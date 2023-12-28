@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3bb32c70fa0f694da5949f519647108, type: 3}
+  m_Name: Rain of Fire Ability
+  m_EditorClassIdentifier: 
+  InternalName: Rain of Fire
+  AbilityDesc: Rain fire over the area for 3 seconds
+  flags: 2
+  AbilityVisuals: []
+  DamageMultiplier: 1
+  ManaCost: 4
+  Cooldown: 0
+  AbilityFlags: 01000000
+  sprite: {fileID: 21300000, guid: 994d74d1e4e145f4db279ab14d3f93f4, type: 3}
+  RecievesWeaponBonuses: 0
+  AbilityEffects:
+  - {fileID: 11400000, guid: f8fa9459e7d94b34c90ddace26284f0c, type: 2}
+  AbilityType: 2
+  CastTime: 1
+  SucceedEffects:
+  - {fileID: 11400000, guid: 39a04db7fb5379c4eac0c34dc96976c0, type: 2}
+  ChannelInterval: 0.25
+  AreaOfEffect: 3
+  MinCastRange: 0
+  MaxCastRange: 12

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 096708ad7dfbd864d958decda6f4f693, type: 3}
+  m_Name: Javelin Thrower
+  m_EditorClassIdentifier: 
+  HeroArchetype: 1
+  InternalName: Thrower
+  AttackDamage: 4
+  Health: 30
+  HealthRegen: 0
+  Armor: 0
+  Resistance: 0
+  SpecialDamage: 5
+  Mana: 0
+  ManaRegen: 0
+  MovementSpeed: 5
+  Abilities:
+  - {fileID: 11400000, guid: da24bc75a98f0034e97a5242ef8ae03b, type: 2}

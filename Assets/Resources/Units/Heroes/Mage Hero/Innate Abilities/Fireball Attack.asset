@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91857acede6359b4b9aee8aa5f8b5dad, type: 3}
+  m_Name: Fireball Attack
+  m_EditorClassIdentifier: 
+  InternalName: Throw
+  AbilityDesc: MISSING
+  flags: 1
+  AbilityVisuals:
+  - {fileID: 11400000, guid: 228b3da3c820c2a43a6ea1a834f7be0f, type: 2}
+  - {fileID: 11400000, guid: 99ed5bbf0c9294d4fbd7d09189d4caac, type: 2}
+  DamageMultiplier: 1
+  ManaCost: 0
+  Cooldown: 2
+  AbilityFlags: 0100000010000000
+  sprite: {fileID: 0}
+  RecievesWeaponBonuses: 0
+  AbilityEffects:
+  - {fileID: 11400000, guid: 843c338be27cd9a47b7aff36b4d6e564, type: 2}
+  - {fileID: 11400000, guid: 404b659c46d591442be98b7fb3498792, type: 2}
+  AbilityType: 2
+  CastTime: 0.7
+  AreaOfEffect: 0
+  MinCastRange: 0
+  MaxCastRange: 10

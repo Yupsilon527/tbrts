@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ec43791bb22ec74eabe05866119e294, type: 3}
+  m_Name: Helix Ability
+  m_EditorClassIdentifier: 
+  InternalName: Helix Spin
+  AbilityDesc: Deal attack damage to surrounding enemies
+  flags: 0
+  AbilityVisuals:
+  - {fileID: 11400000, guid: 3bb72057555b7214292f0f9b785295e5, type: 2}
+  - {fileID: 11400000, guid: 06f373a6562c8dd4984c36791e692e70, type: 2}
+  DamageMultiplier: 1
+  ManaCost: 1
+  Cooldown: 0
+  AbilityFlags: 01000000
+  sprite: {fileID: 21300000, guid: 4fd1d3ae73e992f46b4b90b9f3f4c831, type: 3}
+  RecievesWeaponBonuses: 0
+  AbilityEffects:
+  - {fileID: 11400000, guid: 42809bb3458c6a54686d0846fa5919bc, type: 2}
+  AbilityType: 1
+  CastTime: 0.15
+  AreaOfEffect: 3

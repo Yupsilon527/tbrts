@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fc3f7c321444434eba3eca5db430cd4, type: 3}
+  m_Name: Tank Taunt Ability
+  m_EditorClassIdentifier: 
+  InternalName: Provoke
+  AbilityDesc: MISSING
+  flags: 0
+  AbilityVisuals:
+  - {fileID: 11400000, guid: 8e1714a6fff9e5d42bf281df83709796, type: 2}
+  DamageMultiplier: 0
+  ManaCost: 0
+  Cooldown: 1
+  AbilityFlags: 0100000010000000
+  sprite: {fileID: 0}
+  RecievesWeaponBonuses: 0
+  AbilityEffects:
+  - {fileID: 11400000, guid: a979e228d030cb54eb5ec7ea81cc24d5, type: 2}
+  - {fileID: 11400000, guid: e653a66cc710cdf40938a9b43359143f, type: 2}
+  - {fileID: 11400000, guid: 92c2a405beb28454bbaba79c484e62bc, type: 2}
+  AbilityType: 1
+  CastTime: 0.2

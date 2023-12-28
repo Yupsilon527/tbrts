@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91857acede6359b4b9aee8aa5f8b5dad, type: 3}
+  m_Name: Golem Slam
+  m_EditorClassIdentifier: 
+  InternalName: Slam
+  AbilityDesc: MISSING
+  flags: 0
+  AbilityVisuals:
+  - {fileID: 11400000, guid: 8b4076b4d9278864db4c22f0b992a561, type: 2}
+  - {fileID: 11400000, guid: 58f9c3285069cb742b0f6afea3b9b691, type: 2}
+  DamageMultiplier: 1
+  ManaCost: 0
+  Cooldown: 1
+  AbilityFlags: 
+  sprite: {fileID: 0}
+  RecievesWeaponBonuses: 0
+  AbilityEffects:
+  - {fileID: 11400000, guid: 461bf552c0030c949945764b9433b62e, type: 2}
+  - {fileID: 11400000, guid: f3586719ce769464b8cfb13b21131f11, type: 2}
+  AbilityType: 1
+  CastTime: 0.15
+  ChannelInterval: 0
+  AreaOfEffect: 2
+  MinCastRange: 0
+  MaxCastRange: 2

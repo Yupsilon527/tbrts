@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3588cd47080b9e9438c158d4f2c7059a, type: 3}
+  m_Name: Berserk Ability
+  m_EditorClassIdentifier: 
+  InternalName: Berserk
+  AbilityDesc: Increase your hero's attack for 15 seconds
+  flags: 4
+  AbilityVisuals:
+  - {fileID: 11400000, guid: 029e04dddcaad7346995aa685b48d16c, type: 2}
+  DamageMultiplier: 1
+  ManaCost: 1
+  Cooldown: 0
+  AbilityFlags: 04000000
+  sprite: {fileID: 21300000, guid: 9acbd0f8aab7c534893064e2ee66e2b8, type: 3}
+  RecievesWeaponBonuses: 0
+  AbilityEffects:
+  - {fileID: 11400000, guid: f100cf2d6322d354a97c762bbd3c56cb, type: 2}
+  - {fileID: 11400000, guid: fe974bc75a459554ab48f2420abe22cd, type: 2}
+  AbilityType: 5
+  CastTime: 0

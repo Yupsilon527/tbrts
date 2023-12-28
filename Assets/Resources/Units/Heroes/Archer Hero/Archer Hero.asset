@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c98a543df002f41a861b85c1200b3a, type: 3}
+  m_Name: Archer Hero
+  m_EditorClassIdentifier: 
+  HeroArchetype: 1
+  InternalName: Archer
+  AttackDamage: 20
+  Health: 240
+  HealthRegen: 0
+  Armor: 0
+  Resistance: 0
+  SpecialDamage: 5
+  MovementSpeed: 6
+  Abilities:
+  - {fileID: 11400000, guid: 24edb5e3e01586a47a694f2147d9101d, type: 2}
+  heroRig: {fileID: 6918720839375701271, guid: dd7345f5356463c41b626fdb014a2436, type: 3}
+  heroPortrait: {fileID: 21300000, guid: 0897473f0ecfb524c9b183489270d598, type: 3}
+  heroColor: {r: 0.0627451, g: 1, b: 0.76470596, a: 1}
