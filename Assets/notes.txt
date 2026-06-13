@@ -1,4 +1,0 @@
-TODO
-	hex
-	players
-	turn-by-turn
