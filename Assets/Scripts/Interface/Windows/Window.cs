@@ -1,45 +1,42 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace VikingParty
+public class Window : MonoBehaviour
 {
-    public class Window : MonoBehaviour
+    public bool unique = true;
+    public bool IsOpen()
     {
-        public bool unique = true;
-        public bool IsOpen()
+        return gameObject.activeSelf;
+    }
+    public void Open()
+    {
+        if (!IsOpen())
         {
-            return gameObject.activeSelf;
+            if (unique)
+                InterfaceManager.main.CloseAllWindows();
+            InterfaceManager.main.OpenWindow(this);
+            OnOpened();
         }
-        public void Open()
+    }
+    public void Close()
+    {
+        if (IsOpen())
         {
-            if (!IsOpen())
-            {
-                if (unique)
-                    InterfaceManager.main.CloseAllWindows();
-                InterfaceManager.main.OpenWindow(this);
-                OnOpened();
-            }
+            gameObject.SetActive(false);
+            OnClosed();
         }
-        public void Close()
-        {
-            if (IsOpen())
-            {
-                gameObject.SetActive(false);
-                OnClosed();
-            }
-        }
-        protected virtual void OnOpened()
-        {
+    }
+    protected virtual void OnOpened()
+    {
 
-        }
-        protected virtual void OnClosed()
-        {
+    }
+    protected virtual void OnClosed()
+    {
 
-        }
-        protected virtual void LayoutRefresh()
-        {
-            LayoutRebuilder.MarkLayoutForRebuild(transform as RectTransform);
-            Canvas.ForceUpdateCanvases();
-        }
+    }
+    protected virtual void LayoutRefresh()
+    {
+        LayoutRebuilder.MarkLayoutForRebuild(transform as RectTransform);
+        Canvas.ForceUpdateCanvases();
     }
 }

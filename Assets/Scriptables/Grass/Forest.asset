@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49150a6f51192c840b5e996458493ac4, type: 3}
+  m_Name: Forest
+  m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: -1462036316, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
+  - {fileID: -726883283, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
+  - {fileID: 34828606, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
+  - {fileID: -1611727110, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
+  - {fileID: -2002224077, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
+  - {fileID: 804894649, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
+  - {fileID: -267327457, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
+  - {fileID: 826610282, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
+  - {fileID: 34823619, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
+  - {fileID: 780286625, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
+  - {fileID: 800013098, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
+  - {fileID: -1754647652, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
+  - {fileID: -158253758, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
+  - {fileID: -817637257, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
+  - {fileID: -1569397305, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
+  - {fileID: 1530871024, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}

@@ -1,16 +1,13 @@
 using UnityEngine;
+using VikingParty;
 
-public class InterfaceManager : Initializable
+public class InterfaceManager : WindowManager
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static InterfaceManager main;
+    protected override void Initialize()
     {
-        
+        base.Initialize();
+        main = this;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
