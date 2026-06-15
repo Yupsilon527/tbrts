@@ -19,7 +19,7 @@ public abstract class Initializable : MonoBehaviour
     public void FindComponent<T>(ref T att) where T : Component
     {
         if (att == null)
-            att = GetComponent<T>();
+            att = GetComponentInChildren<T>();
     }
     public void Inspect(string str)
     {

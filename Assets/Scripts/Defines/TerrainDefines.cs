@@ -37,7 +37,7 @@ public static class TerrainDefines
         Ruin = 9,
         City = 10,
         Road = 11,
-        Bridge = 12
+        Bridge = 12,
     }
 
     public static int GetSprite(bool[] Edges)

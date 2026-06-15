@@ -1,16 +1,10 @@
-using UnityEngine;
 
 public class DataItem
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static int GlobalEntityId = 0;
+    public int eID = 0;
+    public DataItem()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        eID = GlobalEntityId++;
     }
 }

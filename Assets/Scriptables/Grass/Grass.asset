@@ -16,15 +16,13 @@ MonoBehaviour:
   - CharID: 102
     TilesetVariations:
     - {fileID: 11400000, guid: 8c948c827a455ec42998eec26991c248, type: 2}
-    Elevation: 5
+    elevation: 5
   - CharID: 45
     TilesetVariations:
     - {fileID: 11400000, guid: ad5ee90eb59d7924ca7bf17f41c1639f, type: 2}
-    Elevation: 0
+    elevation: 0
   - CharID: 112
     TilesetVariations:
     - {fileID: 11400000, guid: b4fffde25e77e5d48b66c00a60e0fb48, type: 2}
-    Elevation: 4
-  GenerationChunks: []
-  GeneratedObjects: []
+    elevation: 4
   ObjectDensity: 1

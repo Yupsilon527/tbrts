@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags: []
   layers:
   - Default
@@ -41,3 +41,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ground
+    uniqueID: 1869690021
+    locked: 0
+  - name: Building
+    uniqueID: 2078239005
+    locked: 0
+  - name: Troops
+    uniqueID: 1322272961
+    locked: 0
+  - name: Banners
+    uniqueID: 2497318443
+    locked: 0
+  - name: Effects
+    uniqueID: 4141107649
+    locked: 0
+  m_RenderingLayers:
+  - Default
