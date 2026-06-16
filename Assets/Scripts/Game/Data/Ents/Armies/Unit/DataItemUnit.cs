@@ -6,7 +6,7 @@ public class DataItemUnit : DataItemObject
     public int hitCounter = 1;
     public int dodgeCounter = 1;
 
-    public UnitStatsTable scriptable;
+    public UnitData scriptable;
     public UnitStats stats;
     public UnitDamageable damageable;
     public CombatantAbilities abilities;
@@ -16,10 +16,10 @@ public class DataItemUnit : DataItemObject
     {
         return false;
     }
-    public DataItemUnit(UnitStatsTable table, int level)
+    public DataItemUnit(UnitData table)
     {
         scriptable = table;
-        stats = new(this, table, level);
+        stats = new(this, table.unit);
         damageable = new(this);
         abilities = new(this);
         modifiers = new(this);

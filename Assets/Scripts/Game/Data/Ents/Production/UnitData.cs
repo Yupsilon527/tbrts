@@ -3,7 +3,7 @@ using UnityEngine;
 public class UnitData : ProductionData
 {
     public UnitStatsTable unit;
-
+    public AbilitySO[] abilities;
     public override AvailableState GetAvailableState(DataItemPlayer player)
     {
         var avs = base.GetAvailableState(player);
@@ -17,4 +17,5 @@ public class UnitData : ProductionData
     {
        // PlayerController.main.troopMan.SpawnBannerAtPoint(this, table.point, table.playerOwner);
     }
+
 }

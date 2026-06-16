@@ -26,7 +26,7 @@ public class PropertyAbility : PropertyBase
         if (t == 0 || a == CombatDefines.Action.FirstStrike || a == CombatDefines.Action.AttackOnce)
             oneTime = true;
     }
-    public UnitData[] GetValidTargets(DataItemUnit caster, DataItemUnit victim)
+    public DataItemUnit[] GetValidTargets(DataItemUnit caster, DataItemUnit victim)
     {
         switch (target)
         {
@@ -41,7 +41,7 @@ public class PropertyAbility : PropertyBase
                     return new[] { targets[1] };
                 else if (targets.Length > 1)
                     return new[] { targets[1 + Mathf.FloorToInt(Random.value * (targets.Length - 1))] };
-                return new UnitData[0];
+                return new DataItemUnit[0];
             case CombatDefines.Targeting.allEnemies:
                 return caster.IsPlayerOwned() ? Combat.main.GetEnemies(true) : Combat.main.GetHeroes(true);
             case CombatDefines.Targeting.randomAlly:

@@ -1,0 +1,17 @@
+TODO
+	combat from stepidle
+	then from ATW 
+		events, stats? damage
+	from RTS 
+		upgrades
+		damage bonus
+		upgrades
+	new
+		abilities
+		pick targets
+
+Units and orders
+	order indicator
+	waypoints
+
+hover over tiles

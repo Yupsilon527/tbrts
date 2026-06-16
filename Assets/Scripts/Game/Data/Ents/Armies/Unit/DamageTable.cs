@@ -15,7 +15,7 @@ public class DamageTable
     { attacker = a; target = t; baseDamage = basedamage; dmt = dtype; element = etype; blockType = block; Calculate(); }
     public void Calculate()
     {
-        realDamage = baseDamage * target.stats.realStats.GetElementalResistance(element);
+        realDamage = baseDamage;
         switch (blockType)
         {
             case AttackDefines.BlockType.blocked:
