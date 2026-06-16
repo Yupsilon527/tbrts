@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47e80552a12d80848b98135a8bf90020, type: 3}
-  m_Name: Grass
+  m_Name: Grass Biome
   m_EditorClassIdentifier: 
   Elevations:
   - CharID: 102
@@ -25,4 +25,8 @@ MonoBehaviour:
     TilesetVariations:
     - {fileID: 11400000, guid: b4fffde25e77e5d48b66c00a60e0fb48, type: 2}
     elevation: 4
+  - CharID: 99
+    TilesetVariations:
+    - {fileID: 11400000, guid: ee13edf274882de4ea0fdbc4445d3a1a, type: 2}
+    elevation: 10
   ObjectDensity: 1

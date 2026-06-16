@@ -10,7 +10,11 @@ public class DisplayItemObject<tDataItem> : Initializable where tDataItem : Data
     {
         assignedObject = ob;
     }
-    public virtual void Redraw()
+    public virtual void DrawFresh()
+    {
+
+    }
+    public virtual void DrawAgain()
     {
 
     }

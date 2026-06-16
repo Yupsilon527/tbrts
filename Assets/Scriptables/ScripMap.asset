@@ -12,8 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de7083d2ed351214cbf70c89d847bcf6, type: 3}
   m_Name: ScripMap
   m_EditorClassIdentifier: 
-  customName: 
-  customDescription: 
-  savedVersion: 
-  height: 6
-  MapData: p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0f0p0p0p0p0f0p0p0p0p0p0f0f0p0p0p0p0p0p0p0p0
+  MapData:
+    customName: 
+    customDescription: 
+    savedVersion: 
+    height: 6
+    MapData: p0p0p0p0c0c0p0c0c0p0p0p0p0p0p0f0p0p0p0p0f0p0p0p0p0p0f0f0p0p0p0p0p0p0p0p0
+    castles:
+    - ownership: 0
+      spawnPos: {x: 1, y: 1}
+      customName: z
+      customDescription: x
+      customSprite: c
+      isCapital: 1
+      producedArmies: []
+      producedBuildings: []

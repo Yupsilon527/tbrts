@@ -57,8 +57,8 @@ public class MapGenEditor : MapGen
             {
                 if (tile != null)
                 {
-                    tile.elevation = mapData.GetTileAt(tile.gridPos.x, tile.gridPos.y, biomeData).elevation.CharID;
-                    tile.variation = mapData.GetTileAt(tile.gridPos.x, tile.gridPos.y, biomeData).Variation;
+                    tile.elevation = mapData.MapData.GetTileAt(tile.gridPos.x, tile.gridPos.y, biomeData).elevation.CharID;
+                    tile.variation = mapData.MapData.GetTileAt(tile.gridPos.x, tile.gridPos.y, biomeData).Variation;
                     EditorUtility.SetDirty(tile);
                 }
             }
@@ -95,16 +95,16 @@ public class MapGenEditor : MapGen
     {
         var tiles = GetComponentsInChildren<MapGenPredefinedTile>();
 
-        mapData.height = GetHeight();
-        mapData.MapData = "";
+        mapData.MapData.height = GetHeight();
+        mapData.MapData.MapData = "";
         for (int y = 0; y < GetHeight(); y++)
         {
             for (int x = 0; x < GetWidth(); x++)
             {
                 Debug.Log($"{x},{y}");
                 Debug.Log($"{mapData.MapData}");
-                mapData.MapData += tiles[y * GetWidth() + x].elevation + "";
-                mapData.MapData += tiles[y * GetWidth() + x].variation + "";
+                mapData.MapData.MapData += tiles[y * GetWidth() + x].elevation + "";
+                mapData.MapData.MapData += tiles[y * GetWidth() + x].variation + "";
 
             }
         }
@@ -118,8 +118,8 @@ public class MapGenEditor : MapGen
     {
      if (mapData!=null && !IsDone) 
         {
-            dims.x = mapData.GetWidth();
-            dims.y = mapData.GetHeight();
+            dims.x = mapData.MapData.GetWidth();
+            dims.y = mapData.MapData.GetHeight();
             IsDone = true;
         }
     }

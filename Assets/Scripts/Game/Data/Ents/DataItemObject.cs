@@ -5,7 +5,7 @@ public class DataItemObject : DataItem
 {
     public Vector2Int gridPos;
     public SidewaysTile tile;
-    public DisplayItemObject display;
+    public DisplayItemObject<DataItemObject> display;
 
     private readonly HashSet<UnitGroup<DataItemObject>> _groups = new();
     public IReadOnlyCollection<UnitGroup<DataItemObject>> Groups => _groups;
@@ -100,4 +100,22 @@ public class DataItemObject : DataItem
     {
 
     }
+    #region Visible
+    public virtual bool IsVisibleToAnother(DataItemObject other)
+    {
+        return true;
+    }
+    public virtual bool IsVisibleToPlayer(int playerID)
+    {
+        return true;
+    }
+    public virtual bool IsVisibleToPlayer(DataItemPlayer player)
+    {
+        return true;
+    }
+    public int GetSightRange()
+    { return 0; }
+    public int GetTrueRange()
+    { return 0; }
+    #endregion
 }

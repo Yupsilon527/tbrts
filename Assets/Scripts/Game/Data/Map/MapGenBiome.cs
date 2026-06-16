@@ -9,12 +9,12 @@ public class MapGenBiome : MapGen
     public void GenerateMapFromBiomeData( MapBiomeSO biome, MapChunkSO map)
     {
         biomeData = biome;
-        Initalize(map.GetHeight(), map.GetWidth());
-        for (int iY = 0; iY < map.GetHeight(); iY++)
+        Initalize(map.MapData.GetHeight(), map.MapData.GetWidth());
+        for (int iY = 0; iY < map.MapData.GetHeight(); iY++)
         {
-            for (int iX = 0; iX < map.GetWidth(); iX++)
+            for (int iX = 0; iX < map.MapData.GetWidth(); iX++)
             {
-                SetTile(iX, iY, map.GetTileAt(iX, iY, biomeData));
+                SetTile(iX, iY, map.MapData.GetTileAt(iX, iY, biomeData));
             }
         }
     }

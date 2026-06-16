@@ -13,7 +13,7 @@ public class DataItemPlayer
     public int TurnDefeat = -1;
     public int playerTurn = -1;
 
-    public UnitGroup<DataitemArmy> units = new();
+    public UnitGroup<DataItemArmy> units = new();
     public UnitGroup<DataItemCastle> buildings = new();
 
     public DataItemPlayer(int iD, Color color)

@@ -148,7 +148,7 @@ public class SidewaysTile
                         layer.name = "Segment " + iX + "_" + iY + " " + elevation.name;
 
                         layer.GetComponent<SpriteRenderer>().sprite = elevation;
-                        layer.GetComponent<SpriteRenderer>().sortingOrder = edge.elevationID;
+                        layer.GetComponent<SpriteRenderer>().sortingOrder = (int)edge.elevation;
                     }
 
                     eUsed.Add(edge);

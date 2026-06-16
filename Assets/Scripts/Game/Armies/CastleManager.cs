@@ -31,11 +31,11 @@ public class CastleManager : EntityManager
             buildings.Add(new DataItemCastle(Zim));
         }
 
-        foreach (entityTile tData in game.TileList)
+        foreach (var tData in GameManager.main.map.tiles)
         {
-            if (tData.iElevation == TileSetData.Elevation_City && tData.CityLocated == null)
+            if (tData.elevation.elevation == TerrainDefines.Elevation.City && tData.buildingLayer == null)
             {
-                game.GameCastles.Add(entityCastle.MakeFromEditorData(game, DataItemCastle.GenerateRandom(tData.Pos.x, tData.Pos.y, game.game.language, game.Scenario)));
+                buildings.Add(new DataItemCastle(CistomCastle.GenerateRandom(tData.gridPos)));
             }
         }
 
@@ -46,7 +46,7 @@ public class CastleManager : EntityManager
                 var castlePrefab = GameManager.main.displayPool.PoolItem(GameManager.main.displayPool.castlePrefab);
                 if (castlePrefab.TryGetComponent(out DisplayItemCastle dic))
                 {
-                    dic.AssignCastle(castle);
+                    dic.AssignObject(castle);
                 }
             }
         }

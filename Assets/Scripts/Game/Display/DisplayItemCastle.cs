@@ -6,17 +6,26 @@ public class DisplayItemCastle: DisplayItemObject<DataItemCastle>
     public override void AssignObject(DataItemCastle ob)
     {
         base.AssignObject(ob);
+        assignedCastle = ob;
+        DrawFresh();
+    }
+    public override void DrawFresh()
+    {
         objectSprites = new();
-        foreach (var tile in ob.castleTiles)
+        foreach (var tile in assignedCastle.castleTiles)
         {
             var prefab = GameManager.main.displayPool.PoolItem(SpritePrefab);
             prefab.transform.position = tile.GetWorldPosition();
             objectSprites.Add(prefab.GetComponent<SpriteRenderer>());
         }
-        Redraw();
+        DrawAgain();
     }
-   public override void Redraw()
+    public override void DrawAgain()
     {
-
+        foreach (var sprite in objectSprites)
+        {
+            sprite.gameObject.SetActive(true);
+           // sprite.sprite = assignedCastle.citySprite;
+        }
     }
 }
