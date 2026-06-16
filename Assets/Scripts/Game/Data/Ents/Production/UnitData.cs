@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class UnitData : ProductionData
 {
-   // public StatsTableSO unit;
+    public UnitStatsTable unit;
 
     public override AvailableState GetAvailableState(DataItemPlayer player)
     {
