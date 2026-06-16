@@ -3,14 +3,14 @@ using UnityEngine;
 
 public static class AttackDefines
 {
-    public enum BlockType
+    public enum HitType
     {
         ignoreArmor,
         halfBlock,
         normal,
         blocked,
     }
-    public enum EffectType
+    public enum ActionType
     {
         DirectDamage = 0,
         Block = 1,
@@ -23,25 +23,6 @@ public static class AttackDefines
         NonLethalDamage = 8,
         Assassinate = 9,
         Total = 10,
-    }
-    public enum DamageElement
-    {
-        Pure = -1,
-        Blunt = 0,
-        Pierce = 1,
-        Physical = 2, //All blocked by armor
-        Fire = 2,
-        Cold = 3,
-        Electric = 4,
-        Radiation = 5,
-        Magic = 6,
-        Psychic = 7,
-        Cosmic = 8,
-        Acid = 9,
-        Mass = 10,
-        Elemental = 10, //All blocked by resist
-        Heal = 11,
-        Max = 12
     }
     public enum ScaleType
     {
@@ -62,6 +43,16 @@ public static class AttackDefines
         CurBlock = 10,
 
         Random = 11,
+    }
+    public enum ScaleMode
+    {
+        caster,
+        target
+    }
+    public enum ScaleRate
+    {
+        additive,
+        multiplicative,
     }
     public static float ArmorMitigation = 50;
 

@@ -37,9 +37,9 @@ public class UnitDamageable : UnitComponent
         Block.SetValue(0);
     }
 
-    public void DealDamage(float value, AttackDefines.EffectType damage, DataItemUnit attacker, AttackDefines.DamageElement element, AttackDefines.BlockType block = AttackDefines.BlockType.normal)
+    public void DealDamage(float value, AttackDefines.ActionType damage, DataItemUnit attacker,  AttackDefines.HitType block = AttackDefines.HitType.normal)
     {
-        var dmt = new DamageTable(attacker == null ? parent : attacker, parent, value, damage, element, block);
+        var dmt = new DamageTable(attacker == null ? parent : attacker, parent, value, damage, block);
         DealDamage(dmt, false);
     }
     public virtual void DealDamage(DamageTable damage, bool bonusDamage = false)
@@ -51,18 +51,18 @@ public class UnitDamageable : UnitComponent
 
         switch (damage.dmt)
         {
-            case AttackDefines.EffectType.DirectDamage:
+            case AttackDefines.ActionType.DirectDamage:
                 float outDamage = damage.realDamage;
                 UpdateKiller(damage.attacker);
                 float healthDamage = TakeDirectDamage(outDamage);
                 Vampirism(healthDamage);
                 parent.FireEventOnSelf(AbilityDefines.Event.OnTakeDamage);
                 break;
-            case AttackDefines.EffectType.Assassinate:
+            case AttackDefines.ActionType.Assassinate:
                 if (Health.GetValue() <= damage.realDamage)
                     Kill(damage.attacker);
                 break;
-            case AttackDefines.EffectType.NonLethalIgnoreArmorDamage:
+            case AttackDefines.ActionType.NonLethalIgnoreArmorDamage:
                 float magicDamage = Mathf.Min(Health.GetValue() - 1, damage.realDamage);
                 if (magicDamage > 0)
                 {
@@ -70,7 +70,7 @@ public class UnitDamageable : UnitComponent
                     parent.FireEventOnSelf(AbilityDefines.Event.OnTakeDamage);
                 }
                 break;
-            case AttackDefines.EffectType.NonLethalDamage:
+            case AttackDefines.ActionType.NonLethalDamage:
                 float nonLethalDamage = Mathf.Min(Health.GetValue() + Armor.GetValue() + Block.GetValue() - 1, damage.realDamage);
                 if (nonLethalDamage > 0)
                 {
@@ -78,31 +78,31 @@ public class UnitDamageable : UnitComponent
                     parent.FireEventOnSelf(AbilityDefines.Event.OnTakeDamage);
                 }
                 break;
-            case AttackDefines.EffectType.ArmorBreak:
+            case AttackDefines.ActionType.ArmorBreak:
                 float armorDamage = damage.realDamage;
                 TakeShieldDamage(true, armorDamage, out outDamage);
                 parent.FireEventOnSelf(AbilityDefines.Event.OnTakeDamage);
                 break;
-            case AttackDefines.EffectType.LifeHealNoOverheal:
-            case AttackDefines.EffectType.LifeHealOverhealShield:
-            case AttackDefines.EffectType.LifeHealOverhealArmor:
+            case AttackDefines.ActionType.LifeHealNoOverheal:
+            case AttackDefines.ActionType.LifeHealOverhealShield:
+            case AttackDefines.ActionType.LifeHealOverhealArmor:
                 float overheal = Heal(damage.realDamage);
                 if (overheal > 0)
                 {
-                    if (damage.dmt == AttackDefines.EffectType.LifeHealOverhealShield)
+                    if (damage.dmt == AttackDefines.ActionType.LifeHealOverhealShield)
                     {
                         GiveShield(overheal);
                     }
-                    if (damage.dmt == AttackDefines.EffectType.LifeHealOverhealArmor)
+                    if (damage.dmt == AttackDefines.ActionType.LifeHealOverhealArmor)
                     {
                         GiveArmor(overheal);
                     }
                 }
                 break;
-            case AttackDefines.EffectType.ArmorHeal:
+            case AttackDefines.ActionType.ArmorHeal:
                 GiveArmor(damage.realDamage);
                 break;
-            case AttackDefines.EffectType.Block:
+            case AttackDefines.ActionType.Block:
                 GiveShield(damage.realDamage);
                 break;
         }

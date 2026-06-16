@@ -3,12 +3,19 @@ TODO
 	then from ATW 
 		events, stats? damage
 	from RTS 
+		abilities
 		upgrades
 		damage bonus
 		upgrades
 	new
 		abilities
 		pick targets
+
+ability costs
+	ap
+	mp
+	combat ends when all troops tired
+
 
 Units and orders
 	order indicator

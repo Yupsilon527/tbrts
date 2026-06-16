@@ -1,11 +1,11 @@
 
-public static class CombatDefines 
+public static class CombatDefines
 {
-    public enum Events
+    public enum AttackPhase
     {
-        Ticks = 0,
-        HitsLanded = 1,
-        HitsTaken = 2,
+        Prep = 0,
+        Attack = 1,
+        PostAttack = 2,
     }
     public enum ChanceMult
     {
@@ -14,8 +14,12 @@ public static class CombatDefines
         Luck = 2,
         Proc = 3,
     }
-    public enum Targeting
+    public enum TargetType
     {
+        nobody = -1,
+        caster = 0,
+        targets = 1,
+        caster_and_target = 2,
         none =0,
         self = 1,
         attackTarget = 2,
@@ -25,59 +29,44 @@ public static class CombatDefines
         allAllies = 6,
         randomSecondaryTarget = 7,
     }
-    public enum Action
+    public enum TileTargetingMode
     {
-        // Procs
-        Attack = 0,
-        Ranged = 1 ,
-        FirstStrike = 2,
-        AttackOnce = 3,
-        BuffAlly = 4,
-        BuffSelf = 5,
-        Huddle = 6,
-        MagicAttack = 7,
-        PowerAttack = 8,
-
-        // Combat Events
-        OnHit = 10,       //When attack lands
-        OnParried = 11,     //when critical miss
-        ParryAttack = 12,   //retaliates on critical miss 
-        OnCrit = 13,      //critical hit
-        OnMiss = 14,      //regular miss
-        OnDodge = 15,     //when dodges attack
-        EvadeAttack = 16,     //when dodge, or target misses
-        Block = 17,     //when blocked, separate from dodge
-        Proc = 18,      //proc elemental attacks/chance
-        Retaliate = 19,   // when attacked
-
-
-        // Misc Events
-        ShieldBreak = 20,
-        BelowHalf=21,
-        BelowThird = 22,
-        BelowQuarter = 23,
-        EnemyBelowHalf=24,
-        EnemyBelowThird = 25,
-        EnemyBelowQuarter = 26,
-        Enraged = 27,
-        FinalStrike = 28,
-        OnKill = 29,
-        Crit = 30,
+        passive,
+        none,
+        direction,
+        tile,
+        random_tile,
+        random_closest_tile,
+        random_farthest_tile,
     }
-    public static bool RequiresLearning(Action action)
+    public enum TileRangeMode
     {
-        return action == Action.Ranged
-        || action == Action.FirstStrike
-        || action == Action.BuffAlly
-        || action == Action.Huddle
-        || action == Action.MagicAttack
-        || action == Action.PowerAttack
-        || action == Action.BuffSelf;
+        circle,
+        cross,
+        diagcross,
+        star,
+        square,
     }
-    public static bool IsSpell(Action action)
+    public enum TileTargetingArea
     {
-        return action == Action.MagicAttack
-        || action == Action.BuffAlly
-        || action == Action.BuffSelf;
+        circle,
+        square,
+        line,
+        cone,
+    }
+    public enum ArmyRangeMode
+    {
+        passive,
+        frontrow,
+        backrow,
+        ranged,
+        transport,
+    }
+    public enum ArmyTargetingArea
+    {
+        tile,
+        row,
+        column,
+        all,
     }
 }

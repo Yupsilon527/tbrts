@@ -3,25 +3,24 @@ using System;
 [Serializable]
 public class ApplyAttack : ApplyEffects
 {
-    public AttackDefines.EffectType attack;
+    public AttackDefines.ActionType attack;
     public float BaseDamage = 0;
     public ScaleData[] scaling;
 
-    public override bool Resolve(CastTable table, float strength = 1)
+    public override void ActivateOnUnit(CastTable table, DataItemUnit target, float strength = 1)
     {
-        if (!base.Resolve(table)) return false;
+        if (!base.Resolve(table)) return;
         float realDamage = BaseDamage * strength;
         foreach (var scale in scaling)
         {
-            realDamage = scale.GetScaleStrength(table.attacker, table. target, realDamage);
+            realDamage = scale.GetScaleStrength(table.caster, target, realDamage);
         }
-        table.target.damageable.DealDamage(realDamage * table.proc, attack, table.attacker, element, table.blocked ? AttackDefines.BlockType.blocked : table.action == CombatDefines.Action.OnCrit ? AttackDefines.BlockType.halfBlock : AttackDefines.BlockType.normal);
-        return true;
-
+        target.damageable.DealDamage(realDamage * table.proc, attack, table.caster,  table.hit);
     }
+
     public override string GetDescription()
     {
-        string effect = $"{BaseDamage} {element} {attack}";
+        string effect = $"{BaseDamage} {attack}";
 
         return base.GetDescription()
             .Replace("%effect%", "deal " + effect);
@@ -33,6 +32,8 @@ public class ScaleData
     public AttackDefines.ScaleType scaleMode;
     public float scaleDamage = 0;
 
+    public AttackDefines.ScaleMode scaleoff = AttackDefines.ScaleMode.caster;
+    public AttackDefines.ScaleRate scaleRate;
     public float GetScaleStrength(DataItemUnit attacker, DataItemUnit target, float baseDamage)
     {
         float bonusDamage = scaleDamage;

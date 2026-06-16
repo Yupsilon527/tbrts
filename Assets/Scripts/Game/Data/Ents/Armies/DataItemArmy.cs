@@ -14,6 +14,10 @@ public class DataItemArmy : DataItemObject
     {
         return Formation.Sum(u => u != null && u.damageable.IsAlive() ? 1 : 0);
     }
+    public int CountFightingTroops(CombatDefines.AttackPhase phase)
+    {
+        return Formation.Sum(u => u != null && u.damageable.IsAlive()  && u.abilities._actions.Any(a => a.) ? 1 : 0);
+    }
     public DataItemUnit GetTroopInPosition(int x, int y)
     {
         return Formation[x + y * 3];

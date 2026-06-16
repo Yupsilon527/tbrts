@@ -11,6 +11,7 @@ public class Combat : Initializable
         base.Initialize();
     }
 
+    public CombatDefines.AttackPhase currentPhase;
     public SidewaysTile locatedTile;
     public DataItemArmy attackers, defenders;
 
@@ -47,6 +48,7 @@ public class Combat : Initializable
         enabled = true;
         currentTick = 0;
         FireEventOnAllFighters(AbilityDefines.Event.CombatBegin);
+        currentPhase = CombatDefines.AttackPhase.Prep;
     }
     public bool IsInCombat()
     {
@@ -55,17 +57,18 @@ public class Combat : Initializable
     public  void OnGameTick(int steps)
     {
         if (!IsInCombat()) return;
-        currentTick += steps;
         combatants.Sort((a, b) => a.nextAction.CompareTo(b.nextAction));
+        currentTick = combatants[0].nextAction ;
+
         while (combatants[0].nextAction <= currentTick)
         {
             combatants[0].Act();
             combatants.Sort((a, b) => a.nextAction.CompareTo(b.nextAction));
-            if (!SanityCheck())
+            if (!ForwardCheck())
                 break;
         }
     }
-    bool SanityCheck()
+    bool ForwardCheck()
     {
         bool playerAlive = attackers.CountLivingTroops()>0;
         bool enemiesAlive = defenders.CountLivingTroops()>0;

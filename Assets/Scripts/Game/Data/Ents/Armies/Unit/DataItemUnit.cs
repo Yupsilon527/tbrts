@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class DataItemUnit : DataItemObject
@@ -52,6 +53,10 @@ public class DataItemUnit : DataItemObject
         abilities.Tick(steps);
         modifiers.Tick(steps);
         UpdateNextAction(steps);
+    }
+    public bool CanAct(CombatDefines.AttackPhase phase)
+    {
+        return abilities._actions.Any(a => a.attackPhase == phase && a.HasResourcesToCast());
     }
     protected void UpdateNextAction(int steps)
     {

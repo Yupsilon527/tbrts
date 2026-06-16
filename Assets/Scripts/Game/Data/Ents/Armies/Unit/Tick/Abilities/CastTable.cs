@@ -4,17 +4,17 @@ using Random = UnityEngine.Random;
 
 public class CastTable
 {
+    public CombatDefines.AttackPhase phase;
     public bool directHit = false;
-    public bool blocked = false;
+    public AttackDefines.HitType hit =  AttackDefines.HitType.normal;
     public int tick = 0;
     public float proc = 0;
-    public CombatDefines.Action action;
-    public DataItemUnit attacker;
-    public DataItemUnit target;
+    public DataItemUnit caster;
+    public Vector2Int target;
 
     public CastTable(DataItemUnit attacker, DataItemUnit target, CombatDefines.Action action, int tick, float proc = 1)
     {
-        this.attacker = attacker;
+        this.caster = attacker;
         this.target = target;
         this.action = action;
         this.tick = tick;
@@ -26,11 +26,11 @@ public class CastTable
         if (action == CombatDefines.Action.Attack)
         {
             DetermineHitType();
-            attacker.FireEventOnSelf(AbilityDefines.Event.BeforeAttack);
+            caster.FireEventOnSelf(AbilityDefines.Event.BeforeAttack);
         }
-        Combat.main.Inspect($"Resolve {action} from {attacker} to {target}");
-        blocked = Random.value < attacker.stats.realStats.BlockChance;
-        foreach (var effect in attacker.abilities._effects)
+        Combat.main.Inspect($"Resolve {action} from {caster} to {target}");
+        hit = Random.value < caster.stats.realStats.BlockChance;
+        foreach (var effect in caster.abilities._effects)
         {
             if (effect.appliedEffect.action == action)
                 effect.appliedEffect.Resolve(this, proc);
@@ -43,28 +43,28 @@ public class CastTable
         }
         if (action == CombatDefines.Action.OnParried)
         {
-            target.abilities.Action(attacker, CombatDefines.Action.ParryAttack, tick);
+            target.abilities.Action(caster, CombatDefines.Action.ParryAttack, tick);
             target.FireEventOnSelf(AbilityDefines.Event.SuccessfulParry);
         }
         if (action == CombatDefines.Action.OnMiss || action == CombatDefines.Action.OnDodge)
         {
-            target.abilities.Action(attacker, CombatDefines.Action.EvadeAttack, tick);
+            target.abilities.Action(caster, CombatDefines.Action.EvadeAttack, tick);
             target.FireEventOnSelf(AbilityDefines.Event.SuccessfulEvade);
         }
         else
         {
             target.FireEventOnSelf(AbilityDefines.Event.OnHitByEnemy);
-            attacker.FireEventOnSelf(AbilityDefines.Event.AttackHit);
+            caster.FireEventOnSelf(AbilityDefines.Event.AttackHit);
         }
-        if (blocked)
+        if (hit)
         {
             target.FireEventOnSelf(AbilityDefines.Event.SuccessfulBlock);
-            target.abilities.Action(attacker, CombatDefines.Action.Block, tick);
+            target.abilities.Action(caster, CombatDefines.Action.Block, tick);
         }
         if (directHit)
         {
-            attacker.FireEventOnSelf(AbilityDefines.Event.AfterAttack);
-            target.abilities.Action(attacker, CombatDefines.Action.Retaliate, tick);
+            caster.FireEventOnSelf(AbilityDefines.Event.AfterAttack);
+            target.abilities.Action(caster, CombatDefines.Action.Retaliate, tick);
     }
     }
 
@@ -73,7 +73,7 @@ public class CastTable
         directHit = true;
         action = CombatDefines.Action.OnHit;
 
-        if (attacker.stats.realStats.DodgeChance > 0)
+        if (caster.stats.realStats.DodgeChance > 0)
         {
             if (UnityEngine.Random.value < target.stats.realStats.DodgeChance * (target.dodgeCounter / 2)) //Dodge chance
             {
@@ -86,8 +86,8 @@ public class CastTable
                 target.dodgeCounter++;
             }
         }
-        float accuracy = attacker.stats.realStats.Offense / Mathf.Max(target.stats.realStats.Defense);
-         accuracy = accuracy * .6f + Mathf.Min(.4f, attacker.hitCounter / 2 * .5f); //TODO DEFINE
+        float accuracy = caster.stats.realStats.Offense / Mathf.Max(target.stats.realStats.Defense);
+         accuracy = accuracy * .6f + Mathf.Min(.4f, caster.hitCounter / 2 * .5f); //TODO DEFINE
 
         float critChance = 15 * accuracy;   //TODO DEFINE
         float hitChance = 50 * accuracy;
@@ -98,14 +98,14 @@ public class CastTable
         if (ranval < missChance)
         {
             action = ranval< parryChance ? CombatDefines.Action.OnParried : CombatDefines.Action.OnMiss;
-            attacker.hitCounter++;
+            caster.hitCounter++;
         }
         else
         {
             action = (ranval > parryChance + missChance + hitChance) ? CombatDefines.Action.OnCrit : CombatDefines.Action.OnHit;
-            attacker.hitCounter = 1;
+            caster.hitCounter = 1;
 
-            attacker.abilities.Trigger(target, CombatDefines.Events.HitsLanded, 1);
+            caster.abilities.Trigger(target, CombatDefines.Events.HitsLanded, 1);
             target.abilities.Trigger(target, CombatDefines.Events.HitsTaken, 1);
         }
     }
@@ -125,7 +125,7 @@ public class AbilityData
 {
     public CombatDefines.Action abilityEvent;
     public CombatDefines.Events abilityCondition;
-    public CombatDefines.Targeting abilityTarget;
+    public CombatDefines.TargetType abilityTarget;
     public int abilityCooldown;
     public float abilityStrength;
     public virtual string GetDescription()

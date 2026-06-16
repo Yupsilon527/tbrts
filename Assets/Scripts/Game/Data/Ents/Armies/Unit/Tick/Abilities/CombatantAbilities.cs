@@ -8,7 +8,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     public ResourceInt Ap;
     public ResourceInt Mp;
 
-    public HashSet<PropertyAbility> _actions = new();
+    public HashSet<PropertyWeapon> _actions = new();
     public HashSet<EffectCounter> _effects = new();
     public class EffectCounter
     {
@@ -47,14 +47,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     void AddAbility(PropertyAbility ability)
     {
         _actions.Add(ability);
-        ability.ExtendCooldown(parent.stats.realStats.SpeedCoefficient);
-
-        var dupes = _actions.Where(a => a.action == ability.action && a.condition == ability.condition && a.target == ability.target).ToList();
-        dupes.Sort((a, b) => (a.actionInterval * a.procStrength).CompareTo(b.actionInterval * b.procStrength));
-        foreach (var dupe in dupes)
-        {
-            dupe.active = dupes.IndexOf(dupe) == 0;
-        }
+        ability.SetCooldown(Mathf.CeilToInt(parent.stats.realStats.SpeedCoefficient * ability.actionDelay));
     }
     public void FromCombatantData()
     {
@@ -73,34 +66,30 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         foreach (var p in data.procs)
             _effects.Add(new EffectCounter(p));
     }
-    public bool HasAction(CombatDefines.Action action)
-    {
-        return _actions.Any(e => e.action == action);
-    }
     public void RegisterEvent(AbilityData abilityEvent)
     {
         var action = new PropertyAbility(abilityEvent);
         AddAbility(action);
     }
-    public bool Trigger(DataItemUnit mainTarget, CombatDefines.Events condition, int ticks)
+    public bool Trigger(DataItemUnit mainTarget, CombatDefines.AttackPhase phase, int ticks)
     {
-        var abilities = _actions.Where(a => a.active && a.condition == condition);
+        var abilities = _actions.Where(a => a.HasResourcesToCast() && a.attackPhase == phase);
 
-        foreach (PropertyAbility action in abilities)
+        foreach (var action in abilities)
         {
             if (action.ForwardTime(ticks))
             {
                 while (action.expiration <= 0)
                 {
                     int currentTick = Combat.main.currentTick + action.expiration;
-                    Combat.main.Inspect($"Combatant {parent.scriptable.name} performs action {action.action} at turn {currentTick}");
+                    //.main.Inspect($"Combatant {parent.scriptable.name} performs action {action.action} at turn {currentTick}");
                     foreach (var target in action.GetValidTargets(parent, mainTarget))
                     {
                         Action(target, action.action, currentTick, action.procStrength);
                     }
-                    if (action.oneTime)
+                    if (action.mpCost > 0)
                     {
-                        _actions.Remove(action);
+                        action.SetCooldown(-1);
                         return true;
                     }
                     else
@@ -113,10 +102,33 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         }
         return ticks == 0;
     }
-    public void Action(DataItemUnit target, CombatDefines.Action action, int tick, float proc = 1)
+    public bool CastAbility(PropertyAbility ability, Gem gem = null)
     {
-        if (target.damageable.IsAlive())
-            new CastTable(parent, target, action, tick, proc).Resolve();
+        if (!ability.RequiresGemTarget())
+        {
+            Combat.main.GetCurrentPlayer().abilities.CastAbilityNoTarget(ability);
+            Combat.main.PostPlayerTurn();
+            return true;
+        }
+        else if (gem != null && ability.IsValidGemTarget(gem))
+        {
+            Combat.main.GetCurrentPlayer().abilities.CastAbilityOnGem(ability, gem);
+            Combat.main.PostPlayerTurn();
+            return true;
+        }
+        return false;
+    }
+    void CastAbilityNoTarget(PropertyAbility ability)
+    {
+        Combat.main.Actionbegin(new CastTable(parent, parent.GetAttackTarget(), ability, Combat.main.currentTurn));
+        ability.CastFromTable(CastTable.main);
+        Combat.main.ActionConclude();
+    }
+    void CastAbilityOnGem(PropertyAbility ability, Gem gem)
+    {
+        Combat.main.Actionbegin(new CastTable(parent, parent.GetAttackTarget(), ability, Combat.main.currentTurn, targetGem: gem));
+        ability.CastFromTable(CastTable.main);
+        Combat.main.ActionConclude();
     }
     public bool Tick(int steps)
     {

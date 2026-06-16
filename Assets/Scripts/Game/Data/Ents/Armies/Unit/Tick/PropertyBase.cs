@@ -2,7 +2,9 @@
 public class PropertyBase
 {
     public DataItemUnit parent;
+    public int uses = 0;
     public int expiration = 0;
+    public int actionDelay = 100;
     public int actionInterval = 100;
 
     public void ExtendCooldown(float cdr = 1)
@@ -22,4 +24,8 @@ public class PropertyBase
     {
         expiration += cooldown;
     }
-}
+    public void Reset()
+    {
+        expiration = 0; 
+        uses = 0;
+    }
