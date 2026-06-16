@@ -88,6 +88,7 @@ public class DataItemObject : DataItem
     public void SetPlayerOwner(int player)
     {
         SetPlayerOwner(GameManager.main.playerManager.players[player]) ;
+        display.OnPlayerOwnerChange();
     }
 
     public DataItemPlayer GetPlayerOwner()

@@ -18,4 +18,8 @@ public class DisplayItemObject<tDataItem> : Initializable where tDataItem : Data
     {
 
     }
+    public virtual void OnPlayerOwnerChange()
+    {
+
+    }
 }

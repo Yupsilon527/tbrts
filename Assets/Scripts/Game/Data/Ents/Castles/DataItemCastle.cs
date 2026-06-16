@@ -61,7 +61,6 @@ public class DataItemCastle : DataItemBuilding
             }
         }
     }
-    public bool isRazed() { return GameManager.main.currentTurn < RazeTurn; }
     #region Garrison and Control
     public IEnumerable<DataItemArmy> GetGarrison()
     {
@@ -71,34 +70,28 @@ public class DataItemCastle : DataItemBuilding
     public int GetMyDefenseLevel()
     {
         int Power = 0;
-        foreach (entityArmy Panty in GetGarrison())
+        foreach (DataItemArmy army in GetGarrison())
         {
-            Power += Panty.GetPowerValue(false);
+            Power += army.GetPowerValue(false);
         }
 
         return Power;
     }
 
-    public bool AmIRevealedByPlayer(DataItemPlayer Player)
-    {
-        return castleTiles.Any(t => t.IsRevealedByPlayer(Player));
-    }
-
-    public bool AmIBeingTakenOver(entityPlayer Conqueror)
+    public bool AmIBeingTakenOver(DataItemPlayer Conqueror)
     {
 
         bool Takeover = false;
 
-        if (isRazed() && GetGarrison().Count > 0)
+        if (isRazed() && GetGarrison().Count() > 0)
         {
             Takeover = true;
         }
-        else if (PlayerOwner != Conqueror)
+        else if (GetPlayerOwner() != Conqueror)
         {
-
-            foreach (entityArmy Panty in GetGarrison())
+            foreach (DataItemArmy army in GetGarrison())
             {
-                if (Panty.GetOwner() == Conqueror)
+                if (army.GetPlayerOwner() == Conqueror)
                 {
                     Takeover = true;
                 }
@@ -186,6 +179,40 @@ public class DataItemCastle : DataItemBuilding
 
         return Cost;
     }
+    #endregion
+    #region Raze
+    public void Demolish()
+    {
+
+        PlayerOwner = game.Players[Game.iNeutrals];
+        RazeTurn = game.RuleSet.CurrentTurn + game.RuleSet.CastleRazeTime;
+
+        WayPoints = new List<entityOrder>();
+        Production = new List<DataItemArmy>();
+        ProductionNames = new List<string>();
+        iProduction.Clear();
+        Upgrades.Clear();
+        ClearPopulation();
+
+        Redraw();
+    }
+
+    public void RebuildMe(entityPlayer Player)
+    {
+        PlayerOwner = Player;
+        Player.VictoryStats.CitiesRebuilt++;
+        ClearPopulation();
+
+        WayPoints.Clear();
+        Production = new List<DataItemArmy>();
+        ProductionNames = new List<string>();
+        iProduction.Clear();
+        Upgrades.Clear();
+
+        Redraw();
+        game.Events.Add(Reporter.EventReport.ReportCastleRebuild(game, this));
+    }
+    public bool isRazed() { return GameManager.main.currentTurn < RazeTurn; }
     #endregion
     #region Production
 
@@ -350,6 +377,12 @@ public class DataItemCastle : DataItemBuilding
 
         return res;
     }
+
+    public int GetIncome()
+    {
+        return Game.iCastleIncomeBase * GetSize() + Game.iCastleIncomeLevel * GetLevel() + (int)GetBonus("income");
+
+    }
     #endregion
     public override void OnTurnEnd()
     {
@@ -390,4 +423,16 @@ public class DataItemCastle : DataItemBuilding
                 }
             }
     }
+    #region LoS
+    public bool AmIRevealedByPlayer(DataItemPlayer Player)
+    {
+        return castleTiles.Any(t => t.IsRevealedByPlayer(Player));
+    }
+
+    public int GetLineOfSight()
+    {
+
+        return Game.iBuildingBaseSight + (int)GetBonus("sightbonus");
+    }
+    #endregion
 }
