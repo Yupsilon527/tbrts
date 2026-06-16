@@ -102,11 +102,11 @@ public class DataItemObject : DataItem
 
     }
     #region Visible
-    public virtual bool IsVisibleToAnother(DataItemObject other)
+    public  bool IsVisibleToAnother(DataItemObject other)
     {
         return true;
     }
-    public virtual bool IsVisibleToPlayer(int playerID)
+    public  bool IsVisibleToPlayer(int playerID)
     {
         return true;
     }

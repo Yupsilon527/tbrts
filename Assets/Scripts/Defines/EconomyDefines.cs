@@ -1,14 +1,30 @@
 using System;
-using UnityEngine;
 
 public class EconomyDefines 
 {
+    public static float CastleRazeReward { get; internal set; }
+    public static int CastleRaidPercent { get; internal set; }
+
     public enum EconomyResource
     {
-        Steel = 0,
+        Metal = 0,
         Gold = 1,
         Mana = 2,
-        Total = 3,
+        Labor = 3,
+        Total = 4,
+    }
+    public enum IncomeResource
+    {
+        Metal = 0,
+        Gold = 1,
+        Mana = 2,
+        Labor = 3,
+        RawIncome = 4,
+        SteelMult = 5,
+        GoldMult = 6,
+        ManaMult = 7,
+        LaborMult = 8,
+        Total = 9,
     }
 }
 

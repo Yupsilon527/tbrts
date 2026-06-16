@@ -12,10 +12,10 @@ public class UpgradeData : ProductionData
     public ResourceAlteration[] resourceChanges;
 
     [Header("Bonus Damage Upgrade For Units")]
-    public BonusDamageTable[] bonusDamage = new BonusDamageTable[0];
+  //  public BonusDamageTable[] bonusDamage = new BonusDamageTable[0];
     [Header("Stat Alterations For Units")]
-    public ModifierDefines.PropertyData[] properties = new ModifierDefines.PropertyData[0];
-    public ModifierDefines.StateData[] states = new ModifierDefines.StateData[0];
+  //  public ModifierDefines.PropertyData[] properties = new ModifierDefines.PropertyData[0];
+   // public ModifierDefines.StateData[] states = new ModifierDefines.StateData[0];
 
     [Header("Grant Resources/Income")]
     public ResourceCost[] grantedResources = new ResourceCost[0];
@@ -27,10 +27,6 @@ public class UpgradeData : ProductionData
             return AvailableState.unavailable;
         }
         else if (prerequisites.Length == 1 && !PrerequisiteMet(player, prerequisites[0]))
-        {
-            return AvailableState.unavailable;
-        }
-        else if (player.UpgradeAlreadyBeingResearched(this))
         {
             return AvailableState.unavailable;
         }
@@ -63,11 +59,10 @@ public class UpgradeData : ProductionData
 
         foreach (var income in grantedIncome)
             player.IncreaseIncome(income, newLevel - oldLevel);
-        base.SetPlayerLevel(player, oldLevel, newLevel);
 
         player.ReviseRealIncome();
     }
-    public override void SetUnitLevel(UpgradeComponent data, bool onSpawn, int oldLevel, int newLevel)
+    /*public override void SetUnitLevel(UpgradeComponent data, bool onSpawn, int oldLevel, int newLevel)
     {
         int delta = newLevel - oldLevel;
 
@@ -82,8 +77,7 @@ public class UpgradeData : ProductionData
                 data.UpdateState(stat.State, 0);
 
         data.parent.classification.GrantBonusDamageFromTable(bonusDamage, oldLevel, newLevel);
-        base.SetUnitLevel(data, onSpawn, oldLevel, newLevel);
-    }
+    }*/
     public override void CompleteProduction(ProductionTable table)
     {
         table.playerOwner.CompleteUpgrade(this, 1);

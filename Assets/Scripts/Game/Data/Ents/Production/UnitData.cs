@@ -1,16 +1,20 @@
 using UnityEngine;
 
-public class UnitData : MonoBehaviour
+public class UnitData : ProductionData
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+   // public StatsTableSO unit;
 
-    // Update is called once per frame
-    void Update()
+    public override AvailableState GetAvailableState(DataItemPlayer player)
     {
-        
+        var avs = base.GetAvailableState(player);
+        if (avs == AvailableState.available && !player.CanAffordResources(GetCostForPlayer(player)))
+        {
+            return AvailableState.greyedout;
+        }
+        return avs;
+    }
+    public override void CompleteProduction(ProductionTable table)
+    {
+       // PlayerController.main.troopMan.SpawnBannerAtPoint(this, table.point, table.playerOwner);
     }
 }

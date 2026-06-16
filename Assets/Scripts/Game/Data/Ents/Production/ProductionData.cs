@@ -1,8 +1,6 @@
-using System;
 using UnityEngine;
 
-[Serializable]
-public class ProductionData 
+public abstract class ProductionData 
 {
     public string InternalName;
     public enum AvailableState
@@ -19,13 +17,111 @@ public class ProductionData
     [Header("Costs")]
     public ResourceCost[] costs = new ResourceCost[0];
     public string[] prerequisites = new string[0];
-    public virtual bool IsValidPosition(Vector2Int origin)
+    public float GetBaseCost(EconomyDefines.EconomyResource resource)
     {
-        return true;
+        foreach (var cost in costs)
+        {
+            if (cost.resource == resource)
+                return cost.value;
+        }
+        return 0;
+    }
+    public virtual AvailableState GetAvailableState(DataItemPlayer player)
+    {
+        foreach (string prerequisite in prerequisites)
+        {
+            if (!PrerequisiteMet(player, prerequisite))
+            {
+                return AvailableState.greyedoutNocost;
+            }
+        }
+        return AvailableState.available;
+    }
+
+    public bool PrerequisiteMet(DataItemPlayer player, string prerequisite)
+    {
+        //if (prerequisite.Substring(0, 2) == "b_")
+        {
+          //  return player.HasBuilding(prerequisite);
+        }
+        return player.UpgradeResearched(prerequisite);
+    }
+    public virtual float GetCostForPlayer(DataItemPlayer player, EconomyDefines.EconomyResource resource, float mult = 1)
+    {
+        foreach (var cost in GetCostForPlayer(player, mult))
+        {
+            if (cost.resource == resource)
+                return cost.value;
+        }
+        return 0;
+    }
+    public bool IsFreeForPlayer(DataItemPlayer player)
+    {
+        var costs = GetCostForPlayer(player);
+        return (costs[(int)EconomyDefines.EconomyResource.Gold].value == 0
+            && costs[(int)EconomyDefines.EconomyResource.Metal].value == 0
+            && costs[(int)EconomyDefines.EconomyResource.Mana].value == 0
+            && costs[(int)EconomyDefines.EconomyResource.Labor].value == 0);
+    }
+    public virtual ResourceCost[] GetCostForPlayer(DataItemPlayer player, float mult = 1)
+    {
+        float[] additions = new float[(int)EconomyDefines.EconomyResource.Total];
+        float[] multipliers = new float[] { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+        foreach (var upgrade in player.researchedUpgrades)
+        {
+            if (upgrade.level > 0 && upgrade.upgrade.AppliesToThing(this))
+            {
+                foreach (var change in upgrade.upgrade.resourceChanges)
+                {
+                    int iR = (int)change.changedResource;
+                    switch (change.resourceChangeBehavior)
+                    {
+                        case ResourceAlteration.ChangeBehavior.raw:
+                            additions[iR] += change.changeValue * upgrade.level;
+                            break;
+                        case ResourceAlteration.ChangeBehavior.percentage:
+                            for (int i = 0; i < upgrade.level; i++)
+                                multipliers[iR] *= Mathf.Pow(change.changeValue, upgrade.level);
+                            break;
+                    }
+                }
+            }
+        }
+        ResourceCost[] final = new ResourceCost[(int)EconomyDefines.EconomyResource.Total];
+        for (int iR = 0; iR < final.Length; iR++)
+        {
+            EconomyDefines.EconomyResource res = (EconomyDefines.EconomyResource)iR;
+            final[iR] = new ResourceCost(res, (GetBaseCost(res) + additions[iR]) * multipliers[iR] * mult);
+        }
+        return final;
+    }
+    public virtual bool Produce(ProductionTable table)
+    {
+        if (table.percent < 0) return true;
+        var price = GetCostForPlayer(table.playerOwner);
+        if (table.playerOwner.CanAffordResources(price))
+        {
+            table.playerOwner.SpendResources(price);
+            return true;
+
+        }
+        return false;
     }
     public virtual void CompleteProduction(ProductionTable table)
     {
 
+    }
+    public virtual bool IsValidPosition(Vector2Int origin)
+    {
+        return true;
+    }
+    public virtual float GetRadius()
+    {
+        return 1f;
+    }
+    public virtual bool IsUnique()
+    {
+        return true;
     }
     public virtual void AdoptOther(ProductionData other, float resMult)
     {
