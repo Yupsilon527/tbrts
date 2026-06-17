@@ -2,8 +2,8 @@ using System;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "Ability", menuName = "Abilities/Ability")]
-public class AbilitySO : ScriptableObject
+[Serializable]
+public class AbilityData
 {
-    public CombatantAbilityTable data;
+    public ApplyEffects[] effects;
 }

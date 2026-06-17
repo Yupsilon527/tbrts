@@ -249,6 +249,8 @@ public static class ModifierDefines
         item_rarity = 104,
         
         total = 105,
+        ability_cast_range = 106,
+        ability_aoe_range = 107,
     }
 
 

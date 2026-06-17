@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public abstract class ApplyEffects
@@ -8,19 +9,38 @@ public abstract class ApplyEffects
 
     public virtual void Activate(CastTable table, float strength = 1)
     {
-            if (targeting == CombatDefines.TargetType.caster || targeting == CombatDefines.TargetType.caster_and_target)
-            {
-                ActivateOnCaster(table, strength);
-            }
-            if (targeting == CombatDefines.TargetType.targets || targeting == CombatDefines.TargetType.caster_and_target)
-            {
-                ActivateOnTargets(table, strength);
-            }
+        switch (targeting)
+        {
+            case CombatDefines.TargetType.caster:
+                ActivateOnUnit(table, table.caster, strength);
+                break;
+            case CombatDefines.TargetType.main_target:
+                foreach (var target in table.maintarget)
+                    ActivateOnUnit(table, target, strength);
+                break;
+            case CombatDefines.TargetType.all_targets:
+                foreach (var target in table.sidetarget)
+                    ActivateOnUnit(table, target, strength);
+                break;
+            case CombatDefines.TargetType.side_targets:
+                foreach (var target in table.sidetarget.Where(t => !table.maintarget.Contains(t)))
+                    ActivateOnUnit(table, target, strength);
+                break;
+            case CombatDefines.TargetType.randomEnemy:
+                //var randomEnemy = table.caster.troop.Formation[Mathf.FloorToInt(table.caster.troop.Formation.Length * Random.value)];
+                //ActivateOnUnit(table, randomEnemy, strength);
+                // TODO
+                break;
+            case CombatDefines.TargetType.randomAlly:
+                var randomAlly = table.caster.troop.Formation[Mathf.FloorToInt(table.caster.troop.Formation.Length * Random.value)];
+                ActivateOnUnit(table, randomAlly, strength);
+                break;
+        }
     }
     public abstract void ActivateOnUnit(CastTable table, DataItemUnit target, float strength = 1);
     public virtual bool Resolve(CastTable table, float strength = 1)
     {
-        if ( Passes(table, strength))
+        if (Passes(table, strength))
         {
             Activate(table, strength);
             return true;
@@ -30,8 +50,8 @@ public abstract class ApplyEffects
     public virtual string GetDescription()
     {
         string desc = "%effect%";
-            if (applyChance < 1 && chance != CombatDefines.ChanceMult.always)
-            desc = $"{Mathf.Round(applyChance * 100)}% {chance} to "+ desc;
+        if (applyChance < 1 && chance != CombatDefines.ChanceMult.always)
+            desc = $"{Mathf.Round(applyChance * 100)}% {chance} to " + desc;
         return desc;
     }
     public bool Passes(CastTable table, float pass = 1)
@@ -45,9 +65,9 @@ public abstract class ApplyEffects
             case CombatDefines.ChanceMult.True:
                 return ranVal < c;
             case CombatDefines.ChanceMult.Luck:
-                 return ranVal < c * table.caster.stats.realStats.LuckCoefficient;
+                return ranVal < c * table.caster.stats.realStats.LuckCoefficient;
             case CombatDefines.ChanceMult.Proc:
-                return ranVal <( c + table.caster.stats.realStats.ProcChance) * table.caster.stats.realStats.LuckCoefficient;
+                return ranVal < (c + table.caster.stats.realStats.ProcChance) * table.caster.stats.realStats.LuckCoefficient;
             default: return true;
         }
     }

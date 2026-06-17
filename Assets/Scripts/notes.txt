@@ -1,5 +1,9 @@
 TODO
+	FIX COMBAT
+
 	combat from stepidle
+	combat from gemidle
+
 	then from ATW 
 		events, stats? damage
 	from RTS 

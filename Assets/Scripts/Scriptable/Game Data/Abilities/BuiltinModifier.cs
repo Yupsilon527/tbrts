@@ -13,7 +13,7 @@ using UnityEngine;
     public override bool Resolve(CastTable table, float strength =1)
     {
         if (!base.Resolve(table, strength)) return false;
-        table.target.modifiers.ApplyNewModifier(Translate(), table.tick, true,false);
+        table.maintarget.modifiers.ApplyNewModifier(Translate(), table.tick, true,false);
         return true;
 
     }

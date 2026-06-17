@@ -1,39 +1,36 @@
 using UnityEngine;
-using static UnityEngine.UI.Image;
 
 public class PropertySpell : PropertyAbility
 {
-    public int GoldCost = 0;
-    public int ManaCost = 0;
+    public SpellData original;
 
-    public CombatDefines.TileTargetingMode targetMode ;
-    public CombatDefines.TileRangeMode rangeMode;
-    public CombatDefines.TileTargetingArea areaMode;
-
-
-    public float GetMinRange(bool raw)
+    public override bool IsUsable()
     {
-        if (!raw && GetAreaRange(true) > 0)
-            return Mathf.Max(GetAreaRange(false), original.GetMinRange());
-        return original.GetMinRange();
+        return base.IsUsable();
+    }
+    #region Resource
+    public override bool HasResourcesToCast()
+    {
+        return base.HasResourcesToCast();
+    }
+    public override void SpendResources()
+    {
+        base.SpendResources();
+    }
+    #endregion
+    #region Range
+    public float GetMinRange()
+    {
+        return Mathf.Max(GetAreaRange(), original.min_range);
     }
 
-    public float GetMaxRange(bool raw)
+    public float GetMaxRange()
     {
-        float range = original.GetMaxRange();
-        if (!raw)
-        {
-            range = Mathf.Max(0, range + caster.GetPropertyAdditive(ModifierDefines.modProps.ability_cast_range) + (IsBasicAttack() ? caster.stats.realStats.AttackRange : 0));
-        }
-        return range;
+        return Mathf.Max(0, original.max_range + parent.GetPropertyAdditive(ModifierDefines.Properties.ability_cast_range));
     }
-    public int GetAreaRange(bool raw)
+    public float GetAreaRange()
     {
-        float range = original.GetAoERange();
-        if (!raw && caster.modifiers != null)
-        {
-            range = Mathf.Max(1, range + caster.GetPropertyAdditive(ModifierDefines.modProps.ability_aoe_range));
-        }
-        return Mathf.RoundToInt(range);
+        return Mathf.Max(0, original.area_range + parent.GetPropertyAdditive(ModifierDefines.Properties.ability_aoe_range));
     }
+    #endregion
 }

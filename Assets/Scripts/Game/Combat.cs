@@ -18,7 +18,7 @@ public class Combat : Initializable
     public List<DataItemUnit> combatants = new();
 
     public int currentTick = 0;
-    public void StartCombat(DataItemArmy a, DataItemArmy d, SidewaysTile location)
+    public void SetUp(DataItemArmy a, DataItemArmy d, SidewaysTile location)
     {
         currentTick = 0;
         locatedTile = location;
@@ -26,10 +26,8 @@ public class Combat : Initializable
         defenders = d;
 
         InitCombatants();
-
-        BeginCombat();
     }
-    void InitCombatants()
+    void InitCombatants()   //TODO ranged support
     {
         foreach (var a in attackers.Formation)
         {
@@ -54,35 +52,45 @@ public class Combat : Initializable
     {
         return enabled;
     }
-    public  void OnGameTick(int steps)
+    void ResolveInstantly()
+    {
+        BeginCombat();
+        int soft = 0;
+        while (enabled && ++soft < 100)
+        {
+            OnGameTick();
+        }
+    }
+    private void Update()
+    {
+        OnGameTick();
+    }
+    public void OnGameTick()
     {
         if (!IsInCombat()) return;
         combatants.Sort((a, b) => a.nextAction.CompareTo(b.nextAction));
-        currentTick = combatants[0].nextAction ;
+        currentTick = combatants[0].nextAction;
 
         while (combatants[0].nextAction <= currentTick)
         {
+            Inspect($"{combatants[0]} acts!");
             combatants[0].Act();
             combatants.Sort((a, b) => a.nextAction.CompareTo(b.nextAction));
-            if (!ForwardCheck())
-                break;
+
+            if (combatants.Any(c => c.abilities._actions.Any(a => a.CanBeCast(currentPhase))))
+                continue;
+            ForwardPhase();
         }
     }
-    bool ForwardCheck()
+    void ForwardPhase()
     {
-        bool playerAlive = attackers.CountLivingTroops()>0;
-        bool enemiesAlive = defenders.CountLivingTroops()>0;
-        if (!playerAlive || !enemiesAlive)
+        if (currentPhase == CombatDefines.AttackPhase.PostAttack)
+            EndCombat();
+        else
         {
-            DeclareWinner(playerAlive);
-            return false;
+            currentPhase++;
+            currentTick = 0;
         }
-        return true;
-    }
-    void DeclareWinner(bool playerside)
-    {
-        Inspect(playerside ? "Player won" : "Monsters won");
-        EndCombat();
     }
     void EndCombat()
     {

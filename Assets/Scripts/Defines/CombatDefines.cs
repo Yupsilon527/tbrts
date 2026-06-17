@@ -18,16 +18,11 @@ public static class CombatDefines
     {
         nobody = -1,
         caster = 0,
-        targets = 1,
-        caster_and_target = 2,
-        none =0,
-        self = 1,
-        attackTarget = 2,
-        randomEnemy = 3,
-        allEnemies = 4,
-        randomAlly =5,
-        allAllies = 6,
-        randomSecondaryTarget = 7,
+        all_targets = 1,
+        main_target = 2,
+        side_targets = 3,
+        randomEnemy = 4,
+        randomAlly = 5,
     }
     public enum TileTargetingMode
     {

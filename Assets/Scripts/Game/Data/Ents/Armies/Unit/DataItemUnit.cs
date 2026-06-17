@@ -8,6 +8,7 @@ public class DataItemUnit : DataItemObject
     public int dodgeCounter = 1;
 
     public UnitData scriptable;
+    public DataItemArmy troop;
     public UnitStats stats;
     public UnitDamageable damageable;
     public CombatantAbilities abilities;
@@ -135,5 +136,9 @@ public class DataItemUnit : DataItemObject
         }
         output += abilities.OutputTable();
         return output;
+    }
+    public bool IsInCombat()
+    {
+        return troop.IsInCombat();
     }
 }

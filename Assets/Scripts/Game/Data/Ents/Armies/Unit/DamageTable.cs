@@ -4,7 +4,6 @@ public class DamageTable
 {
     public DataItemUnit attacker;
     public DataItemUnit target;
-    public AttackDefines.DamageElement element;
     public AttackDefines.ActionType dmt;
     public float baseDamage;
     public float realDamage;

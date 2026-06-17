@@ -1,20 +1,14 @@
 using System.Collections.Generic;
-using UnityEngine;
-using static UnityEngine.UI.Image;
 
-public class PropertyAbility : PropertyBase
+public abstract class PropertyAbility : PropertyBase
 {
     public float procStrength = 1;
-    protected ApplyEffects[] effects;
    
-    public PropertyAbility(AbilityData data) :this(data.abilityCooldown, data.abilityCondition, data.abilityTarget,data.abilityEvent, data.abilityStrength)
-    {
-       
-    }
     public DataItemUnit[] GetValidTargets(CastTable table)
     {
         return new[] { table.caster };
     }
+    public ApplyEffects[] GetAbilityEffects() { return null; }
     public bool CanBeCast(CombatDefines.AttackPhase phase)
     {
         return IsUsable() && HasResourcesToCast();

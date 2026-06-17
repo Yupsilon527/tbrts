@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ public class DataItemArmy : DataItemObject
     }
     public int CountFightingTroops(CombatDefines.AttackPhase phase)
     {
-        return Formation.Sum(u => u != null && u.damageable.IsAlive()  && u.abilities._actions.Any(a => a.) ? 1 : 0);
+        return Formation.Sum(u => u != null && u.damageable.IsAlive()  && u.abilities._actions.Any(a => a.CanBeCast(phase)) ? 1 : 0);
     }
     public DataItemUnit GetTroopInPosition(int x, int y)
     {
@@ -25,5 +26,10 @@ public class DataItemArmy : DataItemObject
     public int GetPowerValue(bool threat)
     {
         return 0;
+    }
+
+    internal bool IsInCombat()
+    {
+        throw new NotImplementedException();
     }
 }

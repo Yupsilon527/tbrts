@@ -1,5 +1,5 @@
 
-public class PropertyBase
+public abstract class PropertyBase
 {
     public DataItemUnit parent;
     public int uses = 0;
@@ -28,4 +28,5 @@ public class PropertyBase
     {
         expiration = 0; 
         uses = 0;
+    }
     }
