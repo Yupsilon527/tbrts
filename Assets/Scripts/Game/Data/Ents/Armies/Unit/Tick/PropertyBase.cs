@@ -1,8 +1,8 @@
 
 public abstract class PropertyAction
 {
+    public string InternalName = "ERROR";
     public DataItemUnit parent;
-    public int uses = 0;
     public int expiration = 0;
     public int actionDelay = 100;
     public int actionInterval = 100;

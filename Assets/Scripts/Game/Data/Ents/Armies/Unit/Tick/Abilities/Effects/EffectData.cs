@@ -3,8 +3,8 @@ using UnityEngine;
 
 public abstract class ApplyEffects
 {
-    public CombatDefines.ChanceMult chance;
     public float applyChance = 1;
+    public CombatDefines.ChanceMult chance;
     public CombatDefines.TargetType targeting;
 
     public virtual void Activate(CastTable table, float strength = 1)
@@ -12,19 +12,19 @@ public abstract class ApplyEffects
         switch (targeting)
         {
             case CombatDefines.TargetType.caster:
-                ActivateOnUnit(table, table.caster, strength);
+                ActivateOnUnit(new EventTable(table, table.caster), strength);
                 break;
             case CombatDefines.TargetType.main_target:
                 foreach (var target in table.maintarget)
-                    ActivateOnUnit(table, target, strength);
+                    ActivateOnUnit(new EventTable(table, target), strength);
                 break;
             case CombatDefines.TargetType.all_targets:
                 foreach (var target in table.sidetarget)
-                    ActivateOnUnit(table, target, strength);
+                ActivateOnUnit(new EventTable(table, target), strength);
                 break;
             case CombatDefines.TargetType.side_targets:
                 foreach (var target in table.sidetarget.Where(t => !table.maintarget.Contains(t)))
-                    ActivateOnUnit(table, target, strength);
+                ActivateOnUnit(new EventTable(table, target), strength);
                 break;
             case CombatDefines.TargetType.randomEnemy:
                 //var randomEnemy = table.caster.troop.Formation[Mathf.FloorToInt(table.caster.troop.Formation.Length * Random.value)];
@@ -33,11 +33,11 @@ public abstract class ApplyEffects
                 break;
             case CombatDefines.TargetType.randomAlly:
                 var randomAlly = table.caster.troop.Formation[Mathf.FloorToInt(table.caster.troop.Formation.Length * Random.value)];
-                ActivateOnUnit(table, randomAlly, strength);
+                ActivateOnUnit(new EventTable(table, randomAlly), strength);
                 break;
         }
     }
-    public abstract void ActivateOnUnit(CastTable table, DataItemUnit target, float strength = 1);
+    public abstract void ActivateOnUnit(EventTable table, float strength = 1);
     public virtual bool Resolve(CastTable table, float strength = 1)
     {
         if (Passes(table, strength))

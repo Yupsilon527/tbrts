@@ -3,7 +3,7 @@ using UnityEngine;
 public class UnitData : ProductionData
 {
     public UnitStatsTable unit;
-    public AbilitySO[] abilities;
+    public PropertyAbility[] abilities;
     public override AvailableState GetAvailableState(DataItemPlayer player)
     {
         var avs = base.GetAvailableState(player);

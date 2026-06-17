@@ -1,8 +1,13 @@
 using System;
+using UnityEngine;
+
+public class ActionSO : ScriptableObject
+{
+    public AttackEffectSO[] effects;
+}
 
 
-[Serializable]
-public class AbilityData
+public class ActionData : BaseData
 {
     public ApplyEffects[] effects;
 }

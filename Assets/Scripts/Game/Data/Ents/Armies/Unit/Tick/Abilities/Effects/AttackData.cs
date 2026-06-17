@@ -5,17 +5,20 @@ public class ApplyAttack : ApplyEffects
 {
     public AttackDefines.ActionType attack;
     public float BaseDamage = 0;
+    public float CritMult = 0;
     public ScaleData[] scaling;
 
-    public override void ActivateOnUnit(CastTable table, DataItemUnit target, float strength = 1)
+    public override void ActivateOnUnit(EventTable table, float strength = 1)
     {
-        if (!base.Resolve(table)) return;
         float realDamage = BaseDamage * strength;
         foreach (var scale in scaling)
         {
             realDamage = scale.GetScaleStrength(table.caster, target, realDamage);
         }
-        target.damageable.DealDamage(realDamage * table.proc, attack, table.caster,  table.hit);
+        float critModifier = 1;
+        if (table.hit == AttackDefines.HitType.criticalHit)
+            critModifier = CritMult + table.caster.GetPropertyAdditive(ModifierDefines.Property.critical_damage) ;
+        target.damageable.DealDamage(realDamage * table.proc * critModifier, attack, table.caster,  table.hit);
     }
 
     public override string GetDescription()

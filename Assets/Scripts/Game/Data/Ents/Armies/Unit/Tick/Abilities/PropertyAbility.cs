@@ -3,7 +3,8 @@ using System.Collections.Generic;
 public abstract class PropertyAbility : PropertyAction
 {
     public float procStrength = 1;
-   
+    public int uses = 0;
+
     public DataItemUnit[] GetValidTargets(CastTable table)
     {
         return new[] { table.caster };
@@ -45,28 +46,20 @@ public abstract class PropertyAbility : PropertyAction
         }
     }
     #region Events
-    public void FireEvent(AbilityDefines.Event fct, Mob target)
+    public void FireEvent(AbilityDefines.Event fct, DataItemUnit target)
     {
         if (!HasEvent(fct)) return;
 
 
-        FireEvent(fct, new CastTable(caster, this, target, new Mob[] { target }));
-    }
-    public void FireEvent(AbilityDefines.Event fct, Mob[] targets)
-    {
-        if (!HasEvent(fct)) return;
-
-
-        FireEvent(fct, new CastTable(caster, this, null, targets));
+        FireEvent(fct, new CastTable(parent, UnityEngine.Vector2Int.zero, this)) ;
     }
     public void FireEvent(AbilityDefines.Event fct)
     {
-        FireEvent(fct, new CastTable(caster, this));
+        FireEvent(fct, new CastTable(caster, source:this));
     }
-    public void FireEvent(AbilityDefines.Event fct, CastTable table)
+    public void FireEvent(AbilityDefines.Event fct, AttackTable table)
     {
         if (!HasEvent(fct)) return;
-
         AbilityEvent(fct, table);
     }
     public bool HasEvent(AbilityDefines.Event evt)
@@ -79,8 +72,8 @@ public abstract class PropertyAbility : PropertyAction
     }
     #endregion
     #region Ability Events
-    public List<AbilitySO.AbilityListener> AbilityFunctions;
-    void AbilityEvent(AbilityDefines.Event fct, CastTable table)
+    public List<AbilityDefines.AbilityListener> AbilityFunctions;
+    void AbilityEvent(AbilityDefines.Event fct, EventTable table)
     {
         if (AbilityFunctions != null)
         {

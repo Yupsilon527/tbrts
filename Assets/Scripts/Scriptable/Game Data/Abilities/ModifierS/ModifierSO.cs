@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Modifier", menuName = "Abilities/Modifier")]
+[CreateAssetMenu(fileName = "Modifier", menuName = "Abilities/Effects/Modifiers/Modifier")]
 public class ModifierSO : AlterationSO
 {
     public int duration = 1;

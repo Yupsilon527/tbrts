@@ -14,7 +14,7 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
     }
 
     #region Create Modifiers
-    public bool ApplyNewModifierFromData(ModifierSO Modifier, int atTick, out PropertyModifier resultingModifier)
+    public bool ApplyNewModifierFromData(ModifierData Modifier, int atTick, out PropertyModifier resultingModifier)
     {
         resultingModifier = null;
         if (IsImmuneToModifier(Modifier)) { return false; }

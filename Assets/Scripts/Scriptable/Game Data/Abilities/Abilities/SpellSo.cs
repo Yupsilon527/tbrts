@@ -6,10 +6,6 @@ public class SpellSo : ActionSO
 {
     public SpellData data;
 }
-public class ActionSO : ScriptableObject
-{
-    public AttackEffectSO[] effects;
-}
 [Serializable]
 public class SpellData
 {
@@ -22,10 +18,5 @@ public class SpellData
     public CombatDefines.TileRangeMode rangeMode;
     public CombatDefines.TileTargetingArea areaMode;
 
-}
-
-public class ActionData : BaseData
-{
-    public ApplyEffects[] effects;
 }
 

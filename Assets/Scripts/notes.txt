@@ -1,4 +1,9 @@
 TODO
+	spells
+		stemonGO
+		stepRpg
+		Dice Saga
+
 	FIX COMBAT
 
 	unov

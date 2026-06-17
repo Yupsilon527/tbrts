@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.U2D;
 
+[CreateAssetMenu(fileName = "Properties", menuName = "Abilities/Effects/Modifiers/Properties")]
 public class AlterationSO : TagSO
 {
     public ModifierDefines.Priority priority = ModifierDefines.Priority.low;

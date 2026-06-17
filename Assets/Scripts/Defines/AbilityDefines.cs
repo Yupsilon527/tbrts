@@ -4,11 +4,11 @@ public static class AbilityDefines
 
     public enum Event
     {
-        Nothing=-1,
+        Nothing = -1,
         Step = 29,
 
         //functional
-        OnCreated =0,
+        OnCreated = 0,
         OnDestroyed = 1,
         OnExpired = 2,
         OnRefresh = 3,
@@ -29,10 +29,10 @@ public static class AbilityDefines
         OnHitByEnemy = 13,
 
         OnTakeDamage = 14,
-        OnTakeLifeDamage =15,
+        OnTakeLifeDamage = 15,
         OnLifeChange = 30,
 
-        OnHealRecieved=16,
+        OnHealRecieved = 16,
         OnShieldRecieved = 17,
         OnArmorRecieved = 18,
 
@@ -51,5 +51,34 @@ public static class AbilityDefines
         OnLoopEnd = 24,
 
         Total = 31
+    }
+    public delegate void AbilityFunction(EventTable CastData);
+    public class AbilityListener
+    {
+        public Event aEvent;
+        public AbilityFunction aFunction;
+
+        public AbilityListener(AbilityEvent evt, DataItemUnit activator)
+        {
+            aEvent = evt.Event;
+            aFunction = (EventTable castData) =>
+            {
+                foreach (var effect in evt.defaultEffects)
+                {
+                    effect?.ActivateOnUnit(new EventTable(castData.caster, activator));
+                }
+            };
+        }
+        public AbilityListener(Event aEvent, AbilityFunction aFunction)
+        {
+            this.aEvent = aEvent;
+            this.aFunction = aFunction;
+        }
+    }
+    [System.Serializable]
+    public class AbilityEvent
+    {
+        public Event Event;
+        public ApplyEffects[] defaultEffects = new ApplyEffects[0];
     }
 }

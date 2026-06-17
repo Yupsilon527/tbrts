@@ -139,29 +139,6 @@ public void SetPropertyRaw(ModifierDefines.Property prop, float value)
     {
         return false;
     }
-    #region Thinker
-    public void StartThinker(int interval)
-    {
-        HasThinker = true;
-        actionInterval = Mathf.Max(1, interval);
-        thinker = 0;
-    }
-   public virtual void Think()
-    {
-
-    }
-    public override bool ForwardTime(int cooldown)
-    {
-       bool executed = base.ForwardTime(cooldown);
-        CheckExpiration();
-
-        if (HasThinker) thinker -= cooldown;
-        executed = executed || thinker < 0;
-        while (thinker < 0) 
-            Think();
-        return executed;
-    }
-    #endregion
     #region Parameters
     public void SetParameter(string name, float value)
     {
@@ -184,9 +161,8 @@ public void SetPropertyRaw(ModifierDefines.Property prop, float value)
 
 }
 
-public class PropertyTag
+public class PropertyTag : PropertyAction
 {
-    public string InternalName = "ERROR";
     public Sprite sprite;
     public ModifierDefines.Behavior behavior;
     public ModifierDefines.VisibleState uibehavior;
@@ -206,6 +182,29 @@ public class PropertyTag
     public bool IsOverheadVisible()
     {
         return uibehavior >= ModifierDefines.VisibleState.always_visible;
+    }
+    #endregion
+    #region Thinker
+    public void StartThinker(int interval)
+    {
+        HasThinker = true;
+        actionInterval = Mathf.Max(1, interval);
+        thinker = 0;
+    }
+    public virtual void Think()
+    {
+
+    }
+    public override bool ForwardTime(int cooldown)
+    {
+        bool executed = base.ForwardTime(cooldown);
+        CheckExpiration();
+
+        if (HasThinker) thinker -= cooldown;
+        executed = executed || thinker < 0;
+        while (thinker < 0)
+            Think();
+        return executed;
     }
     #endregion
 }

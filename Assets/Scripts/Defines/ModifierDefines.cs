@@ -254,6 +254,7 @@ public static class ModifierDefines
         total = 105,
         ability_cast_range = 106,
         ability_aoe_range = 107,
+        critical_damage = 108,
     }
 
 

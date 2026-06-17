@@ -1,10 +1,26 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public class EventTable
+{
+    public AttackDefines.HitType hit = AttackDefines.HitType.normal;
+    public int tick = 0;
+    public DataItemUnit caster;
+    public DataItemUnit target;
+
+    public EventTable(CastTable table, DataItemUnit target)
+    {
+        this.target = target;
+        this.hit = table.hit;
+        this.caster = table.caster;
+        this.tick = table.tick;
+    }
+}
 public class CastTable
 {
     public bool attackingSide = false;
     public float proc = 0;
+    public int tick = 0;
     public DataItemUnit caster;
     public Vector2Int targetPoint;
     public PropertyAbility ability;
@@ -90,7 +106,6 @@ public class AttackTable : CastTable
         ComputeTargets();
     }
     public CombatDefines.AttackPhase phase;
-    public int tick = 0;
     void DetermineHitType()
     {
         directHit = true;

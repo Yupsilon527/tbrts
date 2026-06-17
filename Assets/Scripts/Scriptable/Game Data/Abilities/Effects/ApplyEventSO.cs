@@ -1,21 +1,19 @@
 using UnityEngine;
 
-namespace VikingParty
-{
 
-    [CreateAssetMenu(fileName = "Apply Event", menuName = "Abilities/Effects/Apply Event")]
-    public class ApplyEventSO : ApplyPhaseSO
+[CreateAssetMenu(fileName = "Trigger Event", menuName = "Abilities/Effects/Trigger Event")]
+public class ApplyEventSO : AttackEffectSO
+{
+    public AbilityDefines.Event abilityEvent;
+
+    public override ApplyEffects Translate()
     {
-        public AbilityDefines.Event abilityEvent;
-        public override void ActivateOnCaster(AttackTable table, RollTable roll)
+        return new EventData()
         {
-            if (targeting == AbilityDefines.TargetType.nobody) return;
-            table.attacker.FireEventOnSelf(abilityEvent);
-        }
-        public override void ActivateOnTargets(AttackTable table, RollTable roll)
-        {
-            if (targeting == AbilityDefines.TargetType.nobody) return;
-            table.target.FireEventOnSelf(abilityEvent);
-        }
+            abilityEvent = abilityEvent,
+            applyChance = applyChance,
+            targeting = targeting,
+            chance = chance,
+        };
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.U2D;
 
+[CreateAssetMenu(fileName = "Tag", menuName = "Abilities/Effects/Modifiers/Tag")]
 public class TagSO : ScriptableObject
 {
     public Sprite sprite;
