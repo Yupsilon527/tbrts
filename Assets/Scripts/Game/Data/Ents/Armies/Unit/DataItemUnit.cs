@@ -57,7 +57,7 @@ public class DataItemUnit : DataItemObject
     }
     public bool CanAct(CombatDefines.AttackPhase phase)
     {
-        return abilities._actions.Any(a => a.attackPhase == phase && a.HasResourcesToCast());
+        return abilities.attacks.Any(a => a.original.attackPhase == phase && a.HasResourcesToCast());
     }
     protected void UpdateNextAction(int steps)
     {
@@ -69,39 +69,34 @@ public class DataItemUnit : DataItemObject
         FireEventOnSelf(AbilityDefines.Event.OnRefresh);
         modifiers.Refresh(force);
     }
-    public virtual bool GetState(ModifierDefines.modStates State)
+    public virtual bool GetState(ModifierDefines.State State)
     {
         return modifiers.GetState(State);
     }
-    public float GetProperty(ModifierDefines.Properties Property)
+    public float GetProperty(ModifierDefines.Property Property)
     {
         if (ModifierDefines.IsPropertyMultiplicative(Property))
             return modifiers.GetPropertyMultiplicative(Property);
         return modifiers.GetPropertyAdditive(Property);
     }
-    public virtual float GetPropertyAdditive(ModifierDefines.Properties Property)
+    public virtual float GetPropertyAdditive(ModifierDefines.Property Property)
     {
         return modifiers.GetPropertyAdditive(Property);
     }
-    public virtual float GetPropertyMultiplicative(ModifierDefines.Properties Property)
+    public virtual float GetPropertyMultiplicative(ModifierDefines.Property Property)
     {
         return modifiers.GetPropertyMultiplicative(Property);
     }
     #endregion
-    public DataItemUnit GetAttackTarget()
-    {
-        var targets = IsPlayerOwned() ? Combat.main.GetEnemies(true) : Combat.main.GetHeroes(true);
-        return targets[0];
-    }
     public string OutputTable()
     {
         string output = stats.realStats.OutputTable();
         // Properties (non-zero values only)
         bool hasProperties = false;
         string propertiesOutput = "";
-        for (int i = 0; i < (int)ModifierDefines.Properties.total; i++)
+        for (int i = 0; i < (int)ModifierDefines.Property.total; i++)
         {
-            ModifierDefines.Properties prop = (ModifierDefines.Properties)i;
+            ModifierDefines.Property prop = (ModifierDefines.Property)i;
             bool multi = ModifierDefines.IsPropertyMultiplicative(prop);
             float value = GetProperty(prop);
             if ((multi && value != 1) || (!multi && value != 0))
@@ -120,12 +115,12 @@ public class DataItemUnit : DataItemObject
         // States (active states only)
         bool hasStates = false;
         string statesOutput = "";
-        for (int i = 0; i < (int)ModifierDefines.modStates.total; i++)
+        for (int i = 0; i < (int)ModifierDefines.State.total; i++)
         {
-            if (GetState((ModifierDefines.modStates)i))
+            if (GetState((ModifierDefines.State)i))
             {
                 hasStates = true;
-                ModifierDefines.modStates state = (ModifierDefines.modStates)i;
+                ModifierDefines.State state = (ModifierDefines.State)i;
                 statesOutput += $"{state}<br>";
             }
         }

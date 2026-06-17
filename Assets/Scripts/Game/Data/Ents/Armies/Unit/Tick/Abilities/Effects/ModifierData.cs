@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.VFX;
 
 [Serializable]
 public class ApplyModifier : ApplyEffects
@@ -17,20 +18,4 @@ public class ApplyModifier : ApplyEffects
         return base.GetDescription()
             .Replace("%effect%", "apply " + appliedModifier.name) ;
     }
-}
-
-public class ModifierData
-{
-
-    public ModifierDefines.Behavior behavior = ModifierDefines.Behavior.Unique;
-    public ModifierDefines.PropertyData[] properties = new ModifierDefines.PropertyData[0];
-    public ModifierDefines.StateData[] states = new ModifierDefines.StateData[0];
-
-    public int duration = 1;
-    public Sprite sprite;
-    public ModifierDefines.Flag flag;
-    public ModifierDefines.ExpireType expireType = ModifierDefines.ExpireType.time;
-    public ModifierDefines.Priority priority = ModifierDefines.Priority.low;
-
-    public ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.always_visible;
 }

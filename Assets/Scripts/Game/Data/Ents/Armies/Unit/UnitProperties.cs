@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class UnitProperties : UnitComponent
 {
-    public int[] states = new int[(int)ModifierDefines.modStates.total];
-    public float[] properties = new float[(int)ModifierDefines.Properties.total];
+    public int[] states = new int[(int)ModifierDefines.State.total];
+    public float[] properties = new float[(int)ModifierDefines.Property.total];
 
     protected bool propRefresh = false;
     protected bool statRefresh = false;
@@ -22,13 +22,13 @@ public class UnitProperties : UnitComponent
     {
     }
     #region States
-    public bool GetState(ModifierDefines.modStates State)
+    public bool GetState(ModifierDefines.State State)
     {
         return states[(int)State] > 0;
     }
-    protected void UpdateState(ModifierDefines.modStates State, int value)
+    protected void UpdateState(ModifierDefines.State State, int value)
     {
-        if ((int)State >= 0 && (int)State < (int)ModifierDefines.modStates.total)
+        if ((int)State >= 0 && (int)State < (int)ModifierDefines.State.total)
             return;
 
         //if (Mathf.Abs(states[(int)State]) < Mathf.Abs(value))
@@ -38,21 +38,21 @@ public class UnitProperties : UnitComponent
     }
     #endregion
     #region Properties
-    public float GetPropertyAdditive(ModifierDefines.Properties p)
+    public float GetPropertyAdditive(ModifierDefines.Property p)
     {
         if (p < 0 || (int)p >= properties.Length)
             return 0;
         return properties[(int)p];
     }
-    public float GetPropertyMultiplicative(ModifierDefines.Properties p)
+    public float GetPropertyMultiplicative(ModifierDefines.Property p)
     {
         if (p < 0 || (int)p >= properties.Length)
             return 1;
         return 1 + properties[(int)p];
     }
-    protected void UpdateProperty(ModifierDefines.Properties Property, float value)
+    protected void UpdateProperty(ModifierDefines.Property Property, float value)
     {
-        if ((int)Property < 0 || (int)Property >= (int)ModifierDefines.Properties.total)
+        if ((int)Property < 0 || (int)Property >= (int)ModifierDefines.Property.total)
             return;
         RefreshProperties();
         if (ModifierDefines.IsPropertyMultiplicative(Property))
@@ -74,8 +74,8 @@ public class UnitProperties : UnitComponent
     {
         if (force || statRefresh || propRefresh)
         {
-            if (force || statRefresh) states = new int[(int)ModifierDefines.modStates.total];
-            if (force || propRefresh) properties = new float[(int)ModifierDefines.Properties.total];
+            if (force || statRefresh) states = new int[(int)ModifierDefines.State.total];
+            if (force || propRefresh) properties = new float[(int)ModifierDefines.Property.total];
         }
         propRefresh = false;
         statRefresh = false;

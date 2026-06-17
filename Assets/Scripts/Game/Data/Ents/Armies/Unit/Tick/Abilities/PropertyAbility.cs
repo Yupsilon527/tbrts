@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public abstract class PropertyAbility : PropertyBase
+public abstract class PropertyAbility : PropertyAction
 {
     public float procStrength = 1;
    
@@ -9,9 +9,9 @@ public abstract class PropertyAbility : PropertyBase
         return new[] { table.caster };
     }
     public ApplyEffects[] GetAbilityEffects() { return null; }
-    public bool CanBeCast(CombatDefines.AttackPhase phase)
+    public virtual bool CanBeCast(CombatDefines.AttackPhase phase)
     {
-        return IsUsable() && HasResourcesToCast();
+        return HasResourcesToCast();
     }
     public virtual bool HasResourcesToCast()
     {
@@ -43,10 +43,6 @@ public abstract class PropertyAbility : PropertyBase
             }
             FireCooldown();
         }
-    }
-    public virtual bool IsUsable()
-    {
-        return true;
     }
     #region Events
     public void FireEvent(AbilityDefines.Event fct, Mob target)
@@ -98,4 +94,6 @@ public abstract class PropertyAbility : PropertyBase
         }
     }
     #endregion
+    public abstract DataItemUnit[] GetMainTargets(CastTable table);
+    public abstract DataItemUnit[] GetSideTargets(CastTable table);
 }

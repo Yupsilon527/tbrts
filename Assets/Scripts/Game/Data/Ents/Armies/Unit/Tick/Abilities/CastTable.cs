@@ -1,77 +1,96 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class CastTable
 {
-    public CombatDefines.AttackPhase phase;
-    public bool directHit = false;
-    public AttackDefines.HitType hit =  AttackDefines.HitType.normal;
-    public int tick = 0;
+    public bool attackingSide = false;
     public float proc = 0;
     public DataItemUnit caster;
     public Vector2Int targetPoint;
     public PropertyAbility ability;
+    public AttackDefines.HitType hit = AttackDefines.HitType.normal;
 
     public DataItemUnit[] maintarget;
     public DataItemUnit[] sidetarget;
 
-    public CastTable(DataItemUnit attacker, DataItemUnit target, CombatDefines.Action action, int tick, float proc = 1)
+    public CastTable(DataItemUnit caster, Vector2Int targetPoint, PropertyAbility ability)
     {
-        this.caster = attacker;
-        this.maintarget = target;
-        this.action = action;
+        this.caster = caster;
+        this.targetPoint = targetPoint;
+        this.ability = ability;
+        ComputeTargets();
+    }
+
+
+    public void ComputeTargets()
+    {
+        maintarget = ability.GetMainTargets(this);
+        sidetarget = ability.GetSideTargets(this);
+    }
+    public virtual void Resolve()
+    {
+
+    }
+        /*
+        public void Resolve()
+        {
+            if (action == CombatDefines.Action.Attack)
+            {
+                DetermineHitType();
+                caster.FireEventOnSelf(AbilityDefines.Event.BeforeAttack);
+            }
+            Combat.main.Inspect($"Resolve {action} from {caster} to {maintarget}");
+            hit = Random.value < caster.stats.realStats.BlockChance;
+            foreach (var effect in caster.abilities._effects)
+            {
+                if (effect.appliedEffect.action == action)
+                    effect.appliedEffect.Resolve(this, proc);
+                else if (effect.appliedEffect.action == CombatDefines.Action.OnHit && action == CombatDefines.Action.OnCrit)
+                    effect.appliedEffect.Resolve(this, proc * 2);
+                else if (effect.appliedEffect.action == CombatDefines.Action.OnHit && action == CombatDefines.Action.OnParried)
+                    effect.appliedEffect.Resolve(this, proc * .1f);
+                else if (effect.appliedEffect.action == CombatDefines.Action.OnHit && action == CombatDefines.Action.OnMiss)
+                    effect.appliedEffect.Resolve(this, proc * .5f);
+            }
+            if (action == CombatDefines.Action.OnParried)
+            {
+                maintarget.abilities.Action(caster, CombatDefines.Action.ParryAttack, tick);
+                maintarget.FireEventOnSelf(AbilityDefines.Event.SuccessfulParry);
+            }
+            if (action == CombatDefines.Action.OnMiss || action == CombatDefines.Action.OnDodge)
+            {
+                maintarget.abilities.Action(caster, CombatDefines.Action.EvadeAttack, tick);
+                maintarget.FireEventOnSelf(AbilityDefines.Event.SuccessfulEvade);
+            }
+            else
+            {
+                maintarget.FireEventOnSelf(AbilityDefines.Event.OnHitByEnemy);
+                caster.FireEventOnSelf(AbilityDefines.Event.AttackHit);
+            }
+            if (hit)
+            {
+                maintarget.FireEventOnSelf(AbilityDefines.Event.SuccessfulBlock);
+                maintarget.abilities.Action(caster, CombatDefines.Action.Block, tick);
+            }
+            if (directHit)
+            {
+                caster.FireEventOnSelf(AbilityDefines.Event.AfterAttack);
+                maintarget.abilities.Action(caster, CombatDefines.Action.Retaliate, tick);
+            }
+        }*/
+    }
+public class AttackTable : CastTable
+{
+
+    public AttackTable(CombatDefines.AttackPhase phase, int tick, DataItemUnit caster, Vector2Int targetPoint, PropertyAbility ability) : base(caster, targetPoint, ability)
+    {
+        this.phase = phase;
         this.tick = tick;
-        this.proc = proc;
+        attackingSide = Combat.main.IsAttackingSide(caster);
+        ComputeTargets();
     }
-
-    public void Resolve()
-    {
-        if (action == CombatDefines.Action.Attack)
-        {
-            DetermineHitType();
-            caster.FireEventOnSelf(AbilityDefines.Event.BeforeAttack);
-        }
-        Combat.main.Inspect($"Resolve {action} from {caster} to {maintarget}");
-        hit = Random.value < caster.stats.realStats.BlockChance;
-        foreach (var effect in caster.abilities._effects)
-        {
-            if (effect.appliedEffect.action == action)
-                effect.appliedEffect.Resolve(this, proc);
-            else if (effect.appliedEffect.action == CombatDefines.Action.OnHit && action == CombatDefines.Action.OnCrit)
-                effect.appliedEffect.Resolve(this, proc*2);
-            else if (effect.appliedEffect.action == CombatDefines.Action.OnHit && action == CombatDefines.Action.OnParried)
-                effect.appliedEffect.Resolve(this, proc * .1f);
-            else if (effect.appliedEffect.action == CombatDefines.Action.OnHit && action == CombatDefines.Action.OnMiss)
-                effect.appliedEffect.Resolve(this, proc * .5f);
-        }
-        if (action == CombatDefines.Action.OnParried)
-        {
-            maintarget.abilities.Action(caster, CombatDefines.Action.ParryAttack, tick);
-            maintarget.FireEventOnSelf(AbilityDefines.Event.SuccessfulParry);
-        }
-        if (action == CombatDefines.Action.OnMiss || action == CombatDefines.Action.OnDodge)
-        {
-            maintarget.abilities.Action(caster, CombatDefines.Action.EvadeAttack, tick);
-            maintarget.FireEventOnSelf(AbilityDefines.Event.SuccessfulEvade);
-        }
-        else
-        {
-            maintarget.FireEventOnSelf(AbilityDefines.Event.OnHitByEnemy);
-            caster.FireEventOnSelf(AbilityDefines.Event.AttackHit);
-        }
-        if (hit)
-        {
-            maintarget.FireEventOnSelf(AbilityDefines.Event.SuccessfulBlock);
-            maintarget.abilities.Action(caster, CombatDefines.Action.Block, tick);
-        }
-        if (directHit)
-        {
-            caster.FireEventOnSelf(AbilityDefines.Event.AfterAttack);
-            maintarget.abilities.Action(caster, CombatDefines.Action.Retaliate, tick);
-    }
-    }
-
+    public CombatDefines.AttackPhase phase;
+    public int tick = 0;
     void DetermineHitType()
     {
         directHit = true;
@@ -114,3 +133,4 @@ public class CastTable
         }
     }
 }
+

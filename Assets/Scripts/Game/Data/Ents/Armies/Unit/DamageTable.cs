@@ -33,44 +33,44 @@ public class DamageTable
         switch (dmt)
         {
             case AttackDefines.ActionType.DirectDamage:
-                realDamage *= attacker.GetProperty(ModifierDefines.Properties.outgoing_damage);
-                realDamage *= target.GetProperty(ModifierDefines.Properties.incoming_damage);
+                realDamage *= attacker.GetProperty(ModifierDefines.Property.outgoing_damage);
+                realDamage *= target.GetProperty(ModifierDefines.Property.incoming_damage);
 
                 if (realDamage != 0)
                 {
                     if (element != AttackDefines.DamageElement.Pure)
                     {
-                        realDamage *= attacker.GetProperty(ModifierDefines.Properties.outgoing_pure_damage);
+                        realDamage *= attacker.GetProperty(ModifierDefines.Property.outgoing_pure_damage);
                     }
                     else
                     {
                         if (element < AttackDefines.DamageElement.Elemental)
                         {
-                            realDamage *= attacker.GetProperty(ModifierDefines.Properties.outgoing_phys_damage);
-                            realDamage *= target.GetProperty(ModifierDefines.Properties.incoming_phys_damage);
+                            realDamage *= attacker.GetProperty(ModifierDefines.Property.outgoing_phys_damage);
+                            realDamage *= target.GetProperty(ModifierDefines.Property.incoming_phys_damage);
                         }
                         else if (element >= AttackDefines.DamageElement.Elemental)
                         {
-                            realDamage *= attacker.GetProperty(ModifierDefines.Properties.outgoing_elem_damage);
-                            realDamage *= target.GetProperty(ModifierDefines.Properties.incoming_elem_damage);
+                            realDamage *= attacker.GetProperty(ModifierDefines.Property.outgoing_elem_damage);
+                            realDamage *= target.GetProperty(ModifierDefines.Property.incoming_elem_damage);
                         }
 
-                        realDamage *= attacker.GetProperty(ModifierDefines.Properties.outgoing_blunt_damage + (int)element);
-                        realDamage *= target.GetProperty(ModifierDefines.Properties.incoming_blunt_damage + (int)element);
+                        realDamage *= attacker.GetProperty(ModifierDefines.Property.outgoing_blunt_damage + (int)element);
+                        realDamage *= target.GetProperty(ModifierDefines.Property.incoming_blunt_damage + (int)element);
                     }
                 }
                 break;
             case AttackDefines.ActionType.Block:
-                realDamage += target.GetProperty(ModifierDefines.Properties.shielding_bonus_flat);
-                realDamage *= target.GetProperty(ModifierDefines.Properties.outgoing_shielding);
+                realDamage += target.GetProperty(ModifierDefines.Property.shielding_bonus_flat);
+                realDamage *= target.GetProperty(ModifierDefines.Property.outgoing_shielding);
                 break;
             case AttackDefines.ActionType.LifeHealNoOverheal:
             case AttackDefines.ActionType.LifeHealOverhealShield:
             case AttackDefines.ActionType.LifeHealOverhealArmor:
-                realDamage *= target.GetProperty(ModifierDefines.Properties.incoming_healing);
+                realDamage *= target.GetProperty(ModifierDefines.Property.incoming_healing);
                 break;
             case AttackDefines.ActionType.ArmorHeal:
-                realDamage *= target.GetProperty(ModifierDefines.Properties.incoming_barrier);
+                realDamage *= target.GetProperty(ModifierDefines.Property.incoming_barrier);
                 break;
         }
     }

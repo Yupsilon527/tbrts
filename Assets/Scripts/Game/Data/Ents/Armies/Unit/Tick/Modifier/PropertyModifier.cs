@@ -1,45 +1,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PropertyThinker : PropertyAttribute
-{
-    public Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> functions = new Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction>();
-    #region Functions
-
-    public void AddFunction(AbilityDefines.Event Name, ModifierDefines.ModifierAction execution)
-    {
-        if (execution == null)
-        {
-            return;
-        }
-
-        functions.Add(Name, execution);
-
-    }
-
-    public void ExecuteFunction(AbilityDefines.Event act)
-    {
-        ExecuteEvent(act, null);
-    }
-
-    public virtual void ExecuteEvent(AbilityDefines.Event act, DataItemUnit target)
-    {
-        if (functions.TryGetValue(act, out ModifierDefines.ModifierAction func))
-            func.Invoke(this, target);
-    }
-
-    #endregion
-
-}
-public class PropertyModifier : PropertyThinker
+public class PropertyModifier : PropertyAttribute
 {
     //expiration
     public ModifierDefines.ExpireType expireType;
     public int tickDuration = 1;
     public int stacks = 1;
+    public int expiration = 1;
+
+
+    public override void ExecuteEvent(AbilityDefines.Event act, DataItemUnit target)
+    {
+        base.ExecuteEvent(act, target);
+        if (expireType != ModifierDefines.ExpireType.time && (int)act == (int)expireType)
+        {
+            expiration--;
+            CheckExpiration();
+        }
+    }
+
 
     public ModifierDefines.Flag flag;
-    public ModifierDefines.VisibleState uibehavior;
     public PropertyModifier(string Name,
       ModifierDefines.Flag a,
         ModifierDefines.VisibleState v,
@@ -99,7 +81,7 @@ public class PropertyModifier : PropertyThinker
     }
     public override bool IsExpired()
     {
-        return (expireType == ModifierDefines.ExpireType.time && expiration < 0) || (expireType == ModifierDefines.ExpireType.stacks && stacks <= 0) || tickDuration < 0;
+        return (expireType == ModifierDefines.ExpireType.time && tickDuration < 0) || (expireType == ModifierDefines.ExpireType.stacks && stacks <= 0);
     }
     public override void Die(bool expire)
     {
@@ -130,15 +112,6 @@ public class PropertyModifier : PropertyThinker
         }
         return false;
     }
-    public override void ExecuteEvent(AbilityDefines.Event act, DataItemUnit target)
-    {
-        base.ExecuteEvent(act, target);
-        if (expireType != ModifierDefines.ExpireType.time && (int)act == (int)expireType)
-        {
-            expiration--;
-            CheckExpiration();
-        }
-    }
     #endregion
     #region Stacks
     public int GetStackCount()
@@ -157,24 +130,6 @@ public class PropertyModifier : PropertyThinker
     public void DecrementStackCount()
     {
         SetStackCount(stacks - 1);
-    }
-    #endregion
-    #region Display
-    public Sprite GetModifierIcon()
-    {
-        if (sprite != null)
-        {
-            return sprite;
-        }
-        return null;
-    }
-    public bool IsTooltipVisible()
-    {
-        return uibehavior >= ModifierDefines.VisibleState.tooltip_only;
-    }
-    public bool IsOverheadVisible()
-    {
-        return uibehavior >= ModifierDefines.VisibleState.always_visible;
     }
     #endregion
 }

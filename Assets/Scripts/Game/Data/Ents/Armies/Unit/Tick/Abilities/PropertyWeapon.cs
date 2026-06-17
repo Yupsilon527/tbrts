@@ -3,9 +3,9 @@ using UnityEngine;
 public class PropertyWeapon : PropertyAbility
 {
     public WeaponData original;
-    public override bool IsUsable()
+    public override bool CanBeCast(CombatDefines.AttackPhase phase)
     {
-        return base.IsUsable();
+        return original.attackPhase == phase && base.CanBeCast(phase);
     }
     public override bool HasResourcesToCast()
     {
@@ -14,5 +14,25 @@ public class PropertyWeapon : PropertyAbility
     public override void SpendResources()
     {
         base.SpendResources();
+    }
+
+    public override DataItemUnit[] GetMainTargets(CastTable table)
+    {
+        return new DataItemUnit[] { Combat.main.GetUnitAt(!table.attackingSide, table.targetPoint.x, table.targetPoint.y) };
+    }
+
+    public override DataItemUnit[] GetSideTargets(CastTable table)
+    {
+        switch (original.areaMode)
+        {
+            default:
+                return GetMainTargets(table);
+            case CombatDefines.ArmyTargetingArea.row:
+                return Combat.main.GetUnitsInRow(!table.attackingSide, table.targetPoint.x);
+            case CombatDefines.ArmyTargetingArea.column:
+                return Combat.main.GetUnitsInColumn(!table.attackingSide, table.targetPoint.y);
+            case CombatDefines.ArmyTargetingArea.all:
+                return Combat.main.GetTroopsInSide(!table.attackingSide);
+        }
     }
 }

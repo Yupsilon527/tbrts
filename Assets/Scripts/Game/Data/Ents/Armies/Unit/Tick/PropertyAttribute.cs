@@ -1,18 +1,14 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PropertyAttribute : PropertyBase
+public class PropertyAttribute : PropertyTag
 {
-    public string InternalName = "ERROR";
-    public Sprite sprite;
     public bool active = true;
     public int priority;
-    public ModifierDefines.Behavior behavior;
 
     //states, props
-    public List<ModifierDefines.modStates> states = new List<ModifierDefines.modStates>();
-    public Dictionary<ModifierDefines.Properties, float> properties = new Dictionary<ModifierDefines.Properties, float>();
+    public List<ModifierDefines.State> states = new List<ModifierDefines.State>();
+    public Dictionary<ModifierDefines.Property, float> properties = new Dictionary<ModifierDefines.Property, float>();
 
     // Thinker
     public bool HasThinker = false;
@@ -34,8 +30,34 @@ public class PropertyAttribute : PropertyBase
         SetProps(pr);
     }
 
+    public Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> functions = new Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction>();
+    #region Functions
+
+    public void AddFunction(AbilityDefines.Event Name, ModifierDefines.ModifierAction execution)
+    {
+        if (execution == null)
+        {
+            return;
+        }
+
+        functions.Add(Name, execution);
+
+    }
+
+    public void ExecuteFunction(AbilityDefines.Event act)
+    {
+        ExecuteEvent(act, null);
+    }
+    public virtual void ExecuteEvent(AbilityDefines.Event act, DataItemUnit target)
+    {
+        if (functions.TryGetValue(act, out ModifierDefines.ModifierAction func))
+            func.Invoke(this, target);
+    }
+
+    #endregion
+
     #region States
-    public void SetState(ModifierDefines.modStates state, bool value)
+    public void SetState(ModifierDefines.State state, bool value)
     {
         if (value)
         {
@@ -48,13 +70,13 @@ public class PropertyAttribute : PropertyBase
                 states.Remove(state);
         }
     }
-    public bool GetState(ModifierDefines.modStates state)
+    public bool GetState(ModifierDefines.State state)
     {
         return states.Contains(state);
     }
     public bool GetState(int state)
     {
-        return GetState((ModifierDefines.modStates)state);
+        return GetState((ModifierDefines.State)state);
     }
 
     public void SetStates(ModifierDefines.StateData[] states)
@@ -67,11 +89,11 @@ public class PropertyAttribute : PropertyBase
     }
     #endregion
     #region Properties
-    public void SetProperty(ModifierDefines.Properties prop, float value)
+    public void SetProperty(ModifierDefines.Property prop, float value)
     {
         SetPropertyRaw(prop, ModifierDefines.IsPropertyMultiplicative(prop) ? (value / 100) : value);
 }
-public void SetPropertyRaw(ModifierDefines.Properties prop, float value)
+public void SetPropertyRaw(ModifierDefines.Property prop, float value)
     {
         if (properties.ContainsKey(prop))
         {
@@ -82,7 +104,7 @@ public void SetPropertyRaw(ModifierDefines.Properties prop, float value)
             properties.Add(prop, value);
         }
     }
-    public float GetProperty(ModifierDefines.Properties property)
+    public float GetProperty(ModifierDefines.Property property)
     {
         if (!properties.ContainsKey(property))
             return 0;
@@ -160,5 +182,30 @@ public void SetPropertyRaw(ModifierDefines.Properties prop, float value)
     }
     #endregion
 
+}
 
+public class PropertyTag
+{
+    public string InternalName = "ERROR";
+    public Sprite sprite;
+    public ModifierDefines.Behavior behavior;
+    public ModifierDefines.VisibleState uibehavior;
+    #region Display
+    public Sprite GetModifierIcon()
+    {
+        if (sprite != null)
+        {
+            return sprite;
+        }
+        return null;
+    }
+    public bool IsTooltipVisible()
+    {
+        return uibehavior >= ModifierDefines.VisibleState.tooltip_only;
+    }
+    public bool IsOverheadVisible()
+    {
+        return uibehavior >= ModifierDefines.VisibleState.always_visible;
+    }
+    #endregion
 }

@@ -8,7 +8,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     public ResourceInt Ap;
     public ResourceInt Mp;
 
-    public HashSet<PropertyWeapon> _actions = new();
+    public HashSet<PropertyWeapon> attacks = new();
     public HashSet<EffectCounter> _effects = new();
     public class EffectCounter
     {
@@ -41,12 +41,12 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     }
     public void ClearAbilities()
     {
-        _actions.Clear();
+        attacks.Clear();
         _effects.Clear();
     }
     void AddAbility(PropertyAbility ability)
     {
-        _actions.Add(ability);
+        attacks.Add(ability);
         ability.SetCooldown(Mathf.CeilToInt(parent.stats.realStats.SpeedCoefficient * ability.actionDelay));
     }
     public void FromCombatantData()
@@ -73,7 +73,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     }
     public bool Trigger(DataItemUnit mainTarget, CombatDefines.AttackPhase phase, int ticks)
     {
-        var abilities = _actions.Where(a => a.HasResourcesToCast() && a.attackPhase == phase);
+        var abilities = attacks.Where(a => a.HasResourcesToCast() && a.attackPhase == phase);
 
         foreach (var action in abilities)
         {
@@ -139,7 +139,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     public int GetNextTick(int steps)
     {
         int ticks = int.MaxValue;
-        foreach (var action in _actions)
+        foreach (var action in attacks)
         {
             ticks = Mathf.Min(ticks, steps + action.expiration);
         }
@@ -149,7 +149,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     public virtual string OutputTable()
     {
         string output = "<br><b>Actions</b><br>";
-        foreach (var action in _actions)
+        foreach (var action in attacks)
         {
             output += action.ToString() + "<br>";
         }

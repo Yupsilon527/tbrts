@@ -2,9 +2,13 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Spell", menuName = "Abilities/Spell")]
-public class SpellSo : ScriptableObject
+public class SpellSo : ActionSO
 {
     public SpellData data;
+}
+public class ActionSO : ScriptableObject
+{
+    public AttackEffectSO[] effects;
 }
 [Serializable]
 public class SpellData
@@ -18,5 +22,10 @@ public class SpellData
     public CombatDefines.TileRangeMode rangeMode;
     public CombatDefines.TileTargetingArea areaMode;
 
+}
+
+public class ActionData : BaseData
+{
+    public ApplyEffects[] effects;
 }
 

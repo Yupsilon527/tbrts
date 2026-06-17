@@ -1,6 +1,10 @@
 TODO
 	FIX COMBAT
 
+	unov
+		spells - cost AP
+		reactions
+
 	combat from stepidle
 	combat from gemidle
 

@@ -3,9 +3,10 @@ public static class CombatDefines
 {
     public enum AttackPhase
     {
-        Prep = 0,
-        Attack = 1,
-        PostAttack = 2,
+        OutOfCombat = 0,
+        Prep = 1,
+        Attack = 2,
+        PostAttack = 3,
     }
     public enum ChanceMult
     {

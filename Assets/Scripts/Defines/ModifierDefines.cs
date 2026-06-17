@@ -8,8 +8,8 @@ public static class ModifierDefines
         tooltip_only,
         always_visible
     }
-    public delegate void ModifierAction(PropertyThinker self, DataItemUnit attacker);
-    public enum modStates
+    public delegate void ModifierAction(PropertyAttribute self, DataItemUnit attacker);
+    public enum State
     {
         //hard disables
         cannot_move = 0,
@@ -28,96 +28,99 @@ public static class ModifierDefines
         invulnerable = 12,
         out_of_the_game = 13,
 
-        total = 14
+        priority_melee_target = 14,
+        priority_range_target = 15,
+
+        total = 16
     };
 
-    public static bool IsPropertyMultiplicative(Properties prop)
+    public static bool IsPropertyMultiplicative(Property prop)
     {
-        return prop == Properties.attack_bonus_percent
-        || prop == Properties.mana_bonus
-        || prop == Properties.health_bonus_percent
-        || prop == Properties.barrier_bonus_percent
-        || prop == Properties.armor_bonus_percent
-        || prop == Properties.resistance_bonus_percent
-        || prop == Properties.block_bonus_percent
-        || prop == Properties.armor_bonus_percent
-        || prop == Properties.resistance_bonus_percent
-        || prop == Properties.block_bonus_percent
+        return prop == Property.attack_bonus_percent
+        || prop == Property.mana_bonus
+        || prop == Property.health_bonus_percent
+        || prop == Property.barrier_bonus_percent
+        || prop == Property.armor_bonus_percent
+        || prop == Property.resistance_bonus_percent
+        || prop == Property.block_bonus_percent
+        || prop == Property.armor_bonus_percent
+        || prop == Property.resistance_bonus_percent
+        || prop == Property.block_bonus_percent
 
-        || prop == Properties.offense_incoming_from_bonus
-        || prop == Properties.defense_incoming_from_bonus
-        || prop == Properties.attack_incoming_from_bonus
-        || prop == Properties.magic_incoming_from_bonus
-        || prop == Properties.ctrl_incoming_from_bonus
-        || prop == Properties.health_incoming_from_bonus
-        || prop == Properties.barrier_incoming_from_bonus
-        || prop == Properties.armor_incoming_from_bonus
-        || prop == Properties.resistance_incoming_from_bonus
-        || prop == Properties.block_incoming_from_bonus
-        || prop == Properties.speed_incoming_from_bonus
-        || prop == Properties.luck_incoming_from_bonus
+        || prop == Property.offense_incoming_from_bonus
+        || prop == Property.defense_incoming_from_bonus
+        || prop == Property.attack_incoming_from_bonus
+        || prop == Property.magic_incoming_from_bonus
+        || prop == Property.ctrl_incoming_from_bonus
+        || prop == Property.health_incoming_from_bonus
+        || prop == Property.barrier_incoming_from_bonus
+        || prop == Property.armor_incoming_from_bonus
+        || prop == Property.resistance_incoming_from_bonus
+        || prop == Property.block_incoming_from_bonus
+        || prop == Property.speed_incoming_from_bonus
+        || prop == Property.luck_incoming_from_bonus
 
-        || prop == Properties.vampirism_percent
-        || prop == Properties.health_regen_percentage
-        || prop == Properties.health_regen_percentage_total
+        || prop == Property.vampirism_percent
+        || prop == Property.health_regen_percentage
+        || prop == Property.health_regen_percentage_total
 
-        || prop == Properties.incoming_damage
-        || prop == Properties.outgoing_damage
-        || prop == Properties.shielding_bonus_flat
+        || prop == Property.incoming_damage
+        || prop == Property.outgoing_damage
+        || prop == Property.shielding_bonus_flat
 
-        || prop == Properties.incoming_healing
-        || prop == Properties.incoming_barrier
-        || prop == Properties.outgoing_shielding
+        || prop == Property.incoming_healing
+        || prop == Property.incoming_barrier
+        || prop == Property.outgoing_shielding
 
-        || prop == Properties.incoming_phys_damage
-        || prop == Properties.outgoing_phys_damage
+        || prop == Property.incoming_phys_damage
+        || prop == Property.outgoing_phys_damage
 
-        || prop == Properties.incoming_elem_damage
-        || prop == Properties.outgoing_elem_damage
-
-
-    || prop == Properties.incoming_blunt_damage
-    || prop == Properties.incoming_pierce_damage
-    || prop == Properties.incoming_fire_damage
-    || prop == Properties.incoming_cold_damage
-    || prop == Properties.incoming_electric_damage
-    || prop == Properties.incoming_radiation_damage
-    || prop == Properties.incoming_magic_damage
-    || prop == Properties.incoming_psychic_damage
-    || prop == Properties.incoming_cosmic_damage
-    || prop == Properties.incoming_acid_damage
-    || prop == Properties.incoming_mass_damage
-    || prop == Properties.incoming_heal
-
-    || prop == Properties.outgoing_pure_damage
-    || prop == Properties.outgoing_blunt_damage
-    || prop == Properties.outgoing_pierce_damage
-    || prop == Properties.outgoing_fire_damage
-    || prop == Properties.outgoing_cold_damage
-    || prop == Properties.outgoing_electric_damage
-    || prop == Properties.outgoing_radiation_damage
-    || prop == Properties.outgoing_magic_damage
-    || prop == Properties.outgoing_psychic_damage
-    || prop == Properties.outgoing_cosmic_damage
-    || prop == Properties.outgoing_acid_damage
-    || prop == Properties.outgoing_mass_damage
-    || prop == Properties.outgoing_heal
-
-    || prop == Properties.enemies_health
-    || prop == Properties.enemies_speed
-    || prop == Properties.enemies_damage
-    || prop == Properties.curse_enemy_chance
-    || prop == Properties.gold_gain_percent
-    || prop == Properties.gold_gain_interest
-    || prop == Properties.experience_gain_percent
-    || prop == Properties.bricks_gain_percent
-    || prop == Properties.resource_gain_percent
-    || prop == Properties.item_price
+        || prop == Property.incoming_elem_damage
+        || prop == Property.outgoing_elem_damage
 
 
-        || prop == Properties.special_bonus_percent;
+    || prop == Property.incoming_blunt_damage
+    || prop == Property.incoming_pierce_damage
+    || prop == Property.incoming_fire_damage
+    || prop == Property.incoming_cold_damage
+    || prop == Property.incoming_electric_damage
+    || prop == Property.incoming_radiation_damage
+    || prop == Property.incoming_magic_damage
+    || prop == Property.incoming_psychic_damage
+    || prop == Property.incoming_cosmic_damage
+    || prop == Property.incoming_acid_damage
+    || prop == Property.incoming_mass_damage
+    || prop == Property.incoming_heal
+
+    || prop == Property.outgoing_pure_damage
+    || prop == Property.outgoing_blunt_damage
+    || prop == Property.outgoing_pierce_damage
+    || prop == Property.outgoing_fire_damage
+    || prop == Property.outgoing_cold_damage
+    || prop == Property.outgoing_electric_damage
+    || prop == Property.outgoing_radiation_damage
+    || prop == Property.outgoing_magic_damage
+    || prop == Property.outgoing_psychic_damage
+    || prop == Property.outgoing_cosmic_damage
+    || prop == Property.outgoing_acid_damage
+    || prop == Property.outgoing_mass_damage
+    || prop == Property.outgoing_heal
+
+    || prop == Property.enemies_health
+    || prop == Property.enemies_speed
+    || prop == Property.enemies_damage
+    || prop == Property.curse_enemy_chance
+    || prop == Property.gold_gain_percent
+    || prop == Property.gold_gain_interest
+    || prop == Property.experience_gain_percent
+    || prop == Property.bricks_gain_percent
+    || prop == Property.resource_gain_percent
+    || prop == Property.item_price
+
+
+        || prop == Property.special_bonus_percent;
     }
-    public enum Properties
+    public enum Property
     {
         //combat
         bonus_combat = 0,
@@ -297,7 +300,7 @@ public static class ModifierDefines
     [Serializable]
     public class PropertyData
     {
-        public Properties Property;
+        public Property Property;
         public float value;
         public float IncreasePerLevel;
     }
@@ -306,11 +309,11 @@ public static class ModifierDefines
     [Serializable]
     public class StateData
     {
-        public modStates State;
+        public State State;
         public float priority;
         public StateData() { }
 
-        public StateData(modStates state, float priority)
+        public StateData(State state, float priority)
         {
             State = state;
             this.priority = priority;

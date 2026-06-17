@@ -12,7 +12,7 @@ public static class DefaultModifiers
                          {
                          {
                     AbilityDefines.Event.CombatEnd,
-                     (PropertyThinker self, DataItemUnit attacker) =>
+                     (PropertyModifier self, DataItemUnit attacker) =>
                                 {
                                     self.parent.damageable.Heal(self.GetParameter("post_combat_heal"));
                 }

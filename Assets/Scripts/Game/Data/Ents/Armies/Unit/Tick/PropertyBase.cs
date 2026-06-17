@@ -1,5 +1,5 @@
 
-public abstract class PropertyBase
+public abstract class PropertyAction
 {
     public DataItemUnit parent;
     public int uses = 0;

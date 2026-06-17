@@ -96,8 +96,8 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
     {
         if (force || statRefresh || propRefresh)
         {
-            if (force || statRefresh) states = new int[(int)ModifierDefines.modStates.total];
-            if (force || propRefresh) properties = new float[(int)ModifierDefines.Properties.total];
+            if (force || statRefresh) states = new int[(int)ModifierDefines.State.total];
+            if (force || propRefresh) properties = new float[(int)ModifierDefines.Property.total];
             foreach (PropertyModifier mod in _modifiers)
             {
                 if (!mod.dead && !mod.IsExpired())
@@ -124,14 +124,14 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
     }
     void UpdateModifierStates(PropertyModifier Mod)
     {
-        foreach (ModifierDefines.modStates state in Mod.states)
+        foreach (ModifierDefines.State state in Mod.states)
         {
             UpdateState(state, Mod.priority);
         }
     }
     void UpdateModifierProperties(PropertyModifier Mod)
     {
-        foreach (KeyValuePair<ModifierDefines.Properties, float> prop in Mod.properties)
+        foreach (KeyValuePair<ModifierDefines.Property, float> prop in Mod.properties)
         {
             UpdateProperty(prop.Key, prop.Value);
         }
@@ -276,10 +276,10 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
             return false;
         }
 
-        return ((GetState(ModifierDefines.modStates.debuff_immune) && negative) ||
-            (flag == ModifierDefines.Flag.HardDisable && GetState(ModifierDefines.modStates.hard_disable_immune)) ||
-            (flag == ModifierDefines.Flag.DamageOverTime && GetState(ModifierDefines.modStates.dot_immune)) ||
-        (flag == ModifierDefines.Flag.SoftDisable && GetState(ModifierDefines.modStates.soft_disable_immune)));
+        return ((GetState(ModifierDefines.State.debuff_immune) && negative) ||
+            (flag == ModifierDefines.Flag.HardDisable && GetState(ModifierDefines.State.hard_disable_immune)) ||
+            (flag == ModifierDefines.Flag.DamageOverTime && GetState(ModifierDefines.State.dot_immune)) ||
+        (flag == ModifierDefines.Flag.SoftDisable && GetState(ModifierDefines.State.soft_disable_immune)));
     }
 
     public void EventReaction(AbilityDefines.Event evt, DataItemUnit[] affectedCritters)

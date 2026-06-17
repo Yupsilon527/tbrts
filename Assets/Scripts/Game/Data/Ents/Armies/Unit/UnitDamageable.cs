@@ -112,7 +112,7 @@ public class UnitDamageable : UnitComponent
     {
         if (damage > 0)
         {
-            float healVamp = parent.GetProperty(ModifierDefines.Properties.vampirism_constant) + (parent.GetProperty(ModifierDefines.Properties.vampirism_percent) - 1) * damage;
+            float healVamp = parent.GetProperty(ModifierDefines.Property.vampirism_constant) + (parent.GetProperty(ModifierDefines.Property.vampirism_percent) - 1) * damage;
             Heal(healVamp);
         }
     }
@@ -207,7 +207,7 @@ public class UnitDamageable : UnitComponent
     {
         if (IsAlive())
         {
-            Heal(parent.GetProperty(ModifierDefines.Properties.health_regen_bonus) * parent.GetProperty(ModifierDefines.Properties.health_regen_percentage) + parent.GetProperty(ModifierDefines.Properties.total) * Health.GetLimit());
+            Heal(parent.GetProperty(ModifierDefines.Property.health_regen_bonus) * parent.GetProperty(ModifierDefines.Property.health_regen_percentage) + parent.GetProperty(ModifierDefines.Property.total) * Health.GetLimit());
             CheckDeath();
         }
         else
