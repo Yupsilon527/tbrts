@@ -50,6 +50,9 @@ public static class CombatDefines
         line,
         cone,
     }
+    public enum ArmyPriorityMode{
+        random
+}
     public enum ArmyRangeMode
     {
         passive,

@@ -65,7 +65,7 @@ public static class AbilityDefines
             {
                 foreach (var effect in evt.defaultEffects)
                 {
-                    effect?.ActivateOnUnit(new EventTable(castData.caster, activator));
+                    effect?.ActivateOnUnit(castData);
                 }
             };
         }

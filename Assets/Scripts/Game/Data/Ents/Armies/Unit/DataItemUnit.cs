@@ -5,6 +5,7 @@ public class DataItemUnit : DataItemObject
 {
     public int nextAction = 0;
     public int hitCounter = 1;
+    public int critCounter = 1;
     public int dodgeCounter = 1;
 
     public UnitData scriptable;

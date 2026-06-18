@@ -1,17 +1,23 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DamageTable
 {
     public DataItemUnit attacker;
     public DataItemUnit target;
-    public AttackDefines.ActionType dmt;
-    public float baseDamage;
-    public float realDamage;
     public AttackDefines.HitType blockType;
+    public Dictionary<AttackDefines.ActionType, float> damages = new();
 
     //ability
-    public DamageTable(DataItemUnit a, DataItemUnit t, float basedamage, AttackDefines.ActionType dtype,  AttackDefines.HitType block)
-    { attacker = a; target = t; baseDamage = basedamage; dmt = dtype; element = etype; blockType = block; Calculate(); }
+    public DamageTable(DataItemUnit a, DataItemUnit t,   AttackDefines.HitType block)
+    { attacker = a; target = t;  blockType = block; Calculate(); }
+    public void CalcAttack(AttackDefines.ActionType damage, float val)
+    {
+        if (damages.ContainsKey(damage))
+            damages[damage] += val;
+        else
+            damages.Add(damage, val);
+    }
     public void Calculate()
     {
         realDamage = baseDamage;
@@ -72,13 +78,6 @@ public class DamageTable
             case AttackDefines.ActionType.ArmorHeal:
                 realDamage *= target.GetProperty(ModifierDefines.Property.incoming_barrier);
                 break;
-        }
-    }
-    public void AccountBonusDamage()
-    {
-        if (dmt == AttackDefines.ActionType.Block)
-        {
-
         }
     }
 }

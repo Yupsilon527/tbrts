@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,17 +10,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     public ResourceInt Mp;
 
     public HashSet<PropertyWeapon> attacks = new();
-    public HashSet<EffectCounter> _effects = new();
-    public class EffectCounter
-    {
-        public ApplyEffects appliedEffect;
-        public int counter = 1;
-
-        public EffectCounter(ApplyEffects effect)
-        {
-            appliedEffect = effect;
-        }
-    }
+    public HashSet<PropertyWeapon> available = new();
     public CombatantAbilities(DataItemUnit parent) : base(parent)
     {
     }
@@ -42,99 +33,33 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     public void ClearAbilities()
     {
         attacks.Clear();
-        _effects.Clear();
-    }
-    void AddAbility(PropertyAbility ability)
-    {
-        attacks.Add(ability);
-        ability.SetCooldown(Mathf.CeilToInt(parent.stats.realStats.SpeedCoefficient * ability.actionDelay));
     }
     public void FromCombatantData()
     {
-        foreach (var ability in parent.scriptable.abilities)
+        ClearAbilities();
+        foreach (var ability in parent.scriptable.weapons)
         {
-            if (ability != null) AddAbility(ability.data);
+            if (ability != null) AddAbility(ability);
         }
     }
-    public void AddAbility(CombatantAbilityTable data)
-    {
-        RegisterEvent(data.abilityEvent);
-        foreach (var a in data.attacks)
-            _effects.Add(new EffectCounter(a));
-        foreach (var m in data.modifiers)
-            _effects.Add(new EffectCounter(m));
-        foreach (var p in data.procs)
-            _effects.Add(new EffectCounter(p));
-    }
-    public void RegisterEvent(AbilityData abilityEvent)
-    {
-        var action = new PropertyAbility(abilityEvent);
-        AddAbility(action);
-    }
-    public bool Trigger(DataItemUnit mainTarget, CombatDefines.AttackPhase phase, int ticks)
-    {
-        var abilities = attacks.Where(a => a.HasResourcesToCast() && a.attackPhase == phase);
 
-        foreach (var action in abilities)
-        {
-            if (action.ForwardTime(ticks))
-            {
-                while (action.expiration <= 0)
-                {
-                    int currentTick = Combat.main.currentTick + action.expiration;
-                    //.main.Inspect($"Combatant {parent.scriptable.name} performs action {action.action} at turn {currentTick}");
-                    foreach (var target in action.GetValidTargets(parent, mainTarget))
-                    {
-                        Action(target, action.action, currentTick, action.procStrength);
-                    }
-                    if (action.mpCost > 0)
-                    {
-                        action.SetCooldown(-1);
-                        return true;
-                    }
-                    else
-                    {
-                        action.ExtendCooldown(parent.stats.realStats.SpeedCoefficient);
-                    }
-                }
-                return true;
-            }
-        }
-        return ticks == 0;
-    }
-    public bool CastAbility(PropertyAbility ability, Gem gem = null)
+
+    public virtual void AddAbility(PropertyWeapon ability, bool active = false)
     {
-        if (!ability.RequiresGemTarget())
-        {
-            Combat.main.GetCurrentPlayer().abilities.CastAbilityNoTarget(ability);
-            Combat.main.PostPlayerTurn();
-            return true;
-        }
-        else if (gem != null && ability.IsValidGemTarget(gem))
-        {
-            Combat.main.GetCurrentPlayer().abilities.CastAbilityOnGem(ability, gem);
-            Combat.main.PostPlayerTurn();
-            return true;
-        }
-        return false;
+        attacks.Add(ability);
+        ability.FireEvent(AbilityDefines.Event.OnCreated);
+        ability.SetCooldown(Mathf.CeilToInt(parent.stats.realStats.SpeedCoefficient * ability.actionDelay));
     }
-    void CastAbilityNoTarget(PropertyAbility ability)
+    public virtual void RemoveAbility(PropertyWeapon ability)
     {
-        Combat.main.Actionbegin(new CastTable(parent, parent.GetAttackTarget(), ability, Combat.main.currentTurn));
-        ability.CastFromTable(CastTable.main);
-        Combat.main.ActionConclude();
-    }
-    void CastAbilityOnGem(PropertyAbility ability, Gem gem)
-    {
-        Combat.main.Actionbegin(new CastTable(parent, parent.GetAttackTarget(), ability, Combat.main.currentTurn, targetGem: gem));
-        ability.CastFromTable(CastTable.main);
-        Combat.main.ActionConclude();
+        ability.FireEvent(AbilityDefines.Event.OnDestroyed);
+        attacks.Remove(ability);
     }
     public bool Tick(int steps)
     {
         int tickDelta = steps - lastTick;
         lastTick = steps;
-        return Trigger(parent.GetAttackTarget(), CombatDefines.Events.Ticks, tickDelta);
+        return Trigger(Combat.main.currentPhase, tickDelta);
     }
     public int GetNextTick(int steps)
     {
@@ -145,6 +70,58 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         }
         return ticks;
     }
+    public PropertyAbility[] GetAvailableAbilities(CombatDefines.AttackPhase phase, bool castable)
+    {
+        available.Clear();
+        if (!castable || SanityCheck())
+        {
+            foreach (PropertyWeapon ability in attacks)
+            {
+                if (ability == null)
+                    continue;
+                if (castable && ability.CanBeCast(phase))
+                    available.Add(ability);
+            }
+        }
+        return available.ToArray();
+    }
+
+    #region Casting
+    public bool Trigger( CombatDefines.AttackPhase phase, int ticks)
+    {
+        var abilities = attacks.Where(a => a.CanBeCast(phase) );
+
+        foreach (var action in abilities)
+        {
+            if (action.ForwardTime(ticks))
+            {
+                while (action.expiration <= 0)
+                {
+                    int currentTick = Combat.main.currentTick;
+                    Combat.main.Inspect($"Combatant {parent.scriptable.InternalName} performs action {action.InternalName} at turn {currentTick}");
+
+                    var target = action.GetBestUnitForAbility();
+                    var castData = new AttackTable(phase,currentTick, parent, target.gridPos, action);
+                    action.CastFromTable(castData);
+                }
+                return true;
+            }
+        }
+        return ticks == 0;
+    }
+    #endregion
+
+    #region Events
+    public void EventReaction(AbilityDefines.Event evtData, DataItemUnit other)
+    {
+        foreach (PropertyAbility ability in attacks)
+        {
+            if (ability == null)
+                continue;
+            ability.FireEvent(evtData, other);
+        }
+    }
+    #endregion
 
     public virtual string OutputTable()
     {
@@ -152,11 +129,6 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         foreach (var action in attacks)
         {
             output += action.ToString() + "<br>";
-        }
-        output += "<br><b>Effects</b><br>";
-        foreach (var effect in _effects)
-        {
-            output += effect.appliedEffect.GetDescription() + "<br>";
         }
         return output;
     }

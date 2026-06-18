@@ -1,5 +1,5 @@
 
-public abstract class PropertyAction
+public abstract class PropertyAction : ITimerAction
 {
     public string InternalName = "ERROR";
     public DataItemUnit parent;
@@ -24,9 +24,16 @@ public abstract class PropertyAction
     {
         expiration += cooldown;
     }
-    public void Reset()
+    public virtual void Reset()
     {
-        expiration = 0; 
-        uses = 0;
+        expiration = 0;
     }
-    }
+}
+public interface ITimerAction
+{
+    public void ExtendCooldown(float cdr = 1);
+    public void SetCooldown(int cooldown);
+    public  bool ForwardTime(int cooldown);
+    public  void BackwardTime(int cooldown);
+    public  void Reset();
+}

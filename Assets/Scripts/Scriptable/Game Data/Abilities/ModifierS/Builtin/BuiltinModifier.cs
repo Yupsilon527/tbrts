@@ -24,7 +24,7 @@ public class BuiltInModifier : ApplyEffects
         switch (BuiltinType)
         {
             case BuiltInModifierType.HealPostCombat:
-                nModifier = DefaultModifiers.HealPostCombat;
+                nModifier = new (DefaultModifiers.HealPostCombat);
                 break;
 
         }

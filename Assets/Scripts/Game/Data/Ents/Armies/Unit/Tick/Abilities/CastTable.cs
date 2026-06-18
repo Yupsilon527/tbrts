@@ -3,7 +3,6 @@ using Random = UnityEngine.Random;
 
 public class EventTable
 {
-    public AttackDefines.HitType hit = AttackDefines.HitType.normal;
     public int tick = 0;
     public DataItemUnit caster;
     public DataItemUnit target;
@@ -11,9 +10,15 @@ public class EventTable
     public EventTable(CastTable table, DataItemUnit target)
     {
         this.target = target;
-        this.hit = table.hit;
-        this.caster = table.caster;
+        this.caster = table.attacker;
         this.tick = table.tick;
+    }
+
+    public EventTable(int tick, DataItemUnit caster, DataItemUnit target)
+    {
+        this.tick = tick;
+        this.caster = caster;
+        this.target = target;
     }
 }
 public class CastTable
@@ -21,17 +26,16 @@ public class CastTable
     public bool attackingSide = false;
     public float proc = 0;
     public int tick = 0;
-    public DataItemUnit caster;
+    public DataItemUnit attacker;
     public Vector2Int targetPoint;
     public PropertyAbility ability;
-    public AttackDefines.HitType hit = AttackDefines.HitType.normal;
 
     public DataItemUnit[] maintarget;
     public DataItemUnit[] sidetarget;
 
     public CastTable(DataItemUnit caster, Vector2Int targetPoint, PropertyAbility ability)
     {
-        this.caster = caster;
+        this.attacker = caster;
         this.targetPoint = targetPoint;
         this.ability = ability;
         ComputeTargets();
@@ -41,60 +45,26 @@ public class CastTable
     public void ComputeTargets()
     {
         maintarget = ability.GetMainTargets(this);
-        sidetarget = ability.GetSideTargets(this);
+        sidetarget = ability.GetAreaTargets(this);
     }
-    public virtual void Resolve()
+    public virtual void ComputeDamageTable(DataItemUnit target)
     {
-
+        target.damageable.lastDamage = new DamageTable(attacker, target, AttackDefines.HitType.normal);
     }
-        /*
-        public void Resolve()
+    public virtual void Precast()
+    {
+        ComputeDamageTable(attacker);
+        foreach (var mt in maintarget)
         {
-            if (action == CombatDefines.Action.Attack)
-            {
-                DetermineHitType();
-                caster.FireEventOnSelf(AbilityDefines.Event.BeforeAttack);
-            }
-            Combat.main.Inspect($"Resolve {action} from {caster} to {maintarget}");
-            hit = Random.value < caster.stats.realStats.BlockChance;
-            foreach (var effect in caster.abilities._effects)
-            {
-                if (effect.appliedEffect.action == action)
-                    effect.appliedEffect.Resolve(this, proc);
-                else if (effect.appliedEffect.action == CombatDefines.Action.OnHit && action == CombatDefines.Action.OnCrit)
-                    effect.appliedEffect.Resolve(this, proc * 2);
-                else if (effect.appliedEffect.action == CombatDefines.Action.OnHit && action == CombatDefines.Action.OnParried)
-                    effect.appliedEffect.Resolve(this, proc * .1f);
-                else if (effect.appliedEffect.action == CombatDefines.Action.OnHit && action == CombatDefines.Action.OnMiss)
-                    effect.appliedEffect.Resolve(this, proc * .5f);
-            }
-            if (action == CombatDefines.Action.OnParried)
-            {
-                maintarget.abilities.Action(caster, CombatDefines.Action.ParryAttack, tick);
-                maintarget.FireEventOnSelf(AbilityDefines.Event.SuccessfulParry);
-            }
-            if (action == CombatDefines.Action.OnMiss || action == CombatDefines.Action.OnDodge)
-            {
-                maintarget.abilities.Action(caster, CombatDefines.Action.EvadeAttack, tick);
-                maintarget.FireEventOnSelf(AbilityDefines.Event.SuccessfulEvade);
-            }
-            else
-            {
-                maintarget.FireEventOnSelf(AbilityDefines.Event.OnHitByEnemy);
-                caster.FireEventOnSelf(AbilityDefines.Event.AttackHit);
-            }
-            if (hit)
-            {
-                maintarget.FireEventOnSelf(AbilityDefines.Event.SuccessfulBlock);
-                maintarget.abilities.Action(caster, CombatDefines.Action.Block, tick);
-            }
-            if (directHit)
-            {
-                caster.FireEventOnSelf(AbilityDefines.Event.AfterAttack);
-                maintarget.abilities.Action(caster, CombatDefines.Action.Retaliate, tick);
-            }
-        }*/
+            ComputeDamageTable(mt);
+        }
+        foreach (var st in sidetarget)
+        {
+            ComputeDamageTable(st);
+        }
+        ability.FireEvent(AbilityDefines.Event.BeforeAttack);
     }
+}
 public class AttackTable : CastTable
 {
 
@@ -106,46 +76,54 @@ public class AttackTable : CastTable
         ComputeTargets();
     }
     public CombatDefines.AttackPhase phase;
-    void DetermineHitType()
+    public AttackDefines.HitType DetermineHitType(DataItemUnit target)
     {
-        directHit = true;
-        action = CombatDefines.Action.OnHit;
-
-        if (caster.stats.realStats.DodgeChance > 0)
+        AttackDefines.HitType hitType = AttackDefines.HitType.normal;
+        if (ability is PropertyWeapon attack)
         {
-            if (UnityEngine.Random.value < maintarget.stats.realStats.DodgeChance * (maintarget.dodgeCounter / 2)) //Dodge chance
+            float ranval = Random.value;
+            if ( !attacker.GetState(ModifierDefines.State.cannot_miss))
             {
-                action = CombatDefines.Action.OnDodge;
-                maintarget.dodgeCounter = 1;
-                return;
+                float evasion   = target.dodgeCounter / 2f * target.stats.realStats.Evasion * target.stats.realStats.GetLuckCoefficient();
+
+                if (ranval > Mathf.Min(AttackDefines.minAccuracy,  evasion))
+                {
+                    target.dodgeCounter = 1;
+                    return AttackDefines.HitType.miss;
+                }
+                else
+                {
+                    target.dodgeCounter++;
+                }
+            }
+            float accuracy = attacker.stats.realStats.Offense / Mathf.Max(target.stats.realStats.Defense);
+            accuracy = accuracy * .6f + Mathf.Min(.4f, attacker.hitCounter / 2 * .5f); //TODO DEFINE
+
+            float critChance = 15 * accuracy + attacker.modifiers.GetPropertyAdditive(ModifierDefines.Property.critical_chance) * (1+accuracy)/2f;   //TODO DEFINE
+            float hitChance = 50 * accuracy;
+            float missChance = 30 / accuracy;
+            float parryChance = 20 / accuracy + attacker.modifiers.GetPropertyAdditive(ModifierDefines.Property.parry_chance) * (1 + accuracy) / 2f;
+
+            ranval = Random.value * (critChance+ hitChance+ missChance+ parryChance);
+            if (ranval < missChance)
+            {
+                hitType = ranval < parryChance ? AttackDefines.HitType.halfBlock : AttackDefines.HitType.blocked;
+                attacker.hitCounter++;
             }
             else
             {
-                maintarget.dodgeCounter++;
+                hitType = (ranval > parryChance + missChance + hitChance) ? AttackDefines.HitType.criticalHit : AttackDefines.HitType.normal;
+                attacker.hitCounter = 1;
+
+                attacker.FireEventOnTarget(AbilityDefines.Event.AttackHit, target);
+                target.FireEventOnTarget(AbilityDefines.Event.OnHitByEnemy, attacker);
             }
         }
-        float accuracy = caster.stats.realStats.Offense / Mathf.Max(maintarget.stats.realStats.Defense);
-         accuracy = accuracy * .6f + Mathf.Min(.4f, caster.hitCounter / 2 * .5f); //TODO DEFINE
-
-        float critChance = 15 * accuracy;   //TODO DEFINE
-        float hitChance = 50 * accuracy;
-        float missChance = 30 / accuracy;
-        float parryChance = 20 / accuracy;
-
-        float ranval = Random.value * (critChance + hitChance + missChance + parryChance);
-        if (ranval < missChance)
-        {
-            action = ranval< parryChance ? CombatDefines.Action.OnParried : CombatDefines.Action.OnMiss;
-            caster.hitCounter++;
-        }
-        else
-        {
-            action = (ranval > parryChance + missChance + hitChance) ? CombatDefines.Action.OnCrit : CombatDefines.Action.OnHit;
-            caster.hitCounter = 1;
-
-            caster.abilities.Trigger(maintarget, CombatDefines.Events.HitsLanded, 1);
-            maintarget.abilities.Trigger(maintarget, CombatDefines.Events.HitsTaken, 1);
-        }
+        return hitType;
+    }
+    public override void ComputeDamageTable(DataItemUnit target)
+    {
+        target.damageable.lastDamage = new DamageTable(attacker, target, DetermineHitType(target));
     }
 }
 

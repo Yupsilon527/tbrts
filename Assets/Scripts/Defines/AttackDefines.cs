@@ -10,6 +10,7 @@ public static class AttackDefines
         normal,
         blocked,
         criticalHit,
+        miss,
     }
     public enum ActionType
     {
@@ -24,10 +25,6 @@ public static class AttackDefines
         NonLethalDamage = 8,
         Assassinate = 9,
         Total = 10,
-    }
-    public enum PrioritizeTarget
-    {
-        Random,
     }
     public enum ScaleType
     {
@@ -169,4 +166,5 @@ public static class AttackDefines
         return baseValue;
     }
     public static float attackCoefficient = 100;
+    internal static float minAccuracy;
 }

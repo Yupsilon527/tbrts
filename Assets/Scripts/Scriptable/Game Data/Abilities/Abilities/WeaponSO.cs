@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using VikingParty;
 
 [CreateAssetMenu(fileName = "Weapon", menuName = "Abilities/Weapon")]
 public class WeaponSO : ActionSO
@@ -14,6 +13,7 @@ public class WeaponData : ActionData
     public bool castOnce = false;
     public CombatDefines.AttackPhase attackPhase;
 
+    public CombatDefines.ArmyPriorityMode targetPriority;
     public CombatDefines.ArmyRangeMode rangeMode;
     public CombatDefines.ArmyTargetingArea areaMode;
 }

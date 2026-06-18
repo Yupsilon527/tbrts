@@ -7,7 +7,7 @@ public class SpellSo : ActionSO
     public SpellData data;
 }
 [Serializable]
-public class SpellData
+public class SpellData : ActionData
 {
     public int GoldCost = 0;
     public int ManaCost = 0;

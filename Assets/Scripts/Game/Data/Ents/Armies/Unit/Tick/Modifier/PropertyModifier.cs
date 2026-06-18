@@ -26,16 +26,16 @@ public class PropertyModifier : PropertyAttribute
       ModifierDefines.Flag a,
         ModifierDefines.VisibleState v,
       ModifierDefines.ExpireType expire,
-       ModifierDefines.Behavior bh,
+       ModifierDefines.StackType bh,
       Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> fs) : this(Name, a, v, expire, bh, new ModifierDefines.StateData[0], new ModifierDefines.PropertyData[0], fs)
     {
 
     }
     public PropertyModifier(string Name = "UNDEFINED",
-        ModifierDefines.Flag a = ModifierDefines.Flag.Undispellable,
+        ModifierDefines.Flag a = ModifierDefines.Flag.Tag,
         ModifierDefines.VisibleState v = ModifierDefines.VisibleState.tooltip_only,
         ModifierDefines.ExpireType expire = ModifierDefines.ExpireType.time,
-         ModifierDefines.Behavior bh = ModifierDefines.Behavior.Unique,
+         ModifierDefines.StackType bh = ModifierDefines.StackType.Unique,
         ModifierDefines.StateData[] sa = null,
         ModifierDefines.PropertyData[] pr = null,
         Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> fs = null)
@@ -50,7 +50,15 @@ public class PropertyModifier : PropertyAttribute
         SetProps(pr);
         functions = fs;
     }
-    public PropertyModifier(ModifierSO scriptable) : this(scriptable.name, scriptable.flag, scriptable.uibehavior, scriptable.expireType, scriptable.behavior, scriptable.states, scriptable.properties, null)
+    public PropertyModifier(TagData scriptable) : this(scriptable.InternalName, ModifierDefines.Flag.Tag, scriptable.uibehavior, ModifierDefines.ExpireType.permanent, scriptable.behavior)
+    {
+        sprite = scriptable.sprite;
+    }
+    public PropertyModifier(AlterationData scriptable) : this(scriptable.InternalName, scriptable.flag, scriptable.uibehavior, ModifierDefines.ExpireType.permanent, scriptable.behavior, scriptable.states, scriptable.properties)
+    {
+        sprite = scriptable.sprite;
+    }
+    public PropertyModifier(ModifierData scriptable) : this(scriptable.InternalName, scriptable.flag, scriptable.uibehavior, scriptable.expireType, scriptable.behavior, scriptable.states, scriptable.properties)
     {
         sprite = scriptable.sprite;
     }
@@ -67,11 +75,11 @@ public class PropertyModifier : PropertyAttribute
     #region Alignment
     public bool IsPositive()
     {
-        return flag > ModifierDefines.Flag.Undispellable;
+        return flag > ModifierDefines.Flag.Tag;
     }
     public bool IsNegative()
     {
-        return flag < ModifierDefines.Flag.Undispellable;
+        return flag < ModifierDefines.Flag.Tag;
     }
     #endregion
     #region Duration, expire
@@ -82,6 +90,13 @@ public class PropertyModifier : PropertyAttribute
     public override bool IsExpired()
     {
         return (expireType == ModifierDefines.ExpireType.time && tickDuration < 0) || (expireType == ModifierDefines.ExpireType.stacks && stacks <= 0);
+    }
+    public override bool ForwardTime(int cooldown)
+    {
+        bool executed = base.ForwardTime(cooldown);
+        CheckExpiration();
+
+        return executed;
     }
     public override void Die(bool expire)
     {
@@ -95,22 +110,6 @@ public class PropertyModifier : PropertyAttribute
             parent.modifiers.RefreshModifier(this);
             dead = true;
         }
-    }
-    public override bool ForwardTime(int cooldown)
-    {
-        if (expireType == ModifierDefines.ExpireType.time)
-            return base.ForwardTime(cooldown);
-
-        if (HasThinker)
-        {
-            thinker -= cooldown;
-            while (thinker < 0)
-            {
-                Think();
-                return true;
-            }
-        }
-        return false;
     }
     #endregion
     #region Stacks

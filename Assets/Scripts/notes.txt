@@ -1,8 +1,24 @@
 TODO
+	Resources
+		Weapons
+		Spells
+
+	fix modifiers
+	port bonus damage from littlesol
+
+	damabgetable
+	builtinmodifier
+
 	spells
 		stemonGO
 		stepRpg
 		Dice Saga
+
+	stats & scalemode
+
+	events
+	modifier states
+	props
 
 	FIX COMBAT
 

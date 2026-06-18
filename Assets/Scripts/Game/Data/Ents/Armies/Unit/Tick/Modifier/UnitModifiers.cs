@@ -14,12 +14,12 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
     }
 
     #region Create Modifiers
-    public bool ApplyNewModifierFromData(ModifierData Modifier, int atTick, out PropertyModifier resultingModifier)
+    public bool ApplyNewModifierFromData(TagData Modifier, int atTick, out PropertyModifier resultingModifier)
     {
         resultingModifier = null;
-        if (IsImmuneToModifier(Modifier)) { return false; }
+        if (Modifier is AlterationData alt && IsImmuneToModifier(alt)) { return false; }
 
-        if (Modifier.behavior == ModifierDefines.Behavior.Unique && HasModifier(Modifier.name))
+        if (Modifier.behavior == ModifierDefines.StackType.Unique && HasModifier(Modifier.InternalName))
         {
             return false;
         }
@@ -38,17 +38,17 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
         }*/
         switch (Modifier.behavior)
         {
-            case ModifierDefines.Behavior.Replace: //Replace 
+            case ModifierDefines.StackType.Replace: //Replace 
                 if (TryFindModifierByName(Modifier.InternalName, false, out PropertyModifier found))
                     Remove(found);
                 break;
-            case ModifierDefines.Behavior.Unique: //Unique 
+            case ModifierDefines.StackType.Unique: //Unique 
                 if (HasModifier(Modifier.InternalName))
                 {
                     return false;
                 }
                 break;
-            case ModifierDefines.Behavior.Stacking:
+            case ModifierDefines.StackType.Stacking:
                 if (TryFindModifierByName(Modifier.InternalName, false, out PropertyModifier original))
                 {
                     original.SetStackCount(original.GetStackCount() + Modifier.GetStackCount());
@@ -57,7 +57,7 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
                     return false;
                 }
                 break;
-            case ModifierDefines.Behavior.Duration:
+            case ModifierDefines.StackType.Duration:
                 if (TryFindModifierByName(Modifier.InternalName, false, out PropertyModifier first))
                 {
                     first.SetCooldown(first.expiration + Modifier.expiration);
@@ -167,7 +167,7 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
     {
         Remove(new PropertyModifier[] { Mod }, expire, refresh);
     }
-    public void DestroyFilteredModifiers(string ModifierName = "", ModifierDefines.Flag alignment = ModifierDefines.Flag.Undispellable, bool includePositives = false, bool includeNegative = false, bool refresh = true)
+    public void DestroyFilteredModifiers(string ModifierName = "", ModifierDefines.Flag alignment = ModifierDefines.Flag.Tag, bool includePositives = false, bool includeNegative = false, bool refresh = true)
     {
         Remove(Filter(ModifierName, alignment, includePositives, includeNegative), false, refresh);
     }
@@ -226,7 +226,7 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
     }
     #endregion
     #region Filter
-    public PropertyModifier[] Filter(string ModifierName = "", ModifierDefines.Flag alignment = ModifierDefines.Flag.Undispellable, bool includePositives = false, bool includeNegative = false, ModifierDefines.Flag checkFlag = ModifierDefines.Flag.Undispellable)
+    public PropertyModifier[] Filter(string ModifierName = "", ModifierDefines.Flag alignment = ModifierDefines.Flag.Tag, bool includePositives = false, bool includeNegative = false, ModifierDefines.Flag checkFlag = ModifierDefines.Flag.Tag)
     {
         List<PropertyModifier> rest = new List<PropertyModifier>();
         foreach (PropertyModifier Mod in _modifiers)
@@ -235,7 +235,7 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
             {
                 if (ModifierName == "" || ModifierName == Mod.InternalName)
                 {
-                    if ((alignment == ModifierDefines.Flag.Undispellable || alignment == Mod.flag) || (includeNegative && Mod.IsNegative()) || (includePositives && Mod.IsPositive()) || (checkFlag == ModifierDefines.Flag.Undispellable && Mod.flag == checkFlag))
+                    if ((alignment == ModifierDefines.Flag.Tag || alignment == Mod.flag) || (includeNegative && Mod.IsNegative()) || (includePositives && Mod.IsPositive()) || (checkFlag == ModifierDefines.Flag.Tag && Mod.flag == checkFlag))
                     {
                         rest.Add(Mod);
 
@@ -261,9 +261,9 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
     }
     #endregion
     #region Resistance And Defense
-    public bool IsImmuneToModifier(ModifierSO mod)
+    public bool IsImmuneToModifier(AlterationData mod)
     {
-        return IsImmuneToModifier(mod.flag, mod.flag < ModifierDefines.Flag.Undispellable);
+        return IsImmuneToModifier(mod.flag, mod.flag < ModifierDefines.Flag.Tag);
     }
     public bool IsImmuneToModifier(PropertyModifier mod)
     {
@@ -271,7 +271,7 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
     }
     public bool IsImmuneToModifier(ModifierDefines.Flag flag, bool negative)
     {
-        if (flag == ModifierDefines.Flag.Undispellable)
+        if (flag == ModifierDefines.Flag.Tag)
         {
             return false;
         }
@@ -313,7 +313,7 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
         int ticks = int.MaxValue;
         foreach (var modifier in _modifiers)
         {
-            ticks = Mathf.Min(ticks, steps + modifier.expiration, steps + modifier.thinker);
+            ticks = Mathf.Min(ticks, steps + modifier.expiration, steps + modifier.thinkInterval);
         }
         return ticks;
     }

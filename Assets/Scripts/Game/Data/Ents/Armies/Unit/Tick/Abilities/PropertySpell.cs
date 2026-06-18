@@ -1,9 +1,26 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PropertySpell : PropertyAbility
 {
     public SpellData original;
 
+    public override bool CastFromTable(CastTable table)
+    {
+        if ( base.CastFromTable(table))
+        {
+            table.ComputeTargets();
+            table.Precast();
+            foreach (var attack in original.effects)
+            {
+                attack.Activate(table);
+            }
+            return true;
+        }
+        return false;
+    }
 
     #region Resource
     public override bool HasResourcesToCast()
@@ -32,12 +49,38 @@ public class PropertySpell : PropertyAbility
 
     public override DataItemUnit[] GetMainTargets(CastTable table)
     {
-        throw new System.NotImplementedException();
+        if (SidewaysMap.main?.GetTile(table.targetPoint)?.locatedArmy is DataItemArmy targetArmy )
+        {
+            return targetArmy.Formation;
+        }
+        return Array.Empty<DataItemUnit>();
     }
 
-    public override DataItemUnit[] GetSideTargets(CastTable table)
+    public override DataItemUnit[] GetAreaTargets(CastTable table)
     {
-        throw new System.NotImplementedException();
+        HashSet<DataItemUnit> targets = new HashSet<DataItemUnit>();
+        int arange = (int)GetAreaRange();
+        switch (original.areaMode)
+        {
+            case CombatDefines.TileTargetingArea.circle:
+                var checkTiles = SidewaysMap.main.GetTilesInCircle(table.targetPoint, arange);
+                foreach (var tile in checkTiles) {
+                    if (tile.locatedArmy != null)
+                        foreach (var army in tile.locatedArmy.Formation)
+                            targets.Add(army);
+                }
+                break;
+            case CombatDefines.TileTargetingArea.square:
+                var checkRect = SidewaysMap.main.GetTilesInRect(new RectInt(table.targetPoint.x - arange, table.targetPoint.y - arange, table.targetPoint.x + arange, table.targetPoint.y + arange));
+                foreach (var tile in checkRect)
+                {
+                    if (tile.locatedArmy != null)
+                        foreach (var army in tile.locatedArmy.Formation)
+                            targets.Add(army);
+                }
+                break;
+        }
+        return targets.ToArray();
     }
     #endregion
 }

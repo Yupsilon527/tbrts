@@ -37,33 +37,32 @@ public class UnitDamageable : UnitComponent
         Block.SetValue(0);
     }
 
-    public void DealDamage(float value, AttackDefines.ActionType damage, DataItemUnit attacker,  AttackDefines.HitType block = AttackDefines.HitType.normal)
+    public void DealDamage(float value, AttackDefines.ActionType damage)
     {
-        var dmt = new DamageTable(attacker == null ? parent : attacker, parent, value, damage, block);
-        DealDamage(dmt, false);
+        lastDamage.CalcAttack(damage, value);
     }
-    public virtual void DealDamage(DamageTable damage, bool bonusDamage = false)
+    public virtual void DealDamage(DamageTable damage)
     {
 
         lastDamage = damage;
         damage.Calculate();
-        if (bonusDamage) damage.AccountBonusDamage();
 
-        switch (damage.dmt)
+        foreach (var d in damage.damages) { 
+        switch (d.Key)
         {
             case AttackDefines.ActionType.DirectDamage:
-                float outDamage = damage.realDamage;
+                float outDamage = d.Value;
                 UpdateKiller(damage.attacker);
                 float healthDamage = TakeDirectDamage(outDamage);
                 Vampirism(healthDamage);
                 parent.FireEventOnSelf(AbilityDefines.Event.OnTakeDamage);
                 break;
             case AttackDefines.ActionType.Assassinate:
-                if (Health.GetValue() <= damage.realDamage)
+                if (Health.GetValue() <= d.Value)
                     Kill(damage.attacker);
                 break;
             case AttackDefines.ActionType.NonLethalIgnoreArmorDamage:
-                float magicDamage = Mathf.Min(Health.GetValue() - 1, damage.realDamage);
+                float magicDamage = Mathf.Min(Health.GetValue() - 1, d.Value);
                 if (magicDamage > 0)
                 {
                     TakeLifeDamage(magicDamage, out float resulting);
@@ -71,7 +70,7 @@ public class UnitDamageable : UnitComponent
                 }
                 break;
             case AttackDefines.ActionType.NonLethalDamage:
-                float nonLethalDamage = Mathf.Min(Health.GetValue() + Armor.GetValue() + Block.GetValue() - 1, damage.realDamage);
+                float nonLethalDamage = Mathf.Min(Health.GetValue() + Armor.GetValue() + Block.GetValue() - 1, d.Value);
                 if (nonLethalDamage > 0)
                 {
                     TakeLifeDamage(nonLethalDamage, out float resulting);
@@ -79,32 +78,33 @@ public class UnitDamageable : UnitComponent
                 }
                 break;
             case AttackDefines.ActionType.ArmorBreak:
-                float armorDamage = damage.realDamage;
+                float armorDamage = d.Value;
                 TakeShieldDamage(true, armorDamage, out outDamage);
                 parent.FireEventOnSelf(AbilityDefines.Event.OnTakeDamage);
                 break;
             case AttackDefines.ActionType.LifeHealNoOverheal:
             case AttackDefines.ActionType.LifeHealOverhealShield:
             case AttackDefines.ActionType.LifeHealOverhealArmor:
-                float overheal = Heal(damage.realDamage);
+                float overheal = Heal(d.Value);
                 if (overheal > 0)
                 {
-                    if (damage.dmt == AttackDefines.ActionType.LifeHealOverhealShield)
+                    if (d.Key == AttackDefines.ActionType.LifeHealOverhealShield)
                     {
                         GiveShield(overheal);
                     }
-                    if (damage.dmt == AttackDefines.ActionType.LifeHealOverhealArmor)
+                    if (d.Key == AttackDefines.ActionType.LifeHealOverhealArmor)
                     {
                         GiveArmor(overheal);
                     }
                 }
                 break;
             case AttackDefines.ActionType.ArmorHeal:
-                GiveArmor(damage.realDamage);
+                GiveArmor(d.Value);
                 break;
             case AttackDefines.ActionType.Block:
-                GiveShield(damage.realDamage);
+                GiveShield(d.Value);
                 break;
+        }
         }
 
     }

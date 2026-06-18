@@ -5,7 +5,6 @@ public class ApplyAttack : ApplyEffects
 {
     public AttackDefines.ActionType attack;
     public float BaseDamage = 0;
-    public float CritMult = 0;
     public ScaleData[] scaling;
 
     public override void ActivateOnUnit(EventTable table, float strength = 1)
@@ -13,12 +12,9 @@ public class ApplyAttack : ApplyEffects
         float realDamage = BaseDamage * strength;
         foreach (var scale in scaling)
         {
-            realDamage = scale.GetScaleStrength(table.caster, target, realDamage);
+            realDamage = scale.GetScaleStrength(table.caster, table.target, realDamage);
         }
-        float critModifier = 1;
-        if (table.hit == AttackDefines.HitType.criticalHit)
-            critModifier = CritMult + table.caster.GetPropertyAdditive(ModifierDefines.Property.critical_damage) ;
-        target.damageable.DealDamage(realDamage * table.proc * critModifier, attack, table.caster,  table.hit);
+        table.target.damageable.DealDamage(realDamage * strength , attack);
     }
 
     public override string GetDescription()

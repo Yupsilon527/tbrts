@@ -9,19 +9,18 @@ public class ModifierSO : AlterationSO
 
     public override TagData Translate()
     {
-        return new ModifierData()
-        {
-            InternalName = InternalName,
-            sprite = sprite,
-            behavior = behavior,
-            uibehavior = uibehavior,
-            priority = priority,
-            properties = properties,
-            states = states,
-            duration = duration,
-            flag = flag,
-            expireType = expireType,
-        };
+        return new ModifierData(
+            InternalName,
+            sprite,
+            behavior,
+            uibehavior,
+            flag,
+            expireType,
+            priority,
+            duration,
+            properties,
+            states
+            );
     }
 }
 

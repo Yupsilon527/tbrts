@@ -15,13 +15,35 @@ public class PropertyWeapon : PropertyAbility
     {
         base.SpendResources();
     }
+    public override bool CastFromTable(CastTable table)
+    {
+     if (table is AttackTable at && table.attacker.CanAct(original.attackPhase) && base.CastFromTable(table))
+        {
+            at.ComputeTargets();
+            at.Precast();
+            foreach (var attack in original.effects)
+            {
+                attack.Activate(table);
+            }
+            return true;
+        }
+        return false;
+    }
+    public DataItemUnit GetBestUnitForAbility()
+    {
+        switch (original.targetPriority)
+        {
+            default:
+                return null;
+        }
+    }
 
     public override DataItemUnit[] GetMainTargets(CastTable table)
     {
         return new DataItemUnit[] { Combat.main.GetUnitAt(!table.attackingSide, table.targetPoint.x, table.targetPoint.y) };
     }
 
-    public override DataItemUnit[] GetSideTargets(CastTable table)
+    public override DataItemUnit[] GetAreaTargets(CastTable table)
     {
         switch (original.areaMode)
         {

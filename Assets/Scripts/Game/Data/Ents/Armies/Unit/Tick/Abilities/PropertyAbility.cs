@@ -7,7 +7,7 @@ public abstract class PropertyAbility : PropertyAction
 
     public DataItemUnit[] GetValidTargets(CastTable table)
     {
-        return new[] { table.caster };
+        return new[] { table.attacker };
     }
     public ApplyEffects[] GetAbilityEffects() { return null; }
     public virtual bool CanBeCast(CombatDefines.AttackPhase phase)
@@ -22,42 +22,30 @@ public abstract class PropertyAbility : PropertyAction
     {
 
     }
-    public void CastFromTable(CastTable table)
+    public virtual bool CastFromTable(CastTable table)
     {
-        if (CanBeCast() && (table.targetGem == null || IsValidGemTarget(table.targetGem)))
+        if ( HasResourcesToCast() )
         {
-            var spentMana = caster.mana.GetSelectedGems();
-            if (TryCastWithResources(table, original.castEffects[0], spentMana, false))
-            {
-                for (int i = 1; i < original.castEffects.Length; i++)
-                {
-                    TryCastWithResources(table, original.castEffects[i], spentMana, true);
-                }
-            }
-            if (table.ability.CheckFlag(AbilityDefines.AbilityFlag.discardUsedGems))
-            {
-                table.attacker.HandleEvent(AbilityDefines.Event.DiscardGems, table.ability.GetTotalGemCost());
-            }
-            else
-            {
-                table.attacker.HandleEvent(AbilityDefines.Event.SpendGems, table.ability.GetTotalGemCost());
-            }
-            FireCooldown();
+           SpendResources();
+            ExtendCooldown(parent.stats.realStats.SpeedCoefficient);
+            return true;
         }
+        return false;
     }
+
     #region Events
     public void FireEvent(AbilityDefines.Event fct, DataItemUnit target)
     {
         if (!HasEvent(fct)) return;
 
 
-        FireEvent(fct, new CastTable(parent, UnityEngine.Vector2Int.zero, this)) ;
+        FireEvent(fct, new EventTable(Combat.main.currentTick, parent, target));
     }
     public void FireEvent(AbilityDefines.Event fct)
     {
-        FireEvent(fct, new CastTable(caster, source:this));
+        FireEvent(fct, new EventTable(Combat.main.currentTick, parent, parent));
     }
-    public void FireEvent(AbilityDefines.Event fct, AttackTable table)
+    public void FireEvent(AbilityDefines.Event fct, EventTable table)
     {
         if (!HasEvent(fct)) return;
         AbilityEvent(fct, table);
@@ -88,5 +76,5 @@ public abstract class PropertyAbility : PropertyAction
     }
     #endregion
     public abstract DataItemUnit[] GetMainTargets(CastTable table);
-    public abstract DataItemUnit[] GetSideTargets(CastTable table);
+    public abstract DataItemUnit[] GetAreaTargets(CastTable table);
 }

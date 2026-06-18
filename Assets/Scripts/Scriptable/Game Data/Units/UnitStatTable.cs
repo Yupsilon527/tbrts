@@ -52,6 +52,9 @@ public class UnitStatsTable
     public float BlockChance = 0;
     public float ProcChance = 0;
 
+    public float Accuracy { get; internal set; }
+    public float Evasion { get; internal set; }
+
     public UnitStatsTable() { }
     public UnitStatsTable Clone()
     {

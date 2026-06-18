@@ -3,19 +3,22 @@ using System.Collections.Generic;
 
 public static class DefaultModifiers
 {
-    public static PropertyModifier HealPostCombat = new("postCombat heal",
-        ModifierDefines.Flag.Buff,
-         ModifierDefines.VisibleState.hidden,
-          ModifierDefines.ExpireType.permanent,
-           ModifierDefines.Behavior.Multiple,
-            new Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction>()
+    public static ModifierData HealPostCombat = new("postCombat heal",
+        null,
+       flag: ModifierDefines.Flag.Buff,
+        uibehavior:  ModifierDefines.VisibleState.hidden,
+     expire:    ModifierDefines.ExpireType.permanent,
+        priority:  ModifierDefines.Priority.normal,
+ behavior:          ModifierDefines.StackType.Multiple,
+          funcs:  new Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction>()
                          {
                          {
                     AbilityDefines.Event.CombatEnd,
-                     (PropertyModifier self, DataItemUnit attacker) =>
+                     (PropertyAttribute self, DataItemUnit attacker) =>
                                 {
+
                                     self.parent.damageable.Heal(self.GetParameter("post_combat_heal"));
-                }
+                     }
                 }
             }
     );

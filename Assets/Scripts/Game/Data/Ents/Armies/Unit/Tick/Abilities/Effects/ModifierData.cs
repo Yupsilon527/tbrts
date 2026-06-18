@@ -6,16 +6,16 @@ public class ApplyModifier : ApplyEffects
     public TagData appliedModifier;
     public ModifierParameterAlteration[] alterations;
 
-    public override void ActivateOnUnit(CastTable table, DataItemUnit target, float strength = 1)
+    public override void ActivateOnUnit(EventTable table, float strength = 1)
     {
-        target.modifiers.ApplyNewModifierFromData(appliedModifier, table.tick, out PropertyModifier modifier);
+        table. target.modifiers.ApplyNewModifierFromData(appliedModifier, table.tick, out PropertyModifier modifier);
         foreach (var parameter in modifier.parameters)
         {
             foreach (var alteration in alterations)
             {
                 if (alteration.parameter == parameter.Key)
                 {
-                    modifier.parameters[alteration.parameter] = AttackDefines.GetScaleStrength(table.caster, target, alteration.scaleoff, parameter.Value, alteration.scaleMode, alteration.scaleRate, alteration.scaleDamage);
+                    modifier.parameters[alteration.parameter] = AttackDefines.GetScaleStrength(table.caster, table.target, alteration.scaleoff, parameter.Value, alteration.scaleMode, alteration.scaleRate, alteration.scaleDamage);
                 }
             }
         }

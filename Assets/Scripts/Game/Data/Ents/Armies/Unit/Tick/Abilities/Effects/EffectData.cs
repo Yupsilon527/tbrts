@@ -12,7 +12,7 @@ public abstract class ApplyEffects
         switch (targeting)
         {
             case CombatDefines.TargetType.caster:
-                ActivateOnUnit(new EventTable(table, table.caster), strength);
+                ActivateOnUnit(new EventTable(table, table.attacker), strength);
                 break;
             case CombatDefines.TargetType.main_target:
                 foreach (var target in table.maintarget)
@@ -32,7 +32,7 @@ public abstract class ApplyEffects
                 // TODO
                 break;
             case CombatDefines.TargetType.randomAlly:
-                var randomAlly = table.caster.troop.Formation[Mathf.FloorToInt(table.caster.troop.Formation.Length * Random.value)];
+                var randomAlly = table.attacker.troop.Formation[Mathf.FloorToInt(table.attacker.troop.Formation.Length * Random.value)];
                 ActivateOnUnit(new EventTable(table, randomAlly), strength);
                 break;
         }
@@ -65,9 +65,9 @@ public abstract class ApplyEffects
             case CombatDefines.ChanceMult.True:
                 return ranVal < c;
             case CombatDefines.ChanceMult.Luck:
-                return ranVal < c * table.caster.stats.realStats.LuckCoefficient;
+                return ranVal < c * table.attacker.stats.realStats.LuckCoefficient;
             case CombatDefines.ChanceMult.Proc:
-                return ranVal < (c + table.caster.stats.realStats.ProcChance) * table.caster.stats.realStats.LuckCoefficient;
+                return ranVal < (c + table.attacker.stats.realStats.ProcChance) * table.attacker.stats.realStats.LuckCoefficient;
             default: return true;
         }
     }

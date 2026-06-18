@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PropertyAttribute : PropertyTag
+public class PropertyAttribute : PropertyThinker
 {
     public bool active = true;
     public int priority;
@@ -10,16 +10,11 @@ public class PropertyAttribute : PropertyTag
     public List<ModifierDefines.State> states = new List<ModifierDefines.State>();
     public Dictionary<ModifierDefines.Property, float> properties = new Dictionary<ModifierDefines.Property, float>();
 
-    // Thinker
-    public bool HasThinker = false;
-    public int thinker = 0;
-    public int lastTick = 0;
-
     //Parameters
     public Dictionary<string, float> parameters = new Dictionary<string, float>();
 
     public PropertyAttribute(string Name = "UNDEFINED",
-         ModifierDefines.Behavior bh = ModifierDefines.Behavior.Unique,
+         ModifierDefines.StackType bh = ModifierDefines.StackType.Unique,
         ModifierDefines.StateData[] sa = null,
         ModifierDefines.PropertyData[] pr = null)
     {
@@ -161,10 +156,12 @@ public void SetPropertyRaw(ModifierDefines.Property prop, float value)
 
 }
 
-public class PropertyTag : PropertyAction
+public class PropertyTag
 {
+    public string InternalName = "ERROR";
+    public DataItemUnit parent;
     public Sprite sprite;
-    public ModifierDefines.Behavior behavior;
+    public ModifierDefines.StackType behavior;
     public ModifierDefines.VisibleState uibehavior;
     #region Display
     public Sprite GetModifierIcon()
@@ -184,27 +181,51 @@ public class PropertyTag : PropertyAction
         return uibehavior >= ModifierDefines.VisibleState.always_visible;
     }
     #endregion
+}
+public class PropertyThinker : PropertyTag, ITimerAction
+{
+
+    // Thinker
+    public bool HasThinker = false;
+    public bool executed = false;
+    public int lastThink = 0;
+    public int thinkInterval = 0;
     #region Thinker
     public void StartThinker(int interval)
     {
         HasThinker = true;
-        actionInterval = Mathf.Max(1, interval);
-        thinker = 0;
+        thinkInterval = Mathf.Max(1, interval);
+        lastThink = 0;
     }
     public virtual void Think()
     {
-
+        lastThink += thinkInterval;
     }
-    public override bool ForwardTime(int cooldown)
-    {
-        bool executed = base.ForwardTime(cooldown);
-        CheckExpiration();
+    #endregion
 
-        if (HasThinker) thinker -= cooldown;
-        executed = executed || thinker < 0;
-        while (thinker < 0)
+    public void ExtendCooldown(float cdr = 1)
+    {
+        BackwardTime((int)(thinkInterval * cdr));
+    }
+    public void SetCooldown(int cooldown)
+    {
+        lastThink = cooldown;
+    }
+    public virtual bool ForwardTime(int cooldown)
+    {
+        if (HasThinker) lastThink -= cooldown;
+        executed = executed || lastThink < 0;
+        while (lastThink < 0)
             Think();
         return executed;
     }
-    #endregion
+    public virtual void BackwardTime(int cooldown)
+    {
+        lastThink += cooldown;
+    }
+    public virtual void Reset()
+    {
+        lastThink = 0;
+        executed = false;
+    }
 }

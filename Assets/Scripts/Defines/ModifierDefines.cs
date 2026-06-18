@@ -31,9 +31,9 @@ public static class ModifierDefines
         priority_melee_target = 14,
         priority_range_target = 15,
 
-        total = 16
-    };
-
+        total = 16,
+        cannot_miss = 17
+    }
     public static bool IsPropertyMultiplicative(Property prop)
     {
         return prop == Property.attack_bonus_percent
@@ -255,10 +255,12 @@ public static class ModifierDefines
         ability_cast_range = 106,
         ability_aoe_range = 107,
         critical_damage = 108,
+        critical_chance = 109,
+        parry_chance = 110,
     }
 
 
-    public enum Behavior    //TODO part of the modifier
+    public enum StackType    //TODO part of the modifier
     {
         Multiple = 0,
         Replace = 1,
@@ -269,7 +271,7 @@ public static class ModifierDefines
 
     public enum Flag
     {
-        Undispellable = 0,
+        Tag = 0,
         //positive
         Buff = 1,
         Regeneration = 2,
