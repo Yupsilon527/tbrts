@@ -84,7 +84,7 @@ public class AttackTable : CastTable
             float ranval = Random.value;
             if ( !attacker.GetState(ModifierDefines.State.cannot_miss))
             {
-                float evasion   = target.dodgeCounter / 2f * target.stats.realStats.Evasion * target.stats.realStats.GetLuckCoefficient();
+                float evasion   = target.dodgeCounter / 2f * target.stats.realStats.DodgeChance * target.stats.realStats.GetLuckCoefficient();
 
                 if (ranval > Mathf.Min(AttackDefines.minAccuracy,  evasion))
                 {

@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 public static class AttackDefines
@@ -11,6 +12,12 @@ public static class AttackDefines
         blocked,
         criticalHit,
         miss,
+    }
+    public enum BonusType
+    {
+        nothing = -1,
+        additive = 0,
+        multiplicative = 1,
     }
     public enum ActionType
     {
@@ -25,6 +32,51 @@ public static class AttackDefines
         NonLethalDamage = 8,
         Assassinate = 9,
         Total = 10,
+    }
+    public enum DamageType
+    {
+        Slashing = 0,
+        Piercing = 1,
+        Crushing = 2,
+        Magical = 3,
+        Pure = 4,
+        Poison = 5,
+        LifeHeal = 6,
+        ShieldHeal = 7,
+    }
+    public enum AttackType
+    {
+        Physical = 0,
+        Piercing = 1,
+        Crushing = 2,
+        Magical = 3,
+        Pure = 4,
+        Poison = 5,
+        Heal = 6,
+        Shield = 7,
+        Taunt = 8,
+
+    }
+    public enum MobFlag
+    {
+        civilian,
+        Spearman,
+        Infantry,
+        Skirmisher,
+        Archer,
+        Cavalry,
+        Knight,
+        SiegeEngine,
+        Building,
+        UniqueUnit,
+        Production,
+        Defensive,
+        TownCenter,
+        Lair,
+        FootUnit,
+        RangedUnit,
+        MountedUnit,
+        Support,
     }
     public enum ScaleType
     {

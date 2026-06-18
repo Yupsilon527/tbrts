@@ -3,11 +3,9 @@ TODO
 		Weapons
 		Spells
 
-	fix modifiers
-	port bonus damage from littlesol
+	unit from data
 
 	damabgetable
-	builtinmodifier
 
 	spells
 		stemonGO
@@ -15,6 +13,13 @@ TODO
 		Dice Saga
 
 	stats & scalemode
+
+	faction
+		permanent/starting bonuses
+		global bonuses (buildings?)
+		local bonuses
+			given to units that enter a castle
+			
 
 	events
 	modifier states

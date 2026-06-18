@@ -1,5 +1,7 @@
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [Serializable]
@@ -52,8 +54,17 @@ public class UnitStatsTable
     public float BlockChance = 0;
     public float ProcChance = 0;
 
-    public float Accuracy { get; internal set; }
-    public float Evasion { get; internal set; }
+    public BonusDamageTable[] bonusDamage;
+    public AttackDefines.MobFlag[] GetCounters()
+    {
+        HashSet<AttackDefines.MobFlag> counterFlags = new();
+        foreach (var counter in bonusDamage)
+        {
+            if (counter.damage > 0)
+                counterFlags.Add(counter.flag);
+        }
+        return counterFlags.ToArray();
+    }
 
     public UnitStatsTable() { }
     public UnitStatsTable Clone()

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class DataItemUnit : DataItemObject
     public UnitStats stats;
     public UnitDamageable damageable;
     public CombatantAbilities abilities;
+    public UnitBonuses bonuses;
     public CombatantModifiers modifiers;
 
     public virtual bool IsPlayerOwned()
@@ -26,6 +28,7 @@ public class DataItemUnit : DataItemObject
         damageable = new(this);
         abilities = new(this);
         modifiers = new(this);
+        bonuses = new(this);
     }
     #region events
     public void FireEventOnSelf(AbilityDefines.Event evtData, bool refresh = false)
