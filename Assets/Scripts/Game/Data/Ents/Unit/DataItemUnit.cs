@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -167,4 +168,9 @@ public class DataItemUnit : DataItemObject
     {
         return Mathf.Max(1, Mathf.CeilToInt(GetPower(true) * Game.iArmySalaryMultiplier));
     }
+
+    public bool isTransport()
+    {
+        return innates.GetAbilityLevel("transport") > 0;
     }
+}

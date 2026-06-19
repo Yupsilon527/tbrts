@@ -62,7 +62,7 @@ public class ArmyFormation : ArmyComponent
         {
             return true;
         }
-        else if (transporter == null || target.isTransport())
+        else if (transport == null || target.isTransport())
         {
             if (!Pathfinder.CanIWalkOver(target.GetMovetype(), getMyTile().iElevation, getMyTile().isRoad))
             {

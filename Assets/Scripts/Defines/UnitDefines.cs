@@ -11,5 +11,6 @@ public static class UnitDefines
         mercenary,
         scouting,
         spies,
+        transport,
     }
 }

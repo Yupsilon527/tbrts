@@ -42,14 +42,15 @@ public static class TerrainDefines
     public enum Movement
     {
         NoMovement = -1,
-        Sea = 0,
+        Boat = 0,
         Swimmer = 1,
         Amphibian = 2,
         Ground = 3,
-        GroundVersatile = 4,
-        Fly = 5,
-        Ghost = 6,
-        Teleport = 6
+        GroundGiant = 4,
+        Wheels = 5,
+        Fly = 6,
+        Ghost = 7,
+        Teleport = 8
     };
 
     public static int GetSprite(bool[] Edges)
@@ -212,6 +213,158 @@ public static class TerrainDefines
             UnityEngine.Debug.Log(Edges[0] + " " + Edges[1] + " " + Edges[2] + " " + Edges[3]);
             return -1;
         }
+    }
+    public static int GetMoveCost(Movement movement, Elevation Elevation)
+    {
+        if (CanIWalkOver(movement, Elevation))
+        {
+
+            switch (movement)
+            {
+                case Movement.Ground:
+                    if (Elevation == Elevation.Forest)
+                    {
+                        return 3;
+                    }
+                    if (Elevation == Elevation.Swamp)
+                    {
+                        return 3;
+                    }
+                    if (Elevation == Elevation.Hill)
+                    {
+                        return 3;
+                    }
+                    if (Elevation == Elevation.Bridge)
+                    {
+                        return 1;
+                    }
+                    if (Elevation == Elevation.Road)
+                    {
+                        return 1;
+                    }
+                    return 2;
+                case Movement.GroundGiant:
+                    if (Elevation == Elevation.Swamp)
+                    {
+                        return 3;
+                    }
+                    if (Elevation == Elevation.Hill)
+                    {
+                        return 3;
+                    }
+                    return 2;
+                case Movement.Wheels:
+
+                    if (Elevation == Elevation.Bridge)
+                    {
+                        return 2;
+                    }
+                    if (Elevation == Elevation.Road)
+                    {
+                        return 2;
+                    }
+                    if (Elevation == Elevation.Swamp)
+                    {
+                        return 5;
+                    }
+                    if (Elevation >= Elevation.Forest)
+                    {
+                        return 4;
+                    }
+                    return 3;
+                case Movement.Amphibian:
+                    if (Elevation == Elevation.Swamp)
+                    {
+                        return 1;
+                    }
+                    if (Elevation == Elevation.Hill)
+                    {
+                        return 3;
+                    }
+                    if (Elevation == Elevation.DeepSea)
+                    {
+                        return 3;
+                    }
+                    return 2;
+                case Movement.Swimmer:
+
+                    if (Elevation > Elevation.Sea)
+                    {
+                        return 2;
+                    }
+                    if (Elevation >= Elevation.Hill)
+                    {
+                        return 4;
+                    }
+                    return 3;
+                case Movement.Boat:
+                    if (Elevation == Elevation.Sea)
+                    {
+                        return 3;
+                    }
+                    return 2;
+                case Movement.Fly:
+
+                    if (Elevation == Elevation.Mountain)
+                    {
+                        return 3;
+                    }
+                    return 2;
+                case Movement.Ghost:
+                    if (Elevation == Elevation.Void)
+                    {
+                        return 2;
+                    }
+                    return 3;
+                case Movement.Teleport:
+                    return 4;
+            }
+        }
+
+        return -1;
+    }
+
+    public static bool CanIWalkOver(Movement movement, Elevation elevation)
+    {
+        switch (movement)
+        {
+
+            case Movement.NoMovement:
+                return false;
+            case Movement.Ground:
+
+                return  elevation < Elevation.Wall &&
+                elevation >= Elevation.Sea;
+            case Movement.Wheels:
+
+                return elevation > Elevation.DeepSea &&
+                elevation < Elevation.Mountain;
+
+            case Movement.GroundGiant:
+
+                return elevation > Elevation.DeepSea &&
+                    elevation < Elevation.Wall;
+
+            case Movement.Swimmer:
+            case Movement.Amphibian:
+
+                return elevation > Elevation.Void &&
+                    elevation < Elevation.Mountain;
+
+            case Movement.Fly:
+
+                return elevation != Elevation.Wall;
+
+            case Movement.Ghost:
+            case Movement.Teleport:
+
+                return true;
+
+            case Movement.Boat:
+
+                return elevation >= Elevation.DeepSea && elevation <= Elevation.Swamp;
+}
+return false;
     }
 }
 
