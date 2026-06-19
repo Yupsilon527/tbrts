@@ -30,17 +30,9 @@ public class Combat : Initializable
     }
     void InitCombatants()   //TODO ranged support
     {
-        foreach (var a in attackers.Formation)
-        {
-            combatants.Add(a);
-        }
-        combatants.Add(attackers.transport);
+        combatants.AddRange(attackers.formation.GetUnits());
+        combatants.AddRange(defenders.formation.GetUnits());
 
-        foreach (var d in defenders.Formation)
-        {
-            combatants.Add(d);
-        }
-        combatants.Add(defenders.transport);
     }
     void BeginCombat()
     {

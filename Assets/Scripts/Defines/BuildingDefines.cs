@@ -10,4 +10,10 @@ public static class BuildingDefines
         occupy,
         raze
     }
+
+    public enum BuildingAbilities
+    {
+
+
+    }
 }

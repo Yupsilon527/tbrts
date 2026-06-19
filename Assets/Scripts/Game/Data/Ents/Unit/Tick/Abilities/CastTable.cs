@@ -62,12 +62,10 @@ public class CastTable
         {
             ComputeDamageTable(st);
         }
-        ability.FireEvent(AbilityDefines.Event.BeforeAttack);
     }
 }
 public class AttackTable : CastTable
 {
-
     public AttackTable(CombatDefines.AttackPhase phase, int tick, DataItemUnit caster, Vector2Int targetPoint, PropertyAbility ability) : base(caster, targetPoint, ability)
     {
         this.phase = phase;
@@ -82,11 +80,11 @@ public class AttackTable : CastTable
         if (ability is PropertyWeapon attack)
         {
             float ranval = Random.value;
-            if ( !attacker.GetState(ModifierDefines.State.cannot_miss))
+            if (!attacker.GetState(ModifierDefines.State.cannot_miss))
             {
-                float evasion   = target.dodgeCounter / 2f * target.stats.realStats.DodgeChance * target.stats.realStats.GetLuckCoefficient();
+                float evasion = target.dodgeCounter / 2f * target.stats.realStats.DodgeChance * target.stats.realStats.GetLuckCoefficient();
 
-                if (ranval > Mathf.Min(AttackDefines.minAccuracy,  evasion))
+                if (ranval > Mathf.Min(AttackDefines.minAccuracy, evasion))
                 {
                     target.dodgeCounter = 1;
                     return AttackDefines.HitType.miss;
@@ -99,12 +97,12 @@ public class AttackTable : CastTable
             float accuracy = attacker.stats.realStats.Offense / Mathf.Max(target.stats.realStats.Defense);
             accuracy = accuracy * .6f + Mathf.Min(.4f, attacker.hitCounter / 2 * .5f); //TODO DEFINE
 
-            float critChance = 15 * accuracy + attacker.modifiers.GetPropertyAdditive(ModifierDefines.Property.critical_chance) * (1+accuracy)/2f;   //TODO DEFINE
+            float critChance = 15 * accuracy + attacker.modifiers.GetPropertyAdditive(ModifierDefines.Property.critical_chance) * (1 + accuracy) / 2f;   //TODO DEFINE
             float hitChance = 50 * accuracy;
             float missChance = 30 / accuracy;
             float parryChance = 20 / accuracy + attacker.modifiers.GetPropertyAdditive(ModifierDefines.Property.parry_chance) * (1 + accuracy) / 2f;
 
-            ranval = Random.value * (critChance+ hitChance+ missChance+ parryChance);
+            ranval = Random.value * (critChance + hitChance + missChance + parryChance);
             if (ranval < missChance)
             {
                 hitType = ranval < parryChance ? AttackDefines.HitType.halfBlock : AttackDefines.HitType.blocked;

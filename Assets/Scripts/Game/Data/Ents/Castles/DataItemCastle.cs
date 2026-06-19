@@ -23,16 +23,16 @@ public class DataItemCastle : DataItemBuilding
         customName = custom.customName;
         customDescription = custom.customDescription;
         isCapital = custom.isCapital;
-        PlaceOnTile(custom.spawnPos);
+        ChangeTile(custom.spawnPos);
     }
 
     public int GetSize()
     {
         return castleTiles.Count;
     }
-    public override void PlaceOnTile(Vector2Int t)
+    public override void ChangeTile(Vector2Int t)
     {
-        base.PlaceOnTile(t);
+        base.ChangeTile(t);
 
         castleTiles = new List<SidewaysTile>();
 

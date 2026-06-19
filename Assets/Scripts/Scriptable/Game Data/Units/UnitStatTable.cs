@@ -24,6 +24,8 @@ public class UnitStatsTable
 
     //damage mitigation
     public float Armor = 0; //flat damage reduction against all physical sources
+    public float Shield = 0; 
+    public float Padding = 0; 
     public float Resistance = 0; //flat damage reduction against all elemental sources
     public float Block = 0; //damage block, reduces damage when blocking
 
@@ -118,6 +120,11 @@ public class UnitStatsTable
     private string FormatPercent(float value)
     {
         return $"{Mathf.Round(value * 100)}%";
+    }
+
+    public float GetPowerValue(AbilityData[] abilities = null)
+    {
+        return 100;
     }
 }
 [Serializable]

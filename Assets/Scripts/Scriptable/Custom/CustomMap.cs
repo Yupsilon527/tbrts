@@ -4,11 +4,12 @@ using UnityEngine;
 [Serializable]
 public class CustomMap 
 {
-    public string customName, customDescription, savedVersion;
+    public string customName, customDescription, savedVersion, assignedWorld;
 
     public int height = 0;
     public string MapData;
     public CistomCastle[] castles;
+    public CustomArmy[] armies;
     public int GetWidth()
     {
         if (MapData.Length == 0)

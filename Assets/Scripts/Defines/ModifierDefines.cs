@@ -291,7 +291,7 @@ public static class ModifierDefines
     public enum ExpireType
     {
         permanent = AbilityDefines.Event.Nothing,
-        time = AbilityDefines.Event.Step,
+        time = AbilityDefines.Event.Time,
         stacks = AbilityDefines.Event.OnStacksChange,
     }
 

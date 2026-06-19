@@ -9,13 +9,26 @@ public class PropertySpell : PropertyAbility
 
     public override bool CastFromTable(CastTable table)
     {
-        if ( base.CastFromTable(table))
+        if (base.CastFromTable(table))
         {
             table.ComputeTargets();
             table.Precast();
+            table.attacker.FireEventOnSelf(AbilityDefines.Event.CastSpell);
             foreach (var attack in original.effects)
             {
                 attack.Activate(table);
+            }
+            foreach (var target in table.maintarget)
+            {
+                target.damageable.ResolveDamate();
+                table.attacker.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, target);
+                target.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, table.attacker);
+            }
+            foreach (var target in table.sidetarget)
+            {
+                target.damageable.ResolveDamate();
+                table.attacker.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, target);
+                target.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, table.attacker);
             }
             return true;
         }
@@ -49,7 +62,7 @@ public class PropertySpell : PropertyAbility
 
     public override DataItemUnit[] GetMainTargets(CastTable table)
     {
-        if (SidewaysMap.main?.GetTile(table.targetPoint)?.locatedArmy is DataItemArmy targetArmy )
+        if (SidewaysMap.main?.GetTile(table.targetPoint)?.locatedArmy is DataItemArmy targetArmy)
         {
             return targetArmy.Formation;
         }
@@ -64,7 +77,8 @@ public class PropertySpell : PropertyAbility
         {
             case CombatDefines.TileTargetingArea.circle:
                 var checkTiles = SidewaysMap.main.GetTilesInCircle(table.targetPoint, arange);
-                foreach (var tile in checkTiles) {
+                foreach (var tile in checkTiles)
+                {
                     if (tile.locatedArmy != null)
                         foreach (var army in tile.locatedArmy.Formation)
                             targets.Add(army);

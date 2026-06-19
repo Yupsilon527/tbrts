@@ -16,6 +16,7 @@ public class DataItemUnit : DataItemObject
     public CombatantAbilities abilities;
     public UnitBonuses bonuses;
     public CombatantModifiers modifiers;
+    public AbilityComponentn innates;
 
     public virtual bool IsPlayerOwned()
     {
@@ -29,6 +30,7 @@ public class DataItemUnit : DataItemObject
         abilities = new(this);
         modifiers = new(this);
         bonuses = new(this);
+        innates = new(this);
     }
     #region events
     public void FireEventOnSelf(AbilityDefines.Event evtData, bool refresh = false)
@@ -140,4 +142,29 @@ public class DataItemUnit : DataItemObject
     {
         return troop.IsInCombat();
     }
-}
+    public int GetPowerValue(bool accountPenalty)
+    {
+        return 0;
+    }
+
+    public float GetPurchaseCost(DataItemPlayer Owner)
+    {
+        float Cost = GetPower(true);
+
+        Cost -= Stats[DataItemArmy.Stat_Resource] * Game.iArmyCostReduction;
+
+        if (Owner != null)
+        {
+            if (!Owner.Faction.Armies.Contains(this))
+            {
+                Cost += 1;
+            }
+        }
+
+        return Mathf.Max(1, Mathf.CeilToInt(Cost * Game.iArmyBuildMultiplier));
+    }
+    public float GetUpkeep()
+    {
+        return Mathf.Max(1, Mathf.CeilToInt(GetPower(true) * Game.iArmySalaryMultiplier));
+    }
+    }

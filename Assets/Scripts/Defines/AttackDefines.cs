@@ -19,20 +19,6 @@ public static class AttackDefines
         additive = 0,
         multiplicative = 1,
     }
-    public enum ActionType
-    {
-        DirectDamage = 0,
-        Block = 1,
-        LifeHealNoOverheal = 2,
-        ArmorBreak = 3,
-        ArmorHeal = 4,
-        NonLethalIgnoreArmorDamage = 5,
-        LifeHealOverhealShield = 6,
-        LifeHealOverhealArmor = 7,
-        NonLethalDamage = 8,
-        Assassinate = 9,
-        Total = 10,
-    }
     public enum DamageType
     {
         Slashing = 0,
@@ -41,8 +27,18 @@ public static class AttackDefines
         Magical = 3,
         Pure = 4,
         Poison = 5,
-        LifeHeal = 6,
+        LifeHealNoOverheal = 6,
         ShieldHeal = 7,
+        ArmorHeal = 8,
+        ArmorBreak = 9,
+
+        LifeHealOverhealShield = 10,
+        LifeHealOverhealArmor = 11,
+        Assassinate = 12,
+        
+        Stun = 13,
+
+        Total = 14,
     }
     public enum AttackType
     {

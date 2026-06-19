@@ -29,16 +29,28 @@ public static class TerrainDefines
         DeepSea = 1,
         Sea = 2,
         Swamp = 3,
-        Plain = 4,
-        Forest = 5,
-        Hill = 6,
-        Mountain = 7,
-        Wall = 8,
-        Ruin = 9,
-        City = 10,
-        Road = 11,
-        Bridge = 12,
+        Bridge = 4,
+        Plain = 5,
+        Road = 6,
+        Forest = 7,
+        Hill = 8,
+        Mountain = 9,
+        Wall = 10,
+        City = 11,
     }
+
+    public enum Movement
+    {
+        NoMovement = -1,
+        Sea = 0,
+        Swimmer = 1,
+        Amphibian = 2,
+        Ground = 3,
+        GroundVersatile = 4,
+        Fly = 5,
+        Ghost = 6,
+        Teleport = 6
+    };
 
     public static int GetSprite(bool[] Edges)
     {

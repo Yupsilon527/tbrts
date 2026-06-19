@@ -37,9 +37,13 @@ public class UnitDamageable : UnitComponent
         Block.SetValue(0);
     }
 
-    public void DealDamage(float value, AttackDefines.ActionType damage)
+    public void DealDamage(float value, AttackDefines.DamageType damage)
     {
         lastDamage.CalcAttack(damage, value);
+    }
+    public virtual void ResolveDamate()
+    {
+        DealDamage(lastDamage);
     }
     public virtual void DealDamage(DamageTable damage)
     {
@@ -47,64 +51,69 @@ public class UnitDamageable : UnitComponent
         lastDamage = damage;
         damage.Calculate();
 
-        foreach (var d in damage.damages) { 
-        switch (d.Key)
+        foreach (var d in damage.realDamage)
         {
-            case AttackDefines.ActionType.DirectDamage:
-                float outDamage = d.Value;
-                UpdateKiller(damage.attacker);
-                float healthDamage = TakeDirectDamage(outDamage);
-                Vampirism(healthDamage);
-                parent.FireEventOnSelf(AbilityDefines.Event.OnTakeDamage);
-                break;
-            case AttackDefines.ActionType.Assassinate:
-                if (Health.GetValue() <= d.Value)
-                    Kill(damage.attacker);
-                break;
-            case AttackDefines.ActionType.NonLethalIgnoreArmorDamage:
-                float magicDamage = Mathf.Min(Health.GetValue() - 1, d.Value);
-                if (magicDamage > 0)
-                {
-                    TakeLifeDamage(magicDamage, out float resulting);
+            float realDamage = d.Value;
+            switch (d.Key)
+            {
+                case AttackDefines.DamageType.Slashing:
+                case AttackDefines.DamageType.Piercing:
+                case AttackDefines.DamageType.Crushing:
+                case AttackDefines.DamageType.Magical:
+                case AttackDefines.DamageType.Poison:
+                case AttackDefines.DamageType.Pure:
+
+                    UpdateKiller(damage.attacker);
+                    TakeDirectDamage(realDamage);
+                    if (d.Key == AttackDefines.DamageType.Slashing
+                        || d.Key == AttackDefines.DamageType.Crushing
+                        || d.Key == AttackDefines.DamageType.Piercing)
+                        Vampirism(realDamage);
+
                     parent.FireEventOnSelf(AbilityDefines.Event.OnTakeDamage);
-                }
-                break;
-            case AttackDefines.ActionType.NonLethalDamage:
-                float nonLethalDamage = Mathf.Min(Health.GetValue() + Armor.GetValue() + Block.GetValue() - 1, d.Value);
-                if (nonLethalDamage > 0)
-                {
-                    TakeLifeDamage(nonLethalDamage, out float resulting);
-                    parent.FireEventOnSelf(AbilityDefines.Event.OnTakeDamage);
-                }
-                break;
-            case AttackDefines.ActionType.ArmorBreak:
-                float armorDamage = d.Value;
-                TakeShieldDamage(true, armorDamage, out outDamage);
-                parent.FireEventOnSelf(AbilityDefines.Event.OnTakeDamage);
-                break;
-            case AttackDefines.ActionType.LifeHealNoOverheal:
-            case AttackDefines.ActionType.LifeHealOverhealShield:
-            case AttackDefines.ActionType.LifeHealOverhealArmor:
-                float overheal = Heal(d.Value);
-                if (overheal > 0)
-                {
-                    if (d.Key == AttackDefines.ActionType.LifeHealOverhealShield)
+                    break;
+                case AttackDefines.DamageType.ShieldHeal:
+                    Block.GiveValue(realDamage);
+                    parent.FireEventOnSelf(AbilityDefines.Event.OnShieldRecieved);
+                    break;
+                case AttackDefines.DamageType.ArmorHeal:
+                    Armor.GiveValue(realDamage);
+                    parent.FireEventOnSelf(AbilityDefines.Event.OnArmorRecieved);
+                    break;
+                case AttackDefines.DamageType.ArmorBreak:
+                    TakeShieldDamage(false, realDamage, out float guardblock); //temp shield
+                    realDamage -= guardblock;
+                    TakeShieldDamage(true, realDamage, out float armorblock);    //armor
+                    realDamage -= armorblock;
+                    break;
+                case AttackDefines.DamageType.Assassinate:
+                    if (Health.GetValue() <= realDamage)
+                        Kill(damage.attacker);
+                    break;
+                case AttackDefines.DamageType.LifeHealNoOverheal:
+                case AttackDefines.DamageType.LifeHealOverhealShield:
+                case AttackDefines.DamageType.LifeHealOverhealArmor:
+                    float healValue = Mathf.Min(realDamage, Health.GetDifference());
+                    float overheal = realDamage - healValue;
+
+                    Health.GiveValue(healValue);
+                    parent.FireEventOnSelf(AbilityDefines.Event.OnHealRecieved);
+
+                    if (overheal > 0)
                     {
-                        GiveShield(overheal);
+                        if (d.Key == AttackDefines.DamageType.LifeHealOverhealShield)
+                        {
+                            Block.GiveValue(overheal);
+                            parent.FireEventOnSelf(AbilityDefines.Event.OnShieldRecieved);
+                        }
+                        if (d.Key == AttackDefines.DamageType.LifeHealOverhealArmor)
+                        {
+                            Armor.GiveValue(overheal);
+                            parent.FireEventOnSelf(AbilityDefines.Event.OnArmorRecieved);
+                        }
                     }
-                    if (d.Key == AttackDefines.ActionType.LifeHealOverhealArmor)
-                    {
-                        GiveArmor(overheal);
-                    }
-                }
-                break;
-            case AttackDefines.ActionType.ArmorHeal:
-                GiveArmor(d.Value);
-                break;
-            case AttackDefines.ActionType.Block:
-                GiveShield(d.Value);
-                break;
-        }
+                    break;
+            }
         }
 
     }
@@ -115,16 +124,6 @@ public class UnitDamageable : UnitComponent
             float healVamp = parent.GetProperty(ModifierDefines.Property.vampirism_constant) + (parent.GetProperty(ModifierDefines.Property.vampirism_percent) - 1) * damage;
             Heal(healVamp);
         }
-    }
-    void GiveArmor(float amt)
-    {
-        Armor.GiveValue(amt);
-        parent.FireEventOnSelf(AbilityDefines.Event.OnArmorRecieved);
-    }
-    void GiveShield(float amt)
-    {
-        Block.GiveValue(amt);
-        parent.FireEventOnSelf(AbilityDefines.Event.OnShieldRecieved);
     }
     float TakeDirectDamage(float damage)
     {

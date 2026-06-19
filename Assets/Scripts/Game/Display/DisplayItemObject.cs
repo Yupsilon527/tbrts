@@ -18,7 +18,15 @@ public class DisplayItemObject<tDataItem> : Initializable where tDataItem : Data
     {
 
     }
+    public virtual void OnGraphicsChange()
+    {
+
+    }
     public virtual void OnPlayerOwnerChange()
+    {
+
+    }
+    public virtual void OnSelectionChange()
     {
 
     }

@@ -17,13 +17,26 @@ public class PropertyWeapon : PropertyAbility
     }
     public override bool CastFromTable(CastTable table)
     {
-     if (table is AttackTable at && table.attacker.CanAct(original.attackPhase) && base.CastFromTable(table))
+        if (table is AttackTable at && table.attacker.CanAct(original.attackPhase) && base.CastFromTable(table))
         {
             at.ComputeTargets();
             at.Precast();
+            table.attacker.FireEventOnSelf(AbilityDefines.Event.BeforeAttack);
             foreach (var attack in original.effects)
             {
                 attack.Activate(table);
+            }
+            foreach (var target in table.maintarget)
+            {
+                target.damageable.ResolveDamate();
+                table.attacker.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, target);
+                target.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, table.attacker);
+            }
+            foreach (var target in table.sidetarget)
+            {
+                target.damageable.ResolveDamate();
+                table.attacker.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, target);
+                target.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, table.attacker);
             }
             return true;
         }

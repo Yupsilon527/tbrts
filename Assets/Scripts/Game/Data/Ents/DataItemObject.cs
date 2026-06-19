@@ -9,10 +9,11 @@ public class DataItemObject : DataItem
 
     private readonly HashSet<UnitGroup<DataItemObject>> _groups = new();
     public IReadOnlyCollection<UnitGroup<DataItemObject>> Groups => _groups;
-    bool Selected = false;
+    protected bool Selected = false;
+    protected bool dead = false;
     protected DataItemPlayer currentOwner;
 
-    public virtual void PlaceOnTile(Vector2Int t)
+    public virtual void ChangeTile(Vector2Int t)
     {
         gridPos = t;
         tile = GameManager.main.map.GetTile(gridPos);
@@ -32,18 +33,15 @@ public class DataItemObject : DataItem
     {
         return Selected;
     }
-    public SpriteRenderer SelectionCircle;  //TODO separate component?
     public void NotifyInterfaceChange()
     {
         //if (Selected)
           //  DungeonInterfaceController.main.unitInfo.Refresh();
     }
-    public void Select()
+    public virtual void Select()
     {
         Selected = true;
         OnSelectStateChange(true);
-        if (SelectionCircle != null)
-            SelectionCircle.color = Color.white;
         //    foreach (MobComponent cmp in GetComponents<MobComponent>())
         {
             //        cmp.OnRegisterNewOwner(GetPlayerOwner(), newOwner);
@@ -58,8 +56,6 @@ public class DataItemObject : DataItem
     {
         Selected = false;
         OnSelectStateChange(true);
-        if (SelectionCircle != null)
-            SelectionCircle.color = Color.clear;
     //    foreach (ISelectable sel in GetComponents<ISelectable>())
         {
      //       sel.OnDeselected();
@@ -77,7 +73,12 @@ public class DataItemObject : DataItem
     #region Alignment
     public PlayerDefines.Alignment GetAlignment(DataItemObject other)
     {
-        return GetPlayerOwner().GetAlignment(other.currentOwner);
+        return GetAlignment(other.currentOwner);
+    }
+    
+    public PlayerDefines.Alignment GetAlignment(DataItemPlayer other)
+    {
+        return GetPlayerOwner().GetAlignment(other);
     }
 
     public virtual void SetPlayerOwner(DataItemPlayer player)
@@ -119,4 +120,8 @@ public class DataItemObject : DataItem
     public int GetTrueRange()
     { return 0; }
     #endregion
+    public virtual void Despawn()
+    {
+
+    }
 }

@@ -3,7 +3,7 @@ using System;
 [Serializable]
 public class ApplyAttack : ApplyEffects
 {
-    public AttackDefines.ActionType attack;
+    public AttackDefines.DamageType attack;
     public float BaseDamage = 0;
     public ScaleData[] scaling;
 

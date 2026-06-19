@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class ProductionSO : ScriptableBase
+public abstract class ProductionSO : ScriptableBase
 {
     public ProductionData production;
+
 }

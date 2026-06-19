@@ -305,4 +305,8 @@ public class DataItemPlayer
     */
     }
     #endregion
+    public bool IsAiControlled()
+    {
+        return false;
+    }
 }

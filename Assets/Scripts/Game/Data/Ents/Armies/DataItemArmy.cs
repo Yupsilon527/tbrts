@@ -1,35 +1,248 @@
-using System;
 using System.Linq;
 using UnityEngine;
 
 public class DataItemArmy : DataItemObject
 {
-    public int Movement = 0;
-    public bool movedThisTurn = false;
-
-
-    public DataItemUnit[] Formation = new DataItemUnit[6];
-    public DataItemUnit transport;
-
-    public int CountLivingTroops()
+    public DataItemArmy (Vector2Int pos, int playerOwner)
     {
-        return Formation.Sum(u => u != null && u.damageable.IsAlive() ? 1 : 0);
+        ChangeTile(pos);
+        SetPlayerOwner(playerOwner);
+        formation = new(this);
+        movement = new(this);
+        status = new(this);
+        orders = new(this);
     }
-    public int CountFightingTroops(CombatDefines.AttackPhase phase)
+
+    public DataItemArmy (CustomArmy army) : this (army.spawnPos, army.ownership)
     {
-        return Formation.Sum(u => u != null && u.damageable.IsAlive()  && u.abilities.attacks.Any(a => a.CanBeCast(phase)) ? 1 : 0);
+
     }
-    public DataItemUnit GetTroopInPosition(int x, int y)
+
+    public ArmyFormation formation;
+    public ArmyMovementComponent movement;
+    public ArmyStatusComponent status;
+    public ArmyOrders orders;
+    #region Move
+    public override void ChangeTile(Vector2Int t)
     {
-        return Formation[x + y * 3];
+        if (tile != null)
+        {
+            tile.armyLayer = null;
+        }
+        tile = SidewaysMap.main.GetTile(t);
+        gridPos = t;
     }
-    public int GetPowerValue(bool threat)
+    public bool MoveToTile(Vector2Int t)
     {
+        var ntile = SidewaysMap.main.GetTile(t);
+        if (ntile!=null && ntile.armyLayer == null)
+        {
+            ChangeTile(t);
+            return true;
+        }
+        return false;
+    }
+    #endregion
+    public bool IsAlive()
+    {
+        return dead || formation.GetUnits().Length > 0;
+    }
+    public bool IsInCombat()
+    {
+        return Combat.main.attackers == this || Combat.main.defenders == this;
+    }
+    public override void SetPlayerOwner(DataItemPlayer player)
+    {
+        base.SetPlayerOwner(player);
+        foreach (var unit in formation.GetUnits())
+        {
+            unit.SetPlayerOwner(player);
+        }
+        orders.Clear();
+        display.OnPlayerOwnerChange();
+    }
+
+    public void ApplyEffect(ApplyEffects effect) { }
+    public float GetCityBonuses(string Bonus)
+    {
+        if (tile.buildingLayer != null && tile.buildingLayer.GetAlignment(this) ==  PlayerDefines.Alignment.playerowned)
+        {
+            return 1;//TODO tile.buildingLayer.GetSightRange(Bonus);
+        }
         return 0;
     }
 
-    internal bool IsInCombat()
+    public override void OnTurnEnd()
     {
-        throw new NotImplementedException();
+        base.OnTurnEnd();
+    }
+    #region Power
+
+    public int GetPowerValue(bool accountPenalty)
+    {
+        return formation.Formation.Sum(u => u.GetPowerValue(accountPenalty)) + formation.transport?.GetPowerValue(accountPenalty) ?? 0;
+    }
+    public float GetUpkeep()
+    { 
+        return GetPowerValue(true) * UnitDefines.fSalaryMultiplier;
+    }
+    #endregion
+    #region Merging
+    public bool canMerge(bool forced)
+    {
+        if (!forced && movement.movementLeft > 0)
+        {
+            return false;
+        }
+
+        /*foreach (entityUnit Zim in getUnits(true))
+        {
+            if (Zim.getOwner(false) != Zim.getOwner(true) || Zim.HasModifier(entityModifier.Names.mercenary))
+            {
+                return false;
+            }
+        }*/
+        return true;
+    }
+    public bool CanWeMerge(DataItemArmy other)
+    {
+        if (canMerge(false) && other.canMerge(false))
+        {
+            return (other.GetAlignment(this) == PlayerDefines.Alignment.playerowned && other.formation.CanIAccept(formation.GetCommandValue()));
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public bool Transfer(DataItemArmy other, bool Instant)
+    {
+
+        if (!Instant && GameManager.main.playerManager.GetCurrentPlayer().IsAiControlled())
+        {
+//            game.game.InGameMenus.OpenWindow(new ArmyUINew(game.game, this, Defender));
+            return false;
+        }
+
+        foreach (var unit in formation.Formation)
+        {
+            other.formation.TakeUnit(unit, false);
+        }
+
+        if (AmISelected(false))
+        {
+            other.Select() ;
+        }
+        other.movement.movementLeft = movement.movementLeft;
+        other.display.OnGraphicsChange();
+        Despawn();
+        return true;
+    }
+    #endregion
+    #region LoS
+    public int GetLineOfSight()
+    {
+        return Mathf.Max(1, UnitDefines.iArmyBaseLoS + formation.GetAbilitiyMax("scouting"));
+    }
+    public float GetTrueSight()
+    {
+                return Mathf.Min(UnitDefines.iArmyBaseLoS + formation.GetAbilitiyMax("spies"), GetLineOfSight());
+    }
+    void UpdateAdjenctedLoS()
+    {
+
+    }
+    #endregion
+    public bool TryBattle(DataItemArmy other, bool canFlee)
+    {
+        if (other.IsAlive() && tile.IsNeighboring(other.tile) && GetAlignment(other) == PlayerDefines.Alignment.enemy)
+        {
+
+            //   if (other == OrderList[0].TargetUnit)
+            //  {
+            //      OrderList.RemoveAt(0);
+            //  }
+            return true;//TODO Actions.BattleArmies(game, this, other, false, canFlee);
+
+        }
+        return false;
+    }
+    public bool InvadeCastle(DataItemCastle castle, bool Instant)
+    {
+
+        if (!Instant && GameManager.main.playerManager.GetCurrentPlayer().IsAiControlled())
+        {
+
+           // game.game.InGameMenus.OpenWindow(new CastleInvadeWindow(game.game, this, Defender));
+            return false;
+        }
+
+        return true;
+    }
+    #region Selection
+    public override void Select()
+    {
+        if (GetAlignment( GameManager.main.playerManager.GetCurrentPlayer()) == PlayerDefines.Alignment.playerowned)
+        {
+            base.Select();
+            GameManager.main.armyManager.mainSelectedArmy = this;
+            display.OnSelectionChange();
+        }
+    }
+
+    public bool AmISelected(bool Moving)
+    {
+        if (Moving)
+        {
+            return GameManager.main.armyManager.mainSelectedArmy == this || GameManager.main.armyManager.movingArmies.Contains(this);
+        }
+        return GameManager.main.armyManager.mainSelectedArmy == this;
+    }
+    #endregion
+
+    #region Bribes/Mercs
+    public bool CanBeBribed(DataItemArmy Attacker)
+    {
+        return (GetMyBribeCost() > 0 && Attacker.GetPowerValue(false) > GetPowerValue(false) );
+    }
+
+    public bool isMercenary()
+    {
+        foreach (var unit in formation.GetUnits())
+        {
+            if (unit.innates.HasAbility("mercenary"))
+                return true;
+        }
+        return false;
+    }
+
+    public int GetMyBribeCost()
+    {
+        if (!canMerge(false) || isMercenary() || GetPlayerOwner().isNeutral() )
+        {
+            return -1;
+        }
+
+        return Mathf.RoundToInt(GetPowerValue(false) * UnitDefines.fBribeMultiplier);
+    }
+    #endregion
+    public override void Despawn()
+    {
+        base.Despawn();
+    }
+
+    public void DestroyMe()
+    {
+        
+        if (!dead)
+        {
+            dead = true;
+            UpdateAdjenctedLoS();
+
+            tile.armyLayer = null;
+            if (IsSelected()) Deselect();
+
+           //remove display
+        }
     }
 }

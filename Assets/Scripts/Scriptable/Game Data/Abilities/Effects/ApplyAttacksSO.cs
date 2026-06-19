@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Apply Attacks", menuName = "Abilities/Effects/Apply Attacks")]
 public class ApplyAttacksSO : AttackEffectSO
 {
-    public AttackDefines.ActionType attack;
+    public AttackDefines.DamageType attack;
     public float BaseDamage = 0;
     public ScaleData[] scaling;
     public override ApplyEffects Translate()

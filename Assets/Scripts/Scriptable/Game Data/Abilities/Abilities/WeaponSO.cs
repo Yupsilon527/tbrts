@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponSO : ActionSO
 {
     public WeaponData data;
+    public ModifierSO innate;
 }
 [Serializable]
 public class WeaponData : ActionData
@@ -16,4 +17,6 @@ public class WeaponData : ActionData
     public CombatDefines.ArmyPriorityMode targetPriority;
     public CombatDefines.ArmyRangeMode rangeMode;
     public CombatDefines.ArmyTargetingArea areaMode;
+
+    public ModifierData innate;
 }
