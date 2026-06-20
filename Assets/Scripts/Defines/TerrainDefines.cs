@@ -46,11 +46,12 @@ public static class TerrainDefines
         Swimmer = 1,
         Amphibian = 2,
         Ground = 3,
-        GroundGiant = 4,
-        Wheels = 5,
-        Fly = 6,
-        Ghost = 7,
-        Teleport = 8
+        GroundFoot = 4,
+        GroundGiant = 5,
+        Wheels = 6,
+        Fly = 7,
+        Ghost = 8,
+        Teleport = 9
     };
 
     public static int GetSprite(bool[] Edges)

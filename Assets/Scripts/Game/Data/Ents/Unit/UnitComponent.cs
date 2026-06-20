@@ -12,6 +12,10 @@ public class UnitComponent
     {
         return parent.damageable.IsAlive();
     }
+    public virtual void Spawn()
+    {
+
+    }
     public virtual void TriggerFuncs(AbilityDefines.Event act)
     {
     }

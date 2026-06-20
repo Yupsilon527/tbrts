@@ -143,14 +143,65 @@ public class DataItemUnit : DataItemObject
     {
         return troop.IsInCombat();
     }
+    public int GetCommandValue()
+    {
+        return 1 + innates.GetAbilityLevel("command");
+    }
     public int GetPowerValue(bool accountPenalty)
     {
         return 0;
     }
 
+    public TerrainDefines.Movement GetMovetype()
+    {
+
+        if (innates.GetAbilityLevel("ghost") > 0)
+        {
+            return TerrainDefines.Movement.Ghost;
+        }
+        else   if (innates.GetAbilityLevel("ghost") > 0)
+        {
+            return TerrainDefines.Movement.Ghost;
+        }
+        else if (innates.GetAbilityLevel("fly") > 0)
+        {
+            return TerrainDefines.Movement.Fly;
+        }
+        else if (innates.GetAbilityLevel("teleport") > 0)
+        {
+            return TerrainDefines.Movement.Teleport;
+        }
+        else if (innates.GetAbilityLevel("wheels") > 0)
+        {
+            return TerrainDefines.Movement.Wheels;
+        }
+        else if (innates.GetAbilityLevel("giant") > 0)
+        {
+            return TerrainDefines.Movement.GroundGiant;
+        }
+        else if (innates.GetAbilityLevel("foot") > 0)
+        {
+            return TerrainDefines.Movement.GroundFoot;
+        }
+        else if (innates.GetAbilityLevel("amphibian") > 0)
+        {
+            return TerrainDefines.Movement.Amphibian;
+        }
+        else if (innates.GetAbilityLevel("swim") > 0)
+        {
+            return TerrainDefines.Movement.Swimmer;
+        }
+        else if (innates.GetAbilityLevel("seaworthy") > 0)
+        {
+            return TerrainDefines.Movement.Boat;
+        }
+
+        return TerrainDefines.Movement.Ground;
+    }
+
     public float GetPurchaseCost(DataItemPlayer Owner)
     {
-        float Cost = GetPower(true);
+        float Cost = stats.realStats.GetPowerValue(innates.abilities);
 
         Cost -= Stats[DataItemArmy.Stat_Resource] * Game.iArmyCostReduction;
 

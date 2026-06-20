@@ -126,6 +126,11 @@ public class UnitStatsTable
     {
         return 100;
     }
+
+    public float GetPowerValue(Dictionary<UnitDefines.ArmyAbilities, int> abilities = null)
+    {
+        return 100;
+    }
 }
 [Serializable]
 public class StatAlteration

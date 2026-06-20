@@ -64,20 +64,20 @@ public class ArmyFormation : ArmyComponent
         }
         else if (transport == null || target.isTransport())
         {
-            if (!Pathfinder.CanIWalkOver(target.GetMovetype(), getMyTile().iElevation, getMyTile().isRoad))
+            if (!TerrainDefines.CanIWalkOver(target.GetMovetype(), parent.tile.elevation))
             {
                 return false;
             }
         }
-        return CanIAccept(target.GetCommand());
+        return CanIAccept(target.GetCommandValue());
     }
     public bool CanIAccept(int Value)
     {
         if (Value <= 0)
         {
-            return transporter == null;
+            return transport == null;
         }
-        return getUnits(false).Count < Game.iMaxTroopStack && GetCommandValue() + Value <= GetMaxCommand();
+        return GetUnits().Count() < UnitDefines.iMaxTroopStack && GetCommandValue() + Value <= GetMaxCommand();
     }
     public int GetCommandValue()
     {
