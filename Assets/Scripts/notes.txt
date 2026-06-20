@@ -1,10 +1,7 @@
 TODO
-	Resources
-		Weapons
-		Spells
 
 	unit from data
-
+	armydisplay
 
 	stats & scalemode
 

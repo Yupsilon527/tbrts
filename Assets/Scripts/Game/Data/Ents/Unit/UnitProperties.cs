@@ -26,7 +26,7 @@ public class UnitProperties : UnitComponent
     {
         return states[(int)State] > 0;
     }
-    protected void UpdateState(ModifierDefines.State State, int value)
+    public void UpdateState(ModifierDefines.State State, int value)
     {
         if ((int)State >= 0 && (int)State < (int)ModifierDefines.State.total)
             return;
@@ -50,7 +50,7 @@ public class UnitProperties : UnitComponent
             return 1;
         return 1 + properties[(int)p];
     }
-    protected void UpdateProperty(ModifierDefines.Property Property, float value)
+    public void UpdateProperty(ModifierDefines.Property Property, float value)
     {
         if ((int)Property < 0 || (int)Property >= (int)ModifierDefines.Property.total)
             return;

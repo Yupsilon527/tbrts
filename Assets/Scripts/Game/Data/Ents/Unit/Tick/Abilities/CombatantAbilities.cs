@@ -37,7 +37,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     public void FromCombatantData()
     {
         ClearAbilities();
-        foreach (var ability in parent.scriptable.weapons)
+        foreach (var ability in parent.data.weapons)
         {
             if (ability != null) AddAbility(ability);
         }
@@ -98,7 +98,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
                 while (action.expiration <= 0)
                 {
                     int currentTick = Combat.main.currentTick;
-                    Combat.main.Inspect($"Combatant {parent.scriptable.InternalName} performs action {action.InternalName} at turn {currentTick}");
+                    Combat.main.Inspect($"Combatant {parent.data.InternalName} performs action {action.InternalName} at turn {currentTick}");
 
                     var target = action.GetBestUnitForAbility();
                     var castData = new AttackTable(phase,currentTick, parent, target.gridPos, action);

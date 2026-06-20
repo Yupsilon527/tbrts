@@ -11,19 +11,20 @@ public class DataItemCastle : DataItemBuilding
     public int RaidTurn, RazeTurn = -1;
     public List<SidewaysTile> castleTiles = new();
 
+    public CityBonuses bonuses;
 
     public List<UnitData> Production = new List<UnitData>();
     public List<ProductionData> production = new List<ProductionData>();
     public List<Vector2Int> wayPoints = new List<Vector2Int>();
     public float iProductionTime = 0;
     public bool ContinuousProduction = false;
-    public List<UpgradeData> Upgrades = new List<UpgradeData>();
     public DataItemCastle(CistomCastle custom) : base()
     {
         customName = custom.customName;
         customDescription = custom.customDescription;
         isCapital = custom.isCapital;
         ChangeTile(custom.spawnPos);
+        bonuses = new(this);
     }
 
     public int GetSize()

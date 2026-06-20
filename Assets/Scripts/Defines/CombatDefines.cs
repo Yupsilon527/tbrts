@@ -55,11 +55,15 @@ public static class CombatDefines
 }
     public enum ArmyRangeMode
     {
-        passive,
-        frontrow,
-        backrow,
-        ranged,
-        transport,
+        self,
+        enemy_frontrow,
+        enemy_backrow,
+        enemy_ranged,
+        enemy_transport,
+        ally_frontrow,
+        ally_backrow,
+        ally_forward,
+        ally_samerow,
     }
     public enum ArmyTargetingArea
     {

@@ -9,7 +9,7 @@ public class DataItemUnit : DataItemObject
     public int critCounter = 1;
     public int dodgeCounter = 1;
 
-    public UnitData scriptable;
+    public UnitData data;
     public DataItemArmy troop;
     public UnitStats stats;
     public UnitDamageable damageable;
@@ -17,6 +17,7 @@ public class DataItemUnit : DataItemObject
     public UnitBonuses bonuses;
     public CombatantModifiers modifiers;
     public AbilityComponentn innates;
+    public UnitUpgrades upgrades;
 
     public ArmyFormation Troop { get; internal set; }
 
@@ -26,13 +27,14 @@ public class DataItemUnit : DataItemObject
     }
     public DataItemUnit(UnitData table)
     {
-        scriptable = table;
+        data = table;
         stats = new(this, table.unit);
         damageable = new(this);
         abilities = new(this);
         modifiers = new(this);
         bonuses = new(this);
         innates = new(this);
+        upgrades = new(this);
     }
     #region events
     public void FireEventOnSelf(AbilityDefines.Event evtData, bool refresh = false)
