@@ -26,5 +26,8 @@ public class UnitData : ProductionData
     {
         return base.GetCostForPlayer(player, mult);
     }
-
+    public int GetCommandValue()
+    {
+        return 1;
+    }
 }

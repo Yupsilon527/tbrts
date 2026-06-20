@@ -108,7 +108,7 @@ public class Combat : Initializable
     }
     public DataItemUnit GetUnitAt(bool attackingSide, int X, int Y)
     {
-        return (attackingSide ? attackers : defenders).GetTroopInPosition(X, Y);
+        return (attackingSide ? attackers : defenders).formation.GetTroopInPosition(X, Y);
     }
     public DataItemUnit[] GetUnitInArea(bool attackingSide,  int aX=-1, int aY = -1, int bX=-1, int bY = -1, int cX=-1, int cY = -1 )
     {

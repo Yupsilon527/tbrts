@@ -32,7 +32,8 @@ public abstract class ApplyEffects
                 // TODO
                 break;
             case CombatDefines.TargetType.randomAlly:
-                var randomAlly = table.attacker.troop.Formation[Mathf.FloorToInt(table.attacker.troop.Formation.Length * Random.value)];
+                var targets = table.attacker.troop.formation.GetUnits();
+                var randomAlly = targets[Mathf.FloorToInt(targets.Length * Random.value)];
                 ActivateOnUnit(new EventTable(table, randomAlly), strength);
                 break;
         }

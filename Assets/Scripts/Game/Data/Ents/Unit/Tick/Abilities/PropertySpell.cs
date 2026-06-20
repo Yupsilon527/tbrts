@@ -64,7 +64,7 @@ public class PropertySpell : PropertyAbility
     {
         if (SidewaysMap.main?.GetTile(table.targetPoint)?.locatedArmy is DataItemArmy targetArmy)
         {
-            return targetArmy.Formation;
+            return targetArmy.formation.GetUnits();
         }
         return Array.Empty<DataItemUnit>();
     }
@@ -80,7 +80,7 @@ public class PropertySpell : PropertyAbility
                 foreach (var tile in checkTiles)
                 {
                     if (tile.locatedArmy != null)
-                        foreach (var army in tile.locatedArmy.Formation)
+                        foreach (var army in tile.locatedArmy.formation.GetUnits())
                             targets.Add(army);
                 }
                 break;
@@ -89,7 +89,7 @@ public class PropertySpell : PropertyAbility
                 foreach (var tile in checkRect)
                 {
                     if (tile.locatedArmy != null)
-                        foreach (var army in tile.locatedArmy.Formation)
+                        foreach (var army in tile.locatedArmy.formation.GetUnits())
                             targets.Add(army);
                 }
                 break;

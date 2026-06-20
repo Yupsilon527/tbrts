@@ -88,7 +88,7 @@ public class DataItemArmy : DataItemObject
     }
     #endregion
     #region Merging
-    public bool canMerge(bool forced)
+    public bool CanMerge(bool forced)
     {
         if (!forced && movement.movementLeft > 0)
         {
@@ -106,7 +106,7 @@ public class DataItemArmy : DataItemObject
     }
     public bool CanWeMerge(DataItemArmy other)
     {
-        if (canMerge(false) && other.canMerge(false))
+        if (CanMerge(false) && other.CanMerge(false))
         {
             return (other.GetAlignment(this) == PlayerDefines.Alignment.playerowned && other.formation.CanIAccept(formation.GetCommandValue()));
         }
@@ -126,7 +126,7 @@ public class DataItemArmy : DataItemObject
 
         foreach (var unit in formation.Formation)
         {
-            other.formation.TakeUnit(unit, false);
+            other.formation.TransferUnit(unit, false);
         }
 
         if (AmISelected(false))
@@ -218,7 +218,7 @@ public class DataItemArmy : DataItemObject
 
     public int GetMyBribeCost()
     {
-        if (!canMerge(false) || isMercenary() || GetPlayerOwner().isNeutral() )
+        if (!CanMerge(false) || isMercenary() || GetPlayerOwner().isNeutral() )
         {
             return -1;
         }

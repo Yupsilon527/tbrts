@@ -4,6 +4,11 @@ public class ArmyStatusComponent : ArmyComponent
 {
     public int shieldedTurns=0;
     public int cloakedTurns =0;
+
+    public ArmyStatusComponent(DataItemArmy parent) : base(parent)
+    {
+    }
+
     public void Shield(int turns)
     {
         shieldedTurns = GameManager.main.currentTurn + turns;

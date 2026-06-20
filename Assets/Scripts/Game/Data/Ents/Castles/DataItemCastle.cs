@@ -36,7 +36,7 @@ public class DataItemCastle : DataItemBuilding
 
         castleTiles = new List<SidewaysTile>();
 
-        if (tile.elevation.elevation == TerrainDefines.Elevation.City)
+        if (tile.GetWalkElevation() == TerrainDefines.Elevation.City)
         {
             List<SidewaysTile> openList = new List<SidewaysTile>();
             openList.Add(tile);
@@ -46,7 +46,7 @@ public class DataItemCastle : DataItemBuilding
                 castleTiles.Add(ct);
                 foreach (SidewaysTile Zyzyx in ct.neighbors)
                 {
-                    if (Zyzyx.elevation.elevation == TerrainDefines.Elevation.City && Zyzyx.buildingLayer == null)
+                    if (Zyzyx.GetWalkElevation() == TerrainDefines.Elevation.City && Zyzyx.buildingLayer == null)
                     {
                         Zyzyx.buildingLayer = this;
                         openList.Add(Zyzyx);

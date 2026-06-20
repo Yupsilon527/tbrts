@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -18,6 +17,8 @@ public class DataItemUnit : DataItemObject
     public UnitBonuses bonuses;
     public CombatantModifiers modifiers;
     public AbilityComponentn innates;
+
+    public ArmyFormation Troop { get; internal set; }
 
     public virtual bool IsPlayerOwned()
     {
@@ -151,6 +152,10 @@ public class DataItemUnit : DataItemObject
     {
         return 0;
     }
+    public bool IsRanged()
+    {
+        return false;
+    }
 
     public TerrainDefines.Movement GetMovetype()
     {
@@ -223,5 +228,10 @@ public class DataItemUnit : DataItemObject
     public bool isTransport()
     {
         return innates.GetAbilityLevel("transport") > 0;
+    }
+
+    public Vector2Int GetFormation()
+    {
+        return troop.formation.GetPositionForUnit(this);
     }
 }

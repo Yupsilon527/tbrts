@@ -7,25 +7,28 @@ public class ArmyMovementComponent : ArmyComponent
     public bool movedThisTurn = false;
     public Vector2Int initialPosition;
 
-    public int GetMyMovement()
+    public ArmyMovementComponent(DataItemArmy parent) : base(parent)
+    {
+    }
+
+    public TerrainDefines.Movement GetMyMovement()
     {
         if (parent.formation.transport != null)
         {
 
-            return parent.formation.transport.GetMyMovement();
+            return parent.formation.transport.GetMovetype();
         }
 
-        float total = 666;
+        int total = 666;
 
-        foreach (entityUnit Zim in getUnits(false))
+        foreach (var Zim in parent.formation.GetUnits())
         {
-
-            total = Mathf.Min(total, Zim.GetMyMovement());
+            total = Mathf.Min(total, (int)Zim.GetMovetype());
 
 
         }
 
-        return (int)total;
+        return (TerrainDefines.Movement)total;
     }
     public bool CanIMove()
     {
@@ -45,5 +48,8 @@ public class ArmyMovementComponent : ArmyComponent
     {
         parent.MoveToTile(Location);
     }
+    public void UpdateMaxMovement()
+    {
 
+    }
 }

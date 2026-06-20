@@ -12,6 +12,10 @@ public class SidewaysTile
     public bool isRoad;
     public ElevationData elevation;
 
+    public TerrainDefines.Elevation GetWalkElevation()
+    {
+        return elevation.elevation;
+    }
     //layers
     public DataItemArmy armyLayer;
     public DataItemBuilding buildingLayer, regionCastle;

@@ -33,7 +33,7 @@ public class CastleManager : EntityManager
 
         foreach (var tData in GameManager.main.map.tiles)
         {
-            if (tData.elevation.elevation == TerrainDefines.Elevation.City && tData.buildingLayer == null)
+            if (tData.GetWalkElevation() == TerrainDefines.Elevation.City && tData.buildingLayer == null)
             {
                 buildings.Add(new DataItemCastle(CistomCastle.GenerateRandom(tData.gridPos)));
             }
