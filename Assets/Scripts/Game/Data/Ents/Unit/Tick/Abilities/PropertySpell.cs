@@ -6,6 +6,11 @@ using UnityEngine;
 public class PropertySpell : PropertyAbility
 {
     public SpellData original;
+    public PropertySpell(DataItemUnit caster, SpellData original) : base(caster)
+    {
+        InternalName = original.InternalName;
+        this.original = original;
+    }
 
     public override bool CastFromTable(CastTable table)
     {

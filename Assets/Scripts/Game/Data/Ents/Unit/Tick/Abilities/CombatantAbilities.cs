@@ -9,15 +9,14 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     public ResourceInt Ap;
     public ResourceInt Mp;
 
-    public HashSet<PropertyWeapon> attacks = new();
-    public HashSet<PropertyWeapon> available = new();
+    public HashSet<PropertyAbility> abilities = new();
+    public HashSet<PropertyAbility> available = new();
     public CombatantAbilities(DataItemUnit parent) : base(parent)
     {
     }
     public override void TriggerFuncs(AbilityDefines.Event act)
     {
-        if (act == AbilityDefines.Event.OnRefresh
-            || act == AbilityDefines.Event.OnSpawn)
+        if (act == AbilityDefines.Event.OnSpawn)
         {
             ClearAbilities();
             FromCombatantData();
@@ -32,28 +31,41 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     }
     public void ClearAbilities()
     {
-        attacks.Clear();
+        abilities.Clear();
     }
     public void FromCombatantData()
     {
-        ClearAbilities();
         foreach (var ability in parent.data.weapons)
         {
-            if (ability != null) AddAbility(ability);
+            foreach (var w in parent.data.weapons)
+            {
+                AddAbility(new PropertyWeapon(parent, w));
+            }
+            foreach (var ab in parent.data.spells)
+            {
+                AddAbility(new PropertySpell(parent, ab));
+            }
         }
     }
-
-
-    public virtual void AddAbility(PropertyWeapon ability, bool active = false)
+    public PropertyWeapon[] GetAttacks()
     {
-        attacks.Add(ability);
+        return abilities.Select(a => a is PropertyWeapon atk ? atk : null).ToArray();
+    }
+    public PropertySpell[] GetSpells()
+    {
+        return abilities.Select(a => a is PropertySpell spell ? spell : null).ToArray();
+    }
+
+    public virtual void AddAbility(PropertyAbility ability, bool active = false)
+    {
+        abilities.Add(ability);
         ability.FireEvent(AbilityDefines.Event.OnCreated);
         ability.SetCooldown(Mathf.CeilToInt(parent.stats.realStats.SpeedCoefficient * ability.actionDelay));
     }
-    public virtual void RemoveAbility(PropertyWeapon ability)
+    public virtual void RemoveAbility(PropertyAbility ability)
     {
         ability.FireEvent(AbilityDefines.Event.OnDestroyed);
-        attacks.Remove(ability);
+        abilities.Remove(ability);
     }
     public bool Tick(int steps)
     {
@@ -64,7 +76,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     public int GetNextTick(int steps)
     {
         int ticks = int.MaxValue;
-        foreach (var action in attacks)
+        foreach (var action in abilities)
         {
             ticks = Mathf.Min(ticks, steps + action.expiration);
         }
@@ -75,7 +87,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         available.Clear();
         if (!castable || SanityCheck())
         {
-            foreach (PropertyWeapon ability in attacks)
+            foreach (PropertyWeapon ability in abilities)
             {
                 if (ability == null)
                     continue;
@@ -89,9 +101,9 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     #region Casting
     public bool Trigger( CombatDefines.AttackPhase phase, int ticks)
     {
-        var abilities = attacks.Where(a => a.CanBeCast(phase) );
+        var abilities = this.abilities.Where(a => a.CanBeCast(phase) );
 
-        foreach (var action in abilities)
+        foreach (var action in GetAttacks())
         {
             if (action.ForwardTime(ticks))
             {
@@ -114,7 +126,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     #region Events
     public void EventReaction(AbilityDefines.Event evtData, DataItemUnit other)
     {
-        foreach (PropertyAbility ability in attacks)
+        foreach (PropertyAbility ability in abilities)
         {
             if (ability == null)
                 continue;
@@ -126,7 +138,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     public virtual string OutputTable()
     {
         string output = "<br><b>Actions</b><br>";
-        foreach (var action in attacks)
+        foreach (var action in abilities)
         {
             output += action.ToString() + "<br>";
         }

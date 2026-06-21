@@ -6,6 +6,7 @@ public class UnitBonuses : UnitComponent
 {
     public UnitBonuses(DataItemUnit parent) : base(parent)
     {
+        unitFlags = parent.data.unitFlags;
     }
     public AttackDefines.MobFlag[] unitFlags;
 

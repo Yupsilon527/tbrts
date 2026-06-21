@@ -126,7 +126,7 @@ public class DataItemArmy : DataItemObject
 
         foreach (var unit in formation.Formation)
         {
-            other.formation.TransferUnit(unit, false);
+            other.formation.TransferUnit(unit);
         }
 
         if (AmISelected(false))

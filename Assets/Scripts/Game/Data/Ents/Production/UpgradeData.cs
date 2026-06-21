@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class UpgradeData : TechData
 {
-    public override AvailableState GetAvailableState(DataItemPlayer player)
+    public override AvailableState GetAvailableState(DataItemPlayer player, DataItemCastle castle)
     {
         if (player.upgrades.upgrades.HasReachedLimitForUpgrade(this))
         {
             return AvailableState.unavailable;
         }
-        else if (prerequisites.Length == 1 && !PrerequisiteMet(player, prerequisites[0]))
+        else if (prerequisites.Length == 1 && !PrerequisiteMet(player, castle, prerequisites[0]))
         {
             return AvailableState.unavailable;
         }
-        else return base.GetAvailableState(player);
+        else return base.GetAvailableState(player, castle);
     }
     public virtual void SetPlayerLevel(DataItemPlayer player, int oldLevel, int newLevel)
     {

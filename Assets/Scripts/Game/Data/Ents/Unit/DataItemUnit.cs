@@ -36,6 +36,12 @@ public class DataItemUnit : DataItemObject
         innates = new(this);
         upgrades = new(this);
     }
+
+    public DataItemUnit( UnitData uData, DataItemArmy newArmy) :this(uData)
+    {
+        SetPlayerOwner(newArmy.GetPlayerOwner());
+        newArmy.formation.TransferUnit(this);
+    }
     #region events
     public void FireEventOnSelf(AbilityDefines.Event evtData, bool refresh = false)
     {
@@ -67,7 +73,7 @@ public class DataItemUnit : DataItemObject
     }
     public bool CanAct(CombatDefines.AttackPhase phase)
     {
-        return abilities.attacks.Any(a => a.original.attackPhase == phase && a.HasResourcesToCast());
+        return abilities.GetAttacks().Any(a => a.original.attackPhase == phase && a.HasResourcesToCast());
     }
     protected void UpdateNextAction(int steps)
     {
@@ -206,25 +212,13 @@ public class DataItemUnit : DataItemObject
         return TerrainDefines.Movement.Ground;
     }
 
-    public float GetPurchaseCost(DataItemPlayer Owner)
+    public ResourceCost[] GetPurchaseCost(DataItemPlayer Owner)
     {
-        float Cost = stats.realStats.GetPowerValue(innates.abilities);
-
-        Cost -= Stats[DataItemArmy.Stat_Resource] * Game.iArmyCostReduction;
-
-        if (Owner != null)
-        {
-            if (!Owner.Faction.Armies.Contains(this))
-            {
-                Cost += 1;
-            }
-        }
-
-        return Mathf.Max(1, Mathf.CeilToInt(Cost * Game.iArmyBuildMultiplier));
+        return data.GetCostForPlayer(Owner);
     }
     public float GetUpkeep()
     {
-        return Mathf.Max(1, Mathf.CeilToInt(GetPower(true) * Game.iArmySalaryMultiplier));
+        return Mathf.Max(1, Mathf.CeilToInt(GetPowerValue(true) * UnitDefines.fSalaryMultiplier));
     }
 
     public bool isTransport()

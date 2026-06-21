@@ -16,10 +16,12 @@ MonoBehaviour:
     customName: 
     customDescription: 
     savedVersion: 
+    assignedWorld: 
     height: 6
     MapData: p0p0p0p0c0c0p0c0c0p0p0p0p0p0p0f0p0p0p0p0f0p0p0p0p0p0f0f0p0p0p0p0p0p0p0p0
     castles:
-    - ownership: 0
+    - InternalName: 
+      ownership: 0
       spawnPos: {x: 1, y: 1}
       customName: z
       customDescription: x
@@ -27,3 +29,10 @@ MonoBehaviour:
       isCapital: 1
       producedArmies: []
       producedBuildings: []
+    armies:
+    - InternalName: 1
+      ownership: 1
+      spawnPos: {x: 3, y: 3}
+      formation:
+      - Peasant
+      transporter: 

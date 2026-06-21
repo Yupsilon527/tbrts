@@ -6,7 +6,7 @@ public class FactionSO : ScriptableBase
     public ResourceCost[] startingResources = new ResourceCost[0];
     public ResourceIncome[] startingIncome = new ResourceIncome[0];
 
-    public BuildingSO[] innateUpgrades;
+    public UpgradeSO[] innateUpgrades;
 
     public UnitSO[] producedUnits;
     public BuildingSO[] buildings;

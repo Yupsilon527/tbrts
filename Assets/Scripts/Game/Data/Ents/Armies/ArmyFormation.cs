@@ -26,7 +26,7 @@ public class ArmyFormation : ArmyComponent
     }
     public int CountFightingTroops(CombatDefines.AttackPhase phase)
     {
-        return Formation.Sum(u => u != null && u.damageable.IsAlive() && u.abilities.attacks.Any(a => a.CanBeCast(phase)) ? 1 : 0);
+        return Formation.Sum(u => u != null && u.damageable.IsAlive() && u.abilities.abilities.Any(a => a.CanBeCast(phase)) ? 1 : 0);
     }
     public DataItemUnit GetTroopInPosition(int x, int y)
     {
@@ -47,38 +47,24 @@ public class ArmyFormation : ArmyComponent
         else Formation[x + y * UnitDefines.iArmyCols] = unit;
         OnFormationUpdate();
     }
-    public bool TransferUnit(DataItemUnit Army, bool updateVisual)
+    public bool TransferUnit(DataItemUnit unit)
     {
-        if (CanIAccept(Army.GetCommandValue()) && parent.CanMerge(true))
+        if (CanIAccept(unit.GetCommandValue()) && parent.CanMerge(true))
         {
-
-            if (Army.isTransport())
-            {
-                if (Army.Troop != null)
+            if (unit.troop != null)
                 {
-                    Army.Troop.transporter = null;
-                    Army.Troop.reviseDisplay(true);
+                    unit.troop.formation.RemoveTroop(transport);
                 }
-            }
-            else if (Army.Troop != null)
-            {
-                Army.Troop.Formation[Army.GetFormation().y, Army.GetFormation().x] = null;
-                Army.Troop.reviseDisplay(true);
-            }
 
-            int[] row = new int[] { 0, 1, 2 };
-            if (Army.BaseData.isRangedCreature())
-            {
-                row = new int[] { 1, 2, 0 };
-            }
 
-            for (int iY = 0; iY < 3; iY++)
+            for (int iX = 0; iX < UnitDefines.iArmyRows; iX++)
             {
-                for (int iX = 0; iX < 3; iX++)
+                for (int iY = 0; iY < UnitDefines.iArmyCols; iY++)
                 {
-                    if (isEmptyAt(row[iY], iX))
+                    int rY = unit.IsRanged() ? (UnitDefines.iArmyCols - iY - 1) : iY;
+                    if (IsEmptyAt (iX,rY))
                     {
-                        TakeUnit(iX, row[iY], Army, updateVisual);
+                        SetTroopInPosition(iX, rY, unit);
                         return true;
                     }
                 }
@@ -108,10 +94,9 @@ public class ArmyFormation : ArmyComponent
         {
             for (int iY = 0; iY < UnitDefines.iArmyCols; iY++)
             {
-                int rY = unit.IsRanged() ? (UnitDefines.iArmyCols - iY - 1) : iY;
-                if (GetTroopInPosition(iX, rY) == unit)
+                if (GetTroopInPosition(iX, iY) == unit)
                 {
-                    return new Vector2Int(iX, rY);
+                    return new Vector2Int(iX, iY);
                 }
             }
         }
@@ -208,13 +193,13 @@ public class ArmyFormation : ArmyComponent
         }
         return Vector2Int.one * -1;
     }
-    public DataItemUnit MakeMeANewUnit(DataItemArmy Zim, List<float> Stats, string[] Abilities)
+    /*public DataItemUnit MakeMeANewUnit(DataItemArmy Zim, List<float> Stats, string[] Abilities)
     {
 
         if (Zim != null)
         {
 
-            DataItemUnit Stocking = DataItemUnit.MakeNewUnit(game, GetOwner(), Zim, this);
+            DataItemUnit Stocking = new DataItemUnit( Zim, parent);
 
             if (Stats != null)
             {
@@ -229,7 +214,7 @@ public class ArmyFormation : ArmyComponent
             return Stocking;
         }
         return null;
-    }
+    }*/
 
     public static void SwapTroops(DataItemUnit uUnit, int aX, int aY, bool updateVisual)
     {

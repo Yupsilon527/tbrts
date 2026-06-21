@@ -6,6 +6,7 @@ public class WorldManager : Initializable
 {
     HashSet<UnitData> units=new();
     public static WorldManager main;
+    public static WorldData world;
     protected override void Initialize()
     {
         base.Initialize();

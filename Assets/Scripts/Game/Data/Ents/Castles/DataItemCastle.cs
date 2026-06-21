@@ -178,7 +178,7 @@ public class DataItemCastle : DataItemBuilding
         Production.Clear();
         production.Clear();
         wayPoints.Clear();
-        Upgrades.Clear();
+        bonuses.upgrades.researchedUpgrades.Clear();
 
         display.DrawAgain();
     }
@@ -192,7 +192,7 @@ public class DataItemCastle : DataItemBuilding
         Production.Clear();
         production.Clear();
         wayPoints.Clear();
-        Upgrades.Clear();
+        bonuses.upgrades.researchedUpgrades.Clear();
 
         display.DrawAgain();
     }
@@ -242,7 +242,7 @@ public class DataItemCastle : DataItemBuilding
         else
         {
             var costs = production[0].GetCostForPlayer(GetPlayerOwner());
-            return iProductionTime >= costs[(int)EconomyDefines.EconomyResource.Labor].value && GetPlayerOwner().CanAffordResources(costs);
+            return iProductionTime >= costs[(int)EconomyDefines.EconomyResource.Labor].value && GetPlayerOwner().econ.CanAffordResources(costs);
         }
     }
 

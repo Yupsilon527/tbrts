@@ -3,6 +3,13 @@ using UnityEngine;
 public class PropertyWeapon : PropertyAbility
 {
     public WeaponData original;
+
+    public PropertyWeapon(DataItemUnit caster, WeaponData original) : base(caster)
+    {
+        InternalName = original.InternalName;
+        this.original = original;
+    }
+
     public override bool CanBeCast(CombatDefines.AttackPhase phase)
     {
         return original.attackPhase == phase && base.CanBeCast(phase);

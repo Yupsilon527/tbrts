@@ -39,47 +39,17 @@ public class ArmyManager : EntityManager
             //Panty.Exhaust();
         }
 
-        DataItemUnit Zim = DataItemUnit.MakeNewUnit(game, Player, uData, newArmy);
+        DataItemUnit Zim = new DataItemUnit(  uData, newArmy);
 
         if (Zim == null)
         {
             return null;
         }
 
-        if (myCastle != null)
-        {
-            List<string> Bonuses = new List<string>();
+        Player.upgrades.ApplyResearchedUpgradeToNewlySpawnedUnit(Zim);
+        myCastle.bonuses.ApplyResearchedUpgradeToNewlySpawnedUnit(Zim);
+        Zim.FireEventOnSelf(AbilityDefines.Event.OnSpawn);
 
-            if (myCastle.GetBonus("attack") > 0)
-            {
-                Bonuses.Add("attack-" + myCastle.GetBonus("attack"));
-            }
-            if (myCastle.GetBonus("speed") > 0)
-            {
-                Bonuses.Add("speed-" + myCastle.GetBonus("speed"));
-            }
-            if (myCastle.GetBonus("hitpoints") > 0)
-            {
-                Bonuses.Add("hitpoints-" + myCastle.GetBonus("hitpoints"));
-            }
-
-            foreach (DataItemBuilding Gir in myCastle.Upgrades)
-            {
-                foreach (string data in Gir.BuildingData)
-                {
-                    string[] temp = Game.separateString(data);
-                    if (temp[0] == "ability_min" || temp[0] == "ability_add" || temp[0] == "ability_improve" || temp[0] == "ability_learn")
-                    {
-                        Bonuses.Add(temp[0] + "-" + temp[1] + ", " + temp[2]);
-                    }
-
-                }
-            }
-
-            Zim.ApplyBonuses(Bonuses);
-        }
-
-        newArmy.sanityCheck();
         return Zim;
     }
 }

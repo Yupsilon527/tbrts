@@ -8,7 +8,7 @@ public class WorldData : BaseData
     public UnitData[] neutralUnits;
 
     public bool globalNeutralBuildings;
-    public UnitData[] neutralBuildings;
+    public BuildingData[] neutralBuildings;
 
     public MapData[] availableMaps;
 }

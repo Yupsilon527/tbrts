@@ -11,7 +11,7 @@ public class PlayerUpgrades : PlayerComponent
             ApplyUpgradeToAllUnits(upgrade, oldLevel, newLevel);
         };
             }
-    void ApplyUpgradeToAllUnits(UpgradeData upgrade, int oldLevel, int newLevel)
+    void ApplyUpgradeToAllUnits(TechData upgrade, int oldLevel, int newLevel)
     {
         foreach (var troop in player.units)
         {

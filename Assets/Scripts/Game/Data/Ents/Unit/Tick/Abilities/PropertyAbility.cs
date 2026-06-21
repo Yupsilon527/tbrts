@@ -4,7 +4,10 @@ public abstract class PropertyAbility : PropertyAction
 {
     public float procStrength = 1;
     public int uses = 0;
-
+    public PropertyAbility(DataItemUnit caster)
+    {
+        parent = caster;
+    }
     public DataItemUnit[] GetValidTargets(CastTable table)
     {
         return new[] { table.attacker };

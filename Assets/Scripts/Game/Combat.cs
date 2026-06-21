@@ -70,7 +70,7 @@ public class Combat : Initializable
             combatants[0].Act();
             combatants.Sort((a, b) => a.nextAction.CompareTo(b.nextAction));
 
-            if (combatants.Any(c => c.abilities.attacks.Any(a => a.CanBeCast(currentPhase))))
+            if (combatants.Any(c => c.abilities.abilities.Any(a => a.CanBeCast(currentPhase))))
                 continue;
             ForwardPhase();
         }

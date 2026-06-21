@@ -14,6 +14,7 @@ public class CityBonuses : CityComponent
     }
     public void BuildBuilding(TechData upgrade, int levels)
     {
+        upgrades.CompleteUpgrade(upgrade, levels);
         foreach (var army in city.GetGarrison())
         {
             ApplyUpgradeToAllUnits(army, upgrade, levels);

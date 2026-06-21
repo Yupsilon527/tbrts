@@ -26,11 +26,11 @@ public abstract class ProductionData
         }
         return 0;
     }
-    public virtual AvailableState GetAvailableState(DataItemPlayer player)
+    public virtual AvailableState GetAvailableState(DataItemPlayer player, DataItemCastle castle)
     {
         foreach (string prerequisite in prerequisites)
         {
-            if (!PrerequisiteMet(player, prerequisite))
+            if (!PrerequisiteMet(player, castle, prerequisite))
             {
                 return AvailableState.greyedoutNocost;
             }
@@ -38,13 +38,13 @@ public abstract class ProductionData
         return AvailableState.available;
     }
 
-    public bool PrerequisiteMet(DataItemPlayer player, string prerequisite)
+    public bool PrerequisiteMet(DataItemPlayer player, DataItemCastle castle, string prerequisite)
     {
         //if (prerequisite.Substring(0, 2) == "b_")
         {
           //  return player.HasBuilding(prerequisite);
         }
-        return player.UpgradeResearched(prerequisite);
+        return player.upgrades.upgrades.UpgradeResearched(prerequisite);
     }
     public virtual float GetCostForPlayer(DataItemPlayer player, EconomyDefines.EconomyResource resource, float mult = 1)
     {
@@ -67,7 +67,7 @@ public abstract class ProductionData
     {
         float[] additions = new float[(int)EconomyDefines.EconomyResource.Total];
         float[] multipliers = new float[] { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-        foreach (var upgrade in player.researchedUpgrades)
+        foreach (var upgrade in player.upgrades.upgrades.researchedUpgrades)
         {
             if (upgrade.level > 0 && upgrade.upgrade.AppliesToThing(this))
             {
@@ -99,9 +99,9 @@ public abstract class ProductionData
     {
         if (table.percent < 0) return true;
         var price = GetCostForPlayer(table.playerOwner);
-        if (table.playerOwner.CanAffordResources(price))
+        if (table.playerOwner.econ.CanAffordResources(price))
         {
-            table.playerOwner.SpendResources(price);
+            table.playerOwner.econ.SpendResources(price);
             return true;
 
         }

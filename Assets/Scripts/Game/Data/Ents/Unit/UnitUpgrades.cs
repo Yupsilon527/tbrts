@@ -9,7 +9,7 @@ public class UnitUpgrades : UnitProperties
     {
         upgrades = new();
         upgrades.onUpgradeLevelChange += (upgrade, oldLevel, newLevel) => {
-            upgrade.SetUnitLevel(this, false, oldLevel, newLevel);
+            upgrade.SetUnitLevel(parent, false, oldLevel, newLevel);
         };
     }
 

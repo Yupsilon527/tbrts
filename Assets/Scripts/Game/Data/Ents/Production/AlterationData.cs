@@ -21,6 +21,8 @@ public class TechData : ProductionData
     [Header("Stat Alterations For Units")]
     public ModifierDefines.PropertyData[] properties = new ModifierDefines.PropertyData[0];
     public ModifierDefines.StateData[] states = new ModifierDefines.StateData[0];
+    [Header("Abilities")]
+    public string[] abilitiesAdded = new string[0];
 
     [Header("Grant Resources/Income")]
     public ResourceCost[] grantedResources = new ResourceCost[0];
@@ -44,21 +46,27 @@ public class TechData : ProductionData
         }
         return false;
     }
-    public virtual void SetUnitLevel(UnitUpgrades data, bool onSpawn, int oldLevel, int newLevel)
+    public virtual void SetUnitLevel(DataItemUnit unit, bool onSpawn, int oldLevel, int newLevel)
     {
         int delta = newLevel - oldLevel;
 
         foreach (var prop in properties)
-            data.UpdateProperty(prop.Property, prop.value * delta);
+            unit.upgrades.UpdateProperty(prop.Property, prop.value * delta);
 
         if (oldLevel == 0 && newLevel > 0)
             foreach (var stat in states)
-                data.UpdateState(stat.State, (int)stat.priority);
+                unit.upgrades.UpdateState(stat.State, (int)stat.priority);
         else if (newLevel == 0)
             foreach (var stat in states)
-                data.UpdateState(stat.State, 0);
+                unit.upgrades.UpdateState(stat.State, 0);
 
-        data.parent.bonuses.GrantBonusDamageFromTable(bonusDamage, oldLevel, newLevel);
+        unit.bonuses.GrantBonusDamageFromTable(bonusDamage, oldLevel, newLevel);
+
+        if (delta > 0)
+        {
+            foreach (var innate in abilitiesAdded)
+                unit.innates.AddAbility(innate, delta);
+        }
     }
 }
 
