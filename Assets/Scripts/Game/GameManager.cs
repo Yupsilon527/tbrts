@@ -28,6 +28,9 @@ public class GameManager : Initializable
     void StartTheGame()
     {
         gen.GenerateMap();
+
+        playerManager.MakeThePlayersFromEditorData(gen.mapData.MapData);
+
         cb.SetRect(new Rect(TerrainDefines.UnitsPerTile * .5f, -TerrainDefines.UnitsPerTile * .5f, (map.width + 1) * TerrainDefines.UnitsPerTile, (map.height +1) * TerrainDefines.UnitsPerTile));
         castleManager.DrawTheCastlesFromEditorData(gen.mapData.MapData.castles);
         castleManager.redoCastleRegions();

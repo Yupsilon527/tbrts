@@ -16,6 +16,13 @@ public class DataItemPlayer
     public UnitGroup<DataItemArmy> units = new();
     public UnitGroup<DataItemCastle> buildings = new();
 
+    public DataItemPlayer(CustomPlayer custom) : this(custom.id,custom.Team,Color.white)
+    {
+        if (custom.FactionName == "" || custom.FactionName == "Random")
+            faction = WorldManager.world.factions[ Mathf.FloorToInt(Random.value * WorldManager.world.factions.Length)];
+        else
+        faction = WorldManager.main.LoadFaction(custom.FactionName);
+    }
     public DataItemPlayer(int iD, Color color) : this(iD,iD,color)
     {
     }

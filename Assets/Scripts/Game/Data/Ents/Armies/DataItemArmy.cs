@@ -53,11 +53,16 @@ public class DataItemArmy : DataItemObject
     }
     public override void SetPlayerOwner(DataItemPlayer player)
     {
+        if (GetPlayerOwner()!= null)
+        {
+            GetPlayerOwner().units.Remove(this);
+        }
         base.SetPlayerOwner(player);
         foreach (var unit in formation.GetUnits())
         {
             unit.SetPlayerOwner(player);
         }
+        GetPlayerOwner().units.Add(this);
         orders.Clear();
         display.OnPlayerOwnerChange();
     }
@@ -245,4 +250,5 @@ public class DataItemArmy : DataItemObject
            //remove display
         }
     }
+
 }

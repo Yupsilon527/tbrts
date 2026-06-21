@@ -19,7 +19,7 @@ public class ArmyManager : EntityManager
 
     public static DataItemUnit SpawnUnit( string UnitName, DataItemPlayer Player, SidewaysTile tTile)
     {
-        return SpawnUnit(WorldManager.main.GetUnit(UnitName), Player, tTile);
+        return SpawnUnit(WorldManager.main.LoadUnit(UnitName), Player, tTile);
     }
     public static DataItemUnit SpawnUnit(UnitData uData, DataItemPlayer Player, SidewaysTile tTile)
     {
@@ -52,6 +52,17 @@ public class ArmyManager : EntityManager
 
         return Zim;
     }
+
+    public static void DrawTheArmiesFromEditorData(CustomArmy[] armies)
+    {
+
+
+        foreach (var Zim in armies)
+        {
+            new DataItemArmy(Zim);
+        }
+    }
+
 }
 
 public class EntityManager : GameComponent

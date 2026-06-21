@@ -5,6 +5,11 @@ public class CustomMap
 {
     public string customName, customDescription, savedVersion, assignedWorld;
 
+    public string NeutralName;
+    public string[] neutralUnits;
+    public ResourceCost[] startingPlayerResources;
+    public CustomPlayer[] players;
+
     public int height = 0;
     public string MapData;
     public CistomCastle[] castles;

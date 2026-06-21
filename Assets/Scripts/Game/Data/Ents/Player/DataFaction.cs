@@ -18,6 +18,19 @@ public class DataFaction : BaseData
     {
 
     }
+    public DataFaction(FactionSO faction)
+    {
+        sigilTexture = faction.sigilTexture;
+        bannerTexture = faction.bannerTexture;
+
+        foreach (var r in faction.startingResources)
+            startingResources.Add(r);
+        foreach (var i in faction.startingIncome)
+            startingIncome.Add(i);
+
+        producedUnits = faction.producedUnits.Select(p => p.unit).ToArray();
+        availableBuildings = faction.buildings.Select(p => p.building).ToArray();
+    }
 
     public List<UnitData> GetRecruitableArmies()
     {

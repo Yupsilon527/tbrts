@@ -10,4 +10,5 @@ public class FactionSO : ScriptableBase
 
     public UnitSO[] producedUnits;
     public BuildingSO[] buildings;
+
 }
