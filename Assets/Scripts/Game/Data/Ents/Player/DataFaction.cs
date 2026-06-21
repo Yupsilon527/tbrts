@@ -35,7 +35,7 @@ public class DataFaction : BaseData
     public List<UnitData> GetRecruitableArmies()
     {
         List<UnitData> ProductionArmies = new List<UnitData>();
-        if (WorldManager.world.globalNeutralUnits)
+        if (WorldManager.world.NeutralTroopsRecuitment)
         {
             foreach (UnitData Panty in WorldManager.world.neutralUnits)
             {
@@ -57,7 +57,7 @@ public class DataFaction : BaseData
     public List<BuildingData> GetAvailableUpgrades()
     {
         List<BuildingData> ProductionArmies = new List<BuildingData>();
-        if (WorldManager.world.globalNeutralBuildings)
+        if (WorldManager.world.NeutralBuilding)
         {
             foreach (BuildingData Panty in WorldManager.world.neutralBuildings)
             {

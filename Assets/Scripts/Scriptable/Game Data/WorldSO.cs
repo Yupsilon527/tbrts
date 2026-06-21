@@ -6,7 +6,7 @@ public class WorldSO : ScriptableBase
     public FactionSO[] factions;
 
     public bool NeutralTroopsRecuitment = false;
-    public UnitSO[] neutralTroops;
+    public UnitSO[] neutralUnits;
 
     public bool NeutralBuilding = false;
     public BuildingSO[] neutralBuildings;

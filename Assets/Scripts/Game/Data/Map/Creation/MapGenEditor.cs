@@ -24,7 +24,7 @@ public class MapGenEditor : MapGen
         List<MapGenPredefinedTile> existingTiles = new();
         existingTiles.AddRange(GetComponentsInChildren<MapGenPredefinedTile>());
 
-        Vector2Int mins = Vector2Int.zero;
+        Vector2Int mins = Vector2Int.one * -1;
         foreach (var tile in existingTiles)
         {
             if (tile.gridPos.x >= dims.x || tile.gridPos.y >= dims.y)
@@ -80,7 +80,7 @@ public class MapGenEditor : MapGen
         List<ObjectData> spawnObjs = new List<ObjectData>();
         foreach (MapGenPredefinedTile dit in tiles)
         {
-            Vector2Int tPos = new Vector2Int(dit.gridPos.x, dims.y - dit.gridPos.y - 1);
+            Vector2Int tPos = new Vector2Int(dit.gridPos.y, dims.x - dit.gridPos.x);
             Tiles[tPos.y][tPos.x] = new SidewaysTile(biomeData.GetElevation(dit.elevation), dit.variation);
             if (dit.objectData != null)
                 spawnObjs.Add(new ObjectData()
@@ -101,10 +101,7 @@ public class MapGenEditor : MapGen
         {
             for (int x = 0; x < GetWidth(); x++)
             {
-                Debug.Log($"{x},{y}");
-                Debug.Log($"{mapData.MapData}");
-                mapData.MapData.MapData += tiles[y * GetWidth() + x].elevation + "";
-                mapData.MapData.MapData += tiles[y * GetWidth() + x].variation + "";
+                mapData.MapData.MapData += tiles[x * GetHeight() + y].elevation+""+ tiles[x * GetHeight() + y].variation;
 
             }
         }

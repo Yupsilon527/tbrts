@@ -18,10 +18,10 @@ public abstract class MapGen : MonoBehaviour
     {
         Debug.Log("[MapGeneration] Initialize map size " + w + "," + h);
         Tiles = new List<List<SidewaysTile>>();
-        for (int iY = 0; iY < h; iY++)
+        for (int iX = 0; iX < w; iX++)
         {
             List<SidewaysTile> row = new List<SidewaysTile>();
-            for (int iX = 0; iX < w; iX++)
+            for (int iY = 0; iY < h; iY++)
             {
                 row.Add(new SidewaysTile( biomeData.Ground , 0));
             }
@@ -32,11 +32,11 @@ public abstract class MapGen : MonoBehaviour
     #region Size
     public virtual int GetWidth()
     {
-        return Tiles[0].Count;
+        return Tiles.Count;
     }
     public virtual int GetHeight()
     {
-        return Tiles.Count;
+        return Tiles[0].Count;
     }
     #endregion
     public void SetTile(int x, int y, SidewaysTile tile)

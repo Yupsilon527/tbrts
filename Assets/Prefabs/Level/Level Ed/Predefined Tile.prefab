@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7901775109024593720}
   - component: {fileID: 7901775109024593721}
   m_Layer: 0
-  m_Name: Segment x66_y77 -0
+  m_Name: Segment x133_y154 -0
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mge: {fileID: 0}
-  gridPos: {x: 66, y: 77}
+  gridPos: {x: 133, y: 154}
   objectData: {fileID: 0}
   elevation: 45
   variation: 0

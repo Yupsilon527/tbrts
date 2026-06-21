@@ -16,7 +16,7 @@ MonoBehaviour:
   - CharID: 102
     TilesetVariations:
     - {fileID: 11400000, guid: 8c948c827a455ec42998eec26991c248, type: 2}
-    elevation: 5
+    elevation: 7
   - CharID: 45
     TilesetVariations:
     - {fileID: 11400000, guid: ad5ee90eb59d7924ca7bf17f41c1639f, type: 2}
@@ -24,9 +24,9 @@ MonoBehaviour:
   - CharID: 112
     TilesetVariations:
     - {fileID: 11400000, guid: b4fffde25e77e5d48b66c00a60e0fb48, type: 2}
-    elevation: 4
+    elevation: 5
   - CharID: 99
     TilesetVariations:
     - {fileID: 11400000, guid: ee13edf274882de4ea0fdbc4445d3a1a, type: 2}
-    elevation: 10
+    elevation: 11
   ObjectDensity: 1

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class WorldManager : Initializable
 {
-    HashSet<WorldData> worlds=new();
-    HashSet<UnitData> units=new();
-    HashSet<DataFaction> races=new();
+    public HashSet<WorldData> worlds=new();
+    public HashSet<UnitData> units=new();
+    public HashSet<DataFaction> races=new();
+    public HashSet<CustomMap> maps=new();
     public static WorldManager main;
     public static WorldData world;
     protected override void Initialize()
@@ -59,6 +60,10 @@ public class WorldManager : Initializable
         foreach (var f in Resources.LoadAll<FactionSO>("Canon"))
         {
             races.Add(new DataFaction(f));
+        }
+        foreach (var f in Resources.LoadAll<MapChunkSO>("Canon"))
+        {
+            maps.Add(f.MapData);
         }
         foreach (var f in Resources.LoadAll<WorldSO>("Canon"))
         {

@@ -44,7 +44,8 @@ public class DataItemCastle : DataItemBuilding
             while (openList.Count > 0)
             {
                 var ct = openList[0];
-                castleTiles.Add(ct);
+                if (!castleTiles.Contains(ct))
+                    castleTiles.Add(ct);
                 foreach (SidewaysTile Zyzyx in ct.neighbors)
                 {
                     if (Zyzyx.GetWalkElevation() == TerrainDefines.Elevation.City && Zyzyx.buildingLayer == null)

@@ -26,11 +26,11 @@ public class CustomMap
     }
     public SidewaysTile GetTileAt(int x, int y, MapBiomeSO biome)
     {
-        int t = x * 2 + y * height * 2;
+        int t = (x * height + y )*2 ;
         if (t >= MapData.Length)
             return new SidewaysTile();
 
-        string readData = MapData.Substring((x + y * height) * 2, 2);
+        string readData = MapData.Substring(t, 2);
 
         var elevation = new ElevationData();
         foreach (var e in biome.Elevations)

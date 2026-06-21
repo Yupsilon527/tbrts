@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3159137856149226842}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8147829876591841177
 MonoBehaviour:
@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10b8c94287f1e2344a2ce260db54276e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biomeData: {fileID: 0}
-  IsDone: 0
-  dims: {x: 0, y: 0}
+  biomeData: {fileID: 11400000, guid: b504902e287f8134ea8485e27dd23ab5, type: 2}
+  mapData: {fileID: 0}
+  IsDone: 1
+  dims: {x: -1, y: -1}
   predefinedTilePrefab: {fileID: 7901775109024593727, guid: 45eeb1a3346a0bb42a727ef74f1cb375, type: 3}

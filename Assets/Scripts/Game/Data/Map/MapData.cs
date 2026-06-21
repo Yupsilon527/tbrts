@@ -2,7 +2,6 @@
 using UnityEngine;
 
 public class MapData {
-
     public string[] building_data;  //obsolete?
     public ObjectData[] object_data = new ObjectData[0];
 

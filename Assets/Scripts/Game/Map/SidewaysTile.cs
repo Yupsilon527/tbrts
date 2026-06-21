@@ -57,7 +57,7 @@ public class SidewaysTile
         //Draw the Foundations
 
         List<ElevationData> NeighborData = new List<ElevationData> { ElevationBorders, ElevationBorders, ElevationBorders, ElevationBorders };
-        int[] VariationData = new int[] { 0, 0, 0, 0 };
+        int[] VariationData = new int[] { 0, 0, 0, 0, 0 };
         int[][] iData = new int[][] { new int[] { -1, -1 }, new int[] { 0, -1 }, new int[] { -1, 0 }, new int[] { 0, 0 } };
 
         for (int iNeighbor = 0; iNeighbor < NeighborData.Count; iNeighbor++)
@@ -147,7 +147,7 @@ public class SidewaysTile
                         layer.transform.localScale = Vector3.one;
 
 
-                        var elevation = edge.GetSprite(nData, VariationData[iN]);
+                        var elevation = edge.GetSprite(nData, iN < VariationData.Length ? VariationData[iN] : 0);
 
                         layer.name = "Segment " + iX + "_" + iY + " " + elevation.name;
 
@@ -166,16 +166,16 @@ public class SidewaysTile
         MakeTileGameObject(gridPos.x, gridPos.y, Vector2.zero);
         if (gridPos.x == SidewaysMap.main.mapData.GetWidth() - 1 && gridPos.y >= SidewaysMap.main.mapData.GetHeight() - 1)
         {
-            MakeTileGameObject(gridPos.x + 1, gridPos.y + 1, Vector2.right + Vector2.down);
+            MakeTileGameObject(gridPos.x + 1, gridPos.y + 1, Vector2.right * TerrainDefines.UnitsPerTile + Vector2.down * TerrainDefines.UnitsPerTile);
         }
         if (gridPos.x == SidewaysMap.main.mapData.GetWidth() - 1)
         {
-            MakeTileGameObject(gridPos.x + 1, gridPos.y, Vector2.right);
+            MakeTileGameObject(gridPos.x + 1, gridPos.y, Vector2.right * TerrainDefines.UnitsPerTile);
 
         }
         if (gridPos.y == SidewaysMap.main.mapData.GetHeight() - 1)
         {
-            MakeTileGameObject(gridPos.x, gridPos.y + 1, Vector2.down);
+            MakeTileGameObject(gridPos.x, gridPos.y + 1, Vector2.down * TerrainDefines.UnitsPerTile);
         }
     }
     #endregion
@@ -288,6 +288,10 @@ public class SidewaysTile
     public Vector2 GetWorldPosition()
     {
         return SidewaysMap.main.TranslateGridPosition(gridPos);
+    }
+    public Vector2 GetCenterPosition()
+    {
+        return SidewaysMap.main.TranslateGridPosition(gridPos) + new Vector2(1,-1) * TerrainDefines.UnitsPerTile * .5f;
     }
     public bool IsNeighboring(SidewaysTile other)
     {

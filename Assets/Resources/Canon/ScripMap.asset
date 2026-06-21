@@ -17,12 +17,28 @@ MonoBehaviour:
     customDescription: 
     savedVersion: 
     assignedWorld: 
+    NeutralName: 
+    neutralUnits: []
+    startingPlayerResources: []
+    players:
+    - Name: 1
+      FactionName: 
+      id: 1
+      Team: 0
+      AiLevel: 0
+      startingResources: []
+      Used: 0
+      Enabled: 0
+      Ready: 0
+      Locked: 0
+      LockedRace: 0
+      LockedTeam: 0
     height: 6
-    MapData: p0p0p0p0c0c0p0c0c0p0p0p0p0p0p0f0p0p0p0p0f0p0p0p0p0p0f0f0p0p0p0p0p0p0p0p0
+    MapData: p0p0p0p0p0f0p0p0p0p0f0p0p0p0c0c0p0p0p0p0c0c0p0p0p0f0p0p0p0p0f0p0p0p0p0p0
     castles:
     - InternalName: 
       ownership: 0
-      spawnPos: {x: 1, y: 1}
+      spawnPos: {x: 2, y: 2}
       customName: z
       customDescription: x
       customSprite: c

@@ -11,7 +11,7 @@ public static class TerrainDefines
     public static int tileVariationsBegin = 0;
     public static int tileVariationsEnd = 15;
 
-    public static int UnitsPerTile = 2;
+    public static int UnitsPerTile = 1;
 
     public static int ElevationRaiseChance = 4;
 

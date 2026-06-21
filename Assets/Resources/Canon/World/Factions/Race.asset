@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcddf7723cb65e54e8d83f4a6c080f98, type: 3}
+  m_Name: Race
+  m_EditorClassIdentifier: 
+  InternalName: Race
+  AssignedWorld: Etheria
+  sigilTexture: {fileID: 0}
+  bannerTexture: {fileID: 0}
+  startingResources: []
+  startingIncome: []
+  innateUpgrades: []
+  producedUnits:
+  - {fileID: 11400000, guid: b47cc2297ab165546996f3f54370d6fc, type: 2}
+  buildings: []
