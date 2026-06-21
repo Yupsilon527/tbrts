@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "World", menuName = "Data/World")]
 public class WorldSO : ScriptableBase
 {
     public FactionSO[] factions;

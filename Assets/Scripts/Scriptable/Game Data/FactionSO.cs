@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Race", menuName = "Data/World/Race")]
 public class FactionSO : ScriptableBase
 {
     public Sprite sigilTexture, bannerTexture;
