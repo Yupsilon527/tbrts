@@ -146,9 +146,7 @@ public class SidewaysMap : MonoBehaviour
             {
                 SidewaysTile tile = SidewaysTile.CreateTile(tilePrefab, mapData, new Vector2Int(iX, iY), false);
                 tiles[iX, iY] = tile;
-                tile.gameObject.transform.SetParent(transform);
-
-
+                tile.display?.gameObject?.transform.SetParent(transform);
             }
         }
         UnityEngine.Debug.Log("Tileset Done");
@@ -159,7 +157,7 @@ public class SidewaysMap : MonoBehaviour
         foreach (SidewaysTile tile in tiles)
         {
             tile.InitNeighbors();
-            tile.Draw();
+            tile.display?.Draw();
         }
     }
 }

@@ -22,8 +22,8 @@ public class DataFaction : BaseData
     {
         if (faction.character != null)
         {
-            sigilTexture = faction.character.GetSprite(0);
-            bannerTexture = faction.character.GetSprite(1);
+            bannerTexture = faction.character.GetSprite(0);
+            sigilTexture = faction.character.GetSprite(1);
             castleTexture = faction.character.GetSprite(2);
         }
 

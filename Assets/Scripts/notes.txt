@@ -1,7 +1,14 @@
 TODO
-	load sprites
 
 	camera
+
+	select army
+	move army
+	move coroutine
+
+	(try with 2 armies)
+
+	move indicator
 
 	stats & scalemode
 

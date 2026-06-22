@@ -52,6 +52,7 @@ public class DataItemArmy : DataItemObject
         }
         tile = SidewaysMap.main.GetTile(t);
         gridPos = t;
+        tile.armyLayer = this;
     }
     public bool MoveToTile(Vector2Int t)
     {

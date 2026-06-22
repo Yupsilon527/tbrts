@@ -8,7 +8,7 @@ public class DisplayItemObject<tDataItem> : Initializable ,  IDisplayItemObject<
     public tDataItem AssignedObject => assignedObject;
 
     public GameObject SpritePrefab;
-    public List<SpriteRenderer> objectSprites, bannerSprites;
+    public List<SpriteRenderer> objectSprites, bannerSprites, selectionCircles;
     public DisplayBanner banner;
     public float movementSpeed = 1;
     Vector3 direction;
@@ -42,7 +42,11 @@ public class DisplayItemObject<tDataItem> : Initializable ,  IDisplayItemObject<
     }
     public virtual void OnSelectionChange()
     {
-
+        bool selected = assignedObject.IsSelected();
+        foreach (var sprite in selectionCircles)
+        {
+            sprite.enabled = selected;
+        }
     }
     public virtual void OnPositionChange(Vector2Int gridPos, DisplayPositionChange change)
     {
