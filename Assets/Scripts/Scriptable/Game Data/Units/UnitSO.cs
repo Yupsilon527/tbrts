@@ -4,4 +4,5 @@ using UnityEngine;
 public class UnitSO : ScriptableObject
 {
     public UnitData unit;
+    public CharacterSO character;
 }

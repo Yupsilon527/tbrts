@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class WorldManager : Initializable
 {
-    public HashSet<WorldData> worlds=new();
-    public HashSet<UnitData> units=new();
-    public HashSet<DataFaction> races=new();
-    public HashSet<CustomMap> maps=new();
+    public HashSet<CharacterSO> characters = new();
+    public HashSet<WorldData> worlds = new();
+    public HashSet<UnitData> units = new();
+    public HashSet<DataFaction> races = new();
+    public HashSet<CustomMap> maps = new();
     public static WorldManager main;
     public static WorldData world;
     protected override void Initialize()
@@ -15,9 +16,9 @@ public class WorldManager : Initializable
         if (main == null)
         {
 
-        base.Initialize();
-        main = this;
-        LoadFromUnityData();
+            base.Initialize();
+            main = this;
+            LoadFromUnityData();
             LoadPresetWorld();
             DontDestroyOnLoad(gameObject);
         }
@@ -53,9 +54,18 @@ public class WorldManager : Initializable
     }
     void LoadFromUnityData()
     {
+        foreach (var c in Resources.LoadAll<CharacterSO>("Canon"))
+        {
+            characters.Add(c);
+        }
         foreach (var u in Resources.LoadAll<UnitSO>("Canon"))
         {
             units.Add(u.unit);
+            if (u.character != null)
+                u.unit.LoadCharacter(u.character);
+            else
+                u.unit.LoadCharacter(LoadCharacter(u.unit.InternalName));
+
         }
         foreach (var f in Resources.LoadAll<FactionSO>("Canon"))
         {
@@ -69,6 +79,10 @@ public class WorldManager : Initializable
         {
             worlds.Add(new WorldData(f));
         }
+    }
+    public CharacterSO LoadCharacter(string name)
+    {
+        return characters.FirstOrDefault(u => u.InternalName == name);
     }
     public UnitData LoadUnit(string name)
     {

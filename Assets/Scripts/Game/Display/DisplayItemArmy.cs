@@ -3,6 +3,7 @@ using UnityEngine;
 public class DisplayItemArmy : DisplayItemObject<DataItemArmy>
 {
     public DataItemArmy assignedArmy;
+    public GameObject formation;
     public SpriteRenderer transport;
     public override void AssignObject(DataItemArmy ob)
 {
@@ -31,7 +32,7 @@ public class DisplayItemArmy : DisplayItemObject<DataItemArmy>
                 if (i< assignedArmy.formation.Formation.Length && assignedArmy.formation.Formation[i] != null)
                 {
                     objectSprites[i].gameObject.SetActive(true);
-                    objectSprites[i].sprite = assignedArmy.formation.Formation[i].data.icon;
+                    objectSprites[i].sprite = assignedArmy.formation.Formation[i].data.GetSprite( CharacterSO.SpriteFrame.idle);
                 }
                 else
                 {

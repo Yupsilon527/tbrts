@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DataFaction : BaseData
 {
-    public Sprite sigilTexture, bannerTexture;
+    public Sprite sigilTexture, bannerTexture, castleTexture;
     [Header("Startup")]
     public HashSet<ResourceCost> startingResources = new();
     public HashSet<ResourceIncome> startingIncome = new();
@@ -20,8 +20,12 @@ public class DataFaction : BaseData
     }
     public DataFaction(FactionSO faction)
     {
-        sigilTexture = faction.sigilTexture;
-        bannerTexture = faction.bannerTexture;
+        if (faction.character != null)
+        {
+            sigilTexture = faction.character.GetSprite(0);
+            bannerTexture = faction.character.GetSprite(1);
+            castleTexture = faction.character.GetSprite(2);
+        }
 
         foreach (var r in faction.startingResources)
             startingResources.Add(r);
@@ -32,10 +36,10 @@ public class DataFaction : BaseData
         availableBuildings = faction.buildings.Select(p => p.building).ToArray();
     }
 
-    public List<UnitData> GetRecruitableArmies()
+    public List<UnitData> GetRecruitableArmies(bool neutral)
     {
         List<UnitData> ProductionArmies = new List<UnitData>();
-        if (WorldManager.world.NeutralTroopsRecuitment)
+        if (neutral|| WorldManager.world.NeutralTroopsRecuitment)
         {
             foreach (UnitData Panty in WorldManager.world.neutralUnits)
             {
@@ -54,10 +58,10 @@ public class DataFaction : BaseData
         return ProductionArmies;
     }
 
-    public List<BuildingData> GetAvailableUpgrades()
+    public List<BuildingData> GetAvailableUpgrades(bool neutral)
     {
         List<BuildingData> ProductionArmies = new List<BuildingData>();
-        if (WorldManager.world.NeutralBuilding)
+        if (neutral || WorldManager.world.NeutralBuilding)
         {
             foreach (BuildingData Panty in WorldManager.world.neutralBuildings)
             {
@@ -76,10 +80,10 @@ public class DataFaction : BaseData
         return ProductionArmies;
     }
 
-    public List<UnitData> FindArmiesWithAbility(string Ability)
+    public List<UnitData> FindArmiesWithAbility(string Ability, bool neutrals)
     {
         List<UnitData> AvailableArmies = new List<UnitData>();
-        foreach (UnitData Panty in GetRecruitableArmies())
+        foreach (UnitData Panty in GetRecruitableArmies(neutrals))
         {
             if (Panty.HasAbility(Ability) )
             {

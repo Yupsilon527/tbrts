@@ -6,7 +6,7 @@ using UnityEngine;
 public class UnitData : ProductionData
 {
     public UnitStatsTable unit;
-    public Sprite[] armySprites;
+    public Sprite[] armySprites = new Sprite[6];
     public AttackDefines.MobFlag[] unitFlags;
     public WeaponData[] weapons;
     public SpellData[] spells;
@@ -19,6 +19,22 @@ public class UnitData : ProductionData
             return AvailableState.greyedout;
         }
         return avs;
+    }
+    public void LoadCharacter(CharacterSO character)
+    {
+        if (character == null) return;
+        foreach (var sprite in character.sprites)
+        {
+            armySprites[(int)sprite.frame] = sprite.sprite;
+        }
+    }
+    public Sprite GetSprite(CharacterSO.SpriteFrame id)
+    {
+        return GetSprite((int)id);
+    }
+    public Sprite GetSprite(int id)
+    {
+        return armySprites[id];
     }
     public override void CompleteProduction(ProductionTable table)
     {

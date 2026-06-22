@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InternalName: Race
   AssignedWorld: Etheria
-  sigilTexture: {fileID: 0}
-  bannerTexture: {fileID: 0}
+  character: {fileID: 11400000, guid: 33a926e142d4a8f4e8cc0f669517a559, type: 2}
   startingResources: []
   startingIncome: []
   innateUpgrades: []

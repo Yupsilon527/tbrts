@@ -17,21 +17,14 @@ public class PlayerManager : GameComponent
         {
             Name = map.NeutralName
         };
-
-        List<UnitData> asd = new();
-        asd.AddRange(WorldManager.world.neutralUnits);
-        foreach (string unitID in map.neutralUnits)
+        foreach (var player in map.players)
         {
-            asd.Add(WorldManager.main.LoadUnit(unitID));
+            if (player.id == 0)
+            {
+                neutrals = new DataItemPlayer(player, Color.gray);
+            }
         }
-
-        neutrals.faction = new DataFaction()
-        {
-            InternalName = map.NeutralName,
-
-            producedUnits = asd.ToArray(),
-            availableBuildings = WorldManager.world.neutralBuildings,
-        };
+        neutrals.Team = -1;
         return  neutrals;
     }
 
@@ -45,7 +38,7 @@ public class PlayerManager : GameComponent
 
         foreach (var cplayer in game.players)
         {
-            var player = new DataItemPlayer(cplayer);
+            var player = new DataItemPlayer(cplayer, PlayerDefines.playerColors[cplayer.id]);
             player.econ.GiveResources(game.startingPlayerResources);
             player.econ.GiveResources(cplayer.startingResources);
             tempPlayers.Add(player);

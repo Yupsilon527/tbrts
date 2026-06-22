@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Race", menuName = "Data/World/Race")]
 public class FactionSO : ScriptableBase
 {
-    public Sprite sigilTexture, bannerTexture;
+    public CharacterSO character;
     public ResourceCost[] startingResources = new ResourceCost[0];
     public ResourceIncome[] startingIncome = new ResourceIncome[0];
 

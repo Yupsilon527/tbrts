@@ -27,7 +27,6 @@ public class DataItemCastle : DataItemBuilding
         bonuses = new(this);
         SetPlayerOwner(custom.ownership);
     }
-
     public int GetSize()
     {
         return castleTiles.Count;

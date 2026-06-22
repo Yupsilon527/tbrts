@@ -32,10 +32,11 @@ public class DisplayItemCastle : DisplayItemObject<DataItemCastle>
     }
     public override void DrawAgain()
     {
+        var citySprite = assignedCastle.citySprite == null ? assignedCastle.GetPlayerOwner().faction.castleTexture : assignedCastle.citySprite;
         foreach (var sprite in objectSprites)
         {
             sprite.gameObject.SetActive(true);
-            sprite.sprite = assignedCastle.citySprite;
+            sprite.sprite = citySprite;
         }
     }
 }

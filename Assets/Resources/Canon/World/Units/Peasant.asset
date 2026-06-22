@@ -40,8 +40,15 @@ MonoBehaviour:
       BlockChance: 0
       ProcChance: 0
       bonusDamage: []
-    armySprites: []
+    armySprites:
+    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
+    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
+    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
+    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
+    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
+    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
     unitFlags: 00000000
     weapons: []
     spells: []
     abilities: []
+  character: {fileID: 11400000, guid: 850fd7226d5526e4ea37367751806fcf, type: 2}

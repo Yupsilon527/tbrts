@@ -21,7 +21,7 @@ MonoBehaviour:
     neutralUnits: []
     startingPlayerResources: []
     players:
-    - Name: 1
+    - Name: Player 1
       FactionName: 
       id: 1
       Team: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
     MapData: p0p0p0p0p0f0p0p0p0p0f0p0p0p0c0c0p0p0p0p0c0c0p0p0p0f0p0p0p0p0f0p0p0p0p0p0
     castles:
     - InternalName: 
-      ownership: 0
+      ownership: 1
       spawnPos: {x: 2, y: 2}
       customName: z
       customDescription: x
