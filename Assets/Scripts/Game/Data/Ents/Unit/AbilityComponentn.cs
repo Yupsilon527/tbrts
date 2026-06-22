@@ -42,7 +42,9 @@ public class AbilityComponentn : UnitComponent
     }
     public int GetAbilityLevel(UnitDefines.ArmyAbilities ability)
     {
-        return abilities[ability];
+        if (abilities.ContainsKey(ability))
+            return abilities[ability];
+        return 0;
     }
 }
 

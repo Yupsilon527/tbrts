@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 396432182078358884, guid: 7024ee576ad5966428a76c474b18a42b, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 396432182078358884, guid: 7024ee576ad5966428a76c474b18a42b, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1797648853
+      objectReference: {fileID: 0}
     - target: {fileID: 857420521757587146, guid: 7024ee576ad5966428a76c474b18a42b, type: 3}
       propertyPath: m_Name
       value: Display Banner
@@ -100,6 +108,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7402300388114749975}
     m_Modifications:
+    - target: {fileID: 396432182078358884, guid: 7024ee576ad5966428a76c474b18a42b, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 396432182078358884, guid: 7024ee576ad5966428a76c474b18a42b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 396432182078358884, guid: 7024ee576ad5966428a76c474b18a42b, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1797648853
+      objectReference: {fileID: 0}
     - target: {fileID: 857420521757587146, guid: 7024ee576ad5966428a76c474b18a42b, type: 3}
       propertyPath: m_Name
       value: Crest

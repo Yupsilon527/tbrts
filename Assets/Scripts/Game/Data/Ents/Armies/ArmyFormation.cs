@@ -32,19 +32,35 @@ public class ArmyFormation : ArmyComponent
     {
         return Formation[x + y * UnitDefines.iArmyCols];
     }
+    public void GiveUnitInPosition(int x, int y, UnitData unit)
+    {
+        SetTroopInPosition(x, y, new DataItemUnit(unit, parent));
+    }
+    public void GiveUnitInPosition(int p, UnitData unit)
+    {
+        SetTroopInPosition( p, new DataItemUnit(unit, parent));
+    }
     public void SetTroopInPosition(int x, int y, DataItemUnit unit)
+    {
+        if (x < 0 || y < 0)
+            SetTroopInPosition(-1, unit);
+        else
+            SetTroopInPosition(x + y * UnitDefines.iArmyCols, unit);
+    }
+    public void SetTroopInPosition(int p, DataItemUnit unit)
     {
         if (!CanIAccept(unit))
         {
             return;
         }
-        if (unit != null)
+        if (unit.troop != null)
         {
-            unit.troop.formation.RemoveTroop(unit);
+            unit.troop?.formation.RemoveTroop(unit);
         }
-        if (x < 0 || y < 0)
+        if (p<0)
             transport = unit;
-        else Formation[x + y * UnitDefines.iArmyCols] = unit;
+        else 
+            Formation[p] = unit;
         OnFormationUpdate();
     }
     public bool TransferUnit(DataItemUnit unit)
@@ -87,6 +103,7 @@ public class ArmyFormation : ArmyComponent
     void OnFormationUpdate()
     {
         parent.movement.UpdateMaxMovement();
+        parent.display?.OnGraphicsChange();
     }
     public Vector2Int GetPositionForUnit(DataItemUnit unit)
     {
@@ -140,7 +157,7 @@ public class ArmyFormation : ArmyComponent
         {
             return true;
         }
-        else if (transport == null || target.isTransport())
+        else if (transport == null && target.isTransport())
         {
             if (!TerrainDefines.CanIWalkOver(target.GetMovetype(), parent.tile.GetWalkElevation()))
             {

@@ -25,6 +25,7 @@ public class DataItemCastle : DataItemBuilding
         isCapital = custom.isCapital;
         ChangeTile(custom.spawnPos);
         bonuses = new(this);
+        SetPlayerOwner(custom.ownership);
     }
 
     public int GetSize()

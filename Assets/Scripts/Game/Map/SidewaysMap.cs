@@ -121,6 +121,12 @@ public class SidewaysMap : MonoBehaviour
         return new Vector2(gridPosition.x, height - gridPosition.y - 1 ) * TerrainDefines.UnitsPerTile;
     }
 
+    public  Vector3 TranslateEntityPosition(Vector2Int gridPosition)
+    {
+        Vector2 output = TranslateGridPosition(gridPosition) + new Vector2(1,-1) * .5f * TerrainDefines.UnitsPerTile; ;
+        return new Vector3(output.x, output.y, output.y);
+    }
+
     public Vector2 TranslateGridPosition(Vector2Int gridPosition)
     {
         return TranslateGridPosition(gridPosition,height);

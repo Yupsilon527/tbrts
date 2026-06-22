@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Peasant
   m_EditorClassIdentifier: 
   unit:
-    InternalName: 
+    InternalName: Peasant
     icon: {fileID: 0}
     flags: []
     costs: []
@@ -40,6 +40,7 @@ MonoBehaviour:
       BlockChance: 0
       ProcChance: 0
       bonusDamage: []
+    armySprites: []
     unitFlags: 00000000
     weapons: []
     spells: []

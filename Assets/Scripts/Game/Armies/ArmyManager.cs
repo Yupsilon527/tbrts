@@ -53,13 +53,36 @@ public class ArmyManager : EntityManager
         return Zim;
     }
 
-    public static void DrawTheArmiesFromEditorData(CustomArmy[] armies)
+    public void GenerateTheArmiesFromEditorData(CustomArmy[] armies)
     {
-
-
         foreach (var Zim in armies)
         {
             new DataItemArmy(Zim);
+        }
+    }
+    public void RegisterArmy(DataItemArmy army)
+    {
+        if (!armies.Contains(army))
+        armies.Remove(army);
+        if (army.display == null)
+        {
+            var armyPrefab = GameManager.main.displayPool.PoolItem(GameManager.main.displayPool.armyPrefab);
+            if (armyPrefab.TryGetComponent(out DisplayItemArmy dia))
+            {
+                dia.AssignObject(army);
+            }
+        }
+    }
+    public void ForgetArmy(DataItemArmy army)
+    {
+        if (army.dead)
+        {
+            army.Despawn();
+        }
+        armies.Remove(army);
+        if (army.display == null)
+        {
+            GameManager.main.displayPool.DeactivateObject(army.display.GetParentObject());
         }
     }
 

@@ -1,10 +1,12 @@
 using System;
 using System.Linq;
+using UnityEngine;
 
 [Serializable]
 public class UnitData : ProductionData
 {
     public UnitStatsTable unit;
+    public Sprite[] armySprites;
     public AttackDefines.MobFlag[] unitFlags;
     public WeaponData[] weapons;
     public SpellData[] spells;

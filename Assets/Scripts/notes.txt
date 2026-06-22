@@ -1,7 +1,7 @@
 TODO
+	load sprites
 
-	unit from data
-	armydisplay
+	camera
 
 	stats & scalemode
 

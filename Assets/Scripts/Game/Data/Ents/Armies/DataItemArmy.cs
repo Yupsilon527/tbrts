@@ -3,19 +3,40 @@ using UnityEngine;
 
 public class DataItemArmy : DataItemObject
 {
-    public DataItemArmy (Vector2Int pos, int playerOwner)
+    public DataItemArmy() : base()
     {
-        ChangeTile(pos);
-        SetPlayerOwner(playerOwner);
         formation = new(this);
         movement = new(this);
         status = new(this);
         orders = new(this);
     }
+    public DataItemArmy (Vector2Int pos, int playerOwner):this()
+    {
+
+        ChangeTile(pos);
+        SetPlayerOwner(playerOwner);
+        GameManager.main.armyManager.RegisterArmy(this);
+    }
 
     public DataItemArmy (CustomArmy army) : this (army.spawnPos, army.ownership)
     {
-
+        for (int i =0; i< army.formation.Length; i++)
+        {
+            var unit = WorldManager.main.LoadUnit(army.formation[i]);
+            if (unit != null)
+            {
+                formation.GiveUnitInPosition(i, unit);
+            }
+        }
+        if (!string.IsNullOrEmpty(army.transporter))
+        {
+            var unit = WorldManager.main.LoadUnit(army.transporter);
+            if (unit != null)
+            {
+                formation.GiveUnitInPosition(-1, unit);
+            }
+        }
+        display?.OnGraphicsChange();
     }
 
     public ArmyFormation formation;
@@ -64,7 +85,7 @@ public class DataItemArmy : DataItemObject
         }
         GetPlayerOwner().units.Add(this);
         orders.Clear();
-        display.OnPlayerOwnerChange();
+        display?.OnPlayerOwnerChange();
     }
 
     public void ApplyEffect(ApplyEffects effect) { }
@@ -233,21 +254,16 @@ public class DataItemArmy : DataItemObject
     #endregion
     public override void Despawn()
     {
-        base.Despawn();
-    }
-
-    public void DestroyMe()
-    {
-        
         if (!dead)
         {
             dead = true;
+            base.Despawn();
             UpdateAdjenctedLoS();
 
             tile.armyLayer = null;
             if (IsSelected()) Deselect();
 
-           //remove display
+            GameManager.main.armyManager.ForgetArmy(this);
         }
     }
 

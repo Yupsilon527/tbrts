@@ -2,6 +2,10 @@ using UnityEngine;
 
 public abstract class ProductionData 
 {
+    public override string ToString()
+    {
+        return InternalName + " UnitData";
+    }
     public string InternalName;
     public enum AvailableState
     {

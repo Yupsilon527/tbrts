@@ -5,12 +5,12 @@ public class DataItemObject : DataItem
 {
     public Vector2Int gridPos;
     public SidewaysTile tile;
-    public DisplayItemObject<DataItemObject> display;
+    public IDisplayItemObject<DataItemObject> display;
 
     private readonly HashSet<UnitGroup<DataItemObject>> _groups = new();
     public IReadOnlyCollection<UnitGroup<DataItemObject>> Groups => _groups;
     protected bool Selected = false;
-    protected bool dead = false;
+    public bool dead = false;
     protected DataItemPlayer currentOwner;
 
     public virtual void ChangeTile(Vector2Int t)
@@ -84,7 +84,7 @@ public class DataItemObject : DataItem
     public virtual void SetPlayerOwner(DataItemPlayer player)
     {
          currentOwner =  player;
-        display.OnPlayerOwnerChange();
+        display?.OnPlayerOwnerChange();
     }
 
     public void SetPlayerOwner(int player)

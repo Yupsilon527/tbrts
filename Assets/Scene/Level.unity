@@ -527,7 +527,7 @@ MonoBehaviour:
   inactiveObjs: {fileID: 1084442404}
   precacheData: []
   castlePrefab: {fileID: 1137592080461875685, guid: ac234438a63e32c40861aa3ce34be888, type: 3}
-  armyPrefab: {fileID: 0}
+  armyPrefab: {fileID: 1137592080461875685, guid: e92a3a92e8796074e9f46f080cf82445, type: 3}
   ruinPrefab: {fileID: 0}
   pupPrefab: {fileID: 0}
 --- !u!1 &1512420660

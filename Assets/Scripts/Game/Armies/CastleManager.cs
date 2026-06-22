@@ -1,5 +1,7 @@
 
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class CastleManager : EntityManager
@@ -46,7 +48,7 @@ public class CastleManager : EntityManager
                 var castlePrefab = GameManager.main.displayPool.PoolItem(GameManager.main.displayPool.castlePrefab);
                 if (castlePrefab.TryGetComponent(out DisplayItemCastle dic))
                 {
-                    dic.AssignObject(castle);
+                    dic.AssignObject(castle); 
                 }
             }
         }

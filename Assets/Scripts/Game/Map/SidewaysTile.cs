@@ -289,9 +289,9 @@ public class SidewaysTile
     {
         return SidewaysMap.main.TranslateGridPosition(gridPos);
     }
-    public Vector2 GetCenterPosition()
+    public Vector3 GetCenterPosition()
     {
-        return SidewaysMap.main.TranslateGridPosition(gridPos) + new Vector2(1,-1) * TerrainDefines.UnitsPerTile * .5f;
+        return SidewaysMap.main.TranslateEntityPosition(gridPos);
     }
     public bool IsNeighboring(SidewaysTile other)
     {

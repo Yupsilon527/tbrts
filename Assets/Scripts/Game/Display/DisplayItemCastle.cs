@@ -19,13 +19,15 @@ public class DisplayItemCastle : DisplayItemObject<DataItemCastle>
             {
                 if (tile.gridPos.x < topMostTile.gridPos.x && tile.gridPos.y < topMostTile.gridPos.y)
                     topMostTile = tile;
-                var prefab = GameManager.main.displayPool.PoolItem(SpritePrefab,transform);
+                var prefab = GameManager.main.displayPool.PoolItem(SpritePrefab);
+                prefab.transform.SetParent(transform);
                 prefab.transform.position = tile.GetCenterPosition();
                 objectSprites.Add(prefab.GetComponent<SpriteRenderer>());
             }
             if (banner!=null)
             banner.transform.position = topMostTile.GetCenterPosition();
         }
+        OnPlayerOwnerChange();
         DrawAgain();
     }
     public override void DrawAgain()
