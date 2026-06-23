@@ -34,6 +34,10 @@ public class ArmyMovementComponent : ArmyComponent
     {
         return (movementLeft > 0 && !parent.orders.IsIdle());
     }
+    public bool CanWalkOnTile(SidewaysTile tile)
+    {
+        return true;
+    }
 
     public bool ShouldIMove()
     {

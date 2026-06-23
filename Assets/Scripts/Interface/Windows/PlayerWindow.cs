@@ -1,5 +1,3 @@
-using System.Reflection;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerWindow : Window
@@ -13,6 +11,7 @@ public class PlayerWindow : Window
         {
             banner.gameObject.SetActive(true);
             banner.sprite = assignedPlayer.faction.bannerTexture;
+            banner.color = assignedPlayer.color;
         }
         foreach (var emblem in playerEmblems)
         {

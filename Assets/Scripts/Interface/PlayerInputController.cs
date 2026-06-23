@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerInputController : MonoBehaviour
 {
     public static PlayerInputController main;
+    float lastClick = 0;
     private void Awake()
     {
         main = this;
@@ -121,9 +122,6 @@ public class PlayerInputController : MonoBehaviour
                 else if (mouseOverTile.buildingLayer != null)
                 {
                     if (mouseOverTile.buildingLayer is DataItemCastle castle)
-                        if (mouseOverTile.buildingLayer.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned)
-                            InterfaceManager.main.commandMenu.OpenCastleCommands(castle);
-                        else
                             InterfaceManager.main.infoWindow.ShowCastleInfo(castle);
                 }
                 else
@@ -170,7 +168,8 @@ public class PlayerInputController : MonoBehaviour
     {
         if (mouseOverTile != null)
         {
-            InterfaceManager.main.commandMenu.OpenTileCommands(mouseOverTile);
+            InterfaceManager.main.commandMenu.OpenAtPosition(Input.mousePosition) ;
+            InterfaceManager.main.commandMenu.OpenTileDetails(mouseOverTile);
         }
     }
 

@@ -38,6 +38,10 @@ public class GameManager : Initializable
 
         armyManager.GenerateTheArmiesFromEditorData(gen.mapData.MapData.armies);
     }
+    public void EndTurn()
+    {
+
+    }
     private void OnValidate()
     {
         FindComponent(ref cb);

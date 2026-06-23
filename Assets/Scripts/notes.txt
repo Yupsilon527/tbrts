@@ -1,8 +1,5 @@
 TODO
 
-	camera
-
-	select army
 	move army
 	move coroutine
 
@@ -56,4 +53,4 @@ Units and orders
 	order indicator
 	waypoints
 
-hover over tiles
+TODO cast spells via command menu (on tile, on self)

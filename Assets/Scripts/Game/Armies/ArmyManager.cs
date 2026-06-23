@@ -108,6 +108,18 @@ public class ArmyManager : EntityManager
             mainSelectedArmy = null;
         }
     }
+    public void SelectNextIdleArmy()
+    {
+      
+    }
+    public void SelectClosestArmy()
+    {
+      
+    }
+    public void MoveAllArmies()
+    {
+      
+    }
 }
 
 public class EntityManager : GameComponent

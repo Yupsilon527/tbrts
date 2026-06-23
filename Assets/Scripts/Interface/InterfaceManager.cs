@@ -8,6 +8,8 @@ public class InterfaceManager : WindowManager
     public static InterfaceManager main;
 
     public InfoWindow infoWindow;
+    public CastleInfoWindow castleWindow;
+    public ArmyInfoWindow armyWindow;
 
     public CommandMenu commandMenu;
     protected override void Initialize()

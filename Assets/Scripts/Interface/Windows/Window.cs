@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Window : MonoBehaviour
+public class Window : Initializable
 {
     public bool unique = true;
     public bool IsOpen()

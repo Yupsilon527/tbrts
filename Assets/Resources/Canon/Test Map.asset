@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Test Map
   m_EditorClassIdentifier: 
   MapData:
-    customName: Test Castle
-    customDescription: Used for testing
+    customName: 
+    customDescription: 
     savedVersion: 
     assignedWorld: 
     NeutralName: 
@@ -51,8 +51,8 @@ MonoBehaviour:
     - InternalName: 
       ownership: 1
       spawnPos: {x: 2, y: 2}
-      customName: z
-      customDescription: x
+      customName: Test Castle
+      customDescription: Used for testing
       customSprite: c
       isCapital: 1
       producedArmies: []

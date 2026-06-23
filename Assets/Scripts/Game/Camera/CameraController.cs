@@ -1,3 +1,4 @@
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -94,6 +95,14 @@ public class CameraController : MonoBehaviour
     {
         MovePosition((Vector2)transform.position + direction * speed);
     }
+    public void CenterOnTile(Vector2Int title)
+    {
+        MovePosition(SidewaysMap.main.TranslateEntityPosition(title));
+    }
+    public void CenterOnGameObject(GameObject gob)
+    {
+        MovePosition(gob.transform.position);
+    }
     public void MovePosition(Vector2 center)
     {
         if (camera == null) return;
@@ -187,9 +196,12 @@ public class CameraController : MonoBehaviour
         }
         MoveDirection(speed * moveSpeed);
     }
-    public void Zoom(float delta)
+    public void Zoom(float delta, bool instant)
     {
-        ChangeScale(camera.orthographicSize + delta);
+        if (instant)
+            ChangeScale(camera.orthographicSize + delta);
+        else
+            desiredSize = delta;
     }
     void ChangeScale(float scale)
     {
