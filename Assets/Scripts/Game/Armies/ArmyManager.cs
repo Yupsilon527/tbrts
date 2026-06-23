@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
 
 public class ArmyManager : EntityManager
 {
@@ -86,6 +87,23 @@ public class ArmyManager : EntityManager
         }
     }
 
+    public void SelectArmy(DataItemArmy army)
+    {
+        ClearSelectedArmy();
+        if (army != null)
+        {
+            mainSelectedArmy = army;
+            army.SetSelected(true);
+        }
+    }
+    public void ClearSelectedArmy()
+    {
+        if (mainSelectedArmy != null)
+        {
+            mainSelectedArmy.SetSelected(false);
+            mainSelectedArmy = null;
+        }
+    }
 }
 
 public class EntityManager : GameComponent

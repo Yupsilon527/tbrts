@@ -158,7 +158,7 @@ public class DataItemArmy : DataItemObject
 
         if (AmISelected(false))
         {
-            other.Select() ;
+            GameManager.main.armyManager.SelectArmy(other) ;
         }
         other.movement.movementLeft = movement.movementLeft;
         other.display.OnGraphicsChange();
@@ -207,15 +207,6 @@ public class DataItemArmy : DataItemObject
         return true;
     }
     #region Selection
-    public override void Select()
-    {
-        if (GetAlignment( GameManager.main.playerManager.GetCurrentPlayer()) == PlayerDefines.Alignment.playerowned)
-        {
-            base.Select();
-            GameManager.main.armyManager.mainSelectedArmy = this;
-            display.OnSelectionChange();
-        }
-    }
 
     public bool AmISelected(bool Moving)
     {
@@ -262,7 +253,7 @@ public class DataItemArmy : DataItemObject
             UpdateAdjenctedLoS();
 
             tile.armyLayer = null;
-            if (IsSelected()) Deselect();
+            if (IsSelected()) GameManager.main.armyManager.ClearSelectedArmy();
 
             GameManager.main.armyManager.ForgetArmy(this);
         }

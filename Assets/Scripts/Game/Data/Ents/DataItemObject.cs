@@ -38,10 +38,10 @@ public class DataItemObject : DataItem
         //if (Selected)
           //  DungeonInterfaceController.main.unitInfo.Refresh();
     }
-    public virtual void Select()
+    public virtual void SetSelected( bool value)
     {
-        Selected = true;
-        OnSelectStateChange(true);
+        Selected = value;
+        OnSelectStateChange(value);
         //    foreach (MobComponent cmp in GetComponents<MobComponent>())
         {
             //        cmp.OnRegisterNewOwner(GetPlayerOwner(), newOwner);
@@ -50,16 +50,8 @@ public class DataItemObject : DataItem
         {
             //     sel.OnSelected();
         }
+        display?.OnSelectionChange();
         MessageGroups();
-    }
-    public void Deselect()
-    {
-        Selected = false;
-        OnSelectStateChange(true);
-    //    foreach (ISelectable sel in GetComponents<ISelectable>())
-        {
-     //       sel.OnDeselected();
-        }
     }
     public virtual void OnSelectStateChange(bool hard)
     {

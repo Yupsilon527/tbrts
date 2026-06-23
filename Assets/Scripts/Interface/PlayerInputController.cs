@@ -71,12 +71,14 @@ public class PlayerInputController : MonoBehaviour
             return;
         TrackMouseTile();
         HandlePlayerOrders();
+        if (Input.GetMouseButtonDown(0))
+            HandleMainInput();
     }
     void TrackMouseTile()
     {
-        var asd = SidewaysMap.TranslateWorldPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        asd.y = SidewaysMap.main.height - asd.y - 2;
-        ChangeMouseTile(SidewaysMap.main.GetTile(asd));
+        var mouseCoords = SidewaysMap.TranslateWorldPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        mouseCoords.y = SidewaysMap.main.height - mouseCoords.y - 2;
+        ChangeMouseTile(SidewaysMap.main.GetTile(mouseCoords));
     }
     void HandlePlayerOrders()
     {
@@ -103,6 +105,24 @@ public class PlayerInputController : MonoBehaviour
              ClearTileHighlights();
          }*/
     }
+    
+    void HandleMainInput()
+    {
+        if (mouseOverTile!=null && mouseOverTile.armyLayer!=null)
+        {
+            if (mouseOverTile.armyLayer.GetAlignment(GameManager.main.playerManager.GetCurrentPlayer()) == PlayerDefines.Alignment.playerowned)
+                GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
+        }
+        else
+        {
+            GameManager.main.armyManager.ClearSelectedArmy();
+        }
+    }
+    void HandleSideInput()
+    {
+
+    }
+    
     #region Highlight Entities
     DataItemArmy HighlightedEntity;
     void HighlightEntity(DataItemArmy ent)
