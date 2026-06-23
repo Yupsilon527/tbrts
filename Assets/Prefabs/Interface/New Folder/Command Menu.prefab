@@ -91,6 +91,7 @@ MonoBehaviour:
   playerBanners: []
   playerEmblems: []
   parent: {fileID: 2690415630706470814}
+  rectTransform: {fileID: 2690415630706470814}
   Names: []
   playerButtonPrefab: {fileID: 451287008045217616, guid: b42b0df5e1a927a439719b624449059b, type: 3}
   playerDividerPrefab: {fileID: 451287008045217616, guid: dd11cfbc86f24cf4883a7c89d6026e3e, type: 3}

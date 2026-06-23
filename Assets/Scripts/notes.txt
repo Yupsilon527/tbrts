@@ -3,6 +3,9 @@ TODO
 	move army
 	move coroutine
 
+	army window
+	castle window
+
 	(try with 2 armies)
 
 	move indicator

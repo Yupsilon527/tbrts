@@ -159,7 +159,7 @@ public class ArmyFormation : ArmyComponent
         }
         else if (transport == null && target.isTransport())
         {
-            if (!TerrainDefines.CanIWalkOver(target.GetMovetype(), parent.tile.GetWalkElevation()))
+            if (!parent.tile.IsPassible(target.GetMovetype()))
             {
                 return false;
             }

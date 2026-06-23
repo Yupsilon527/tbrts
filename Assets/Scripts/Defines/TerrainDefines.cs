@@ -51,7 +51,8 @@ public static class TerrainDefines
         Wheels = 6,
         Fly = 7,
         Ghost = 8,
-        Teleport = 9
+        Teleport = 9,
+        Total = 10
     };
 
     public static int GetSprite(bool[] Edges)

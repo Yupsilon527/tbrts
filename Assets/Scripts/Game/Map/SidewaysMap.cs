@@ -1,6 +1,8 @@
 ﻿using NUnit;
 using System.Collections.Generic;
+using UnityEditor.Search;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SidewaysMap : MonoBehaviour
 {
@@ -108,6 +110,49 @@ public class SidewaysMap : MonoBehaviour
             }
         }
         return found.ToArray();
+    }
+    public SidewaysTile GetClosestToPoint(SidewaysTile position, TerrainDefines.Movement movement, float maxDistance = Mathf.Infinity)
+    {
+        if (position.IsPassible(movement) && position.armyLayer == null)
+            return position;
+        return GetClosestToPoint(position.gridPos, movement, maxDistance) ;
+    }
+    public SidewaysTile GetClosestToPoint(Vector2Int point, TerrainDefines.Movement movement, float maxDistance = Mathf.Infinity)
+    {
+        List<SidewaysTile> openlist = new List<SidewaysTile>
+        {
+           GetTile(point)
+        };
+        HashSet<SidewaysTile> closedlist = new ();
+
+    loopstart:
+        while (openlist.Count > 0)
+        {
+            if (openlist[0] != null)
+            {
+                if (openlist[0].IsPassible(movement))
+                    return openlist[0];
+                
+                
+                    foreach (var neighbor in openlist[0].neighbors)
+                    {
+                        if (neighbor == null) continue;
+                        if (!closedlist.Contains (neighbor))
+                        {
+                            closedlist.Add(neighbor);
+
+                            float dist = (openlist[0].gridPos - point).sqrMagnitude;
+                            if (dist <= maxDistance) openlist.Add(neighbor);
+                        
+
+                    }
+                }
+            }
+            openlist.RemoveAt(0);
+            goto loopstart;
+        }
+
+        return null;
     }
 
 

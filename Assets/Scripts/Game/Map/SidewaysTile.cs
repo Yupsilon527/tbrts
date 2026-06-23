@@ -10,6 +10,27 @@ public class SidewaysTile
     public bool isRoad;
     public ElevationData terrain;
 
+    public bool[]passible;
+    public int[]movecost;
+    void InitPassible()
+    {
+        passible = new bool[(int)TerrainDefines.Movement.Total];
+        movecost = new int[(int)TerrainDefines.Movement.Total];
+
+        for (int i = 0; i < passible.Length; i++)
+        {
+            passible[i] = TerrainDefines.CanIWalkOver((TerrainDefines.Movement)i, terrain.elevation);
+            movecost[i] = TerrainDefines.GetMoveCost((TerrainDefines.Movement)i, terrain.elevation);
+        }
+    }
+    public int GetMoveCost(TerrainDefines.Movement m)
+    {
+        return movecost[(int)m];
+    }
+    public bool IsPassible(TerrainDefines.Movement m)
+    {
+        return passible[(int)m];
+    }
     public TerrainDefines.Elevation GetWalkElevation()
     {
         return terrain.elevation;
@@ -23,6 +44,14 @@ public class SidewaysTile
     {
         return "sTile " + gridPos + " " + terrain.ToString();
     }
+    public bool IsAdjecent(SidewaysTile other)
+    {
+        return IsAdjecent(other.gridPos);
+    }
+    public bool IsAdjecent(Vector2Int other)
+    {
+        return Mathf.Abs(gridPos.x - other.x) <= 1 && Mathf.Abs(gridPos.y - other.y) <= 1;
+    }
 
     #region Tile Creation
 
@@ -30,6 +59,7 @@ public class SidewaysTile
     {
         terrain = eC != null ? eC : new ElevationData();
         Variation = tV;
+        InitPassible();
     }
     public static SidewaysTile CreateTile(GameObject prefab, MapData mapData, Vector2Int pos, bool skipdraw)
     {

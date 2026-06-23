@@ -1,3 +1,4 @@
+using Astar;
 using System.Linq;
 using UnityEngine;
 
@@ -43,6 +44,7 @@ public class DataItemArmy : DataItemObject
     public ArmyMovementComponent movement;
     public ArmyStatusComponent status;
     public ArmyOrders orders;
+    public Pathfinder pathfinder;
     #region Move
     public override void ChangeTile(Vector2Int t)
     {

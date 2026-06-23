@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class CommandMenu : PlayerWindow
 {
     public Transform parent;
-    RectTransform rectTransform;
-    float rectHeight = 0;
+   public RectTransform rectTransform;
 
     public string[] Names;
     public PlayerMenuAction[] Actions;
@@ -21,7 +20,7 @@ public class CommandMenu : PlayerWindow
     protected override void Initialize()
     {
         base.Initialize();
-        rectTransform = GetComponent<RectTransform>();
+        FindComponent(ref rectTransform);
     }
     public void OpenAtPosition(Vector2 position)
     {
