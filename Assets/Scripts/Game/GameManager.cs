@@ -28,6 +28,7 @@ public class GameManager : Initializable
     void StartTheGame()
     {
         gen.GenerateMap();
+        cc.SetBounds(cb);
 
         playerManager.MakeThePlayersFromEditorData(gen.mapData.MapData);
 

@@ -1,19 +1,23 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CameraController : MonoBehaviour
 {
     public Camera camera;
     CameraBounds currentBounds;
 
+    public float cameraScreenBorders = .2f;
+    public float cameraScreenDragSpeed = .2f;
+    public float cameraScreenZoomSpeed = .2f;
+
     Vector2 cameraSize = Vector2.one;
     public float borderbounds = .2f;
     public float defaultCameraScale = 16;
     public float cameraBound = .2f;
+    float desiredSize = 3;
 
-    public float zoomBackDelay = 5f;
     public float zoomBackTime = 2f;
     public static CameraController main;
-    float nextZoomTime = 0;
 
     private void Awake()
     {
@@ -25,13 +29,36 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         RefitSize();
+        HandleCameraMovement();
+    }
+    public void HandleCameraMovement()
+    {
+        if (Input.mousePosition.x < cameraScreenBorders)
+        {
+            MoveDirection(Vector2.left, cameraScreenDragSpeed*Time.deltaTime);
+        }
+        if (Input.mousePosition.x > Screen.width - cameraScreenBorders)
+        {
+            MoveDirection(Vector2.right, cameraScreenDragSpeed * Time.deltaTime);
+        }
+        if (Input.mousePosition.y < cameraScreenBorders)
+        {
+            MoveDirection(Vector2.down, cameraScreenDragSpeed * Time.deltaTime);
+        }
+        if (Input.mousePosition.y > Screen.height - cameraScreenBorders)
+        {
+            MoveDirection(Vector2.up, cameraScreenDragSpeed * Time.deltaTime);
+        }
+        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        {
+            desiredSize = Mathf.Clamp(desiredSize - Input.GetAxis("Mouse ScrollWheel")  * cameraScreenZoomSpeed, defaultCameraScale, currentBounds.maxScale);
+        }
     }
     public void SetBounds(CameraBounds newbounds)
     {
         currentBounds = newbounds;
         camera.orthographicSize = currentBounds.maxScale;
         MovePosition(newbounds.transform.position);
-        nextZoomTime = Time.time + zoomBackTime;
     }
 
     public void JumptoMob(DataItemObject followChar)
@@ -63,9 +90,9 @@ public class CameraController : MonoBehaviour
 
         return dir;
     }
-    public void MoveDirection(Vector2 direction)
+    public void MoveDirection(Vector2 direction, float speed = 1)
     {
-        MovePosition((Vector2)transform.position + direction);
+        MovePosition((Vector2)transform.position + direction * speed);
     }
     public void MovePosition(Vector2 center)
     {
@@ -76,7 +103,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            if (cameraSize.x * 2 > currentBounds.rBounds.width)
+            if (cameraSize.x * 2 >= currentBounds.rBounds.width)
             {
                 center.x = currentBounds.rBounds.center.x;
             }
@@ -84,13 +111,13 @@ public class CameraController : MonoBehaviour
             {
                 center.x = Mathf.Clamp(center.x, currentBounds.rBounds.xMin + cameraSize.x * borderbounds, currentBounds.rBounds.xMax - cameraSize.x * borderbounds);
             }
-            if (cameraSize.y * 2 > currentBounds.rBounds.height)
+            if (cameraSize.y * 2 >= currentBounds.rBounds.height)
             {
                 center.y = currentBounds.rBounds.center.y;
             }
             else
             {
-                center.y = Mathf.Clamp(center.y, currentBounds.rBounds.yMin + cameraSize.y * borderbounds , currentBounds.rBounds.yMax - cameraSize.y * borderbounds);
+                center.y = Mathf.Clamp(center.y, currentBounds.rBounds.yMin + cameraSize.y * borderbounds, currentBounds.rBounds.yMax - cameraSize.y * borderbounds);
             }
         }
         transform.position = center;
@@ -164,24 +191,20 @@ public class CameraController : MonoBehaviour
     {
         ChangeScale(camera.orthographicSize + delta);
     }
-    void ChangeScale(float scale, bool zoomBack = true)
+    void ChangeScale(float scale)
     {
         if (currentBounds != null)
         {
             camera.orthographicSize = Mathf.Clamp(scale, defaultCameraScale, currentBounds.maxScale);
             Readjust();
             MoveDirection(Vector2.zero);
-            if (zoomBack)
-                nextZoomTime = Time.time + zoomBackDelay;
         }
     }
     void RefitSize()
     {
-        if (currentBounds != null
-            && camera.orthographicSize > defaultCameraScale
-            && nextZoomTime < Time.time)
+        if (camera.orthographicSize != desiredSize)
         {
-            camera.orthographicSize = Mathf.Max(defaultCameraScale, camera.orthographicSize - (currentBounds.maxScale - defaultCameraScale) / zoomBackTime * Time.deltaTime);
+            ChangeScale(camera.orthographicSize + (desiredSize - camera.orthographicSize) / zoomBackTime * Time.deltaTime);
             Readjust();
         }
     }
