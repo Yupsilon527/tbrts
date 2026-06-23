@@ -67,7 +67,7 @@ public class PropertySpell : PropertyAbility
 
     public override DataItemUnit[] GetMainTargets(CastTable table)
     {
-        if (SidewaysMap.main?.GetTile(table.targetPoint)?.locatedArmy is DataItemArmy targetArmy)
+        if (SidewaysMap.main?.GetTile(table.targetPoint)?.armyLayer is DataItemArmy targetArmy)
         {
             return targetArmy.formation.GetUnits();
         }
@@ -84,8 +84,8 @@ public class PropertySpell : PropertyAbility
                 var checkTiles = SidewaysMap.main.GetTilesInCircle(table.targetPoint, arange);
                 foreach (var tile in checkTiles)
                 {
-                    if (tile.locatedArmy != null)
-                        foreach (var army in tile.locatedArmy.formation.GetUnits())
+                    if (tile.armyLayer != null)
+                        foreach (var army in tile.armyLayer.formation.GetUnits())
                             targets.Add(army);
                 }
                 break;
@@ -93,8 +93,8 @@ public class PropertySpell : PropertyAbility
                 var checkRect = SidewaysMap.main.GetTilesInRect(new RectInt(table.targetPoint.x - arange, table.targetPoint.y - arange, table.targetPoint.x + arange, table.targetPoint.y + arange));
                 foreach (var tile in checkRect)
                 {
-                    if (tile.locatedArmy != null)
-                        foreach (var army in tile.locatedArmy.formation.GetUnits())
+                    if (tile.armyLayer != null)
+                        foreach (var army in tile.armyLayer.formation.GetUnits())
                             targets.Add(army);
                 }
                 break;

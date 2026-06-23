@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerInputController : MonoBehaviour
@@ -113,40 +111,53 @@ public class PlayerInputController : MonoBehaviour
     {
         if (mouseOverTile != null)
         {
-            if (GameManager.main.armyManager.mainSelectedArmy == null){
+            if (GameManager.main.armyManager.mainSelectedArmy == null)
+            {
                 if (mouseOverTile.armyLayer != null)
                 {
-                        if (mouseOverTile.armyLayer.GetAlignment(GameManager.main.playerManager.GetCurrentPlayer()) == PlayerDefines.Alignment.playerowned)
-                            GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
+                    if (mouseOverTile.armyLayer.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned)
+                        GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
                 }
                 else if (mouseOverTile.buildingLayer != null)
                 {
                     if (mouseOverTile.buildingLayer is DataItemCastle castle)
-                        if (mouseOverTile.buildingLayer.GetAlignment(GameManager.main.playerManager.GetCurrentPlayer()) == PlayerDefines.Alignment.playerowned)
+                        if (mouseOverTile.buildingLayer.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned)
                             InterfaceManager.main.commandMenu.OpenCastleCommands(castle);
                         else
                             InterfaceManager.main.infoWindow.ShowCastleInfo(castle);
                 }
-            } else {
-                if (mouseOverTile.armyLayer != null && mouseOverTile.armyLayer.IsVisibleToPlayer(GameManager.main.playerManager.GetCurrentPlayer()){ 
-                        if (mouseOverTile.armyLayer.GetAlignment(GameManager.main.playerManager.GetCurrentPlayer()) == PlayerDefines.Alignment.playerowned)
-                        GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
-                //  else issue attack order
-            }
-                else if (mouseOverTile.buildingLayer != null && mouseOverTile.buildingLayer is DataItemCastle castle)
+                else
                 {
-                    if (!castle.isRazed() 
-                        && castle.GetAlignment(GameManager.main.playerManager.GetCurrentPlayer()) == PlayerDefines.Alignment.playerowned)
-                        && castle.IsVisibleToPlayer(GameManager.main.playerManager.GetCurrentPlayer()))
-                            {
-                        if (GameManager.main.armyManager.mainSelectedArmy.tile == mouseOverTile)
-                            //invade castle
-                            // else order raze
-                    }
-                    else
+                    InterfaceManager.main.infoWindow.ShowTileInfo(mouseOverTile);
+                }
+            }
+            else
+            {
+                if (mouseOverTile.armyLayer != null && mouseOverTile.armyLayer.IsVisibleToPlayer(GameManager.main.playerManager.GetActivePlayer()))
+                {
+                    if (mouseOverTile.armyLayer.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned)
+                        GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
+                    //  else issue attack order
+                }
+                else if (mouseOverTile.buildingLayer != null)
+                {
+                    if (mouseOverTile.buildingLayer is DataItemCastle castle)
                     {
-                        //  else issue move order
+                        if (!castle.isRazed()
+                            && castle.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned
+                            && castle.IsVisibleToPlayer(GameManager.main.playerManager.GetActivePlayer()))
+                        {
+                            if (GameManager.main.armyManager.mainSelectedArmy.tile == mouseOverTile)
+                            {
+                                //invade castle
+                            }
+                            // else order raze
+                        }
                     }
+                }
+                else
+                {
+                    //  else issue move order
                 }
             }
         }
@@ -171,7 +182,7 @@ public class PlayerInputController : MonoBehaviour
             ClearHighlightEntity();
 
         HighlightedEntity = ent;
-        ent.tile.display.Highlight(ent.GetAlignment(GameManager.main.playerManager.GetCurrentPlayer()) == PlayerDefines.Alignment.ally ? DisplayItemTile.tileState.select_ally : DisplayItemTile.tileState.select_enemy);
+        ent.tile.display.Highlight(ent.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.ally ? DisplayItemTile.tileState.select_ally : DisplayItemTile.tileState.select_enemy);
     }
     void ClearHighlightEntity()
     {
@@ -181,7 +192,7 @@ public class PlayerInputController : MonoBehaviour
     #region Highlight Cities
     void HighlightCity(DataItemBuilding ent)
     {
-        ent.tile.display.Highlight(ent.GetAlignment(GameManager.main.playerManager.GetCurrentPlayer()) == PlayerDefines.Alignment.ally ? DisplayItemTile.tileState.mindread_ally : DisplayItemTile.tileState.mindread_danger);
+        ent.tile.display.Highlight(ent.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.ally ? DisplayItemTile.tileState.mindread_ally : DisplayItemTile.tileState.mindread_danger);
     }
     #endregion
     #region Tile Highlights

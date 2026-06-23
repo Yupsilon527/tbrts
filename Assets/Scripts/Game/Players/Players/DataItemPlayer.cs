@@ -18,8 +18,9 @@ public class DataItemPlayer
 
     public DataItemPlayer(CustomPlayer custom, Color color) : this(custom.id,custom.Team, color)
     {
+        Name = custom.Name;
         if (ID > 0 && (custom.FactionName == "" || custom.FactionName == "Random"))
-            faction = WorldManager.world.factions[ Mathf.FloorToInt(Random.value * WorldManager.world.factions.Length)];
+            faction = WorldManager.world.availableFactions[ Mathf.FloorToInt(Random.value * WorldManager.world.availableFactions.Length)];
         else
         faction = WorldManager.main.LoadFaction(custom.FactionName);
     }

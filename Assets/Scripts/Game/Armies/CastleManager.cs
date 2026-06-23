@@ -1,13 +1,16 @@
 
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using Unity.Burst.Intrinsics;
+using System.Linq;
 using UnityEngine;
 
 public class CastleManager : EntityManager
 {
     public List<DataItemBuilding> buildings = new();
 
+    public DataItemBuilding FindCastleByID(int ID)
+    {
+        return buildings.FirstOrDefault(a => a.eID == ID);
+    }
     public void redoCastleRegions()
     {
         foreach (var tData in GameManager.main.map.tiles)

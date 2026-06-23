@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Unity.Burst.Intrinsics;
+using System.Linq;
 
 public class ArmyManager : EntityManager
 {
@@ -18,6 +18,10 @@ public class ArmyManager : EntityManager
         return Panty;
     }*/
 
+    public DataItemArmy FindArmyByID(int ID)
+    {
+        return armies.FirstOrDefault(a => a.eID == ID) ;
+    }
     public static DataItemUnit SpawnUnit( string UnitName, DataItemPlayer Player, SidewaysTile tTile)
     {
         return SpawnUnit(WorldManager.main.LoadUnit(UnitName), Player, tTile);

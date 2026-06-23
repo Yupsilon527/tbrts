@@ -145,7 +145,7 @@ public class DataItemArmy : DataItemObject
     public bool Transfer(DataItemArmy other, bool Instant)
     {
 
-        if (!Instant && GameManager.main.playerManager.GetCurrentPlayer().IsAiControlled())
+        if (!Instant && GameManager.main.playerManager.GetActivePlayer().IsAiControlled())
         {
 //            game.game.InGameMenus.OpenWindow(new ArmyUINew(game.game, this, Defender));
             return false;
@@ -197,7 +197,7 @@ public class DataItemArmy : DataItemObject
     public bool InvadeCastle(DataItemCastle castle, bool Instant)
     {
 
-        if (!Instant && GameManager.main.playerManager.GetCurrentPlayer().IsAiControlled())
+        if (!Instant && GameManager.main.playerManager.GetActivePlayer().IsAiControlled())
         {
 
            // game.game.InGameMenus.OpenWindow(new CastleInvadeWindow(game.game, this, Defender));

@@ -41,10 +41,10 @@ public class DisplayItemTile : MonoBehaviour
             int tY = iY + iData[iNeighbor][1];
 
             var tile = SidewaysMap.main.mapData.GetTileAt(new Vector2Int(tX, tY));
-            if (tile != null && tile.elevation != null)
+            if (tile != null && tile.terrain != null)
             {
                 VariationData[iNeighbor] = tile.Variation;
-                NeighborData[iNeighbor] = tile.elevation;
+                NeighborData[iNeighbor] = tile.terrain;
             }
             else
             {

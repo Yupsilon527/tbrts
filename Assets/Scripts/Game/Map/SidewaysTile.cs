@@ -8,11 +8,11 @@ public class SidewaysTile
     public int Variation = -1;
     public int iEdgeData;
     public bool isRoad;
-    public ElevationData elevation;
+    public ElevationData terrain;
 
     public TerrainDefines.Elevation GetWalkElevation()
     {
-        return elevation.elevation;
+        return terrain.elevation;
     }
     //layers
     public DataItemArmy armyLayer;
@@ -21,21 +21,21 @@ public class SidewaysTile
 
     public override string ToString()
     {
-        return "sTile " + gridPos + " " + elevation.ToString();
+        return "sTile " + gridPos + " " + terrain.ToString();
     }
 
     #region Tile Creation
 
     public SidewaysTile(ElevationData eC = null, int tV = 0)
     {
-        elevation = eC != null ? eC : new ElevationData();
+        terrain = eC != null ? eC : new ElevationData();
         Variation = tV;
     }
     public static SidewaysTile CreateTile(GameObject prefab, MapData mapData, Vector2Int pos, bool skipdraw)
     {
         SidewaysTile tile = new SidewaysTile();
         tile.gridPos = pos;
-        tile.elevation = mapData.GetTileAt(pos).elevation;
+        tile.terrain = mapData.GetTileAt(pos).terrain;
         tile.RevealedByPlayer = new int[] { 0, 0 };
 
         if (!skipdraw)

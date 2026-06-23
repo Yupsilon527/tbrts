@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InternalName: Etheria
   AssignedWorld: Default
+  neutrals: {fileID: 11400000, guid: 07ff4a4fe017b8946bd3a0c866536e09, type: 2}
   factions:
   - {fileID: 11400000, guid: d888d1ae659db314188daca241b7ba0c, type: 2}
-  NeutralTroopsRecuitment: 0
-  neutralUnits: []
-  NeutralBuilding: 0
-  neutralBuildings: []
+  NeutralArmiesAreDefault: 0
+  NeutralBuildingsAreDefault: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DataFaction : BaseData
 {
-    public Sprite sigilTexture, bannerTexture, castleTexture;
+    public Sprite emblemTexture, bannerTexture, castleTexture;
     [Header("Startup")]
     public HashSet<ResourceCost> startingResources = new();
     public HashSet<ResourceIncome> startingIncome = new();
@@ -20,10 +20,11 @@ public class DataFaction : BaseData
     }
     public DataFaction(FactionSO faction)
     {
+        InternalName = faction.InternalName;
         if (faction.character != null)
         {
             bannerTexture = faction.character.GetSprite(0);
-            sigilTexture = faction.character.GetSprite(1);
+            emblemTexture = faction.character.GetSprite(1);
             castleTexture = faction.character.GetSprite(2);
         }
 
@@ -39,9 +40,9 @@ public class DataFaction : BaseData
     public List<UnitData> GetRecruitableArmies(bool neutral)
     {
         List<UnitData> ProductionArmies = new List<UnitData>();
-        if (neutral|| WorldManager.world.NeutralTroopsRecuitment)
+        if (neutral|| WorldManager.world.NeutralArmiesAreDefault)
         {
-            foreach (UnitData Panty in WorldManager.world.neutralUnits)
+            foreach (UnitData Panty in WorldManager.world.neutralFaction.producedUnits)
             {
                 ProductionArmies.Add(Panty);
             }
@@ -61,9 +62,9 @@ public class DataFaction : BaseData
     public List<BuildingData> GetAvailableUpgrades(bool neutral)
     {
         List<BuildingData> ProductionArmies = new List<BuildingData>();
-        if (neutral || WorldManager.world.NeutralBuilding)
+        if (neutral || WorldManager.world.NeutralBuildingsAreDefault)
         {
-            foreach (BuildingData Panty in WorldManager.world.neutralBuildings)
+            foreach (BuildingData Panty in WorldManager.world.neutralFaction.availableBuildings)
             {
                 ProductionArmies.Add(Panty);
             }

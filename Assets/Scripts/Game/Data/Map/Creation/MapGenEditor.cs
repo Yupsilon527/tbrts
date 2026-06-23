@@ -57,7 +57,7 @@ public class MapGenEditor : MapGen
             {
                 if (tile != null)
                 {
-                    tile.elevation = mapData.MapData.GetTileAt(tile.gridPos.x, tile.gridPos.y, biomeData).elevation.CharID;
+                    tile.elevation = mapData.MapData.GetTileAt(tile.gridPos.x, tile.gridPos.y, biomeData).terrain.CharID;
                     tile.variation = mapData.MapData.GetTileAt(tile.gridPos.x, tile.gridPos.y, biomeData).Variation;
                     EditorUtility.SetDirty(tile);
                 }

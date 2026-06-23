@@ -59,7 +59,7 @@ public abstract class MapGen : MonoBehaviour
         {
             for (int iX = 0; iX < generatedMap.tile_data.GetLength(1); iX++)
             {
-                generatedMap.tile_data[iY, iX] = new SidewaysTile(Tiles[iY][iX].elevation, Tiles[iY][iX].Variation);
+                generatedMap.tile_data[iY, iX] = new SidewaysTile(Tiles[iY][iX].terrain, Tiles[iY][iX].Variation);
             }
         }
         generatedMap.object_data = GenObj;

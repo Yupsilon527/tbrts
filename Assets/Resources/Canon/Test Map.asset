@@ -10,17 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de7083d2ed351214cbf70c89d847bcf6, type: 3}
-  m_Name: ScripMap
+  m_Name: Test Map
   m_EditorClassIdentifier: 
   MapData:
-    customName: 
-    customDescription: 
+    customName: Test Castle
+    customDescription: Used for testing
     savedVersion: 
     assignedWorld: 
     NeutralName: 
     neutralUnits: []
     startingPlayerResources: []
     players:
+    - Name: Neutrals
+      FactionName: 
+      id: 0
+      Team: 0
+      AiLevel: 0
+      startingResources: []
+      Used: 0
+      Enabled: 0
+      Ready: 0
+      Locked: 0
+      LockedRace: 0
+      LockedTeam: 0
     - Name: Player 1
       FactionName: 
       id: 1
