@@ -108,18 +108,5 @@ public class SidewaysTile
         return true;
     }
     #endregion
-    #region Entities
-    public DataItemArmy locatedArmy;
-
-    public void AddEntity(DataItemArmy mob)
-    {
-        locatedArmy = mob;
-    }
-    public void RemoveEntity(DataItemArmy mob)
-    {
-        if (mob == locatedArmy)
-            locatedArmy = null;
-    }
-    #endregion
 
 }

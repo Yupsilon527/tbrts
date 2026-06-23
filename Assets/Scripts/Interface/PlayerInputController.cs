@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerInputController : MonoBehaviour
@@ -43,7 +44,7 @@ public class PlayerInputController : MonoBehaviour
                 {
                     HighlightEntity(mouseOverTile.armyLayer);
                 }
-                else if (mouseOverTile.buildingLayer!= null)
+                else if (mouseOverTile.buildingLayer != null)
                 {
                     HighlightCity(mouseOverTile.buildingLayer);
                 }
@@ -73,6 +74,8 @@ public class PlayerInputController : MonoBehaviour
         HandlePlayerOrders();
         if (Input.GetMouseButtonDown(0))
             HandleMainInput();
+        if (Input.GetMouseButtonDown(1))
+            HandleSideInput();
     }
     void TrackMouseTile()
     {
@@ -105,13 +108,47 @@ public class PlayerInputController : MonoBehaviour
              ClearTileHighlights();
          }*/
     }
-    
+
     void HandleMainInput()
     {
-        if (mouseOverTile!=null && mouseOverTile.armyLayer!=null)
+        if (mouseOverTile != null)
         {
-            if (mouseOverTile.armyLayer.GetAlignment(GameManager.main.playerManager.GetCurrentPlayer()) == PlayerDefines.Alignment.playerowned)
-                GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
+            if (GameManager.main.armyManager.mainSelectedArmy == null){
+                if (mouseOverTile.armyLayer != null)
+                {
+                        if (mouseOverTile.armyLayer.GetAlignment(GameManager.main.playerManager.GetCurrentPlayer()) == PlayerDefines.Alignment.playerowned)
+                            GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
+                }
+                else if (mouseOverTile.buildingLayer != null)
+                {
+                    if (mouseOverTile.buildingLayer is DataItemCastle castle)
+                        if (mouseOverTile.buildingLayer.GetAlignment(GameManager.main.playerManager.GetCurrentPlayer()) == PlayerDefines.Alignment.playerowned)
+                            InterfaceManager.main.commandMenu.OpenCastleCommands(castle);
+                        else
+                            InterfaceManager.main.infoWindow.ShowCastleInfo(castle);
+                }
+            } else {
+                if (mouseOverTile.armyLayer != null && mouseOverTile.armyLayer.IsVisibleToPlayer(GameManager.main.playerManager.GetCurrentPlayer()){ 
+                        if (mouseOverTile.armyLayer.GetAlignment(GameManager.main.playerManager.GetCurrentPlayer()) == PlayerDefines.Alignment.playerowned)
+                        GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
+                //  else issue attack order
+            }
+                else if (mouseOverTile.buildingLayer != null && mouseOverTile.buildingLayer is DataItemCastle castle)
+                {
+                    if (!castle.isRazed() 
+                        && castle.GetAlignment(GameManager.main.playerManager.GetCurrentPlayer()) == PlayerDefines.Alignment.playerowned)
+                        && castle.IsVisibleToPlayer(GameManager.main.playerManager.GetCurrentPlayer()))
+                            {
+                        if (GameManager.main.armyManager.mainSelectedArmy.tile == mouseOverTile)
+                            //invade castle
+                            // else order raze
+                    }
+                    else
+                    {
+                        //  else issue move order
+                    }
+                }
+            }
         }
         else
         {
@@ -120,9 +157,12 @@ public class PlayerInputController : MonoBehaviour
     }
     void HandleSideInput()
     {
-
+        if (mouseOverTile != null)
+        {
+            InterfaceManager.main.commandMenu.OpenTileCommands(mouseOverTile);
+        }
     }
-    
+
     #region Highlight Entities
     DataItemArmy HighlightedEntity;
     void HighlightEntity(DataItemArmy ent)

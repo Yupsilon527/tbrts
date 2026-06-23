@@ -2,11 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using VikingParty;
 
 public class InterfaceManager : WindowManager
 {
     public static InterfaceManager main;
+
+    public InfoWindow infoWindow;
+
+    public CommandMenu commandMenu;
     protected override void Initialize()
     {
         base.Initialize();
