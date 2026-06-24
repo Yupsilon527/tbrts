@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class DataItemArmy : DataItemObject
 {
+
+    public ArmyFormation formation;
+    public ArmyMovementComponent movement;
+    public ArmyStatusComponent status;
+    public OrderComponent orders;
+    public Pathfinder pathfinder;
     public DataItemArmy() : base()
     {
         formation = new(this);
@@ -13,8 +19,7 @@ public class DataItemArmy : DataItemObject
     }
     public DataItemArmy (Vector2Int pos, int playerOwner):this()
     {
-
-        ChangeTile(pos);
+        ChangeTile(pos, DisplayPositionChange.instant);
         SetPlayerOwner(playerOwner);
         GameManager.main.armyManager.RegisterArmy(this);
     }
@@ -39,30 +44,93 @@ public class DataItemArmy : DataItemObject
         }
         display?.OnGraphicsChange();
     }
-
-    public ArmyFormation formation;
-    public ArmyMovementComponent movement;
-    public ArmyStatusComponent status;
-    public ArmyOrders orders;
-    public Pathfinder pathfinder;
     #region Move
-    public override void ChangeTile(Vector2Int t)
+    public virtual bool ChangeTile(Vector2Int t, int cost, DisplayPositionChange m)
     {
+        if (movement.CanPayMovement(cost))
+        {
+            movement.PayMovement(cost);
+            ChangeTile(t,m);
+            return true;
+        }
+        return false;
+    }
+    public override void ChangeTile(Vector2Int t, DisplayPositionChange m)
+    {
+        Vector2Int oldtile = t;
         if (tile != null)
         {
             tile.armyLayer = null;
+            oldtile = tile.gridPos;
         }
         tile = SidewaysMap.main.GetTile(t);
         gridPos = t;
         tile.armyLayer = this;
+        UpdateLoSAroundTile(gridPos);
+        UpdateLoSAroundTile(oldtile);
+        display?.OnPositionChange(t, DisplayPositionChange.move);
     }
-    public bool MoveToTile(Vector2Int t)
+    public bool MoveToTile(Vector2Int t, bool attack)
     {
         var ntile = SidewaysMap.main.GetTile(t);
-        if (ntile!=null && ntile.armyLayer == null)
+        var m = movement.GetMyMovement();
+        int totalMove = ntile.GetMoveCost(m);
+        if (ntile!=null)
         {
-            ChangeTile(t);
-            return true;
+            if (ntile.armyLayer != null)
+            {
+                if (ntile.armyLayer.GetAlignment(this) == PlayerDefines.Alignment.enemy)
+                {
+                    if (attack)
+                        BattleAnother(ntile.armyLayer);
+                }
+               else
+                {
+                    var currentOrder = orders.GetCurrentOrder();
+
+                    if (currentOrder.gridDest == t)
+                    {
+                        if (!Transfer(ntile.armyLayer,false))
+                        {
+                            InterfaceManager.main.armyWindow.Open();
+                            return false; 
+                        }
+                    }
+                    else
+                    {
+                        if (currentOrder.path.Remaining()>1)
+                        {
+                            var firstTile = currentOrder.path.Following(1);
+                            var secondTile = currentOrder.path.Following(2);
+                            if (movement.CanWalkOnTile(firstTile) && movement.CanWalkOnTile(secondTile))
+                            {
+                                 totalMove = firstTile.GetMoveCost(m) + secondTile.GetMoveCost(m);
+                                return ChangeTile(t, totalMove, DisplayPositionChange.move);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (ntile.buildingLayer != null)
+            {
+                if (ntile.buildingLayer.GetAlignment(this) == PlayerDefines.Alignment.enemy && ntile.buildingLayer is DataItemCastle enemyCastle && attack)
+                {
+                    enemyCastle.BattleTroop(this, ntile);
+                    return false;
+                }
+
+                /*if (getMyTile().RuinData != null)
+                {
+                    getMyTile().RuinData.RevealedByPlayer[GetOwner().ID] = true;
+                    game.Events.Add(Reporter.EventReport.ReportGameRuinDiscover(game, getMyTile().RuinData, GetOwner()));
+                }
+
+                if (getMyTile().PowerUp != null)
+                {
+                    getMyTile().PowerUp.Apply(this);
+                }*/
+            }
+            return ChangeTile(t, totalMove, DisplayPositionChange.move);
         }
         return false;
     }
@@ -117,7 +185,7 @@ public class DataItemArmy : DataItemObject
     }
     #endregion
     #region Merging
-    public bool CanMerge(bool forced)
+    public bool CanBeMerged(bool forced)
     {
         if (!forced && movement.movementLeft > 0)
         {
@@ -135,7 +203,7 @@ public class DataItemArmy : DataItemObject
     }
     public bool CanWeMerge(DataItemArmy other)
     {
-        if (CanMerge(false) && other.CanMerge(false))
+        if (CanBeMerged(false) && other.CanBeMerged(false))
         {
             return (other.GetAlignment(this) == PlayerDefines.Alignment.playerowned && other.formation.CanIAccept(formation.GetCommandValue()));
         }
@@ -177,12 +245,20 @@ public class DataItemArmy : DataItemObject
     {
                 return Mathf.Min(UnitDefines.iArmyBaseLoS + formation.GetAbilitiyMax("spies"), GetLineOfSight());
     }
-    void UpdateAdjenctedLoS()
+    public override bool IsVisibleToPlayer(DataItemPlayer player)
+    {
+        if (GetAlignment(player) == PlayerDefines.Alignment.enemy)
+        {
+                return tile.IsRevealedByPlayer(player, status.IsCloaked() ? UnitDefines.TileVisibility.truesight : UnitDefines.TileVisibility.visible);
+        }
+        return base.IsVisibleToPlayer(player);
+    }
+    public void UpdateLoSAroundTile(Vector2Int tile)
     {
 
     }
     #endregion
-    public bool TryBattle(DataItemArmy other, bool canFlee)
+    public bool BattleAnother(DataItemArmy other, bool canFlee = true)
     {
         if (other.IsAlive() && tile.IsNeighboring(other.tile) && GetAlignment(other) == PlayerDefines.Alignment.enemy)
         {
@@ -238,7 +314,7 @@ public class DataItemArmy : DataItemObject
 
     public int GetMyBribeCost()
     {
-        if (!CanMerge(false) || isMercenary() || GetPlayerOwner().isNeutral() )
+        if (!CanBeMerged(false) || isMercenary() || GetPlayerOwner().isNeutral() )
         {
             return -1;
         }
@@ -252,7 +328,7 @@ public class DataItemArmy : DataItemObject
         {
             dead = true;
             base.Despawn();
-            UpdateAdjenctedLoS();
+            UpdateLoSAroundTile(gridPos);
 
             tile.armyLayer = null;
             if (IsSelected()) GameManager.main.armyManager.ClearSelectedArmy();
@@ -260,5 +336,4 @@ public class DataItemArmy : DataItemObject
             GameManager.main.armyManager.ForgetArmy(this);
         }
     }
-
 }

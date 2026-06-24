@@ -13,10 +13,11 @@ public class DataItemObject : DataItem
     public bool dead = false;
     protected DataItemPlayer currentOwner;
 
-    public virtual void ChangeTile(Vector2Int t)
+    public virtual void ChangeTile(Vector2Int t, DisplayPositionChange position)
     {
         gridPos = t;
         tile = GameManager.main.map.GetTile(gridPos);
+        display?.OnPositionChange(t, position);
     }
 
     #region Unit Groups

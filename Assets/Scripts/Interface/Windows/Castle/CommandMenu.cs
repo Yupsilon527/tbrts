@@ -93,7 +93,7 @@ public class CommandMenu : PlayerWindow
                 a.Add(() => { InterfaceManager.main.infoWindow.ShowCastleInfo(castle); });
             }
         }
-        if (tile.IsRevealedByPlayer(player))
+        if (tile.IsRevealedByPlayer(player, UnitDefines.TileVisibility.visible))
         {
             e.Add("Tile Info");
             a.Add(() => { InterfaceManager.main.infoWindow.ShowTileInfo(tile); });

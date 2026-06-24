@@ -34,26 +34,74 @@ public class ArmyMovementComponent : ArmyComponent
     {
         return (movementLeft > 0 && !parent.orders.IsIdle());
     }
+    public bool CanPayMovement(int movement)
+    {
+        return movementLeft > movement;
+    }
+
+    public void PayMovement(int value)
+    {
+        if (value > 0)
+            movementLeft -= value;
+        else
+            movementLeft = 0;
+    }
     public bool CanWalkOnTile(SidewaysTile tile)
     {
-        return true;
+        if (tile != null)
+            return tile.IsPassible(GetMyMovement());
+        return false;
     }
 
     public bool ShouldIMove()
     {
         return (movementLeft > 0 && !parent.orders.IsIdle() && !parent.orders.IsResting());
     }
-
-    public void Exhaust(int value)
-    {
-        movementLeft = 0;
-    }
     public void Teleport(Vector2Int Location)
     {
-        parent.MoveToTile(Location);
+        parent.MoveToTile(Location, false);
     }
     public void UpdateMaxMovement()
     {
+    }
+    public override void OnTurnBegin()
+    {
+        movementLeft = 0;
+        UpdateStartingMovement();
+    }
+    public void UpdateStartingMovement()
+    {
+        movementStarting = movementLeft;
+        initialPosition = parent.gridPos;
+    }
+    public void ResolveMovement()
+    {
+        if (CanIMove())
+        {
+             movedThisTurn = true;
+            parent.orders.RecalculateEntirePath();
 
+            while (ShouldIMove())
+            {
+                var firstOrder = parent.orders.GetCurrentOrder();
+                if (firstOrder.HasResolvedOrder(parent))
+                {
+                    if (firstOrder.Resolve(parent))
+                    {
+                        parent.orders.AdvanceOrder();
+                        return;
+                    }
+                    else
+                    {
+                        parent.orders.AdvanceOrder();
+                    }
+                }
+                else
+                {
+                    var next = firstOrder.path.Next();
+                    parent.MoveToTile(next.gridPos, false);
+                }
+            }
+        }
     }
 }

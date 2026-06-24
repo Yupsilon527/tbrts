@@ -133,9 +133,9 @@ public class SidewaysTile
     public float sqrDistance;
     public int[] RevealedByPlayer;
 
-    public bool IsRevealedByPlayer(DataItemPlayer player)
+    public bool IsRevealedByPlayer(DataItemPlayer player, UnitDefines.TileVisibility visibility)
     {
-        return true;
+        return RevealedByPlayer[player.ID] >= (int)visibility;
     }
     #endregion
 

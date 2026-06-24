@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 namespace Astar
 {
@@ -59,7 +60,8 @@ namespace Astar
             }
         }
 
-        public SidewaysTile Current() => walkpath.Count > 0 ? walkpath[position] : null;
+        public SidewaysTile Current() => Following(0);
+        public SidewaysTile Following(int index) => walkpath.Count > 0 ? walkpath[Mathf.Clamp(index,0, walkpath.Count-1)] : null;
         public SidewaysTile Last() => walkpath.Count > 0 ? walkpath[walkpath.Count - 1] : null;
 
         public SidewaysTile Next()
@@ -68,8 +70,9 @@ namespace Astar
             if (Solved()) return null;
             return walkpath[position];
         }
-
-        public bool Solved() => position >= walkpath.Count - 1;
+        public int Remaining() =>  walkpath.Count - 1 - position;
+        
+        public bool Solved() => Remaining()==0;
         public void Reset() { position = 0; failure = Failure.incomplete; }
 
         public SidewaysTile GetIndex(int i) => walkpath[i];
@@ -161,6 +164,7 @@ namespace Astar
 
         void RedoGrid()
         {
+            var g = SidewaysMap.main;
             int w = g.width, h = g.height;
             Nodes = new Node[w, h];
             for (int i = 0; i < w; i++)

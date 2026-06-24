@@ -30,7 +30,7 @@ public class InfoWindow : PlayerWindow
         Open();
 
 
-        if (tile.IsRevealedByPlayer(GameManager.main.playerManager.GetActivePlayer()))
+        if (tile.IsRevealedByPlayer(GameManager.main.playerManager.GetActivePlayer(), UnitDefines.TileVisibility.foggy))
         {
             title.text = tile.terrain.elevation.ToString();
             if (tile.regionCastle is DataItemCastle castle)

@@ -65,7 +65,7 @@ public class ArmyFormation : ArmyComponent
     }
     public bool TransferUnit(DataItemUnit unit)
     {
-        if (CanIAccept(unit.GetCommandValue()) && parent.CanMerge(true))
+        if (CanIAccept(unit.GetCommandValue()) && parent.CanBeMerged(true))
         {
             if (unit.troop != null)
                 {
@@ -276,7 +276,7 @@ public class ArmyFormation : ArmyComponent
         else if (aTroop != bTroop)
         {
 
-            if (!aTroop.CanMerge(false) || !bTroop.CanMerge(false))
+            if (!aTroop.CanBeMerged(false) || !bTroop.CanBeMerged(false))
             {
                 Debug.Log("No open army");
                 return;

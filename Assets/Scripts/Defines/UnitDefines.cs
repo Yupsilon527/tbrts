@@ -11,7 +11,13 @@ public static class UnitDefines
     public static int iArmyBaseLoS = 4;
     public static float fBribeMultiplier = 2;
     public static float fSalaryMultiplier = 2;
-
+	public enum TileVisibility
+	{
+		hidden,
+		foggy,
+		visible,
+		truesight,
+	}
     public enum ArmyAbilities
     {
         mercenary,

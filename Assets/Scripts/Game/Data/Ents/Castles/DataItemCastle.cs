@@ -401,7 +401,7 @@ public class DataItemCastle : DataItemBuilding
     #region LoS
     public override bool IsVisibleToPlayer(DataItemPlayer player)
     {
-        return castleTiles.Any(t => t.IsRevealedByPlayer(player));
+        return castleTiles.Any(t => t.IsRevealedByPlayer(player,UnitDefines.TileVisibility.visible));
     }
 
     #endregion

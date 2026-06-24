@@ -1,6 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+public enum DisplayPositionChange
+{
+    instant,
+    teleport,
+    move
+}
 
 public class DisplayItemObject<tDataItem> : Initializable ,  IDisplayItemObject<tDataItem>  where tDataItem : DataItemObject
 {
@@ -14,12 +20,6 @@ public class DisplayItemObject<tDataItem> : Initializable ,  IDisplayItemObject<
     Vector3 direction;
     float realSpeed, approachDist;
     List<Vector3> destinations = new();
-    public enum DisplayPositionChange
-    {
-        instant,
-        teleport,
-        move
-    }
     public virtual void AssignObject(tDataItem ob)
     {
         assignedObject = ob;
@@ -145,5 +145,6 @@ public interface IDisplayItemObject<out T> where T : DataItem
     public abstract void DrawAgain();
     public abstract void OnPlayerOwnerChange();
     public abstract void OnSelectionChange();
+    public abstract void OnPositionChange(Vector2Int gridPos, DisplayPositionChange change);
     public abstract void OnGraphicsChange();
 }
