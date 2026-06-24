@@ -3,9 +3,14 @@ using UnityEngine;
 
 public class PlayerManager : GameComponent
 {
-    public int playerTurn = 0;
+    public int playerTurn = 1;
     public DataItemPlayer[] players;
 
+    protected override void Initialize()
+    {
+        base.Initialize();
+        playerTurn = 1;
+    }
     public DataItemPlayer GetActivePlayer()
     {
         return players[playerTurn];
@@ -45,6 +50,7 @@ public class PlayerManager : GameComponent
             tempPlayers.Add(player);
         }
 
+        tempPlayers.Sort((a, b) => a.ID.CompareTo(b.ID));
         players = tempPlayers.ToArray();
     }
 

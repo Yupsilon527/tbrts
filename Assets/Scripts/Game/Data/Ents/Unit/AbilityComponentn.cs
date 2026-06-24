@@ -46,6 +46,10 @@ public class AbilityComponentn : UnitComponent
             return abilities[ability];
         return 0;
     }
+    public int GetAbilityCombined(UnitDefines.ArmyAbilities ability)
+    {
+        return GetAbilityLevel(ability) + parent.troop?.GetAuraBonuses(ability) ?? 0;
+    }
 }
 
 [Serializable]

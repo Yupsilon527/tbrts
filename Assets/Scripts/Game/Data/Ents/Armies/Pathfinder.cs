@@ -146,7 +146,7 @@ namespace Astar
         void Inspect(string msg) { if (inspect) Debug.Log($"[Inspect {mob.ToString()}] {msg}"); }
 
         int ApproachRange, MaxRange;
-        TerrainDefines.Movement movement;
+        public TerrainDefines.Movement movement;
 
         public Vector2Int vOrigin { get; private set; }
         public Vector2Int vDest { get; private set; }
@@ -220,7 +220,6 @@ namespace Astar
                 {
                     Node nb = neighbors[i];
                     if (nb == null || !TerrainDefines.CanIWalkOver(movement, nb.elevation)) continue;
-                    // FIX A: use visited flag to track settled nodes, not index comparison
                     if (nb.visited) continue;
 
                     float dx = vDest.x - nb.node.gridPos.x;
@@ -244,6 +243,7 @@ namespace Astar
         public Pathfinder(DataItemArmy a)
         {
             mob = a;
+            movement = a.movement.GetMyMovement();
             RedoGrid();
         }
 
@@ -271,7 +271,6 @@ namespace Astar
             ApproachRange = approach;
             MaxRange = maxrange;
 
-            // FIX B: already-at-destination is a success, not a warning+null
             if (vDest.Equals(vOrigin))
                 return ResolvePath(new List<Node>(), includeOrigin, Failure.success);
 
@@ -279,7 +278,6 @@ namespace Astar
             if (currentCell == null || !TerrainDefines.CanIWalkOver(movement, currentCell.elevation))
                 return ResolvePath(new List<Node> { currentCell }, includeOrigin, Failure.impassible_origin);
 
-            // FIX C: correct null-conditional precedence for impassable target check
             Node destNode = GetNodeAt(vDest);
             if (destNode == null || !TerrainDefines.CanIWalkOver(movement, destNode.elevation))
             {

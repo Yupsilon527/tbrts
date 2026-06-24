@@ -8,6 +8,10 @@ public static class UnitDefines
     public static int iArmyCols = 3;
     public static int iMaxTroopStack = iArmyRows * iArmyCols;
 
+    public static int MoveBase = 10;
+    public static int MoveAddition = 10;
+    public static int MoveSubstraction = 10;
+
     public static int iArmyBaseLoS = 4;
     public static float fBribeMultiplier = 2;
     public static float fSalaryMultiplier = 2;
@@ -25,6 +29,9 @@ public static class UnitDefines
         spies,
         transport,
         command,
+		regen,
+		haste,
+		slow,
 
         seaworthy,
         swim,

@@ -15,7 +15,7 @@ public class UnitStatsTable
     public float Attack = 5;
     public float Action = 1;
     //magic
-    public float Magic = 5;
+    public float Magic = 0;
     public float Mana = 1;
 
     //healthbars

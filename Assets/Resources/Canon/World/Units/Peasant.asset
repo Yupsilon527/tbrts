@@ -50,5 +50,7 @@ MonoBehaviour:
     unitFlags: 00000000
     weapons: []
     spells: []
-    abilities: []
+    abilities:
+    - abilityID: foot
+      abilityLevel: 1
   character: {fileID: 11400000, guid: 850fd7226d5526e4ea37367751806fcf, type: 2}

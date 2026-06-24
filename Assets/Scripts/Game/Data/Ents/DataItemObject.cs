@@ -91,7 +91,7 @@ public class DataItemObject : DataItem
     }
     #endregion
 
-    public virtual void OnTurnEnd()
+    public virtual void OnTurnBegin()
     {
 
     }

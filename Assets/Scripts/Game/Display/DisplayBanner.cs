@@ -9,11 +9,16 @@ public class DisplayBanner : MonoBehaviour
     }
     public void ChangePlayer(DataItemPlayer player)
     {
-        if (player.faction != null)
+        if (player != null)
         {
-            banner.sprite = player.faction.bannerTexture;
-            crest.sprite = player.faction.emblemTexture;
+            {
+                if (player.faction != null)
+                {
+                    banner.sprite = player.faction.bannerTexture;
+                    crest.sprite = player.faction.emblemTexture;
+                }
+                ChangeColor(player.color);
+            }
         }
-        ChangeColor(player.color);
     }
-}
+    }

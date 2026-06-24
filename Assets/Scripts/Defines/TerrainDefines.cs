@@ -335,22 +335,22 @@ public static class TerrainDefines
                 return false;
             case Movement.Ground:
 
-                return  elevation < Elevation.Wall &&
-                elevation >= Elevation.Sea;
+                return elevation == Elevation.City ||  elevation < Elevation.Wall &&
+                elevation > Elevation.DeepSea;
             case Movement.Wheels:
 
-                return elevation > Elevation.DeepSea &&
+                return elevation == Elevation.City || elevation > Elevation.DeepSea &&
                 elevation < Elevation.Mountain;
 
             case Movement.GroundGiant:
 
-                return elevation > Elevation.DeepSea &&
+                return elevation == Elevation.City || elevation > Elevation.DeepSea &&
                     elevation < Elevation.Wall;
 
             case Movement.Swimmer:
             case Movement.Amphibian:
 
-                return elevation > Elevation.Void &&
+                return elevation == Elevation.City || elevation > Elevation.Void &&
                     elevation < Elevation.Mountain;
 
             case Movement.Fly:

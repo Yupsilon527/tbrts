@@ -1,3 +1,4 @@
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class GameManager : Initializable
@@ -37,10 +38,20 @@ public class GameManager : Initializable
         castleManager.redoCastleRegions();
 
         armyManager.GenerateTheArmiesFromEditorData(gen.mapData.MapData.armies);
+        BeginNewTurn();
     }
     public void EndTurn()
     {
 
+    }
+    public void BeginNewTurn()
+    {
+        foreach (var player in playerManager.players)
+            player.OnTurnBegin();
+        foreach (var castle in castleManager.buildings)
+            castle.OnTurnBegin();
+        foreach (var army in armyManager.armies)
+            army.OnTurnBegin();
     }
     private void OnValidate()
     {

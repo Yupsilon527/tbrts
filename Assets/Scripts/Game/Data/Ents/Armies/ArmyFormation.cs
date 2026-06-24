@@ -20,6 +20,12 @@ public class ArmyFormation : ArmyComponent
         units.RemoveAll(u => u == null);
         return units.ToArray();
     }
+    public override void OnTurnBegin()
+    {
+        base.OnTurnBegin();
+        foreach (var unit in GetUnits())
+            unit.FireEventOnSelf(AbilityDefines.Event.OnTurnBegin);
+    }
     public int CountLivingTroops()
     {
         return Formation.Sum(u => u != null && u.damageable.IsAlive() ? 1 : 0);
@@ -61,6 +67,7 @@ public class ArmyFormation : ArmyComponent
             transport = unit;
         else 
             Formation[p] = unit;
+        unit.troop = parent;
         OnFormationUpdate();
     }
     public bool TransferUnit(DataItemUnit unit)

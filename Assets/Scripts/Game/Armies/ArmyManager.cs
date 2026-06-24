@@ -68,7 +68,7 @@ public class ArmyManager : EntityManager
     public void RegisterArmy(DataItemArmy army)
     {
         if (!armies.Contains(army))
-        armies.Remove(army);
+        armies.Add(army);
         if (army.display == null)
         {
             var armyPrefab = GameManager.main.displayPool.PoolItem(GameManager.main.displayPool.armyPrefab);

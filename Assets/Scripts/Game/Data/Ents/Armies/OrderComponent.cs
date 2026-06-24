@@ -15,16 +15,25 @@ public class OrderComponent : ArmyComponent
     }
     public bool IsResting()
     {
-        return NumOrders()>0 && orders[0].OrderID == Order.ID.Rest;
+        return NumOrders() > 0 && orders[0].OrderID == Order.ID.Rest;
     }
     public void Clear()
     {
 
     }
+    public override void OnTurnBegin()
+    {
+        base.OnTurnBegin();
+        if (orders.Count > 0 && orders[0].OrderID == Order.ID.Rest)
+        {
+            orders.RemoveAt(0);
+        }
+    }
     public void RecalculateEntirePath()
     {
+        parent.pathfinder.movement = parent.movement.GetMyMovement();
         int index = -1;
-        foreach (var order in  orders)
+        foreach (var order in orders)
         {
             order.RecalcPath(parent, index < 0 ? parent.gridPos : orders[index].gridDest);
         }
@@ -74,7 +83,7 @@ public class OrderComponent : ArmyComponent
     }
     void ResolveCurrentOrder()
     {
-      if (orders.Count > 0)
+        if (orders.Count > 0)
         {
             GetCurrentOrder().Resolve(parent);
         }
@@ -108,7 +117,14 @@ public class Order
     public ID OrderID;
     public Vector2Int gridDest;
     public PathfinderPath path;
-    public virtual void  RecalcPath(DataItemArmy owner,Vector2Int origin)
+
+    public Order(ID orderID, Vector2Int gridDest)
+    {
+        OrderID = orderID;
+        this.gridDest = gridDest;
+    }
+
+    public virtual void RecalcPath(DataItemArmy owner, Vector2Int origin)
     {
         path = owner.pathfinder.Solve(origin, gridDest);
     }
@@ -118,7 +134,7 @@ public class Order
     }
     public virtual bool HasResolvedOrder(DataItemArmy owner)
     {
-         return owner.tile.gridPos == gridDest;
+        return owner.tile.gridPos == gridDest;
     }
     public virtual void Conclude(DataItemArmy owner)
     {
@@ -131,10 +147,14 @@ public class Order
 }
 public class RazeOrder : Order
 {
+    public RazeOrder(ID orderID, Vector2Int gridDest) : base(orderID, gridDest)
+    {
+    }
+
     public override bool Resolve(DataItemArmy owner)
     {
         if (owner.tile.buildingLayer is DataItemCastle city && owner.InvadeCastle(city, false))
-            {
+        {
             return true;
         }
         return false;
@@ -143,6 +163,12 @@ public class RazeOrder : Order
 public class FollowOrder : Order
 {
     public DataItemArmy TargetUnit;
+
+    public FollowOrder(ID orderID, Vector2Int gridDest, DataItemArmy targetUnit) : base(orderID, gridDest)
+    {
+        TargetUnit = targetUnit;
+    }
+
     public virtual bool TargetValid(DataItemArmy owner)
     {
         if (TargetUnit != null)
@@ -157,10 +183,10 @@ public class FollowOrder : Order
     {
         if (TargetValid(owner))
             gridDest = TargetUnit.gridPos;
- base.RecalcPath(owner, origin);
+        base.RecalcPath(owner, origin);
     }
     public override bool HasResolvedOrder(DataItemArmy owner)
     {
-        return TargetValid(owner) &&  base.HasResolvedOrder(owner) ;
+        return TargetValid(owner) && base.HasResolvedOrder(owner);
     }
 }

@@ -30,6 +30,25 @@ public class ArmyMovementComponent : ArmyComponent
 
         return (TerrainDefines.Movement)total;
     }
+    public int GetMyMovementDistance()
+    {
+        if (parent.formation.transport != null)
+        {
+
+            return parent.formation.transport.GetMyMovement();
+        }
+
+        int total = 666;
+
+        foreach (var Zim in parent.formation.GetUnits())
+        {
+            total = Mathf.Min(total, Zim.GetMyMovement());
+
+
+        }
+
+        return total;
+    }
     public bool CanIMove()
     {
         return (movementLeft > 0 && !parent.orders.IsIdle());
@@ -41,7 +60,8 @@ public class ArmyMovementComponent : ArmyComponent
 
     public void PayMovement(int value)
     {
-        if (value > 0)
+
+        if (value > 0 && value < movementLeft)
             movementLeft -= value;
         else
             movementLeft = 0;
@@ -66,7 +86,7 @@ public class ArmyMovementComponent : ArmyComponent
     }
     public override void OnTurnBegin()
     {
-        movementLeft = 0;
+        movementLeft = GetMyMovementDistance();
         UpdateStartingMovement();
     }
     public void UpdateStartingMovement()
@@ -78,7 +98,7 @@ public class ArmyMovementComponent : ArmyComponent
     {
         if (CanIMove())
         {
-             movedThisTurn = true;
+            movedThisTurn = true;
             parent.orders.RecalculateEntirePath();
 
             while (ShouldIMove())
@@ -98,8 +118,12 @@ public class ArmyMovementComponent : ArmyComponent
                 }
                 else
                 {
-                    var next = firstOrder.path.Next();
-                    parent.MoveToTile(next.gridPos, false);
+                    if (firstOrder.path.failure != Astar.Failure.impossible && firstOrder.path.failure != Astar.Failure.impassible_origin && firstOrder.path.failure != Astar.Failure.impassible_target)
+                    {
+                        var next = firstOrder.path.Next();
+                        parent.MoveToTile(next.gridPos, false);
+                    }
+                    else return;
                 }
             }
         }

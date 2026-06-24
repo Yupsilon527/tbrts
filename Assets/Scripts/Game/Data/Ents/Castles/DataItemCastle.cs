@@ -23,7 +23,7 @@ public class DataItemCastle : DataItemBuilding
         customName = custom.customName;
         customDescription = custom.customDescription;
         isCapital = custom.isCapital;
-        ChangeTile(custom.spawnPos);
+        ChangeTile(custom.spawnPos, DisplayPositionChange.instant);
         bonuses = new(this);
         SetPlayerOwner(custom.ownership);
     }
@@ -31,9 +31,9 @@ public class DataItemCastle : DataItemBuilding
     {
         return castleTiles.Count;
     }
-    public override void ChangeTile(Vector2Int t)
+    public override void ChangeTile(Vector2Int t, DisplayPositionChange position)
     {
-        base.ChangeTile(t);
+        base.ChangeTile(t, position);
 
         castleTiles = new List<SidewaysTile>();
 
@@ -107,7 +107,7 @@ public class DataItemCastle : DataItemBuilding
     }
     public bool AmIUnderAlliedControl()
     {
-        return GetGarrison().Sum(a => a.GetAlignment(this) == PlayerDefines.Alignment.enemy ? 1 : 0) > 0;
+        return GetGarrison().Sum(a => a?.GetAlignment(this) == PlayerDefines.Alignment.enemy ? 1 : 0) > 0;
     }
 
     public bool BattleTroop(DataItemArmy Attacker, SidewaysTile Tile)
@@ -359,9 +359,9 @@ public class DataItemCastle : DataItemBuilding
 
     }*/
     #endregion
-    public override void OnTurnEnd()
+    public override void OnTurnBegin()
     {
-        base.OnTurnEnd();
+        base.OnTurnBegin();
 
 
         /*if (AmIUnderAlliedControl())

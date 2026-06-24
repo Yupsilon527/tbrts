@@ -78,4 +78,8 @@ public class DataItemPlayer
     {
         return false;
     }
+    public void OnTurnBegin()
+    {
+
+    }
 }

@@ -12,6 +12,11 @@ public class UnitDamageable : UnitComponent
     public override void TriggerFuncs(AbilityDefines.Event act)
     {
         base.TriggerFuncs(act);
+        if (act == AbilityDefines.Event.OnTurnBegin)
+        {
+            float regen = parent.innates.GetAbilityCombined( UnitDefines.ArmyAbilities.regen);
+            Health.GiveValue(regen);
+        }
         if (act == AbilityDefines.Event.OnSpawn)
         {
             Health.SetPercentage(1);
@@ -20,6 +25,11 @@ public class UnitDamageable : UnitComponent
         if (act == AbilityDefines.Event.CombatBegin)
         {
             Armor.SetPercentage(1);
+            Block.SetPercentage(0);
+        }
+        if (act == AbilityDefines.Event.CombatEnd)
+        {
+            Armor.SetPercentage(0);
             Block.SetPercentage(0);
         }
     }

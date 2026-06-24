@@ -53,6 +53,7 @@ public class DataItemUnit : DataItemObject
     }
     public virtual void HandleEvent(AbilityDefines.Event evt, DataItemUnit[] targets, bool refresh = false)
     {
+        damageable.TriggerFuncs(evt);
         abilities.TriggerFuncs(evt);
         modifiers.EventReaction(evt, targets);
         if (evt == AbilityDefines.Event.CombatBegin)
@@ -165,6 +166,12 @@ public class DataItemUnit : DataItemObject
         return false;
     }
 
+    public int GetMyMovement()
+    {
+        return Mathf.Max(1, Mathf.CeilToInt(UnitDefines.MoveBase
+            + UnitDefines.MoveAddition * innates.GetAbilityCombined(UnitDefines.ArmyAbilities.haste)
+            - UnitDefines.MoveSubstraction * innates.GetAbilityCombined(UnitDefines.ArmyAbilities.slow)));
+    }
     public TerrainDefines.Movement GetMovetype()
     {
 

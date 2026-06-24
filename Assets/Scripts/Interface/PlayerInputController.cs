@@ -110,9 +110,10 @@ public class PlayerInputController : MonoBehaviour
 
     void HandleMainInput()
     {
+        var selArmy = GameManager.main.armyManager.mainSelectedArmy;
         if (mouseOverTile != null)
         {
-            if (GameManager.main.armyManager.mainSelectedArmy == null)
+            if (selArmy == null)
             {
                 if (mouseOverTile.armyLayer != null)
                 {
@@ -145,7 +146,7 @@ public class PlayerInputController : MonoBehaviour
                             && castle.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned
                             && castle.IsVisibleToPlayer(GameManager.main.playerManager.GetActivePlayer()))
                         {
-                            if (GameManager.main.armyManager.mainSelectedArmy.tile == mouseOverTile)
+                            if (selArmy.tile == mouseOverTile)
                             {
                                 //invade castle
                             }
@@ -155,7 +156,8 @@ public class PlayerInputController : MonoBehaviour
                 }
                 else
                 {
-                    //  else issue move order
+                    selArmy.orders.ReplaceOrder(new Order(Order.ID.Move, mouseOverTile.gridPos));
+                    selArmy.movement.ResolveMovement();
                 }
             }
         }

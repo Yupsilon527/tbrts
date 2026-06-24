@@ -23,7 +23,7 @@ public static class AbilityDefines
         CombatEnd = 7,
 
 		//board
-        OnTurnEnd = 24,
+        OnTurnBegin = 24,
         OnMoveTile = 23,
 
 		//aura

@@ -16,12 +16,13 @@ public class DataItemArmy : DataItemObject
         movement = new(this);
         status = new(this);
         orders = new(this);
+        pathfinder = new(this);
+        GameManager.main.armyManager.RegisterArmy(this);
     }
     public DataItemArmy (Vector2Int pos, int playerOwner):this()
     {
         ChangeTile(pos, DisplayPositionChange.instant);
         SetPlayerOwner(playerOwner);
-        GameManager.main.armyManager.RegisterArmy(this);
     }
 
     public DataItemArmy (CustomArmy army) : this (army.spawnPos, army.ownership)
@@ -160,18 +161,23 @@ public class DataItemArmy : DataItemObject
     }
 
     public void ApplyEffect(ApplyEffects effect) { }
-    public float GetCityBonuses(string Bonus)
+    public int GetAuraBonuses(UnitDefines.ArmyAbilities Bonus)
     {
-        if (tile.buildingLayer != null && tile.buildingLayer.GetAlignment(this) ==  PlayerDefines.Alignment.playerowned)
-        {
-            return 1;//TODO tile.buildingLayer.GetSightRange(Bonus);
-        }
+ //       if (tile.buildingLayer != null && tile.buildingLayer.GetAlignment(this) ==  PlayerDefines.Alignment.playerowned && tile.buildingLayer is DataItemCastle castle)
+   //     {
+     //       return 0;//TODO (Bonus);
+       // }
         return 0;
     }
 
-    public override void OnTurnEnd()
+    public override void OnTurnBegin()
     {
-        base.OnTurnEnd();
+        base.OnTurnBegin();
+        formation.OnTurnBegin();
+        movement.OnTurnBegin();
+        status.OnTurnBegin();
+        orders.OnTurnBegin();
+
     }
     #region Power
 
