@@ -31,9 +31,9 @@ Transform:
   m_Children:
   - {fileID: 510978166810954141}
   - {fileID: 3824168618496020709}
+  - {fileID: 2496369368536765813}
   - {fileID: 6944280032492201160}
   - {fileID: 725734325240260803}
-  - {fileID: 2496369368536765813}
   - {fileID: 6944172839803927140}
   - {fileID: 2271282610050889909}
   m_Father: {fileID: 1515535197222333074}
@@ -52,7 +52,7 @@ PrefabInstance:
       objectReference: {fileID: 1530871024, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
     - target: {fileID: 1071182807492399749, guid: 6717040d9d4e73d4b96d58781eecd2c5, type: 3}
       propertyPath: m_Name
-      value: Unit (5)
+      value: Unit (4)
       objectReference: {fileID: 0}
     - target: {fileID: 8152299699369215311, guid: 6717040d9d4e73d4b96d58781eecd2c5, type: 3}
       propertyPath: m_LocalScale.x
@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 1530871024, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
     - target: {fileID: 1071182807492399749, guid: 6717040d9d4e73d4b96d58781eecd2c5, type: 3}
       propertyPath: m_Name
-      value: Unit (2)
+      value: Unit (3)
       objectReference: {fileID: 0}
     - target: {fileID: 8152299699369215311, guid: 6717040d9d4e73d4b96d58781eecd2c5, type: 3}
       propertyPath: m_LocalScale.x
@@ -301,10 +301,10 @@ MonoBehaviour:
   SpritePrefab: {fileID: 857420521757587146, guid: 7024ee576ad5966428a76c474b18a42b, type: 3}
   objectSprites:
   - {fileID: 4939108485543572609}
-  - {fileID: 1280737543265894572}
-  - {fileID: 8902282073613995175}
   - {fileID: 5998217812216852753}
+  - {fileID: 1280737543265894572}
   - {fileID: 1281196581877079552}
+  - {fileID: 8902282073613995175}
   - {fileID: 7934258867977657553}
   bannerSprites: []
   selectionCircles:
@@ -515,7 +515,7 @@ PrefabInstance:
       objectReference: {fileID: 1530871024, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
     - target: {fileID: 1071182807492399749, guid: 6717040d9d4e73d4b96d58781eecd2c5, type: 3}
       propertyPath: m_Name
-      value: Unit (4)
+      value: Unit (2)
       objectReference: {fileID: 0}
     - target: {fileID: 8152299699369215311, guid: 6717040d9d4e73d4b96d58781eecd2c5, type: 3}
       propertyPath: m_LocalScale.x
@@ -779,7 +779,7 @@ PrefabInstance:
       objectReference: {fileID: 1530871024, guid: b6d2785843dbe20468e5340cb24b984b, type: 3}
     - target: {fileID: 1071182807492399749, guid: 6717040d9d4e73d4b96d58781eecd2c5, type: 3}
       propertyPath: m_Name
-      value: Unit (3)
+      value: Unit (5)
       objectReference: {fileID: 0}
     - target: {fileID: 8152299699369215311, guid: 6717040d9d4e73d4b96d58781eecd2c5, type: 3}
       propertyPath: m_LocalScale.x

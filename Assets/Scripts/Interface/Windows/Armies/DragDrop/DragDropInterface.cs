@@ -65,6 +65,7 @@ public class AbilityDragDropInterface : Initializable
     {
         foreach (var slot in UnitSlots)
         {
+            if (slot.attachedToken != null)
             slot.army?.formation.SetTroopInPosition(slot.position, slot.attachedToken != null ? slot.attachedToken.tokenUnit : null);
         }
 

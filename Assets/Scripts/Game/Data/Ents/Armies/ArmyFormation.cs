@@ -56,7 +56,7 @@ public class ArmyFormation : ArmyComponent
         if (x < 0 || y < 0)
             SetTroopInPosition(-1, unit);
         else
-            SetTroopInPosition(Translate(x,y), unit);
+            SetTroopInPosition(Translate(x, y), unit);
     }
     public void SetTroopInPosition(int p, DataItemUnit unit)
     {
@@ -98,7 +98,7 @@ public class ArmyFormation : ArmyComponent
         {
             if (unit.troop != null)
             {
-                unit.troop.formation.RemoveTroop(transport,false);
+                unit.troop.formation.RemoveTroop(transport, false);
             }
 
 
@@ -121,15 +121,15 @@ public class ArmyFormation : ArmyComponent
     {
         if (transport == unit)
             transport = null;
-        else if (unit!=null)
+        else if (unit != null)
         {
             Vector2Int pos = GetPositionForUnit(unit);
-            if (pos.x>=0 && pos.y>=0)
-            Formation[Translate(pos.x, pos.y)] = null;
+            if (pos.x >= 0 && pos.y >= 0)
+                Formation[Translate(pos.x, pos.y)] = null;
         }
         unit.troop = null;
         if (refactor)
-        OnFormationUpdate();
+            OnFormationUpdate();
 
     }
     public void OnFormationUpdate()
@@ -275,26 +275,24 @@ public class ArmyFormation : ArmyComponent
 
     public void MoveUnit(DataItemUnit uUnit, int aX, int aY, bool updateVisual)
     {
-        MoveUnit(uUnit,Translate(aX,aY),updateVisual);
+        MoveUnit(uUnit, Translate(aX, aY), updateVisual);
     }
-    public  void MoveUnit(DataItemUnit uUnit, int d, bool updateVisual)
+    public void MoveUnit(DataItemUnit uUnit, int d, bool updateVisual)
     {
         if (uUnit.troop != parent) return;
         int o = -1;
-        for (int i = 0; i< Formation.Length; i++)
+        for (int i = 0; i < Formation.Length; i++)
         {
             if (Formation[i] == uUnit)
             {
-                Formation[i] = null;
                 o = i;
+                if (o == d) return;
+                Formation[i] = null;
                 break;
             }
         }
-        if (o!= d)
-        { 
         Formation[o] = Formation[d];
         Formation[d] = uUnit;
-    }
     }
 
     public void SwapTroops(DataItemUnit a, DataItemUnit b, bool updateVisual)
