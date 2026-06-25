@@ -12,6 +12,6 @@ public class TilesetSO : ScriptableObject
     }
     public Sprite GetSprite(bool[] Edges)
     {
-        return GetSprite(TerrainDefines.GetSprite(Edges));
+        return GetSprite(TerrainDefines.GetEdgeSprite(Edges));
     }
 }

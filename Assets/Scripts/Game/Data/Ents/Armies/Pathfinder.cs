@@ -68,7 +68,7 @@ namespace Astar
         {
             if (walkpath == null || walkpath.Count == 0) return null;
             if (Solved()) return null;
-            return walkpath[position];
+            return walkpath[++position];
         }
         public int Remaining() =>  walkpath.Count - 1 - position;
         
@@ -214,12 +214,12 @@ namespace Astar
 
                 if (current == originNode) break;
 
-                float nextIndex = current.index + 1;//HERE
+                float nextIndex = current.index + current.node.GetMoveCost(movement);
                 Node[] neighbors = current.neighbors;
                 for (int i = 0; i < neighbors.Length; i++)
                 {
                     Node nb = neighbors[i];
-                    if (nb == null || !TerrainDefines.CanIWalkOver(movement, nb.elevation)) continue;
+                    if (nb == null || !nb.node.IsPassible(movement)) continue;
                     if (nb.visited) continue;
 
                     float dx = vDest.x - nb.node.gridPos.x;

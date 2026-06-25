@@ -121,18 +121,16 @@ public class SidewaysMap : MonoBehaviour
     {
         List<SidewaysTile> openlist = new List<SidewaysTile>
         {
-           GetTile(point)
+           GetTile(point,imaginary: GetTileType.clamped)
         };
-        HashSet<SidewaysTile> closedlist = new ();
+        List<SidewaysTile> closedlist = new ();
 
-    loopstart:
         while (openlist.Count > 0)
         {
             if (openlist[0] != null)
             {
                 if (openlist[0].IsPassible(movement))
                     return openlist[0];
-                
                 
                     foreach (var neighbor in openlist[0].neighbors)
                     {
@@ -149,9 +147,27 @@ public class SidewaysMap : MonoBehaviour
                 }
             }
             openlist.RemoveAt(0);
-            goto loopstart;
         }
 
+        return GetClosest(point, closedlist.ToArray());
+    }
+    public SidewaysTile GetClosest(Vector2Int point, SidewaysTile[] list )
+    {
+        if (list.Length > 0)
+        {
+            var closest = list[0];
+            int distance = int.MaxValue;
+            foreach (var tile in list)
+            {
+                var sqrDist = (tile.gridPos - point).sqrMagnitude;
+                if (sqrDist < distance)
+                {
+                    closest = tile;
+                    distance = sqrDist;
+                }
+            }
+            return closest;
+        }
         return null;
     }
 

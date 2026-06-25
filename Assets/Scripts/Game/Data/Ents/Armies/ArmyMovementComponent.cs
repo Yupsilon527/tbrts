@@ -118,9 +118,9 @@ public class ArmyMovementComponent : ArmyComponent
                 }
                 else
                 {
-                    if (firstOrder.path.failure != Astar.Failure.impossible && firstOrder.path.failure != Astar.Failure.impassible_origin && firstOrder.path.failure != Astar.Failure.impassible_target)
+                    var next = firstOrder?.path?.Next() ?? null;
+                    if (next!=null && firstOrder.path.failure != Astar.Failure.impossible && firstOrder.path.failure != Astar.Failure.impassible_origin && firstOrder.path.failure != Astar.Failure.impassible_target)
                     {
-                        var next = firstOrder.path.Next();
                         parent.MoveToTile(next.gridPos, false);
                     }
                     else return;

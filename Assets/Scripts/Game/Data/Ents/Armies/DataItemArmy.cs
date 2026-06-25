@@ -69,7 +69,7 @@ public class DataItemArmy : DataItemObject
         tile.armyLayer = this;
         UpdateLoSAroundTile(gridPos);
         UpdateLoSAroundTile(oldtile);
-        display?.OnPositionChange(t, DisplayPositionChange.move);
+        display?.OnPositionChange(t, m);
     }
     public bool MoveToTile(Vector2Int t, bool attack)
     {

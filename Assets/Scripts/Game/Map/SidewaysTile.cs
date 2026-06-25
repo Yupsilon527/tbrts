@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class SidewaysTile
 {
@@ -10,8 +11,14 @@ public class SidewaysTile
     public bool isRoad;
     public ElevationData terrain;
 
+    public SidewaysTile[] neighbors = Array.Empty<SidewaysTile>();
     public bool[]passible;
     public int[]movecost;
+    public void Init()
+    {
+        RevealedByPlayer = new int[GameManager.main.playerManager.players.Length];
+        InitPassible(); 
+    }
     void InitPassible()
     {
         passible = new bool[(int)TerrainDefines.Movement.Total];
@@ -59,14 +66,13 @@ public class SidewaysTile
     {
         terrain = eC != null ? eC : new ElevationData();
         Variation = tV;
-        InitPassible();
     }
     public static SidewaysTile CreateTile(GameObject prefab, MapData mapData, Vector2Int pos, bool skipdraw)
     {
         SidewaysTile tile = new SidewaysTile();
         tile.gridPos = pos;
         tile.terrain = mapData.GetTileAt(pos).terrain;
-        tile.RevealedByPlayer = new int[] { 0, 0 };
+        tile.Init();
 
         if (!skipdraw)
         {
@@ -83,7 +89,6 @@ public class SidewaysTile
     }
     #endregion
     #region Neighbors
-    public SidewaysTile[] neighbors;
     public void InitNeighbors()
     {
         neighbors = new SidewaysTile[] {

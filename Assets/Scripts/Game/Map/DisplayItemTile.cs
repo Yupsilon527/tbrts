@@ -109,7 +109,7 @@ public class DisplayItemTile : MonoBehaviour
                          };
                 }
 
-                int nData = TerrainDefines.GetSprite(pass);
+                int nData = TerrainDefines.GetEdgeSprite(pass);
 
                 if (nData >= 0)
                 {

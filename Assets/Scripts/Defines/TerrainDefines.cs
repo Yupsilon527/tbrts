@@ -37,6 +37,7 @@ public static class TerrainDefines
         Mountain = 9,
         Wall = 10,
         City = 11,
+        Total = 12
     }
 
     public enum Movement
@@ -55,7 +56,7 @@ public static class TerrainDefines
         Total = 10
     };
 
-    public static int GetSprite(bool[] Edges)
+    public static int GetEdgeSprite(bool[] Edges)
     {
 
         //0 - 1
@@ -335,12 +336,11 @@ public static class TerrainDefines
                 return false;
             case Movement.Ground:
 
-                return elevation == Elevation.City ||  elevation < Elevation.Wall &&
-                elevation > Elevation.DeepSea;
+                return elevation == Elevation.City || (elevation > Elevation.DeepSea &&
+                elevation < Elevation.Wall);
             case Movement.Wheels:
-
-                return elevation == Elevation.City || elevation > Elevation.DeepSea &&
-                elevation < Elevation.Mountain;
+                return elevation == Elevation.City || (elevation > Elevation.DeepSea &&
+                elevation < Elevation.Mountain);
 
             case Movement.GroundGiant:
 

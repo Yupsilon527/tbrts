@@ -36,6 +36,7 @@ public class OrderComponent : ArmyComponent
         foreach (var order in orders)
         {
             order.RecalcPath(parent, index < 0 ? parent.gridPos : orders[index].gridDest);
+            index++;
         }
     }
     public Order GetCurrentOrder()
