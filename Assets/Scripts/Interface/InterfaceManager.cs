@@ -10,6 +10,7 @@ public class InterfaceManager : WindowManager
     public InfoWindow infoWindow;
     public CastleInfoWindow castleWindow;
     public ArmyInfoWindow armyWindow;
+    public ArmyMergeWindow transferWindow;
 
     public CommandMenu commandMenu;
     public MovementIndicator moveIndicator;

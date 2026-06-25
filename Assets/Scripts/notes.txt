@@ -1,13 +1,38 @@
 TODO
 
-	moving alrmies
-		all at once
-		just one
+	army manager
+		moving alrmies
+			all at once
+			just one
+		next idle
 
 	army window
+		quick transfer
+		apply
+		undo
+
+		(only 1 army)
+
 	castle window
+		armies
+		buildings
+		income
+
+		invade
+
+	combat window
 
 	(try with 2 armies)
+			
+
+	auras
+	troop divine shield?
+
+	faction
+		permanent/starting bonuses
+		global bonuses (buildings?)
+		local bonuses
+			given to units that enter a castle
 
 	army abilities
 		self
@@ -16,17 +41,6 @@ TODO
 		cityregion
 
 	stats & scalemode
-
-	faction
-		permanent/starting bonuses
-		global bonuses (buildings?)
-		local bonuses
-			given to units that enter a castle
-			
-
-	auras
-	troop divine shield?
-
 	events
 	modifier states
 	props
@@ -62,3 +76,6 @@ Units and orders
 	waypoints
 
 TODO cast spells via command menu (on tile, on self)
+
+fea diplomacy
+fea bank/loans

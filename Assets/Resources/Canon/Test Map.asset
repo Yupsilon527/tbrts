@@ -63,4 +63,5 @@ MonoBehaviour:
       spawnPos: {x: 3, y: 3}
       formation:
       - Peasant
+      - Peasant
       transporter: 

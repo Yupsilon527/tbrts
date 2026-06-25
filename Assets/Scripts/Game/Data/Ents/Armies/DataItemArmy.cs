@@ -328,6 +328,11 @@ public class DataItemArmy : DataItemObject
         return Mathf.RoundToInt(GetPowerValue(false) * UnitDefines.fBribeMultiplier);
     }
     #endregion
+    public void Revise()
+    {
+        formation.OnFormationUpdate();
+        display?.DrawAgain();
+    }
     public override void Despawn()
     {
         if (!dead)

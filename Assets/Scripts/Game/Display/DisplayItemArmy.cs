@@ -12,6 +12,7 @@ public class DisplayItemArmy : DisplayItemObject<DataItemArmy>
         OnPlayerOwnerChange();
         OnPositionChange(ob.gridPos, DisplayPositionChange.instant);
         OnGraphicsChange();
+        OnSelectionChange();
     }
     public override void OnPositionChange(Vector3 pos, DisplayPositionChange change)
     {

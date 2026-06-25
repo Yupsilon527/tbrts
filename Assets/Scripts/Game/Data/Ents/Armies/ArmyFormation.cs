@@ -36,7 +36,12 @@ public class ArmyFormation : ArmyComponent
     }
     public DataItemUnit GetTroopInPosition(int x, int y)
     {
-        return Formation[x + y * UnitDefines.iArmyCols];
+        if (x < 0 || y < 0) return transport;
+        return Formation[Translate(x, y)];
+    }
+    int Translate(int x, int y)
+    {
+        return x * UnitDefines.iArmyRows + y;
     }
     public void GiveUnitInPosition(int x, int y, UnitData unit)
     {
@@ -44,30 +49,47 @@ public class ArmyFormation : ArmyComponent
     }
     public void GiveUnitInPosition(int p, UnitData unit)
     {
-        SetTroopInPosition( p, new DataItemUnit(unit, parent));
+        SetTroopInPosition(p, new DataItemUnit(unit, parent));
     }
     public void SetTroopInPosition(int x, int y, DataItemUnit unit)
     {
         if (x < 0 || y < 0)
             SetTroopInPosition(-1, unit);
         else
-            SetTroopInPosition(x + y * UnitDefines.iArmyCols, unit);
+            SetTroopInPosition(Translate(x,y), unit);
     }
     public void SetTroopInPosition(int p, DataItemUnit unit)
     {
-        if (!CanIAccept(unit))
+        if (unit == null)
         {
-            return;
+            if (p < 0)
+                transport = null;
+            else
+                Formation[p] = null;
         }
-        if (unit.troop != null)
+        else
         {
-            unit.troop?.formation.RemoveTroop(unit);
+            if (unit.troop != parent)
+            {
+                if (!CanIAccept(unit))
+                {
+                    return;
+                }
+                if (unit.troop != null)
+                {
+                    unit.troop?.formation.RemoveTroop(unit, false);
+                }
+                if (p < 0)
+                    transport = unit;
+                else
+                    Formation[p] = unit;
+                unit.troop = parent;
+            }
+            else
+            {
+                MoveUnit(unit, p, false);
+            }
         }
-        if (p<0)
-            transport = unit;
-        else 
-            Formation[p] = unit;
-        unit.troop = parent;
         OnFormationUpdate();
     }
     public bool TransferUnit(DataItemUnit unit)
@@ -75,9 +97,9 @@ public class ArmyFormation : ArmyComponent
         if (CanIAccept(unit.GetCommandValue()) && parent.CanBeMerged(true))
         {
             if (unit.troop != null)
-                {
-                    unit.troop.formation.RemoveTroop(transport);
-                }
+            {
+                unit.troop.formation.RemoveTroop(transport,false);
+            }
 
 
             for (int iX = 0; iX < UnitDefines.iArmyRows; iX++)
@@ -85,7 +107,7 @@ public class ArmyFormation : ArmyComponent
                 for (int iY = 0; iY < UnitDefines.iArmyCols; iY++)
                 {
                     int rY = unit.IsRanged() ? (UnitDefines.iArmyCols - iY - 1) : iY;
-                    if (IsEmptyAt (iX,rY))
+                    if (IsEmptyAt(iX, rY))
                     {
                         SetTroopInPosition(iX, rY, unit);
                         return true;
@@ -95,22 +117,32 @@ public class ArmyFormation : ArmyComponent
         }
         return false;
     }
-    public void RemoveTroop(DataItemUnit unit)
+    public void RemoveTroop(DataItemUnit unit, bool refactor)
     {
         if (transport == unit)
             transport = null;
-        else
+        else if (unit!=null)
         {
             Vector2Int pos = GetPositionForUnit(unit);
-            Formation[pos.x + pos.y * UnitDefines.iArmyCols] = null;
+            if (pos.x>=0 && pos.y>=0)
+            Formation[Translate(pos.x, pos.y)] = null;
         }
+        unit.troop = null;
+        if (refactor)
         OnFormationUpdate();
 
     }
-    void OnFormationUpdate()
+    public void OnFormationUpdate()
     {
-        parent.movement.UpdateMaxMovement();
-        parent.display?.OnGraphicsChange();
+        if (CountLivingTroops() == 0)
+        {
+            parent.Despawn();
+        }
+        else
+        {
+            parent.movement.UpdateMaxMovement();
+            parent.display?.OnGraphicsChange();
+        }
     }
     public Vector2Int GetPositionForUnit(DataItemUnit unit)
     {
@@ -160,16 +192,17 @@ public class ArmyFormation : ArmyComponent
     #region Command and Accepting
     public bool CanIAccept(DataItemUnit target)
     {
-        if (target == null)
+        if (target == null || target.GetAlignment(parent) != PlayerDefines.Alignment.playerowned)
         {
             return true;
         }
+        else if (!parent.tile.IsPassible(target.GetMovetype()))
+        {
+            return false;
+        }
         else if (transport == null && target.isTransport())
         {
-            if (!parent.tile.IsPassible(target.GetMovetype()))
-            {
-                return false;
-            }
+            return true;
         }
         return CanIAccept(target.GetCommandValue());
     }
@@ -240,9 +273,28 @@ public class ArmyFormation : ArmyComponent
         return null;
     }*/
 
-    public static void SwapTroops(DataItemUnit uUnit, int aX, int aY, bool updateVisual)
+    public void MoveUnit(DataItemUnit uUnit, int aX, int aY, bool updateVisual)
     {
-        uUnit.Troop.SwapTroops(uUnit.Troop.GetTroopInPosition(aY, aX), uUnit, updateVisual);
+        MoveUnit(uUnit,Translate(aX,aY),updateVisual);
+    }
+    public  void MoveUnit(DataItemUnit uUnit, int d, bool updateVisual)
+    {
+        if (uUnit.troop != parent) return;
+        int o = -1;
+        for (int i = 0; i< Formation.Length; i++)
+        {
+            if (Formation[i] == uUnit)
+            {
+                Formation[i] = null;
+                o = i;
+                break;
+            }
+        }
+        if (o!= d)
+        { 
+        Formation[o] = Formation[d];
+        Formation[d] = uUnit;
+    }
     }
 
     public void SwapTroops(DataItemUnit a, DataItemUnit b, bool updateVisual)
@@ -262,8 +314,13 @@ public class ArmyFormation : ArmyComponent
 
     public static void ExchangeTroops(int aX, int aY, int bX, int bY, DataItemArmy aTroop, DataItemArmy bTroop, bool updateVisual)
     {
+        if (aTroop == bTroop)
+        {
+            aTroop.formation.MoveUnit(aTroop.formation.GetTroopInPosition(aY, aX), bX, bY, updateVisual);
+        }
         DataItemUnit aUnit = aTroop.formation.GetTroopInPosition(aY, aX);
         DataItemUnit bUnit = bTroop.formation.GetTroopInPosition(bY, bX);
+
 
         //Debug.Log ("Swap");
         if ((aUnit == null && !aTroop.formation.IsEmptyAt(aY, aX)) || (bUnit == null && !bTroop.formation.IsEmptyAt(bY, bX)))

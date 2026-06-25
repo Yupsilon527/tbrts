@@ -48,21 +48,48 @@ public class CommandMenu : PlayerWindow
                 if (tile.armyLayer == selArmy)
                 {
                     e.Add("Defend");
-                    a.Add(() => { }); //TODO
+                    a.Add(() => {
+                        selArmy.orders.ReplaceOrder(new Order(Order.ID.Rest, tile.gridPos));
+                    });
                 }
                 else if (tile.armyLayer.GetAlignment(selArmy) == PlayerDefines.Alignment.playerowned)
                 {
                     if (selArmy.CanWeMerge(tile.armyLayer))
                     {
                         e.Add("Merge");
-                        a.Add(() => { }); //TODO
+                        a.Add(() => {
+                            selArmy.Transfer(tile.armyLayer, false);
+                        });
+                    }
+                    else
+                    {
+                        e.Add("Transfer");
+                        a.Add(() => {
+                            InterfaceManager.main.OpenWindow(InterfaceManager.main.transferWindow);
+                            InterfaceManager.main.transferWindow.AssignPlayer(player);
+                            InterfaceManager.main.transferWindow.MergeUnits(selArmy, tile.armyLayer);
+                        });
                     }
                     e.Add("Select");
                     a.Add(() => { GameManager.main.armyManager.SelectArmy(tile.armyLayer); });
                 }
             }
+            else if (tile.IsAdjecent(selArmy.tile))
+            {
+                e.Add("Split");
+                a.Add(() => {
+                    var tempArmy = new DataItemArmy(tile.gridPos, player.ID);
+                    InterfaceManager.main.OpenWindow(InterfaceManager.main.transferWindow);
+                    InterfaceManager.main.transferWindow.AssignPlayer(player);
+                    InterfaceManager.main.transferWindow.MergeUnits(selArmy, tile.armyLayer);
+                });
+            }
             if (tile.buildingLayer != null)
             {
+                //center + open production
+                //center + open info
+                //center´+ open armies
+
                 //Raze
                 //Explore ruin
             }
@@ -122,12 +149,21 @@ public class CommandMenu : PlayerWindow
 
         e.Add("Zoom On Tile");
         a.Add(() => { CameraController.main.CenterOnTile(tile.gridPos); CameraController.main.Zoom(0, true); });
-        if (GameManager.main.armyManager.mainSelectedArmy != null)
+        if (GameManager.main.armyManager.mainSelectedArmy is DataItemArmy selArmy)
         {
             e.Add("Center on selected army");
-            a.Add(() => { CameraController.main.CenterOnTile(GameManager.main.armyManager.mainSelectedArmy.gridPos); });
+            a.Add(() => { CameraController.main.CenterOnTile(selArmy.gridPos); });
             e.Add("Move here");
-            a.Add(() => { }); //TODO
+            a.Add(() => {
+                selArmy.orders.ReplaceOrder(new Order(Order.ID.Move, tile.gridPos));
+                selArmy.movement.ResolveMovement();
+            }); 
+            e.Add("Reorganize");
+            a.Add(() => {
+                InterfaceManager.main.OpenWindow(InterfaceManager.main.transferWindow);
+                InterfaceManager.main.transferWindow.AssignPlayer(player);
+                InterfaceManager.main.transferWindow.MergeUnits(selArmy, null);
+            });
             e.Add("Deselect");
             a.Add(() => { GameManager.main.armyManager.ClearSelectedArmy(); });
         }

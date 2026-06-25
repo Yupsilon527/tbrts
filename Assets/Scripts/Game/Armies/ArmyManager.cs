@@ -80,12 +80,12 @@ public class ArmyManager : EntityManager
     }
     public void ForgetArmy(DataItemArmy army)
     {
-        if (army.dead)
+        if (!army.dead)
         {
             army.Despawn();
         }
         armies.Remove(army);
-        if (army.display == null)
+        if (army.display != null)
         {
             GameManager.main.displayPool.DeactivateObject(army.display.GetParentObject());
         }
