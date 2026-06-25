@@ -12,6 +12,7 @@ public class InterfaceManager : WindowManager
     public ArmyInfoWindow armyWindow;
 
     public CommandMenu commandMenu;
+    public MovementIndicator moveIndicator;
     protected override void Initialize()
     {
         base.Initialize();

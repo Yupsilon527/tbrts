@@ -103,21 +103,13 @@ public class ArmyMovementComponent : ArmyComponent
 
             while (ShouldIMove())
             {
-                var firstOrder = parent.orders.GetCurrentOrder();
-                if (firstOrder.HasResolvedOrder(parent))
+                if (parent.orders.OrderPass())
                 {
-                    if (firstOrder.Resolve(parent))
-                    {
                         parent.orders.AdvanceOrder();
-                        return;
-                    }
-                    else
-                    {
-                        parent.orders.AdvanceOrder();
-                    }
                 }
                 else
                 {
+                    var firstOrder = parent.orders.GetCurrentOrder();
                     var next = firstOrder?.path?.Next() ?? null;
                     if (next!=null && firstOrder.path.failure != Astar.Failure.impossible && firstOrder.path.failure != Astar.Failure.impassible_origin && firstOrder.path.failure != Astar.Failure.impassible_target)
                     {

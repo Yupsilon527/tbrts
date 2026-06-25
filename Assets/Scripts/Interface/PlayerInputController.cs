@@ -72,7 +72,7 @@ public class PlayerInputController : MonoBehaviour
         TrackMouseTile();
         HandlePlayerOrders();
         if (Input.GetMouseButtonDown(0))
-            HandleMainInput();
+            HandleMainInput(Input.GetKey( KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift), Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl));
         if (Input.GetMouseButtonDown(1))
             HandleSideInput();
     }
@@ -108,12 +108,17 @@ public class PlayerInputController : MonoBehaviour
          }*/
     }
 
-    void HandleMainInput()
+    void HandleMainInput(bool queue, bool overlaymenu)
     {
         var selArmy = GameManager.main.armyManager.mainSelectedArmy;
         if (mouseOverTile != null)
         {
-            if (selArmy == null)
+            if (overlaymenu)
+            {
+                InterfaceManager.main.commandMenu.OpenAtPosition(Input.mousePosition);
+                InterfaceManager.main.commandMenu.OpenTileCommands(mouseOverTile);
+            }
+            else if (selArmy == null)
             {
                 if (mouseOverTile.armyLayer != null)
                 {
@@ -156,8 +161,12 @@ public class PlayerInputController : MonoBehaviour
                 }
                 else
                 {
-                    selArmy.orders.ReplaceOrder(new Order(Order.ID.Move, mouseOverTile.gridPos));
+                    if (queue)
+                        selArmy.orders.GiveOrder(new Order(Order.ID.Move, mouseOverTile.gridPos));
+                    else { 
+                        selArmy.orders.ReplaceOrder(new Order(Order.ID.Move, mouseOverTile.gridPos));
                     selArmy.movement.ResolveMovement();
+                }
                 }
             }
         }

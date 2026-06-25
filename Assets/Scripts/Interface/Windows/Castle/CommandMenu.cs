@@ -32,23 +32,27 @@ public class CommandMenu : PlayerWindow
         var player = GameManager.main.playerManager.GetActivePlayer();
         List<string> e = new();
         List<PlayerMenuAction> a = new();
-        if (GameManager.main.armyManager.mainSelectedArmy != null)
+        var selArmy = GameManager.main.armyManager.mainSelectedArmy;
+        if (selArmy != null)
         {
-            if (GameManager.main.armyManager.mainSelectedArmy.movement.CanWalkOnTile(tile))
+            if (selArmy.movement.CanWalkOnTile(tile))
             {
                 e.Add("Move here");
-                a.Add(() => { }); //TODO
+                a.Add(() => {
+                    selArmy.orders.ReplaceOrder(new Order(Order.ID.Move, tile.gridPos));
+                    selArmy.movement.ResolveMovement();
+                });
             }
             if (tile.armyLayer != null)
             {
-                if (tile.armyLayer == GameManager.main.armyManager.mainSelectedArmy)
+                if (tile.armyLayer == selArmy)
                 {
                     e.Add("Defend");
                     a.Add(() => { }); //TODO
                 }
-                else if (tile.armyLayer.GetAlignment(GameManager.main.armyManager.mainSelectedArmy) == PlayerDefines.Alignment.playerowned)
+                else if (tile.armyLayer.GetAlignment(selArmy) == PlayerDefines.Alignment.playerowned)
                 {
-                    if (GameManager.main.armyManager.mainSelectedArmy.CanWeMerge(tile.armyLayer))
+                    if (selArmy.CanWeMerge(tile.armyLayer))
                     {
                         e.Add("Merge");
                         a.Add(() => { }); //TODO

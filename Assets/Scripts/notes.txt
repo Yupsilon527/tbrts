@@ -1,14 +1,19 @@
 TODO
 
-	move army
-	move coroutine
+	moving alrmies
+		all at once
+		just one
 
 	army window
 	castle window
 
 	(try with 2 armies)
 
-	move indicator
+	army abilities
+		self
+		aura
+		city
+		cityregion
 
 	stats & scalemode
 

@@ -32,6 +32,9 @@ public class DisplayItemObject<tDataItem> : Initializable ,  IDisplayItemObject<
     public virtual void DrawAgain()
     {
     }
+    public virtual void OnPathChange()
+    {
+    }
     public virtual void OnGraphicsChange()
     {
         DrawAgain();
@@ -48,15 +51,19 @@ public class DisplayItemObject<tDataItem> : Initializable ,  IDisplayItemObject<
             sprite.enabled = selected;
         }
     }
-    public virtual void OnPositionChange(Vector2Int gridPos, DisplayPositionChange change)
+    public  void OnPositionChange(Vector2Int gridPos, DisplayPositionChange change)
+    {
+        OnPositionChange(SidewaysMap.main.TranslateEntityPosition(gridPos),change);
+    }
+    public virtual void OnPositionChange(Vector3 pos, DisplayPositionChange change)
     {
         switch (change)
         {
             case DisplayPositionChange.instant:
-                transform.position = SidewaysMap.main.TranslateEntityPosition(gridPos);
+                transform.position = pos;
                 break;
             case DisplayPositionChange.move:
-                QueuePoint(SidewaysMap.main.TranslateEntityPosition(gridPos));
+                QueuePoint(pos);
                 break;
         }
     }
@@ -70,7 +77,7 @@ public class DisplayItemObject<tDataItem> : Initializable ,  IDisplayItemObject<
         approachDist = (transform.position - destination).sqrMagnitude;
         if (approachDist < realSpeed * realSpeed)
         {
-            transform.position = destination;
+            OnPositionChange( destination,DisplayPositionChange.instant);
             destinations.RemoveAt(0);
             if (destinations.Count == 0)
             {
@@ -147,4 +154,5 @@ public interface IDisplayItemObject<out T> where T : DataItem
     public abstract void OnSelectionChange();
     public abstract void OnPositionChange(Vector2Int gridPos, DisplayPositionChange change);
     public abstract void OnGraphicsChange();
+    public abstract void OnPathChange();
 }

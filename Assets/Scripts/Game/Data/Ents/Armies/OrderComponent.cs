@@ -38,6 +38,7 @@ public class OrderComponent : ArmyComponent
             order.RecalcPath(parent, index < 0 ? parent.gridPos : orders[index].gridDest);
             index++;
         }
+        parent.display?.OnPathChange();
     }
     public Order GetCurrentOrder()
     {
@@ -48,7 +49,7 @@ public class OrderComponent : ArmyComponent
     {
         return orders.Count;
     }
-    public void GiveOrder(Order o, int index)
+    public void GiveOrder(Order o, int index = 999)
     {
         if (o.OrderID == Order.ID.Rest)
         {
@@ -64,6 +65,8 @@ public class OrderComponent : ArmyComponent
         }
         if (orders.Count == 1 || index < 1)
             ResolveCurrentOrder();
+        else
+            RecalculateEntirePath();
     }
     public void ReplaceOrder(Order o)
     {
@@ -88,22 +91,14 @@ public class OrderComponent : ArmyComponent
         {
             GetCurrentOrder().Resolve(parent);
         }
+        parent.display?.OnPathChange();
     }
 
-    public void Update()
-    {
-        if (OrderPass())
-        {
-            AdvanceOrder();
-        }
-
-    }
-    bool OrderPass()
+    public bool OrderPass()
     {
         var currentOrder = GetCurrentOrder();
-        if (currentOrder != null && currentOrder.HasResolvedOrder(parent))
+        if (currentOrder != null && currentOrder.HasResolvedOrder(parent) && currentOrder.Resolve(parent))
         {
-            currentOrder.Conclude(parent);
             return true;
 
         }
@@ -136,10 +131,6 @@ public class Order
     public virtual bool HasResolvedOrder(DataItemArmy owner)
     {
         return owner.tile.gridPos == gridDest;
-    }
-    public virtual void Conclude(DataItemArmy owner)
-    {
-
     }
     public virtual void Cancel()
     {
