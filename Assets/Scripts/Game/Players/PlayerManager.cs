@@ -1,10 +1,14 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerManager : GameComponent
 {
     public int playerTurn = 1;
     public DataItemPlayer[] players;
+    public DataItemPlayer neutrals => players.FirstOrDefault(p => p.ID == 0);
+    public DataItemPlayer currentPlayer => players[playerTurn];
+
 
     protected override void Initialize()
     {

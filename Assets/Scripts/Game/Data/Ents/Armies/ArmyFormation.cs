@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class ArmyFormation : ArmyComponent
 {
@@ -201,6 +202,14 @@ public class ArmyFormation : ArmyComponent
             return false;
         }
         else if (transport == null && target.isTransport())
+        {
+            return true;
+        }
+        return CanIAccept(target.GetCommandValue());
+    }
+    public bool CanIAccept(UnitData target)
+    {
+        if (transport == null && target.isTransport())
         {
             return true;
         }

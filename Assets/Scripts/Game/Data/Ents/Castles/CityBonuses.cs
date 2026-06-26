@@ -16,6 +16,16 @@ public class CityBonuses : CityComponent
         {
             ApplyUpgradeToAllUnits(army, upgrade, levels);
         }
+        city.production.Revision();
+        city.income.Revision();
+    }
+    public bool HasBuilding(BuildingData b)
+    {
+        return HasBuilding(b.InternalName.ToLower());
+    }
+    public bool HasBuilding(string name)
+    {
+        return upgrades.UpgradeResearched(name);
     }
     void ApplyUpgradeToAllUnits(DataItemArmy army, TechData upgrade, int levels)
     {
@@ -30,6 +40,16 @@ public class CityBonuses : CityComponent
         {
             unit.upgrades.upgrades.CompleteUpgrade(upgrade.upgrade, upgrade.level);
         }
+    }
+    public override void OnCastleRaze()
+    {
+        base.OnCastleRaze();
+        upgrades.Clear();
+    }
+
+    public bool CanBuildBuilding(BuildingData b)
+    {
+        return b.GetAvailableState(city) == ProductionData.AvailableState.available && !HasBuilding(b);
     }
 
 }

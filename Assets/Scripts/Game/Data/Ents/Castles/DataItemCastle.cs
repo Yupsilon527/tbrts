@@ -12,12 +12,9 @@ public class DataItemCastle : DataItemBuilding
     public List<SidewaysTile> castleTiles = new();
 
     public CityBonuses bonuses;
+    public CityProduction production;
+    public CityIncome income;
 
-    public List<UnitData> Production = new List<UnitData>();
-    public List<ProductionData> production = new List<ProductionData>();
-    public List<Vector2Int> wayPoints = new List<Vector2Int>();
-    public float iProductionTime = 0;
-    public bool ContinuousProduction = false;
     public DataItemCastle(CistomCastle custom) : base()
     {
         customName = custom.customName;
@@ -25,6 +22,8 @@ public class DataItemCastle : DataItemBuilding
         isCapital = custom.isCapital;
         ChangeTile(custom.spawnPos, DisplayPositionChange.instant);
         bonuses = new(this);
+        production = new(this);
+        income = new(this);
         SetPlayerOwner(custom.ownership);
     }
     public int GetSize()
@@ -170,16 +169,29 @@ public class DataItemCastle : DataItemBuilding
         return Cost;
     }
     #endregion
+    public void OnNewTurnBegin()
+    {
+
+        if (RazeTurn > 0 && GameManager.main.currentTurn >= RazeTurn)
+        {
+            RebuildMe(GameManager.main.playerManager.neutrals);
+        }
+        else
+        {
+            bonuses.OnTurnBegin();
+            production.OnTurnBegin();
+            income.OnTurnBegin();
+        }
+    }
     #region Raze
     public void Demolish()
     {
         SetPlayerOwner(GameManager.main.playerManager.players[0]);
         RazeTurn = GameManager.main.currentTurn;
 
-        Production.Clear();
-        production.Clear();
-        wayPoints.Clear();
-        bonuses.upgrades.researchedUpgrades.Clear();
+        bonuses.OnCastleRaze();
+        income.OnCastleRaze();
+        production.OnCastleRaze();
 
         display.DrawAgain();
     }
@@ -190,155 +202,13 @@ public class DataItemCastle : DataItemBuilding
         SetPlayerOwner(Player);
         RazeTurn = GameManager.main.currentTurn;
 
-        Production.Clear();
-        production.Clear();
-        wayPoints.Clear();
-        bonuses.upgrades.researchedUpgrades.Clear();
+        bonuses.OnCastleRaze();
+        income.OnCastleRaze();
+        production.OnCastleRaze();
 
         display.DrawAgain();
     }
     public bool isRazed() { return GameManager.main.currentTurn < RazeTurn; }
-    #endregion
-    #region Production
-
-
-    public bool CanProduce()
-    {
-        return !isRazed() && AmIUnderAlliedControl();
-    }
-    public void AddProduction(int army, bool instant)
-    {
-        if (army < Production.Count)
-        {
-          //  if (game.RuleSet.CurrentTurn <= 1 && PlayerOwner.DoIHaveEnoughGold(Production[army].GetPower(true) * Game.iArmyInstantPurchaseMultiplier, false, false))
-            {
-
-                Produce(army);
-            }
-            //else
-            {
-                production.Add(Production[army]) ;
-            }
-        }
-    }
-    public bool CanMakeTroop(DataItemArmy Army)
-    {
-        return GetValidTileForArmy(Army, false) != null;
-    }
-
-    public void Produce(int army)
-    {
-        if (CanIForwardProduction())
-        {
-            production[0].CompleteProduction(new ProductionTable(GetPlayerOwner(), tile.GetWorldPosition(), tile.gridPos, this));
-        }
-    }
-
-    public bool CanIForwardProduction()
-    {
-        if (production.Count == 0)
-        {
-            return false;
-        }
-        else
-        {
-            var costs = production[0].GetCostForPlayer(GetPlayerOwner());
-            return iProductionTime >= costs[(int)EconomyDefines.EconomyResource.Labor].value && GetPlayerOwner().econ.CanAffordResources(costs);
-        }
-    }
-
-    public SidewaysTile GetValidTileForArmy(string Army, bool AccArmies)
-    {
-        return null;// GetValidTileForArmy(game.game.LoadArmy(Army, false), AccArmies);
-    }
-    public SidewaysTile GetValidTileForArmy(DataItemArmy Army, bool AccArmies)
-    {
-       /* int movement = Army.GetMovetype();
-        List<SidewaysTile> Temp = new List<SidewaysTile>();
-
-        foreach (SidewaysTile tile in castleTiles)
-        {
-
-            if (!Temp.Contains(tile) && Pathfinder.CanIWalkOver(Army.GetMovetype(), tile.iElevation, tile.isRoad))
-            {
-                if (!AccArmies || tile.ArmyLocated == null)
-                {
-
-                    Temp.Add(tile);
-                }
-                else if (tile.ArmyLocated.GetOwner().GetAlliance(PlayerOwner) == 0 && tile.ArmyLocated.CanIAccept(Army.GetCommand()))
-                {
-                    Temp.Add(tile);
-                }
-            }
-
-            foreach (SidewaysTile Stocking in tile.GetNeighbors(game))
-            {
-
-                if (Stocking != null && !Temp.Contains(Stocking) && Pathfinder.CanIWalkOver(Army.GetMovetype(), Stocking.iElevation, Stocking.isRoad))
-                {
-                    if (!AccArmies || Stocking.ArmyLocated == null)
-                    {
-
-                        Temp.Add(Stocking);
-                    }
-                    else if (Stocking.ArmyLocated.GetOwner().GetAlliance(PlayerOwner) == 0 && Stocking.ArmyLocated.CanIAccept(Army.GetCommand()))
-                    {
-                        Temp.Add(Stocking);
-                    }
-                }
-
-            }
-        }
-        Temp.Sort(delegate (SidewaysTile x, SidewaysTile y)
-        {
-
-            if (x.CityLocated == this && y.CityLocated == this)
-            {
-                return 0;
-            }
-            else if (x.CityLocated == null || x.CityLocated != this)
-            {
-                if (y.CityLocated == null || y.CityLocated != this)
-                {
-                    return 0;
-                }
-                return 1;
-            }
-            else if (y.CityLocated == null || y.CityLocated != this)
-            {
-                if (x.CityLocated == null || x.CityLocated != this)
-                {
-                    return 0;
-                }
-                return -1;
-            }
-            return 0;
-        });
-
-        if (Temp.Count > 0)
-        {
-            return Temp[0];
-        }
-        else*/
-            return null;
-
-    }
-    public List<DataItemArmy> GetAvailableProduction(bool affordable)
-    {
-        List<DataItemArmy> ProductionArmies = new List<DataItemArmy>();
-        /*foreach (DataItemArmy Panty in PlayerOwner.Faction.GetRecruitableArmies(game.game))
-        {
-            if (CanMakeTroop(Panty) && !ProductionNames.Contains(Panty.FileName) &&
-                (!affordable || PlayerOwner.DoIHaveEnoughGold(Panty.GetPurchaseCost(PlayerOwner), true, false)) &&
-                GetValidTileForArmy(Panty, false) != null)
-            {
-
-                ProductionArmies.Add(Panty);
-            }
-        }*/ //TODO
-        return ProductionArmies;
-    }
     #endregion
     #region Income TODO
    /* public int GetResourceIncome()

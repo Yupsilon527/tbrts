@@ -9,7 +9,6 @@ public class FactionSO : ScriptableBase
 
     public UpgradeSO[] innateUpgrades;
 
-    public UnitSO[] producedUnits;
     public BuildingSO[] buildings;
 
 }

@@ -111,7 +111,7 @@ public class CommandMenu : PlayerWindow
                 e.Add("Castle Info");
                 a.Add(() => { InterfaceManager.main.OpenWindow(InterfaceManager.main.castleWindow); });
 
-                if (castle.CanProduce())
+                if (castle.production.CanProduce())
                 {
                     e.Add("Castle Production");
                     a.Add(() => { InterfaceManager.main.OpenWindow(InterfaceManager.main.castleWindow); });

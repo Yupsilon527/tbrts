@@ -11,7 +11,7 @@ public class UnitData : ProductionData
     public WeaponData[] weapons;
     public SpellData[] spells;
     public AbilityData[] abilities;
-    public override AvailableState GetAvailableState(DataItemPlayer player, DataItemCastle castle)
+    public override AvailableState GetAvailableState(DataItemPlayer player,DataItemCastle castle)
     {
         var avs = base.GetAvailableState(player, castle);
         if (avs == AvailableState.available && !player.econ.CanAffordResources(GetCostForPlayer(player)))
@@ -46,7 +46,56 @@ public class UnitData : ProductionData
     }
     public int GetCommandValue()
     {
-        return 1;
+        return 1 + GetAbilityLevel("command");
+    }
+    public bool isTransport()
+    {
+        return GetAbilityLevel("transport") > 0;
+    }
+    public TerrainDefines.Movement GetMovetype()
+    {
+        if (GetAbilityLevel("ghost") > 0)
+        {
+            return TerrainDefines.Movement.Ghost;
+        }
+        else if (GetAbilityLevel("ghost") > 0)
+        {
+            return TerrainDefines.Movement.Ghost;
+        }
+        else if (GetAbilityLevel("fly") > 0)
+        {
+            return TerrainDefines.Movement.Fly;
+        }
+        else if (GetAbilityLevel("teleport") > 0)
+        {
+            return TerrainDefines.Movement.Teleport;
+        }
+        else if (GetAbilityLevel("wheels") > 0)
+        {
+            return TerrainDefines.Movement.Wheels;
+        }
+        else if (GetAbilityLevel("giant") > 0)
+        {
+            return TerrainDefines.Movement.GroundGiant;
+        }
+        else if (GetAbilityLevel("foot") > 0)
+        {
+            return TerrainDefines.Movement.GroundFoot;
+        }
+        else if (GetAbilityLevel("amphibian") > 0)
+        {
+            return TerrainDefines.Movement.Amphibian;
+        }
+        else if (GetAbilityLevel("swim") > 0)
+        {
+            return TerrainDefines.Movement.Swimmer;
+        }
+        else if (GetAbilityLevel("seaworthy") > 0)
+        {
+            return TerrainDefines.Movement.Boat;
+        }
+
+        return TerrainDefines.Movement.Ground;
     }
     public bool HasAbility(UnitDefines.ArmyAbilities ability)
     {
@@ -55,5 +104,9 @@ public class UnitData : ProductionData
     public bool HasAbility(string abilityID)
     {
         return abilities.Any(a => a.abilityID == abilityID);
+    }
+    public int GetAbilityLevel(string abilityID)
+    {
+        return abilities.Sum(a => a.abilityID == abilityID ? a.abilityLevel : 0);
     }
 }

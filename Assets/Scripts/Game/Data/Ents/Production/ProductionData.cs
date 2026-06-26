@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class ProductionData 
@@ -30,7 +31,12 @@ public abstract class ProductionData
         }
         return 0;
     }
-    public virtual AvailableState GetAvailableState(DataItemPlayer player, DataItemCastle castle)
+
+    public  AvailableState GetAvailableState(DataItemCastle castle)
+    {
+        return GetAvailableState(castle.GetPlayerOwner(),castle);
+    }
+    public virtual AvailableState GetAvailableState(DataItemPlayer player,DataItemCastle castle)
     {
         foreach (string prerequisite in prerequisites)
         {
@@ -44,9 +50,9 @@ public abstract class ProductionData
 
     public bool PrerequisiteMet(DataItemPlayer player, DataItemCastle castle, string prerequisite)
     {
-        //if (prerequisite.Substring(0, 2) == "b_")
+        if (prerequisite.Substring(0, 2) == "b_")
         {
-          //  return player.HasBuilding(prerequisite);
+            return castle.bonuses.HasBuilding(prerequisite.Substring(2));
         }
         return player.upgrades.upgrades.UpgradeResearched(prerequisite);
     }
@@ -152,14 +158,18 @@ public abstract class ProductionData
 
 public class ProductionTable
 {
-    public ProductionTable(DataItemPlayer playerOwner, Vector3 point, Vector2Int node, DataItemCastle producer = null, float percent = 0)
+    public ProductionTable(DataItemPlayer playerOwner, ProductionData production, DataItemCastle producer = null,  float percent = 0)
     {
         this.playerOwner = playerOwner;
         this.producer = producer;
-        this.node = node;
-        this.point = point;
         this.percent = percent;
+        this.production = production;
+        costs = production.GetCostForPlayer(playerOwner);
     }
-    public DataItemPlayer playerOwner; public DataItemCastle producer; public Vector2Int node; public Vector3 point; public float percent = 1; public float costPercent = 1;
+    public DataItemPlayer playerOwner; public DataItemCastle producer;public ProductionData production; public float percent = 1; public float costPercent = 1; public ResourceCost[] costs;
 
+    public void CompleteProduction()
+    {
+        production.CompleteProduction(this);
+    }
 }

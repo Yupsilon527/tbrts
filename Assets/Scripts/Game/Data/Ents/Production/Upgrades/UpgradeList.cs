@@ -78,4 +78,10 @@ public class UpgradeList
         SetUpgradeLevel(upgrade, GetUpgradeLevel(upgrade) - levels);
 
     #endregion
+
+    public void Clear()
+    {
+        foreach (var upgrade in researchedUpgrades)
+            RemoveUpgrade(upgrade.upgrade);
+    }
 }

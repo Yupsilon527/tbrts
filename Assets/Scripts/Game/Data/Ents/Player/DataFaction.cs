@@ -9,10 +9,8 @@ public class DataFaction : BaseData
     public HashSet<ResourceCost> startingResources = new();
     public HashSet<ResourceIncome> startingIncome = new();
 
+    [Header("Specific")]
     public UpgradeData[] innateUpgrades;
-
-    [Header("Production")]
-    public UnitData[] producedUnits;
     public BuildingData[] availableBuildings;
     public DataFaction()
     {
@@ -33,7 +31,6 @@ public class DataFaction : BaseData
         foreach (var i in faction.startingIncome)
             startingIncome.Add(i);
 
-        producedUnits = faction.producedUnits.Select(p => p.unit).ToArray();
         availableBuildings = faction.buildings.Select(p => p.building).ToArray();
     }
 
@@ -42,19 +39,19 @@ public class DataFaction : BaseData
         List<UnitData> ProductionArmies = new List<UnitData>();
         if (neutral|| WorldManager.world.NeutralArmiesAreDefault)
         {
-            foreach (UnitData Panty in WorldManager.world.neutralFaction.producedUnits)
+            foreach (var Panty in WorldManager.world.neutralFaction.availableBuildings)
             {
-                ProductionArmies.Add(Panty);
+                ProductionArmies.AddRange(Panty.production);
             }
         }
-        foreach (UnitData Panty in producedUnits)
+        foreach (var Stocking in availableBuildings)
         {
-
+            foreach (var Panty in Stocking.production) { 
             if (!ProductionArmies.Contains(Panty))
             {
                 ProductionArmies.Add(Panty);
             }
-
+        }
         }
         return ProductionArmies;
     }
