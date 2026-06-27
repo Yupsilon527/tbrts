@@ -2087,10 +2087,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1816251063164317795, guid: 602170ab1c37ed441a77687624dae62e, type: 3}
-      propertyPath: defaultTab
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1824460595841533103, guid: 602170ab1c37ed441a77687624dae62e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

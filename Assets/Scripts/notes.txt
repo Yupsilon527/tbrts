@@ -1,4 +1,8 @@
 TODO
+	REDO RAZE ORDER
+		rebuild razed
+		raze enemy
+		nothing if allied
 
 	army manager
 		moving alrmies

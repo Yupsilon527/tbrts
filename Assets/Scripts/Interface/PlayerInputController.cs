@@ -72,7 +72,7 @@ public class PlayerInputController : MonoBehaviour
         TrackMouseTile();
         HandlePlayerOrders();
         if (Input.GetMouseButtonDown(0))
-            HandleMainInput(Input.GetKey( KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift), Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl));
+            HandleMainInput(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift), Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl));
         if (Input.GetMouseButtonDown(1))
             HandleSideInput();
     }
@@ -130,8 +130,8 @@ public class PlayerInputController : MonoBehaviour
                     if (mouseOverTile.buildingLayer is DataItemCastle castle)
                         if (castle.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned)
                             InterfaceManager.main.OpenCastleWindow(castle, false);
-                    else
-                    InterfaceManager.main.infoWindow.ShowCastleInfo(castle);
+                        else
+                            InterfaceManager.main.infoWindow.ShowCastleInfo(castle);
                 }
             }
             else
@@ -146,23 +146,22 @@ public class PlayerInputController : MonoBehaviour
                 {
                     if (mouseOverTile.buildingLayer is DataItemCastle castle)
                     {
-                        if (!castle.isRazed()
-                            && castle.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned
-                            && castle.IsVisibleToPlayer(GameManager.main.playerManager.GetActivePlayer()))
+                        if (castle.IsVisibleToPlayer(GameManager.main.playerManager.GetActivePlayer()))
                         {
-                            InterfaceManager.main.OpenCastleWindow(castle, false);
-                            // else order raze
+                            //   order raze
                         }
+
                     }
                 }
                 else
                 {
                     if (queue)
                         selArmy.orders.GiveOrder(new Order(Order.ID.Move, mouseOverTile.gridPos));
-                    else { 
+                    else
+                    {
                         selArmy.orders.ReplaceOrder(new Order(Order.ID.Move, mouseOverTile.gridPos));
-                    selArmy.movement.ResolveMovement();
-                }
+                        selArmy.movement.ResolveMovement();
+                    }
                 }
             }
         }
@@ -175,7 +174,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if (mouseOverTile != null)
         {
-            InterfaceManager.main.commandMenu.OpenAtPosition(Input.mousePosition) ;
+            InterfaceManager.main.commandMenu.OpenAtPosition(Input.mousePosition);
             InterfaceManager.main.commandMenu.OpenTileDetails(mouseOverTile);
         }
     }

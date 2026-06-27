@@ -301,5 +301,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c3adfe7c4e5dc47adc667f50425a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: {fileID: 0}
+  value: {fileID: 4080442587481136047}
   Progressbar: {fileID: 6998151724809694226}

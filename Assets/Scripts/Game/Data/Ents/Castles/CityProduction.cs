@@ -39,6 +39,12 @@ public class CityProduction : CityComponent
         base.OnTurnBegin();
         ForwardProduction();
     }
+    public float GetFirstItemLaborCost()
+    {
+        if (productionQueue.Count>0)
+            return productionQueue[0].costs[(int)EconomyDefines.EconomyResource.Labor].value;
+        return 0;
+    }
     void ForwardProduction()
     {
 

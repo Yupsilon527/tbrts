@@ -1,21 +1,23 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class CastleBuildTab : MonoBehaviour
 {
     public UnitContainerDescriptipn unitInfo;
-    public SelectableUnitContainer[] prodContainers;
+    public ProductionButton[] prodContainers;
 
     ProductionData selection;
     public void ShowProduction(ProductionData[] production)
     {
+        ClearSelection();
+        ClearProduction();
         for (int i = 0; i < prodContainers.Length; i++)
         {
             if (i < production.Length)
             {
+                var item = production[i];
                 prodContainers[i].ForData(production[i]);
                 prodContainers[i].gameObject.SetActive(true);
+                prodContainers[i].onClick = () => { Select(item); };
             }
             else
             {
@@ -23,13 +25,13 @@ public class CastleBuildTab : MonoBehaviour
             }
         }
     }
-    void Select()
+    void Select(ProductionData item)
     {
-
+        unitInfo.ForData(item);
     }
-    void ClearSelectiob()
+    void ClearSelection()
     {
-
+        unitInfo.Clear();
     }
     void ClearProduction()
     {

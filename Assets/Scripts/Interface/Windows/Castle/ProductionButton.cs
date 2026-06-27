@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ProductionButton : UnitContainer
 {
     public ProductionData produced;
+    public Button button;
+    public Action onClick;
     public ResourceValueIndicator[] abilityCosts;
 
     public void ForProduction()
@@ -24,5 +28,9 @@ public class ProductionButton : UnitContainer
                 abilityCosts[i].gameObject.SetActive(false);
             }
         }
+    }
+    public virtual void OnPressed()
+    {
+        onClick.Invoke();
     }
 }

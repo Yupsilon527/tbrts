@@ -11,6 +11,8 @@ public class CastleProductionWindow : TabWindow
         assignedCastle = castle;
         title.text = castle.customName;
         desc.text = castle.customDescription + "<br>Owner: " + (castle.GetPlayerOwner()?.Name ?? "None");
+
+        production.castle = castle;
     }
     public CastleBuildTab build;
     public CatleProductionTab production;

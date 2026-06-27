@@ -1,4 +1,3 @@
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,5 +15,12 @@ public class UnitContainer : MonoBehaviour
     {
         unitImage.sprite = data.icon;
         unitLabel.text = data.InternalName;
+    }
+    public virtual void ForData(ProductionTable data)
+    {
+    }
+    public virtual void Clear()
+    {
+
     }
 }
