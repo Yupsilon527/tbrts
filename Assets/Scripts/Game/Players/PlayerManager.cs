@@ -20,6 +20,20 @@ public class PlayerManager : GameComponent
         return players[playerTurn];
     }
 
+    public void CycleActivePlayer()
+    {
+        if (playerTurn == players.Length - 1)
+        {
+            ChangeActivePlayer(1);
+            GameManager.main.BeginNewTurn();
+        }
+        else ChangeActivePlayer(playerTurn + 1);
+    }
+    public void ChangeActivePlayer(int ap)
+    {
+        playerTurn++;
+    }
+
     public DataItemPlayer MakeNeutrals(CustomMap map)
     {
         DataItemPlayer neutrals = new DataItemPlayer(0, Color.gray);
@@ -34,7 +48,7 @@ public class PlayerManager : GameComponent
             neutrals.Name = map.NeutralName;
         neutrals.Team = -1;
         neutrals.faction = WorldManager.world.neutralFaction;
-        return  neutrals;
+        return neutrals;
     }
 
 

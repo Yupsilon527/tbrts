@@ -8,9 +8,12 @@ public class InterfaceManager : WindowManager
     public static InterfaceManager main;
 
     public InfoWindow infoWindow;
-    public CastleInfoWindow castleWindow;
     public ArmyInfoWindow armyWindow;
     public ArmyMergeWindow transferWindow;
+
+    public CastleProductionWindow castleWindow;
+    public CastleInfoWindow castleInfoWindow;
+    public CastleRazeWindow castleRazeWindow;
 
     public CommandMenu commandMenu;
     public MovementIndicator moveIndicator;
@@ -28,5 +31,12 @@ public class InterfaceManager : WindowManager
         gr.Raycast(ped, results);
 
         return results.Count > 0;
+    }
+    public void OpenCastleWindow(DataItemCastle castle, bool production)
+    {
+        castleWindow.Open();
+        castleWindow.AssignPlayer(castle.GetPlayerOwner());
+        castleWindow.SetCastle(castle);
+        castleWindow.OpenTab(production ? 1 : 0);
     }
 }

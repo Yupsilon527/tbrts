@@ -128,11 +128,10 @@ public class PlayerInputController : MonoBehaviour
                 else if (mouseOverTile.buildingLayer != null)
                 {
                     if (mouseOverTile.buildingLayer is DataItemCastle castle)
-                            InterfaceManager.main.infoWindow.ShowCastleInfo(castle);
-                }
-                else
-                {
-                    InterfaceManager.main.infoWindow.ShowTileInfo(mouseOverTile);
+                        if (castle.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned)
+                            InterfaceManager.main.OpenCastleWindow(castle, false);
+                    else
+                    InterfaceManager.main.infoWindow.ShowCastleInfo(castle);
                 }
             }
             else
@@ -151,10 +150,7 @@ public class PlayerInputController : MonoBehaviour
                             && castle.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned
                             && castle.IsVisibleToPlayer(GameManager.main.playerManager.GetActivePlayer()))
                         {
-                            if (selArmy.tile == mouseOverTile)
-                            {
-                                //invade castle
-                            }
+                            InterfaceManager.main.OpenCastleWindow(castle, false);
                             // else order raze
                         }
                     }

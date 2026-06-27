@@ -10,7 +10,6 @@ public class CityIncome : CityComponent
     {
         base.OnTurnBegin();
         Revision();
-        HandleIncome();
     }
     public override void Revision()
     {

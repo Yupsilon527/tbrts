@@ -70,8 +70,6 @@ public class CommandMenu : PlayerWindow
                             InterfaceManager.main.transferWindow.MergeUnits(selArmy, tile.armyLayer);
                         });
                     }
-                    e.Add("Select");
-                    a.Add(() => { GameManager.main.armyManager.SelectArmy(tile.armyLayer); });
                 }
             }
             else if (tile.IsAdjecent(selArmy.tile))
@@ -86,13 +84,16 @@ public class CommandMenu : PlayerWindow
             }
             if (tile.buildingLayer != null)
             {
-                //center + open production
-                //center + open info
-                //center´+ open armies
-
                 //Raze
                 //Explore ruin
             }
+        }
+        if (tile.armyLayer != null && tile.armyLayer.GetAlignment(player) == PlayerDefines.Alignment.playerowned)
+        {
+                e.Add("Select");
+                a.Add(() => {
+                        GameManager.main.armyManager.SelectArmy(tile.armyLayer);
+                });
         }
 
         LoadEntries(e.ToArray(), a.ToArray());
@@ -108,14 +109,8 @@ public class CommandMenu : PlayerWindow
         {
             if (castle.GetAlignment(player) == PlayerDefines.Alignment.playerowned)
             {
-                e.Add("Castle Info");
-                a.Add(() => { InterfaceManager.main.OpenWindow(InterfaceManager.main.castleWindow); });
-
-                if (castle.production.CanProduce())
-                {
-                    e.Add("Castle Production");
-                    a.Add(() => { InterfaceManager.main.OpenWindow(InterfaceManager.main.castleWindow); });
-                }
+                e.Add("Castle Production");
+                a.Add(() => { InterfaceManager.main.OpenCastleWindow(castle,true); });
 
             }
             else

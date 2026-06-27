@@ -42,7 +42,7 @@ public class GameManager : Initializable
     }
     public void EndTurn()
     {
-
+        playerManager.CycleActivePlayer();
     }
     public void BeginNewTurn()
     {
