@@ -13,14 +13,27 @@ public class UnitContainer : MonoBehaviour
     }
     public virtual void ForData(ProductionData data)
     {
+        if (data == null)
+        {
+            Clear();
+            return;
+        }
+        unitImage.enabled = true; 
         unitImage.sprite = data.icon;
         unitLabel.text = data.InternalName;
     }
-    public virtual void ForData(ProductionTable data)
+    public  void ForData(ProductionTable data)
     {
+        if (data == null)
+        {
+            Clear();
+            return;
+        }
+        ForData(data.production); ;
     }
     public virtual void Clear()
     {
-
+        unitImage.enabled = false;
+        unitLabel.text = "";
     }
 }

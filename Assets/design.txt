@@ -1,0 +1,28 @@
+Warlordslike* Turn based map* WC tileset
+Sprites:3x2Idle, attack 1, attack 2, cast/spell, hurt, walk
+Unit types:2 weapons (first row, 2nd row)Cav/inf have no 2nd row weaponSkirmisher has decent 1st row weaponArcher has shit 1st row weapon Actives * Cost AP? * Once per battle  * Or multiple times per battle & cost SPPassives * Block, dodge, retaliate  * Cost SP
+BlockCombat
+Linf - cheaper fodder unit, bonus vs cavalry* Mech (slow, bonus vs cavs) Larc - bonus vs linf, harc, stronger attack in 2nd row, skirmisher * InfantryLcav - faster, tougher, costier * Light tank (fast, cannot capture cities?)Lfly - separate from cav, anti skirm, archer, siege, swarmer* Recon? Can't capture 
+Hinf - tanky, weak to cavalry, hits multiple targets Harc - weak in 1st row, ok 2nd row, rnged ability, mage/damage support unitHcav - damage dealer, monster, overall good stats
+Healer/supportSiege* Catapult - long range attack (advance sars art) that deals full damage in castle * Misc: negates siege bonuses* Battering Ram/Siege Tower/Ents grant warding (imm to ranged attackers)
+SpellsLike Mewgenics Inflct damageDebuff (n battles or turns or till rested in castles)
+Resources * Gold* Crystal (low income, found initially on map)* Mana (from kills, income, dead troops, damage, etc)* Can have up to 10* Regenerates by 1 each turn, up to 3
+Combat* 3x2 armies* 3 phases: prep, action, heal* Actions cost 1AP or 1MP* Battle ends when all AP exhausted * Attacks: 1x1, back row, any, entire row, entire column * Abilities * Unit prios: targeting prio, ranged target prio (rams)
+Buildings* Act as upgrades; Units entering castle get all upgrades * Tiers; castle can only have one building from tier* Castle: unique, faction bonus* Tier 4: 50% prod, income, unique* Keep: enables troops, income * Smithy: AoE smithy (armor, attack)* Market (gold), iron mine (ore) econ* Barracks, stable, academy or workshop (1 each)* Castle (factionwjde unique upgrade, allows UU)* Support (shieldmaker, archery (thumb ring) etc)Towers/walls/,statue/clinic * grants temporary unit for range support (inside castle and outside)* grant bonus to troops inside castle 
+Skills* Ranged support * Some units can cast spells in overworld* Like Mewgenics * Tile targeted, Aoe, agecent
+Ability target* Most units (column)* Most armor* Most shield * Most pierce* Lowest hp* Highest hp* Highest attack * Doesn't have modifier* Calc bonuses* Priority overrides (ranged from 2nd row, melee from first row)
+Factions * Race: units, buildings* Leaders: UU, bonuses, unique techs* Can capture/occupy same faction, must raid/raze enemy
+Transports* 1x1, 1x2, 1x3, 2x2, 3x3* Override movement 
+Heroes * Experience, level up* Up to 3 spells
+
+Human: mana on win battles Linf: swordLcav: cavalryLrng: skirmisher (javelin)Lfly: dancing swordSupport: preist (healer)Siege catapult Boat galleon* Knight: cavs are healthierLinf knightHarc priestHcav cavalier UU boyar (bonus vs undead)* Academy: mage focusHcav mounted mageHarc archmageHinf spellblade (melee caster)UU pyromancer (weak combat strong spells)Preist >> white mage* Empire: naval/ecoHinf halbsShield archersHcav lionsUU hoplite (tuff slow inf)
+
+Norse: mana on raid/raze, cheap weak spellsLinf inuitLrng inuit fisherman Lcav wolf sledLfly: harpyMonk Shaman (reindeer mounted monk)Siege mammoth (hcav/siege hybrid)Boat longboat (cheaper)* Horse lordsHinf vikingHarc norse bowHcav Pegasus (Valkyrie)UU mage cav* Elep/bearHinf berserker Harc frostmageHcav polar bear riderUU bear archer* MythHinf yetiHarc trollHcav elkmanUU
+
+Orc: - Linf: orcLarc: orc slingerLcav: wriderLfly: biterSiege: goblin sappers (suicidal, deals pure damage to a unit)* Goblin: inf focus, numbersHinf goblinsHarc gob shaman Hcav spider riders* Ogres: large and powerful defensive Hinf: ogreHcav: giants, can walk over water* Orcs: no defenses, nomads, raiding 
+Dwarf: passive mana income Linf: smithsSkirm: axethrowersCav: runnersLfly: gargoyle * Surface dwarf: econHcav gryph riderUU gold golem: really costy really though* Dark dwarf: strong, slow, expensiveHcav: golems* War dwarf: guns & shit* Dragonlords:Hinf drag guardHarc dragon mageHcav dragonUU dragon
+Undead: blood slave (%chance to gain mana on killed)Linf: jaguar warrior (blood slave)Lrng: bloodslave (blood slave)Lcav: pumaLfly: wraithSupport blood mage (turn blood slave to mana)Boat: canoe (fast, small)Siege • PlaguelordsHinf zombie (spawn more zombies on kill)Harc plague doctor - doubles poisonHcav plague beast (poison)UU plague bearer - procs poison• Lichelords: necromancy focus (summon troops), magesHinf skelHarc NecromancerHcav skel cav* CountsHinf ghoulsHarc lichesHcav reaperUU vampire (vampirism, can eat blood slave)* Drowners: slow in water, siege shipsHinf pirate, boardingHarc cannonHcav UU UU ship, attacks other ship* Biopunk
+
+Insect - advisirs make manaLinf: antLarc: maggotLcav: mantisFly: waspSiege: scarabSupport advisor: generate manaTransport: floater, slow, regens units inside* Breeders: hinf are summoners, UU queen: support, summon hcav, harcWorm: siege, hinf* Adaptors: mutations 
+* Crustaceans: amph units Hcav mana on killsUU gains mana on kills, summoner
+Fey/conflux - double mana from sitesLinf: Larc: Lcav: Lfly: fairySupport unicorn Siege treant* Wood elfHinf elf infHarc elf arcHcav elf guardUU cav archer* Fairies Hinf Harc flying archerHcav rocUu unicorn * Centaur Hcav centaurHarc centaur archer UU pegataur* Naga: amphibian unitsHinf naga guardHarc medusaHcav hydraUU ship kraken

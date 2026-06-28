@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[Serializable]
 public class UpgradeData : TechData
 {
     public override AvailableState GetAvailableState(DataItemPlayer player, DataItemCastle castle)

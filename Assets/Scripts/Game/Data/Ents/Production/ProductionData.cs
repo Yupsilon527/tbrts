@@ -31,7 +31,17 @@ public abstract class ProductionData
         }
         return 0;
     }
-
+    public bool IsCompletelyFree(DataItemPlayer player)
+    {
+        var costs = GetCostForPlayer(player);
+        if (costs.Length > 0)
+        {
+            foreach (var cost in costs)
+                if (cost.value > 0)
+                    return false;
+        }
+        return true;
+    }
     public  AvailableState GetAvailableState(DataItemCastle castle)
     {
         return GetAvailableState(castle.GetPlayerOwner(),castle);
