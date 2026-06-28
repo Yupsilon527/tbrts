@@ -53,7 +53,9 @@ public abstract class ProductionData
                 return AvailableState.hidden;
             }
         }
-        return AvailableState.available;
+        if (player.econ.CanAffordResources(GetCostForPlayer(player)))
+            return AvailableState.available;
+        return AvailableState.unavailable;
     }
 
     public bool PrerequisiteMet(DataItemPlayer player, DataItemCastle castle, string prerequisite)

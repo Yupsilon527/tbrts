@@ -61,10 +61,4 @@ public class CityBonuses : CityComponent
         base.OnCastleRaze();
         upgrades.Clear();
     }
-
-    public bool CanBuildBuilding(BuildingData b)
-    {
-        return b.GetAvailableState(city) == ProductionData.AvailableState.available && !HasBuilding(b);
-    }
-
 }

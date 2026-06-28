@@ -88,8 +88,6 @@ public class CityProduction : CityComponent
         {
             var prodTable = new ProductionTable(city.GetPlayerOwner(), p, city);
 
-            if (!city.GetPlayerOwner().econ.CanAffordResources(prodTable.costs)) return;
-
             city.GetPlayerOwner().econ.SpendResources(prodTable.costs);
 
             if (instant || prodTable.costs[(int)EconomyDefines.EconomyResource.Labor].value == 0)
