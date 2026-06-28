@@ -38,20 +38,21 @@ public class GameManager : Initializable
         castleManager.redoCastleRegions();
 
         armyManager.GenerateTheArmiesFromEditorData(gen.mapData.MapData.armies);
-        BeginNewTurn();
+        BeginNewTurn(true);
     }
     public void EndTurn()
     {
         playerManager.CycleActivePlayer();
     }
-    public void BeginNewTurn()
+    public void BeginNewTurn(bool gamestart)
     {
-        foreach (var player in playerManager.players)
-            player.OnTurnBegin();
         foreach (var castle in castleManager.buildings)
             castle.OnTurnBegin();
         foreach (var army in armyManager.armies)
             army.OnTurnBegin();
+        if (gamestart) return;
+        foreach (var player in playerManager.players)
+            player.OnTurnBegin();
     }
     private void OnValidate()
     {

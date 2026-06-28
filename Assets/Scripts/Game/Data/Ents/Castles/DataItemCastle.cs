@@ -25,11 +25,20 @@ public class DataItemCastle : DataItemBuilding
         production = new(this);
         income = new(this);
         SetPlayerOwner(custom.ownership);
-        bonuses.        ApplyBonuses(); 
+        bonuses.ApplyBonuses();
     }
     public int GetSize()
     {
         return castleTiles.Count;
+    }
+    public override void SetPlayerOwner(DataItemPlayer player)
+    {
+        if (GetPlayerOwner() != null)
+        {
+            GetPlayerOwner().buildings.Remove(this);
+        }
+        base.SetPlayerOwner(player);
+        GetPlayerOwner().buildings.Add(this);
     }
     public override void ChangeTile(Vector2Int t, DisplayPositionChange position)
     {
@@ -107,7 +116,7 @@ public class DataItemCastle : DataItemBuilding
     }
     public bool AmIUnderAlliedControl()
     {
-        return GetGarrison().Sum(a => a?.GetAlignment(this) == PlayerDefines.Alignment.enemy ? 1 : 0) > 0;
+        return GetGarrison().Sum(a => a?.GetAlignment(this) == PlayerDefines.Alignment.enemy ? 1 : 0) == 0;
     }
 
     public bool BattleTroop(DataItemArmy Attacker, SidewaysTile Tile)
@@ -170,20 +179,6 @@ public class DataItemCastle : DataItemBuilding
         return Cost;
     }
     #endregion
-    public void OnNewTurnBegin()
-    {
-
-        if (RazeTurn > 0 && GameManager.main.currentTurn >= RazeTurn)
-        {
-            RebuildMe(GameManager.main.playerManager.neutrals);
-        }
-        else
-        {
-            bonuses.OnTurnBegin();
-            production.OnTurnBegin();
-            income.OnTurnBegin();
-        }
-    }
     #region Raze
     public void Demolish()
     {
@@ -212,28 +207,36 @@ public class DataItemCastle : DataItemBuilding
     public bool isRazed() { return GameManager.main.currentTurn < RazeTurn; }
     #endregion
     #region Income TODO
-   /* public int GetResourceIncome()
-    {
-        int res = game.RuleSet.DefaultResources + (int)GetBonus("resources");
+    /* public int GetResourceIncome()
+     {
+         int res = game.RuleSet.DefaultResources + (int)GetBonus("resources");
 
-        if (PlayerOwner.ID == Game.iNeutrals)
-        {
-            res = game.RuleSet.NeutralsStrength + (int)GetBonus("resources");
-        }
+         if (PlayerOwner.ID == Game.iNeutrals)
+         {
+             res = game.RuleSet.NeutralsStrength + (int)GetBonus("resources");
+         }
 
-        return res;
-    }
+         return res;
+     }
 
-    public int GetIncome()
-    {
-        return Game.iCastleIncomeBase * GetSize() + Game.iCastleIncomeLevel * GetLevel() + (int)GetBonus("income");
+     public int GetIncome()
+     {
+         return Game.iCastleIncomeBase * GetSize() + Game.iCastleIncomeLevel * GetLevel() + (int)GetBonus("income");
 
-    }*/
+     }*/
     #endregion
     public override void OnTurnBegin()
     {
         base.OnTurnBegin();
 
+
+        if (RazeTurn > 0 && GameManager.main.currentTurn >= RazeTurn)
+        {
+            RebuildMe(GameManager.main.playerManager.neutrals);
+        }
+        bonuses.OnTurnBegin();
+        production.OnTurnBegin();
+        income.OnTurnBegin();
 
         /*if (AmIUnderAlliedControl())
         {
@@ -272,7 +275,7 @@ public class DataItemCastle : DataItemBuilding
     #region LoS
     public override bool IsVisibleToPlayer(DataItemPlayer player)
     {
-        return castleTiles.Any(t => t.IsRevealedByPlayer(player,UnitDefines.TileVisibility.visible));
+        return castleTiles.Any(t => t.IsRevealedByPlayer(player, UnitDefines.TileVisibility.visible));
     }
 
     #endregion

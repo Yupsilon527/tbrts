@@ -19,7 +19,9 @@ MonoBehaviour:
     assignedWorld: 
     NeutralName: 
     neutralUnits: []
-    startingPlayerResources: []
+    startingPlayerResources:
+    - resource: 0
+      value: 10000
     players:
     - Name: Neutrals
       FactionName: 

@@ -225,6 +225,7 @@ public static class TerrainDefines
             switch (movement)
             {
                 case Movement.Ground:
+                case Movement.GroundFoot:
                     if (Elevation == Elevation.Forest)
                     {
                         return 3;
@@ -335,6 +336,7 @@ public static class TerrainDefines
             case Movement.NoMovement:
                 return false;
             case Movement.Ground:
+            case Movement.GroundFoot:
 
                 return elevation == Elevation.City || (elevation > Elevation.DeepSea &&
                 elevation < Elevation.Wall);

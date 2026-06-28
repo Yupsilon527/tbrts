@@ -27,7 +27,10 @@ public class CityProduction : CityComponent
         {
             if (unit.upgrade is BuildingData building)
             {
-                availableUnits.AddRange(building.production);
+                foreach (var unitID in building.production)
+                {
+                    availableUnits.Add(WorldManager.main.LoadUnit(unitID));
+                }
             }
         }
     }
@@ -57,16 +60,26 @@ public class CityProduction : CityComponent
                 var prod = productionQueue[0];
                 var costLabor = prod.costs[(int)EconomyDefines.EconomyResource.Labor].value;
 
-                if (iProductionTime > costLabor)
+                if (iProductionTime >= costLabor)
                 {
-                    productionQueue[0].CompleteProduction();
-                    RemoveProduction(0,false);
-                    if (ContinuousProduction)
+                    if (productionQueue[0].CompleteProduction())
                     {
-                        AddProduction(prod.production,false);
+                        RemoveProduction(0, false);
+                        if (ContinuousProduction)
+                        {
+                            AddProduction(prod.production, false);
+                        }
                     }
+                    else return;
                 }
+                else break;
             }
+            if (productionQueue.Count == 0)
+                iProductionTime = 0;
+        }
+        else
+        {
+            iProductionTime = 0;
         }
     }
     public bool CanProduce()
@@ -75,7 +88,6 @@ public class CityProduction : CityComponent
     }
     public bool CanProduce(ProductionData prod)
     {
-        if (prod.GetAvailableState(city) != ProductionData.AvailableState.available) return false;
         if (prod is UnitData unit)
             return GetValidTileForArmy(unit) != null;
         else if (prod is BuildingData building)
@@ -84,7 +96,7 @@ public class CityProduction : CityComponent
     }
     public void AddProduction(ProductionData p, bool instant)
     {
-        if (CanProduce(p))
+        if (p.GetAvailableState(city) == ProductionData.AvailableState.available  && CanProduce(p))
         {
             var prodTable = new ProductionTable(city.GetPlayerOwner(), p, city);
 

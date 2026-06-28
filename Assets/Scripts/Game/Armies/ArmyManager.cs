@@ -28,20 +28,24 @@ public class ArmyManager : EntityManager
     }
     public static DataItemUnit SpawnUnit(UnitData uData, DataItemPlayer Player, SidewaysTile tTile)
     {
-        return SpawnUnit( uData, Player, tTile, null);
+        return SpawnUnitInCastle( uData, Player, tTile, null);
     }
-    public static DataItemUnit SpawnUnit(UnitData uData, DataItemPlayer Player, SidewaysTile tTile, DataItemCastle myCastle)
+    public static DataItemUnit SpawnUnitInCastle(UnitData uData, DataItemPlayer Player, SidewaysTile tTile, DataItemCastle myCastle)
     {
         if (tTile == null)
         {
             return null;
         }
-
         DataItemArmy newArmy = tTile.armyLayer;
-        if (newArmy == null || !newArmy.formation.CanIAccept(uData.GetCommandValue()))
+
+        if (newArmy == null || newArmy.formation.CanIAccept(uData))
         {
-            newArmy = new DataItemArmy(tTile.gridPos, Player.ID);
-            //Panty.Exhaust();
+            var newTile = GameManager.main.map.GetClosestToPoint(tTile.gridPos, uData.GetMovetype(), empty: true);
+            if (newTile != null)
+                newArmy = new DataItemArmy(newTile.gridPos, myCastle.GetPlayerOwner().ID);
+            else 
+                return null;
+
         }
 
         DataItemUnit Zim = new DataItemUnit(  uData, newArmy);
@@ -55,6 +59,17 @@ public class ArmyManager : EntityManager
         myCastle.bonuses.ApplyResearchedUpgradeToNewlySpawnedUnit(Zim);
         Zim.FireEventOnSelf(AbilityDefines.Event.OnSpawn);
 
+        return Zim;
+    }
+    public static DataItemUnit SpawnUnit(UnitData uData, DataItemArmy army, DataItemCastle myCastle)
+    {
+
+
+
+        DataItemUnit Zim = new DataItemUnit(uData, army);
+        army.GetPlayerOwner().upgrades.ApplyResearchedUpgradeToNewlySpawnedUnit(Zim);
+        myCastle.bonuses.ApplyResearchedUpgradeToNewlySpawnedUnit(Zim);
+        Zim.FireEventOnSelf(AbilityDefines.Event.OnSpawn);
         return Zim;
     }
 

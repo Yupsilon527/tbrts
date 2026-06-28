@@ -27,9 +27,10 @@ public class UpgradeData : TechData
 
         player.econ.ReviseRealIncome();
     }
-    public override void CompleteProduction(ProductionTable table)
+    public override bool CompleteProduction(ProductionTable table)
     {
         table.playerOwner.upgrades.upgrades.CompleteUpgrade(this, 1);
+        return true;
     }
     public override ResourceCost[] GetCostForPlayer(DataItemPlayer player, float mult = 1)
     {

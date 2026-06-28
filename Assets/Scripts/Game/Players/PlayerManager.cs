@@ -22,16 +22,17 @@ public class PlayerManager : GameComponent
 
     public void CycleActivePlayer()
     {
-        if (playerTurn == players.Length - 1)
+        int next = playerTurn + 1;
+        if (next >= players.Length - 1)
         {
             ChangeActivePlayer(1);
-            GameManager.main.BeginNewTurn();
+            GameManager.main.BeginNewTurn(false);
         }
-        else ChangeActivePlayer(playerTurn + 1);
+        else ChangeActivePlayer(next);
     }
     public void ChangeActivePlayer(int ap)
     {
-        playerTurn++;
+        playerTurn = ap;
     }
 
     public DataItemPlayer MakeNeutrals(CustomMap map)

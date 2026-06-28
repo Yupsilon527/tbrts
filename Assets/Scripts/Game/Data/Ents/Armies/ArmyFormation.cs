@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class ArmyFormation : ArmyComponent
 {
@@ -13,10 +12,11 @@ public class ArmyFormation : ArmyComponent
     {
     }
 
-    public DataItemUnit[] GetUnits()
+    public DataItemUnit[] GetUnits(bool incTransport = true)
     {
         List<DataItemUnit> units = new();
         units.AddRange(Formation);
+        if (incTransport) 
         units.Add(transport);
         units.RemoveAll(u => u == null);
         return units.ToArray();
@@ -99,13 +99,13 @@ public class ArmyFormation : ArmyComponent
         {
             if (unit.troop != null)
             {
-                unit.troop.formation.RemoveTroop(transport, false);
+                unit.troop.formation.RemoveTroop(unit, false);
             }
 
 
-            for (int iX = 0; iX < UnitDefines.iArmyRows; iX++)
+            for (int iX = 0; iX < UnitDefines.iArmyCols; iX++)
             {
-                for (int iY = 0; iY < UnitDefines.iArmyCols; iY++)
+                for (int iY = 0; iY < UnitDefines.iArmyRows; iY++)
                 {
                     int rY = unit.IsRanged() ? (UnitDefines.iArmyCols - iY - 1) : iY;
                     if (IsEmptyAt(iX, rY))
@@ -221,7 +221,7 @@ public class ArmyFormation : ArmyComponent
         {
             return transport == null;
         }
-        return GetUnits().Count() < UnitDefines.iMaxTroopStack && GetCommandValue() + Value <= GetMaxCommand();
+        return GetUnits(false).Count() < UnitDefines.iMaxTroopStack && GetCommandValue() + Value <= GetMaxCommand();
     }
     public int GetCommandValue()
     {

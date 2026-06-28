@@ -67,7 +67,7 @@ public class PlayerInputController : MonoBehaviour
     #endregion
     private void Update()
     {
-        if (InterfaceManager.main.IsMouseOverUI())
+        if (InterfaceManager.main.IsMouseOverUI() )
             return;
         TrackMouseTile();
         HandlePlayerOrders();

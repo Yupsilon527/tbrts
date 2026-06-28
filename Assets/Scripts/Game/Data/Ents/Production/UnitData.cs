@@ -11,7 +11,7 @@ public class UnitData : ProductionData
     public WeaponData[] weapons;
     public SpellData[] spells;
     public AbilityData[] abilities;
-    public override AvailableState GetAvailableState(DataItemPlayer player,DataItemCastle castle)
+    public override AvailableState GetAvailableState(DataItemPlayer player, DataItemCastle castle)
     {
         var avs = base.GetAvailableState(player, castle);
         if (avs == AvailableState.available && !player.econ.CanAffordResources(GetCostForPlayer(player)))
@@ -36,9 +36,24 @@ public class UnitData : ProductionData
     {
         return armySprites[id];
     }
-    public override void CompleteProduction(ProductionTable table)
+    public override bool CompleteProduction(ProductionTable table)
     {
-        // PlayerController.main.troopMan.SpawnBannerAtPoint(this, table.point, table.playerOwner);
+        foreach (var troop in table.castle.GetGarrison())
+        {
+            if (troop == null) continue;
+            if (troop.GetAlignment(table.castle) == PlayerDefines.Alignment.playerowned && troop.formation.CanIAccept(this))
+            {
+                ArmyManager.SpawnUnit(this, troop, table.castle);
+                return true;
+            }
+        }
+        if (table.castle.production.GetValidTileForArmy(this) is SidewaysTile tile)
+        {
+            if ( ArmyManager.SpawnUnitInCastle(this, table.playerOwner, tile, table.castle) != null)
+                return true;
+        }
+        return false;
+
     }
     public override ResourceCost[] GetCostForPlayer(DataItemPlayer player, float mult = 1)
     {

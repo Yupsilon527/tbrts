@@ -157,7 +157,6 @@ public class DataItemArmy : DataItemObject
         }
         GetPlayerOwner().units.Add(this);
         orders.Clear();
-        display?.OnPlayerOwnerChange();
     }
 
     public void ApplyEffect(ApplyEffects effect) { }

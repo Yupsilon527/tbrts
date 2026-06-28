@@ -111,13 +111,13 @@ public class SidewaysMap : MonoBehaviour
         }
         return found.ToArray();
     }
-    public SidewaysTile GetClosestToPoint(SidewaysTile position, TerrainDefines.Movement movement, float maxDistance = Mathf.Infinity)
+    public SidewaysTile GetClosestToPoint(SidewaysTile position, TerrainDefines.Movement movement, float maxDistance = Mathf.Infinity, bool empty = false)
     {
-        if (position.IsPassible(movement) && position.armyLayer == null)
+        if (position.IsPassible(movement) && (position.armyLayer == null ||!empty))
             return position;
         return GetClosestToPoint(position.gridPos, movement, maxDistance) ;
     }
-    public SidewaysTile GetClosestToPoint(Vector2Int point, TerrainDefines.Movement movement, float maxDistance = Mathf.Infinity)
+    public SidewaysTile GetClosestToPoint(Vector2Int point, TerrainDefines.Movement movement, float maxDistance = Mathf.Infinity, bool empty = false)
     {
         List<SidewaysTile> openlist = new List<SidewaysTile>
         {
@@ -129,7 +129,7 @@ public class SidewaysMap : MonoBehaviour
         {
             if (openlist[0] != null)
             {
-                if (openlist[0].IsPassible(movement))
+                if (openlist[0].IsPassible(movement) && (!empty|| openlist[0].armyLayer == null))
                     return openlist[0];
                 
                     foreach (var neighbor in openlist[0].neighbors)

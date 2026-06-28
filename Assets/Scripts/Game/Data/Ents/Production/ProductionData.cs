@@ -127,9 +127,9 @@ public abstract class ProductionData
         }
         return false;
     }
-    public virtual void CompleteProduction(ProductionTable table)
+    public virtual bool CompleteProduction(ProductionTable table)
     {
-
+        return true;
     }
     public virtual bool IsValidPosition(Vector2Int origin)
     {
@@ -171,15 +171,15 @@ public class ProductionTable
     public ProductionTable(DataItemPlayer playerOwner, ProductionData production, DataItemCastle producer = null,  float percent = 0)
     {
         this.playerOwner = playerOwner;
-        this.producer = producer;
+        this.castle = producer;
         this.percent = percent;
         this.production = production;
         costs = production.GetCostForPlayer(playerOwner);
     }
-    public DataItemPlayer playerOwner; public DataItemCastle producer;public ProductionData production; public float percent = 1; public float costPercent = 1; public ResourceCost[] costs;
+    public DataItemPlayer playerOwner; public DataItemCastle castle;public ProductionData production; public float percent = 1; public float costPercent = 1; public ResourceCost[] costs;
 
-    public void CompleteProduction()
+    public bool CompleteProduction()
     {
-        production.CompleteProduction(this);
+      return  production.CompleteProduction(this);
     }
 }

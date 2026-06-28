@@ -80,6 +80,12 @@ public class DataItemPlayer
     }
     public void OnTurnBegin()
     {
-
+        foreach (var city in buildings)
+        {
+            for (int i = 0; i< city.income.baseIncome.Length; i++)
+            {
+                econ.GiveResource((EconomyDefines.EconomyResource)i, city.income.baseIncome[i]);
+            }
+        }
     }
 }

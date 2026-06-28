@@ -5,7 +5,7 @@ using UnityEngine;
 public class BuildingData : TechData
 {
     [Header("Production")]
-    public UnitData[] production;
+    public string[] production;
     [Header("Income")]
     public ResourceIncome[] income;
     [Header("Aura/Bonuses")]    //TODO
@@ -20,8 +20,9 @@ public class BuildingData : TechData
     {
         return income.Sum(i => i.resource == resource ? i.value : 0);
     }
-    public override void CompleteProduction(ProductionTable table)
+    public override bool CompleteProduction(ProductionTable table)
     {
-        table.producer.bonuses.BuildBuilding(this,1,true);
+        table.castle.bonuses.BuildBuilding(this,1,true);
+        return true;
     }
 }

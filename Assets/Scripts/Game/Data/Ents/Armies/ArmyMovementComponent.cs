@@ -9,6 +9,7 @@ public class ArmyMovementComponent : ArmyComponent
 
     public ArmyMovementComponent(DataItemArmy parent) : base(parent)
     {
+        movementLeft = 0;
     }
 
     public TerrainDefines.Movement GetMyMovement()
@@ -105,13 +106,13 @@ public class ArmyMovementComponent : ArmyComponent
             {
                 if (parent.orders.OrderPass())
                 {
-                        parent.orders.AdvanceOrder();
+                    parent.orders.AdvanceOrder();
                 }
                 else
                 {
                     var firstOrder = parent.orders.GetCurrentOrder();
                     var next = firstOrder?.path?.Next() ?? null;
-                    if (next!=null && firstOrder.path.failure != Astar.Failure.impossible && firstOrder.path.failure != Astar.Failure.impassible_origin && firstOrder.path.failure != Astar.Failure.impassible_target)
+                    if (next != null && firstOrder.path.failure != Astar.Failure.impossible && firstOrder.path.failure != Astar.Failure.impassible_origin && firstOrder.path.failure != Astar.Failure.impassible_target)
                     {
                         parent.MoveToTile(next.gridPos, false);
                     }

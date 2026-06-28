@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DataFaction : BaseData
 {
@@ -37,21 +38,25 @@ public class DataFaction : BaseData
     public List<UnitData> GetRecruitableArmies(bool neutral)
     {
         List<UnitData> ProductionArmies = new List<UnitData>();
-        if (neutral|| WorldManager.world.NeutralArmiesAreDefault)
+        if (neutral || WorldManager.world.NeutralArmiesAreDefault)
         {
-            foreach (var Panty in WorldManager.world.neutralFaction.availableBuildings)
+            foreach (var building in WorldManager.world.neutralFaction.availableBuildings)
             {
-                ProductionArmies.AddRange(Panty.production);
+                foreach (var unitID in building.production)
+                {
+                    ProductionArmies.Add(WorldManager.main.LoadUnit(unitID));
+                }
             }
         }
-        foreach (var Stocking in availableBuildings)
+        foreach (var building in availableBuildings)
         {
-            foreach (var Panty in Stocking.production) { 
-            if (!ProductionArmies.Contains(Panty))
+            foreach (var Panty in building.production)
             {
-                ProductionArmies.Add(Panty);
+                foreach (var unitID in building.production)
+                {
+                    ProductionArmies.Add(WorldManager.main.LoadUnit(unitID));
+                }
             }
-        }
         }
         return ProductionArmies;
     }
@@ -83,7 +88,7 @@ public class DataFaction : BaseData
         List<UnitData> AvailableArmies = new List<UnitData>();
         foreach (UnitData Panty in GetRecruitableArmies(neutrals))
         {
-            if (Panty.HasAbility(Ability) )
+            if (Panty.HasAbility(Ability))
             {
                 AvailableArmies.Add(Panty);
             }
