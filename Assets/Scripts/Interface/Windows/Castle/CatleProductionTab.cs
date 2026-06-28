@@ -39,7 +39,7 @@ public class CatleProductionTab : MonoBehaviour
                 production[i].gameObject.SetActive(true);
                 if (i < castle.production.productionQueue.Count && castle.production.productionQueue[i] is ProductionTable table)
                 {
-                    production[i].ForData(table);
+                    production[i].ForTable(table);
                 }
                 else
                 {

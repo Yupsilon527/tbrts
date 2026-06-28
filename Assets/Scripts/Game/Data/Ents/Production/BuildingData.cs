@@ -10,6 +10,12 @@ public class BuildingData : TechData
     public ResourceIncome[] income;
     [Header("Aura/Bonuses")]    //TODO
     public UpgradeData[] passiveBonuses;
+    public override AvailableState GetAvailableState(DataItemPlayer player, DataItemCastle castle)
+    {
+        if (castle.bonuses.HasBuilding(this))
+            return AvailableState.hidden;
+            return base.GetAvailableState(player, castle);
+    }
     public float GetResourceIncome(EconomyDefines.IncomeResource resource)
     {
         return income.Sum(i => i.resource == resource ? i.value : 0);

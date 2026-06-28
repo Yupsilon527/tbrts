@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcddf7723cb65e54e8d83f4a6c080f98, type: 3}
-  m_Name: Neutrals
+  m_Name: Fantasy Neutrals
   m_EditorClassIdentifier: 
   InternalName: Barbarians
-  AssignedWorld: Etheria
+  AssignedWorld: Fantasy
   character: {fileID: 11400000, guid: 33a926e142d4a8f4e8cc0f669517a559, type: 2}
   startingResources: []
   startingIncome: []
   innateUpgrades: []
-  producedUnits:
-  - {fileID: 11400000, guid: b47cc2297ab165546996f3f54370d6fc, type: 2}
-  buildings: []
+  buildings:
+  - {fileID: 11400000, guid: 7fcc1ea829ce68346b2554a529e7693f, type: 2}
+  - {fileID: 11400000, guid: 8d487c5c4270318459df288c10033324, type: 2}
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}

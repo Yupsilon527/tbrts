@@ -25,6 +25,7 @@ public class DataItemCastle : DataItemBuilding
         production = new(this);
         income = new(this);
         SetPlayerOwner(custom.ownership);
+        bonuses.        ApplyBonuses(); 
     }
     public int GetSize()
     {

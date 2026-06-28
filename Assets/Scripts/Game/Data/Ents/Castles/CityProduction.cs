@@ -92,7 +92,7 @@ public class CityProduction : CityComponent
 
             city.GetPlayerOwner().econ.SpendResources(prodTable.costs);
 
-            if (instant)
+            if (instant || prodTable.costs[(int)EconomyDefines.EconomyResource.Labor].value == 0)
             {
 
                 prodTable.CompleteProduction();

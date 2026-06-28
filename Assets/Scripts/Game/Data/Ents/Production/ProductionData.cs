@@ -11,8 +11,6 @@ public abstract class ProductionData
     public enum AvailableState
     {
         available,
-        greyedout,
-        greyedoutNocost,
         unavailable,
         hidden,
     }
@@ -52,7 +50,7 @@ public abstract class ProductionData
         {
             if (!PrerequisiteMet(player, castle, prerequisite))
             {
-                return AvailableState.greyedoutNocost;
+                return AvailableState.hidden;
             }
         }
         return AvailableState.available;

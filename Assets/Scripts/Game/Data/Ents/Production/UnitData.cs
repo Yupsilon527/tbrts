@@ -16,7 +16,7 @@ public class UnitData : ProductionData
         var avs = base.GetAvailableState(player, castle);
         if (avs == AvailableState.available && !player.econ.CanAffordResources(GetCostForPlayer(player)))
         {
-            return AvailableState.greyedout;
+            return AvailableState.unavailable;
         }
         return avs;
     }

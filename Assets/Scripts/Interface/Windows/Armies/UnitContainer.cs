@@ -22,7 +22,7 @@ public class UnitContainer : MonoBehaviour
         unitImage.sprite = data.icon;
         unitLabel.text = data.InternalName;
     }
-    public  void ForData(ProductionTable data)
+    public virtual void ForTable(ProductionTable data)
     {
         if (data == null)
         {
@@ -33,7 +33,9 @@ public class UnitContainer : MonoBehaviour
     }
     public virtual void Clear()
     {
+        if (unitImage != null) 
         unitImage.enabled = false;
-        unitLabel.text = "";
+        if (unitLabel != null)
+            unitLabel.text = "";
     }
 }

@@ -282,7 +282,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2719278467534300101, guid: a601884728c52b04ba61b5ad30ab63f9, type: 3}
       propertyPath: m_Name
-      value: Unit Container Variant
+      value: Unit Container Desc
       objectReference: {fileID: 0}
     - target: {fileID: 6956776700278441451, guid: a601884728c52b04ba61b5ad30ab63f9, type: 3}
       propertyPath: m_Pivot.x
@@ -471,5 +471,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitImage: {fileID: 926850203399200595}
-  unitLabel: {fileID: 0}
-  description: {fileID: 0}
+  unitLabel: {fileID: 6912464540069282050}
+  description: {fileID: 3473949586965354172}

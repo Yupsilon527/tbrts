@@ -1,9 +1,13 @@
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CastleBuildTab : MonoBehaviour
 {
     public UnitContainerDescriptipn unitInfo;
     public ProductionButton[] prodContainers;
+
+    public Button productionButton;
 
     ProductionData selection;
     public void ShowProduction(ProductionData[] production)
@@ -27,17 +31,28 @@ public class CastleBuildTab : MonoBehaviour
     }
     void Select(ProductionData item)
     {
-        unitInfo.ForData(item);
+        selection = item;
+        unitInfo.ForData(selection);
+        productionButton.enabled = item.GetAvailableState(InterfaceManager.main.castleWindow.assignedCastle) == ProductionData.AvailableState.available;
     }
     void ClearSelection()
     {
+        selection = null;
         unitInfo.Clear();
+        productionButton.enabled = false;
     }
     void ClearProduction()
     {
         foreach (var container in prodContainers)
         {
             container.gameObject.SetActive(false);
+        }
+    }
+    public void ProduceSelectedUnit()
+    {
+        if (selection!=null)
+        {
+            InterfaceManager.main.castleWindow.QueueProduction(selection);
         }
     }
 }

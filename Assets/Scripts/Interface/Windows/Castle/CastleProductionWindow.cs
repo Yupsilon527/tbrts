@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -12,18 +13,23 @@ public class CastleProductionWindow : TabWindow
         title.text = castle.customName;
         desc.text = castle.customDescription + "<br>Owner: " + (castle.GetPlayerOwner()?.Name ?? "None");
 
-        production.castle = castle;
+        prodTab.castle = castle;
     }
-    public CastleBuildTab build;
-    public CatleProductionTab production;
+    public CastleBuildTab buildTab;
+    public CatleProductionTab prodTab;
     public void OpenArmyProduction()
     {
-        OpenTabGameObject(build.gameObject);
-        build.ShowProduction(assignedCastle.production.availableUnits.ToArray());
+        OpenTabGameObject(buildTab.gameObject);
+        buildTab.ShowProduction(assignedCastle.production.availableUnits.Where(u=>u.GetAvailableState(assignedCastle) != ProductionData.AvailableState.hidden).ToArray());
     }
     public void OpenBuildingProduction()
     {
-        OpenTabGameObject(build.gameObject);
-        build.ShowProduction(assignedCastle.GetPlayerOwner().faction.availableBuildings);
+        OpenTabGameObject(buildTab.gameObject);
+        buildTab.ShowProduction(assignedCastle.GetPlayerOwner().faction.GetAvailableUpgrades(false).Where(u => u.GetAvailableState(assignedCastle) != ProductionData.AvailableState.hidden).ToArray());
+    }
+    public void QueueProduction(ProductionData p)
+    {
+        assignedCastle.production.AddProduction(p, false);
+        OpenTabGameObject(prodTab.gameObject) ;
     }
 }

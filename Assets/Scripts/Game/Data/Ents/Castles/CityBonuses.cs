@@ -1,13 +1,10 @@
-
-using UnityEngine;
-
 public class CityBonuses : CityComponent
 {
     public UpgradeList upgrades;
     public CityBonuses(DataItemCastle city) : base(city)
     {
         upgrades = new UpgradeList();
-        upgrades.onUpgradeLevelChange += (upgrade, oldLevel, newLevel) => {
+        upgrades.onUpgradeLevelChange += (upgrade, newLevel, oldLevel) => {
             BuildBuilding(upgrade, newLevel - oldLevel,true) ;
         };
     }
@@ -25,10 +22,10 @@ public class CityBonuses : CityComponent
             city.income.Revision();
         }
     }
-    void ApplyBonuses()
+    public void ApplyBonuses()
     {
         var playerOwner = city.GetPlayerOwner();
-        foreach (var b in playerOwner.faction.availableBuildings)
+        foreach (var b in playerOwner.faction.GetAvailableUpgrades(false))
         {
             if (!HasBuilding(b) && b.GetAvailableState(playerOwner, city) == ProductionData.AvailableState.available && b.IsCompletelyFree(playerOwner))
             {
@@ -38,7 +35,7 @@ public class CityBonuses : CityComponent
     }
     public bool HasBuilding(BuildingData b)
     {
-        return HasBuilding(b.InternalName.ToLower());
+        return HasBuilding(b.InternalName);
     }
     public bool HasBuilding(string name)
     {
@@ -46,6 +43,7 @@ public class CityBonuses : CityComponent
     }
     void ApplyUpgradeToAllUnits(DataItemArmy army, TechData upgrade, int levels)
     {
+        if (army == null) return;
         foreach (var unit in army.formation.GetUnits())
         {
             unit.upgrades.upgrades.CompleteUpgrade(upgrade, levels);

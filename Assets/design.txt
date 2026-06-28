@@ -1,4 +1,6 @@
-Warlordslike* Turn based map* WC tileset
+Warlordslike
+* Turn based map
+* WC tileset
 Sprites:3x2Idle, attack 1, attack 2, cast/spell, hurt, walk
 Unit types:2 weapons (first row, 2nd row)Cav/inf have no 2nd row weaponSkirmisher has decent 1st row weaponArcher has shit 1st row weapon Actives * Cost AP? * Once per battle  * Or multiple times per battle & cost SPPassives * Block, dodge, retaliate  * Cost SP
 BlockCombat
@@ -6,9 +8,31 @@ Linf - cheaper fodder unit, bonus vs cavalry* Mech (slow, bonus vs cavs) Larc -
 Hinf - tanky, weak to cavalry, hits multiple targets Harc - weak in 1st row, ok 2nd row, rnged ability, mage/damage support unitHcav - damage dealer, monster, overall good stats
 Healer/supportSiege* Catapult - long range attack (advance sars art) that deals full damage in castle * Misc: negates siege bonuses* Battering Ram/Siege Tower/Ents grant warding (imm to ranged attackers)
 SpellsLike Mewgenics Inflct damageDebuff (n battles or turns or till rested in castles)
-Resources * Gold* Crystal (low income, found initially on map)* Mana (from kills, income, dead troops, damage, etc)* Can have up to 10* Regenerates by 1 each turn, up to 3
-Combat* 3x2 armies* 3 phases: prep, action, heal* Actions cost 1AP or 1MP* Battle ends when all AP exhausted * Attacks: 1x1, back row, any, entire row, entire column * Abilities * Unit prios: targeting prio, ranged target prio (rams)
-Buildings* Act as upgrades; Units entering castle get all upgrades * Tiers; castle can only have one building from tier* Castle: unique, faction bonus* Tier 4: 50% prod, income, unique* Keep: enables troops, income * Smithy: AoE smithy (armor, attack)* Market (gold), iron mine (ore) econ* Barracks, stable, academy or workshop (1 each)* Castle (factionwjde unique upgrade, allows UU)* Support (shieldmaker, archery (thumb ring) etc)Towers/walls/,statue/clinic * grants temporary unit for range support (inside castle and outside)* grant bonus to troops inside castle 
+Resources
+* Gold* Crystal (low income, found initially on map)
+* Mana (from kills, income, dead troops, damage, etc)
+* Can have up to 10* Regenerates by 1 each turn, up to 3
+Combat
+* 3x2 armies
+* 3 phases: prep, action, heal
+* Actions cost 1AP or 1MP
+* Battle ends when all AP exhausted
+* Attacks: 1x1, back row, any, entire row, entire column
+* Abilities
+* Unit prios: targeting prio, ranged target prio (rams)
+Buildings
+* Act as upgrades; Units entering castle get all upgrades
+* Tiers; castle can only have one building from tier
+* Castle: unique, faction bonus
+* Tier 4: 50% prod, income, unique
+* Keep: enables troops, income 
+* Smithy: AoE smithy (armor, attack)
+* Market (gold), iron mine (ore) econ
+* Barracks, stable, academy or workshop (1 each)
+* Castle (factionwjde unique upgrade, allows UU)
+* Support (shieldmaker, archery (thumb ring) etc)Towers/walls/,statue/clinic
+* grants temporary unit for range support (inside castle and outside)
+* grant bonus to troops inside castle 
 Skills* Ranged support * Some units can cast spells in overworld* Like Mewgenics * Tile targeted, Aoe, agecent
 Ability target* Most units (column)* Most armor* Most shield * Most pierce* Lowest hp* Highest hp* Highest attack * Doesn't have modifier* Calc bonuses* Priority overrides (ranged from 2nd row, melee from first row)
 Factions * Race: units, buildings* Leaders: UU, bonuses, unique techs* Can capture/occupy same faction, must raid/raze enemy

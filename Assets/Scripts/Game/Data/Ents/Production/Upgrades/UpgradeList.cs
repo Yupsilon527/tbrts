@@ -24,7 +24,7 @@ public class UpgradeList
     public void CompleteUpgrade(TechData upgrade, int levels = 1) =>
         SetUpgradeLevel(upgrade, GetUpgradeLevel(upgrade) + levels);
     public bool UpgradeResearched(string name) =>
-        researchedUpgrades.Any(x => x.level > 0 && x.upgrade.InternalName == name);
+        researchedUpgrades.Any(x => x.level > 0 && x.upgrade.InternalName.ToLower() == name.ToLower());
 
 
     public void SetUpgradeLevel(TechData upgrade, int newLevel)
@@ -40,7 +40,10 @@ public class UpgradeList
         if (newLevel == oldLevel) return;
 
         if (existing == null)
-            researchedUpgrades.Add(existing = new ResearchedUpgrade(upgrade));
+        {
+            existing = new ResearchedUpgrade(upgrade);
+            researchedUpgrades.Add(existing);
+        }
 
         onUpgradeLevelChange.Invoke(upgrade, newLevel, oldLevel);
         existing.level = newLevel;

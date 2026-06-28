@@ -8,11 +8,11 @@ public class UpgradeData : TechData
     {
         if (player.upgrades.upgrades.HasReachedLimitForUpgrade(this))
         {
-            return AvailableState.unavailable;
+            return AvailableState.hidden;
         }
         else if (prerequisites.Length == 1 && !PrerequisiteMet(player, castle, prerequisites[0]))
         {
-            return AvailableState.unavailable;
+            return AvailableState.hidden;
         }
         else return base.GetAvailableState(player, castle);
     }

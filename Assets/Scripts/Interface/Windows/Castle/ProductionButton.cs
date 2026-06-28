@@ -1,17 +1,36 @@
-using System;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class ProductionButton : UnitContainer
 {
     public ProductionData produced;
     public Button button;
-    public Action onClick;
+    public System.Action onClick;
     public ResourceValueIndicator[] abilityCosts;
 
-    public void ForProduction()
+    public override void ForData(ProductionData data)
     {
-        ShowCosts(produced.GetCostForPlayer(GameManager.main.playerManager.currentPlayer));
+        base.ForData(data);
+        produced = data;
+        ShowCosts(data.GetCostForPlayer(GameManager.main.playerManager.currentPlayer));
+    }
+    public override void ForTable(ProductionTable data)
+    {
+        base.ForTable(data);
+        ShowCosts(produced.costs);
+    }
+    public override void ForUnit(DataItemUnit unit)
+    {
+        base.ForUnit(unit);
+        produced = unit.data;
+        ShowCosts(unit.data.GetCostForPlayer(GameManager.main.playerManager.currentPlayer));
+    }
+    public override void Clear()
+    {
+        base.Clear();
+        foreach (var cost  in abilityCosts)
+        {
+            cost.gameObject.SetActive(false);
+        }
     }
     void ShowCosts(ResourceCost[] costs)
     {
