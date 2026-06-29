@@ -1,54 +1,69 @@
 TODO
-	army manager
-		moving alrmies
-			all at once
-			just one
-		next idle
-
-
-	REDO RAZE ORDER
-		rebuild razed
-		raze enemy
-		nothing if allied
-
-	raze mode
-		raid - get gold
-		sack - raid´+ destroy defense
-		occupy - occupy
-		raze - destroy city, gain gold
-
-	army window
-		quick transfer
-		apply
-		undo
-
-		(only 1 army)
-
-		right click army inside castle to PRODUCE INSIDE
-
-	castle window
-		current buildings
-
-		invade
+	abilities
+		bonus type:
+			upgrade (granted to units in castle)
+			* modifier
+			* ability
+			* spell
+			* stats
+			Banner - grants all inside castle, all inside troop
+			Aura - all in castle region/within range
+			* modifier
+			* ability
+			* stats
+			
+	weapon data logic
+		
 
 	combat window
+		* 3x2 armies
+		* 3 phases: prep, action, heal
+		* Actions cost 1AP or 1MP
+		* Battle ends when all AP exhausted
+		* Attacks: 1x1, back row, any, entire row, entire column
+		* Abilities
+		* Unit prios: targeting prio, ranged target prio (rams)
 
 	(try with 2 armies)
 			
+	army innates
+		raiding bonuses
+		auras
+		troop divine shield?, haste, slow
+		regen for SP
+		attrition for SP
+		move faster SP
+		ranged support for SP
+		spend SP to move (gas)
+		spend SP to regen
 
-	auras
-	troop divine shield?
+		Resources
+		* Gold* Crystal (low income, found initially on map)
+		* Mana (from kills, income, dead troops, damage, etc)
+		* Can have up to 10* Regenerates by 1 each turn, up to 3
+
+
+
+QoL
+	army QOL
+		window
+			quick transfer
+			apply
+			undo
+
+			open with(only 1 army)
+
+	castle QOL
+		current buildings tab
+
+		right click army inside castle to PRODUCE INSIDE
+
+		invade
 
 	faction
 		global bonuses (need tested)
 
 
-
-	army abilities
-		self
-		aura
-		city
-		cityregion
 
 	stats & scalemode
 	events
@@ -75,14 +90,24 @@ TODO
 		abilities
 		pick targets
 
+	castle raid
+		can not produce this turn
+
+
 ability costs
 	ap
 	mp
+	sp - supplypoints, refresh in castle
 	combat ends when all troops tired
 
+innates
+	charge
+	charge retaliate
+
+	retaliate
+	defend ally
 
 Units and orders
-	order indicator
 	waypoints
 
 TODO cast spells via command menu (on tile, on self)

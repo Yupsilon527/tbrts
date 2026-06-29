@@ -8,18 +8,7 @@ Linf - cheaper fodder unit, bonus vs cavalry* Mech (slow, bonus vs cavs) Larc -
 Hinf - tanky, weak to cavalry, hits multiple targets Harc - weak in 1st row, ok 2nd row, rnged ability, mage/damage support unitHcav - damage dealer, monster, overall good stats
 Healer/supportSiege* Catapult - long range attack (advance sars art) that deals full damage in castle * Misc: negates siege bonuses* Battering Ram/Siege Tower/Ents grant warding (imm to ranged attackers)
 SpellsLike Mewgenics Inflct damageDebuff (n battles or turns or till rested in castles)
-Resources
-* Gold* Crystal (low income, found initially on map)
-* Mana (from kills, income, dead troops, damage, etc)
-* Can have up to 10* Regenerates by 1 each turn, up to 3
-Combat
-* 3x2 armies
-* 3 phases: prep, action, heal
-* Actions cost 1AP or 1MP
-* Battle ends when all AP exhausted
-* Attacks: 1x1, back row, any, entire row, entire column
-* Abilities
-* Unit prios: targeting prio, ranged target prio (rams)
+
 Buildings
 * Act as upgrades; Units entering castle get all upgrades
 * Tiers; castle can only have one building from tier

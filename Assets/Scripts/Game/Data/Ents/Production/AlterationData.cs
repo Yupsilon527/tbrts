@@ -22,6 +22,7 @@ public class TechData : ProductionData
     public ModifierDefines.PropertyData[] properties = new ModifierDefines.PropertyData[0];
     public ModifierDefines.StateData[] states = new ModifierDefines.StateData[0];
     [Header("Abilities")]
+    public SpellData[] tempSpells = new SpellData[0];
     public string[] abilitiesAdded = new string[0];
 
     [Header("Grant Resources/Income")]
@@ -29,6 +30,7 @@ public class TechData : ProductionData
     public ResourceIncome[] grantedIncome = new ResourceIncome[0];
     public bool AppliesToThing(ProductionData data)
     {
+        if (affectedFlags.Length == 0) return true;
         foreach (var check in affectedFlags)
         {
             if (check[0] == '_')

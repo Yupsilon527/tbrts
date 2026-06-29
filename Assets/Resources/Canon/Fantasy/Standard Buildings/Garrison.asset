@@ -12,19 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
   m_Name: Garrison
   m_EditorClassIdentifier: 
-  InternalName: Keep 4
+  InternalName: Garrison
   AssignedWorld: 
   building:
-    InternalName: Keep 4
+    InternalName: Garrison
     icon: {fileID: 0}
     flags:
     - townhall
     - income
-    costs:
-    - resource: 0
-      value: 500
-    - resource: 3
-      value: 100
+    costs: []
     prerequisites: []
     infinite: 2
     affectedFlags: []

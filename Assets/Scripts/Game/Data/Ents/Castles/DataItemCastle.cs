@@ -25,7 +25,7 @@ public class DataItemCastle : DataItemBuilding
         production = new(this);
         income = new(this);
         SetPlayerOwner(custom.ownership);
-        bonuses.ApplyBonuses();
+        bonuses.GrantFreeBuildings();
     }
     public int GetSize()
     {
@@ -97,7 +97,7 @@ public class DataItemCastle : DataItemBuilding
 
         bool Takeover = false;
 
-        if (isRazed() && GetGarrison().Count() > 0)
+        if (IsDemolished() && GetGarrison().Count() > 0)
         {
             Takeover = true;
         }
@@ -135,50 +135,27 @@ public class DataItemCastle : DataItemBuilding
         return !AmIUnderAlliedControl();
     }
 
-    public float GetMyRazeCost(DataFaction OwnerFaction, CastleRazeMode Raze, bool Ruin)
-    {//redo
-
-        float Cost = EconomyDefines.CastleRazeReward;
-
-        switch (Raze)
-        {
-            case CastleRazeMode.raid://raid
-                //Cost = EconomyDefines.CastleRaidPercent * GetIncome();
-                RaidTurn = GameManager.main.currentTurn;
-                break;
-            case CastleRazeMode.occupy://occupy
-                break;
-
-            case CastleRazeMode.raze://clear
-
-                //clear production
-                float Add = 0;
-                /*if (Production.Count > 0)
-                {
-                    Add += Production[Production.Count - 1].GetPurchaseCost(null);
-                    if (Ruin)
-                    {
-                        ChangeProduction(Production[Production.Count - 1].FileName);
-                    }
-                }
-                Cost += Mathf.RoundToInt(Add * Game.iCastleRazePercent);
-
-                //level down
-                foreach (var Upgrade in Upgrades)
-                {
-                    Cost += Upgrade.GetMyCost(null) * Game.iCastleRazePercent;
-                }
-                if (Ruin)
-                {
-                    Upgrades.Clear();
-                }*/
-                break;
-        }
-
-
-        return Cost;
-    }
     #endregion
+    public virtual void OnArmyEnterCastle(DataItemArmy army, bool region)
+    {
+        foreach (var bonus in bonuses.GetBonusesByType(region ? BuildingData.GrantBonus.aura : BuildingData.GrantBonus.garrison))
+        {
+            foreach (var unit in army.formation.GetUnits())
+            {
+                unit.upgrades.upgrades.ApplyBonus(bonus.upgrade, bonus.level);
+            }
+        }
+    }
+    public virtual void OnArmyLeaveCastle(DataItemArmy army, bool region)
+    {
+        foreach (var bonus in bonuses.GetBonusesByType(region ? BuildingData.GrantBonus.aura : BuildingData.GrantBonus.garrison))
+            {
+            foreach (var unit in army.formation.GetUnits())
+            {
+                unit.upgrades.upgrades.RevertUpgrade(bonus.upgrade, bonus.level);
+        }
+        }
+    }
     #region Raze
     public void Demolish()
     {
@@ -204,7 +181,7 @@ public class DataItemCastle : DataItemBuilding
 
         display.DrawAgain();
     }
-    public bool isRazed() { return GameManager.main.currentTurn < RazeTurn; }
+    public bool IsDemolished() { return GameManager.main.currentTurn < RazeTurn; }
     #endregion
     #region Income TODO
     /* public int GetResourceIncome()
@@ -279,4 +256,61 @@ public class DataItemCastle : DataItemBuilding
     }
 
     #endregion
+    public  void RazeCastle(DataItemArmy attacker, DataItemCastle Castle, CastleRazeMode razeMode)
+    {
+        var raidingPlayer = attacker.GetPlayerOwner();
+        var raidedPlayer = Castle.GetPlayerOwner();
+
+        bool canSteal = attacker.formation.HasAbility("raider");
+        int stealStrength = attacker.formation.GetAbilitiySum("vandal");
+
+        float earnedMetal            = EconomyDefines.CastleRazeRewardMetal * (stealStrength + 5 ) / 5;
+        float earnedGold = EconomyDefines.CastleRazeRewardGold * (stealStrength + 3) / 5;
+        switch (razeMode)
+        {
+            case CastleRazeMode.occupy:
+                earnedMetal = 0;
+                earnedGold = 0;
+                Castle.SetPlayerOwner(attacker.GetPlayerOwner());
+                attacker.Exhaust();
+                break;
+
+            case CastleRazeMode.raid:
+
+                attacker.Exhaust();
+                break;
+            case CastleRazeMode.sack:
+                foreach (var building in bonuses.upgrades.researchedUpgrades.ToArray())
+                {
+                    if (building.upgrade.flags.Contains("defensive")) //TODO
+                        bonuses.upgrades.RemoveUpgrade(building.upgrade);
+                }
+                earnedMetal /= 3;
+                earnedGold /= 2;
+
+                attacker.Exhaust();
+                break;
+            case CastleRazeMode.raze:
+
+                earnedMetal /= 4;
+                earnedGold /= 3;
+
+                Castle.Demolish();
+                attacker.Exhaust();
+                break;
+
+        }
+        if (canSteal)
+        {
+            float stolenMetal = Mathf.Min(earnedMetal / 3, raidedPlayer.econ.GetResourceValue(EconomyDefines.EconomyResource.Metal)/4);
+            float stolenGold = Mathf.Min(earnedGold / 4, raidedPlayer.econ.GetResourceValue(EconomyDefines.EconomyResource.Gold)/5);
+
+            raidingPlayer.econ.GetResource(EconomyDefines.EconomyResource.Metal).GiveValue(raidedPlayer.econ.GetResource(EconomyDefines.EconomyResource.Metal).SubstractedValue(stolenMetal));
+            raidingPlayer.econ.GetResource(EconomyDefines.EconomyResource.Gold).GiveValue(raidedPlayer.econ.GetResource(EconomyDefines.EconomyResource.Gold).SubstractedValue(stolenGold));
+        }
+
+        raidingPlayer.econ.GetResource(EconomyDefines.EconomyResource.Metal).GiveValue(earnedMetal);
+        raidingPlayer.econ.GetResource(EconomyDefines.EconomyResource.Gold).GiveValue(earnedGold);
+    }
+
 }

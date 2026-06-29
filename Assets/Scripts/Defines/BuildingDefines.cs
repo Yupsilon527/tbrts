@@ -8,6 +8,7 @@ public static class BuildingDefines
     {
         raid,
         occupy,
+        sack,
         raze
     }
 

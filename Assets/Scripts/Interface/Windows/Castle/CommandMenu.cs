@@ -84,7 +84,13 @@ public class CommandMenu : PlayerWindow
             }
             if (tile.buildingLayer != null)
             {
-                //Raze
+                if (tile.buildingLayer is DataItemCastle castle && selArmy.CanInvadeCastle(castle))
+                {
+                    e.Add("Raze");
+                    a.Add(() => {
+                        InterfaceManager.main.OpenCastleRazeWindow(castle,selArmy);
+                    });
+                }
                 //Explore ruin
             }
         }
@@ -165,7 +171,7 @@ public class CommandMenu : PlayerWindow
         e.Add("<div>");
         a.Add(null);
         e.Add("Closest Army");
-        a.Add(() => { GameManager.main.armyManager.SelectClosestArmy(); });
+        a.Add(() => { GameManager.main.armyManager.SelectClosestArmy(tile.gridPos); });
         e.Add("Move All Armies");
         a.Add(() => { GameManager.main.armyManager.MoveAllArmies(); });
         e.Add("End Turn");

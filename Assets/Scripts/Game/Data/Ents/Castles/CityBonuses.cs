@@ -1,3 +1,5 @@
+using System.Linq;
+
 public class CityBonuses : CityComponent
 {
     public UpgradeList upgrades;
@@ -15,14 +17,14 @@ public class CityBonuses : CityComponent
         {
             ApplyUpgradeToAllUnits(army, upgrade, levels);
         }
-        ApplyBonuses();
+        GrantFreeBuildings();
         if (revise)
         {
             city.production.Revision();
             city.income.Revision();
         }
     }
-    public void ApplyBonuses()
+    public void GrantFreeBuildings()
     {
         var playerOwner = city.GetPlayerOwner();
         foreach (var b in playerOwner.faction.GetAvailableUpgrades(false))
@@ -60,5 +62,9 @@ public class CityBonuses : CityComponent
     {
         base.OnCastleRaze();
         upgrades.Clear();
+    }
+    public ResearchedUpgrade[] GetBonusesByType(BuildingData.GrantBonus bonusType)
+    {
+        return upgrades.researchedUpgrades.Select(u => (u.upgrade is BuildingData building && building.bonusType == bonusType) ? u : null).ToArray();
     }
 }

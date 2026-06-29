@@ -19,6 +19,7 @@ public class DataItemObject : DataItem
         tile = GameManager.main.map.GetTile(gridPos);
         display?.OnPositionChange(t, position);
     }
+    public virtual int GetAuraRange() { return 3; }
 
     #region Unit Groups
     public bool IsInGroup(UnitGroup<DataItemObject> group) => _groups.Contains(group);
@@ -33,6 +34,10 @@ public class DataItemObject : DataItem
     public bool IsSelected()
     {
         return Selected;
+    }
+    public void Select()
+    {
+        SetSelected(true);
     }
     public void NotifyInterfaceChange()
     {

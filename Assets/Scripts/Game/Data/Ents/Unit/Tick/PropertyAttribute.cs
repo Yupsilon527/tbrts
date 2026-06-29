@@ -159,7 +159,7 @@ public void SetPropertyRaw(ModifierDefines.Property prop, float value)
 public class PropertyTag
 {
     public string InternalName = "ERROR";
-    public DataItemUnit parent;
+    public DataItemUnit caster, parent;
     public Sprite sprite;
     public ModifierDefines.StackType behavior;
     public ModifierDefines.VisibleState uibehavior;

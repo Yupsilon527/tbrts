@@ -84,7 +84,7 @@ public class CityProduction : CityComponent
     }
     public bool CanProduce()
     {
-        return !city.isRazed() && city.AmIUnderAlliedControl();
+        return !city.IsDemolished() && city.AmIUnderAlliedControl();
     }
     public bool CanProduce(ProductionData prod)
     {

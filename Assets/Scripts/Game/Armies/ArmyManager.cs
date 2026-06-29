@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class ArmyManager : EntityManager
 {
+    int idleArmyIndex = 0;
     public DataItemArmy mainSelectedArmy = null;
     public List<DataItemArmy> armies = new();
     public HashSet<DataItemArmy> movingArmies = new();
@@ -125,15 +127,48 @@ public class ArmyManager : EntityManager
     }
     public void SelectNextIdleArmy()
     {
-      
+        var playerArmies = GameManager.main.playerManager.currentPlayer.units;
+        if (playerArmies.Count == 0) return;
+        if (idleArmyIndex > playerArmies.Count)
+        {
+            idleArmyIndex = 0;
+        }
+      for (int i = 0; i< playerArmies.Count; i++)
+        {
+            int index = (i + idleArmyIndex) % playerArmies.Count;
+            if (playerArmies[index] is DataItemArmy army && army.orders.IsIdle())
+            {
+                playerArmies[index].Select();
+                return;
+            }
+        }
     }
-    public void SelectClosestArmy()
+    public void SelectClosestArmy(Vector2Int gridpos)
     {
-      
+        var playerArmies = GameManager.main.playerManager.currentPlayer.units;
+        if (playerArmies.Count == 0) return;
+
+        var selection = playerArmies[0];
+        int tileDistance = int.MaxValue;
+        foreach (var army in playerArmies)
+        {
+            if ((army.gridPos- gridpos).sqrMagnitude < tileDistance)
+            {
+                selection = army;
+                tileDistance = (army.gridPos - gridpos).sqrMagnitude;
+            }
+        }
+        selection.Select();
     }
     public void MoveAllArmies()
     {
-      
+        var playerArmies = GameManager.main.playerManager.currentPlayer.units;
+        if (playerArmies.Count == 0) return;
+
+        foreach (var army in playerArmies)
+        {
+            army?.movement?.ResolveMovement();
+        }
     }
 }
 

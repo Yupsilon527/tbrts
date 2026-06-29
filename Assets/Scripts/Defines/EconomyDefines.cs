@@ -2,8 +2,8 @@ using System;
 
 public class EconomyDefines 
 {
-    public static float CastleRazeReward { get; internal set; }
-    public static int CastleRaidPercent { get; internal set; }
+    public static float CastleRazeRewardMetal = 1000;
+    public static float CastleRazeRewardGold = 500;
 
     public enum EconomyResource
     {

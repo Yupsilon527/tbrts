@@ -4,10 +4,16 @@ using UnityEngine;
 [Serializable]
 public class BuildingData : TechData
 {
+    public enum GrantBonus
+    {
+        upgrade,
+        garrison,
+        aura
+    }
+    [Header("Granted Bonus")]
+    public GrantBonus bonusType;
     [Header("Production")]
     public string[] production;
-    [Header("Income")]
-    public ResourceIncome[] income;
     [Header("Aura/Bonuses")]    //TODO
     public UpgradeData[] passiveBonuses;
     public override AvailableState GetAvailableState(DataItemPlayer player, DataItemCastle castle)
@@ -18,7 +24,7 @@ public class BuildingData : TechData
     }
     public float GetResourceIncome(EconomyDefines.IncomeResource resource)
     {
-        return income.Sum(i => i.resource == resource ? i.value : 0);
+        return grantedIncome.Sum(i => i.resource == resource ? i.value : 0);
     }
     public override bool CompleteProduction(ProductionTable table)
     {

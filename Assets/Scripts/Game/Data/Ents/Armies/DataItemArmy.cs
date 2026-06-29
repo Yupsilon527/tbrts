@@ -1,4 +1,4 @@
-using Astar;
+﻿using Astar;
 using System.Linq;
 using UnityEngine;
 
@@ -59,17 +59,47 @@ public class DataItemArmy : DataItemObject
     public override void ChangeTile(Vector2Int t, DisplayPositionChange m)
     {
         Vector2Int oldtile = t;
+        var newTile = SidewaysMap.main.GetTile(t);
         if (tile != null)
         {
             tile.armyLayer = null;
             oldtile = tile.gridPos;
+
+            var exitCastle = tile.buildingLayer as DataItemCastle;
+            var enterCastle = newTile.buildingLayer as DataItemCastle;
+
+            var exitRegion = tile.regionCastle as DataItemCastle;
+            var enterRegion = newTile.regionCastle as DataItemCastle;
+
+            ChangeRegion(enterRegion, exitRegion);
+            ChangeCastle(enterCastle, exitCastle);
         }
-        tile = SidewaysMap.main.GetTile(t);
+        tile = newTile;
         gridPos = t;
         tile.armyLayer = this;
         UpdateLoSAroundTile(gridPos);
         UpdateLoSAroundTile(oldtile);
         display?.OnPositionChange(t, m);
+    }
+    void ChangeRegion(DataItemCastle enter, DataItemCastle exit)
+    {
+        if (exit != enter)
+        {
+            if (exit != null && exit.GetAlignment(this) == PlayerDefines.Alignment.playerowned)
+                exit.OnArmyLeaveCastle(this, true);
+            if (enter != null && enter.GetAlignment(this) == PlayerDefines.Alignment.playerowned)
+                enter.OnArmyEnterCastle(this, true);
+        }
+    }
+    void ChangeCastle(DataItemCastle enter, DataItemCastle exit)
+    {
+            if (exit != enter)
+            {
+                if (exit != null && exit.GetAlignment(this) == PlayerDefines.Alignment.playerowned)
+                    exit.OnArmyLeaveCastle(this, false);
+                if (enter != null && enter.GetAlignment(this) == PlayerDefines.Alignment.playerowned)
+                    enter.OnArmyEnterCastle(this, false);
+        }
     }
     public bool MoveToTile(Vector2Int t, bool attack)
     {
@@ -139,6 +169,10 @@ public class DataItemArmy : DataItemObject
     public bool IsAlive()
     {
         return dead || formation.GetUnits().Length > 0;
+    }
+    public bool CanAttack()
+    {
+        return movement.movementLeft > 0;
     }
     public bool IsInCombat()
     {
@@ -277,20 +311,17 @@ public class DataItemArmy : DataItemObject
         }
         return false;
     }
-    public bool InvadeCastle(DataItemCastle castle, bool Instant)
+    public bool CanInvadeCastle(DataItemCastle castle)
     {
-
-        if (!Instant && GameManager.main.playerManager.GetActivePlayer().IsAiControlled())
-        {
-
-           // game.game.InGameMenus.OpenWindow(new CastleInvadeWindow(game.game, this, Defender));
-            return false;
-        }
-
-        return true;
+        return !castle.IsDemolished() && castle.GetAlignment(this) == PlayerDefines.Alignment.enemy && CanAttack() && formation.GetAbilitiyMax("raze") > 0;
     }
     #region Selection
-
+    public override void SetSelected(bool value)
+    {
+        if (value) 
+        GameManager.main.armyManager.SelectArmy(this);
+        base.SetSelected(value);
+    }
     public bool AmISelected(bool Moving)
     {
         if (Moving)
@@ -332,6 +363,10 @@ public class DataItemArmy : DataItemObject
         formation.OnFormationUpdate();
         display?.DrawAgain();
     }
+    public void Exhaust()
+    {
+        movement.PayMovement(9999);
+    }
     public override void Despawn()
     {
         if (!dead)
@@ -345,5 +380,29 @@ public class DataItemArmy : DataItemObject
 
             GameManager.main.armyManager.ForgetArmy(this);
         }
+    }
+
+    public bool HasAura()
+    {
+        return GetAuraRange() > 0;
+    }
+    public override int GetAuraRange()
+    {
+        return formation.GetAbilitiyMax("aura");
+    }
+
+    public bool CanAssist(DataItemArmy other)
+    {
+        if (GetAlignment(other) == PlayerDefines.Alignment.enemy)
+            return false;
+        if (formation.GetAbilitiyMax("defenseSupport") > 0 && other.tile.buildingLayer == tile.buildingLayer)
+                return true;
+        if (formation.GetAbilitiyMax("rangeSupport")>0 && (other.gridPos - gridPos).magnitude > GetAssistRange())
+            return true;
+        return false;
+    }
+    public  int GetAssistRange()
+    {
+        return formation.GetAbilitiyMax("rangeSupport");
     }
 }

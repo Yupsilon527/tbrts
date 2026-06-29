@@ -42,6 +42,15 @@ public static class UnitDefines
         ghost,
         wheels,
         teleport,
+
+		raze,
+		raider,
+		vandal,
+
+		aura,
+
+		rangeSupport,
+		defenseSupport,
     }
 
     public static List<string> AbilityIndex = new List<string>{

@@ -143,11 +143,16 @@ public class RazeOrder : Order
     {
     }
 
-    public override bool Resolve(DataItemArmy owner)
+    public override bool Resolve(DataItemArmy attacker)
     {
-        if (owner.tile.buildingLayer is DataItemCastle city && owner.InvadeCastle(city, false))
+        if (attacker.tile.buildingLayer is DataItemCastle city)
         {
-            return true;
+            //player ai
+            if (attacker.CanInvadeCastle(city))
+            {
+                InterfaceManager.main.OpenCastleRazeWindow(city, attacker);
+                return true;
+            }
         }
         return false;
     }

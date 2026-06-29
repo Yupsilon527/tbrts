@@ -39,4 +39,12 @@ public class InterfaceManager : WindowManager
         castleWindow.SetCastle(castle);
         castleWindow.OpenTab(production ? 1 : 0);
     }
+    public void OpenCastleRazeWindow(DataItemCastle castle, DataItemArmy attacker)
+    {
+        castleRazeWindow.assignedCastle = castle;
+        castleRazeWindow.attacker = attacker;
+        if (castleRazeWindow.ValidRaze()) {
+            castleRazeWindow.Open();
+        }
+    }
 }

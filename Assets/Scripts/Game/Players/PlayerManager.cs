@@ -33,6 +33,8 @@ public class PlayerManager : GameComponent
     public void ChangeActivePlayer(int ap)
     {
         playerTurn = ap;
+        InterfaceManager.main.OpenWindow(InterfaceManager.main.infoWindow);
+        InterfaceManager.main.infoWindow.ShowPlayerTurn(currentPlayer);
     }
 
     public DataItemPlayer MakeNeutrals(CustomMap map)

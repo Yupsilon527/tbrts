@@ -69,11 +69,11 @@ public class PropertyWeapon : PropertyAbility
         {
             default:
                 return GetMainTargets(table);
-            case CombatDefines.ArmyTargetingArea.row:
+            case CombatDefines.CombatantTargetingArea.row:
                 return Combat.main.GetUnitsInRow(!table.attackingSide, table.targetPoint.x);
-            case CombatDefines.ArmyTargetingArea.column:
+            case CombatDefines.CombatantTargetingArea.column:
                 return Combat.main.GetUnitsInColumn(!table.attackingSide, table.targetPoint.y);
-            case CombatDefines.ArmyTargetingArea.all:
+            case CombatDefines.CombatantTargetingArea.all:
                 return Combat.main.GetTroopsInSide(!table.attackingSide);
         }
     }
