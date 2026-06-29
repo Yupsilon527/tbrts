@@ -1,18 +1,9 @@
 TODO
-	abilities
-		bonus type:
-			upgrade (granted to units in castle)
-			* modifier
-			* ability
-			* spell
-			* stats
-			Banner - grants all inside castle, all inside troop
-			Aura - all in castle region/within range
-			* modifier
-			* ability
-			* stats
+	
 			
-	weapon data logic
+	weapons and spells
+
+	army auras
 		
 
 	combat window

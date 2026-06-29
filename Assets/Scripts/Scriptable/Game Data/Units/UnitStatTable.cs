@@ -17,6 +17,7 @@ public class UnitStatsTable
     //magic
     public float Magic = 0;
     public float Mana = 1;
+    public float Supply = 1;
 
     //healthbars
     public float Health = 25;

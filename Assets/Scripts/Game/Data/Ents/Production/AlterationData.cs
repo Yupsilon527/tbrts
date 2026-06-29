@@ -62,9 +62,17 @@ public class TechData : ProductionData
             foreach (var stat in states)
                 unit.upgrades.UpdateState(stat.State, 0);
 
+        foreach (var spell in tempSpells)
+        {
+            if (delta > 0)
+                unit.abilities.AddAbility(spell);
+            else
+                unit.abilities.RemoveAbility(spell);
+        }
+
         unit.bonuses.GrantBonusDamageFromTable(bonusDamage, oldLevel, newLevel);
 
-        if (delta > 0)
+        if (delta != 0)
         {
             foreach (var innate in abilitiesAdded)
                 unit.innates.AddAbility(innate, delta);

@@ -134,6 +134,7 @@ public static class ModifierDefines
         special_bonus_percent = 6,
         action_bonus = 7,
         mana_bonus = 8,
+        supply_bonus = 8,
 
         //health
         health_bonus = 9,

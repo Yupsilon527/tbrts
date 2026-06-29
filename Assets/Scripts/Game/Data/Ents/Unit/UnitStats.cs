@@ -40,6 +40,8 @@ public class UnitStats : UnitComponent
         UpdateAttack();
         UpdateMagic();
         UpdateAction();
+        UpdateMana();
+        UpdateSupply();
 
         UpdateArmor();
         UpdateBlock();
@@ -133,6 +135,13 @@ public class UnitStats : UnitComponent
         realStats.Mana += parent.GetProperty(ModifierDefines.Property.mana_bonus);
 
         parent.abilities?.Mp?.SetLimit(realStats.Mana, Resource.LimitRule.leave_value);
+    }
+    public virtual void UpdateSupply()
+    {
+        realStats.Supply = baseStats.Supply;
+        realStats.Supply += parent.GetProperty(ModifierDefines.Property.supply_bonus);
+
+        parent.abilities?.Sp?.SetLimit(realStats.Supply, Resource.LimitRule.leave_value);
     }
     #endregion
     #region Misc Stats

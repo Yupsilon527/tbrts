@@ -8,6 +8,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
 
     public ResourceInt Ap;
     public ResourceInt Mp;
+    public ResourceInt Sp;
 
     public HashSet<PropertyAbility> abilities = new();
     public HashSet<PropertyAbility> available = new();
@@ -27,6 +28,13 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
             Ap.SetPercentage(1);
             Mp.SetPercentage(1);
         }
+        else if (act ==  AbilityDefines.Event.OnTurnBegin)
+        {
+            if (parent.tile.buildingLayer is DataItemCastle city 
+                && city.GetAlignment(parent) == PlayerDefines.Alignment.ally 
+                && city.AmIUnderAlliedControl())
+            Sp.SetPercentage(1);
+        }
         base.TriggerFuncs(act);
     }
     public void ClearAbilities()
@@ -37,14 +45,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     {
         foreach (var ability in parent.data.weapons)
         {
-            foreach (var w in parent.data.weapons)
-            {
-                AddAbility(new PropertyWeapon(parent, w));
-            }
-            foreach (var ab in parent.data.spells)
-            {
-                AddAbility(new PropertySpell(parent, ab));
-            }
+            AddAbility(ability);
         }
     }
     public PropertyWeapon[] GetAttacks()
@@ -66,6 +67,21 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     {
         ability.FireEvent(AbilityDefines.Event.OnDestroyed);
         abilities.Remove(ability);
+    }
+    public  void AddAbility(ActionData ability, bool active = false)
+    {
+        if (ability is WeaponData w)
+            AddAbility(new PropertyWeapon(parent, w));
+        if (ability is SpellData s)
+            AddAbility(new PropertySpell(parent, s));
+    }
+    public  void RemoveAbility(ActionData ability)
+    {
+        foreach (var ab in abilities)
+        {
+            if (ab.InternalName == ability.InternalName)
+                RemoveAbility(ab);
+        }
     }
     public bool Tick(int steps)
     {

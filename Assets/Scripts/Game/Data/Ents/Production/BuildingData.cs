@@ -14,8 +14,6 @@ public class BuildingData : TechData
     public GrantBonus bonusType;
     [Header("Production")]
     public string[] production;
-    [Header("Aura/Bonuses")]    //TODO
-    public UpgradeData[] passiveBonuses;
     public override AvailableState GetAvailableState(DataItemPlayer player, DataItemCastle castle)
     {
         if (castle.bonuses.HasBuilding(this))

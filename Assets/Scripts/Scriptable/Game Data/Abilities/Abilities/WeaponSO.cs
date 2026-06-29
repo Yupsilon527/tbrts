@@ -1,4 +1,5 @@
 using System;
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Weapon", menuName = "Abilities/Weapon")]
@@ -15,7 +16,7 @@ public class WeaponSO : ActionSO
         {
             flags |= (int)flag;
         }
-
+        data.abilityFlags = flags;
 
         data.innateModifier = (ModifierData)innate.Translate();
     }

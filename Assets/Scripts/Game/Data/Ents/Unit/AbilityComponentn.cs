@@ -19,7 +19,7 @@ public class AbilityComponentn : UnitComponent
         {
             abilities[ability] += level;
         }
-        else
+        else if (level >0)
         {
             abilities.Add(ability, level);
         }
