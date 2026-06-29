@@ -109,8 +109,9 @@ public class UnitStats : UnitComponent
         realStats.Health *= parent.GetProperty(ModifierDefines.Property.health_bonus_percent);
         if (parent.damageable != null)
         {
-            parent.damageable.Health.SetValue(realStats.Health);
+            parent.damageable.Health.SetLimit(realStats.Health, Resource.LimitRule.percent_value);
         }
+        parent.health.SetLimit(realStats.Health, Resource.LimitRule.percent_value);
     }
     public virtual void UpdateBarrier()
     {

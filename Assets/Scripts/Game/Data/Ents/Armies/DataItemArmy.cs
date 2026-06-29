@@ -19,6 +19,10 @@ public class DataItemArmy : DataItemObject
         pathfinder = new(this);
         GameManager.main.armyManager.RegisterArmy(this);
     }
+    public override string ToString()
+    {
+        return "Army " + eID ;
+    }
     public DataItemArmy (Vector2Int pos, int playerOwner):this()
     {
         ChangeTile(pos, DisplayPositionChange.instant);

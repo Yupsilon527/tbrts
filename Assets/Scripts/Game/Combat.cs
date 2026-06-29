@@ -12,17 +12,25 @@ public class Combat : Initializable
         base.Initialize();
     }
 
+    public SparseIntMap MockBattle(DataItemArmy a, DataItemArmy d, SidewaysTile l)
+    {
+        SetUp(a, d, l);
+        ResolveInstantly();
+        return OutputResults();
+    }
+
     public CombatDefines.AttackPhase currentPhase;
     public SidewaysTile locatedTile;
     public DataItemArmy attackers, defenders;
+    public bool mockBattle = false;
 
     public List<DataItemUnit> combatants = new();
 
     public int currentTick = 0;
-    public void SetUp(DataItemArmy a, DataItemArmy d, SidewaysTile location)
+    public void SetUp(DataItemArmy a, DataItemArmy d, SidewaysTile l)
     {
-        currentTick = 0;
-        locatedTile = location;
+            Inspect($"COMBAT - Begin combat between army {a} and army {d} on tile {l}!");
+        locatedTile = l;
         attackers = a;
         defenders = d;
 
@@ -30,12 +38,14 @@ public class Combat : Initializable
     }
     void InitCombatants()   //TODO ranged support
     {
+        combatants.Clear();
         combatants.AddRange(attackers.formation.GetUnits());
         combatants.AddRange(defenders.formation.GetUnits());
-
+            Inspect($"COMBAT - Loaded {combatants.Count} combatants for combat!");
     }
     void BeginCombat()
     {
+            Inspect($"COMBAT - Begin Combat!");
         enabled = true;
         currentTick = 0;
         FireEventOnAllFighters(AbilityDefines.Event.CombatBegin);
@@ -53,6 +63,7 @@ public class Combat : Initializable
         {
             OnGameTick();
         }
+        EndCombat();
     }
     private void Update()
     {
@@ -66,7 +77,7 @@ public class Combat : Initializable
 
         while (combatants[0].nextAction <= currentTick)
         {
-            Inspect($"{combatants[0]} acts!");
+            Inspect($"{combatants[0]} acts at tick {currentPhase}!");
             combatants[0].Act();
             combatants.Sort((a, b) => a.nextAction.CompareTo(b.nextAction));
 
@@ -87,12 +98,14 @@ public class Combat : Initializable
     }
     void EndCombat()
     {
+        if (enabled) { 
         FireEventOnAllFighters(AbilityDefines.Event.CombatEnd);
-        combatants.Clear();
         enabled = false;
+    }
     }
     void FireEventOnAllFighters(AbilityDefines.Event e)
     {
+            Inspect($"Event on all - {e}");
         foreach (var combatant in combatants)
         {
             combatant.FireEventOnSelf(e, true);
@@ -136,5 +149,14 @@ public class Combat : Initializable
     public DataItemUnit[] GetUnitsInColumn(bool attackingSide, int column)
     {
         return GetUnitInArea(attackingSide, 0, column, 1, column, 2, column);
+    }
+    public SparseIntMap OutputResults()
+    {
+        SparseIntMap map = new();
+        foreach (var unit in combatants)
+        {
+            map.Set(unit.eID, (int)unit.damageable.Health.GetValue());
+        }
+        return map;
     }
 }

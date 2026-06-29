@@ -9,8 +9,11 @@ public class DataItemUnit : DataItemObject
     public int critCounter = 1;
     public int dodgeCounter = 1;
 
+    public ResourceInt health;
+
     public UnitData data;
     public DataItemArmy troop;
+
     public UnitStats stats;
     public UnitDamageable damageable;
     public CombatantAbilities abilities;
@@ -19,22 +22,20 @@ public class DataItemUnit : DataItemObject
     public AbilityComponentn innates;
     public UnitUpgrades upgrades;
 
-    public ArmyFormation Troop { get; internal set; }
-
-    public virtual bool IsPlayerOwned()
-    {
-        return false;
-    }
     public DataItemUnit(UnitData table)
     {
         data = table;
         stats = new(this, table.unit);
+        
         damageable = new(this);
-        abilities = new(this);
+
         modifiers = new(this);
-        bonuses = new(this);
-        innates = new(this);
         upgrades = new(this);
+
+        abilities = new(this);
+        innates = new(this);
+
+        bonuses = new(this);
     }
 
     public DataItemUnit( UnitData uData, DataItemArmy newArmy) :this(uData)

@@ -1,5 +1,4 @@
 using System;
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Weapon", menuName = "Abilities/Weapon")]
@@ -17,8 +16,6 @@ public class WeaponSO : ActionSO
             flags |= (int)flag;
         }
         data.abilityFlags = flags;
-
-        data.innateModifier = (ModifierData)innate.Translate();
     }
 }
 [Serializable]
@@ -32,12 +29,4 @@ public class WeaponData : ActionData
     public CombatDefines.CombatantRangeMode rangeMode;
     public CombatDefines.CombatantTargetingArea areaMode;
 
-    public enum AuraType
-    {
-        self,
-        troop,
-        aura,
-    }
-    public AuraType innateType;
-    public ModifierData innateModifier;
 }

@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,7 +26,7 @@ public class AlterationData : TagData
     public ModifierDefines.PropertyData[] properties = new ModifierDefines.PropertyData[0];
     public ModifierDefines.StateData[] states = new ModifierDefines.StateData[0];
 
-    public AlterationData(string internalName, Sprite sprite, ModifierDefines.StackType behavior = ModifierDefines.StackType.Stacking, ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.hidden, ModifierDefines.Priority priority = ModifierDefines.Priority.normal,ModifierDefines.Flag flag = ModifierDefines.Flag.Tag, ModifierDefines.PropertyData[] properties= null, ModifierDefines.StateData[] states = null) :base(internalName, sprite,behavior, uibehavior)
+    public AlterationData(string internalName, Sprite sprite, ModifierDefines.StackType behavior = ModifierDefines.StackType.Stacking, ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.hidden, ModifierDefines.Priority priority = ModifierDefines.Priority.normal, ModifierDefines.Flag flag = ModifierDefines.Flag.Tag, ModifierDefines.PropertyData[] properties = null, ModifierDefines.StateData[] states = null) : base(internalName, sprite, behavior, uibehavior)
     {
         this.priority = priority;
         this.flag = flag;
@@ -52,19 +53,39 @@ public class AlterationData : TagData
         return false;
     }
 }
-public class ModifierData : AlterationData
+public class FunctionalData : AlterationData
+{
+    public Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> functions;
+    public FunctionalData(string internalName, Sprite sprite, ModifierDefines.StackType behavior = ModifierDefines.StackType.Stacking, ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.hidden, ModifierDefines.Priority priority = ModifierDefines.Priority.normal, ModifierDefines.Flag flag = ModifierDefines.Flag.Tag, ModifierDefines.PropertyData[] properties = null, ModifierDefines.StateData[] states = null, Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> funcs = null) : base(internalName, sprite, behavior, uibehavior, priority, flag, properties, states)
+    {
+        functions = funcs;
+    }
+}
+public class ModifierData : FunctionalData
 {
     public int duration = 1;
     public ModifierDefines.ExpireType expireType = ModifierDefines.ExpireType.time;
-    public Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> functions;
 
-    public ModifierData(string internalName, Sprite sprite, ModifierDefines.StackType behavior = ModifierDefines.StackType.Stacking, ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.hidden, ModifierDefines.Flag flag = ModifierDefines.Flag.Buff, ModifierDefines.ExpireType expire = ModifierDefines.ExpireType.permanent, ModifierDefines.Priority priority = ModifierDefines.Priority.normal, int duration=0, ModifierDefines.PropertyData[] properties = null, ModifierDefines.StateData[] states = null,  Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> funcs=null) : base(internalName, sprite, behavior, uibehavior, priority, flag,properties, states)
+    public ModifierData(string internalName, Sprite sprite, ModifierDefines.StackType behavior = ModifierDefines.StackType.Stacking, ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.hidden, ModifierDefines.Flag flag = ModifierDefines.Flag.Buff, ModifierDefines.ExpireType expire = ModifierDefines.ExpireType.permanent, ModifierDefines.Priority priority = ModifierDefines.Priority.normal, int duration = 0, ModifierDefines.PropertyData[] properties = null, ModifierDefines.StateData[] states = null, Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> funcs = null) : base(internalName, sprite, behavior, uibehavior, priority, flag, properties, states)
     {
         this.InternalName = internalName;
         this.uibehavior = uibehavior;
         this.priority = priority;
         this.expireType = expire;
-        this.functions = funcs;
         this.duration = duration;
+    }
+}
+public class AuraData : FunctionalData
+{
+    public enum AuraType
+    {
+        innate,
+        troop,
+        aura,
+    }
+    public AuraType innateType;
+    public AuraData(string internalName, Sprite sprite, AuraType aura = AuraType.innate, ModifierDefines.StackType behavior = ModifierDefines.StackType.Stacking, ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.hidden, ModifierDefines.Priority priority = ModifierDefines.Priority.normal, ModifierDefines.Flag flag = ModifierDefines.Flag.Tag, ModifierDefines.PropertyData[] properties = null, ModifierDefines.StateData[] states = null, Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> funcs = null) : base(internalName, sprite, behavior, uibehavior, priority, flag, properties, states, funcs)
+    {
+        innateType = aura;
     }
 }

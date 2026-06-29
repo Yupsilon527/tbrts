@@ -4,13 +4,13 @@ using System.Linq;
 
 public class UnitBonuses : UnitComponent
 {
+    public AttackDefines.MobFlag[] unitFlags;
+
+    public HashSet<BonusDamageTable> bonusDamage = new();
     public UnitBonuses(DataItemUnit parent) : base(parent)
     {
         unitFlags = parent.data.unitFlags;
     }
-    public AttackDefines.MobFlag[] unitFlags;
-
-    public HashSet<BonusDamageTable> bonusDamage = new();
 
     public void GrantBonusDamageFromTable(BonusDamageTable[] data, int oldLevel, int newLevel)
     {

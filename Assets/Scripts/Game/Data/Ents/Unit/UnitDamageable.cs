@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class UnitDamageable : UnitComponent
 {
-    public ResourceFloat Health;
-    public ResourceFloat Armor;
-    public ResourceFloat Block;
+    public ResourceInt Health, Armor, Block;
 
     public DamageTable lastDamage;
     protected bool dead = false;
@@ -14,12 +12,12 @@ public class UnitDamageable : UnitComponent
         base.TriggerFuncs(act);
         if (act == AbilityDefines.Event.OnTurnBegin)
         {
-            float regen = parent.innates.GetAbilityCombined( UnitDefines.ArmyAbilities.regen);
+            float regen = parent.innates.GetAbilityCombined(UnitDefines.ArmyAbilities.regen);
             Health.GiveValue(regen);
         }
         if (act == AbilityDefines.Event.OnSpawn)
         {
-            Health.SetPercentage(1);
+            Health.SetValue(parent.health.GetValue());
             ClearKiller();
         }
         if (act == AbilityDefines.Event.CombatBegin)
@@ -35,15 +33,15 @@ public class UnitDamageable : UnitComponent
     }
     public UnitDamageable(DataItemUnit owner) : base(owner)
     {
-        Health = new ResourceFloat(1, "Health", false, false);
+        Health = new ResourceInt(1, "Health", false, false);
         Health.LimitUnder = Resource.LimitRule.percent_value;
         Health.LimitOver = Resource.LimitRule.percent_value;
 
-        Armor = new ResourceFloat(1, "Armor", false, true);
+        Armor = new ResourceInt(1, "Armor", false, true);
         Armor.LimitOver = Resource.LimitRule.leave_value;
         Armor.LimitUnder = Resource.LimitRule.leave_value;
 
-        Block = new ResourceFloat(1, "Block", false, false);
+        Block = new ResourceInt(1, "Block", false, false);
         Block.SetValue(0);
     }
 
