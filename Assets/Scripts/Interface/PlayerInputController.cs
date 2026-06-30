@@ -70,7 +70,6 @@ public class PlayerInputController : MonoBehaviour
         if (InterfaceManager.main.IsMouseOverUI() )
             return;
         TrackMouseTile();
-        HandlePlayerOrders();
         if (Input.GetMouseButtonDown(0))
             HandleMainInput(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift), Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl));
         if (Input.GetMouseButtonDown(1))
@@ -81,31 +80,6 @@ public class PlayerInputController : MonoBehaviour
         var mouseCoords = SidewaysMap.TranslateWorldPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         mouseCoords.y = SidewaysMap.main.height - mouseCoords.y - 2;
         ChangeMouseTile(SidewaysMap.main.GetTile(mouseCoords));
-    }
-    void HandlePlayerOrders()
-    {
-        /* if (RoomController.main.GetCurrentPhase() != RoomController.GamePhase.playerturn) return;
-         if (Input.GetMouseButtonDown(0) && !EntityPlayer.main.animation.IsAnimating())
-         {
-             if (castData != null)
-             {
-                 if (EntityPlayer.main.abilities.ResolveCastData(castData))
-                 {
-                     InGameInterface.main.OnAbilitiesChanged();
-                     ClearTileHighlights();
-                     ClearCastAbility();
-                 }
-             }
-             else if (mouseOverTile != null && pathToMouseTile != null)
-             {
-                 EntityPlayer.main.movement.MoveDownPath(pathToMouseTile, 1);
-             }
-         }
-         if (Input.GetMouseButtonDown(1) && castData != null)
-         {
-             ClearCastAbility();
-             ClearTileHighlights();
-         }*/
     }
 
     void HandleMainInput(bool queue, bool overlaymenu)
@@ -136,11 +110,12 @@ public class PlayerInputController : MonoBehaviour
             }
             else
             {
-                if (mouseOverTile.armyLayer != null && mouseOverTile.armyLayer.IsVisibleToPlayer(GameManager.main.playerManager.GetActivePlayer()))
+                if (mouseOverTile.armyLayer != null )
                 {
                     if (mouseOverTile.armyLayer.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned)
                         GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
-                    //  else issue attack order
+                    else if (mouseOverTile.armyLayer.IsVisibleToPlayer(GameManager.main.playerManager.GetActivePlayer()))
+                        selArmy.orders.GiveOrder(new AttackOrder(Order.ID.Follow, mouseOverTile.gridPos, mouseOverTile.armyLayer));
                 }
                 else if (mouseOverTile.buildingLayer != null)
                 {

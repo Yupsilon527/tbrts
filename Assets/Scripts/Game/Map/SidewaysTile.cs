@@ -81,7 +81,7 @@ public class SidewaysTile
             {
                 dt.tile = tile;
                 tile.display = dt;
-                dt.name = "Tile " + pos.x + "_" + pos.y;
+                dt.name = $"Tile {pos}: {pos.y*mapData.GetWidth()+pos.x}";
                 dt.transform.position = tile.GetWorldPosition();
             }
         }

@@ -27,9 +27,10 @@ public class CastleProductionWindow : TabWindow
         OpenTabGameObject(buildTab.gameObject);
         buildTab.ShowProduction(assignedCastle.GetPlayerOwner().faction.GetAvailableUpgrades(false).Where(u => u.GetAvailableState(assignedCastle) != ProductionData.AvailableState.hidden).ToArray());
     }
-    public void QueueProduction(ProductionData p)
+    public void QueueProduction(ProductionData p, bool ret)
     {
         assignedCastle.production.AddProduction(p, false);
+        if (ret)
         OpenTabGameObject(prodTab.gameObject) ;
     }
 }

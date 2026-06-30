@@ -9,7 +9,7 @@ public class DataItemUnit : DataItemObject
     public int critCounter = 1;
     public int dodgeCounter = 1;
 
-    public ResourceInt health;
+    public ResourceInt health=new(100,"health",false,true);
 
     public UnitData data;
     public DataItemArmy troop;

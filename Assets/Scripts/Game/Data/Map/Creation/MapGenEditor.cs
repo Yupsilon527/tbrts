@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -41,32 +40,36 @@ public class MapGenEditor : MapGen
         {
             for (int y = 0; y < dims.y; y++)
             {
-                for (int x = (y > mins.y ? 0 : (mins.x+1)); x < dims.x; x++)
+                for (int x = (y > mins.y ? 0 : (mins.x + 1)); x < dims.x; x++)
                 {
                     var newTile = (GameObject)PrefabUtility.InstantiatePrefab(predefinedTilePrefab);
                     newTile.transform.parent = transform;
-                    newTile.transform.position = SidewaysMap.TranslateGridPosition(new Vector2Int(x, dims.y - y - 1),dims.y);
+                    newTile.transform.position = SidewaysMap.TranslateGridPosition(new Vector2Int(x, dims.y - y - 1), dims.y);
                     existingTiles.Add(newTile.GetComponentInChildren<MapGenPredefinedTile>());
                     Debug.Log($"Make tile at {x} {y}");
 
                 }
             }
-            }
+        }
+        RegenTiles(existingTiles.ToArray());
+    }
+    void RegenTiles(MapGenPredefinedTile[] existingTiles)
+    {
 
-            foreach (var tile in existingTiles)
+        foreach (var tile in existingTiles)
+        {
+            if (tile != null)
             {
-                if (tile != null)
-                {
-                    tile.elevation = mapData.MapData.GetTileAt(tile.gridPos.x, tile.gridPos.y, biomeData).terrain.CharID;
-                    tile.variation = mapData.MapData.GetTileAt(tile.gridPos.x, tile.gridPos.y, biomeData).Variation;
-                    EditorUtility.SetDirty(tile);
-                }
+                tile.elevation = mapData.MapData.GetTileAt(tile.gridPos.x, tile.gridPos.y, biomeData).terrain.CharID;
+                tile.variation = mapData.MapData.GetTileAt(tile.gridPos.x, tile.gridPos.y, biomeData).Variation;
+                EditorUtility.SetDirty(tile);
             }
         }
+    }
 #endif
-        #endregion
+    #endregion
 
-        #region Generate
+    #region Generate
     public override void GenerateMap()
     {
         ScanTiles();
@@ -81,7 +84,7 @@ public class MapGenEditor : MapGen
         foreach (MapGenPredefinedTile dit in tiles)
         {
             Vector2Int tPos = new Vector2Int(dit.gridPos.y, dims.x - dit.gridPos.x);
-            Tiles[tPos.y][tPos.x] = new SidewaysTile(biomeData.GetElevation(dit.elevation), dit.variation);
+            SetTile(tPos.x, tPos.y, new SidewaysTile(biomeData.GetElevation(dit.elevation), dit.variation));
             if (dit.objectData != null)
                 spawnObjs.Add(new ObjectData()
                 {
@@ -101,7 +104,7 @@ public class MapGenEditor : MapGen
         {
             for (int x = 0; x < GetWidth(); x++)
             {
-                mapData.MapData.MapData += tiles[x * GetHeight() + y].elevation+""+ tiles[x * GetHeight() + y].variation;
+                mapData.MapData.MapData += tiles[x * GetHeight() + y].elevation + "" + tiles[x * GetHeight() + y].variation;
 
             }
         }
@@ -113,10 +116,13 @@ public class MapGenEditor : MapGen
     }
     private void OnValidate()
     {
-     if (mapData!=null && !IsDone) 
+        if (mapData != null && !IsDone)
         {
             dims.x = mapData.MapData.GetWidth();
             dims.y = mapData.MapData.GetHeight();
+
+            RegenTiles(GetComponentsInChildren<MapGenPredefinedTile>());
+
             IsDone = true;
         }
     }

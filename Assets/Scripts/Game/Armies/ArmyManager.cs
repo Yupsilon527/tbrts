@@ -110,10 +110,11 @@ public class ArmyManager : EntityManager
 
     public void SelectArmy(DataItemArmy army)
     {
-        ClearSelectedArmy();
-        if (army != null)
+        if (army != null && mainSelectedArmy != army)
         {
+            ClearSelectedArmy();
             mainSelectedArmy = army;
+            if (!army.IsSelected())
             army.SetSelected(true);
         }
     }

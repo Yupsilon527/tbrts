@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de7083d2ed351214cbf70c89d847bcf6, type: 3}
-  m_Name: Test Map
+  m_Name: Test Map 15x15
   m_EditorClassIdentifier: 
   MapData:
     customName: 
@@ -47,23 +47,46 @@ MonoBehaviour:
       Locked: 0
       LockedRace: 0
       LockedTeam: 0
-    height: 6
-    MapData: p0p0p0p0p0f0p0p0p0p0f0p0p0p0c0c0p0p0p0p0c0c0p0p0p0f0p0p0p0p0f0p0p0p0p0p0
+    - Name: Player 2
+      FactionName: 
+      id: 2
+      Team: 0
+      AiLevel: 0
+      startingResources: []
+      Used: 0
+      Enabled: 0
+      Ready: 0
+      Locked: 0
+      LockedRace: 0
+      LockedTeam: 0
+    height: 15
+    MapData: p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0c0c0p0p0p0p0p0p0p0p0p0c0c0p0p0c0c0p0p0p0p0p0p0p0p0p0c0c0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0c0c0p0p0p0p0p0p0p0p0p0c0c0p0p0c0c0p0p0p0p0p0p0p0p0p0c0c0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0p0
     castles:
+    - InternalName: 
+      ownership: 2
+      spawnPos: {x: 12, y: 12}
+      customName: Enemy Castle
+      customDescription: Enemy Capital
+      customSprite: c
+      isCapital: 1
+      producedArmies: []
+      producedBuildings: []
     - InternalName: 
       ownership: 1
       spawnPos: {x: 2, y: 2}
-      customName: Test Castle
-      customDescription: Used for testing
+      customName: My Castle
+      customDescription: Player Capital
       customSprite: c
       isCapital: 1
       producedArmies: []
       producedBuildings: []
     armies:
     - InternalName: 1
-      ownership: 1
-      spawnPos: {x: 3, y: 3}
+      ownership: 2
+      spawnPos: {x: 10, y: 10}
       formation:
+      - Peasant
+      - Peasant
       - Peasant
       - Peasant
       transporter: 

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MapGen : MonoBehaviour
+public abstract class MapGen : Initializable
 {
     public MapBiomeSO biomeData;
     public MapChunkSO mapData;
@@ -12,36 +12,45 @@ public abstract class MapGen : MonoBehaviour
     }
 
     #region Initalize and Extend
-    public List<List<SidewaysTile>> Tiles;
+    int width, height;
+    public List<SidewaysTile> Tiles;
 
     public virtual void Initalize(int w, int h)
     {
-        Debug.Log("[MapGeneration] Initialize map size " + w + "," + h);
-        Tiles = new List<List<SidewaysTile>>();
+        Inspect("[MapGeneration] Initialize map size " + w + "," + h);
+        width = w;
+        height = h;
+        Tiles = new List<SidewaysTile>();
         for (int iX = 0; iX < w; iX++)
         {
-            List<SidewaysTile> row = new List<SidewaysTile>();
             for (int iY = 0; iY < h; iY++)
             {
-                row.Add(new SidewaysTile( biomeData.Ground , 0));
+                Tiles.Add(new SidewaysTile(biomeData.Ground, 0));
             }
-            Tiles.Add(row);
         }
     }
     #endregion
     #region Size
     public virtual int GetWidth()
     {
-        return Tiles.Count;
+        return width;
     }
     public virtual int GetHeight()
     {
-        return Tiles[0].Count;
+        return height;
     }
     #endregion
+    public SidewaysTile GetTile(int x, int y)
+    {
+        int ti = y * width + x;
+        Inspect($"Get tile {x} {y}: {ti}");
+        return Tiles[ti];
+    }
     public void SetTile(int x, int y, SidewaysTile tile)
     {
-        Tiles[y][x] = tile;
+        int ti = y * width + x;
+        Inspect($"Set tile {x} {y}: {ti}");
+        Tiles[ti] = tile;
     }
     #region Output
     public virtual MapData OutputToMapData()
@@ -58,8 +67,9 @@ public abstract class MapGen : MonoBehaviour
         for (int iY = 0; iY < generatedMap.tile_data.GetLength(0); iY++)
         {
             for (int iX = 0; iX < generatedMap.tile_data.GetLength(1); iX++)
-            {
-                generatedMap.tile_data[iY, iX] = new SidewaysTile(Tiles[iY][iX].terrain, Tiles[iY][iX].Variation);
+        {
+                var t = GetTile(iX, iY);
+                generatedMap.tile_data[iY, iX] = new SidewaysTile(t.terrain, t.Variation);
             }
         }
         generatedMap.object_data = GenObj;

@@ -13,14 +13,34 @@ MonoBehaviour:
   m_Name: Grass Biome
   m_EditorClassIdentifier: 
   Elevations:
-  - CharID: 102
-    TilesetVariations:
-    - {fileID: 11400000, guid: 8c948c827a455ec42998eec26991c248, type: 2}
-    elevation: 7
   - CharID: 45
     TilesetVariations:
     - {fileID: 11400000, guid: ad5ee90eb59d7924ca7bf17f41c1639f, type: 2}
     elevation: 0
+  - CharID: 119
+    TilesetVariations:
+    - {fileID: 11400000, guid: ad5ee90eb59d7924ca7bf17f41c1639f, type: 2}
+    elevation: 10
+  - CharID: 83
+    TilesetVariations:
+    - {fileID: 11400000, guid: c58303906ed59164db602257959360fa, type: 2}
+    elevation: 1
+  - CharID: 115
+    TilesetVariations:
+    - {fileID: 11400000, guid: 34c75a9df7645f445accc8dc9422ad4c, type: 2}
+    elevation: 2
+  - CharID: 102
+    TilesetVariations:
+    - {fileID: 11400000, guid: 8c948c827a455ec42998eec26991c248, type: 2}
+    elevation: 7
+  - CharID: 104
+    TilesetVariations:
+    - {fileID: 11400000, guid: 5445a9d445ed19e4faaacd3f79a0713a, type: 2}
+    elevation: 8
+  - CharID: 109
+    TilesetVariations:
+    - {fileID: 11400000, guid: b64579b884f421c4e9a6ac03309f96c2, type: 2}
+    elevation: 9
   - CharID: 112
     TilesetVariations:
     - {fileID: 11400000, guid: b4fffde25e77e5d48b66c00a60e0fb48, type: 2}

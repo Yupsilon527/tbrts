@@ -132,10 +132,6 @@ public class Order
     {
         return owner.tile.gridPos == gridDest;
     }
-    public virtual void Cancel()
-    {
-
-    }
 }
 public class RazeOrder : Order
 {
@@ -186,4 +182,21 @@ public class FollowOrder : Order
     {
         return TargetValid(owner) && base.HasResolvedOrder(owner);
     }
+}
+public class AttackOrder : FollowOrder
+{
+    public AttackOrder(ID orderID, Vector2Int gridDest, DataItemArmy targetUnit) : base(orderID, gridDest, targetUnit)
+    {
+    }
+
+    public override bool HasResolvedOrder(DataItemArmy owner)
+    {
+        return owner.tile.IsAdjecent(owner.tile) && TargetValid(owner) && base.HasResolvedOrder(owner);
+    }
+    public override bool Resolve(DataItemArmy owner)
+    {
+        Combat.main.MockBattle(owner, TargetUnit, TargetUnit.tile);
+        return true;
+    }
+
 }

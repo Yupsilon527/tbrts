@@ -322,9 +322,10 @@ public class DataItemArmy : DataItemObject
     #region Selection
     public override void SetSelected(bool value)
     {
+        if (value == Selected) return;
+        base.SetSelected(value);
         if (value) 
         GameManager.main.armyManager.SelectArmy(this);
-        base.SetSelected(value);
     }
     public bool AmISelected(bool Moving)
     {

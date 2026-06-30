@@ -213,7 +213,6 @@ public static class TerrainDefines
         }
         else
         {
-            UnityEngine.Debug.Log(Edges[0] + " " + Edges[1] + " " + Edges[2] + " " + Edges[3]);
             return -1;
         }
     }

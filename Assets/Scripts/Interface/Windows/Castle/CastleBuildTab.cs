@@ -52,7 +52,7 @@ public class CastleBuildTab : MonoBehaviour
     {
         if (selection!=null)
         {
-            InterfaceManager.main.castleWindow.QueueProduction(selection);
+            InterfaceManager.main.castleWindow.QueueProduction(selection, selection is not UnitData);
         }
     }
 }
