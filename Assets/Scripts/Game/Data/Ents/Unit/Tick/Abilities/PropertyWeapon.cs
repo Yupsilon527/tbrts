@@ -37,7 +37,7 @@ public class PropertyWeapon : PropertyAbility
         parent.actions.Mp.SubstractedValue(original.mpCost);
          parent.actions.Ap.SubstractedValue(original.apCost);
          parent.actions.Sp.SubstractedValue(original.spCost);
-        ExtendCooldown( Mathf.CeilToInt(parent.stats.realStats.SpeedCoefficient * actionInterval));
+        ExtendCooldown( Mathf.CeilToInt(parent.stats.realStats.SpeedCoefficient ));
         base.SpendResources();
     }
     public override bool CastFromTable(CastTable table)

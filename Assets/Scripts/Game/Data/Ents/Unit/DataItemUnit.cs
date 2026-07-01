@@ -9,7 +9,7 @@ public class DataItemUnit : DataItemObject
     public int critCounter = 1;
     public int dodgeCounter = 1;
 
-    public ResourceInt health=new(100,"health",false,true);
+    public ResourceInt health=new(100,"True Helath",false,true);
     public Vector2Int troopPosition => troop.formation.GetPositionForUnit(this);
 
     public UnitData data;
@@ -25,7 +25,7 @@ public class DataItemUnit : DataItemObject
 
     public override string ToString()
     {
-        return $"Unit {data.InternalName} {eID}";
+        return $"Unit {data.InternalName} {eID} ({nextAction})";
     }
     public DataItemUnit(UnitData table)
     {
@@ -62,7 +62,8 @@ public class DataItemUnit : DataItemObject
         damageable.TriggerFuncs(evt);
         actions.TriggerFuncs(evt);
         modifiers.EventReaction(evt, targets);
-        if (evt == AbilityDefines.Event.CombatBegin)
+        stats.TriggerFuncs(evt);
+        if (evt == AbilityDefines.Event.CombatPhase)
         {
             UpdateNextAction();
         }

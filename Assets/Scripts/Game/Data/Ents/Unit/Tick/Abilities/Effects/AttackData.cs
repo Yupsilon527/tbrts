@@ -14,6 +14,7 @@ public class ApplyAttack : ApplyEffects
         {
             realDamage = scale.GetScaleStrength(table.caster, table.target, realDamage);
         }
+        Combat.main.Inspect($"{table.caster} deals {realDamage * strength} base damage to {table.target}");
         table.target.damageable.DealDamage(realDamage * strength , attack);
     }
 
@@ -40,10 +41,10 @@ public class ScaleData
         {
             switch (scaleMode)
             {
-                /* case ScaleType.AttackStat:
-                     bonusDamage *= attacker.stats.realStats.AttackDamage;
+                 case AttackDefines.ScaleType.AttackStat:
+                     bonusDamage *= attacker.stats.realStats.Attack;
                      break;
-                 case ScaleType.AttackPercent:
+                /* case ScaleType.AttackPercent:
                      return baseDamage * attacker.stats.realStats.AttackDamage * scaleDamage;
                  case ScaleType.AttackCrit:
                      return baseDamage * (bonusDamage + attacker.modifiers.GetPropertyAdditive(ModifierDefines.Property.critical_damage));
@@ -106,6 +107,12 @@ public class ScaleData
                     return attacker.bonuses.CalculateDamageAgainstTarget(target, baseDamage);
             }
         }
-        return bonusDamage * baseDamage;
+        switch (scaleRate)
+        {
+            case AttackDefines.ScaleRate.additive:
+                return bonusDamage + baseDamage;
+            default:
+                return bonusDamage * baseDamage;
+        }
     }
 }

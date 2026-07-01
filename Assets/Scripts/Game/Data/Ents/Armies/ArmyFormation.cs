@@ -151,9 +151,9 @@ public class ArmyFormation : ArmyComponent
     }
     public Vector2Int GetPositionForUnit(DataItemUnit unit)
     {
-        for (int iX = 0; iX < UnitDefines.iArmyRows; iX++)
+        for (int iX = 0; iX < UnitDefines.iArmyCols; iX++)
         {
-            for (int iY = 0; iY < UnitDefines.iArmyCols; iY++)
+            for (int iY = 0; iY < UnitDefines.iArmyRows; iY++)
             {
                 if (GetTroopInPosition(iX, iY) == unit)
                 {

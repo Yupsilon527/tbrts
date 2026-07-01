@@ -131,7 +131,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
             {
                 while (action.nextTime <= currentTick && action.HasResourcesToCast() && action.GetValidTargets(parent).Length > 0)
                 {
-                    Combat.main.Inspect($"Combatant {parent.data.InternalName} performs action {action.InternalName} at tick {currentTick}");
+                    Combat.main.Inspect($"Combatant {parent} performs action {action.InternalName} at tick {currentTick}");
 
                     var target = action.GetBestTargetForAbility(parent);
                     var castData = new AttackTable(phase, currentTick, parent, target.gridPos, action);

@@ -93,6 +93,7 @@ public static class AttackDefines
         CurBlock = 10,
 
         Random = 11,
+        UnitBonuses = 12,
     }
     public enum ScaleMode
     {

@@ -33,7 +33,7 @@ public class UnitDamageable : UnitComponent
     }
     public UnitDamageable(DataItemUnit owner) : base(owner)
     {
-        Health = new ResourceInt(1, "Health", false, false);
+        Health = new ResourceInt(1, "Health", false, true);
         Health.LimitUnder = Resource.LimitRule.percent_value;
         Health.LimitOver = Resource.LimitRule.percent_value;
 

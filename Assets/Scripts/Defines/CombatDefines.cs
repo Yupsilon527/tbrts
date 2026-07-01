@@ -4,9 +4,12 @@ public static class CombatDefines
     #region Attacks
     public enum AttackPhase
     {
-        Prep = 0,
-        Attack = 1,
-        PostAttack = 2,
+        BeforeCombat = 0,
+        Prep = 1,
+        Attack = 2,
+        PostAttack = 3,
+        AfterCombat = 4,
+        OutOfCombat = 5,
     }
     public enum AttackFlag
     {

@@ -80,28 +80,19 @@ public class Combat : Initializable
     {
         if (!IsInCombat()) return;
 
-        int nextTick = 0;
-        DataItemUnit next = null;
+        combatants.Sort((a, b) => a.nextAction.CompareTo(b.nextAction));
 
         foreach (var c in combatants)
         {
-            if (c.actions.GetAttacks().Any(c => c.original.attackPhase == currentPhase && c.CanBeCast(currentPhase)))
+            if (c.actions.GetAttacks().Any(w => w.CanBeCast(currentPhase)))
             {
-                if (next == null || c.nextAction < nextTick)
-                {
-                    nextTick = c.nextAction;
-                    next = c;
-                }
+                Inspect($"{c} acts at tick {c.nextAction}/{currentPhase}!");
+                currentTick = c.nextAction;
+                c.Act();
+                return;
             }
         }
-        if (next != null)
-        {
-            Inspect($"{next} acts at tick {nextTick}/{currentPhase}!");
-            currentTick = next.nextAction;
-            next.Act();
-        }
-        else
-        ForwardPhase();
+            ForwardPhase();
 
     }
     void ForwardPhase()

@@ -1,10 +1,16 @@
 TODO
 	
-			
-	weapons and spells
+	tareet alive health check/target checks
+	apply combat
+	unit health
+
+	units can attack unadjecent
+
+	combat/crit
 
 	army auras
 		
+	mock battle window
 
 	combat window
 		* 3x2 armies
@@ -84,6 +90,10 @@ QoL
 	castle raid
 		can not produce this turn
 
+corpses
+	when units die stay in army
+	replaced when new unit is bought
+	army dies >>> tile corpse layer
 
 ability costs
 	ap
