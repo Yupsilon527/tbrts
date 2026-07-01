@@ -60,6 +60,10 @@ public class WorldManager : Initializable
         }
         foreach (var u in Resources.LoadAll<UnitSO>("Canon"))
         {
+
+            u.unit.attacks = u.attacks.Select(w => w.Translate()).ToArray();
+            u.unit.spells = u.spells.Select(a => a.Translate()).ToArray();
+
             units.Add(u.unit);
             if (u.character != null)
                 u.unit.LoadCharacter(u.character);

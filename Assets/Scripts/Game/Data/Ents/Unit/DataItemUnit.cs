@@ -10,18 +10,23 @@ public class DataItemUnit : DataItemObject
     public int dodgeCounter = 1;
 
     public ResourceInt health=new(100,"health",false,true);
+    public Vector2Int troopPosition => troop.formation.GetPositionForUnit(this);
 
     public UnitData data;
     public DataItemArmy troop;
 
     public UnitStats stats;
     public UnitDamageable damageable;
-    public CombatantAbilities abilities;
+    public CombatantAbilities actions;
     public UnitBonuses bonuses;
     public CombatantModifiers modifiers;
     public AbilityComponentn innates;
     public UnitUpgrades upgrades;
 
+    public override string ToString()
+    {
+        return $"Unit {data.InternalName} {eID}";
+    }
     public DataItemUnit(UnitData table)
     {
         data = table;
@@ -32,7 +37,7 @@ public class DataItemUnit : DataItemObject
         modifiers = new(this);
         upgrades = new(this);
 
-        abilities = new(this);
+        actions = new(this);
         innates = new(this);
 
         bonuses = new(this);
@@ -55,7 +60,7 @@ public class DataItemUnit : DataItemObject
     public virtual void HandleEvent(AbilityDefines.Event evt, DataItemUnit[] targets, bool refresh = false)
     {
         damageable.TriggerFuncs(evt);
-        abilities.TriggerFuncs(evt);
+        actions.TriggerFuncs(evt);
         modifiers.EventReaction(evt, targets);
         if (evt == AbilityDefines.Event.CombatBegin)
         {
@@ -65,21 +70,21 @@ public class DataItemUnit : DataItemObject
     #endregion
     public void Act()
     {
-        Act(nextAction);
+        Act(Combat.main.currentTick);
     }
-    public void Act(int steps)
+    public void Act(int currentTick)
     {
-        abilities.Tick(steps);
-        modifiers.Tick(steps);
-        UpdateNextAction(steps);
+        actions.Tick(currentTick);
+        modifiers.Tick(currentTick);
+        UpdateNextAction(currentTick);
     }
     public bool CanAct(CombatDefines.AttackPhase phase)
     {
-        return abilities.GetAttacks().Any(a => a.original.attackPhase == phase && a.HasResourcesToCast());
+        return actions.GetAttacks().Any(a => a.original.attackPhase == phase && a.HasResourcesToCast());
     }
     protected void UpdateNextAction(int steps)
     {
-        nextAction = Mathf.Min(abilities.GetNextTick(steps), modifiers.GetNextTick(steps));
+        nextAction = Mathf.Min(actions.GetNextTick(steps), modifiers.GetNextTick(steps));
     }
     #region States
     public virtual void Refresh(bool force = false)
@@ -147,7 +152,7 @@ public class DataItemUnit : DataItemObject
             output += "<br><b>States</b><br>";
             output += statesOutput;
         }
-        output += abilities.OutputTable();
+        output += actions.OutputTable();
         return output;
     }
     public bool IsInCombat()
@@ -232,10 +237,5 @@ public class DataItemUnit : DataItemObject
     public bool isTransport()
     {
         return innates.GetAbilityLevel("transport") > 0;
-    }
-
-    public Vector2Int GetFormation()
-    {
-        return troop.formation.GetPositionForUnit(this);
     }
 }

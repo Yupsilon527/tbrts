@@ -33,7 +33,7 @@ TODO
 		* Mana (from kills, income, dead troops, damage, etc)
 		* Can have up to 10* Regenerates by 1 each turn, up to 3
 
-
+LoS
 
 QoL
 	army QOL

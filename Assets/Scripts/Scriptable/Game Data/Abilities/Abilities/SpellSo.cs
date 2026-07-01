@@ -1,10 +1,17 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Spell", menuName = "Abilities/Spell")]
 public class SpellSo : ActionSO
 {
     public SpellData data;
+    public SpellData Translate()
+    {
+        SpellData output = data.Clone() as SpellData;
+        output.effects = effects.Select(x => x.Translate()).ToArray();
+        return output;
+    }
 }
 [Serializable]
 public class SpellData : ActionData

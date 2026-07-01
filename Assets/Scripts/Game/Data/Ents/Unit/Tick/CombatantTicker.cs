@@ -1,7 +1,7 @@
 
 public interface CombatantTicker
 {
-
+    REVISE
     public virtual void Tick(int steps)
     {
     }

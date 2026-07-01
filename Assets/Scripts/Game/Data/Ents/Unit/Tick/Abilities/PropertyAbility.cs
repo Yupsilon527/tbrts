@@ -8,9 +8,9 @@ public abstract class PropertyAbility : PropertyAction
     {
         parent = caster;
     }
-    public DataItemUnit[] GetValidTargets(CastTable table)
+    public virtual DataItemUnit[] GetValidTargets(DataItemUnit caster)
     {
-        return new[] { table.attacker };
+        return new[] { caster };
     }
     public ApplyEffects[] GetAbilityEffects() { return null; }
     public virtual bool CanBeCast(CombatDefines.AttackPhase phase)

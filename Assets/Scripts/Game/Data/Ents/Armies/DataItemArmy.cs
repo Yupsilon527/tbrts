@@ -292,6 +292,7 @@ public class DataItemArmy : DataItemObject
     {
         if (GetAlignment(player) == PlayerDefines.Alignment.enemy)
         {
+            return true;
                 return tile.IsRevealedByPlayer(player, status.IsCloaked() ? UnitDefines.TileVisibility.truesight : UnitDefines.TileVisibility.visible);
         }
         return base.IsVisibleToPlayer(player);

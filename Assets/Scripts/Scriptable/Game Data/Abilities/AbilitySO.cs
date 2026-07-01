@@ -10,4 +10,9 @@ public class ActionSO : ScriptableObject
 public class ActionData : BaseData
 {
     public ApplyEffects[] effects;
+
+    public virtual ActionData Clone()
+    {
+        return MemberwiseClone() as ActionData;
+    }
 }

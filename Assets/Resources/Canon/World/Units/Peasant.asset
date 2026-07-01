@@ -25,6 +25,7 @@ MonoBehaviour:
       Action: 1
       Magic: 5
       Mana: 1
+      Supply: 1
       Health: 25
       Barrier: 4
       Armor: 0
@@ -48,9 +49,11 @@ MonoBehaviour:
     - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
     - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
     unitFlags: 00000000
-    weapons: []
+    attacks: []
     spells: []
     abilities:
     - abilityID: foot
       abilityLevel: 1
+  attacks: []
+  spells: []
   character: {fileID: 11400000, guid: 850fd7226d5526e4ea37367751806fcf, type: 2}

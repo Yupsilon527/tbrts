@@ -115,7 +115,10 @@ public class PlayerInputController : MonoBehaviour
                     if (mouseOverTile.armyLayer.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned)
                         GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
                     else if (mouseOverTile.armyLayer.IsVisibleToPlayer(GameManager.main.playerManager.GetActivePlayer()))
-                        selArmy.orders.GiveOrder(new AttackOrder(Order.ID.Follow, mouseOverTile.gridPos, mouseOverTile.armyLayer));
+                        if (queue)
+                            selArmy.orders.GiveOrder(new AttackOrder(Order.ID.Follow, mouseOverTile.gridPos, mouseOverTile.armyLayer));
+                        else
+                            selArmy.orders.ReplaceOrder(new AttackOrder(Order.ID.Follow, mouseOverTile.gridPos, mouseOverTile.armyLayer));
                 }
                 else if (mouseOverTile.buildingLayer != null)
                 {
@@ -135,7 +138,6 @@ public class PlayerInputController : MonoBehaviour
                     else
                     {
                         selArmy.orders.ReplaceOrder(new Order(Order.ID.Move, mouseOverTile.gridPos));
-                        selArmy.movement.ResolveMovement();
                     }
                 }
             }

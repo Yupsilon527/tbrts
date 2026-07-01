@@ -10,6 +10,7 @@ public class Combat : Initializable
         if (main == null)
             main = this;
         base.Initialize();
+        enabled = false;
     }
 
     public SparseIntMap MockBattle(DataItemArmy a, DataItemArmy d, SidewaysTile l)
@@ -29,7 +30,7 @@ public class Combat : Initializable
     public int currentTick = 0;
     public void SetUp(DataItemArmy a, DataItemArmy d, SidewaysTile l)
     {
-            Inspect($"COMBAT - Begin combat between army {a} and army {d} on tile {l}!");
+        Inspect($"COMBAT - Begin combat between army {a} and army {d} on tile {l}!");
         locatedTile = l;
         attackers = a;
         defenders = d;
@@ -41,11 +42,12 @@ public class Combat : Initializable
         combatants.Clear();
         combatants.AddRange(attackers.formation.GetUnits());
         combatants.AddRange(defenders.formation.GetUnits());
-            Inspect($"COMBAT - Loaded {combatants.Count} combatants for combat!");
+        Inspect($"COMBAT - Loaded {combatants.Count} combatants for combat!");
     }
     void BeginCombat()
     {
-            Inspect($"COMBAT - Begin Combat!");
+        Inspect($"COMBAT - Begin Combat!");
+
         enabled = true;
         currentTick = 0;
         FireEventOnAllFighters(AbilityDefines.Event.CombatBegin);
@@ -72,19 +74,29 @@ public class Combat : Initializable
     public void OnGameTick()
     {
         if (!IsInCombat()) return;
-        combatants.Sort((a, b) => a.nextAction.CompareTo(b.nextAction));
-        currentTick = combatants[0].nextAction;
 
-        while (combatants[0].nextAction <= currentTick)
+        int nextTick = 0;
+        DataItemUnit next = null;
+
+        foreach (var c in combatants)
         {
-            Inspect($"{combatants[0]} acts at tick {currentPhase}!");
-            combatants[0].Act();
-            combatants.Sort((a, b) => a.nextAction.CompareTo(b.nextAction));
-
-            if (combatants.Any(c => c.abilities.abilities.Any(a => a.CanBeCast(currentPhase))))
+            if (!c.actions.GetAttacks().Any(c => c.original.attackPhase == currentPhase && c.CanBeCast(currentPhase)))
                 continue;
-            ForwardPhase();
+            if (next == null || c.nextAction < nextTick)
+            {
+                nextTick = c.nextAction;
+                next = c;
+            }
         }
+        if (next != null)
+        {
+            Inspect($"{next} acts at tick {nextTick}/{currentPhase}!");
+            currentTick = next.nextAction;
+            next.Act();
+            return;
+        }
+        ForwardPhase();
+
     }
     void ForwardPhase()
     {
@@ -98,18 +110,36 @@ public class Combat : Initializable
     }
     void EndCombat()
     {
-        if (enabled) { 
-        FireEventOnAllFighters(AbilityDefines.Event.CombatEnd);
-        enabled = false;
-    }
+        int lastTick = 0;
+
+        foreach (var c in combatants)
+        {
+            lastTick = Mathf.Max(lastTick, c.nextAction);
+        }
+        foreach (var c in combatants)
+        {
+            c.Act(lastTick);
+        }
+
+        if (enabled)
+        {
+            FireEventOnAllFighters(AbilityDefines.Event.CombatEnd);
+            enabled = false;
+        }
     }
     void FireEventOnAllFighters(AbilityDefines.Event e)
     {
-            Inspect($"Event on all - {e}");
+        Inspect($"Event on all - {e}");
         foreach (var combatant in combatants)
         {
             combatant.FireEventOnSelf(e, true);
         }
+    }
+    public DataItemArmy GetOppositeSide(DataItemArmy troop)
+    {
+        if (attackers.GetAlignment(troop) == PlayerDefines.Alignment.enemy)
+            return defenders;
+        return attackers;
     }
     public bool IsAttackingSide(DataItemUnit unit)
     {
@@ -123,7 +153,7 @@ public class Combat : Initializable
     {
         return (attackingSide ? attackers : defenders).formation.GetTroopInPosition(X, Y);
     }
-    public DataItemUnit[] GetUnitInArea(bool attackingSide,  int aX=-1, int aY = -1, int bX=-1, int bY = -1, int cX=-1, int cY = -1 )
+    public DataItemUnit[] GetUnitInArea(bool attackingSide, int aX = -1, int aY = -1, int bX = -1, int bY = -1, int cX = -1, int cY = -1)
     {
         return GetUnitInArea(attackingSide, new Vector2Int[]
         {
@@ -135,7 +165,7 @@ public class Combat : Initializable
     public DataItemUnit[] GetUnitInArea(bool attackingSide, Vector2Int[] position)
     {
         HashSet<DataItemUnit> select = new();
-        foreach ( var vector in position)
+        foreach (var vector in position)
         {
             if (select != null)
                 select.Add(GetUnitAt(attackingSide, vector.x, vector.y));
@@ -152,10 +182,10 @@ public class Combat : Initializable
     }
     public SparseIntMap OutputResults()
     {
-        SparseIntMap map = new();
+        SparseIntMap map = new(combatants.Count);
         foreach (var unit in combatants)
         {
-            map.Set(unit.eID, (int)unit.damageable.Health.GetValue());
+            map.Set(unit.eID, (int)(unit.damageable?.Health?.GetValue() ?? 0));
         }
         return map;
     }

@@ -15,8 +15,11 @@ public static class CombatDefines
         castInFrontRow = 1 << 2,
         castInBackRow = 1 << 3,
         castInTransport = 1 << 4,
-        castInRangeSupport = 1 << 5,
-        targetsDirectlyInFront = 1 << 6,
+        castInSupport = 1 << 5,
+        targetFrontRow = 1 << 6,
+        targetBackRow = 1 << 7,
+        targetOwnCol = 1 << 8,
+        targetSelf = 1 << 9,
     }
     public enum ArmyPriorityMode
     {
@@ -28,18 +31,6 @@ public static class CombatDefines
         row,
         column,
         all,
-    }
-    public enum CombatantRangeMode
-    {
-        self,
-        enemy_frontrow,
-        enemy_backrow,
-        enemy_ranged,
-        enemy_transport,
-        ally_frontrow,
-        ally_backrow,
-        ally_forward,
-        ally_samerow,
     }
     #endregion
     #region Spells

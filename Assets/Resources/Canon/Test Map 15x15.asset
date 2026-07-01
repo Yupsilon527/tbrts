@@ -50,7 +50,7 @@ MonoBehaviour:
     - Name: Player 2
       FactionName: 
       id: 2
-      Team: 0
+      Team: 1
       AiLevel: 0
       startingResources: []
       Used: 0

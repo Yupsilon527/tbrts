@@ -1,5 +1,6 @@
 using Astar;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class OrderComponent : ArmyComponent
@@ -126,6 +127,7 @@ public class Order
     }
     public virtual bool Resolve(DataItemArmy owner)
     {
+        owner.movement.ResolveMovement();
         return true;
     }
     public virtual bool HasResolvedOrder(DataItemArmy owner)
@@ -180,7 +182,7 @@ public class FollowOrder : Order
     }
     public override bool HasResolvedOrder(DataItemArmy owner)
     {
-        return TargetValid(owner) && base.HasResolvedOrder(owner);
+        return TargetValid(owner) || base.HasResolvedOrder(owner);
     }
 }
 public class AttackOrder : FollowOrder
@@ -189,14 +191,26 @@ public class AttackOrder : FollowOrder
     {
     }
 
-    public override bool HasResolvedOrder(DataItemArmy owner)
-    {
-        return owner.tile.IsAdjecent(owner.tile) && TargetValid(owner) && base.HasResolvedOrder(owner);
-    }
     public override bool Resolve(DataItemArmy owner)
     {
-        Combat.main.MockBattle(owner, TargetUnit, TargetUnit.tile);
-        return true;
+        if (owner.tile.IsAdjecent(owner.tile) && TargetValid(owner))
+        {
+            SparseIntMap results =  Combat.main.MockBattle(owner, TargetUnit, TargetUnit.tile);
+
+            var allUnits = new List<DataItemUnit>();
+            allUnits.AddRange(owner.formation.GetUnits());
+            allUnits.AddRange(TargetUnit.formation.GetUnits());
+
+
+            foreach (var result in results._entries)
+            {
+                var unit = allUnits.FirstOrDefault(u => u.eID == result.key);
+                Combat.main.Inspect($"Unit {unit} remaining with {result.value} health!");
+            }
+
+            return true;
+        }
+        return false;
     }
 
 }

@@ -27,13 +27,17 @@ public class ArmyFormation : ArmyComponent
         foreach (var unit in GetUnits())
             unit.FireEventOnSelf(AbilityDefines.Event.OnTurnBegin);
     }
+    public int CountLivingTroopsInRow(int row)
+    {
+        return Formation.Sum(u => u != null && u.troopPosition.y == row && u.damageable.IsAlive() ? 1 : 0);
+    }
     public int CountLivingTroops()
     {
         return Formation.Sum(u => u != null && u.damageable.IsAlive() ? 1 : 0);
     }
     public int CountFightingTroops(CombatDefines.AttackPhase phase)
     {
-        return Formation.Sum(u => u != null && u.damageable.IsAlive() && u.abilities.abilities.Any(a => a.CanBeCast(phase)) ? 1 : 0);
+        return Formation.Sum(u => u != null && u.damageable.IsAlive() && u.actions.actions.Any(a => a.CanBeCast(phase)) ? 1 : 0);
     }
     public DataItemUnit GetTroopInPosition(int x, int y)
     {
@@ -306,10 +310,10 @@ public class ArmyFormation : ArmyComponent
 
     public void SwapTroops(DataItemUnit a, DataItemUnit b, bool updateVisual)
     {
-        int aY = a.GetFormation().x;
-        int aX = a.GetFormation().y;
-        int bY = b.GetFormation().x;
-        int bX = b.GetFormation().y;
+        int aY = a.troopPosition.x;
+        int aX = a.troopPosition.y;
+        int bY = b.troopPosition.x;
+        int bX = b.troopPosition.y;
 
         ExchangeTroops(aX, aY, bX, bY, a.troop, b.troop, updateVisual);
     }

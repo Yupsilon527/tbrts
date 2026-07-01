@@ -31,8 +31,10 @@ public static class ModifierDefines
         priority_melee_target = 14,
         priority_range_target = 15,
 
-        total = 16,
-        cannot_miss = 17
+        cannot_miss = 16,
+
+
+        total = 17,
     }
     public static bool IsPropertyMultiplicative(Property prop)
     {

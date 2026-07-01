@@ -4,13 +4,11 @@ using System.Linq;
 using UnityEngine;
 public class CombatantAbilities : UnitComponent, CombatantTicker
 {
-    public int lastTick = 0;
+    public ResourceInt Ap = new ResourceInt(1,"AP",false,false);
+    public ResourceInt Mp = new ResourceInt(1, "MP", false, false);
+    public ResourceInt Sp = new ResourceInt(1, "SP", false, false);
 
-    public ResourceInt Ap;
-    public ResourceInt Mp;
-    public ResourceInt Sp;
-
-    public HashSet<PropertyAbility> abilities = new();
+    public HashSet<PropertyAbility> actions = new();
     public HashSet<PropertyAbility> available = new();
     public CombatantAbilities(DataItemUnit parent) : base(parent)
     {
@@ -39,34 +37,34 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     }
     public void ClearAbilities()
     {
-        abilities.Clear();
+        actions.Clear();
     }
     public void FromCombatantData()
     {
-        foreach (var ability in parent.data.weapons)
+        foreach (var ability in parent.data.attacks)
         {
             AddAbility(ability);
         }
     }
     public PropertyWeapon[] GetAttacks()
     {
-        return abilities.Select(a => a is PropertyWeapon atk ? atk : null).ToArray();
+        return actions.Select(a => a is PropertyWeapon atk ? atk : null).ToArray();
     }
     public PropertySpell[] GetSpells()
     {
-        return abilities.Select(a => a is PropertySpell spell ? spell : null).ToArray();
+        return actions.Select(a => a is PropertySpell spell ? spell : null).ToArray();
     }
 
     public virtual void AddAbility(PropertyAbility ability, bool active = false)
     {
-        abilities.Add(ability);
+        actions.Add(ability);
         ability.FireEvent(AbilityDefines.Event.OnCreated);
         ability.SetCooldown(Mathf.CeilToInt(parent.stats.realStats.SpeedCoefficient * ability.actionDelay));
     }
     public virtual void RemoveAbility(PropertyAbility ability)
     {
         ability.FireEvent(AbilityDefines.Event.OnDestroyed);
-        abilities.Remove(ability);
+        actions.Remove(ability);
     }
     public  void AddAbility(ActionData ability, bool active = false)
     {
@@ -77,24 +75,22 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     }
     public  void RemoveAbility(ActionData ability)
     {
-        foreach (var ab in abilities)
+        foreach (var ab in actions)
         {
             if (ab.InternalName == ability.InternalName)
                 RemoveAbility(ab);
         }
     }
-    public bool Tick(int steps)
+    public void Tick(int currentTick)
     {
-        int tickDelta = steps - lastTick;
-        lastTick = steps;
-        return Trigger(Combat.main.currentPhase, tickDelta);
+         Trigger(Combat.main.currentPhase, currentTick);
     }
-    public int GetNextTick(int steps)
+    public int GetNextTick()
     {
         int ticks = int.MaxValue;
-        foreach (var action in abilities)
+        foreach (var action in actions)
         {
-            ticks = Mathf.Min(ticks, steps + action.expiration);
+            ticks = Mathf.Min(ticks,  action.nextTime);
         }
         return ticks;
     }
@@ -103,7 +99,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         available.Clear();
         if (!castable || SanityCheck())
         {
-            foreach (PropertyWeapon ability in abilities)
+            foreach (PropertyWeapon ability in actions)
             {
                 if (ability == null)
                     continue;
@@ -115,34 +111,33 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     }
 
     #region Casting
-    public bool Trigger( CombatDefines.AttackPhase phase, int ticks)
+    public bool Trigger(CombatDefines.AttackPhase phase, int currentTick)
     {
-        var abilities = this.abilities.Where(a => a.CanBeCast(phase) );
+        var abilities = GetAttacks().Where(a => a.CanBeCast(phase) && a.GetValidTargets(parent).Length > 0);
 
-        foreach (var action in GetAttacks())
+        foreach (var action in abilities)
         {
-            if (action.ForwardTime(ticks))
+            if (action.nextTime <= currentTick)
             {
-                while (action.expiration <= 0)
+                while (action.nextTime <= currentTick)
                 {
-                    int currentTick = Combat.main.currentTick;
                     Combat.main.Inspect($"Combatant {parent.data.InternalName} performs action {action.InternalName} at turn {currentTick}");
 
-                    var target = action.GetBestUnitForAbility();
-                    var castData = new AttackTable(phase,currentTick, parent, target.gridPos, action);
+                    var target = action.GetBestTargetForAbility(parent);
+                    var castData = new AttackTable(phase, currentTick, parent, target.gridPos, action);
                     action.CastFromTable(castData);
                 }
                 return true;
             }
         }
-        return ticks == 0;
+        return false;
     }
     #endregion
 
     #region Events
     public void EventReaction(AbilityDefines.Event evtData, DataItemUnit other)
     {
-        foreach (PropertyAbility ability in abilities)
+        foreach (PropertyAbility ability in actions)
         {
             if (ability == null)
                 continue;
@@ -154,7 +149,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     public virtual string OutputTable()
     {
         string output = "<br><b>Actions</b><br>";
-        foreach (var action in abilities)
+        foreach (var action in actions)
         {
             output += action.ToString() + "<br>";
         }

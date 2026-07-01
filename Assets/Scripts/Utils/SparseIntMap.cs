@@ -3,7 +3,7 @@ using System;
 
 public struct SparseIntMap
 {
-    private (int key, int value)[] _entries;
+    public (int key, int value)[] _entries;
     private int _count;
 
     public SparseIntMap(int capacity = 16)

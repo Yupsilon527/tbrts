@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PropertyWeapon : PropertyAbility
@@ -12,7 +14,12 @@ public class PropertyWeapon : PropertyAbility
 
     public override bool CanBeCast(CombatDefines.AttackPhase phase)
     {
-        return original.attackPhase == phase && base.CanBeCast(phase);
+        return original.attackPhase == phase 
+            && (original.HasFlag(CombatDefines.AttackFlag.castInFrontRow) && parent.troopPosition.y == 0
+            || original.HasFlag(CombatDefines.AttackFlag.castInBackRow) && parent.troopPosition.y == 1
+            || original.HasFlag(CombatDefines.AttackFlag.castInTransport) && parent.troopPosition.y < 0
+            || original.HasFlag(CombatDefines.AttackFlag.castInSupport) && !parent.troop.IsInCombat())
+            && base.CanBeCast(phase);
     }
     public override bool HasResourcesToCast()
     {
@@ -49,12 +56,34 @@ public class PropertyWeapon : PropertyAbility
         }
         return false;
     }
-    public DataItemUnit GetBestUnitForAbility()
+
+    public override DataItemUnit[] GetValidTargets(DataItemUnit caster)
     {
+        Vector2Int cPos = caster.troopPosition;
+        var troop = original.HasFlag(CombatDefines.AttackFlag.targetAllies) ? caster.troop : Combat.main.GetOppositeSide(caster.troop);
+
+        HashSet<DataItemUnit> units = new();
+        foreach (var u in troop.formation.Formation)
+        {
+            if (u == null) continue;
+            Vector2Int fPos = u.troopPosition;
+            if ((original.HasFlag(CombatDefines.AttackFlag.targetSelf) || caster!=u) 
+                && (original.HasFlag(CombatDefines.AttackFlag.targetFrontRow) && (fPos.y == 0 || troop.formation.CountLivingTroopsInRow(0) == 0))
+                || (original.HasFlag(CombatDefines.AttackFlag.targetBackRow) && (fPos.y == 1 || troop.formation.CountLivingTroopsInRow(1) == 0))
+                || (original.HasFlag(CombatDefines.AttackFlag.targetOwnCol) && fPos.x == cPos.x))
+                units.Add(u);
+        }
+        return units.ToArray();
+    }
+    public DataItemUnit GetBestTargetForAbility(DataItemUnit caster)
+    {
+        var targets = GetValidTargets(caster);
+        if (targets.Length == 0) return null;
+
         switch (original.targetPriority)
         {
             default:
-                return null;
+                return targets[Mathf.FloorToInt(targets.Length * Random.value)];
         }
     }
 

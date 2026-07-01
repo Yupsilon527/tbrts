@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DamageTable
@@ -21,7 +22,7 @@ public class DamageTable
     }
     public void Calculate()
     {
-        foreach (var kvp in baseDamage)
+        foreach (var kvp in baseDamage.ToArray())
         {
             float outDamage = kvp.Value;
             switch (kvp.Key)

@@ -128,21 +128,21 @@ public class UnitStats : UnitComponent
         realStats.Action = baseStats.Action;
         realStats.Action += parent.GetProperty(ModifierDefines.Property.action_bonus);
 
-        parent.abilities?.Ap?.SetLimit(realStats.Action, Resource.LimitRule.leave_value);
+        parent.actions?.Ap?.SetLimit(realStats.Action, Resource.LimitRule.leave_value);
     }
     public virtual void UpdateMana()
     {
         realStats.Mana = baseStats.Mana;
         realStats.Mana += parent.GetProperty(ModifierDefines.Property.mana_bonus);
 
-        parent.abilities?.Mp?.SetLimit(realStats.Mana, Resource.LimitRule.leave_value);
+        parent.actions?.Mp?.SetLimit(realStats.Mana, Resource.LimitRule.leave_value);
     }
     public virtual void UpdateSupply()
     {
         realStats.Supply = baseStats.Supply;
         realStats.Supply += parent.GetProperty(ModifierDefines.Property.supply_bonus);
 
-        parent.abilities?.Sp?.SetLimit(realStats.Supply, Resource.LimitRule.leave_value);
+        parent.actions?.Sp?.SetLimit(realStats.Supply, Resource.LimitRule.leave_value);
     }
     #endregion
     #region Misc Stats

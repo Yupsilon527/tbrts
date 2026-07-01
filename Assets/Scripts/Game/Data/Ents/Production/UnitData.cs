@@ -8,7 +8,7 @@ public class UnitData : ProductionData
     public UnitStatsTable unit;
     public Sprite[] armySprites = new Sprite[6];
     public AttackDefines.MobFlag[] unitFlags;
-    public WeaponData[] weapons;
+    public WeaponData[] attacks;
     public SpellData[] spells;
     public AbilityData[] abilities;
     public override AvailableState GetAvailableState(DataItemPlayer player, DataItemCastle castle)

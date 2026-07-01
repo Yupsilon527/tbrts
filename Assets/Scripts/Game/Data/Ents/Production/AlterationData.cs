@@ -65,9 +65,9 @@ public class TechData : ProductionData
         foreach (var spell in tempSpells)
         {
             if (delta > 0)
-                unit.abilities.AddAbility(spell);
+                unit.actions.AddAbility(spell);
             else
-                unit.abilities.RemoveAbility(spell);
+                unit.actions.RemoveAbility(spell);
         }
 
         unit.bonuses.GrantBonusDamageFromTable(bonusDamage, oldLevel, newLevel);

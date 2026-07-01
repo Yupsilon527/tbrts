@@ -205,7 +205,7 @@ public class PropertyThinker : PropertyTag, ITimerAction
 
     public void ExtendCooldown(float cdr = 1)
     {
-        BackwardTime((int)(thinkInterval * cdr));
+        Delay((int)(thinkInterval * cdr));
     }
     public void SetCooldown(int cooldown)
     {
@@ -219,7 +219,7 @@ public class PropertyThinker : PropertyTag, ITimerAction
             Think();
         return executed;
     }
-    public virtual void BackwardTime(int cooldown)
+    public virtual void Delay(int cooldown)
     {
         lastThink += cooldown;
     }
