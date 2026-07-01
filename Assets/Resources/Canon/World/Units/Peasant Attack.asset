@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b30f17bc374894ba8cccf57206e933, type: 3}
   m_Name: Peasant Attack
   m_EditorClassIdentifier: 
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: 92287d2ebbb0af540bff0a51f8dc2320, type: 2}
   data:
-    InternalName: 
+    InternalName: Peasant Melee
     apCost: 1
     mpCost: 0
     spCost: 0
     castTime: 100
-    abilityFlags: 12
+    abilityFlags: 76
     castOnce: 0
     attackPhase: 1
     targetPriority: 0
     areaMode: 0
-  weaponFlags: 0400000008000000
+  weaponFlags: 040000000800000040000000

@@ -64,7 +64,7 @@ public class DataItemUnit : DataItemObject
         modifiers.EventReaction(evt, targets);
         if (evt == AbilityDefines.Event.CombatBegin)
         {
-            UpdateNextAction(0);
+            UpdateNextAction();
         }
     }
     #endregion
@@ -76,15 +76,15 @@ public class DataItemUnit : DataItemObject
     {
         actions.Tick(currentTick);
         modifiers.Tick(currentTick);
-        UpdateNextAction(currentTick);
+        UpdateNextAction();
     }
     public bool CanAct(CombatDefines.AttackPhase phase)
     {
         return actions.GetAttacks().Any(a => a.original.attackPhase == phase && a.HasResourcesToCast());
     }
-    protected void UpdateNextAction(int steps)
+    protected void UpdateNextAction()
     {
-        nextAction = Mathf.Min(actions.GetNextTick(steps), modifiers.GetNextTick(steps));
+        nextAction = Mathf.Min(actions.GetNextTick(), modifiers.GetNextTick());
     }
     #region States
     public virtual void Refresh(bool force = false)

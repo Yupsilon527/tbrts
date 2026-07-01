@@ -4,7 +4,7 @@ public abstract class PropertyAction : ITimerAction
     public string InternalName = "ERROR";
     public DataItemUnit parent;
     public int nextTime = 0;
-    public int actionDelay = 100;
+    public int startupDelay = 100;
     public int actionInterval = 100;
 
     public void ExtendCooldown(float cdr = 1)
@@ -15,7 +15,7 @@ public abstract class PropertyAction : ITimerAction
     {
         nextTime = cooldown;
     }
-    public virtual bool ForwardTime(int cooldown)
+    public virtual bool RefreshCooldown(int cooldown)
     {
         nextTime -= cooldown;
         return nextTime <= 0;
@@ -33,7 +33,7 @@ public interface ITimerAction
 {
     public void ExtendCooldown(float cdr = 1);
     public void SetCooldown(int cooldown);
-    public  bool ForwardTime(int cooldown);
+    public  bool RefreshCooldown(int cooldown);
     public  void Delay(int cooldown);
     public  void Reset();
 }

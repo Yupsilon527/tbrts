@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class PropertyModifier : PropertyAttribute
 {
@@ -91,9 +90,9 @@ public class PropertyModifier : PropertyAttribute
     {
         return (expireType == ModifierDefines.ExpireType.time && tickDuration < 0) || (expireType == ModifierDefines.ExpireType.stacks && stacks <= 0);
     }
-    public override bool ForwardTime(int cooldown)
+    public override bool RefreshCooldown(int cooldown)
     {
-        bool executed = base.ForwardTime(cooldown);
+        bool executed = base.RefreshCooldown(cooldown);
         CheckExpiration();
 
         return executed;

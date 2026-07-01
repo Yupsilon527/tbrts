@@ -54,6 +54,7 @@ MonoBehaviour:
     abilities:
     - abilityID: foot
       abilityLevel: 1
-  attacks: []
+  attacks:
+  - {fileID: 11400000, guid: c810c3d2ccccc4b4c99c8fe0abdca083, type: 2}
   spells: []
   character: {fileID: 11400000, guid: 850fd7226d5526e4ea37367751806fcf, type: 2}

@@ -1,12 +1,6 @@
 
 public interface CombatantTicker
 {
-    REVISE
-    public virtual void Tick(int steps)
-    {
-    }
-    public virtual int GetNextTick(int ticks)
-    {
-        return int.MaxValue;
-    }
+    public abstract void Tick(int time);
+    public abstract int GetNextTick();
 }

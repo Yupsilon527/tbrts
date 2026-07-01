@@ -38,11 +38,7 @@ public abstract class Resource
 
     public void SetPercentage(float value)
     {
-        if (hasHardLimit)
-            SetValue(value * GetLimit());
-        else
-            SetValue(value * GetValue());
-
+        SetValue(value * GetLimit());
     }
     public void SetLimit(float value)
     {
@@ -69,16 +65,16 @@ public abstract class Resource
         GiveValue(-value);
         return true;
     }
-    public bool ChargePercentage(float value,bool total)
+    public bool ChargePercentage(float value, bool total)
     {
-     return ChargeValue((total ? GetLimit() : GetValue() )* value);
+        return ChargeValue((total ? GetLimit() : GetValue()) * value);
     }
 
     public virtual float SubstractedValue(float value)
     {
         if (resourceDebug) Debug.Log("[" + name + "] Substract " + value);
         value = Mathf.Abs(value);
-        if (!canNegative)  value = Mathf.Min(GetValue(), value);
+        if (!canNegative) value = Mathf.Min(GetValue(), value);
         GiveValue(-value);
         return value;
     }
@@ -95,12 +91,12 @@ public class ResourceFloat : Resource
     {
         return $"{name} ({values.Item1},{values.Item2})";
     }
-    (float,float) values;
+    (float, float) values;
     public ResourceFloat(float limit, string name, bool negative, bool limited)
     {
         this.name = name;
         hasHardLimit = limited;
-        values = (limit,limit);
+        values = (limit, limit);
         canNegative = negative;
         OnValueChanged = new UnityEvent();
         if (resourceDebug) Debug.Log($"[{name}] Initialized");
@@ -331,7 +327,7 @@ public class ResourceUint : ResourceSimple
 
     public override void SetLimit(float value, LimitRule rule = LimitRule.leave_value, bool hard = false)
     {
-        uint ivalue = (uint) Mathf.RoundToInt(value);
+        uint ivalue = (uint)Mathf.RoundToInt(value);
         // display?.SetMaximum(values.Item2);
         switch (rule)
         {

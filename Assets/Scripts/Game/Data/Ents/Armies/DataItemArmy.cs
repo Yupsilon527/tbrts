@@ -47,6 +47,13 @@ public class DataItemArmy : DataItemObject
                 formation.GiveUnitInPosition(-1, unit);
             }
         }
+        foreach (var u in formation.GetUnits())
+        {
+            GetPlayerOwner().upgrades.ApplyResearchedUpgradeToNewlySpawnedUnit(u);
+           if (tile.buildingLayer is DataItemCastle castle)
+                castle.bonuses.ApplyResearchedUpgradeToNewlySpawnedUnit(u);
+            u.FireEventOnSelf(AbilityDefines.Event.OnSpawn);
+        }
         display?.OnGraphicsChange();
     }
     #region Move

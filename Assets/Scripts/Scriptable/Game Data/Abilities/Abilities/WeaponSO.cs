@@ -28,7 +28,7 @@ public class WeaponSO : ActionSO
 [Serializable]
 public class WeaponData : ActionData
 {
-    public int apCost, mpCost, spCost, castTime, abilityFlags;
+    public int apCost, mpCost, spCost, castTime, castDelay, abilityFlags;
     public bool castOnce = false;
     public CombatDefines.AttackPhase attackPhase;
 

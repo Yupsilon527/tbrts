@@ -21,6 +21,7 @@ public static class AbilityDefines
         OnSpawn = 5,
         CombatBegin = 6,
         CombatEnd = 7,
+        CombatPhase = 33,
 
 		//board
         OnTurnBegin = 24,
@@ -55,7 +56,7 @@ public static class AbilityDefines
         OnArmorBlock = 21,
         OnArmorBreak = 22,
 
-        Total = 33
+        Total = 34
     }
 
 public delegate void AbilityFunction(EventTable CastData);

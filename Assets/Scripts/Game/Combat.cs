@@ -43,6 +43,10 @@ public class Combat : Initializable
         combatants.AddRange(attackers.formation.GetUnits());
         combatants.AddRange(defenders.formation.GetUnits());
         Inspect($"COMBAT - Loaded {combatants.Count} combatants for combat!");
+        foreach (var c in combatants)
+        {
+            Inspect($"{c} at {c.health.GetValue()} health");
+        }
     }
     void BeginCombat()
     {
@@ -52,6 +56,7 @@ public class Combat : Initializable
         currentTick = 0;
         FireEventOnAllFighters(AbilityDefines.Event.CombatBegin);
         currentPhase = CombatDefines.AttackPhase.Prep;
+        FireEventOnAllFighters(AbilityDefines.Event.CombatPhase);
     }
     public bool IsInCombat()
     {
@@ -61,7 +66,7 @@ public class Combat : Initializable
     {
         BeginCombat();
         int soft = 0;
-        while (enabled && ++soft < 100)
+        while (enabled && ++soft < 1000)
         {
             OnGameTick();
         }
@@ -80,12 +85,13 @@ public class Combat : Initializable
 
         foreach (var c in combatants)
         {
-            if (!c.actions.GetAttacks().Any(c => c.original.attackPhase == currentPhase && c.CanBeCast(currentPhase)))
-                continue;
-            if (next == null || c.nextAction < nextTick)
+            if (c.actions.GetAttacks().Any(c => c.original.attackPhase == currentPhase && c.CanBeCast(currentPhase)))
             {
-                nextTick = c.nextAction;
-                next = c;
+                if (next == null || c.nextAction < nextTick)
+                {
+                    nextTick = c.nextAction;
+                    next = c;
+                }
             }
         }
         if (next != null)
@@ -93,8 +99,8 @@ public class Combat : Initializable
             Inspect($"{next} acts at tick {nextTick}/{currentPhase}!");
             currentTick = next.nextAction;
             next.Act();
-            return;
         }
+        else
         ForwardPhase();
 
     }
@@ -105,7 +111,7 @@ public class Combat : Initializable
         else
         {
             currentPhase++;
-            currentTick = 0;
+            FireEventOnAllFighters(AbilityDefines.Event.CombatPhase);
         }
     }
     void EndCombat()
@@ -138,8 +144,8 @@ public class Combat : Initializable
     public DataItemArmy GetOppositeSide(DataItemArmy troop)
     {
         if (attackers.GetAlignment(troop) == PlayerDefines.Alignment.enemy)
-            return defenders;
         return attackers;
+        return defenders;
     }
     public bool IsAttackingSide(DataItemUnit unit)
     {

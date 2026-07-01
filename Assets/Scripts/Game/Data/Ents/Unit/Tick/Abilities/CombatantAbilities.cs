@@ -1,10 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 public class CombatantAbilities : UnitComponent, CombatantTicker
 {
-    public ResourceInt Ap = new ResourceInt(1,"AP",false,false);
+    public int nextTick = 0;
+    public ResourceInt Ap = new ResourceInt(1, "AP", false, false);
     public ResourceInt Mp = new ResourceInt(1, "MP", false, false);
     public ResourceInt Sp = new ResourceInt(1, "SP", false, false);
 
@@ -19,19 +19,29 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         {
             ClearAbilities();
             FromCombatantData();
+
         }
-        else if (act ==  AbilityDefines.Event.CombatBegin)
+        else if (act == AbilityDefines.Event.CombatBegin)
         {
-            lastTick = 0;
+            nextTick = 0;
             Ap.SetPercentage(1);
             Mp.SetPercentage(1);
         }
-        else if (act ==  AbilityDefines.Event.OnTurnBegin)
+        else if (act == AbilityDefines.Event.CombatPhase)
         {
-            if (parent.troop.tile.buildingLayer is DataItemCastle city 
-                && city.GetAlignment(parent) == PlayerDefines.Alignment.ally 
+            foreach (var atk in GetAttacks())
+                if (atk.original.attackPhase == Combat.main.currentPhase)
+                {
+                    atk.SetCooldown(Combat.main.currentTick + Mathf.CeilToInt(parent.stats.realStats.SpeedCoefficient * atk.startupDelay));
+                    atk.uses = 0;
+                }
+        }
+        else if (act == AbilityDefines.Event.OnTurnBegin)
+        {
+            if (parent.troop.tile.buildingLayer is DataItemCastle city
+                && city.GetAlignment(parent) == PlayerDefines.Alignment.ally
                 && city.AmIUnderAlliedControl())
-            Sp.SetPercentage(1);
+                Sp.SetPercentage(1);
         }
         base.TriggerFuncs(act);
     }
@@ -45,6 +55,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         {
             AddAbility(ability);
         }
+        nextTick = GetNextTick();
     }
     public PropertyWeapon[] GetAttacks()
     {
@@ -59,40 +70,26 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     {
         actions.Add(ability);
         ability.FireEvent(AbilityDefines.Event.OnCreated);
-        ability.SetCooldown(Mathf.CeilToInt(parent.stats.realStats.SpeedCoefficient * ability.actionDelay));
     }
     public virtual void RemoveAbility(PropertyAbility ability)
     {
         ability.FireEvent(AbilityDefines.Event.OnDestroyed);
         actions.Remove(ability);
     }
-    public  void AddAbility(ActionData ability, bool active = false)
+    public void AddAbility(ActionData ability, bool active = false)
     {
         if (ability is WeaponData w)
             AddAbility(new PropertyWeapon(parent, w));
         if (ability is SpellData s)
             AddAbility(new PropertySpell(parent, s));
     }
-    public  void RemoveAbility(ActionData ability)
+    public void RemoveAbility(ActionData ability)
     {
         foreach (var ab in actions)
         {
             if (ab.InternalName == ability.InternalName)
                 RemoveAbility(ab);
         }
-    }
-    public void Tick(int currentTick)
-    {
-         Trigger(Combat.main.currentPhase, currentTick);
-    }
-    public int GetNextTick()
-    {
-        int ticks = int.MaxValue;
-        foreach (var action in actions)
-        {
-            ticks = Mathf.Min(ticks,  action.nextTime);
-        }
-        return ticks;
     }
     public PropertyAbility[] GetAvailableAbilities(CombatDefines.AttackPhase phase, bool castable)
     {
@@ -111,17 +108,30 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     }
 
     #region Casting
+    public void Tick(int currentTick)
+    {
+        Trigger(Combat.main.currentPhase, currentTick);
+    }
+    public int GetNextTick()
+    {
+        int ticks = int.MaxValue;
+        foreach (var action in actions)
+        {
+            ticks = Mathf.Min(ticks, action.nextTime);
+        }
+        return ticks;
+    }
     public bool Trigger(CombatDefines.AttackPhase phase, int currentTick)
     {
-        var abilities = GetAttacks().Where(a => a.CanBeCast(phase) && a.GetValidTargets(parent).Length > 0);
+        var abilities = GetAttacks();
 
-        foreach (var action in abilities)
+        foreach (var action in abilities.Where(a => a.CanBeCast(phase) && a.GetValidTargets(parent).Length > 0))
         {
             if (action.nextTime <= currentTick)
             {
-                while (action.nextTime <= currentTick)
+                while (action.nextTime <= currentTick && action.HasResourcesToCast() && action.GetValidTargets(parent).Length > 0)
                 {
-                    Combat.main.Inspect($"Combatant {parent.data.InternalName} performs action {action.InternalName} at turn {currentTick}");
+                    Combat.main.Inspect($"Combatant {parent.data.InternalName} performs action {action.InternalName} at tick {currentTick}");
 
                     var target = action.GetBestTargetForAbility(parent);
                     var castData = new AttackTable(phase, currentTick, parent, target.gridPos, action);

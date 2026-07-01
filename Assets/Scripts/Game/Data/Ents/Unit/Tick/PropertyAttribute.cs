@@ -211,7 +211,7 @@ public class PropertyThinker : PropertyTag, ITimerAction
     {
         lastThink = cooldown;
     }
-    public virtual bool ForwardTime(int cooldown)
+    public virtual bool RefreshCooldown(int cooldown)
     {
         if (HasThinker) lastThink -= cooldown;
         executed = executed || lastThink < 0;

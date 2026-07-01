@@ -5,9 +5,11 @@ using UnityEngine;
 public class PropertyWeapon : PropertyAbility
 {
     public WeaponData original;
-
     public PropertyWeapon(DataItemUnit caster, WeaponData original) : base(caster)
     {
+        startupDelay = original.castDelay;
+        actionInterval = original.castTime;
+
         InternalName = original.InternalName;
         this.original = original;
     }
@@ -15,6 +17,7 @@ public class PropertyWeapon : PropertyAbility
     public override bool CanBeCast(CombatDefines.AttackPhase phase)
     {
         return original.attackPhase == phase 
+            && (!original.castOnce || uses==0)
             && (original.HasFlag(CombatDefines.AttackFlag.castInFrontRow) && parent.troopPosition.y == 0
             || original.HasFlag(CombatDefines.AttackFlag.castInBackRow) && parent.troopPosition.y == 1
             || original.HasFlag(CombatDefines.AttackFlag.castInTransport) && parent.troopPosition.y < 0
@@ -23,10 +26,18 @@ public class PropertyWeapon : PropertyAbility
     }
     public override bool HasResourcesToCast()
     {
-        return base.HasResourcesToCast();
+        return parent.actions.Mp.GetValue() >= original.mpCost
+        && parent.actions.Ap.GetValue() >= original.apCost
+        && parent.actions.Sp.GetValue() >= original.spCost;
+
     }
     public override void SpendResources()
     {
+        uses++;
+        parent.actions.Mp.SubstractedValue(original.mpCost);
+         parent.actions.Ap.SubstractedValue(original.apCost);
+         parent.actions.Sp.SubstractedValue(original.spCost);
+        ExtendCooldown( Mathf.CeilToInt(parent.stats.realStats.SpeedCoefficient * actionInterval));
         base.SpendResources();
     }
     public override bool CastFromTable(CastTable table)

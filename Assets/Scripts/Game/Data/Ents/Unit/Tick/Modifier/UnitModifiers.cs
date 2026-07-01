@@ -291,7 +291,7 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
     }
     #endregion
     #region Timely Update
-    public bool Tick(int steps)
+    public void Tick(int steps)
     {
         bool executed = false;
         if (HasUpdates)
@@ -301,21 +301,21 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
             {
                 if (!Mod.dead)
                 {
-                    executed = executed | Mod.ForwardTime(tickDelta);
+                    executed = executed | Mod.RefreshCooldown(tickDelta);
                 }
             }
         }
         lastTick = steps;
-        return executed;
     }
-    public int GetNextTick(int steps)
+    public int GetNextTick()
     {
         int ticks = int.MaxValue;
         foreach (var modifier in _modifiers)
         {
-            ticks = Mathf.Min(ticks, steps + modifier.expiration, steps + modifier.thinkInterval);
+            ticks = Mathf.Min(ticks, modifier.expiration, modifier.thinkInterval);
         }
         return ticks;
     }
+
     #endregion
 }
