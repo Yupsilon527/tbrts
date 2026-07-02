@@ -22,3 +22,7 @@ MonoBehaviour:
     scaleDamage: 1
     scaleoff: 0
     scaleRate: 0
+  - scaleMode: 12
+    scaleDamage: 1
+    scaleoff: 0
+    scaleRate: 0

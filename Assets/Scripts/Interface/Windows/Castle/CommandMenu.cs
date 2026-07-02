@@ -157,7 +157,6 @@ public class CommandMenu : PlayerWindow
             e.Add("Move here");
             a.Add(() => {
                 selArmy.orders.ReplaceOrder(new Order(Order.ID.Move, tile.gridPos));
-                selArmy.movement.ResolveMovement();
             }); 
             e.Add("Reorganize");
             a.Add(() => {

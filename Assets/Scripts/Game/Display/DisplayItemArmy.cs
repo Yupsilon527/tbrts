@@ -23,6 +23,8 @@ public class DisplayItemArmy : DisplayItemObject<DataItemArmy>
     {
         OnPathChange();
         base.OnSelectionChange();
+        InterfaceManager.main.moveIndicator.ClearList();
+        InterfaceManager.main.moveIndicator.DoOrderDisplay(assignedArmy);
     }
     public override void DrawAgain()
     {

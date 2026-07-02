@@ -21,17 +21,17 @@ public class DataItemArmy : DataItemObject
     }
     public override string ToString()
     {
-        return "Army " + eID ;
+        return "Army " + eID;
     }
-    public DataItemArmy (Vector2Int pos, int playerOwner):this()
+    public DataItemArmy(Vector2Int pos, int playerOwner) : this()
     {
         ChangeTile(pos, DisplayPositionChange.instant);
         SetPlayerOwner(playerOwner);
     }
 
-    public DataItemArmy (CustomArmy army) : this (army.spawnPos, army.ownership)
+    public DataItemArmy(CustomArmy army) : this(army.spawnPos, army.ownership)
     {
-        for (int i =0; i< army.formation.Length; i++)
+        for (int i = 0; i < army.formation.Length; i++)
         {
             var unit = WorldManager.main.LoadUnit(army.formation[i]);
             if (unit != null)
@@ -50,7 +50,7 @@ public class DataItemArmy : DataItemObject
         foreach (var u in formation.GetUnits())
         {
             GetPlayerOwner().upgrades.ApplyResearchedUpgradeToNewlySpawnedUnit(u);
-           if (tile.buildingLayer is DataItemCastle castle)
+            if (tile.buildingLayer is DataItemCastle castle)
                 castle.bonuses.ApplyResearchedUpgradeToNewlySpawnedUnit(u);
             u.FireEventOnSelf(AbilityDefines.Event.OnSpawn);
         }
@@ -62,7 +62,7 @@ public class DataItemArmy : DataItemObject
         if (movement.CanPayMovement(cost))
         {
             movement.PayMovement(cost);
-            ChangeTile(t,m);
+            ChangeTile(t, m);
             return true;
         }
         return false;
@@ -104,12 +104,12 @@ public class DataItemArmy : DataItemObject
     }
     void ChangeCastle(DataItemCastle enter, DataItemCastle exit)
     {
-            if (exit != enter)
-            {
-                if (exit != null && exit.GetAlignment(this) == PlayerDefines.Alignment.playerowned)
-                    exit.OnArmyLeaveCastle(this, false);
-                if (enter != null && enter.GetAlignment(this) == PlayerDefines.Alignment.playerowned)
-                    enter.OnArmyEnterCastle(this, false);
+        if (exit != enter)
+        {
+            if (exit != null && exit.GetAlignment(this) == PlayerDefines.Alignment.playerowned)
+                exit.OnArmyLeaveCastle(this, false);
+            if (enter != null && enter.GetAlignment(this) == PlayerDefines.Alignment.playerowned)
+                enter.OnArmyEnterCastle(this, false);
         }
     }
     public bool MoveToTile(Vector2Int t, bool attack)
@@ -117,45 +117,35 @@ public class DataItemArmy : DataItemObject
         var ntile = SidewaysMap.main.GetTile(t);
         var m = movement.GetMyMovement();
         int totalMove = ntile.GetMoveCost(m);
-        if (ntile!=null)
+        if (ntile != null)
         {
-            if (ntile.armyLayer != null)
+            if (ntile.armyLayer != null )
             {
                 if (ntile.armyLayer.GetAlignment(this) == PlayerDefines.Alignment.enemy)
                 {
-                    if (attack)
-                        BattleAnother(ntile.armyLayer);
+                    if (attack) BattleAnother(ntile.armyLayer);
+                    else return false;
                 }
-               else
+                else
                 {
                     var currentOrder = orders.GetCurrentOrder();
 
-                    if (currentOrder.gridDest == t)
-                    {
-                        if (!Transfer(ntile.armyLayer,false))
-                        {
-                            InterfaceManager.main.armyWindow.Open();
-                            return false; 
-                        }
-                    }
-                    else
-                    {
-                        if (currentOrder.path.Remaining()>1)
+                    
+                        if (currentOrder.path.Remaining() > 1)
                         {
                             var firstTile = currentOrder.path.Following(1);
                             var secondTile = currentOrder.path.Following(2);
                             if (movement.CanWalkOnTile(firstTile) && movement.CanWalkOnTile(secondTile))
                             {
-                                 totalMove = firstTile.GetMoveCost(m) + secondTile.GetMoveCost(m);
+                                totalMove = firstTile.GetMoveCost(m) + secondTile.GetMoveCost(m);
                                 return ChangeTile(t, totalMove, DisplayPositionChange.move);
                             }
-                        }
                     }
                 }
             }
             else if (ntile.buildingLayer != null)
             {
-                if (ntile.buildingLayer.GetAlignment(this) == PlayerDefines.Alignment.enemy && ntile.buildingLayer is DataItemCastle enemyCastle && attack)
+                if (attack && ntile.buildingLayer.GetAlignment(this) == PlayerDefines.Alignment.enemy && ntile.buildingLayer is DataItemCastle enemyCastle)
                 {
                     enemyCastle.BattleTroop(this, ntile);
                     return false;
@@ -191,7 +181,7 @@ public class DataItemArmy : DataItemObject
     }
     public override void SetPlayerOwner(DataItemPlayer player)
     {
-        if (GetPlayerOwner()!= null)
+        if (GetPlayerOwner() != null)
         {
             GetPlayerOwner().units.Remove(this);
         }
@@ -207,10 +197,10 @@ public class DataItemArmy : DataItemObject
     public void ApplyEffect(ApplyEffects effect) { }
     public int GetAuraBonuses(UnitDefines.ArmyAbilities Bonus)
     {
- //       if (tile.buildingLayer != null && tile.buildingLayer.GetAlignment(this) ==  PlayerDefines.Alignment.playerowned && tile.buildingLayer is DataItemCastle castle)
-   //     {
-     //       return 0;//TODO (Bonus);
-       // }
+        //       if (tile.buildingLayer != null && tile.buildingLayer.GetAlignment(this) ==  PlayerDefines.Alignment.playerowned && tile.buildingLayer is DataItemCastle castle)
+        //     {
+        //       return 0;//TODO (Bonus);
+        // }
         return 0;
     }
 
@@ -230,7 +220,7 @@ public class DataItemArmy : DataItemObject
         return formation.Formation.Sum(u => u.GetPowerValue(accountPenalty)) + formation.transport?.GetPowerValue(accountPenalty) ?? 0;
     }
     public float GetUpkeep()
-    { 
+    {
         return GetPowerValue(true) * UnitDefines.fSalaryMultiplier;
     }
     #endregion
@@ -267,7 +257,7 @@ public class DataItemArmy : DataItemObject
 
         if (!Instant && GameManager.main.playerManager.GetActivePlayer().IsAiControlled())
         {
-//            game.game.InGameMenus.OpenWindow(new ArmyUINew(game.game, this, Defender));
+            //            game.game.InGameMenus.OpenWindow(new ArmyUINew(game.game, this, Defender));
             return false;
         }
 
@@ -278,7 +268,7 @@ public class DataItemArmy : DataItemObject
 
         if (AmISelected(false))
         {
-            GameManager.main.armyManager.SelectArmy(other) ;
+            GameManager.main.armyManager.SelectArmy(other);
         }
         other.movement.movementLeft = movement.movementLeft;
         other.display.OnGraphicsChange();
@@ -293,14 +283,14 @@ public class DataItemArmy : DataItemObject
     }
     public float GetTrueSight()
     {
-                return Mathf.Min(UnitDefines.iArmyBaseLoS + formation.GetAbilitiyMax("spies"), GetLineOfSight());
+        return Mathf.Min(UnitDefines.iArmyBaseLoS + formation.GetAbilitiyMax("spies"), GetLineOfSight());
     }
     public override bool IsVisibleToPlayer(DataItemPlayer player)
     {
         if (GetAlignment(player) == PlayerDefines.Alignment.enemy)
         {
-            return true;
-                return tile.IsRevealedByPlayer(player, status.IsCloaked() ? UnitDefines.TileVisibility.truesight : UnitDefines.TileVisibility.visible);
+            return true;    //TODO LoS
+            return tile.IsRevealedByPlayer(player, status.IsCloaked() ? UnitDefines.TileVisibility.truesight : UnitDefines.TileVisibility.visible);
         }
         return base.IsVisibleToPlayer(player);
     }
@@ -311,14 +301,19 @@ public class DataItemArmy : DataItemObject
     #endregion
     public bool BattleAnother(DataItemArmy other, bool canFlee = true)
     {
-        if (other.IsAlive() && tile.IsNeighboring(other.tile) && GetAlignment(other) == PlayerDefines.Alignment.enemy)
+        if (other.IsAlive() && tile.IsNeighboring(other.tile) && GetAlignment(other) == PlayerDefines.Alignment.enemy && movement.CanPayMovement(4))
         {
-
-            //   if (other == OrderList[0].TargetUnit)
-            //  {
-            //      OrderList.RemoveAt(0);
-            //  }
-            return true;//TODO Actions.BattleArmies(game, this, other, false, canFlee);
+            Exhaust(4);
+            Combat.main.BattleTroops(this, other, other.tile);
+            foreach (var unit in formation.GetUnits())
+            {
+                Combat.main.Inspect($"Unit {unit} remaining with {unit.health.GetValue()} health!");
+            }
+            foreach (var unit in other.formation.GetUnits())
+            {
+                Combat.main.Inspect($"Unit {unit} remaining with {unit.health.GetValue()} health!");
+            }
+            return true;
 
         }
         return false;
@@ -327,13 +322,25 @@ public class DataItemArmy : DataItemObject
     {
         return !castle.IsDemolished() && castle.GetAlignment(this) == PlayerDefines.Alignment.enemy && CanAttack() && formation.GetAbilitiyMax("raze") > 0;
     }
+    public void PostDamageUpdate()
+    {
+        foreach (var unit in formation.GetUnits())
+        {
+            if (!unit.IsAlive())
+                formation.RemoveTroop(unit, false);
+        }
+        if (formation.GetUnits(incDead: false).Length == 0)
+            Despawn();
+        else
+            formation.OnFormationUpdate();
+    }
     #region Selection
     public override void SetSelected(bool value)
     {
         if (value == Selected) return;
         base.SetSelected(value);
-        if (value) 
-        GameManager.main.armyManager.SelectArmy(this);
+        if (value)
+            GameManager.main.armyManager.SelectArmy(this);
     }
     public bool AmISelected(bool Moving)
     {
@@ -348,7 +355,7 @@ public class DataItemArmy : DataItemObject
     #region Bribes/Mercs
     public bool CanBeBribed(DataItemArmy Attacker)
     {
-        return (GetMyBribeCost() > 0 && Attacker.GetPowerValue(false) > GetPowerValue(false) );
+        return (GetMyBribeCost() > 0 && Attacker.GetPowerValue(false) > GetPowerValue(false));
     }
 
     public bool isMercenary()
@@ -363,7 +370,7 @@ public class DataItemArmy : DataItemObject
 
     public int GetMyBribeCost()
     {
-        if (!CanBeMerged(false) || isMercenary() || GetPlayerOwner().isNeutral() )
+        if (!CanBeMerged(false) || isMercenary() || GetPlayerOwner().isNeutral())
         {
             return -1;
         }
@@ -376,9 +383,9 @@ public class DataItemArmy : DataItemObject
         formation.OnFormationUpdate();
         display?.DrawAgain();
     }
-    public void Exhaust()
+    public void Exhaust(int amt = 9999)
     {
-        movement.PayMovement(9999);
+        movement.PayMovement(amt);
     }
     public override void Despawn()
     {
@@ -409,12 +416,12 @@ public class DataItemArmy : DataItemObject
         if (GetAlignment(other) == PlayerDefines.Alignment.enemy)
             return false;
         if (formation.GetAbilitiyMax("defenseSupport") > 0 && other.tile.buildingLayer == tile.buildingLayer)
-                return true;
-        if (formation.GetAbilitiyMax("rangeSupport")>0 && (other.gridPos - gridPos).magnitude > GetAssistRange())
+            return true;
+        if (formation.GetAbilitiyMax("rangeSupport") > 0 && (other.gridPos - gridPos).magnitude > GetAssistRange())
             return true;
         return false;
     }
-    public  int GetAssistRange()
+    public int GetAssistRange()
     {
         return formation.GetAbilitiyMax("rangeSupport");
     }

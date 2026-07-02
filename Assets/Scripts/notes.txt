@@ -1,27 +1,17 @@
 TODO
-	
-	tareet alive health check/target checks
-	apply combat
-	unit health
 
-	units can attack unadjecent
-
-	combat/crit
-
-	army auras
 		
-	mock battle window
-
 	combat window
-		* 3x2 armies
-		* 3 phases: prep, action, heal
-		* Actions cost 1AP or 1MP
-		* Battle ends when all AP exhausted
-		* Attacks: 1x1, back row, any, entire row, entire column
-		* Abilities
+		apply combat
+		units can attack unadjecent
+		combat/crit stat
 		* Unit prios: targeting prio, ranged target prio (rams)
+		* mock combat window
+		* gather support units	tareet alive health check/target checks
 
 	(try with 2 armies)
+
+	army auras
 			
 	army innates
 		raiding bonuses

@@ -260,7 +260,7 @@ namespace Astar
 
          PathfinderPath Solution(
             Vector2Int origin,
-            bool includeOrigin = false,
+            bool includeOrigin = true,
             bool approximate = true,
             bool recalculate = true,
             bool account_entities = false,

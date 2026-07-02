@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class ArmyMovementComponent : ArmyComponent
@@ -53,6 +54,15 @@ public class ArmyMovementComponent : ArmyComponent
     public bool CanIMove()
     {
         return (movementLeft > 0 && !parent.orders.IsIdle());
+    }
+    public bool PayAndMove(int movement)
+    {
+        if (CanPayMovement(movement))
+        {
+            PayMovement(movement);
+            return true;
+        }
+        return false;
     }
     public bool CanPayMovement(int movement)
     {
@@ -114,11 +124,13 @@ public class ArmyMovementComponent : ArmyComponent
                     var next = firstOrder?.path?.Next() ?? null;
                     if (next != null && firstOrder.path.failure != Astar.Failure.impossible && firstOrder.path.failure != Astar.Failure.impassible_origin && firstOrder.path.failure != Astar.Failure.impassible_target)
                     {
-                        parent.MoveToTile(next.gridPos, false);
+                        if (!parent.MoveToTile(next.gridPos, false))
+                            return;
                     }
                     else return;
                 }
             }
+            parent.display?.OnPathChange();
         }
     }
 }

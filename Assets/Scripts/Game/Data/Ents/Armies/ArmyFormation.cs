@@ -12,13 +12,13 @@ public class ArmyFormation : ArmyComponent
     {
     }
 
-    public DataItemUnit[] GetUnits(bool incTransport = true)
+    public DataItemUnit[] GetUnits(bool incTransport = true, bool incDead = true)
     {
         List<DataItemUnit> units = new();
         units.AddRange(Formation);
-        if (incTransport) 
-        units.Add(transport);
-        units.RemoveAll(u => u == null);
+        if (incTransport)
+            units.Add(transport);
+        units.RemoveAll(u => u == null || (!incDead && !u.IsAlive()));
         return units.ToArray();
     }
     public override void OnTurnBegin()

@@ -12,7 +12,8 @@ public class UnitStats : UnitComponent
     public override void TriggerFuncs(AbilityDefines.Event act)
     {
         if (act == AbilityDefines.Event.CombatBegin
-            || act == AbilityDefines.Event.OnRefresh)
+            || act == AbilityDefines.Event.OnRefresh
+            || act == AbilityDefines.Event.OnSpawn)
         {
             Recalculate();
         }

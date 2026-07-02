@@ -45,6 +45,7 @@ public class PropertyWeapon : PropertyAbility
         if (table is AttackTable at && table.attacker.CanAct(original.attackPhase) && base.CastFromTable(table))
         {
             at.ComputeTargets();
+            if (at.maintarget == null || at.maintarget.Length == 0 || at.maintarget[0] == null) return false;
             at.Precast();
             table.attacker.FireEventOnSelf(AbilityDefines.Event.BeforeAttack);
             foreach (var attack in original.effects)
@@ -100,7 +101,7 @@ public class PropertyWeapon : PropertyAbility
 
     public override DataItemUnit[] GetMainTargets(CastTable table)
     {
-        return new DataItemUnit[] { Combat.main.GetUnitAt(!table.attackingSide, table.targetPoint.x, table.targetPoint.y) };
+        return new DataItemUnit[] { GetBestTargetForAbility(table.attacker) };
     }
 
     public override DataItemUnit[] GetAreaTargets(CastTable table)

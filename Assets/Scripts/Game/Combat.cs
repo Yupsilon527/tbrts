@@ -15,15 +15,22 @@ public class Combat : Initializable
 
     public SparseIntMap MockBattle(DataItemArmy a, DataItemArmy d, SidewaysTile l)
     {
+        mockBattle = true;
         SetUp(a, d, l);
         ResolveInstantly();
         return OutputResults();
     }
+    public void BattleTroops(DataItemArmy a, DataItemArmy d, SidewaysTile l)
+    {
+        mockBattle = false;
+        SetUp(a, d, l);
+        ResolveInstantly();
+    }
+    bool mockBattle = false;
 
     public CombatDefines.AttackPhase currentPhase;
     public SidewaysTile locatedTile;
     public DataItemArmy attackers, defenders;
-    public bool mockBattle = false;
 
     public List<DataItemUnit> combatants = new();
 
@@ -116,6 +123,15 @@ public class Combat : Initializable
         foreach (var c in combatants)
         {
             c.Act(lastTick);
+        }
+        if (!mockBattle)
+        {
+            foreach (var unit in combatants)
+            {
+                unit.health.SetValue(unit.damageable.Health.GetValue());
+            }
+            attackers.PostDamageUpdate();
+            defenders.PostDamageUpdate();
         }
 
         if (enabled)

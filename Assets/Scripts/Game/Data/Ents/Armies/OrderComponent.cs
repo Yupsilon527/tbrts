@@ -1,6 +1,4 @@
-using Astar;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class OrderComponent : ArmyComponent
@@ -39,7 +37,6 @@ public class OrderComponent : ArmyComponent
             order.RecalcPath(parent, index < 0 ? parent.gridPos : orders[index].gridDest);
             index++;
         }
-        parent.display?.OnPathChange();
     }
     public Order GetCurrentOrder()
     {
@@ -68,11 +65,13 @@ public class OrderComponent : ArmyComponent
             ResolveCurrentOrder();
         else
             RecalculateEntirePath();
+        parent.display?.OnPathChange();
     }
     public void ReplaceOrder(Order o)
     {
         ClearOrders();
         GiveOrder(o, 0);
+        parent.movement.ResolveMovement();
     }
     public void AdvanceOrder()
     {
@@ -80,11 +79,13 @@ public class OrderComponent : ArmyComponent
         {
             orders.RemoveAt(0);
             ResolveCurrentOrder();
+            parent.display?.OnPathChange();
         }
     }
     public void ClearOrders()
     {
         orders.Clear();
+        parent.display?.OnPathChange();
     }
     void ResolveCurrentOrder()
     {
@@ -102,113 +103,6 @@ public class OrderComponent : ArmyComponent
         {
             return true;
 
-        }
-        return false;
-    }
-
-}
-
-public class Order
-{
-    public enum ID { Move = 0, Follow = 1, Rest = 2, Raze = 3 };
-    public ID OrderID;
-    public Vector2Int gridDest;
-    public PathfinderPath path;
-
-    public Order(ID orderID, Vector2Int gridDest)
-    {
-        OrderID = orderID;
-        this.gridDest = gridDest;
-    }
-
-    public virtual void RecalcPath(DataItemArmy owner, Vector2Int origin)
-    {
-        path = owner.pathfinder.Solve(origin, gridDest);
-    }
-    public virtual bool Resolve(DataItemArmy owner)
-    {
-        owner.movement.ResolveMovement();
-        return true;
-    }
-    public virtual bool HasResolvedOrder(DataItemArmy owner)
-    {
-        return owner.tile.gridPos == gridDest;
-    }
-}
-public class RazeOrder : Order
-{
-    public RazeOrder(ID orderID, Vector2Int gridDest) : base(orderID, gridDest)
-    {
-    }
-
-    public override bool Resolve(DataItemArmy attacker)
-    {
-        if (attacker.tile.buildingLayer is DataItemCastle city)
-        {
-            //player ai
-            if (attacker.CanInvadeCastle(city))
-            {
-                InterfaceManager.main.OpenCastleRazeWindow(city, attacker);
-                return true;
-            }
-        }
-        return false;
-    }
-}
-public class FollowOrder : Order
-{
-    public DataItemArmy TargetUnit;
-
-    public FollowOrder(ID orderID, Vector2Int gridDest, DataItemArmy targetUnit) : base(orderID, gridDest)
-    {
-        TargetUnit = targetUnit;
-    }
-
-    public virtual bool TargetValid(DataItemArmy owner)
-    {
-        if (TargetUnit != null)
-        {
-            if (!TargetUnit.IsVisibleToAnother(owner))
-                return false;
-            return true;
-        }
-        return false;
-    }
-    public override void RecalcPath(DataItemArmy owner, Vector2Int origin)
-    {
-        if (TargetValid(owner))
-            gridDest = TargetUnit.gridPos;
-        base.RecalcPath(owner, origin);
-    }
-    public override bool HasResolvedOrder(DataItemArmy owner)
-    {
-        return TargetValid(owner) || base.HasResolvedOrder(owner);
-    }
-}
-public class AttackOrder : FollowOrder
-{
-    public AttackOrder(ID orderID, Vector2Int gridDest, DataItemArmy targetUnit) : base(orderID, gridDest, targetUnit)
-    {
-    }
-
-    public override bool Resolve(DataItemArmy owner)
-    {
-        if (owner.tile.IsAdjecent(owner.tile) && TargetValid(owner))
-        {
-            SparseIntMap results =  Combat.main.MockBattle(owner, TargetUnit, TargetUnit.tile);
-
-            var allUnits = new List<DataItemUnit>();
-            allUnits.AddRange(owner.formation.GetUnits());
-            allUnits.AddRange(TargetUnit.formation.GetUnits());
-
-
-            foreach (var result in results._entries)
-            {
-                var unit = allUnits.FirstOrDefault(u => u.eID == result.key);
-                Combat.main.Inspect($"Unit {unit} remaining with {result.value} health!");
-            }
-
-            return true;
         }
         return false;
     }

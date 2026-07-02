@@ -24,8 +24,8 @@ MonoBehaviour:
       Attack: 5
       Action: 1
       Magic: 5
-      Mana: 1
-      Supply: 1
+      Mana: 0
+      Supply: 0
       Health: 25
       Barrier: 4
       Armor: 0
@@ -49,7 +49,18 @@ MonoBehaviour:
     - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
     - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
     unitFlags: 00000000
-    attacks: []
+    attacks:
+    - InternalName: Peasant Melee
+      apCost: 1
+      mpCost: 0
+      spCost: 0
+      castTime: 100
+      castDelay: 0
+      abilityFlags: 76
+      castOnce: 0
+      attackPhase: 1
+      targetPriority: 0
+      areaMode: 0
     spells: []
     abilities:
     - abilityID: foot

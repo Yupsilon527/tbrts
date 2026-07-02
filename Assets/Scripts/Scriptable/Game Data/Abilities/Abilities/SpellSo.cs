@@ -16,8 +16,10 @@ public class SpellSo : ActionSO
 [Serializable]
 public class SpellData : ActionData
 {
+    public int MetalCost = 0;
     public int GoldCost = 0;
     public int ManaCost = 0;
+    public int SupplyCost = 0;
 
     public int min_range, max_range, area_range;
 

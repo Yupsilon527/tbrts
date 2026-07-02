@@ -9,11 +9,12 @@ public class DataItemUnit : DataItemObject
     public int critCounter = 1;
     public int dodgeCounter = 1;
 
+    public UnitData data;
     public ResourceInt health=new(100,"True Helath",false,true);
+
+    public DataItemArmy troop;
     public Vector2Int troopPosition => troop.formation.GetPositionForUnit(this);
 
-    public UnitData data;
-    public DataItemArmy troop;
 
     public UnitStats stats;
     public UnitDamageable damageable;
@@ -59,10 +60,10 @@ public class DataItemUnit : DataItemObject
     }
     public virtual void HandleEvent(AbilityDefines.Event evt, DataItemUnit[] targets, bool refresh = false)
     {
+        stats.TriggerFuncs(evt);
         damageable.TriggerFuncs(evt);
         actions.TriggerFuncs(evt);
         modifiers.EventReaction(evt, targets);
-        stats.TriggerFuncs(evt);
         if (evt == AbilityDefines.Event.CombatPhase)
         {
             UpdateNextAction();
@@ -81,7 +82,7 @@ public class DataItemUnit : DataItemObject
     }
     public bool CanAct(CombatDefines.AttackPhase phase)
     {
-        return actions.GetAttacks().Any(a => a.original.attackPhase == phase && a.HasResourcesToCast());
+        return damageable. IsAlive() && actions.GetAttacks().Any(a => a.original.attackPhase == phase && a.HasResourcesToCast());
     }
     protected void UpdateNextAction()
     {
@@ -238,5 +239,10 @@ public class DataItemUnit : DataItemObject
     public bool isTransport()
     {
         return innates.GetAbilityLevel("transport") > 0;
+    }
+
+    public bool IsAlive()
+    {
+        return health.GetValue() > 0;
     }
 }

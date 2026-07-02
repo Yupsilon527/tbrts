@@ -135,7 +135,8 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
 
                     var target = action.GetBestTargetForAbility(parent);
                     var castData = new AttackTable(phase, currentTick, parent, target.gridPos, action);
-                    action.CastFromTable(castData);
+                    if (!action.CastFromTable(castData))
+                        break;
                 }
                 return true;
             }
