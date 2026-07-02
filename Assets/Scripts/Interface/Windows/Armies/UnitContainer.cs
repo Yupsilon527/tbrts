@@ -8,8 +8,13 @@ public class UnitContainer : MonoBehaviour
 
     public virtual void ForUnit(DataItemUnit unit)
     {
-        unitImage.sprite = unit.data.GetSprite(CharacterSO.SpriteFrame.idle) ;
-        unitLabel.text = unit.InternalName;
+        if (unitImage != null)
+        {
+            unitImage.enabled = true;
+            unitImage.sprite = unit.data.GetSprite(CharacterSO.SpriteFrame.idle);
+        }
+        if (unitLabel != null)
+            unitLabel.text = unit.InternalName;
     }
     public virtual void ForData(ProductionData data)
     {

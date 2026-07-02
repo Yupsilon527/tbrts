@@ -41,7 +41,7 @@ public class ScaleData
         {
             switch (scaleMode)
             {
-                 case AttackDefines.ScaleType.AttackStat:
+                 case AttackDefines.ScaleType.Attack:
                      bonusDamage *= attacker.stats.realStats.Attack;
                      break;
                 /* case ScaleType.AttackPercent:

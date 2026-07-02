@@ -54,14 +54,20 @@ public class DamageTable
                         default:
                             switch (blockType)
                             {
-                                case AttackDefines.HitType.blocked:
-                                    outDamage = Mathf.Max(1, outDamage - target.stats.realStats.Block - armor);
+                                case AttackDefines.HitType.criticalHit:
+                                    outDamage = Mathf.Max(outDamage / 2, outDamage * 2 - armor);
                                     break;
                                 case AttackDefines.HitType.normal:
                                     outDamage = Mathf.Max(1, outDamage - armor);
                                     break;
-                                case AttackDefines.HitType.halfBlock:
-                                    outDamage = Mathf.Max((outDamage / 2), outDamage - target.stats.realStats.Armor);
+                                case AttackDefines.HitType.blocked:
+                                    outDamage = Mathf.Max(1, outDamage - target.stats.realStats.Block - armor);
+                                    break;
+                                case AttackDefines.HitType.blockCrit:
+                                    outDamage = Mathf.Max(1, outDamage - target.stats.realStats.Block * 2 - armor);
+                                    break;
+                                case AttackDefines.HitType.miss:
+                                    outDamage = 1;
                                     break;
                             }
                             break;

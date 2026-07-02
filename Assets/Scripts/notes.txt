@@ -1,17 +1,16 @@
 TODO
-
-		
-	combat window
-		apply combat
-		units can attack unadjecent
-		combat/crit stat
+	FIX COMBAT
+		bonus damage/scaling
+		hit/miss/crit
 		* Unit prios: targeting prio, ranged target prio (rams)
 		* mock combat window
 		* gather support units	tareet alive health check/target checks
 
+
+
 	(try with 2 armies)
 
-	army auras
+	spells
 			
 	army innates
 		raiding bonuses
@@ -28,7 +27,9 @@ TODO
 		* Gold* Crystal (low income, found initially on map)
 		* Mana (from kills, income, dead troops, damage, etc)
 		* Can have up to 10* Regenerates by 1 each turn, up to 3
+		
 
+	army auras
 LoS
 
 QoL

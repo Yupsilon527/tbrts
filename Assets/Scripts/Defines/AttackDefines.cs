@@ -1,5 +1,6 @@
 
 using System;
+using System.Xml;
 using UnityEngine;
 
 public static class AttackDefines
@@ -7,7 +8,7 @@ public static class AttackDefines
     public enum HitType
     {
         ignoreArmor,
-        halfBlock,
+        blockCrit,
         normal,
         blocked,
         criticalHit,
@@ -78,22 +79,16 @@ public static class AttackDefines
     {
         Nothing = 0,
 
-        //Stats
-        AttackStat = 1,
-        MagicStat = 2,
-        ControlStat = 3,
+       
 
-        //Cur Props
-        CurGold = 4,
-        CurHp = 5,
-        MissHp = 6,
-        TotHp = 7,
-        HealthBar = 8,
-        CurArmor = 9,
-        CurBlock = 10,
-
-        Random = 11,
-        UnitBonuses = 12,
+        Random = 1,
+        BonusDamage = 2,
+        Padding = 3,
+        Shield = 4,
+        Armor = 5,
+        HealthBar = 6,
+        Magic = 7,
+        Attack = 8,
     }
     public enum ScaleMode
     {
@@ -115,9 +110,26 @@ public static class AttackDefines
         {
             switch (scale)
             {
-                case ScaleType.AttackStat:
+                case ScaleType.Attack:
                     bonusDamage *= owner.stats.realStats.Attack;
                     break;
+                case ScaleType.Magic:
+                    bonusDamage *= owner.stats.realStats.Magic;
+                    break;
+                case ScaleType.HealthBar:
+                    bonusDamage *= owner.damageable.Health.GetValue();
+                    break;
+                case ScaleType.Armor:
+                    bonusDamage *= owner.damageable.Health.GetValue();
+                    break;
+                case ScaleType.Shield:
+                    bonusDamage *= owner.damageable.Health.GetValue();
+                    break;
+                case ScaleType.Padding:
+                    bonusDamage *= owner.damageable.Health.GetValue();
+                    break;
+                case ScaleType.BonusDamage:
+                    return owner.bonuses.CalculateDamageAgainstTarget(target, baseDamage);
                 /*case ScaleType.AttackCrit:
                     bonusDamage = scaleDamage + owner.modifiers.GetPropertyAdditive(ModifierDefines.Property.critical_damage);
                     break;
@@ -188,7 +200,7 @@ public static class AttackDefines
                         return 0;
                     return Mathf.Max(1, baseDamage + owner.modifiers.GetPropertyAdditive(ModifierDefines.Property.fire_damage_bonus)) * owner.modifiers.GetPropertyMultiplicative(ModifierDefines.Property.fire_damage_incoming);*/
                 default:
-                    return baseDamage;
+                    return baseDamage * UnityEngine.Random.value;
             }
         }
         switch (rate)
@@ -215,5 +227,5 @@ public static class AttackDefines
         return baseValue;
     }
     public static float attackCoefficient = 100;
-    internal static float minAccuracy;
+    internal static float minAccuracy = .2f;
 }

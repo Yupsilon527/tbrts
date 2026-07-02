@@ -84,7 +84,7 @@ public class AttackTable : CastTable
             {
                 float evasion = target.dodgeCounter / 2f * target.stats.realStats.DodgeChance * target.stats.realStats.GetLuckCoefficient();
 
-                if (ranval > Mathf.Min(AttackDefines.minAccuracy, evasion))
+                if (ranval < Mathf.Min(1-AttackDefines.minAccuracy, evasion))
                 {
                     target.dodgeCounter = 1;
                     return AttackDefines.HitType.miss;
@@ -105,7 +105,7 @@ public class AttackTable : CastTable
             ranval = Random.value * (critChance + hitChance + missChance + parryChance);
             if (ranval < missChance)
             {
-                hitType = ranval < parryChance ? AttackDefines.HitType.halfBlock : AttackDefines.HitType.blocked;
+                hitType = ranval < parryChance ? AttackDefines.HitType.blockCrit : AttackDefines.HitType.blocked;
                 attacker.hitCounter++;
             }
             else

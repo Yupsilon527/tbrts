@@ -83,6 +83,14 @@ MonoBehaviour:
     armies:
     - InternalName: 1
       ownership: 2
+      spawnPos: {x: 3, y: 3}
+      formation:
+      - Peasant
+      - 
+      - Peasant
+      transporter: 
+    - InternalName: 1
+      ownership: 2
       spawnPos: {x: 10, y: 10}
       formation:
       - Peasant

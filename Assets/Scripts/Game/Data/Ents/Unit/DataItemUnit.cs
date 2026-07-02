@@ -5,6 +5,7 @@ using UnityEngine;
 public class DataItemUnit : DataItemObject
 {
     public int nextAction = 0;
+    public int initiative = 50;
     public int hitCounter = 1;
     public int critCounter = 1;
     public int dodgeCounter = 1;
@@ -86,6 +87,7 @@ public class DataItemUnit : DataItemObject
     }
     protected void UpdateNextAction()
     {
+        initiative = (int)(UnityEngine.Random.value * 10)   ;
         nextAction = Mathf.Min(actions.GetNextTick(), modifiers.GetNextTick());
     }
     #region States

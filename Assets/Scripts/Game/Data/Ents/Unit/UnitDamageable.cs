@@ -61,7 +61,9 @@ public class UnitDamageable : UnitComponent
 
         foreach (var d in damage.realDamage)
         {
-            float realDamage = d.Value;
+            Combat.main.Inspect($"{parent} recevies {d.Value} {d.Key} total damage from {damage.attacker} at {Combat.main.currentTick}");
+    
+                float realDamage = d.Value;
             switch (d.Key)
             {
                 case AttackDefines.DamageType.Slashing:

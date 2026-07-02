@@ -10,6 +10,7 @@ public class InterfaceManager : WindowManager
     public InfoWindow infoWindow;
     public ArmyInfoWindow armyWindow;
     public ArmyMergeWindow transferWindow;
+    public CombatWindow combatWindow;
 
     public CastleProductionWindow castleWindow;
     public CastleInfoWindow castleInfoWindow;
@@ -46,5 +47,10 @@ public class InterfaceManager : WindowManager
         if (castleRazeWindow.ValidRaze()) {
             castleRazeWindow.Open();
         }
+    }
+    public void OpenPrepareCombatWindow(DataItemArmy attacker, DataItemArmy defender)
+    {
+        combatWindow.Open();
+        combatWindow.PresentSides(attacker, defender);
     }
 }

@@ -299,21 +299,28 @@ public class DataItemArmy : DataItemObject
 
     }
     #endregion
-    public bool BattleAnother(DataItemArmy other, bool canFlee = true)
+    public bool BattleAnother(DataItemArmy other, bool showPopup = true)
     {
         if (other.IsAlive() && tile.IsNeighboring(other.tile) && GetAlignment(other) == PlayerDefines.Alignment.enemy && movement.CanPayMovement(4))
         {
-            Exhaust(4);
-            Combat.main.BattleTroops(this, other, other.tile);
-            foreach (var unit in formation.GetUnits())
+            if (showPopup)
             {
-                Combat.main.Inspect($"Unit {unit} remaining with {unit.health.GetValue()} health!");
+                InterfaceManager.main.OpenPrepareCombatWindow(this,other);
+                return false;
             }
-            foreach (var unit in other.formation.GetUnits())
-            {
-                Combat.main.Inspect($"Unit {unit} remaining with {unit.health.GetValue()} health!");
+            else {
+                Exhaust(4);
+                Combat.main.BattleTroops(this, other, other.tile);
+                foreach (var unit in formation.GetUnits())
+                {
+                    Combat.main.Inspect($"Unit {unit} remaining with {unit.health.GetValue()} health!");
+                }
+                foreach (var unit in other.formation.GetUnits())
+                {
+                    Combat.main.Inspect($"Unit {unit} remaining with {unit.health.GetValue()} health!");
+                }
+                return true;
             }
-            return true;
 
         }
         return false;
