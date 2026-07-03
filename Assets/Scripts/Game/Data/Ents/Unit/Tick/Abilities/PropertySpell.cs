@@ -14,6 +14,18 @@ public class PropertySpell : PropertyAbility
 
     public override bool CastFromTable(CastTable table)
     {
+        if (original.targetMode == CombatDefines.TileTargetingMode.random_tile)
+        {
+            var hitTiles = GetValidCastTiles();
+            if (hitTiles.Length > 0)
+            {
+                var randomTile = hitTiles[Mathf.FloorToInt(hitTiles.Length * UnityEngine.Random.value)];
+                table.targetPoint = randomTile.gridPos;
+            }
+            else return false;
+        }
+
+
         if (base.CastFromTable(table))
         {
             table.ComputeTargets();
@@ -43,10 +55,21 @@ public class PropertySpell : PropertyAbility
     #region Resource
     public override bool HasResourcesToCast()
     {
-        return base.HasResourcesToCast();
+        var playerOwner = parent.GetPlayerOwner();
+        return parent.actions.Sp.GetValue() >= original.SupplyCost
+        && playerOwner.econ.CanAffordResource(new ResourceCost(EconomyDefines.EconomyResource.Metal, original.MetalCost))
+        && playerOwner.econ.CanAffordResource(new ResourceCost(EconomyDefines.EconomyResource.Gold, original.GoldCost))
+        && playerOwner.econ.CanAffordResource(new ResourceCost(EconomyDefines.EconomyResource.Mana, original.ManaCost));
     }
     public override void SpendResources()
     {
+        parent.actions.Sp.SubstractedValue(original.SupplyCost);
+
+        var playerOwner = parent.GetPlayerOwner();
+        playerOwner.econ.Spend(new ResourceCost(EconomyDefines.EconomyResource.Metal, original.MetalCost));
+        playerOwner.econ.Spend(new ResourceCost(EconomyDefines.EconomyResource.Gold, original.GoldCost));
+        playerOwner.econ.Spend(new ResourceCost(EconomyDefines.EconomyResource.Mana, original.ManaCost));
+
         base.SpendResources();
     }
     #endregion
@@ -77,38 +100,26 @@ public class PropertySpell : PropertyAbility
     public override DataItemUnit[] GetAreaTargets(CastTable table)
     {
         HashSet<DataItemUnit> targets = new HashSet<DataItemUnit>();
-        int arange = (int)GetAreaRange();
-        switch (original.areaMode)
+        foreach (var tile in GetHitTiles(SidewaysMap.main.GetTile(table.targetPoint)))
         {
-            case CombatDefines.TileTargetingArea.circle:
-                var checkTiles = SidewaysMap.main.GetTilesInCircle(table.targetPoint, arange);
-                foreach (var tile in checkTiles)
-                {
-                    if (tile.armyLayer != null)
-                        foreach (var army in tile.armyLayer.formation.GetUnits())
-                            targets.Add(army);
-                }
-                break;
-            case CombatDefines.TileTargetingArea.square:
-                var checkRect = SidewaysMap.main.GetTilesInRect(new RectInt(table.targetPoint.x - arange, table.targetPoint.y - arange, table.targetPoint.x + arange, table.targetPoint.y + arange));
-                foreach (var tile in checkRect)
-                {
-                    if (tile.armyLayer != null)
-                        foreach (var army in tile.armyLayer.formation.GetUnits())
-                            targets.Add(army);
-                }
-                break;
+            if (tile.armyLayer != null)
+                foreach (var army in tile.armyLayer.formation.GetUnits())
+                    targets.Add(army);
         }
         return targets.ToArray();
     }
     #endregion
-    public bool IsInCastRange( DataItemTile point)
+    public bool InstantCast()
+    {
+        return original.targetMode == CombatDefines.TileTargetingMode.self || original.targetMode == CombatDefines.TileTargetingMode.random_tile;
+    }
+    public bool IsInCastRange(DataItemTile point)
     {
         DataItemTile origin = parent.tile;
-        float rangeSqrt = (origin.gridPos-point.gridPos).sqrMagnitude;
+        float rangeSqrt = (origin.gridPos - point.gridPos).sqrMagnitude;
         return rangeSqrt > original.min_range * original.min_range && rangeSqrt < original.max_range * original.max_range;
     }
-    public bool CanCastOnTile( DataItemTile point)
+    public bool CanCastOnTile(DataItemTile point)
     {
         DataItemTile origin = parent.tile;
         switch (original.targetMode)
@@ -118,7 +129,7 @@ public class PropertySpell : PropertyAbility
             case CombatDefines.TileTargetingMode.passive:
                 return false;
             case CombatDefines.TileTargetingMode.direction:
-                return (Mathf.Abs(origin.gridPos.x - point.gridPos.x) == 1 && origin.gridPos.y == point.gridPos.y) ||( Mathf.Abs(origin.gridPos.y - point.gridPos.y) == 1 && (origin.gridPos.x == point.gridPos.x));
+                return (Mathf.Abs(origin.gridPos.x - point.gridPos.x) == 1 && origin.gridPos.y == point.gridPos.y) || (Mathf.Abs(origin.gridPos.y - point.gridPos.y) == 1 && (origin.gridPos.x == point.gridPos.x));
             case CombatDefines.TileTargetingMode.direction8:
                 return Mathf.Abs(origin.gridPos.x - point.gridPos.x) == 1 || Mathf.Abs(origin.gridPos.y - point.gridPos.y) == 1;
             case CombatDefines.TileTargetingMode.circle:
@@ -128,44 +139,129 @@ public class PropertySpell : PropertyAbility
 
     public DataItemTile[] GetValidCastTiles()
     {
-
         List<DataItemTile> staticCastTiles = new List<DataItemTile>();
+        DataItemTile centerTile = parent.tile;
         switch (original.targetMode)
         {
             default:
                 staticCastTiles.Add(parent.tile);
                 break;
-            case AbilityDefines.Behavior.adjencent:
-                DataItemTile centerTile = DataItemWorld.main.GetTile(GridPosition);
-                staticCastTiles.AddRange(centerTile.neighbors);
+            case CombatDefines.TileTargetingMode.direction:
+                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.up));
+                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.down));
+                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.left));
+                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.right));
                 break;
-            case AbilityDefines.Behavior.line:
-                Vector3Int cubeCenter = GridPosition.CubeCoords;
-                int range = Mathf.RoundToInt(original.maxRange);
+            case CombatDefines.TileTargetingMode.direction8:
+                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.up));
+                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.down));
+                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.left));
+                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.right));
+                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.upright));
+                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.upleft));
+                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.downright));
+                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.downleft));
+                break;
+            case CombatDefines.TileTargetingMode.random_tile:
+            case CombatDefines.TileTargetingMode.circle:
+                staticCastTiles.AddRange(SidewaysMap.main.GetTilesInCircle(parent.tile.gridPos, (int)GetMaxRange()));
 
-                staticCastTiles.AddRange(DataItemWorld.main.GetTilesInLine(cubeCenter, Vector3Int.right + Vector3Int.back, range));
-                staticCastTiles.AddRange(DataItemWorld.main.GetTilesInLine(cubeCenter, Vector3Int.left + Vector3Int.forward, range));
-                staticCastTiles.AddRange(DataItemWorld.main.GetTilesInLine(cubeCenter, Vector3Int.up + Vector3Int.back, range));
-                staticCastTiles.AddRange(DataItemWorld.main.GetTilesInLine(cubeCenter, Vector3Int.down + Vector3Int.forward, range));
-                staticCastTiles.AddRange(DataItemWorld.main.GetTilesInLine(cubeCenter, Vector3Int.right + Vector3Int.down, range));
-                staticCastTiles.AddRange(DataItemWorld.main.GetTilesInLine(cubeCenter, Vector3Int.left + Vector3Int.up, range));
-
-                staticCastTiles.RemoveAll((DataItemTile T) => { return T.coords.DistanceFrom(GridPosition) <= original.minRange; });
-                break;
-            case AbilityDefines.Behavior.circle:
-                staticCastTiles.AddRange(DataItemWorld.main.GetTilesInCirc(GridPosition, Mathf.RoundToInt(original.maxRange)));
-                staticCastTiles.RemoveAll((DataItemTile T) => { return T.coords.DistanceFrom(GridPosition) <= original.minRange; });
-                break;
-            case AbilityDefines.Behavior.point:
-                staticCastTiles.AddRange(DataItemWorld.main.GetTilesInCirc(GridPosition, Mathf.RoundToInt(original.maxRange)));
-                staticCastTiles.RemoveAll((DataItemTile T) => { return T.LocatedEntity == null && T.coords.DistanceFrom(GridPosition) <= original.minRange; });
+                int minRange = (int)GetMinRange();
+                staticCastTiles.RemoveAll(t => (t.gridPos - centerTile.gridPos).sqrMagnitude < minRange * minRange);
                 break;
         }
-        return staticCastTiles.ToArray() ;
+        staticCastTiles.RemoveAll(t => t == null);
+        return staticCastTiles.ToArray();
     }
 
-    public DataItemTile[] GetHitTiles(DataItemTile GridPosition)
+    public DataItemTile[] GetHitTiles(DataItemTile targetTile)
     {
-
+        List<DataItemTile> staticCastTiles = new List<DataItemTile>();
+        DataItemTile centerTile = parent.tile;
+        int areaRange = (int)GetMaxRange();
+        switch (original.areaMode)
+        {
+            case CombatDefines.TileTargetingArea.circle:
+                staticCastTiles.AddRange(SidewaysMap.main.GetTilesInCircle(targetTile.gridPos, areaRange));
+                break;
+            case CombatDefines.TileTargetingArea.square:
+                staticCastTiles.AddRange(SidewaysMap.main.GetTilesInRect(targetTile.gridPos - Vector2Int.one * areaRange, targetTile.gridPos + Vector2Int.one * areaRange));
+                break;
+            case CombatDefines.TileTargetingArea.cross:
+                for (int i = 0; i < areaRange; i++)
+                {
+                    staticCastTiles.Add(SidewaysMap.main.GetTile(targetTile.gridPos + Vector2Int.up * i));
+                    staticCastTiles.Add(SidewaysMap.main.GetTile(targetTile.gridPos + Vector2Int.down * i));
+                    staticCastTiles.Add(SidewaysMap.main.GetTile(targetTile.gridPos + Vector2Int.left * i));
+                    staticCastTiles.Add(SidewaysMap.main.GetTile(targetTile.gridPos + Vector2Int.right * i));
+                }
+                break;
+            case CombatDefines.TileTargetingArea.cone:
+                Vector2Int dir = targetTile.gridPos - centerTile.gridPos;
+                Vector2Int ang = Vector2Int.zero;
+                if (Math.Abs(dir.x) > Math.Abs(dir.y))
+                {
+                    dir = dir.x > 0 ? Vector2Int.right : Vector2Int.left;
+                    ang = Vector2Int.up;
+                }
+                else
+                {
+                    dir = dir.y > 0 ? Vector2Int.down : Vector2Int.up;
+                    ang = Vector2Int.right;
+                }
+                for (int i = 0; i < areaRange; i++)
+                {
+                    staticCastTiles.Add(SidewaysMap.main.GetTile(targetTile.gridPos + dir * i));
+                    for (int j = 0; j < i; j++)
+                    {
+                        staticCastTiles.Add(SidewaysMap.main.GetTile(targetTile.gridPos + dir * i + ang * j));
+                        staticCastTiles.Add(SidewaysMap.main.GetTile(targetTile.gridPos + dir * i - ang * j));
+                    }
+                }
+                break;
+            case CombatDefines.TileTargetingArea.cone_narrow:
+                dir = targetTile.gridPos - centerTile.gridPos;
+                ang = Vector2Int.zero;
+                if (Math.Abs(dir.x) > Math.Abs(dir.y))
+                {
+                    dir = dir.x > 0 ? Vector2Int.right : Vector2Int.left;
+                    ang = Vector2Int.up;
+                }
+                else
+                {
+                    dir = dir.y > 0 ? Vector2Int.down : Vector2Int.up;
+                    ang = Vector2Int.right;
+                }
+                for (int i = 0; i < areaRange; i++)
+                {
+                    staticCastTiles.Add(SidewaysMap.main.GetTile(targetTile.gridPos + dir * i));
+                    for (int j = 0; j < i; j++)
+                    {
+                        staticCastTiles.Add(SidewaysMap.main.GetTile(targetTile.gridPos + dir * i + ang * j / 2));
+                        staticCastTiles.Add(SidewaysMap.main.GetTile(targetTile.gridPos + dir * i - ang * j / 2));
+                    }
+                }
+                break;
+            case CombatDefines.TileTargetingArea.line:
+                dir = targetTile.gridPos - centerTile.gridPos;
+                if (Math.Abs(dir.x) > Math.Abs(dir.y))
+                {
+                    dir = dir.x > 0 ? Vector2Int.right : Vector2Int.left;
+                }
+                else
+                {
+                    dir = dir.y > 0 ? Vector2Int.down : Vector2Int.up;
+                }
+                for (int i = 0; i < areaRange; i++)
+                {
+                    staticCastTiles.Add(SidewaysMap.main.GetTile(targetTile.gridPos + dir * i));
+                }
+                break;
+            default:
+                staticCastTiles.Add(centerTile);
+                break;
+        }
+        staticCastTiles.RemoveAll(t => t == null);
+        return staticCastTiles.ToArray();
     }
 }

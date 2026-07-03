@@ -47,8 +47,6 @@ public static class CombatDefines
         direction8,
         circle,
         random_tile,
-        random_closest_tile,
-        random_farthest_tile,
     }
     public enum TileAreaMode
     {
@@ -64,10 +62,15 @@ public static class CombatDefines
     }
     public enum TileTargetingArea
     {
+        tile,
         circle,
         square,
         line,
+        line8,
+        cone_narrow,
         cone,
+        cone8,
+        cross,
     }
     #endregion
     public enum TargetType

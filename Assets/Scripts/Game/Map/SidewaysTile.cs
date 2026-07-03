@@ -109,6 +109,10 @@ public class DataItemTile
         left,
         down,
         up,
+        downright,
+        downleft,
+        upright,
+        upleft,
     }
     public DataItemTile GetNeighbor(GridDirection delta)
     {

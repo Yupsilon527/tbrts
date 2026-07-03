@@ -25,7 +25,11 @@ public class PlayerInputController : MonoBehaviour
             mouseOverTile.display.Highlight(DisplayItemTile.tileState.clear);
         mouseOverTile = nTile;
         ClearTileColors();
-        if (nTile != null)
+        Asd();
+    }
+    void Asd()
+    {
+        if (mouseOverTile != null)
         {
             PropertySpell cast = GetCastData();
             if (cast != null)
@@ -93,7 +97,14 @@ public class PlayerInputController : MonoBehaviour
             }
             else if (selArmy == null)
             {
-                if (mouseOverTile.armyLayer != null)
+                if (castData != null)
+                {
+                   if ( selArmy.abilities.CastAbilityOnTile(castData, mouseOverTile))
+                    {
+                        ClearCastAbility();
+                    }
+                }
+                else if (mouseOverTile.armyLayer != null)
                 {
                     if (mouseOverTile.armyLayer.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned)
                         GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
@@ -144,6 +155,7 @@ public class PlayerInputController : MonoBehaviour
         else
         {
             GameManager.main.armyManager.ClearSelectedArmy();
+            ClearCastAbility();
         }
     }
     void HandleSideInput()
@@ -233,25 +245,14 @@ public class PlayerInputController : MonoBehaviour
      {
          return castData;
      }
-     public void CastAbilitySelf(PropertySpell ability, bool forceNew)
-     {
-         CastAbilityPoint(ability, EntityPlayer.main.movement.GetMyTile(), forceNew);
-     }
-     public void CastAbilityPoint(PropertySpell ability, DataItemTile point, bool forceNew)
-     {
-         CastAbilityPoint(ability, point.gridPos, forceNew);
-     }
-     public void CastAbilityPoint(PropertySpell ability, Vector2Int point, bool forceNew)
-     {
-         if (forceNew || (castData == null || castData.ability != ability))
-         {
-             castData = EntityPlayer.main.abilities.CastAbility(ability);
-         }
-         castData.UpdatePointTarget(point);
-     }
+    public void AssignCastAbility(PropertySpell ability) {
+        castData = ability;
+        Asd();
+            }
      void ClearCastAbility()
      {
          castData = null;
-     }
+        Asd();
+    }
     #endregion
 }

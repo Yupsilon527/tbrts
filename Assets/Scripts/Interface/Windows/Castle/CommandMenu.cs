@@ -73,7 +73,6 @@ public class CommandMenu : PlayerWindow
                         });
                     }
                 }
-                s.AddRange(selArmy.abilities.GetAbilitiesCastable(tile));
             }
             else if (tile.IsAdjecent(selArmy.tile))
             {
@@ -95,6 +94,14 @@ public class CommandMenu : PlayerWindow
                     });
                 }
                 //Explore ruin
+                if (tile == selArmy.tile)
+                {
+                    s.AddRange(selArmy.abilities.GetAbilitiesCastable(tile));
+                }
+                else
+                {
+                    s.AddRange(selArmy.abilities.GetAbilitiesCastable(tile).Where(a => a.CanCastOnTile(tile)));
+                }
             }
         }
         if (tile.armyLayer != null && tile.armyLayer.GetAlignment(player) == PlayerDefines.Alignment.playerowned)
@@ -114,13 +121,13 @@ public class CommandMenu : PlayerWindow
                 e.Add("Cast " + spell.InternalName);
                 a.Add(()=>
                 {
-                    if (spell.CanCastOnTile(selArmy.tile, tile))
+                    if (spell.InstantCast())
                     {
                         selArmy.abilities.CastAbilityOnTile(spell, tile);
                     }
                     else
                     {
-                        InterfaceManager.main.ChangeCastAbility(spell);
+                        PlayerInputController.main.AssignCastAbility(spell);
                     }
                 });
             }
