@@ -16,9 +16,9 @@ public class PlayerInputController : MonoBehaviour
     }
 
     #region Pathfinder
-    public SidewaysTile mouseOverTile;
+    public DataItemTile mouseOverTile;
     //Pathfinder.PathfinderPath pathToMouseTile;
-    public void ChangeMouseTile(SidewaysTile nTile)
+    public void ChangeMouseTile(DataItemTile nTile)
     {
         if (mouseOverTile == nTile) return;
         if (mouseOverTile != null)
@@ -27,17 +27,16 @@ public class PlayerInputController : MonoBehaviour
         ClearTileColors();
         if (nTile != null)
         {
-            /*AbilityData.CastData cast = GetCastData();
+            PropertySpell cast = GetCastData();
             if (cast != null)
             {
-                HighlightCastTiles(cast.ability);
-                cast.UpdatePointTarget(mouseOverTile);
+                HighlightCastTiles(cast);
                 if (cast.CanCastOnTile(mouseOverTile))
                 {
                     ColorTargetTile(mouseOverTile, cast);
                 }
             }
-            else*/
+            else
             {
                 if (mouseOverTile.armyLayer != null)
                 {
@@ -178,128 +177,71 @@ public class PlayerInputController : MonoBehaviour
     }
     #endregion
     #region Tile Highlights
-    public enum HighlightState
-    {
-        clear = 0,
-        setup,
-        actor,
-        ability
-    }
-    public List<SidewaysTile> colortiles = new List<SidewaysTile>();
-    public List<SidewaysTile> lighttiles = new List<SidewaysTile>();
-    public List<SidewaysTile> outlinetiles = new List<SidewaysTile>();
-    public void ChangeHighlightState(HighlightState state)
-    {
-        Debug.Log("[stateInGame] Highlight Tiles In State " + state);
-        /*ClearTileColors();
-        switch (state)
-        {
-            case HighlightState.setup:
-                foreach (WorldTile t in GetPlayerSide().GetStartingTiles())
-                {
-                    t.ChangeColor(WorldTile.tileState.setup);
-                    colortiles.Add(t);
-                }
-                return;
-            case HighlightState.actor:
-                EntityBase selection = GetPlayerSide().getSelectedEntity();
-                if (selection == null)
-                {
-                    ChangeHighlightState(HighlightState.clear);
-                }
-                if (CurrentPhase == Phase.Setup)
-                {
-                    foreach (WorldTile walkpath in GetPlayerSide().GetStartingTiles())
-                    {
-                        if (Pathfinder.CanIWalkOver(selection.GetMovementType(), walkpath))
-                        {
-                            walkpath.ChangeColor(WorldTile.tileState.setup);
-                            colortiles.Add(walkpath);
-                        }
-
-                    }
-                }
-                ColorTilePredictions();
-                return;
-            case HighlightState.ability:
-                if (castAbility.ability == null)
-                {
-                    ChangeHighlightState(HighlightState.clear);
-                }
-                foreach (WorldTile walkpath in castAbility.ability.GetValidCastTiles())
-                {
-                    walkpath.ChangeColor(WorldTile.tileState.highlight_ability);
-                    colortiles.Add(walkpath);
-
-                }
-                return;
-            case HighlightState.clear:
-                ColorTilePredictions();
-                return;
-        }*/
-    }
+    public List<DataItemTile> colortiles = new List<DataItemTile>();
+    public List<DataItemTile> lighttiles = new List<DataItemTile>();
+    public List<DataItemTile> outlinetiles = new List<DataItemTile>();
     /* void HighlighPath(Pathfinder.PathfinderPath hPath)
      {
          for (int I = 0; I < hPath.walkpath.Count; I++)
          {
-             hPath.walkpath[I].ChangeColor(SidewaysTile.tileState.walkpath);
+             hPath.walkpath[I].ChangeColor(DataItemTile.tileState.walkpath);
              colortiles.Add(hPath.walkpath[I]);
          }
      }*/
     public void ClearTileColors()
     {
-        foreach (SidewaysTile tile in colortiles)
+        foreach (DataItemTile tile in colortiles)
         { tile.display.ChangeColor(DisplayItemTile.tileState.clear); }
         colortiles.Clear();
     }
-    /*public void HighlightCastTiles(propertyAbility Ability)
+    public void HighlightCastTiles(PropertySpell Ability)
     {
         ClearTileHighlights();
         if (Ability != null)
         {
-            foreach (SidewaysTile hittile in Ability.GetValidCastTiles())
+            foreach (DataItemTile hittile in Ability.GetValidCastTiles())
             {
-                hittile.Highlight(tileState.abilitycastable);
+                hittile.display.Highlight( DisplayItemTile.tileState.valid_tile);
                 lighttiles.Add(hittile);
             }
         }
     }
-    void ColorTargetTile(SidewaysTile target, AbilityData.CastData Ability)
+    void ColorTargetTile(DataItemTile target, PropertySpell Ability)
     {
 
         if (Ability != null)
         {
-            foreach (SidewaysTile hittile in Ability.GetHitTiles(true))
+            foreach (DataItemTile hittile in Ability.GetHitTiles(target))
             {
-                hittile.Highlight(tileState.abilitytarget);
+                hittile.display.Highlight(DisplayItemTile.tileState.highlight_ability);
                 lighttiles.Add(hittile);
             }
         }
-    }*/
+    }
 
     public void ClearTileHighlights()
     {
-        foreach (SidewaysTile tile in lighttiles)
+        foreach (DataItemTile tile in lighttiles)
         { tile.display.Highlight(DisplayItemTile.tileState.clear); }
         lighttiles.Clear();
     }
 
     #endregion
     #region AbilityCastData
-    /* AbilityData.CastData castData;
-     public AbilityData.CastData GetCastData()
+    PropertySpell castData;
+     public PropertySpell GetCastData()
      {
          return castData;
      }
-     public void CastAbilitySelf(propertyAbility ability, bool forceNew)
+     public void CastAbilitySelf(PropertySpell ability, bool forceNew)
      {
          CastAbilityPoint(ability, EntityPlayer.main.movement.GetMyTile(), forceNew);
      }
-     public void CastAbilityPoint(propertyAbility ability, SidewaysTile point, bool forceNew)
+     public void CastAbilityPoint(PropertySpell ability, DataItemTile point, bool forceNew)
      {
          CastAbilityPoint(ability, point.gridPos, forceNew);
      }
-     public void CastAbilityPoint(propertyAbility ability, Vector2Int point, bool forceNew)
+     public void CastAbilityPoint(PropertySpell ability, Vector2Int point, bool forceNew)
      {
          if (forceNew || (castData == null || castData.ability != ability))
          {
@@ -310,6 +252,6 @@ public class PlayerInputController : MonoBehaviour
      void ClearCastAbility()
      {
          castData = null;
-     }*/
+     }
     #endregion
 }

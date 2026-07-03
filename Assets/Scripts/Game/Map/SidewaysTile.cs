@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class SidewaysTile
+public class DataItemTile
 {
     public Vector2Int gridPos;
     public DisplayItemTile display;
@@ -11,7 +11,7 @@ public class SidewaysTile
     public bool isRoad;
     public ElevationData terrain;
 
-    public SidewaysTile[] neighbors = Array.Empty<SidewaysTile>();
+    public DataItemTile[] neighbors = Array.Empty<DataItemTile>();
     public bool[]passible;
     public int[]movecost;
     public void Init()
@@ -51,7 +51,7 @@ public class SidewaysTile
     {
         return "sTile " + gridPos + " " + terrain.ToString();
     }
-    public bool IsAdjecent(SidewaysTile other)
+    public bool IsAdjecent(DataItemTile other)
     {
         return IsAdjecent(other.gridPos);
     }
@@ -62,14 +62,14 @@ public class SidewaysTile
 
     #region Tile Creation
 
-    public SidewaysTile(ElevationData eC = null, int tV = 0)
+    public DataItemTile(ElevationData eC = null, int tV = 0)
     {
         terrain = eC != null ? eC : new ElevationData();
         Variation = tV;
     }
-    public static SidewaysTile CreateTile(GameObject prefab, MapData mapData, Vector2Int pos, bool skipdraw)
+    public static DataItemTile CreateTile(GameObject prefab, MapData mapData, Vector2Int pos, bool skipdraw)
     {
-        SidewaysTile tile = new SidewaysTile();
+        DataItemTile tile = new DataItemTile();
         tile.gridPos = pos;
         tile.terrain = mapData.GetTileAt(pos).terrain;
         tile.Init();
@@ -91,7 +91,7 @@ public class SidewaysTile
     #region Neighbors
     public void InitNeighbors()
     {
-        neighbors = new SidewaysTile[] {
+        neighbors = new DataItemTile[] {
             GetNeighbor( Vector2Int.right),
             GetNeighbor( Vector2Int.left),
             GetNeighbor( Vector2Int.down),
@@ -110,13 +110,13 @@ public class SidewaysTile
         down,
         up,
     }
-    public SidewaysTile GetNeighbor(GridDirection delta)
+    public DataItemTile GetNeighbor(GridDirection delta)
     {
         if (neighbors == null || neighbors.Length == 0)
             InitNeighbors();
         return neighbors[(int)delta];
     }
-    SidewaysTile GetNeighbor(Vector2Int delta)
+    DataItemTile GetNeighbor(Vector2Int delta)
     {
         return SidewaysMap.main.GetTile(gridPos.x + delta.x, gridPos.y - delta.y, SidewaysMap.GetTileType.imaginary);
     }
@@ -128,7 +128,7 @@ public class SidewaysTile
     {
         return SidewaysMap.main.TranslateEntityPosition(gridPos);
     }
-    public bool IsNeighboring(SidewaysTile other)
+    public bool IsNeighboring(DataItemTile other)
     {
         Vector2 deltapos = other.gridPos - gridPos;
         return Mathf.Abs(deltapos.x) <= 1 && Mathf.Abs(deltapos.y) <= 1;

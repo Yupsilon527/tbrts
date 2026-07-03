@@ -25,7 +25,7 @@ public class InfoWindow : PlayerWindow
 
         description.text = $"{ castle.customDescription}<br><br>Owner: {castle.GetPlayerOwner().Name} ({castle.GetPlayerOwner().faction.InternalName})";
     }
-   public void ShowTileInfo(SidewaysTile tile)
+   public void ShowTileInfo(DataItemTile tile)
     {
         Open();
 

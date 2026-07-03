@@ -24,7 +24,7 @@ public class SpellData : ActionData
     public int min_range, max_range, area_range;
 
     public CombatDefines.TileTargetingMode targetMode;
-    public CombatDefines.TileRangeMode rangeMode;
+    public CombatDefines.TileAreaMode rangeMode;
     public CombatDefines.TileTargetingArea areaMode;
 
 }

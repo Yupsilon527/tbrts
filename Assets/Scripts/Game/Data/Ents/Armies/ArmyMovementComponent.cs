@@ -77,7 +77,7 @@ public class ArmyMovementComponent : ArmyComponent
         else
             movementLeft = 0;
     }
-    public bool CanWalkOnTile(SidewaysTile tile)
+    public bool CanWalkOnTile(DataItemTile tile)
     {
         if (tile != null)
             return tile.IsPassible(GetMyMovement());

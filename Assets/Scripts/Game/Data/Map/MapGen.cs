@@ -13,19 +13,19 @@ public abstract class MapGen : Initializable
 
     #region Initalize and Extend
     int width, height;
-    public List<SidewaysTile> Tiles;
+    public List<DataItemTile> Tiles;
 
     public virtual void Initalize(int w, int h)
     {
         Inspect("[MapGeneration] Initialize map size " + w + "," + h);
         width = w;
         height = h;
-        Tiles = new List<SidewaysTile>();
+        Tiles = new List<DataItemTile>();
         for (int iX = 0; iX < w; iX++)
         {
             for (int iY = 0; iY < h; iY++)
             {
-                Tiles.Add(new SidewaysTile(biomeData.Ground, 0));
+                Tiles.Add(new DataItemTile(biomeData.Ground, 0));
             }
         }
     }
@@ -40,13 +40,13 @@ public abstract class MapGen : Initializable
         return height;
     }
     #endregion
-    public SidewaysTile GetTile(int x, int y)
+    public DataItemTile GetTile(int x, int y)
     {
         int ti = y * width + x;
         Inspect($"Get tile {x} {y}: {ti}");
         return Tiles[ti];
     }
-    public void SetTile(int x, int y, SidewaysTile tile)
+    public void SetTile(int x, int y, DataItemTile tile)
     {
         int ti = y * width + x;
         Inspect($"Set tile {x} {y}: {ti}");
@@ -63,13 +63,13 @@ public abstract class MapGen : Initializable
         generatedMap.InitElevationData();
 
         //generate tiles
-        generatedMap.tile_data = new SidewaysTile[GetHeight(), GetWidth()];
+        generatedMap.tile_data = new DataItemTile[GetHeight(), GetWidth()];
         for (int iY = 0; iY < generatedMap.tile_data.GetLength(0); iY++)
         {
             for (int iX = 0; iX < generatedMap.tile_data.GetLength(1); iX++)
         {
                 var t = GetTile(iX, iY);
-                generatedMap.tile_data[iY, iX] = new SidewaysTile(t.terrain, t.Variation);
+                generatedMap.tile_data[iY, iX] = new DataItemTile(t.terrain, t.Variation);
             }
         }
         generatedMap.object_data = GenObj;

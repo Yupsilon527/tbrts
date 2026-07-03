@@ -51,7 +51,7 @@ public class SidewaysCamera : MonoBehaviour
     {
         HandleCameraMovement();
     }
-    public void MoveToTile(SidewaysTile tile)
+    public void MoveToTile(DataItemTile tile)
     {
         MoveToTile(tile.gridPos.x, tile.gridPos.y);
     }

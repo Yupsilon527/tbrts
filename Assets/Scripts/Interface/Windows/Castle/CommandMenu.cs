@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,9 +28,10 @@ public class CommandMenu : PlayerWindow
         rectTransform.anchoredPosition = position;
         Open();
     }
-    public void OpenTileCommands(SidewaysTile tile)
+    public void OpenTileCommands(DataItemTile tile)
     {
         var player = GameManager.main.playerManager.GetActivePlayer();
+        List<PropertySpell> s = new();
         List<string> e = new();
         List<PlayerMenuAction> a = new();
         var selArmy = GameManager.main.armyManager.mainSelectedArmy;
@@ -71,6 +73,7 @@ public class CommandMenu : PlayerWindow
                         });
                     }
                 }
+                s.AddRange(selArmy.abilities.GetAbilitiesCastable(tile));
             }
             else if (tile.IsAdjecent(selArmy.tile))
             {
@@ -101,11 +104,32 @@ public class CommandMenu : PlayerWindow
                         GameManager.main.armyManager.SelectArmy(tile.armyLayer);
                 });
         }
+        if (s.Count > 0)
+        {
+            e.Add("-");
+            a.Add(null);
+
+            foreach (var spell in s)
+            {
+                e.Add("Cast " + spell.InternalName);
+                a.Add(()=>
+                {
+                    if (spell.CanCastOnTile(selArmy.tile, tile))
+                    {
+                        selArmy.abilities.CastAbilityOnTile(spell, tile);
+                    }
+                    else
+                    {
+                        InterfaceManager.main.ChangeCastAbility(spell);
+                    }
+                });
+            }
+        }
 
         LoadEntries(e.ToArray(), a.ToArray());
     }
 
-    public void OpenTileDetails(SidewaysTile tile)
+    public void OpenTileDetails(DataItemTile tile)
     {
         var player = GameManager.main.playerManager.GetActivePlayer();
         List<string> e = new();

@@ -15,7 +15,7 @@ public class SidewaysMap : MonoBehaviour
 
     public MapData mapData;
 
-    public SidewaysTile[,] tiles;
+    public DataItemTile[,] tiles;
 
     public int width { get => tiles.GetLength(0); }
     public int height { get => tiles.GetLength(1); }
@@ -26,9 +26,9 @@ public class SidewaysMap : MonoBehaviour
         imaginary,
         clamped
     }
-    public SidewaysTile[] GetTiles(Vector2Int[] av, GetTileType imaginary = GetTileType.real)
+    public DataItemTile[] GetTiles(Vector2Int[] av, GetTileType imaginary = GetTileType.real)
     {
-        List<SidewaysTile> valid = new List<SidewaysTile>();
+        List<DataItemTile> valid = new List<DataItemTile>();
         foreach (Vector2Int tile in av)
         {
             valid.Add(GetTile(tile, imaginary));
@@ -39,8 +39,8 @@ public class SidewaysMap : MonoBehaviour
     {
         return x >= 0 && y >= 0 && x < width && y < height;
     }
-    public SidewaysTile GetTile(Vector2Int v, GetTileType imaginary = GetTileType.real) { return GetTile(v.x, v.y, imaginary); }
-    public SidewaysTile GetTile(int iX, int iY, GetTileType imaginary = GetTileType.real)
+    public DataItemTile GetTile(Vector2Int v, GetTileType imaginary = GetTileType.real) { return GetTile(v.x, v.y, imaginary); }
+    public DataItemTile GetTile(int iX, int iY, GetTileType imaginary = GetTileType.real)
     {
         if (IsOnMap(iX,iY))
         {
@@ -48,7 +48,7 @@ public class SidewaysMap : MonoBehaviour
         }
         if (imaginary == GetTileType.imaginary)
         {
-            return SidewaysTile.CreateTile(tilePrefab,mapData, new Vector2Int(iX, iY), true);
+            return DataItemTile.CreateTile(tilePrefab,mapData, new Vector2Int(iX, iY), true);
         }
         else if (imaginary == GetTileType.clamped)
         {
@@ -56,7 +56,7 @@ public class SidewaysMap : MonoBehaviour
         }
         else return null;
     }
-    public SidewaysTile[] GetTilesInArea(TerrainDefines.AreaType areaType, Vector2Int center, int radius, GetTileType imaginary = GetTileType.real)
+    public DataItemTile[] GetTilesInArea(TerrainDefines.AreaType areaType, Vector2Int center, int radius, GetTileType imaginary = GetTileType.real)
     {
      switch (areaType)
         {
@@ -66,19 +66,19 @@ public class SidewaysMap : MonoBehaviour
                 return GetTilesInCircle(center, radius, imaginary);
         }
     }
-    public SidewaysTile[] GetTilesInRect(Rect rect, GetTileType imaginary = GetTileType.real)
+    public DataItemTile[] GetTilesInRect(Rect rect, GetTileType imaginary = GetTileType.real)
     {
         Vector2Int start = TranslateWorldPosition(rect.min);
         Vector2Int end = TranslateWorldPosition(rect.max);
         return GetTilesInRect(start, end, imaginary);
     }
-    public SidewaysTile[] GetTilesInRect(RectInt rect, GetTileType imaginary = GetTileType.real)
+    public DataItemTile[] GetTilesInRect(RectInt rect, GetTileType imaginary = GetTileType.real)
     {
         return GetTilesInRect(rect.min,rect.max, imaginary);
     }
-    public SidewaysTile[] GetTilesInRect(Vector2Int start, Vector2Int end, GetTileType imaginary = GetTileType.real)
+    public DataItemTile[] GetTilesInRect(Vector2Int start, Vector2Int end, GetTileType imaginary = GetTileType.real)
     {
-        List<SidewaysTile> found = new List<SidewaysTile>();
+        List<DataItemTile> found = new List<DataItemTile>();
         for (int x = start.x; x <= end.x; x++)
         {
             for (int y = start.y; y <= end.y; y++)
@@ -88,9 +88,9 @@ public class SidewaysMap : MonoBehaviour
         }
         return found.ToArray();
     }
-    public SidewaysTile[] GetTilesInCircle(Vector2Int center, int radius,GetTileType imaginary = GetTileType.real)
+    public DataItemTile[] GetTilesInCircle(Vector2Int center, int radius,GetTileType imaginary = GetTileType.real)
     {
-        List<SidewaysTile> found = new List<SidewaysTile>();
+        List<DataItemTile> found = new List<DataItemTile>();
         int radiusSquared = radius * radius;
 
         for (int x = center.x - radius; x <= center.x + radius; x++)
@@ -108,19 +108,19 @@ public class SidewaysMap : MonoBehaviour
         }
         return found.ToArray();
     }
-    public SidewaysTile GetClosestToPoint(SidewaysTile position, TerrainDefines.Movement movement, float maxDistance = Mathf.Infinity, bool empty = false)
+    public DataItemTile GetClosestToPoint(DataItemTile position, TerrainDefines.Movement movement, float maxDistance = Mathf.Infinity, bool empty = false)
     {
         if (position.IsPassible(movement) && (position.armyLayer == null ||!empty))
             return position;
         return GetClosestToPoint(position.gridPos, movement, maxDistance) ;
     }
-    public SidewaysTile GetClosestToPoint(Vector2Int point, TerrainDefines.Movement movement, float maxDistance = Mathf.Infinity, bool empty = false)
+    public DataItemTile GetClosestToPoint(Vector2Int point, TerrainDefines.Movement movement, float maxDistance = Mathf.Infinity, bool empty = false)
     {
-        List<SidewaysTile> openlist = new List<SidewaysTile>
+        List<DataItemTile> openlist = new List<DataItemTile>
         {
            GetTile(point,imaginary: GetTileType.clamped)
         };
-        List<SidewaysTile> closedlist = new ();
+        List<DataItemTile> closedlist = new ();
 
         while (openlist.Count > 0)
         {
@@ -148,7 +148,7 @@ public class SidewaysMap : MonoBehaviour
 
         return GetClosest(point, closedlist.ToArray());
     }
-    public SidewaysTile GetClosest(Vector2Int point, SidewaysTile[] list )
+    public DataItemTile GetClosest(Vector2Int point, DataItemTile[] list )
     {
         if (list.Length > 0)
         {
@@ -195,14 +195,14 @@ public class SidewaysMap : MonoBehaviour
         UnityEngine.Debug.Log("Awake Map Done");
         mapData = Map;
 
-        tiles = new SidewaysTile[Map.GetWidth(), Map.GetHeight()];
+        tiles = new DataItemTile[Map.GetWidth(), Map.GetHeight()];
 
         for (int iY = 0; iY < height; iY++)
         {
 
             for (int iX = 0; iX < width; iX++)
             {
-                SidewaysTile tile = SidewaysTile.CreateTile(tilePrefab, mapData, new Vector2Int(iX, iY), false);
+                DataItemTile tile = DataItemTile.CreateTile(tilePrefab, mapData, new Vector2Int(iX, iY), false);
                 tiles[iX, iY] = tile;
                 tile.display?.gameObject?.transform.SetParent(transform);
             }
@@ -212,7 +212,7 @@ public class SidewaysMap : MonoBehaviour
     }
     public void Draw()
     {
-        foreach (SidewaysTile tile in tiles)
+        foreach (DataItemTile tile in tiles)
         {
             tile.InitNeighbors();
             tile.display?.Draw();

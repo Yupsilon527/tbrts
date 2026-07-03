@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DisplayItemTile : MonoBehaviour
 {
-    public SidewaysTile tile;
+    public DataItemTile tile;
     public SpriteRenderer highlight;
     public void Draw()
     {

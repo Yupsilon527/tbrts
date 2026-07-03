@@ -6,6 +6,7 @@ public class DataItemArmy : DataItemObject
 {
 
     public ArmyFormation formation;
+    public ArmyAbilities abilities;
     public ArmyMovementComponent movement;
     public ArmyStatusComponent status;
     public OrderComponent orders;
@@ -17,6 +18,7 @@ public class DataItemArmy : DataItemObject
         status = new(this);
         orders = new(this);
         pathfinder = new(this);
+        abilities = new(this);
         GameManager.main.armyManager.RegisterArmy(this);
     }
     public override string ToString()

@@ -53,4 +53,8 @@ public class InterfaceManager : WindowManager
         combatWindow.Open();
         combatWindow.PresentSides(attacker, defender);
     }
+    public void ChangeCastAbility(PropertyAbility ability)
+    {
+
+    }
 }

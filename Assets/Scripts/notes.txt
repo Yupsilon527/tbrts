@@ -6,7 +6,7 @@ TODO
 
 		support units
 
-
+	swapping tokens doesnt work
 
 	(try with 2 armies)
 

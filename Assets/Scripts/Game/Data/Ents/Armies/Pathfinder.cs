@@ -17,14 +17,14 @@ namespace Astar
 
     public class Node
     {
-        public SidewaysTile node;
+        public DataItemTile node;
         public float index = -1f;
         public float distance;
         public bool visited;
         public TerrainDefines.Elevation elevation;
         public Node[] neighbors;
 
-        public Node(SidewaysTile node) { this.node = node; elevation = node.GetWalkElevation(); }
+        public Node(DataItemTile node) { this.node = node; elevation = node.GetWalkElevation(); }
 
         public override string ToString() => $"Node {node.gridPos}";
 
@@ -48,7 +48,7 @@ namespace Astar
     public class PathfinderPath
     {
         public int position = 0;
-        public List<SidewaysTile> walkpath = new List<SidewaysTile>();
+        public List<DataItemTile> walkpath = new List<DataItemTile>();
         public Failure failure = Failure.incomplete;
 
         public void Cull(int desiredLength)
@@ -60,11 +60,11 @@ namespace Astar
             }
         }
 
-        public SidewaysTile Current() => Following(0);
-        public SidewaysTile Following(int index) => walkpath.Count > 0 ? walkpath[Mathf.Clamp(index,0, walkpath.Count-1)] : null;
-        public SidewaysTile Last() => walkpath.Count > 0 ? walkpath[walkpath.Count - 1] : null;
+        public DataItemTile Current() => Following(0);
+        public DataItemTile Following(int index) => walkpath.Count > 0 ? walkpath[Mathf.Clamp(index,0, walkpath.Count-1)] : null;
+        public DataItemTile Last() => walkpath.Count > 0 ? walkpath[walkpath.Count - 1] : null;
 
-        public SidewaysTile Next()
+        public DataItemTile Next()
         {
             if (walkpath == null || walkpath.Count == 0) return null;
             if (Solved()) return null;
@@ -75,14 +75,14 @@ namespace Astar
         public bool Solved() => Remaining()==0;
         public void Reset() { position = 0; failure = Failure.incomplete; }
 
-        public SidewaysTile GetIndex(int i) => walkpath[i];
+        public DataItemTile GetIndex(int i) => walkpath[i];
 
-        public SidewaysTile[] GetIndex(int start, int count)
+        public DataItemTile[] GetIndex(int start, int count)
         {
-            if (walkpath == null || walkpath.Count == 0) return new SidewaysTile[0];
+            if (walkpath == null || walkpath.Count == 0) return new DataItemTile[0];
             int clampedStart = Mathf.Max(0, start);
             int clampedCount = Mathf.Min(count, walkpath.Count - clampedStart);
-            if (clampedCount <= 0) return new SidewaysTile[0];
+            if (clampedCount <= 0) return new DataItemTile[0];
             return walkpath.GetRange(clampedStart, clampedCount).ToArray();
         }
     }

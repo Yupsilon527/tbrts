@@ -102,4 +102,70 @@ public class PropertySpell : PropertyAbility
         return targets.ToArray();
     }
     #endregion
+    public bool IsInCastRange( DataItemTile point)
+    {
+        DataItemTile origin = parent.tile;
+        float rangeSqrt = (origin.gridPos-point.gridPos).sqrMagnitude;
+        return rangeSqrt > original.min_range * original.min_range && rangeSqrt < original.max_range * original.max_range;
+    }
+    public bool CanCastOnTile( DataItemTile point)
+    {
+        DataItemTile origin = parent.tile;
+        switch (original.targetMode)
+        {
+            default://self
+                return true;
+            case CombatDefines.TileTargetingMode.passive:
+                return false;
+            case CombatDefines.TileTargetingMode.direction:
+                return (Mathf.Abs(origin.gridPos.x - point.gridPos.x) == 1 && origin.gridPos.y == point.gridPos.y) ||( Mathf.Abs(origin.gridPos.y - point.gridPos.y) == 1 && (origin.gridPos.x == point.gridPos.x));
+            case CombatDefines.TileTargetingMode.direction8:
+                return Mathf.Abs(origin.gridPos.x - point.gridPos.x) == 1 || Mathf.Abs(origin.gridPos.y - point.gridPos.y) == 1;
+            case CombatDefines.TileTargetingMode.circle:
+                return IsInCastRange(point);
+        }
+    }
+
+    public DataItemTile[] GetValidCastTiles()
+    {
+
+        List<DataItemTile> staticCastTiles = new List<DataItemTile>();
+        switch (original.targetMode)
+        {
+            default:
+                staticCastTiles.Add(parent.tile);
+                break;
+            case AbilityDefines.Behavior.adjencent:
+                DataItemTile centerTile = DataItemWorld.main.GetTile(GridPosition);
+                staticCastTiles.AddRange(centerTile.neighbors);
+                break;
+            case AbilityDefines.Behavior.line:
+                Vector3Int cubeCenter = GridPosition.CubeCoords;
+                int range = Mathf.RoundToInt(original.maxRange);
+
+                staticCastTiles.AddRange(DataItemWorld.main.GetTilesInLine(cubeCenter, Vector3Int.right + Vector3Int.back, range));
+                staticCastTiles.AddRange(DataItemWorld.main.GetTilesInLine(cubeCenter, Vector3Int.left + Vector3Int.forward, range));
+                staticCastTiles.AddRange(DataItemWorld.main.GetTilesInLine(cubeCenter, Vector3Int.up + Vector3Int.back, range));
+                staticCastTiles.AddRange(DataItemWorld.main.GetTilesInLine(cubeCenter, Vector3Int.down + Vector3Int.forward, range));
+                staticCastTiles.AddRange(DataItemWorld.main.GetTilesInLine(cubeCenter, Vector3Int.right + Vector3Int.down, range));
+                staticCastTiles.AddRange(DataItemWorld.main.GetTilesInLine(cubeCenter, Vector3Int.left + Vector3Int.up, range));
+
+                staticCastTiles.RemoveAll((DataItemTile T) => { return T.coords.DistanceFrom(GridPosition) <= original.minRange; });
+                break;
+            case AbilityDefines.Behavior.circle:
+                staticCastTiles.AddRange(DataItemWorld.main.GetTilesInCirc(GridPosition, Mathf.RoundToInt(original.maxRange)));
+                staticCastTiles.RemoveAll((DataItemTile T) => { return T.coords.DistanceFrom(GridPosition) <= original.minRange; });
+                break;
+            case AbilityDefines.Behavior.point:
+                staticCastTiles.AddRange(DataItemWorld.main.GetTilesInCirc(GridPosition, Mathf.RoundToInt(original.maxRange)));
+                staticCastTiles.RemoveAll((DataItemTile T) => { return T.LocatedEntity == null && T.coords.DistanceFrom(GridPosition) <= original.minRange; });
+                break;
+        }
+        return staticCastTiles.ToArray() ;
+    }
+
+    public DataItemTile[] GetHitTiles(DataItemTile GridPosition)
+    {
+
+    }
 }

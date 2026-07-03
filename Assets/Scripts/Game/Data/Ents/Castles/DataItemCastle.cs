@@ -9,7 +9,7 @@ public class DataItemCastle : DataItemBuilding
     public Sprite citySprite;
     public bool isCapital = false;
     public int RaidTurn, RazeTurn = -1;
-    public List<SidewaysTile> castleTiles = new();
+    public List<DataItemTile> castleTiles = new();
 
     public CityBonuses bonuses;
     public CityProduction production;
@@ -44,18 +44,18 @@ public class DataItemCastle : DataItemBuilding
     {
         base.ChangeTile(t, position);
 
-        castleTiles = new List<SidewaysTile>();
+        castleTiles = new List<DataItemTile>();
 
         if (tile.GetWalkElevation() == TerrainDefines.Elevation.City)
         {
-            List<SidewaysTile> openList = new List<SidewaysTile>();
+            List<DataItemTile> openList = new List<DataItemTile>();
             openList.Add(tile);
             while (openList.Count > 0)
             {
                 var ct = openList[0];
                 if (!castleTiles.Contains(ct))
                     castleTiles.Add(ct);
-                foreach (SidewaysTile Zyzyx in ct.neighbors)
+                foreach (DataItemTile Zyzyx in ct.neighbors)
                 {
                     if (Zyzyx.GetWalkElevation() == TerrainDefines.Elevation.City && Zyzyx.buildingLayer == null)
                     {
@@ -67,7 +67,7 @@ public class DataItemCastle : DataItemBuilding
                 openList.RemoveAt(0);
             }
         }
-        foreach (SidewaysTile Gir in castleTiles)
+        foreach (DataItemTile Gir in castleTiles)
         {
             if (Gir.buildingLayer == null)
             {
@@ -119,7 +119,7 @@ public class DataItemCastle : DataItemBuilding
         return GetGarrison().Sum(a => a?.GetAlignment(this) == PlayerDefines.Alignment.enemy ? 1 : 0) == 0;
     }
 
-    public bool BattleTroop(DataItemArmy Attacker, SidewaysTile Tile)
+    public bool BattleTroop(DataItemArmy Attacker, DataItemTile Tile)
     {
         if (GetGarrison().Count() > 0)
         {

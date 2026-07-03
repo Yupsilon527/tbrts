@@ -4,7 +4,7 @@ using UnityEngine;
 public class DataItemObject : DataItem
 {
     public Vector2Int gridPos;
-    public SidewaysTile tile;
+    public DataItemTile tile;
     public IDisplayItemObject<DataItemObject> display;
 
     private readonly HashSet<UnitGroup<DataItemObject>> _groups = new();

@@ -7,12 +7,12 @@ public class MapData {
 
     public MapBiomeSO biome;
     public ElevationData[] elevation_data;
-    public SidewaysTile[,] tile_data;
+    public DataItemTile[,] tile_data;
 
-    public SidewaysTile GetTileAt(Vector2Int pos)
+    public DataItemTile GetTileAt(Vector2Int pos)
     {
         if (pos.y < 0 || pos.x < 0 || pos.y >= tile_data.GetLength(0) || pos.x >= tile_data.GetLength(1))
-        { return new SidewaysTile(); }
+        { return new DataItemTile(); }
         return tile_data[pos.y, pos.x];
     }
     

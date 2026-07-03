@@ -84,7 +84,7 @@ public class MapGenEditor : MapGen
         foreach (MapGenPredefinedTile dit in tiles)
         {
             Vector2Int tPos = new Vector2Int(dit.gridPos.y, dims.x - dit.gridPos.x);
-            SetTile(tPos.x, tPos.y, new SidewaysTile(biomeData.GetElevation(dit.elevation), dit.variation));
+            SetTile(tPos.x, tPos.y, new DataItemTile(biomeData.GetElevation(dit.elevation), dit.variation));
             if (dit.objectData != null)
                 spawnObjs.Add(new ObjectData()
                 {

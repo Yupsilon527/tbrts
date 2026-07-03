@@ -13,14 +13,14 @@ public class Combat : Initializable
         enabled = false;
     }
 
-    public SparseIntMap MockBattle(DataItemArmy a, DataItemArmy d, SidewaysTile l)
+    public SparseIntMap MockBattle(DataItemArmy a, DataItemArmy d, DataItemTile l)
     {
         mockBattle = true;
         SetUp(a, d, l);
         ResolveInstantly();
         return OutputResults();
     }
-    public void BattleTroops(DataItemArmy a, DataItemArmy d, SidewaysTile l)
+    public void BattleTroops(DataItemArmy a, DataItemArmy d, DataItemTile l)
     {
         mockBattle = false;
         SetUp(a, d, l);
@@ -29,13 +29,13 @@ public class Combat : Initializable
     bool mockBattle = false;
 
     public CombatDefines.AttackPhase currentPhase;
-    public SidewaysTile locatedTile;
+    public DataItemTile locatedTile;
     public DataItemArmy attackers, defenders;
 
     public List<DataItemUnit> combatants = new();
 
     public int currentTick = 0;
-    public void SetUp(DataItemArmy a, DataItemArmy d, SidewaysTile l)
+    public void SetUp(DataItemArmy a, DataItemArmy d, DataItemTile l)
     {
         Inspect($"COMBAT - Begin combat between army {a} and army {d} on tile {l}!");
         locatedTile = l;

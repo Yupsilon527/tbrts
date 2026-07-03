@@ -42,20 +42,25 @@ public static class CombatDefines
     public enum TileTargetingMode
     {
         passive,
-        none,
+        self,
         direction,
-        tile,
+        direction8,
+        circle,
         random_tile,
         random_closest_tile,
         random_farthest_tile,
     }
-    public enum TileRangeMode
+    public enum TileAreaMode
     {
         circle,
+        square,
         cross,
         diagcross,
-        star,
-        square,
+        cross8,
+        line,
+        line8,
+        cone,
+        cone8,
     }
     public enum TileTargetingArea
     {

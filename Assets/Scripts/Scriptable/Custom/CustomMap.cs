@@ -24,11 +24,11 @@ public class CustomMap
     {
         return height;
     }
-    public SidewaysTile GetTileAt(int x, int y, MapBiomeSO biome)
+    public DataItemTile GetTileAt(int x, int y, MapBiomeSO biome)
     {
         int t = (x * height + y )*2 ;
         if (t >= MapData.Length)
-            return new SidewaysTile();
+            return new DataItemTile();
 
         string readData = MapData.Substring(t, 2);
 
@@ -41,7 +41,7 @@ public class CustomMap
                 break;
             }
         }
-        var swt = new SidewaysTile(elevation, int.Parse(readData[1] + ""));
+        var swt = new DataItemTile(elevation, int.Parse(readData[1] + ""));
 
         return swt;
     }

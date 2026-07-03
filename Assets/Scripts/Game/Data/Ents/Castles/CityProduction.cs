@@ -125,11 +125,11 @@ public class CityProduction : CityComponent
     }
 
 
-    public SidewaysTile GetValidTileForArmy(UnitData Army)
+    public DataItemTile GetValidTileForArmy(UnitData Army)
     {
         var movement = Army.GetMovetype();
 
-        List<SidewaysTile> passibleTiles = new();
+        List<DataItemTile> passibleTiles = new();
         if (TerrainDefines.CanIWalkOver(movement, TerrainDefines.Elevation.City))
         {
             passibleTiles.AddRange(city.castleTiles);

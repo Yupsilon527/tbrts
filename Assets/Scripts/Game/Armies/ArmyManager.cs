@@ -24,15 +24,15 @@ public class ArmyManager : EntityManager
     {
         return armies.FirstOrDefault(a => a.eID == ID) ;
     }
-    public static DataItemUnit SpawnUnit( string UnitName, DataItemPlayer Player, SidewaysTile tTile)
+    public static DataItemUnit SpawnUnit( string UnitName, DataItemPlayer Player, DataItemTile tTile)
     {
         return SpawnUnit(WorldManager.main.LoadUnit(UnitName), Player, tTile);
     }
-    public static DataItemUnit SpawnUnit(UnitData uData, DataItemPlayer Player, SidewaysTile tTile)
+    public static DataItemUnit SpawnUnit(UnitData uData, DataItemPlayer Player, DataItemTile tTile)
     {
         return SpawnUnitInCastle( uData, Player, tTile, null);
     }
-    public static DataItemUnit SpawnUnitInCastle(UnitData uData, DataItemPlayer Player, SidewaysTile tTile, DataItemCastle myCastle)
+    public static DataItemUnit SpawnUnitInCastle(UnitData uData, DataItemPlayer Player, DataItemTile tTile, DataItemCastle myCastle)
     {
         if (tTile == null)
         {

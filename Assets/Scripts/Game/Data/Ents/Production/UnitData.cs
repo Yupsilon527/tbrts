@@ -54,7 +54,7 @@ public class UnitData : ProductionData
                 return true;
             }
         }
-        if (table.castle.production.GetValidTileForArmy(this) is SidewaysTile tile)
+        if (table.castle.production.GetValidTileForArmy(this) is DataItemTile tile)
         {
             if ( ArmyManager.SpawnUnitInCastle(this, table.playerOwner, tile, table.castle) != null)
                 return true;
