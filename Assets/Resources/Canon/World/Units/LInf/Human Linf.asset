@@ -25,20 +25,20 @@ MonoBehaviour:
     unit:
       Offense: 10
       Defense: 10
+      Luck: 0
       Attack: 10
-      Action: 1
       Magic: 5
+      Speed: 100
+      Action: 2
       Mana: 0
       Supply: 0
-      Health: 50
+      Health: 40
       Barrier: 0
       Armor: 2
       Shield: 3
       Padding: 0
       Resistance: 0
       Block: 5
-      Speed: 100
-      Luck: 0
       LuckCoefficient: 1
       SpeedCoefficient: 1
       DodgeChance: 0

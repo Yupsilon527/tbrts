@@ -7,32 +7,32 @@ using UnityEngine;
 [Serializable]
 public class UnitStatsTable 
 {
-    //combat
+    [Header("Combat")]
     public float Offense = 5;
     public float Defense = 5;
+    public float Luck = 0;
 
-    //attack
+    [Header("Attack")]
     public float Attack = 5;
-    public float Action = 1;
-    //magic
     public float Magic = 0;
+    public float Speed = 100;
+
+    [Header("Resources")]
+    public float Action = 1;
     public float Mana = 1;
     public float Supply = 1;
 
-    //healthbars
+    [Header("Health/Barrier")]
     public float Health = 25;
     public float Barrier = 4;
 
-    //damage mitigation
+    [Header("Armor/Block")]
     public float Armor = 0; //flat damage reduction against all physical sources
     public float Shield = 0; 
     public float Padding = 0; 
     public float Resistance = 0; //flat damage reduction against all elemental sources
     public float Block = 0; //damage block, reduces damage when blocking
 
-    //modifiers
-    public float Speed = 100;
-    public float Luck = 0;
     public float GetLuckCoefficient()
     {
         if (Luck > 0)

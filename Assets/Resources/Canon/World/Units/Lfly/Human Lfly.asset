@@ -25,9 +25,11 @@ MonoBehaviour:
     unit:
       Offense: 9
       Defense: 9
-      Attack: 6
-      Action: 1
+      Luck: 0
+      Attack: 20
       Magic: 5
+      Speed: 140
+      Action: 1
       Mana: 0
       Supply: 1
       Health: 45
@@ -37,8 +39,6 @@ MonoBehaviour:
       Padding: 0
       Resistance: 0
       Block: 4
-      Speed: 140
-      Luck: 0
       LuckCoefficient: 1
       SpeedCoefficient: 1
       DodgeChance: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
       ProcChance: 0
       CritChance: 0
       bonusDamage:
-      - damage: 6
+      - damage: 15
         scale: 0
         flag: 11
     armySprites:

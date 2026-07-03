@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -77,10 +78,10 @@ public class AttackTable : CastTable
     public AttackDefines.HitType DetermineHitType(DataItemUnit target)
     {
         AttackDefines.HitType hitType = AttackDefines.HitType.normal;
-        if (ability is PropertyWeapon attack)
+        if (ability is PropertyWeapon attack && !attack.original.HasFlag(CombatDefines.AttackFlag.indirectAttack))
         {
             float ranval = Random.value;
-            if (!attacker.GetState(ModifierDefines.State.cannot_miss))
+            if (!attacker.GetState(ModifierDefines.State.cannot_miss) && !attack.original.HasFlag(CombatDefines.AttackFlag.cannotMiss))
             {
                 float evasion = target.dodgeCounter / 2f * target.stats.realStats.DodgeChance * target.stats.realStats.GetLuckCoefficient();
 
@@ -97,7 +98,7 @@ public class AttackTable : CastTable
             float accuracy = attacker.stats.realStats.Offense / Mathf.Max(target.stats.realStats.Defense);
             accuracy = accuracy * .6f + Mathf.Min(.4f, attacker.hitCounter / 2 * .5f); //TODO DEFINE
 
-            float critChance = 15 * accuracy + attacker.stats.realStats.CritChance * (1 + accuracy) / 2f;   //TODO DEFINE
+            float critChance = 15 * accuracy + attacker.stats.realStats.CritChance * (1 + accuracy) / 2f * attacker.critCounter * .5f; 
             float hitChance = 50 * accuracy;
             float missChance = 30 / accuracy;
             float parryChance = 20 / accuracy + attacker.stats.realStats.BlockChance * (1 + accuracy) / 2f;
@@ -112,6 +113,10 @@ public class AttackTable : CastTable
             {
                 hitType = (ranval > parryChance + missChance + hitChance) ? AttackDefines.HitType.criticalHit : AttackDefines.HitType.normal;
                 attacker.hitCounter = 1;
+                if (hitType == AttackDefines.HitType.criticalHit)
+                    attacker.critCounter = 1;
+                else
+                    attacker.critCounter++;
 
                 attacker.FireEventOnTarget(AbilityDefines.Event.AttackHit, target);
                 target.FireEventOnTarget(AbilityDefines.Event.OnHitByEnemy, attacker);

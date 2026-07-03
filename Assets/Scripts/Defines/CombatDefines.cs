@@ -23,6 +23,8 @@ public static class CombatDefines
         targetBackRow = 1 << 7,
         targetOwnCol = 1 << 8,
         targetSelf = 1 << 9,
+        cannotMiss = 1 << 10,
+        indirectAttack = 1 << 11,
     }
     public enum ArmyPriorityMode
     {

@@ -83,18 +83,45 @@ MonoBehaviour:
     armies:
     - InternalName: 1
       ownership: 2
-      spawnPos: {x: 3, y: 3}
+      spawnPos: {x: 4, y: 4}
       formation:
-      - Peasant
+      - Human Linf
       - 
-      - Peasant
+      - Human Linf
+      - 
+      - Human Linf
+      - 
+      transporter: 
+    - InternalName: 2
+      ownership: 2
+      spawnPos: {x: 5, y: 5}
+      formation:
+      - Human Larc
+      - 
+      - Human Larc
+      - 
+      - Human Larc
+      - 
+      transporter: 
+    - InternalName: 3
+      ownership: 2
+      spawnPos: {x: 6, y: 6}
+      formation:
+      - Human Lcav
+      - 
+      - Human Lcav
+      - 
+      - Human Lcav
+      - 
       transporter: 
     - InternalName: 1
       ownership: 2
-      spawnPos: {x: 10, y: 10}
+      spawnPos: {x: 7, y: 7}
       formation:
-      - Peasant
-      - Peasant
-      - Peasant
-      - Peasant
+      - Human Linf
+      - 
+      - 
+      - Human Larc
+      - Human Linf
+      - 
       transporter: 

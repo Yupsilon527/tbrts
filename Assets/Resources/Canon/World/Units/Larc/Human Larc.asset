@@ -25,9 +25,11 @@ MonoBehaviour:
     unit:
       Offense: 12
       Defense: 8
+      Luck: 0
       Attack: 5
-      Action: 1
       Magic: 5
+      Speed: 100
+      Action: 2
       Mana: 0
       Supply: 0
       Health: 30
@@ -37,8 +39,6 @@ MonoBehaviour:
       Padding: 2
       Resistance: 0
       Block: 5
-      Speed: 100
-      Luck: 0
       LuckCoefficient: 1
       SpeedCoefficient: 1
       DodgeChance: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
         scale: 0
         flag: 1
     armySprites:
-    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
+    - {fileID: 3973588016999555590, guid: 48ceb9c1456b3c748a55977bd726530e, type: 3}
     - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
     - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
     - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
@@ -61,15 +61,26 @@ MonoBehaviour:
     - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
     unitFlags: 030000000b000000
     attacks:
-    - InternalName: Peasant Melee
+    - InternalName: Larc Melee
       apCost: 1
       mpCost: 0
       spCost: 0
       castTime: 100
-      castDelay: 0
-      abilityFlags: 76
+      castDelay: 150
+      abilityFlags: 12
       castOnce: 0
-      attackPhase: 1
+      attackPhase: 2
+      targetPriority: 0
+      areaMode: 0
+    - InternalName: Larc Ranged
+      apCost: 1
+      mpCost: 0
+      spCost: 0
+      castTime: 300
+      castDelay: 400
+      abilityFlags: 136
+      castOnce: 0
+      attackPhase: 2
       targetPriority: 0
       areaMode: 0
     spells: []
@@ -82,4 +93,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 353b222755b25ec46bd7cea8cd41ce19, type: 2}
   - {fileID: 11400000, guid: 7a24da0132597db4286820965f35a81b, type: 2}
   spells: []
-  character: {fileID: 11400000, guid: 63cf10750e4557e4788a028a752f6729, type: 2}
+  character: {fileID: 11400000, guid: b101394e424a1284b84ff198faac5056, type: 2}
