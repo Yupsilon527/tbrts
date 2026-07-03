@@ -23,13 +23,13 @@ MonoBehaviour:
       value: 25
     prerequisites: []
     unit:
-      Offense: 12
+      Offense: 4
       Defense: 8
       Luck: 0
-      Attack: 5
+      Attack: 15
       Magic: 5
       Speed: 100
-      Action: 2
+      Action: 1
       Mana: 0
       Supply: 0
       Health: 30
@@ -46,10 +46,10 @@ MonoBehaviour:
       ProcChance: 0
       CritChance: 0
       bonusDamage:
-      - damage: 3
+      - damage: 15
         scale: 0
         flag: 4
-      - damage: 5
+      - damage: 10
         scale: 0
         flag: 1
     armySprites:
@@ -88,6 +88,8 @@ MonoBehaviour:
     - abilityID: foot
       abilityLevel: 1
     - abilityID: raze
+      abilityLevel: 1
+    - abilityID: slow
       abilityLevel: 1
   attacks:
   - {fileID: 11400000, guid: 353b222755b25ec46bd7cea8cd41ce19, type: 2}

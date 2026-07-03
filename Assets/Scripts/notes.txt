@@ -2,9 +2,9 @@ TODO
 	FIX COMBAT
 		bonus damage/scaling
 		hit/miss/crit
-		* Unit prios: targeting prio, ranged target prio (rams)
-		* mock combat window
-		* gather support units	tareet alive health check/target checks
+		(doesn't account right)
+
+		support units
 
 
 
@@ -44,6 +44,8 @@ Fixes
 	game skips player 2
 
 QoL
+	mock combat windows
+
 	tile highlights and colors
 	army QOL
 		window

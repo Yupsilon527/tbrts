@@ -60,6 +60,7 @@ public class Combat : Initializable
         Inspect($"COMBAT - Begin Combat!");
 
         enabled = true;
+        currentPhase = CombatDefines.AttackPhase.BeforeCombat;
         currentTick = 0;
         FireEventOnAllFighters(AbilityDefines.Event.CombatBegin);
         currentPhase = CombatDefines.AttackPhase.Prep;
@@ -105,7 +106,9 @@ public class Combat : Initializable
     void ForwardPhase()
     {
         if (currentPhase == CombatDefines.AttackPhase.PostAttack)
+        {
             EndCombat();
+        }
         else
         {
             currentPhase++;
@@ -124,6 +127,7 @@ public class Combat : Initializable
         {
             c.Act(lastTick);
         }
+        currentPhase = CombatDefines.AttackPhase.AfterCombat;
         if (!mockBattle)
         {
             foreach (var unit in combatants)

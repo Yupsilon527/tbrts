@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+    using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ public class DamageTable
 
     //ability
     public DamageTable(DataItemUnit a, DataItemUnit t,   AttackDefines.HitType block)
-    { attacker = a; target = t;  blockType = block; Calculate(); }
+    { attacker = a; target = t;  blockType = block;  }
     public void CalcAttack(AttackDefines.DamageType damage, float val)
     {
         if (baseDamage.ContainsKey(damage))

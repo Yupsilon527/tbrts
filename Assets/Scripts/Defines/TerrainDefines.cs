@@ -346,7 +346,7 @@ public static class TerrainDefines
                 return elevation == Elevation.City || elevation >= Elevation.Sea &&
                     elevation <= Elevation.Mountain;
             case Movement.Fly:
-                return elevation < Elevation.Wall;
+                return elevation == Elevation.City || elevation < Elevation.Wall;
             case Movement.Ghost:
             case Movement.Teleport:
 

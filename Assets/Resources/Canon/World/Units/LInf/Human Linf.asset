@@ -26,8 +26,8 @@ MonoBehaviour:
       Offense: 10
       Defense: 10
       Luck: 0
-      Attack: 10
-      Magic: 5
+      Attack: 15
+      Magic: 0
       Speed: 100
       Action: 2
       Mana: 0
@@ -46,10 +46,10 @@ MonoBehaviour:
       ProcChance: 0
       CritChance: 0
       bonusDamage:
-      - damage: 15
+      - damage: 30
         scale: 0
         flag: 12
-      - damage: 10
+      - damage: 15
         scale: 0
         flag: 13
     armySprites:
@@ -78,6 +78,8 @@ MonoBehaviour:
       abilityLevel: 1
     - abilityID: raze
       abilityLevel: 1
+    - abilityID: slow
+      abilityLevel: 2
   attacks:
   - {fileID: 11400000, guid: a2980518f8729cc478c3d4f7e2632b1d, type: 2}
   spells: []

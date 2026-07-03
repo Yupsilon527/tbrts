@@ -23,6 +23,13 @@ public class UnitData : ProductionData
     public void LoadCharacter(CharacterSO character)
     {
         if (character == null) return;
+        if (character.sprites.Length ==1)
+        {
+            for (int i = 0; i< armySprites.Length; i++)
+            {
+                armySprites[i] = character.sprites[0].sprite;
+            }
+        }
         foreach (var sprite in character.sprites)
         {
             armySprites[(int)sprite.frame] = sprite.sprite;

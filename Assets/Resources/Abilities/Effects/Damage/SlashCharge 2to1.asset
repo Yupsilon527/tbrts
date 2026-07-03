@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43f429b60ff54854f8f152f4bc7fa126, type: 3}
-  m_Name: SlashCharge 1to1
+  m_Name: SlashCharge 2to1
   m_EditorClassIdentifier: 
   applyChance: 1
   chance: 0
   targeting: 2
   attack: 0
-  BaseDamage: 0
+  BaseDamage: -3
   scaling:
   - scaleMode: 8
-    scaleDamage: 2
+    scaleDamage: 1
     scaleoff: 0
     scaleRate: 0
   - scaleMode: 2

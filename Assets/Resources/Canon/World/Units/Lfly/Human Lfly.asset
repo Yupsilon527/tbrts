@@ -29,9 +29,9 @@ MonoBehaviour:
       Attack: 20
       Magic: 5
       Speed: 140
-      Action: 1
+      Action: 3
       Mana: 0
-      Supply: 1
+      Supply: 0
       Health: 45
       Barrier: 0
       Armor: 0
@@ -50,30 +50,32 @@ MonoBehaviour:
         scale: 0
         flag: 11
     armySprites:
-    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
-    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
-    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
-    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
-    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
-    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
+    - {fileID: 7171838046460540711, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
+    - {fileID: 7171838046460540711, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
+    - {fileID: 7171838046460540711, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
+    - {fileID: 7171838046460540711, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
+    - {fileID: 7171838046460540711, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
+    - {fileID: 7171838046460540711, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
     unitFlags: 0d000000
     attacks:
-    - InternalName: Peasant Melee
+    - InternalName: Lcav Melee
       apCost: 1
       mpCost: 0
       spCost: 0
-      castTime: 100
-      castDelay: 0
+      castTime: 90
+      castDelay: 160
       abilityFlags: 76
       castOnce: 0
-      attackPhase: 1
+      attackPhase: 2
       targetPriority: 0
       areaMode: 0
     spells: []
     abilities:
     - abilityID: fly
       abilityLevel: 1
+    - abilityID: slow
+      abilityLevel: 2
   attacks:
   - {fileID: 11400000, guid: 1eff5a7a6566a15498a0aabff0087be0, type: 2}
   spells: []
-  character: {fileID: 11400000, guid: bb659cc1777b7dc40b5a7ad4ce786ca7, type: 2}
+  character: {fileID: 11400000, guid: 73dad06f958bcf8429789db1c848a39a, type: 2}

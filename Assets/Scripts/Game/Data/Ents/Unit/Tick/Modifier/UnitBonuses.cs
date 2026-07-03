@@ -10,6 +10,11 @@ public class UnitBonuses : UnitComponent
     public UnitBonuses(DataItemUnit parent) : base(parent)
     {
         unitFlags = parent.data.unitFlags;
+
+        foreach (var bonus in parent.data.unit.bonusDamage)
+        {
+            GrantBonusDamageFromTable(bonus,0, 1);
+        }
     }
 
     public void GrantBonusDamageFromTable(BonusDamageTable[] data, int oldLevel, int newLevel)

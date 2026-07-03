@@ -20,7 +20,7 @@ MonoBehaviour:
     mpCost: 0
     spCost: 0
     castTime: 90
-    castDelay: 90
+    castDelay: 160
     abilityFlags: 76
     castOnce: 0
     attackPhase: 2

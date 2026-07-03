@@ -81,7 +81,7 @@ MonoBehaviour:
       producedArmies: []
       producedBuildings: []
     armies:
-    - InternalName: 1
+    - InternalName: 3 Linf
       ownership: 2
       spawnPos: {x: 4, y: 4}
       formation:
@@ -92,9 +92,53 @@ MonoBehaviour:
       - Human Linf
       - 
       transporter: 
-    - InternalName: 2
+    - InternalName: 3 Linf
+      ownership: 2
+      spawnPos: {x: 5, y: 3}
+      formation:
+      - Human Linf
+      - 
+      - Human Linf
+      - 
+      - Human Linf
+      - 
+      transporter: 
+    - InternalName: 3 Linf
+      ownership: 2
+      spawnPos: {x: 3, y: 5}
+      formation:
+      - Human Linf
+      - 
+      - Human Linf
+      - 
+      - Human Linf
+      - 
+      transporter: 
+    - InternalName: Skirms
       ownership: 2
       spawnPos: {x: 5, y: 5}
+      formation:
+      - Human Larc
+      - 
+      - Human Larc
+      - 
+      - Human Larc
+      - 
+      transporter: 
+    - InternalName: Skirms
+      ownership: 2
+      spawnPos: {x: 4, y: 6}
+      formation:
+      - Human Larc
+      - 
+      - Human Larc
+      - 
+      - Human Larc
+      - 
+      transporter: 
+    - InternalName: Skirms
+      ownership: 2
+      spawnPos: {x: 6, y: 4}
       formation:
       - Human Larc
       - 
