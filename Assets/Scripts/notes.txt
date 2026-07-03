@@ -30,9 +30,21 @@ TODO
 		
 
 	army auras
-LoS
+	LoS
+
+	document armies/etc
+
+Fixes
+	armies not desel on turn end
+
+	command window
+	window close/open
+
+	player window doesnt work
+	game skips player 2
 
 QoL
+	tile highlights and colors
 	army QOL
 		window
 			quick transfer
@@ -40,6 +52,7 @@ QoL
 			undo
 
 			open with(only 1 army)
+	army animations
 
 	castle QOL
 		current buildings tab
@@ -47,11 +60,16 @@ QoL
 		right click army inside castle to PRODUCE INSIDE
 
 		invade
+	revise command menu/mouse interactions
+	revise camera move
 
 	faction
 		global bonuses (need tested)
 
-
+	combat window
+		animations
+		damage numbers
+		hp bars
 
 	stats & scalemode
 	events

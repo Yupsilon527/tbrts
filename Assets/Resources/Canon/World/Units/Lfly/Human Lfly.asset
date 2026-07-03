@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
+  m_Name: Human Lfly
+  m_EditorClassIdentifier: 
+  unit:
+    InternalName: Human Lfly
+    icon: {fileID: 7171838046460540711, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
+    flags: []
+    costs:
+    - resource: 0
+      value: 320
+    - resource: 3
+      value: 25
+    prerequisites: []
+    unit:
+      Offense: 9
+      Defense: 9
+      Attack: 6
+      Action: 1
+      Magic: 5
+      Mana: 0
+      Supply: 1
+      Health: 45
+      Barrier: 0
+      Armor: 0
+      Shield: 4
+      Padding: 0
+      Resistance: 0
+      Block: 4
+      Speed: 140
+      Luck: 0
+      LuckCoefficient: 1
+      SpeedCoefficient: 1
+      DodgeChance: 0
+      BlockChance: 10
+      ProcChance: 0
+      CritChance: 0
+      bonusDamage:
+      - damage: 6
+        scale: 0
+        flag: 11
+    armySprites:
+    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
+    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
+    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
+    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
+    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
+    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
+    unitFlags: 0d000000
+    attacks:
+    - InternalName: Peasant Melee
+      apCost: 1
+      mpCost: 0
+      spCost: 0
+      castTime: 100
+      castDelay: 0
+      abilityFlags: 76
+      castOnce: 0
+      attackPhase: 1
+      targetPriority: 0
+      areaMode: 0
+    spells: []
+    abilities:
+    - abilityID: fly
+      abilityLevel: 1
+  attacks:
+  - {fileID: 11400000, guid: 1eff5a7a6566a15498a0aabff0087be0, type: 2}
+  spells: []
+  character: {fileID: 11400000, guid: bb659cc1777b7dc40b5a7ad4ce786ca7, type: 2}

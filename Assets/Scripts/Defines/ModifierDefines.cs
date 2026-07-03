@@ -33,8 +33,10 @@ public static class ModifierDefines
 
         cannot_miss = 16,
 
+        absolute_melee_priority = 17,
+        absolute_range_priority = 18,
 
-        total = 17,
+        total = 19,
     }
     public static bool IsPropertyMultiplicative(Property prop)
     {
@@ -259,7 +261,7 @@ public static class ModifierDefines
         ability_aoe_range = 107,
         critical_damage = 108,
         critical_chance = 109,
-        parry_chance = 110,
+        outgoing_bonus_damage=110,
     }
 
 

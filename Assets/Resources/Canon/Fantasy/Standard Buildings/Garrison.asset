@@ -28,12 +28,18 @@ MonoBehaviour:
     bonusDamage: []
     properties: []
     states: []
+    tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome: []
+    bonusType: 0
     production:
-    - Peasant
-    income: []
-    passiveBonuses: []
+    - Human Larc
+    - Human Linf
+    - Human Lcav
+    - Human Lfly
   armies:
-  - {fileID: 11400000, guid: b47cc2297ab165546996f3f54370d6fc, type: 2}
+  - {fileID: 11400000, guid: 886a5c98da63c734ba584330cadc6b6e, type: 2}
+  - {fileID: 11400000, guid: 6bcd0ea8ac54ced46b53c9c0f47cf7f0, type: 2}
+  - {fileID: 11400000, guid: fb79edb46f4bc31428e186831f0a885c, type: 2}
+  - {fileID: 11400000, guid: efb02aa9294312343a0b47ddf42bd8da, type: 2}

@@ -92,6 +92,11 @@ public class PropertyWeapon : PropertyAbility
         var targets = GetValidTargets(caster);
         if (targets.Length == 0) return null;
 
+        if (caster.troopPosition.y == 0 && targets.Any(t => t.GetState(ModifierDefines.State.absolute_melee_priority)))
+            targets = targets.Where(t => t.GetState(ModifierDefines.State.absolute_melee_priority)).ToArray();
+        else if (caster.troopPosition.y == 1 && targets.Any(t => t.GetState(ModifierDefines.State.absolute_range_priority)))
+            targets = targets.Where(t => t.GetState(ModifierDefines.State.absolute_range_priority)).ToArray();
+
         switch (original.targetPriority)
         {
             default:

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DamageTable
 {
+    public bool resolved = false;
     public DataItemUnit attacker;
     public DataItemUnit target;
     public AttackDefines.HitType blockType;
@@ -58,16 +59,16 @@ public class DamageTable
                                     outDamage = Mathf.Max(outDamage / 2, outDamage * 2 - armor);
                                     break;
                                 case AttackDefines.HitType.normal:
-                                    outDamage = Mathf.Max(1, outDamage - armor);
+                                    outDamage = Mathf.Max(0, outDamage - armor);
                                     break;
                                 case AttackDefines.HitType.blocked:
-                                    outDamage = Mathf.Max(1, outDamage - target.stats.realStats.Block - armor);
+                                    outDamage = Mathf.Max(0, outDamage - target.stats.realStats.Block - armor);
                                     break;
                                 case AttackDefines.HitType.blockCrit:
-                                    outDamage = Mathf.Max(1, outDamage - target.stats.realStats.Block * 2 - armor);
+                                    outDamage = Mathf.Max(0, outDamage - target.stats.realStats.Block * 2 - armor);
                                     break;
                                 case AttackDefines.HitType.miss:
-                                    outDamage = 1;
+                                    outDamage = 0;
                                     break;
                             }
                             break;
@@ -95,7 +96,22 @@ public class DamageTable
             }
             realDamage[kvp.Key] = outDamage;
         }
+        if (realDamage.ContainsKey(AttackDefines.DamageType.Slashing) 
+            || realDamage.ContainsKey(AttackDefines.DamageType.Piercing)
+            || realDamage.ContainsKey(AttackDefines.DamageType.Crushing))
+        {
+            float totalDamage = (realDamage.TryGetValue(AttackDefines.DamageType.Slashing, out float slash) ? slash : 0f)
+                + (realDamage.TryGetValue(AttackDefines.DamageType.Piercing, out float pierce) ? pierce : 0f)
+                + (realDamage.TryGetValue(AttackDefines.DamageType.Crushing, out float crush) ? crush : 0f)
+                + (realDamage.TryGetValue(AttackDefines.DamageType.Pure, out float pure) ? pure : 0f);
+            if (totalDamage == 0)
+            {
+                if (realDamage.ContainsKey(AttackDefines.DamageType.Pure))
+                    realDamage[AttackDefines.DamageType.Pure] = 1;
+                else
+                    realDamage.Add(AttackDefines.DamageType.Pure, 1);
+            }
+        }
         realDamage = baseDamage;
-
     }
 }

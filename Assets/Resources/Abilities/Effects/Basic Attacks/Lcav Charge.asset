@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b30f17bc374894ba8cccf57206e933, type: 3}
+  m_Name: Lcav Charge
+  m_EditorClassIdentifier: 
+  effects:
+  - {fileID: 11400000, guid: dbfff8c60a737364ca0330623bf46464, type: 2}
+  data:
+    InternalName: Lcav Charge
+    apCost: 1
+    mpCost: 0
+    spCost: 1
+    castTime: 60
+    castDelay: 60
+    abilityFlags: 76
+    castOnce: 1
+    attackPhase: 2
+    targetPriority: 0
+    areaMode: 0
+  weaponFlags: 040000000800000040000000

@@ -97,10 +97,10 @@ public class AttackTable : CastTable
             float accuracy = attacker.stats.realStats.Offense / Mathf.Max(target.stats.realStats.Defense);
             accuracy = accuracy * .6f + Mathf.Min(.4f, attacker.hitCounter / 2 * .5f); //TODO DEFINE
 
-            float critChance = 15 * accuracy + attacker.modifiers.GetPropertyAdditive(ModifierDefines.Property.critical_chance) * (1 + accuracy) / 2f;   //TODO DEFINE
+            float critChance = 15 * accuracy + attacker.stats.realStats.CritChance * (1 + accuracy) / 2f;   //TODO DEFINE
             float hitChance = 50 * accuracy;
             float missChance = 30 / accuracy;
-            float parryChance = 20 / accuracy + attacker.modifiers.GetPropertyAdditive(ModifierDefines.Property.parry_chance) * (1 + accuracy) / 2f;
+            float parryChance = 20 / accuracy + attacker.stats.realStats.BlockChance * (1 + accuracy) / 2f;
 
             ranval = Random.value * (critChance + hitChance + missChance + parryChance);
             if (ranval < missChance)

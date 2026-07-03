@@ -55,13 +55,12 @@ public class UnitDamageable : UnitComponent
     }
     public virtual void DealDamage(DamageTable damage)
     {
-
         lastDamage = damage;
+        if (damage.resolved) return;
         damage.Calculate();
-
         foreach (var d in damage.realDamage)
         {
-            Combat.main.Inspect($"{parent} recevies {d.Value} {d.Key} total damage from {damage.attacker} at {Combat.main.currentTick}");
+            Combat.main.Inspect($"{parent} recevies {d.Value} {d.Key} ({damage.blockType}) total damage from {damage.attacker} at t{Combat.main.currentTick}");
     
                 float realDamage = d.Value;
             switch (d.Key)
@@ -125,7 +124,7 @@ public class UnitDamageable : UnitComponent
                     break;
             }
         }
-
+        damage.resolved = true;
     }
     void Vampirism(float damage)
     {

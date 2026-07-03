@@ -117,7 +117,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         int ticks = int.MaxValue;
         foreach (var action in actions)
         {
-            ticks = Mathf.Min(ticks+parent.initiative, action.nextTime);
+            ticks = Mathf.Min(ticks, action.nextTime + parent.initiative);
         }
         return ticks;
     }

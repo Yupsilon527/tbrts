@@ -161,6 +161,7 @@ public class UnitStats : UnitComponent
     }
     public virtual void UpdateMisc()
     {
+        realStats.CritChance = baseStats.CritChance + parent.GetProperty(ModifierDefines.Property.critical_chance);
         realStats.DodgeChance = baseStats.DodgeChance + parent.GetProperty(ModifierDefines.Property.dodge_chance);
         realStats.BlockChance = baseStats.BlockChance + parent.GetProperty(ModifierDefines.Property.block_chance);
         realStats.ProcChance = baseStats.ProcChance + parent.GetProperty(ModifierDefines.Property.proc_chance);

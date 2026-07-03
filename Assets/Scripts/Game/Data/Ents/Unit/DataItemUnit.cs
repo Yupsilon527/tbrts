@@ -87,8 +87,9 @@ public class DataItemUnit : DataItemObject
     }
     protected void UpdateNextAction()
     {
-        initiative = (int)(UnityEngine.Random.value * 10)   ;
+        initiative = (int)(UnityEngine.Random.value * 25)   ;
         nextAction = Mathf.Min(actions.GetNextTick(), modifiers.GetNextTick());
+        Combat.main.Inspect($"{this} next action is set to {nextAction}");
     }
     #region States
     public virtual void Refresh(bool force = false)
@@ -203,11 +204,11 @@ public class DataItemUnit : DataItemObject
         }
         else if (innates.GetAbilityLevel("wheels") > 0)
         {
-            return TerrainDefines.Movement.Wheels;
+            return TerrainDefines.Movement.GroundWheels;
         }
         else if (innates.GetAbilityLevel("giant") > 0)
         {
-            return TerrainDefines.Movement.GroundGiant;
+            return TerrainDefines.Movement.GroundVersatile;
         }
         else if (innates.GetAbilityLevel("foot") > 0)
         {
@@ -226,7 +227,7 @@ public class DataItemUnit : DataItemObject
             return TerrainDefines.Movement.Boat;
         }
 
-        return TerrainDefines.Movement.Ground;
+        return TerrainDefines.Movement.Basic;
     }
 
     public ResourceCost[] GetPurchaseCost(DataItemPlayer Owner)

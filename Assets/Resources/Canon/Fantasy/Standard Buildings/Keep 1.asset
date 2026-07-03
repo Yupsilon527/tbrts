@@ -32,13 +32,14 @@ MonoBehaviour:
     bonusDamage: []
     properties: []
     states: []
+    tempSpells: []
     abilitiesAdded: []
     grantedResources: []
-    grantedIncome: []
-    production: []
-    income:
+    grantedIncome:
     - resource: 0
       value: 500
     - resource: 3
       value: 100
-    passiveBonuses: []
+    bonusType: 0
+    production: []
+  armies: []

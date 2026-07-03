@@ -87,11 +87,11 @@ public class UnitData : ProductionData
         }
         else if (GetAbilityLevel("wheels") > 0)
         {
-            return TerrainDefines.Movement.Wheels;
+            return TerrainDefines.Movement.GroundWheels;
         }
         else if (GetAbilityLevel("giant") > 0)
         {
-            return TerrainDefines.Movement.GroundGiant;
+            return TerrainDefines.Movement.GroundVersatile;
         }
         else if (GetAbilityLevel("foot") > 0)
         {
@@ -110,7 +110,7 @@ public class UnitData : ProductionData
             return TerrainDefines.Movement.Boat;
         }
 
-        return TerrainDefines.Movement.Ground;
+        return TerrainDefines.Movement.Basic;
     }
     public bool HasAbility(UnitDefines.ArmyAbilities ability)
     {

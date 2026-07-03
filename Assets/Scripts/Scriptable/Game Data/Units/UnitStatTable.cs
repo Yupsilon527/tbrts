@@ -56,6 +56,7 @@ public class UnitStatsTable
     public float DodgeChance = 0;
     public float BlockChance = 0;
     public float ProcChance = 0;
+    public float CritChance = 0;
 
     public BonusDamageTable[] bonusDamage;
     public AttackDefines.MobFlag[] GetCounters()

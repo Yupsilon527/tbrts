@@ -1,6 +1,3 @@
-
-using System;
-using System.Xml;
 using UnityEngine;
 
 public static class AttackDefines
@@ -66,14 +63,11 @@ public static class AttackDefines
         SiegeEngine,
         Building,
         UniqueUnit,
-        Production,
-        Defensive,
-        TownCenter,
-        Lair,
         FootUnit,
         RangedUnit,
         MountedUnit,
-        Support,
+        FlyingUnit,
+        SupportUnit,
     }
     public enum ScaleType
     {
@@ -129,78 +123,10 @@ public static class AttackDefines
                     bonusDamage *= owner.damageable.Health.GetValue();
                     break;
                 case ScaleType.BonusDamage:
-                    return owner.bonuses.CalculateDamageAgainstTarget(target, baseDamage);
-                /*case ScaleType.AttackCrit:
-                    bonusDamage = scaleDamage + owner.modifiers.GetPropertyAdditive(ModifierDefines.Property.critical_damage);
-                    break;
-                case ScaleType.ItemLevel:
-                    bonusDamage *= (roll == null || roll.sourceItem == null) ? 0 : roll.sourceItem.GetLevel();
-                    break;
-                case ScaleType.CurBlock:
-                    bonusDamage *= owner.damageable.Block.GetValue();
-                    break;
-                case ScaleType.SpeedStat:
-                    bonusDamage *= owner.stats.realStats.Speed;
-                    break;
-                case ScaleType.EmptySlots:
-                    if (owner is Hero attackingHero)
-                        bonusDamage *= attackingHero.inventory.GetEmptyInventorySlots();
-                    break;
-                case ScaleType.UnarmedBonus:
-                    bonusDamage *= owner.modifiers.GetPropertyAdditive(ModifierDefines.Property.unarmed_bonus);
-                    break;
-                case ScaleType.AttackBonus: //Accounts bonus attack only
-                    bonusDamage *= owner.stats.realStats.AttackDamage - owner.stats.baseStats.AttackDamage;
-                    break;
-                case ScaleType.BlockBonus:
-                    bonusDamage *= owner.modifiers.GetPropertyAdditive(ModifierDefines.Property.block_bonus);
-                    break;
-                case ScaleType.ArmorBonus:
-                case ScaleType.ArmorBonusRaw:
-                    bonusDamage *= owner.modifiers.GetPropertyAdditive(ModifierDefines.Property.armor_bonus);
-                    if (scale == ScaleType.ArmorBonus)
-                        bonusDamage *= owner.modifiers.GetPropertyAdditive(ModifierDefines.Property.incoming_armor_from_bonus);
-                    break;
-                case ScaleType.Random:
-                    bonusDamage *= Random.value;
-                    break;
-                case ScaleType.TotHp:
-                    bonusDamage *= owner.stats.realStats.Health;
-                    break;
-                case ScaleType.TotHpArmor:
-                    bonusDamage *= owner.stats.realStats.Health + owner.damageable.ConstantArmor.GetValue() + owner.damageable.PersistentArmor.GetValue();
-                    break;
-                case ScaleType.MissHp:
-                    bonusDamage *= owner.damageable.Health.GetDifference();
-                    break;
-                case ScaleType.CurHp:
-                    bonusDamage *= owner.damageable.Health.GetValue();
-                    break;
-                case ScaleType.MissHpPercent:
-                    bonusDamage *= 1 - owner.damageable.Health.GetPercentage();
-                    break;
-                case ScaleType.CurHpPercent:
-                    bonusDamage *= owner.damageable.Health.GetPercentage();
-                    break;
-                case ScaleType.RollNumberCanCrit:
-                case ScaleType.RollNumber:
-                    bonusDamage *= roll.rollAmount;
-                    if (roll.isDiceCrit && scale == ScaleType.RollNumberCanCrit)
-                        bonusDamage *= 2;
-                    break;
-                case ScaleType.Level:
-                    bonusDamage *= owner.level;
-                    break;
-                case ScaleType.Poison:
-                    if (victim.modifiers.GetState(ModifierDefines.State.poison_immune))
-                        return 0;
-                    return Mathf.Max(1, baseDamage + owner.modifiers.GetPropertyAdditive(ModifierDefines.Property.poison_damage_bonus)) * owner.modifiers.GetPropertyMultiplicative(ModifierDefines.Property.poison_damage_incoming);
-                case ScaleType.Fire:
-                    if (victim.modifiers.GetState(ModifierDefines.State.fire_immune))
-                        return 0;
-                    return Mathf.Max(1, baseDamage + owner.modifiers.GetPropertyAdditive(ModifierDefines.Property.fire_damage_bonus)) * owner.modifiers.GetPropertyMultiplicative(ModifierDefines.Property.fire_damage_incoming);*/
+                    bonusDamage =  (owner.bonuses.CalculateDamageAgainstTarget(target, baseDamage)- baseDamage)*owner.GetPropertyMultiplicative( ModifierDefines.Property.outgoing_bonus_damage);
+                    return bonusDamage + baseDamage;
                 default:
-                    return baseDamage * UnityEngine.Random.value;
+                    return baseDamage * Random.value;
             }
         }
         switch (rate)

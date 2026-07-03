@@ -23,13 +23,29 @@ public static class TerrainDefines
         circle,
         square
     }
+
+    public enum Movement
+    {
+        NoMovement = -1,
+        Boat = 0,
+        Swimmer = 1,
+        Amphibian = 2,
+        Basic = 3,
+        GroundFoot = 4,
+        GroundVersatile = 5,
+        GroundWheels = 6,
+        Fly = 7,
+        Ghost = 8,
+        Teleport = 9,
+        Total = 10
+    };
     public enum Elevation
     {
         Void = 0,
         DeepSea = 1,
         Sea = 2,
-        Swamp = 3,
-        Bridge = 4,
+        Bridge = 3,
+        Swamp = 4,
         Plain = 5,
         Road = 6,
         Forest = 7,
@@ -39,22 +55,6 @@ public static class TerrainDefines
         City = 11,
         Total = 12
     }
-
-    public enum Movement
-    {
-        NoMovement = -1,
-        Boat = 0,
-        Swimmer = 1,
-        Amphibian = 2,
-        Ground = 3,
-        GroundFoot = 4,
-        GroundGiant = 5,
-        Wheels = 6,
-        Fly = 7,
-        Ghost = 8,
-        Teleport = 9,
-        Total = 10
-    };
 
     public static int GetEdgeSprite(bool[] Edges)
     {
@@ -220,71 +220,12 @@ public static class TerrainDefines
     {
         if (CanIWalkOver(movement, Elevation))
         {
-
+            if (Elevation == Elevation.City)
+                return 1;
             switch (movement)
             {
-                case Movement.Ground:
-                case Movement.GroundFoot:
-                    if (Elevation == Elevation.Forest)
-                    {
-                        return 3;
-                    }
-                    if (Elevation == Elevation.Swamp)
-                    {
-                        return 3;
-                    }
-                    if (Elevation == Elevation.Hill)
-                    {
-                        return 3;
-                    }
-                    if (Elevation == Elevation.Bridge)
-                    {
-                        return 1;
-                    }
-                    if (Elevation == Elevation.Road)
-                    {
-                        return 1;
-                    }
-                    return 2;
-                case Movement.GroundGiant:
-                    if (Elevation == Elevation.Swamp)
-                    {
-                        return 3;
-                    }
-                    if (Elevation == Elevation.Hill)
-                    {
-                        return 3;
-                    }
-                    return 2;
-                case Movement.Wheels:
-
-                    if (Elevation == Elevation.Bridge)
-                    {
-                        return 2;
-                    }
-                    if (Elevation == Elevation.Road)
-                    {
-                        return 2;
-                    }
-                    if (Elevation == Elevation.Swamp)
-                    {
-                        return 5;
-                    }
-                    if (Elevation >= Elevation.Forest)
-                    {
-                        return 4;
-                    }
-                    return 3;
-                case Movement.Amphibian:
-                    if (Elevation == Elevation.Swamp)
-                    {
-                        return 1;
-                    }
-                    if (Elevation == Elevation.Hill)
-                    {
-                        return 3;
-                    }
-                    if (Elevation == Elevation.DeepSea)
+                case Movement.Boat:
+                    if (Elevation == Elevation.Sea)
                     {
                         return 3;
                     }
@@ -300,12 +241,65 @@ public static class TerrainDefines
                         return 4;
                     }
                     return 3;
-                case Movement.Boat:
-                    if (Elevation == Elevation.Sea)
+                case Movement.Amphibian:
+                    if (Elevation >= Elevation.Plain)
+                    {
+                        return 3;
+                    }
+                    if (Elevation >= Elevation.Forest)
+                    {
+                        return 4;
+                    }
+                    return 2;
+                case Movement.Basic:
+                    if (Elevation == Elevation.Mountain)
+                    {
+                        return 3;
+                    }
+                    if (Elevation == Elevation.Swamp || Elevation >= Elevation.Forest)
                     {
                         return 3;
                     }
                     return 2;
+                case Movement.GroundFoot:
+                    if (Elevation == Elevation.Mountain)
+                    {
+                        return 3;
+                    }
+                    if (Elevation == Elevation.Swamp || Elevation >= Elevation.Forest)
+                    {
+                        return 3;
+                    }
+                    if (Elevation == Elevation.Bridge || Elevation == Elevation.Road)
+                    {
+                        return 1;
+                    }
+                    return 2;
+                case Movement.GroundVersatile:
+                    if (Elevation == Elevation.Swamp || Elevation == Elevation.Hill)
+                    {
+                        return 3;
+                    }
+                    if (Elevation < Elevation.Bridge || Elevation > Elevation.Hill)
+                    {
+                        return 4;
+                    }
+                    return 2;
+                case Movement.GroundWheels:
+
+                    if (Elevation == Elevation.Bridge || Elevation == Elevation.Road)
+                    {
+                        return 1;
+                    }
+                    if (Elevation == Elevation.Swamp)
+                    {
+                        return 5;
+                    }
+                    if (Elevation >= Elevation.Forest)
+                    {
+                        return 4;
+                    }
+                    return 3;
                 case Movement.Fly:
 
                     if (Elevation == Elevation.Mountain)
@@ -331,43 +325,34 @@ public static class TerrainDefines
     {
         switch (movement)
         {
-
             case Movement.NoMovement:
                 return false;
-            case Movement.Ground:
-            case Movement.GroundFoot:
-
-                return elevation == Elevation.City || (elevation > Elevation.DeepSea &&
-                elevation < Elevation.Wall);
-            case Movement.Wheels:
-                return elevation == Elevation.City || (elevation > Elevation.DeepSea &&
-                elevation < Elevation.Mountain);
-
-            case Movement.GroundGiant:
-
-                return elevation == Elevation.City || elevation > Elevation.DeepSea &&
-                    elevation < Elevation.Wall;
-
+            case Movement.Boat:
+                return elevation >= Elevation.DeepSea && elevation <= Elevation.Swamp;
             case Movement.Swimmer:
+                return elevation == Elevation.City || elevation >= Elevation.DeepSea &&
+                    elevation <= Elevation.Hill;
             case Movement.Amphibian:
-
-                return elevation == Elevation.City || elevation > Elevation.Void &&
-                    elevation < Elevation.Mountain;
-
+                return elevation == Elevation.City || elevation >= Elevation.Sea &&
+                    elevation <= Elevation.Hill;
+            case Movement.Basic:
+            case Movement.GroundFoot:
+                return elevation == Elevation.City || (elevation >= Elevation.Swamp &&
+                elevation <= Elevation.Mountain);
+            case Movement.GroundWheels:
+                return elevation == Elevation.City || (elevation >= Elevation.Plain &&
+                elevation <= Elevation.Hill);
+            case Movement.GroundVersatile:
+                return elevation == Elevation.City || elevation >= Elevation.Sea &&
+                    elevation <= Elevation.Mountain;
             case Movement.Fly:
-
-                return elevation != Elevation.Wall;
-
+                return elevation < Elevation.Wall;
             case Movement.Ghost:
             case Movement.Teleport:
 
                 return true;
-
-            case Movement.Boat:
-
-                return elevation >= Elevation.DeepSea && elevation <= Elevation.Swamp;
-}
-return false;
+        }
+        return false;
     }
 }
 
