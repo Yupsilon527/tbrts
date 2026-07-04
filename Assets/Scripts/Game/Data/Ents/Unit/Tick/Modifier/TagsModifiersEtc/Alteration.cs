@@ -1,7 +1,47 @@
+
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PropertyAttribute : PropertyThinker
+public class AlterationData : TagData
+{
+    public ModifierDefines.Flag flag;
+    public ModifierDefines.Priority priority = ModifierDefines.Priority.low;
+    public ModifierDefines.PropertyData[] properties = new ModifierDefines.PropertyData[0];
+    public ModifierDefines.StateData[] states = new ModifierDefines.StateData[0];
+
+    public AlterationData(string internalName, Sprite sprite,  ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.hidden, ModifierDefines.Priority priority = ModifierDefines.Priority.normal, ModifierDefines.Flag flag = ModifierDefines.Flag.Tag, ModifierDefines.PropertyData[] properties = null, ModifierDefines.StateData[] states = null) : base(internalName, sprite, uibehavior)
+    {
+        this.priority = priority;
+        this.flag = flag;
+        this.properties = properties;
+        this.states = states;
+    }
+
+    public float GetProperty(ModifierDefines.Property property)
+    {
+        foreach (var p in properties)
+        {
+            if (p.Property == property)
+                return p.value;
+        }
+        return 0;
+    }
+    public bool GetState(ModifierDefines.State state)
+    {
+        foreach (var s in states)
+        {
+            if (s.State == state)
+                return true;
+        }
+        return false;
+    }
+    public override ModifierDefines.Flag GetFlag()
+    {
+        return flag;
+    }
+}
+
+public class PropertyAttribute : PropertyTag
 {
     public bool active = true;
     public int priority;
@@ -12,20 +52,23 @@ public class PropertyAttribute : PropertyThinker
 
     //Parameters
     public Dictionary<string, float> parameters = new Dictionary<string, float>();
+    public Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> functions = new Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction>();
 
-    public PropertyAttribute(string Name = "UNDEFINED",
-         ModifierDefines.StackType bh = ModifierDefines.StackType.Unique,
-        ModifierDefines.StateData[] sa = null,
-        ModifierDefines.PropertyData[] pr = null)
+    public PropertyAttribute(AlterationData data, DataItemUnit caster, DataItemUnit parent = null) : this(data.InternalName, caster, parent, data.sprite,  data.uibehavior,(int) data.priority,data.states,data.properties)
     {
-        InternalName = Name;
-        behavior = bh;
-
+    }
+    public PropertyAttribute(string internalName, DataItemUnit caster, DataItemUnit parent = null, Sprite sprite = null, ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.hidden,
+       
+        int p = 0,
+        ModifierDefines.StateData[] sa = null,
+        ModifierDefines.PropertyData[] pr = null) : base(internalName, caster, parent, sprite, uibehavior)
+    {
+        priority = p;
         SetStates(sa);
         SetProps(pr);
+
     }
 
-    public Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> functions = new Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction>();
     #region Functions
 
     public void AddFunction(AbilityDefines.Event Name, ModifierDefines.ModifierAction execution)
@@ -87,8 +130,8 @@ public class PropertyAttribute : PropertyThinker
     public void SetProperty(ModifierDefines.Property prop, float value)
     {
         SetPropertyRaw(prop, ModifierDefines.IsPropertyMultiplicative(prop) ? (value / 100) : value);
-}
-public void SetPropertyRaw(ModifierDefines.Property prop, float value)
+    }
+    public void SetPropertyRaw(ModifierDefines.Property prop, float value)
     {
         if (properties.ContainsKey(prop))
         {
@@ -111,29 +154,10 @@ public void SetPropertyRaw(ModifierDefines.Property prop, float value)
         if (properties == null) return;
         for (int iS = 0; iS < properties.Length; iS++)
         {
-            SetProperty(properties[iS].Property,properties[iS].value);
+            SetProperty(properties[iS].Property, properties[iS].value);
         }
     }
     #endregion
-    public bool dead = false;
-    public virtual void Die(bool expire)
-    {
-        if (!dead)
-        {
-            dead = true;
-        }
-    }
-    protected void CheckExpiration()
-    {
-        if (IsExpired())
-        {
-            Die(true);
-        }
-    }
-    public virtual bool IsExpired()
-    {
-        return false;
-    }
     #region Parameters
     public void SetParameter(string name, float value)
     {
@@ -154,78 +178,4 @@ public void SetPropertyRaw(ModifierDefines.Property prop, float value)
     }
     #endregion
 
-}
-
-public class PropertyTag
-{
-    public string InternalName = "ERROR";
-    public DataItemUnit caster, parent;
-    public Sprite sprite;
-    public ModifierDefines.StackType behavior;
-    public ModifierDefines.VisibleState uibehavior;
-    #region Display
-    public Sprite GetModifierIcon()
-    {
-        if (sprite != null)
-        {
-            return sprite;
-        }
-        return null;
-    }
-    public bool IsTooltipVisible()
-    {
-        return uibehavior >= ModifierDefines.VisibleState.tooltip_only;
-    }
-    public bool IsOverheadVisible()
-    {
-        return uibehavior >= ModifierDefines.VisibleState.always_visible;
-    }
-    #endregion
-}
-public class PropertyThinker : PropertyTag, ITimerAction
-{
-
-    // Thinker
-    public bool HasThinker = false;
-    public bool executed = false;
-    public int lastThink = 0;
-    public int thinkInterval = 0;
-    #region Thinker
-    public void StartThinker(int interval)
-    {
-        HasThinker = true;
-        thinkInterval = Mathf.Max(1, interval);
-        lastThink = 0;
-    }
-    public virtual void Think()
-    {
-        lastThink += thinkInterval;
-    }
-    #endregion
-
-    public void ExtendCooldown(float cdr = 1)
-    {
-        Delay((int)(thinkInterval * cdr));
-    }
-    public void SetCooldown(int cooldown)
-    {
-        lastThink = cooldown;
-    }
-    public virtual bool RefreshCooldown(int cooldown)
-    {
-        if (HasThinker) lastThink -= cooldown;
-        executed = executed || lastThink < 0;
-        while (lastThink < 0)
-            Think();
-        return executed;
-    }
-    public virtual void Delay(int cooldown)
-    {
-        lastThink += cooldown;
-    }
-    public virtual void Reset()
-    {
-        lastThink = 0;
-        executed = false;
-    }
 }

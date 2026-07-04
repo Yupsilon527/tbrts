@@ -11,7 +11,7 @@ public class ApplyModifierSO : AttackEffectSO
     {
         return new ApplyModifier()
         {
-            appliedModifier = appliedModifier.Translate(),
+            appliedModifier = appliedModifier.Translate() as ModifierData,
             alterations = alteredParameters,
             applyChance = applyChance,
             targeting = targeting,

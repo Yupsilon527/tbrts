@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4837039885573320416}
   - component: {fileID: 1403797246964528099}
   - component: {fileID: 6227218587036056332}
+  - component: {fileID: 377934029294990417}
   m_Layer: 5
   m_Name: Lifebar
   m_TagString: Untagged
@@ -76,6 +77,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &377934029294990417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098448364618938251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa2f5fb6317faf47adc8890c91edfb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fill: {fileID: 5012006647172121701}
 --- !u!1 &4280772303171057991
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,6 +251,7 @@ GameObject:
   - component: {fileID: 439046459267122228}
   - component: {fileID: 6667950212885918508}
   - component: {fileID: 6004121315442782716}
+  - component: {fileID: 2159508933565300857}
   m_Layer: 5
   m_Name: Action Bar
   m_TagString: Untagged
@@ -302,6 +317,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2159508933565300857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7827423724616315159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa2f5fb6317faf47adc8890c91edfb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fill: {fileID: 6682295756143956113}
 --- !u!1001 &8378527323800147218
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -475,7 +503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitImage: {fileID: 4137682117121075013}
   unitLabel: {fileID: 0}
-  hpFill: {fileID: 5012006647172121701}
-  actionFill: {fileID: 6682295756143956113}
+  hpFill: {fileID: 377934029294990417}
+  actionFill: {fileID: 2159508933565300857}
   hpParent: {fileID: 1098448364618938251}
   actionParent: {fileID: 7827423724616315159}

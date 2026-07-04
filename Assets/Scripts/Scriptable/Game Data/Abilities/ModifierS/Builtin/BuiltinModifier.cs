@@ -12,19 +12,19 @@ public class BuiltInModifier : ApplyEffects
     }
     public override void ActivateOnUnit(EventTable table, float strength = 1)
     {
-        table.target.modifiers.ApplyNewModifier(Translate(), table.tick, true, false);
+        table.target.modifiers.ApplyNewModifier(Translate(table.caster,table.target), table.tick, true, false);
 
     }
     #region Params
     [Header("Parameters")]
     public BuiltInModifierType BuiltinType;
-    public PropertyModifier Translate(int stacks = 0)
+    public PropertyModifier Translate(DataItemUnit caster, DataItemUnit target, int stacks = 0)
     {
         PropertyModifier nModifier = null;
         switch (BuiltinType)
         {
             case BuiltInModifierType.HealPostCombat:
-                nModifier = new (DefaultModifiers.HealPostCombat);
+                nModifier = new (DefaultModifiers.HealPostCombat,caster, target);
                 break;
 
         }

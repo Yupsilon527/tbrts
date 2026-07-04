@@ -7,6 +7,10 @@ public class AbilityComponentn : UnitComponent
 
     public AbilityComponentn(DataItemUnit parent) : base(parent)
     {
+        foreach ( var innate in parent.data.abilities)
+        {
+            AddAbility(innate.abilityID, innate.abilityLevel);
+        }
     }
     public void AddAbility(string name, int level)
     {

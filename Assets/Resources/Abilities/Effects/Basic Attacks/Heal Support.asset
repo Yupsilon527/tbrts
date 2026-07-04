@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b30f17bc374894ba8cccf57206e933, type: 3}
+  m_Name: Heal Support
+  m_EditorClassIdentifier: 
+  effects:
+  - {fileID: 11400000, guid: 72629d6a76c5d854b969b65ec3586aa6, type: 2}
+  data:
+    InternalName: Heal Support
+    apCost: 0
+    mpCost: 0
+    spCost: 1
+    castTime: 120
+    castDelay: 160
+    abilityFlags: 78
+    castOnce: 1
+    attackPhase: 3
+    targetPriority: 0
+    areaMode: 3
+  weaponFlags: 04000000080000000200000040000000

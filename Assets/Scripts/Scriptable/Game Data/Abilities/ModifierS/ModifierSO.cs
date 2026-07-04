@@ -4,22 +4,29 @@ using UnityEngine;
 public class ModifierSO : AlterationSO
 {
     public int duration = 1;
+    public int thinker = 0;
+    public int level = 0;
     public ModifierDefines.Flag flag;
-    public ModifierDefines.ExpireType expireType = ModifierDefines.ExpireType.time;
+    public ModifierDefines.ExpireType destroyEvt = ModifierDefines.ExpireType.ticks;
+    public ModifierDefines.ExpireType expireType = ModifierDefines.ExpireType.ticks;
 
     public override TagData Translate()
     {
         return new ModifierData(
             InternalName,
             sprite,
-            behavior,
             uibehavior,
-            flag,
-            expireType,
             priority,
-            duration,
+            flag,
             properties,
-            states
+            states,
+            new System.Collections.Generic.Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction>(),
+            behavior,
+            duration,
+            expireType,
+            destroyEvt,
+            thinker,
+            level
             );
     }
 }

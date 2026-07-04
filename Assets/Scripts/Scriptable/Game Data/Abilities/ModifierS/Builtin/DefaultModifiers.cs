@@ -7,7 +7,7 @@ public static class DefaultModifiers
         null,
        flag: ModifierDefines.Flag.Buff,
         uibehavior:  ModifierDefines.VisibleState.hidden,
-     expire:    ModifierDefines.ExpireType.permanent,
+     expireType:    ModifierDefines.ExpireType.permanent,
         priority:  ModifierDefines.Priority.normal,
  behavior:          ModifierDefines.StackType.Multiple,
           funcs:  new Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction>()

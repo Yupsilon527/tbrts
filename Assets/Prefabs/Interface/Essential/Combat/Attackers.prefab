@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 7912653274825928116}
   - component: {fileID: 8156498791085347637}
   - component: {fileID: 7778778730638569421}
+  - component: {fileID: 6388487127979106974}
   m_Layer: 5
   m_Name: Lifebar
   m_TagString: Untagged
@@ -292,6 +293,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6388487127979106974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5033078450765268963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa2f5fb6317faf47adc8890c91edfb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fill: {fileID: 6047689408091778391}
+  value: {fileID: 2753629000479818597}
 --- !u!1 &5569581834216077494
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,7 +552,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 1
   m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
@@ -742,6 +757,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4137682117121075013, guid: 074d90e4f995e104da68fa8e750a356a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6504473842130613247, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
     - target: {fileID: 7332358685162147161, guid: 074d90e4f995e104da68fa8e750a356a, type: 3}
       propertyPath: m_Name
       value: Combatant Container (6)
@@ -1852,13 +1871,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6451251492530894287}
     m_Modifications:
+    - target: {fileID: 1253776047382126936, guid: cfb43d7cc12be7e46bb60c5995890e4a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -3.199997
+      objectReference: {fileID: 0}
     - target: {fileID: 2746125683754173226, guid: cfb43d7cc12be7e46bb60c5995890e4a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2746125683754173226, guid: cfb43d7cc12be7e46bb60c5995890e4a, type: 3}
-      propertyPath: m_Pivot.y
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2746125683754173226, guid: cfb43d7cc12be7e46bb60c5995890e4a, type: 3}
       propertyPath: m_AnchorMax.x

@@ -1,4 +1,5 @@
 ﻿using Astar;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class DataItemArmy : DataItemObject
 
     public ArmyFormation formation;
     public ArmyAbilities abilities;
+    public ArmyAuras auras;
     public ArmyMovementComponent movement;
     public ArmyStatusComponent status;
     public OrderComponent orders;
@@ -19,6 +21,7 @@ public class DataItemArmy : DataItemObject
         orders = new(this);
         pathfinder = new(this);
         abilities = new(this);
+        auras = new(this);
         GameManager.main.armyManager.RegisterArmy(this);
     }
     public override string ToString()
@@ -61,7 +64,7 @@ public class DataItemArmy : DataItemObject
     #region Move
     public virtual bool ChangeTile(Vector2Int t, int cost, DisplayPositionChange m)
     {
-        if (movement.CanPayMovement(cost))
+        if (movement.movementLeft>0)
         {
             movement.PayMovement(cost);
             ChangeTile(t, m);
@@ -312,6 +315,7 @@ public class DataItemArmy : DataItemObject
             }
             else {
                 Exhaust(4);
+                movement.UpdateStartingMovement();
                 Combat.main.BattleTroops(this, other, other.tile);
                 foreach (var unit in formation.GetUnits())
                 {
@@ -433,5 +437,38 @@ public class DataItemArmy : DataItemObject
     public int GetAssistRange()
     {
         return formation.GetAbilitiyMax("rangeSupport");
+    }
+    public DataItemUnit[] GetSupportingUnits()
+    {
+        List<DataItemArmy> supporters = new();
+        foreach (var army in GetPlayerOwner().units)
+        {
+            if (army.formation.GetAbilitiyMax("rangeSupport") >0 && (army.gridPos - gridPos).magnitude<= army.formation.GetAbilitiyMax("rangeSupport"))
+            {
+                supporters.Add(army);
+            }
+        }
+        if (tile.buildingLayer is DataItemCastle castle && GetAlignment(castle) == PlayerDefines.Alignment.playerowned)
+        {
+            foreach (var army in castle.GetGarrison())
+            {
+                if (army!=this && army.formation.GetAbilitiyMax("siegeSupport")>0)
+                {
+                    supporters.Add(army);
+                }
+            }
+        }
+        List<DataItemUnit> assist = new();
+        foreach (var army in supporters)
+        {
+            foreach (var unit in army.formation.GetUnits())
+            {
+                if (unit.innates.HasAbility("rangeSupport") || unit.innates.HasAbility("siegeSupport"))
+                {
+                    assist.Add(unit);
+                }
+            }
+        }
+        return assist.ToArray();
     }
 }

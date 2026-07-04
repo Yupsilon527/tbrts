@@ -48,6 +48,10 @@ public class InterfaceManager : WindowManager
             castleRazeWindow.Open();
         }
     }
+    public void PreviewCombat(DataItemArmy attacker, DataItemArmy defender)
+    {
+
+    }
     public void OpenPrepareCombatWindow(DataItemArmy attacker, DataItemArmy defender)
     {
         combatWindow.Open();

@@ -26,7 +26,7 @@ public static class TerrainDefines
 
     public enum Movement
     {
-        NoMovement = -1,
+        Building = -1,
         Boat = 0,
         Swimmer = 1,
         Amphibian = 2,
@@ -325,8 +325,8 @@ public static class TerrainDefines
     {
         switch (movement)
         {
-            case Movement.NoMovement:
-                return false;
+            default:
+                return elevation == Elevation.City;
             case Movement.Boat:
                 return elevation >= Elevation.DeepSea && elevation <= Elevation.Swamp;
             case Movement.Swimmer:
@@ -352,7 +352,6 @@ public static class TerrainDefines
 
                 return true;
         }
-        return false;
     }
 }
 

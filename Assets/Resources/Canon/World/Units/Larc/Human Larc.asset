@@ -26,7 +26,7 @@ MonoBehaviour:
       Offense: 4
       Defense: 8
       Luck: 0
-      Attack: 15
+      Attack: 10
       Magic: 5
       Speed: 100
       Action: 1
@@ -46,10 +46,10 @@ MonoBehaviour:
       ProcChance: 0
       CritChance: 0
       bonusDamage:
-      - damage: 15
+      - damage: 10
         scale: 0
         flag: 4
-      - damage: 10
+      - damage: 5
         scale: 0
         flag: 1
     armySprites:

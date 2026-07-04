@@ -13,7 +13,6 @@ public class TagSO : ScriptableObject
         return new TagData(
              InternalName,
              sprite,
-             behavior,
             uibehavior
         );
     }

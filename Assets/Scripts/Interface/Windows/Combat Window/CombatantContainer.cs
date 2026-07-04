@@ -1,10 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CombatantContainer : UnitContainer
 {
     DataItemUnit owner;
-    public Image hpFill, actionFill;
+    public HealthBar actionFill;
     public GameObject hpParent, actionParent;
 
     public override void ForUnit(DataItemUnit unit)
@@ -12,10 +11,12 @@ public class CombatantContainer : UnitContainer
         owner = unit;
         base.ForUnit(unit);
         UpdateLifebar();
-        owner.damageable.Health.OnValueChanged.AddListener( UpdateLifebar);
+        owner.damageable.Health.OnValueChanged.AddListener(UpdateLifebar);
 
-        hpParent?.SetActive(unit.IsAlive());
-        actionParent?.SetActive(false);
+        if (hpParent != null)
+        hpParent.SetActive(unit.IsAlive());
+        if (actionParent != null)
+            actionParent.SetActive(false);
     }
     public override void Clear()
     {
@@ -28,6 +29,8 @@ public class CombatantContainer : UnitContainer
     void UpdateLifebar()
     {
         if (hpFill != null)
-            hpFill.fillAmount = owner.damageable.Health.GetPercentage();
+            hpFill.AssignResource(owner.damageable.Health);
+        if (hpParent != null)
+            hpParent.SetActive(owner.damageable.IsAlive());
     }
 }

@@ -18,6 +18,7 @@ public static class AbilityDefines
         OnSpawn = 5,
         CombatBegin = 6,
         CombatEnd = 7,
+        CombatExit = 34,    //exits a non mock-battle combat, used for "lasts for X fights" modifiers
         CombatPhase = 33,
 
 		//board
@@ -53,7 +54,7 @@ public static class AbilityDefines
         OnArmorBlock = 21,
         OnArmorBreak = 22,
 
-        Total = 34
+        Total = 35
     }
 
 public delegate void AbilityFunction(EventTable CastData);

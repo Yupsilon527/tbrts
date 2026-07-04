@@ -22,6 +22,8 @@ MonoBehaviour:
     startingPlayerResources:
     - resource: 0
       value: 10000
+    - resource: 1
+      value: 10000
     players:
     - Name: Neutrals
       FactionName: 

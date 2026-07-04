@@ -122,6 +122,15 @@ public class UnitDamageable : UnitComponent
                         }
                     }
                     break;
+                case AttackDefines.DamageType.GrantAP:
+                    parent.actions.Ap.GiveValue(realDamage);
+                    break;
+                case AttackDefines.DamageType.GrantMP:
+                    parent.actions.Mp.GiveValue(realDamage);
+                    break;
+                case AttackDefines.DamageType.GrantSP:
+                    parent.actions.Sp.GiveValue(realDamage);
+                    break;
             }
         }
         damage.resolved = true;

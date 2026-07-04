@@ -89,6 +89,8 @@ public class ArmyFormation : ArmyComponent
                 else
                     Formation[p] = unit;
                 unit.troop = parent;
+                unit.FireEventOnSelf(AbilityDefines.Event.OnMoveTile);
+                parent.auras.OnUnitEnterFormation(unit);
             }
             else
             {
@@ -132,6 +134,7 @@ public class ArmyFormation : ArmyComponent
             if (pos.x >= 0 && pos.y >= 0)
                 Formation[Translate(pos.x, pos.y)] = null;
         }
+        unit.troop.auras.OnUnitExitFormation(unit);
         unit.troop = null;
         if (refactor)
             OnFormationUpdate();

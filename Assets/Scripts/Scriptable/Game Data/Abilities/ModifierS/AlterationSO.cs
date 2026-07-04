@@ -12,7 +12,6 @@ public class AlterationSO : TagSO
         return new AlterationData(
             InternalName,
             sprite,
-            behavior,
             uibehavior,
             priority,
             flag,

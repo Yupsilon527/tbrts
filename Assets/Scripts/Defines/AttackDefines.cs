@@ -33,10 +33,14 @@ public static class AttackDefines
         LifeHealOverhealShield = 10,
         LifeHealOverhealArmor = 11,
         Assassinate = 12,
-        
-        Stun = 13,
 
-        Total = 14,
+        Stagger = 13,
+
+        GrantAP = 14,
+        GrantMP = 15,
+        GrantSP = 16,
+
+        Total = 17,
     }
     public enum AttackType
     {
@@ -73,7 +77,7 @@ public static class AttackDefines
     {
         Nothing = 0,
 
-       
+
 
         Random = 1,
         BonusDamage = 2,
@@ -123,7 +127,7 @@ public static class AttackDefines
                     bonusDamage *= owner.damageable.Health.GetValue();
                     break;
                 case ScaleType.BonusDamage:
-                    bonusDamage =  (owner.bonuses.CalculateDamageAgainstTarget(target, baseDamage)- baseDamage)*owner.GetPropertyMultiplicative( ModifierDefines.Property.outgoing_bonus_damage);
+                    bonusDamage = (owner.bonuses.CalculateDamageAgainstTarget(target, baseDamage) - baseDamage) * owner.GetPropertyMultiplicative(ModifierDefines.Property.outgoing_bonus_damage);
                     return bonusDamage + baseDamage;
                 default:
                     return baseDamage * Random.value;

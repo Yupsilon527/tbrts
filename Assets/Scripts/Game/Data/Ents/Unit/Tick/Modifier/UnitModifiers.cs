@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CombatantModifiers : UnitProperties, CombatantTicker
@@ -7,14 +8,90 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
     public CombatantModifiers(DataItemUnit parent) : base(parent)
     {
     }
-    protected List<PropertyModifier> _modifiers = new List<PropertyModifier>();
-    public List<PropertyModifier> GetModifiers()
+    #region List
+    protected List<PropertyTag> _modifiers = new List<PropertyTag>();
+    public PropertyModifier[] GetModifiers()
     {
-        return _modifiers;
+        return _modifiers.Select(m => m is PropertyModifier ? m as PropertyModifier : null).ToArray();
     }
+    public PropertyInnate[] GetInnates()
+    {
+        return _modifiers.Select(m => m is PropertyInnate ? m as PropertyInnate : null).ToArray();
+    }
+    #endregion
+    #region Filter
+    public bool HasModifier(string Name)
+    {
+        return FindModifierByName(Name) != null;
+    }
+    public PropertyTag FindModifierByName(string Name)
+    {
+        Name = Name.ToLower();
+        foreach (var Mod in _modifiers)
+        {
+            if (Mod.InternalName == Name)
+            {
+                return Mod;
+            }
+        }
+        return null;
+    }
+    public bool TryFindModifierByName(string Name, bool Reverse, out PropertyModifier found)
+    {
+        found = null;
+        var modifiers = GetModifiers();
+        for (int iM = 0; iM < modifiers.Length; iM++)
+        {
+            var mod = modifiers[Reverse ? (modifiers.Length - iM - 1) : iM];
+            if (mod.InternalName.ToLower() == Name.ToLower())
+            {
+                found = mod;
+                return true;
+            }
+        }
+        return false;
+    }
+    public PropertyModifier[] Filter(string ModifierName = "", ModifierDefines.Flag alignment = ModifierDefines.Flag.Tag, bool includePositives = false, bool includeNegative = false, ModifierDefines.Flag checkFlag = ModifierDefines.Flag.Tag)
+    {
+        List<PropertyModifier> rest = new List<PropertyModifier>();
+        foreach (PropertyModifier Mod in _modifiers)
+        {
+            if (!Mod.dead && !Mod.IsExpired())
+            {
+                if (ModifierName == "" || ModifierName == Mod.InternalName)
+                {
+                    if ((alignment == ModifierDefines.Flag.Tag || alignment == Mod.flag) || (includeNegative && Mod.IsNegative()) || (includePositives && Mod.IsPositive()) || (checkFlag == ModifierDefines.Flag.Tag && Mod.flag == checkFlag))
+                    {
+                        rest.Add(Mod);
+
+                    }
+                }
+            }
+        }
+        return rest.ToArray();
+
+    }
+    #endregion
+
 
     #region Create Modifiers
-    public bool ApplyNewModifierFromData(TagData Modifier, int atTick, out PropertyModifier resultingModifier)
+
+    public bool ApplyNewModifierFromData(TagData tag, bool refresh = true) {
+        if (HasModifier(tag.InternalName))
+        {
+            return false;
+        }
+        return ApplyNewModifier(new PropertyTag(tag, parent), skipImmunityCheck: true, refresh: refresh);
+    }
+    public bool ApplyNewModifierFromData(InnateData innate, DataItemUnit caster)
+    {
+        if (!innate.CanApplyToUnit(caster,parent))
+        {
+            return false;
+        }
+        return ApplyNewModifier(new PropertyInnate(innate, caster, parent), refresh: true);
+    }
+    public bool ApplyNewModifierFromData(ModifierData Modifier, DataItemUnit caster, int atTick, out PropertyModifier resultingModifier)
     {
         resultingModifier = null;
         if (Modifier is AlterationData alt && IsImmuneToModifier(alt)) { return false; }
@@ -24,73 +101,91 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
             return false;
         }
 
-        resultingModifier = new PropertyModifier(Modifier);
+        resultingModifier = new PropertyModifier(Modifier,caster,parent);
 
-        return ApplyNewModifier(resultingModifier, atTick, refresh: true);
+        return ApplyNewModifier(resultingModifier, atTick + Modifier.duration, refresh: true);
     }
-    public bool ApplyNewModifier(PropertyModifier Modifier, int atTick, bool skipImmunityCheck = false, bool refresh = true)
+    public bool ApplyNewModifier(PropertyTag status, int atTick=0, bool skipImmunityCheck = false, bool refresh = true)
     {
-        if (!skipImmunityCheck && IsImmuneToModifier(Modifier)) { return false; }
-        Modifier.parent = parent;
+        if (!skipImmunityCheck && IsImmuneToModifier(status)) { return false; }
+        status.parent = parent;
         /*if (Modifier.alignment == ModifierDefines.Alignment.Debuff)
         {
             Modifier.duration *= parent.modifiers.GetPropertyMultiplicative(ModifierDefines.modProps.debuff_duration_amp);
         }*/
-        switch (Modifier.behavior)
+        if (status is PropertyModifier modifier) {
+            modifier.duration = atTick;
+        switch (modifier.behavior)
         {
             case ModifierDefines.StackType.Replace: //Replace 
-                if (TryFindModifierByName(Modifier.InternalName, false, out PropertyModifier found))
+                if (TryFindModifierByName(status.InternalName, false, out PropertyModifier found))
                     Remove(found);
                 break;
             case ModifierDefines.StackType.Unique: //Unique 
-                if (HasModifier(Modifier.InternalName))
+                if (HasModifier(status.InternalName))
                 {
                     return false;
                 }
                 break;
-            case ModifierDefines.StackType.Stacking:
-                if (TryFindModifierByName(Modifier.InternalName, false, out PropertyModifier original))
+            case ModifierDefines.StackType.IncreaseStacks:
+                if (TryFindModifierByName(status.InternalName, false, out PropertyModifier original))
                 {
-                    original.SetStackCount(original.GetStackCount() + Modifier.GetStackCount());
-                    if (original.properties.Count > 0)
-                        RefreshProperties();
+                    if (status is PropertyModifier data)
+                    {
+                        original.SetStackCount(original.GetStackCount() + data.GetStackCount());
+                        if (original.properties.Count > 0)
+                            RefreshProperties();
+                    }
                     return false;
                 }
                 break;
-            case ModifierDefines.StackType.Duration:
-                if (TryFindModifierByName(Modifier.InternalName, false, out PropertyModifier first))
+            case ModifierDefines.StackType.ExtendDuration:
+                if (TryFindModifierByName(status.InternalName, false, out PropertyModifier first))
                 {
-                    first.SetCooldown(first.expiration + Modifier.expiration);
+                    if (status is PropertyModifier data)
+                    {
+                        first.SetCooldown(first.duration + data.duration);
+                    }
                     return false;
                 }
                 break;
 
         }
-        Debug.Log("[Modifiers] Add new modifier " + Modifier.InternalName);
-        Modifier.SetStackCount(1);
-        OnAddModifier(Modifier);
+        }
+        else if (HasModifier(status.InternalName))
+        {
+            return false;
+        }
+        Debug.Log("[Modifiers] Add new modifier " + status.InternalName);
+        OnAddModifier(status);
         if (refresh) Refresh();
         return true;
     }
-    void OnAddModifier(PropertyModifier Modifier)
+    void OnAddModifier(PropertyTag tag)
     {
-        _modifiers.Add(Modifier);
-        Modifier.ExecuteFunction(AbilityDefines.Event.OnCreated);
-        foreach (PropertyModifier Mod in _modifiers)
+        _modifiers.Add(tag);
+        if (tag is PropertyModifier mod)
         {
-            if (IsImmuneToModifier(Mod))
+            mod.ExecuteFunction(AbilityDefines.Event.OnCreated);
+            foreach (PropertyModifier Mod in _modifiers)
             {
-                Mod.Die(false);
+                if (IsImmuneToModifier(Mod))
+                {
+                    Mod.Die(false);
+                }
             }
         }
-        RefreshModifier(Modifier);
+        RefreshModifier(tag);
     }
     #endregion
     #region Refresh
-    public void RefreshModifier(PropertyModifier Modifier)
+    public void RefreshModifier(PropertyTag tag)
     {
-        if (Modifier.states.Count > 0) RefreshStates();
-        if (Modifier.properties.Count > 0) RefreshProperties();
+        if (tag is PropertyAttribute alt)
+        {
+            if (alt.states.Count > 0) RefreshStates();
+            if (alt.properties.Count > 0) RefreshProperties();
+        }
     }
     public override void Refresh(bool force = false)
     {
@@ -109,7 +204,7 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
                         UpdateModifierProperties(mod);
                     }
                 }
-                if (mod.expireType == ModifierDefines.ExpireType.time || mod.HasThinker)
+                if (mod.expireType == ModifierDefines.ExpireType.ticks || mod.HasThinker)
                 {
                     HasUpdates = true;
                 }
@@ -146,7 +241,7 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
     void HandleModifiers()
     {
         bool refresh = false;
-        foreach (PropertyModifier mod in _modifiers)
+        foreach (PropertyModifier mod in GetModifiers())
         {
             if (mod.IsExpired())
             {
@@ -158,20 +253,20 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
     }
     #endregion
     #region Remove Modifiers
-    public void Remove(PropertyModifier Mod)
+    public void Remove(PropertyTag Mod)
     {
         Remove(Mod, false);
     }
 
-    public void Remove(PropertyModifier Mod, bool expire, bool refresh = true)
+    public void Remove(PropertyTag Mod, bool expire, bool refresh = true)
     {
-        Remove(new PropertyModifier[] { Mod }, expire, refresh);
+        Remove(new PropertyTag[] { Mod }, expire, refresh);
     }
     public void DestroyFilteredModifiers(string ModifierName = "", ModifierDefines.Flag alignment = ModifierDefines.Flag.Tag, bool includePositives = false, bool includeNegative = false, bool refresh = true)
     {
         Remove(Filter(ModifierName, alignment, includePositives, includeNegative), false, refresh);
     }
-    public void Remove(PropertyModifier[] Mods, bool expire = true, bool refresh = true)
+    public void Remove(PropertyTag[] Mods, bool expire = true, bool refresh = true)
     {
         foreach (PropertyModifier Modifier in Mods)
         {
@@ -188,95 +283,23 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
 
     }
     #endregion
-    #region Find By Name
-    public bool HasModifier(string Name)
-    {
-        return FindModifierByName(Name) != null;
-    }
-    public bool HasModifier(string Name, out PropertyModifier mod)
-    {
-        mod = FindModifierByName(Name);
-        return mod != null;
-    }
-    public PropertyModifier FindModifierByName(string Name)
-    {
-        Name = Name.ToLower();
-        foreach (PropertyModifier Mod in _modifiers)
-        {
-            if (Mod.InternalName == Name)
-            {
-                return Mod;
-            }
-        }
-        return null;
-    }
-    public bool TryFindModifierByName(string Name, bool Reverse, out PropertyModifier found)
-    {
-        found = null;
-        for (int iM = 0; iM < _modifiers.Count; iM++)
-        {
-            PropertyModifier mod = _modifiers[Reverse ? (_modifiers.Count - iM - 1) : iM];
-            if (mod.InternalName.ToLower() == Name.ToLower())
-            {
-                found = mod;
-                return true;
-            }
-        }
-        return false;
-    }
-    #endregion
-    #region Filter
-    public PropertyModifier[] Filter(string ModifierName = "", ModifierDefines.Flag alignment = ModifierDefines.Flag.Tag, bool includePositives = false, bool includeNegative = false, ModifierDefines.Flag checkFlag = ModifierDefines.Flag.Tag)
-    {
-        List<PropertyModifier> rest = new List<PropertyModifier>();
-        foreach (PropertyModifier Mod in _modifiers)
-        {
-            if (!Mod.dead && !Mod.IsExpired())
-            {
-                if (ModifierName == "" || ModifierName == Mod.InternalName)
-                {
-                    if ((alignment == ModifierDefines.Flag.Tag || alignment == Mod.flag) || (includeNegative && Mod.IsNegative()) || (includePositives && Mod.IsPositive()) || (checkFlag == ModifierDefines.Flag.Tag && Mod.flag == checkFlag))
-                    {
-                        rest.Add(Mod);
-
-                    }
-                }
-            }
-        }
-        return rest.ToArray();
-
-    }
-    #endregion
-
-    #region Funcs
-    public override void TriggerFuncs(AbilityDefines.Event act)
-    {
-        foreach (PropertyModifier Mod in _modifiers)
-        {
-            if (!Mod.dead && !Mod.IsExpired())
-            {
-                Mod.ExecuteEvent(act, parent);
-            }
-        }
-    }
-    #endregion
     #region Resistance And Defense
-    public bool IsImmuneToModifier(AlterationData mod)
+    public bool IsImmuneToModifier(TagData mod)
     {
-        return IsImmuneToModifier(mod.flag, mod.flag < ModifierDefines.Flag.Tag);
+        return IsImmuneToModifier(mod.GetFlag());
     }
-    public bool IsImmuneToModifier(PropertyModifier mod)
+    public bool IsImmuneToModifier(PropertyTag mod)
     {
-        return IsImmuneToModifier(mod.flag, mod.IsNegative());
+        return IsImmuneToModifier(mod.GetFlag());
     }
-    public bool IsImmuneToModifier(ModifierDefines.Flag flag, bool negative)
+    public bool IsImmuneToModifier(ModifierDefines.Flag flag)
     {
         if (flag == ModifierDefines.Flag.Tag)
         {
             return false;
         }
 
-        return ((GetState(ModifierDefines.State.debuff_immune) && negative) ||
+        return ((GetState(ModifierDefines.State.debuff_immune) && flag < ModifierDefines.Flag.Tag) ||
             (flag == ModifierDefines.Flag.HardDisable && GetState(ModifierDefines.State.hard_disable_immune)) ||
             (flag == ModifierDefines.Flag.DamageOverTime && GetState(ModifierDefines.State.dot_immune)) ||
         (flag == ModifierDefines.Flag.SoftDisable && GetState(ModifierDefines.State.soft_disable_immune)));
@@ -285,9 +308,22 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
     public void EventReaction(AbilityDefines.Event evt, DataItemUnit[] affectedCritters)
     {
         TriggerFuncs(evt);
-        if ((int)evt == (int)ModifierDefines.ExpireType.stacks || (int)evt == (int)ModifierDefines.ExpireType.time)
+        if ((int)evt == (int)ModifierDefines.ExpireType.stacks || (int)evt == (int)ModifierDefines.ExpireType.ticks)
             Refresh();
 
+    }
+    public override void TriggerFuncs(AbilityDefines.Event act)
+    {
+        foreach (var tag in _modifiers)
+        {
+            if (tag is PropertyAttribute Mod)
+            {
+                if (!Mod.dead && !Mod.IsExpired())
+                {
+                    Mod.ExecuteEvent(act, parent);
+                }
+            }
+        }
     }
     #endregion
     #region Timely Update
@@ -297,7 +333,7 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
         if (HasUpdates)
         {
             int tickDelta = steps - lastTick;
-            foreach (PropertyModifier Mod in _modifiers)
+            foreach (PropertyModifier Mod in GetModifiers())
             {
                 if (!Mod.dead)
                 {
@@ -310,9 +346,9 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
     public int GetNextTick()
     {
         int ticks = int.MaxValue;
-        foreach (var modifier in _modifiers)
+        foreach (var modifier in GetModifiers())
         {
-            ticks = Mathf.Min(ticks, modifier.expiration, modifier.thinkInterval);
+            ticks = Mathf.Min(ticks, modifier.duration, modifier.thinkInterval);
         }
         return ticks;
     }

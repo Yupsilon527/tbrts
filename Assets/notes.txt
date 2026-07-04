@@ -1,21 +1,13 @@
 TODO
-	FIX COMBAT
-		bonus damage/scaling
-		hit/miss/crit
-		(doesn't account right)
-
-		support units
-
-	swapping tokens doesnt work
-
-	(try with 2 armies)
 
 	spells
 			
 	army innates
-		raiding bonuses
 		auras
-		troop divine shield?, haste, slow
+
+		troop statuses
+			troop divine shield?, haste, slow
+
 		regen for SP
 		attrition for SP
 		move faster SP
@@ -24,7 +16,8 @@ TODO
 		spend SP to regen
 
 		Resources
-		* Gold* Crystal (low income, found initially on map)
+		* Gold
+		* Crystal (low income, found initially on map)
 		* Mana (from kills, income, dead troops, damage, etc)
 		* Can have up to 10* Regenerates by 1 each turn, up to 3
 		
@@ -36,6 +29,7 @@ TODO
 
 Fixes
 	armies not desel on turn end
+	army swap/formation tomens
 
 	command window
 	window close/open
@@ -126,3 +120,7 @@ TODO cast spells via command menu (on tile, on self)
 
 fea diplomacy
 fea bank/loans
+
+rename
+	weapon > attack
+	sidewaysmap/tile > dataitem

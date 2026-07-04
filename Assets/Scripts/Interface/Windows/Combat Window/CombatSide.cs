@@ -26,6 +26,19 @@ public class CombatSide : MonoBehaviour
             }
             else { formation[i].gameObject.SetActive(false); }
         }
+
+        var allies = army.GetSupportingUnits();
+        supportParent.SetActive(allies.Length > 0);
+        for (int i = 0; i < support.Length; i++)
+        {
+            if (i < allies.Length)
+            {
+                support[i].gameObject.SetActive(true);
+                support[i].ForUnit(allies[i]);
+            }
+            else { support[i].gameObject.SetActive(false); }
+        }
+
     }
     public void Clear()
     {

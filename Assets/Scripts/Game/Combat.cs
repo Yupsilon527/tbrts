@@ -49,6 +49,13 @@ public class Combat : Initializable
         combatants.Clear();
         combatants.AddRange(attackers.formation.GetUnits());
         combatants.AddRange(defenders.formation.GetUnits());
+
+        if (!mockBattle)
+        {
+            combatants.AddRange(attackers.GetSupportingUnits());
+            combatants.AddRange(defenders.GetSupportingUnits());
+        }
+
         Inspect($"COMBAT - Loaded {combatants.Count} combatants for combat!");
         foreach (var c in combatants)
         {
@@ -136,6 +143,7 @@ public class Combat : Initializable
             }
             attackers.PostDamageUpdate();
             defenders.PostDamageUpdate();
+            FireEventOnAllFighters(AbilityDefines.Event.CombatExit);
         }
 
         if (enabled)
@@ -196,6 +204,23 @@ public class Combat : Initializable
     public DataItemUnit[] GetUnitsInColumn(bool attackingSide, int column)
     {
         return GetUnitInArea(attackingSide, 0, column, 1, column, 2, column);
+    }
+    public DataItemUnit[] GetSupportingUnitsForSide(bool attackingSide)
+    {
+        return GetSupportingUnitsForSide(attackingSide ? attackers : defenders);
+    }
+    public DataItemUnit[] GetSupportingUnitsForSide(DataItemArmy troop)
+    {
+        List<DataItemUnit> supporters = new();
+        foreach (var unit in combatants)
+        {
+            if (unit.GetAlignment(troop) != PlayerDefines.Alignment.enemy
+                && unit.troop != troop)
+            {
+                supporters.Add(unit);
+            }
+        }
+        return supporters.ToArray();
     }
     public SparseIntMap OutputResults()
     {

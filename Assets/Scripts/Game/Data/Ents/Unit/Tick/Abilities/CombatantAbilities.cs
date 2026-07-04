@@ -12,16 +12,12 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     public HashSet<PropertyAbility> available = new();
     public CombatantAbilities(DataItemUnit parent) : base(parent)
     {
+        ClearAbilities();
+        FromCombatantData();
     }
     public override void TriggerFuncs(AbilityDefines.Event act)
     {
-        if (act == AbilityDefines.Event.OnSpawn)
-        {
-            ClearAbilities();
-            FromCombatantData();
-
-        }
-        else if (act == AbilityDefines.Event.CombatBegin)
+       if (act == AbilityDefines.Event.CombatBegin)
         {
             nextTick = 0;
             Ap.SetPercentage(1);

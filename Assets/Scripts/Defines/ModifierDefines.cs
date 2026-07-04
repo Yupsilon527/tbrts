@@ -270,8 +270,8 @@ public static class ModifierDefines
         Multiple = 0,
         Replace = 1,
         Unique = 2,
-        Stacking = 3,
-        Duration = 4
+        IncreaseStacks = 3,
+        ExtendDuration = 4
     }
 
     public enum Flag
@@ -296,8 +296,10 @@ public static class ModifierDefines
     public enum ExpireType
     {
         permanent = AbilityDefines.Event.Nothing,
-        time = AbilityDefines.Event.Time,
+        ticks = AbilityDefines.Event.Time,
         stacks = AbilityDefines.Event.OnStacksChange,
+        battles = AbilityDefines.Event.CombatEnd,
+        forNfights = AbilityDefines.Event.CombatExit,
     }
 
 

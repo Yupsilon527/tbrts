@@ -5,6 +5,7 @@ public class UnitContainer : MonoBehaviour
 {
     public Image unitImage;
     public TMPro.TextMeshProUGUI unitLabel;
+    public HealthBar hpFill;
 
     public virtual void ForUnit(DataItemUnit unit)
     {
@@ -15,6 +16,8 @@ public class UnitContainer : MonoBehaviour
         }
         if (unitLabel != null)
             unitLabel.text = unit.InternalName;
+        if (hpFill != null)
+            hpFill.AssignResource(unit.health);
     }
     public virtual void ForData(ProductionData data)
     {
