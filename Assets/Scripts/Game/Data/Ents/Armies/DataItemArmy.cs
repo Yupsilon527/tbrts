@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class DataItemArmy : DataItemObject
+public class DataItemArmy : DataItemMob
 {
 
     public ArmyFormation formation;
@@ -209,6 +209,7 @@ public class DataItemArmy : DataItemObject
         return 0;
     }
 
+
     public override void OnTurnBegin()
     {
         base.OnTurnBegin();
@@ -295,7 +296,7 @@ public class DataItemArmy : DataItemObject
         if (GetAlignment(player) == PlayerDefines.Alignment.enemy)
         {
             return true;    //TODO LoS
-            return tile.IsRevealedByPlayer(player, status.IsCloaked() ? UnitDefines.TileVisibility.truesight : UnitDefines.TileVisibility.visible);
+            return tile.IsRevealedByPlayer(player, status.HasState(ModifierDefines.TroopState.Stealth) ? UnitDefines.TileVisibility.truesight : UnitDefines.TileVisibility.visible);
         }
         return base.IsVisibleToPlayer(player);
     }
@@ -344,8 +345,10 @@ public class DataItemArmy : DataItemObject
         }
         if (formation.GetUnits(incDead: false).Length == 0)
             Despawn();
-        else
+        else {
+            status.ResolvePendingStatuses();
             formation.OnFormationUpdate();
+    }
     }
     #region Selection
     public override void SetSelected(bool value)
@@ -471,4 +474,25 @@ public class DataItemArmy : DataItemObject
         }
         return assist.ToArray();
     }
+}
+
+public class DataItemMob : DataItemObject
+{
+  protected  Vector2Int gridPos;
+    protected DataItemTile tile;
+
+    public override Vector2Int GetCoords()
+    {
+        return gridPos;
+    }
+
+    public override DataItemTile[] GetOccupiedTiles()
+    {
+        return new DataItemTile[] { tile };
+    }
+    public virtual DataItemTile GetMainTile()
+    {
+        return tile;
+    }
+
 }

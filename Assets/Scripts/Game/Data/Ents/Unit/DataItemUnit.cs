@@ -2,13 +2,30 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class DataItemUnit : DataItemObject
+public class DataItemUnit : DataItemMob
 {
     public int nextAction = 0;
     public int initiative = 50;
     public int hitCounter = 1;
     public int critCounter = 1;
     public int dodgeCounter = 1;
+
+
+    public override Vector2Int GetCoords()
+    {
+        return troop.GetCoords();
+    }
+
+    public override DataItemTile[] GetOccupiedTiles()
+    {
+        return troop.GetOccupiedTiles();
+    }
+
+    public override DataItemTile GetMainTile()
+    {
+        return troop.GetMainTile();
+    }
+
 
     public UnitData data;
     public ResourceInt health=new(100,"True Helath",false,true);
@@ -248,4 +265,5 @@ public class DataItemUnit : DataItemObject
     {
         return health.GetValue() > 0;
     }
+
 }

@@ -25,20 +25,18 @@ public class PlayerInputController : MonoBehaviour
             mouseOverTile.display.Highlight(DisplayItemTile.tileState.clear);
         mouseOverTile = nTile;
         ClearTileColors();
-        Asd();
+        HandleAbilityInput();
     }
-    void Asd()
+    void HandleAbilityInput()
     {
         if (mouseOverTile != null)
         {
             PropertySpell cast = GetCastData();
             if (cast != null)
             {
+                ClearHighlightEntity();
                 HighlightCastTiles(cast);
-                if (cast.CanCastOnTile(mouseOverTile))
-                {
-                    ColorTargetTile(mouseOverTile, cast);
-                }
+                ColorTargetTile(mouseOverTile, cast);
             }
             else
             {
@@ -70,7 +68,7 @@ public class PlayerInputController : MonoBehaviour
     #endregion
     private void Update()
     {
-        if (InterfaceManager.main.IsMouseOverUI() )
+        if (InterfaceManager.main.IsMouseOverUI())
             return;
         TrackMouseTile();
         if (Input.GetMouseButtonDown(0))
@@ -95,16 +93,16 @@ public class PlayerInputController : MonoBehaviour
                 InterfaceManager.main.commandMenu.OpenAtPosition(Input.mousePosition);
                 InterfaceManager.main.commandMenu.OpenTileCommands(mouseOverTile);
             }
+            else if (castData != null)
+            {
+                if (selArmy.abilities.CastAbilityOnTile(castData, mouseOverTile))
+                {
+                    ClearCastAbility();
+                }
+            }
             else if (selArmy == null)
             {
-                if (castData != null)
-                {
-                   if ( selArmy.abilities.CastAbilityOnTile(castData, mouseOverTile))
-                    {
-                        ClearCastAbility();
-                    }
-                }
-                else if (mouseOverTile.armyLayer != null)
+               if (mouseOverTile.armyLayer != null)
                 {
                     if (mouseOverTile.armyLayer.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned)
                         GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
@@ -120,7 +118,7 @@ public class PlayerInputController : MonoBehaviour
             }
             else
             {
-                if (mouseOverTile.armyLayer != null )
+                if (mouseOverTile.armyLayer != null)
                 {
                     if (mouseOverTile.armyLayer.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned)
                         GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
@@ -175,7 +173,11 @@ public class PlayerInputController : MonoBehaviour
             ClearHighlightEntity();
 
         HighlightedEntity = ent;
-        ent.tile.display.Highlight(ent.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.ally ? DisplayItemTile.tileState.select_ally : DisplayItemTile.tileState.select_enemy);
+        foreach (var tile in ent.GetOccupiedTiles())
+        {
+            tile.display.ChangeColor(ent.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.ally ? DisplayItemTile.tileState.select_ally : DisplayItemTile.tileState.select_enemy);
+            colortiles.Add(tile);
+        }
     }
     void ClearHighlightEntity()
     {
@@ -185,7 +187,11 @@ public class PlayerInputController : MonoBehaviour
     #region Highlight Cities
     void HighlightCity(DataItemBuilding ent)
     {
-        ent.tile.display.Highlight(ent.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.ally ? DisplayItemTile.tileState.mindread_ally : DisplayItemTile.tileState.mindread_danger);
+        foreach (var tile in ent.GetOccupiedTiles())
+        {
+            tile.display.ChangeColor(ent.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.ally ? DisplayItemTile.tileState.mindread_ally : DisplayItemTile.tileState.mindread_danger);
+            colortiles.Add(tile);
+        }
     }
     #endregion
     #region Tile Highlights
@@ -213,20 +219,20 @@ public class PlayerInputController : MonoBehaviour
         {
             foreach (DataItemTile hittile in Ability.GetValidCastTiles())
             {
-                hittile.display.Highlight( DisplayItemTile.tileState.valid_tile);
+                hittile.display.Highlight(DisplayItemTile.tileState.valid_tile);
                 lighttiles.Add(hittile);
             }
         }
     }
     void ColorTargetTile(DataItemTile target, PropertySpell Ability)
     {
-
         if (Ability != null)
         {
+            bool castable = Ability.CanCastOnTile(target);
             foreach (DataItemTile hittile in Ability.GetHitTiles(target))
             {
-                hittile.display.Highlight(DisplayItemTile.tileState.highlight_ability);
-                lighttiles.Add(hittile);
+                hittile.display.ChangeColor(castable ? DisplayItemTile.tileState.select_unit : DisplayItemTile.tileState.select_enemy);
+                colortiles.Add(hittile);
             }
         }
     }
@@ -241,18 +247,19 @@ public class PlayerInputController : MonoBehaviour
     #endregion
     #region AbilityCastData
     PropertySpell castData;
-     public PropertySpell GetCastData()
-     {
-         return castData;
-     }
-    public void AssignCastAbility(PropertySpell ability) {
+    public PropertySpell GetCastData()
+    {
+        return castData;
+    }
+    public void AssignCastAbility(PropertySpell ability)
+    {
         castData = ability;
-        Asd();
-            }
-     void ClearCastAbility()
-     {
-         castData = null;
-        Asd();
+        HandleAbilityInput();
+    }
+    void ClearCastAbility()
+    {
+        castData = null;
+        HandleAbilityInput();
     }
     #endregion
 }

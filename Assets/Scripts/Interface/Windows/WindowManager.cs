@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class WindowManager : Initializable
 {
     public List<Window> openWindows;
-
+    public GameObject clearButton;
     protected override void Initialize()
     {
         base.Initialize();
@@ -63,6 +63,7 @@ public class WindowManager : Initializable
     {
         openWindows.Add(window);
         LayoutRebuilder.MarkLayoutForRebuild(transform as RectTransform);
+        clearButton?.SetActive(openWindows.Count > 0);
     }
     public void CloseAllWindows()
     {
@@ -71,6 +72,7 @@ public class WindowManager : Initializable
             openWindow.Close();
         }
         openWindows.RemoveAll((Window match) => { return !match.IsOpen(); });
+        clearButton?.SetActive(openWindows.Count > 0);
     }
     public void CloseWindow(string ID)
     {
@@ -79,6 +81,7 @@ public class WindowManager : Initializable
         {
             openWindow.Close();
         }
+        clearButton?.SetActive(openWindows.Count > 0);
     }
     public Window MainOpenWindow()
     {

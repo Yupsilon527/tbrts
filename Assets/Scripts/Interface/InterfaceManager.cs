@@ -7,6 +7,8 @@ public class InterfaceManager : WindowManager
 {
     public static InterfaceManager main;
 
+    public PlayerWidget playerWidget;
+
     public InfoWindow infoWindow;
     public ArmyInfoWindow armyWindow;
     public ArmyMergeWindow transferWindow;
@@ -22,6 +24,12 @@ public class InterfaceManager : WindowManager
     {
         base.Initialize();
         main = this;
+    }
+    public void AssignPlayer(DataItemPlayer player)
+    {
+        OpenWindow(infoWindow);
+        infoWindow.ShowPlayerTurn(player);
+        playerWidget?.AssignPlayer(player);
     }
     public bool IsMouseOverUI()
     {

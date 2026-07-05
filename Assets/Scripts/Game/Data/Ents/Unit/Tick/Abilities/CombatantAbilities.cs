@@ -34,7 +34,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         }
         else if (act == AbilityDefines.Event.OnTurnBegin)
         {
-            if (parent.troop.tile.buildingLayer is DataItemCastle city
+            if (parent.GetMainTile().buildingLayer is DataItemCastle city
                 && city.GetAlignment(parent) == PlayerDefines.Alignment.ally
                 && city.AmIUnderAlliedControl())
                 Sp.SetPercentage(1);
@@ -51,15 +51,19 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         {
             AddAbility(ability);
         }
+        foreach (var ability in parent.data.spells)
+        {
+            AddAbility(ability);
+        }
         nextTick = GetNextTick();
     }
     public PropertyWeapon[] GetAttacks()
     {
-        return actions.Select(a => a is PropertyWeapon atk ? atk : null).ToArray();
+        return actions.OfType<PropertyWeapon>().ToArray();
     }
     public PropertySpell[] GetSpells()
     {
-        return actions.Select(a => a is PropertySpell spell ? spell : null).ToArray();
+        return actions.OfType<PropertySpell>().ToArray();
     }
 
     public virtual void AddAbility(PropertyAbility ability, bool active = false)
@@ -130,7 +134,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
                     Combat.main.Inspect($"Combatant {parent} performs action {action.InternalName} at tick {currentTick}");
 
                     var target = action.GetBestTargetForAbility(parent);
-                    var castData = new AttackTable(phase, currentTick, parent, target.gridPos, action);
+                    var castData = new AttackTable(phase, currentTick, parent, target.GetCoords(), action);
                     if (!action.CastFromTable(castData))
                         break;
                 }

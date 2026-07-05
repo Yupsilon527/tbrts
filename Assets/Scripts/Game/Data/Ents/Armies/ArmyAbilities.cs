@@ -18,7 +18,7 @@ public class ArmyAbilities : ArmyComponent
     }
     public PropertySpell[] GetAbilitiesCastable(DataItemTile tile)
     {
-        return GetAllAvaiableSpells().Where(s => s.CanCastOnTile( tile)).ToArray();
+        return GetAllAvaiableSpells().Where(s => s!=null && s.CanCastOnTile( tile)).ToArray();
     }
     public bool CastAbilityOnTile(PropertySpell spell, DataItemTile tile)
     {

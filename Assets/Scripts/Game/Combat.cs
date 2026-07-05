@@ -148,6 +148,8 @@ public class Combat : Initializable
 
         if (enabled)
         {
+            attackers.status.ClearPendingStatuses();
+            defenders.status.ClearPendingStatuses();
             FireEventOnAllFighters(AbilityDefines.Event.CombatEnd);
             enabled = false;
         }

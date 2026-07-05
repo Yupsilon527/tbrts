@@ -26,8 +26,15 @@ public class UnitContainer : MonoBehaviour
             Clear();
             return;
         }
-        unitImage.enabled = true; 
-        unitImage.sprite = data.icon;
+        if (data is UnitData unit)
+        {
+            unitImage.sprite = unit.GetSprite(CharacterSO.SpriteFrame.idle);
+        }
+        else
+        {
+            unitImage.sprite = data.icon;
+        }
+        unitImage.enabled = true;
         unitLabel.text = data.InternalName;
     }
     public virtual void ForTable(ProductionTable data)
@@ -41,8 +48,8 @@ public class UnitContainer : MonoBehaviour
     }
     public virtual void Clear()
     {
-        if (unitImage != null) 
-        unitImage.enabled = false;
+        if (unitImage != null)
+            unitImage.enabled = false;
         if (unitLabel != null)
             unitLabel.text = "";
     }

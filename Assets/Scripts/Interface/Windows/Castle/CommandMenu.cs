@@ -74,7 +74,7 @@ public class CommandMenu : PlayerWindow
                     }
                 }
             }
-            else if (tile.IsAdjecent(selArmy.tile))
+            else if (selArmy.IsAdjecent(tile))
             {
                 e.Add("Split");
                 a.Add(() => {
@@ -94,14 +94,14 @@ public class CommandMenu : PlayerWindow
                     });
                 }
                 //Explore ruin
-                if (tile == selArmy.tile)
-                {
-                    s.AddRange(selArmy.abilities.GetAbilitiesCastable(tile));
-                }
-                else
-                {
-                    s.AddRange(selArmy.abilities.GetAbilitiesCastable(tile).Where(a => a.CanCastOnTile(tile)));
-                }
+            }
+            if (tile.gridPos == selArmy.GetCoords())
+            {
+                s.AddRange(selArmy.abilities.GetAllAvaiableSpells());
+            }
+            else
+            {
+                s.AddRange(selArmy.abilities.GetAbilitiesCastable(tile));
             }
         }
         if (tile.armyLayer != null && tile.armyLayer.GetAlignment(player) == PlayerDefines.Alignment.playerowned)
@@ -121,6 +121,7 @@ public class CommandMenu : PlayerWindow
                 e.Add("Cast " + spell.InternalName);
                 a.Add(()=>
                 {
+                    if (spell.HasResourcesToCast()) { 
                     if (spell.InstantCast())
                     {
                         selArmy.abilities.CastAbilityOnTile(spell, tile);
@@ -128,6 +129,7 @@ public class CommandMenu : PlayerWindow
                     else
                     {
                         PlayerInputController.main.AssignCastAbility(spell);
+                    }
                     }
                 });
             }
@@ -184,7 +186,7 @@ public class CommandMenu : PlayerWindow
         if (GameManager.main.armyManager.mainSelectedArmy is DataItemArmy selArmy)
         {
             e.Add("Center on selected army");
-            a.Add(() => { CameraController.main.CenterOnTile(selArmy.gridPos); });
+            a.Add(() => { CameraController.main.CenterOnTile(selArmy.GetCoords()); });
             e.Add("Move here");
             a.Add(() => {
                 selArmy.orders.ReplaceOrder(new Order(Order.ID.Move, tile.gridPos));

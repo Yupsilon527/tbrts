@@ -1,6 +1,19 @@
 TODO
 
 	spells
+
+	army statuses
+		speed/slow/rooted
+		cloaked (works?)
+		warded
+
+	army effects
+		push back
+		zone of control
+
+		firststrike (removes delay off abilities)
+		swarm - gets weaker the less hp it has
+		run after attack
 			
 	army innates
 		auras

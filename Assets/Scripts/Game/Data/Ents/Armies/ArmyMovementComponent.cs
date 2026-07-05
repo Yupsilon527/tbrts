@@ -103,7 +103,7 @@ public class ArmyMovementComponent : ArmyComponent
     public void UpdateStartingMovement()
     {
         movementStarting = movementLeft;
-        initialPosition = parent.gridPos;
+        initialPosition = parent.GetCoords();
     }
     public void ResolveMovement()
     {

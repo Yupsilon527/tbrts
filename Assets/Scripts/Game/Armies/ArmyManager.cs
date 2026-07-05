@@ -153,10 +153,10 @@ public class ArmyManager : EntityManager
         int tileDistance = int.MaxValue;
         foreach (var army in playerArmies)
         {
-            if ((army.gridPos- gridpos).sqrMagnitude < tileDistance)
+            if (army.GetDistanceFromTile(gridpos) < tileDistance)
             {
                 selection = army;
-                tileDistance = (army.gridPos - gridpos).sqrMagnitude;
+                tileDistance = army.GetDistanceFromTile(gridpos);
             }
         }
         selection.Select();

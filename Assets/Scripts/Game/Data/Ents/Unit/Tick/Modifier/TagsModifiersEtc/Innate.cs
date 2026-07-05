@@ -73,7 +73,7 @@ public class PropertyInnate : PropertyAttribute
             case InnateData.AuraType.troop:
                 return caster.troop == unit.troop;
             case InnateData.AuraType.aura:
-                return unit.GetAlignment(caster) == PlayerDefines.Alignment.playerowned && (parent.troop.gridPos - unit.troop.gridPos).magnitude > caster.innates.GetAbilityLevel("aura");
+                return unit.GetAlignment(caster) == PlayerDefines.Alignment.playerowned && parent.GetDistanceFromObject(unit) > caster.innates.GetAbilityLevel("aura");
         }
         return false;
     }

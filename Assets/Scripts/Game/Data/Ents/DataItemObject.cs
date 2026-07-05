@@ -1,10 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class DataItemObject : DataItem
+public abstract class DataItemObject : DataItem
 {
-    public Vector2Int gridPos;
-    public DataItemTile tile;
     public IDisplayItemObject<DataItemObject> display;
 
     private readonly HashSet<UnitGroup<DataItemObject>> _groups = new();
@@ -13,11 +12,38 @@ public class DataItemObject : DataItem
     public bool dead = false;
     protected DataItemPlayer currentOwner;
 
+    public abstract Vector2Int GetCoords();
+    public abstract DataItemTile[] GetOccupiedTiles();
     public virtual void ChangeTile(Vector2Int t, DisplayPositionChange position)
     {
-        gridPos = t;
-        tile = GameManager.main.map.GetTile(gridPos);
         display?.OnPositionChange(t, position);
+    }
+    public int GetDistanceFromTile(DataItemTile tile) {
+        return GetDistanceFromTile(tile.gridPos);
+    }
+    public bool IsAdjecent(DataItemTile tile)
+    {
+        return IsAdjecent(tile.gridPos);
+    }
+    public bool IsAdjecent(Vector2Int tile) {
+        return GetOccupiedTiles().Any(t => t.IsAdjecent(tile));
+    }
+    public int GetDistanceFromTile(Vector2Int tile) {
+        float dist = int.MaxValue;
+        foreach (var t in GetOccupiedTiles())
+        {
+            dist= Mathf.Min((tile - t.gridPos).magnitude,dist);
+        }
+        return (int)dist;
+    }
+    public int GetDistanceFromObject(DataItemObject other)
+    {
+        float dist = int.MaxValue;
+        foreach (var t in other.GetOccupiedTiles())
+        {
+            dist = Mathf.Min(GetDistanceFromTile(t.gridPos), dist);
+        }
+        return (int)dist;
     }
     public virtual int GetAuraRange() { return 3; }
 

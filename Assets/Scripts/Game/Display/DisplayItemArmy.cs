@@ -10,7 +10,7 @@ public class DisplayItemArmy : DisplayItemObject<DataItemArmy>
         base.AssignObject(ob);
         assignedArmy = ob;
         OnPlayerOwnerChange();
-        OnPositionChange(ob.gridPos, DisplayPositionChange.instant);
+        OnPositionChange(ob.GetCoords(), DisplayPositionChange.instant);
         OnGraphicsChange();
         OnSelectionChange();
     }

@@ -264,7 +264,16 @@ public static class ModifierDefines
         outgoing_bonus_damage=110,
     }
 
-
+    public enum TroopState
+    {
+        Nothing = 0,
+        Stealth = 1,
+        Ward = 2,
+        Root = 3,
+        Haste = 4,
+        Slow = 5,
+        Total = 11,
+    }
     public enum StackType    //TODO part of the modifier
     {
         Multiple = 0,

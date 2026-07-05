@@ -18,7 +18,7 @@ public class CastleManager : EntityManager
             float Distance = Mathf.Infinity;
             foreach (var cData in buildings)
             {
-                float tDistance = (cData.gridPos - tData.gridPos).sqrMagnitude;
+                float tDistance = cData.GetDistanceFromTile(tData);
                 if (tData.regionCastle == null || Distance > tDistance)
                 {
                     tData.regionCastle = cData;

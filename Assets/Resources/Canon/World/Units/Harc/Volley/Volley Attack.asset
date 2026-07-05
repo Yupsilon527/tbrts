@@ -9,11 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdb2a4007eece70479bede182159e45f, type: 3}
-  m_Name: Preist Character
+  m_Script: {fileID: 11500000, guid: 43f429b60ff54854f8f152f4bc7fa126, type: 3}
+  m_Name: Volley Attack
   m_EditorClassIdentifier: 
-  InternalName: Preist Character
-  AssignedWorld: 
-  sprites:
-  - sprite: {fileID: 8125670880829888781, guid: 6d7c661f7ff912e43bf2a4c44c2af2e1, type: 3}
-    frame: 0
+  applyChance: 1
+  chance: 0
+  targeting: 1
+  attack: 1
+  BaseDamage: 10
+  scaling:
+  - scaleMode: 7
+    scaleDamage: 1
+    scaleoff: 0
+    scaleRate: 0

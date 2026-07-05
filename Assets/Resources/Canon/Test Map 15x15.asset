@@ -24,6 +24,8 @@ MonoBehaviour:
       value: 10000
     - resource: 1
       value: 10000
+    - resource: 2
+      value: 100
     players:
     - Name: Neutrals
       FactionName: 

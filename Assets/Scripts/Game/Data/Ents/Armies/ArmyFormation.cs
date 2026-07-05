@@ -204,7 +204,7 @@ public class ArmyFormation : ArmyComponent
         {
             return true;
         }
-        else if (!parent.tile.IsPassible(target.GetMovetype()))
+        else if (!parent.GetMainTile().IsPassible(target.GetMovetype()))
         {
             return false;
         }

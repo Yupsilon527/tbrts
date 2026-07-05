@@ -38,6 +38,8 @@ public class GameManager : Initializable
         castleManager.redoCastleRegions();
 
         armyManager.GenerateTheArmiesFromEditorData(gen.mapData.MapData.armies);
+
+        playerManager.ChangeActivePlayer(1);
         BeginNewTurn(true);
     }
     public void EndTurn()

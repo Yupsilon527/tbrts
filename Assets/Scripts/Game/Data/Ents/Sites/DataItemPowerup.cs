@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class DataItemPowerup : DataItemObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override Vector2Int GetCoords()
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override DataItemTile[] GetOccupiedTiles()
     {
-        
+        throw new System.NotImplementedException();
     }
 }

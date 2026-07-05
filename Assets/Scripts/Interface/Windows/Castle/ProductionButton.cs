@@ -9,8 +9,8 @@ public class ProductionButton : UnitContainer
 
     public override void ForData(ProductionData data)
     {
-        base.ForData(data);
         produced = data;
+        base.ForData(data);
         ShowCosts(data.GetCostForPlayer(GameManager.main.playerManager.currentPlayer));
     }
     public override void ForTable(ProductionTable data)

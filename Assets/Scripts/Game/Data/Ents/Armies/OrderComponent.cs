@@ -34,7 +34,7 @@ public class OrderComponent : ArmyComponent
         int index = -1;
         foreach (var order in orders)
         {
-            order.RecalcPath(parent, index < 0 ? parent.gridPos : orders[index].gridDest);
+            order.RecalcPath(parent, index < 0 ? parent.GetCoords() : orders[index].gridDest);
             index++;
         }
     }

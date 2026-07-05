@@ -11,9 +11,7 @@ public class PlayerEconomy : PlayerComponent
         resources = new[] {
             new ResourceInt(0, "Player Metal", false, false),
             new ResourceInt(0, "Player Gold", false, false),
-            new ResourceInt(0, "Player Stone", false, false),
-            new ResourceInt(0, "Player Tech", false, false),
-            new ResourceInt(0, "Player Pop", false, true)
+            new ResourceInt(100, "Player Mana", false, true)
     };
     }
     public Resource GetResource(EconomyDefines.EconomyResource res)

@@ -27,4 +27,8 @@ public class ResourceValueIndicator : Initializable
     {
         UpdateValue(cost.resource, cost.value);
     }
+    public void UpdateValue(EconomyDefines.EconomyResource resource, Resource res)
+    {
+        UpdateValue(resource, res.GetValue());
+    }
 }

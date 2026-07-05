@@ -132,11 +132,11 @@ public class CityProduction : CityComponent
         List<DataItemTile> passibleTiles = new();
         if (TerrainDefines.CanIWalkOver(movement, TerrainDefines.Elevation.City))
         {
-            passibleTiles.AddRange(city.castleTiles);
+            passibleTiles.AddRange(city.occupiedTiles);
         }
         else
         {
-            foreach (var tile in city.castleTiles)
+            foreach (var tile in city.occupiedTiles)
             {
                 foreach (var n in tile.neighbors)
                 {

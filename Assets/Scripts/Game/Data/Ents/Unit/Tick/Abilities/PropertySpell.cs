@@ -29,6 +29,7 @@ public class PropertySpell : PropertyAbility
         if (base.CastFromTable(table))
         {
             table.ComputeTargets();
+            HashSet<DataItemArmy> affectedArmies = new();
             table.Precast();
             table.attacker.FireEventOnSelf(AbilityDefines.Event.CastSpell);
             foreach (var attack in original.effects)
@@ -40,12 +41,18 @@ public class PropertySpell : PropertyAbility
                 target.damageable.ResolveDamate();
                 table.attacker.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, target);
                 target.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, table.attacker);
+                affectedArmies.Add(target.troop);
             }
             foreach (var target in table.sidetarget)
             {
                 target.damageable.ResolveDamate();
                 table.attacker.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, target);
                 target.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, table.attacker);
+                affectedArmies.Add(target.troop);
+            }
+            foreach (var army in affectedArmies)
+            {
+                army.status.ResolvePendingStatuses();
             }
             return true;
         }
@@ -104,7 +111,8 @@ public class PropertySpell : PropertyAbility
         {
             if (tile.armyLayer != null)
                 foreach (var army in tile.armyLayer.formation.GetUnits())
-                    targets.Add(army);
+                    if (!table.maintarget.Contains(army))
+                        targets.Add(army);
         }
         return targets.ToArray();
     }
@@ -115,13 +123,13 @@ public class PropertySpell : PropertyAbility
     }
     public bool IsInCastRange(DataItemTile point)
     {
-        DataItemTile origin = parent.tile;
+        DataItemTile origin = parent.GetOccupiedTiles()[0];
         float rangeSqrt = (origin.gridPos - point.gridPos).sqrMagnitude;
         return rangeSqrt > original.min_range * original.min_range && rangeSqrt < original.max_range * original.max_range;
     }
     public bool CanCastOnTile(DataItemTile point)
     {
-        DataItemTile origin = parent.tile;
+        DataItemTile origin = parent.GetOccupiedTiles()[0];
         switch (original.targetMode)
         {
             default://self
@@ -140,11 +148,11 @@ public class PropertySpell : PropertyAbility
     public DataItemTile[] GetValidCastTiles()
     {
         List<DataItemTile> staticCastTiles = new List<DataItemTile>();
-        DataItemTile centerTile = parent.tile;
+        var centerTile = parent.GetOccupiedTiles()[0];
         switch (original.targetMode)
         {
             default:
-                staticCastTiles.Add(parent.tile);
+                staticCastTiles.AddRange(parent.GetOccupiedTiles());
                 break;
             case CombatDefines.TileTargetingMode.direction:
                 staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.up));
@@ -164,7 +172,7 @@ public class PropertySpell : PropertyAbility
                 break;
             case CombatDefines.TileTargetingMode.random_tile:
             case CombatDefines.TileTargetingMode.circle:
-                staticCastTiles.AddRange(SidewaysMap.main.GetTilesInCircle(parent.tile.gridPos, (int)GetMaxRange()));
+                staticCastTiles.AddRange(SidewaysMap.main.GetTilesInCircle(centerTile.gridPos, (int)GetMaxRange()));
 
                 int minRange = (int)GetMinRange();
                 staticCastTiles.RemoveAll(t => (t.gridPos - centerTile.gridPos).sqrMagnitude < minRange * minRange);
@@ -177,10 +185,13 @@ public class PropertySpell : PropertyAbility
     public DataItemTile[] GetHitTiles(DataItemTile targetTile)
     {
         List<DataItemTile> staticCastTiles = new List<DataItemTile>();
-        DataItemTile centerTile = parent.tile;
+        DataItemTile centerTile = parent.GetOccupiedTiles()[0];
         int areaRange = (int)GetMaxRange();
         switch (original.areaMode)
         {
+            case CombatDefines.TileTargetingArea.tile:
+                staticCastTiles.Add(SidewaysMap.main.GetTile(targetTile.gridPos));
+                break;
             case CombatDefines.TileTargetingArea.circle:
                 staticCastTiles.AddRange(SidewaysMap.main.GetTilesInCircle(targetTile.gridPos, areaRange));
                 break;

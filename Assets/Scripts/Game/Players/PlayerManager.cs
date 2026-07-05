@@ -10,11 +10,6 @@ public class PlayerManager : GameComponent
     public DataItemPlayer currentPlayer => players[playerTurn];
 
 
-    protected override void Initialize()
-    {
-        base.Initialize();
-        playerTurn = 1;
-    }
     public DataItemPlayer GetActivePlayer()
     {
         return players[playerTurn];
@@ -33,8 +28,7 @@ public class PlayerManager : GameComponent
     public void ChangeActivePlayer(int ap)
     {
         playerTurn = ap;
-        InterfaceManager.main.OpenWindow(InterfaceManager.main.infoWindow);
-        InterfaceManager.main.infoWindow.ShowPlayerTurn(currentPlayer);
+        InterfaceManager.main.AssignPlayer(currentPlayer);
     }
 
     public DataItemPlayer MakeNeutrals(CustomMap map)

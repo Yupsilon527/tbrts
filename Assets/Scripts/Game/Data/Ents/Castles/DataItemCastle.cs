@@ -9,7 +9,6 @@ public class DataItemCastle : DataItemBuilding
     public Sprite citySprite;
     public bool isCapital = false;
     public int RaidTurn, RazeTurn = -1;
-    public List<DataItemTile> castleTiles = new();
 
     public CityBonuses bonuses;
     public CityProduction production;
@@ -29,7 +28,7 @@ public class DataItemCastle : DataItemBuilding
     }
     public int GetSize()
     {
-        return castleTiles.Count;
+        return occupiedTiles.Count;
     }
     public override void SetPlayerOwner(DataItemPlayer player)
     {
@@ -44,8 +43,9 @@ public class DataItemCastle : DataItemBuilding
     {
         base.ChangeTile(t, position);
 
-        castleTiles = new List<DataItemTile>();
+        occupiedTiles = new List<DataItemTile>();
 
+        var tile = SidewaysMap.main.GetTile(t);
         if (tile.GetWalkElevation() == TerrainDefines.Elevation.City)
         {
             List<DataItemTile> openList = new List<DataItemTile>();
@@ -53,8 +53,8 @@ public class DataItemCastle : DataItemBuilding
             while (openList.Count > 0)
             {
                 var ct = openList[0];
-                if (!castleTiles.Contains(ct))
-                    castleTiles.Add(ct);
+                if (!occupiedTiles.Contains(ct))
+                    occupiedTiles.Add(ct);
                 foreach (DataItemTile Zyzyx in ct.neighbors)
                 {
                     if (Zyzyx.GetWalkElevation() == TerrainDefines.Elevation.City && Zyzyx.buildingLayer == null)
@@ -67,7 +67,7 @@ public class DataItemCastle : DataItemBuilding
                 openList.RemoveAt(0);
             }
         }
-        foreach (DataItemTile Gir in castleTiles)
+        foreach (DataItemTile Gir in occupiedTiles)
         {
             if (Gir.buildingLayer == null)
             {
@@ -78,7 +78,7 @@ public class DataItemCastle : DataItemBuilding
     #region Garrison and Control
     public IEnumerable<DataItemArmy> GetGarrison()
     {
-        return castleTiles.Select(t => t.armyLayer);
+        return occupiedTiles.Select(t => t.armyLayer);
     }
 
     public int GetMyDefenseLevel()
@@ -253,7 +253,7 @@ public class DataItemCastle : DataItemBuilding
     #region LoS
     public override bool IsVisibleToPlayer(DataItemPlayer player)
     {
-        return castleTiles.Any(t => t.IsRevealedByPlayer(player, UnitDefines.TileVisibility.visible));
+        return occupiedTiles.Any(t => t.IsRevealedByPlayer(player, UnitDefines.TileVisibility.visible));
     }
 
     #endregion

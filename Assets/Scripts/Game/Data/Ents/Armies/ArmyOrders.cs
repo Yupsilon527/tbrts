@@ -24,7 +24,7 @@ public class Order
     }
     public virtual bool HasResolvedOrder(DataItemArmy owner)
     {
-        return owner.tile.gridPos == gridDest;
+        return owner.GetCoords() == gridDest;
     }
 }
 public class RazeOrder : Order
@@ -35,7 +35,7 @@ public class RazeOrder : Order
 
     public override bool Resolve(DataItemArmy attacker)
     {
-        if (attacker.tile.buildingLayer is DataItemCastle city)
+        if (attacker.GetMainTile().buildingLayer is DataItemCastle city)
         {
             //player ai
             if (attacker.CanInvadeCastle(city))
@@ -70,7 +70,7 @@ public class FollowOrder : Order
     {
         if (TargetValid(owner))
         {
-            gridDest = TargetUnit.gridPos;
+            gridDest = TargetUnit.GetCoords();
             base.RecalcPath(owner, origin);
         }
     }

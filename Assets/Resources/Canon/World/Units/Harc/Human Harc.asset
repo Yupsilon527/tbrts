@@ -96,5 +96,6 @@ MonoBehaviour:
   attacks:
   - {fileID: 11400000, guid: 2e485267c1bd2834c8632db5ba48d2aa, type: 2}
   - {fileID: 11400000, guid: 2da6701740c77724a8e768453806fff2, type: 2}
-  spells: []
+  spells:
+  - {fileID: 11400000, guid: 82d8fb3736530824eb8ad3c0c8025f7b, type: 2}
   character: {fileID: 11400000, guid: 37931bba4cff8084e85e77b162af2633, type: 2}

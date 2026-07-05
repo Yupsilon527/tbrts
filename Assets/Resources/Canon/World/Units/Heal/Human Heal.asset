@@ -45,13 +45,7 @@ MonoBehaviour:
       BlockChance: 33
       ProcChance: 0
       CritChance: 0
-      bonusDamage:
-      - damage: 15
-        scale: 0
-        flag: 4
-      - damage: 10
-        scale: 0
-        flag: 1
+      bonusDamage: []
     armySprites:
     - {fileID: 8125670880829888781, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
     - {fileID: 8125670880829888781, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
@@ -88,11 +82,11 @@ MonoBehaviour:
     - abilityID: foot
       abilityLevel: 1
     - abilityID: slow
-      abilityLevel: 1
+      abilityLevel: 2
     - abilityID: rangeSupport
       abilityLevel: 3
   attacks:
-  - {fileID: 11400000, guid: 2e485267c1bd2834c8632db5ba48d2aa, type: 2}
-  - {fileID: 11400000, guid: 2da6701740c77724a8e768453806fff2, type: 2}
+  - {fileID: 11400000, guid: 2c61788af62d7264e958cf196c832aca, type: 2}
+  - {fileID: 11400000, guid: 4c220d6e8c5d09847a52a94b7c8cd64e, type: 2}
   spells: []
-  character: {fileID: 11400000, guid: 37931bba4cff8084e85e77b162af2633, type: 2}
+  character: {fileID: 11400000, guid: 71cf5a630acd2d64eac8dd8971e3420c, type: 2}

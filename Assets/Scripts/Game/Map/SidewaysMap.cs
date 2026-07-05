@@ -106,6 +106,7 @@ public class SidewaysMap : MonoBehaviour
                 }
             }
         }
+        found.RemoveAll(t => t == null);
         return found.ToArray();
     }
     public DataItemTile GetClosestToPoint(DataItemTile position, TerrainDefines.Movement movement, float maxDistance = Mathf.Infinity, bool empty = false)

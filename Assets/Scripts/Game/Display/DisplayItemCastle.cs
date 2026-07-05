@@ -11,11 +11,11 @@ public class DisplayItemCastle : DisplayItemObject<DataItemCastle>
     }
     public override void DrawFresh()
     {
-        if (assignedCastle.castleTiles.Count > 0)
+        if (assignedCastle.occupiedTiles.Count > 0)
         {
             objectSprites = new();
-            var topMostTile = assignedCastle.castleTiles[0];
-            foreach (var tile in assignedCastle.castleTiles)
+            var topMostTile = assignedCastle.occupiedTiles[0];
+            foreach (var tile in assignedCastle.occupiedTiles)
             {
                 if (tile.gridPos.x < topMostTile.gridPos.x && tile.gridPos.y < topMostTile.gridPos.y)
                     topMostTile = tile;

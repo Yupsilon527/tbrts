@@ -119,7 +119,7 @@ public class UnitGroup<DataItemType> : Collection<DataItemType> where DataItemTy
     {
         float sqrRadius = radius * radius;
         return Filter(player, alignment)
-            .Where(m => ((Vector2)m.gridPos - center).sqrMagnitude <= sqrRadius)
+            .Where(m => ((Vector2)m.GetCoords() - center).sqrMagnitude <= sqrRadius)
             .ToArray();
     }
 
@@ -132,7 +132,7 @@ public class UnitGroup<DataItemType> : Collection<DataItemType> where DataItemTy
 
         foreach (var mob in Filter(player, alignment))
         {
-            float sqrDist = ((Vector2)mob.gridPos - center).sqrMagnitude;
+            float sqrDist = ((Vector2)mob.GetCoords() - center).sqrMagnitude;
             if (sqrDist <= sqrRadius && sqrDist < nearestSqr)
             {
                 nearestSqr = sqrDist;
@@ -148,7 +148,7 @@ public class UnitGroup<DataItemType> : Collection<DataItemType> where DataItemTy
     public DataItemType[] FindInRect(RectInt rect, DataItemPlayer player, PlayerDefines.Alignment alignment)
     {
         return Filter(player, alignment)
-            .Where(m => rect.Contains(m.gridPos))
+            .Where(m => rect.Contains(m.GetCoords()))
             .ToArray();
     }
 }
