@@ -98,6 +98,8 @@ public class PlayerInputController : MonoBehaviour
                 if (selArmy.abilities.CastAbilityOnTile(castData, mouseOverTile))
                 {
                     ClearCastAbility();
+                    ClearTileHighlights();
+                    ClearTileColors();
                 }
             }
             else if (selArmy == null)

@@ -22,6 +22,7 @@ public class ArmyAbilities : ArmyComponent
     }
     public bool CastAbilityOnTile(PropertySpell spell, DataItemTile tile)
     {
-        return false;
+        CastTable castTable = new(spell.parent, tile.gridPos, spell);
+        return spell.CastFromTable(castTable);
     }
 }

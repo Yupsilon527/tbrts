@@ -111,7 +111,6 @@ public class PropertySpell : PropertyAbility
         {
             if (tile.armyLayer != null)
                 foreach (var army in tile.armyLayer.formation.GetUnits())
-                    if (!table.maintarget.Contains(army))
                         targets.Add(army);
         }
         return targets.ToArray();

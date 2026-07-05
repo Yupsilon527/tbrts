@@ -1,19 +1,5 @@
 TODO
-
-	spells
-
-	army statuses
-		speed/slow/rooted
-		cloaked (works?)
-		warded
-
-	army effects
-		push back
-		zone of control
-
-		firststrike (removes delay off abilities)
-		swarm - gets weaker the less hp it has
-		run after attack
+	LoS
 			
 	army innates
 		auras
@@ -35,12 +21,21 @@ TODO
 		* Can have up to 10* Regenerates by 1 each turn, up to 3
 		
 
-	army auras
-	LoS
+	army statuses
+		speed/slow/rooted
+		cloaked (works?)
+		warded
 
-	document armies/etc
+	army effects
+		push back
+		zone of control
+
+		firststrike (removes delay off abilities)
+		swarm - gets weaker the less hp it has
+		run after attack
 
 Fixes
+	armor?
 	armies not desel on turn end
 	army swap/formation tomens
 
@@ -51,6 +46,8 @@ Fixes
 	game skips player 2
 
 QoL
+
+	document armies/etc
 	mock combat windows
 
 	tile highlights and colors
