@@ -16,14 +16,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dbfff8c60a737364ca0330623bf46464, type: 2}
   data:
     InternalName: Lcav Charge
+    abilityFlags: 12
     apCost: 0
     mpCost: 0
     spCost: 1
     castTime: 75
     castDelay: 75
-    abilityFlags: 76
-    castOnce: 1
     attackPhase: 2
     targetPriority: 0
     areaMode: 0
-  weaponFlags: 040000000800000040000000
+  weaponFlags: 0400000008000000

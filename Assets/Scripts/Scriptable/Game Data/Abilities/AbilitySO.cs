@@ -9,6 +9,7 @@ public class ActionSO : ScriptableObject
 
 public class ActionData : BaseData
 {
+    public int abilityFlags;
     public ApplyEffects[] effects;
 
     public virtual ActionData Clone()

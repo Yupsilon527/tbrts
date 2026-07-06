@@ -71,7 +71,7 @@ public class ArmyMovementComponent : ArmyComponent
 
     public void PayMovement(int value)
     {
-
+        movedThisTurn = true;
         if (value > 0 && value < movementLeft)
             movementLeft -= value;
         else
@@ -95,9 +95,11 @@ public class ArmyMovementComponent : ArmyComponent
     }
     public void UpdateMaxMovement()
     {
+        movementLeft = Mathf.Min(movementLeft,GetMyMovementDistance());
     }
     public override void OnTurnBegin()
     {
+        movedThisTurn = false;
         movementLeft = GetMyMovementDistance();
         UpdateStartingMovement();
     }

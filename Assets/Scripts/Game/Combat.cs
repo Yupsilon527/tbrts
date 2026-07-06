@@ -112,7 +112,7 @@ public class Combat : Initializable
     }
     void ForwardPhase()
     {
-        if (currentPhase == CombatDefines.AttackPhase.PostAttack)
+        if (currentPhase == CombatDefines.AttackPhase.Parting)
         {
             EndCombat();
         }

@@ -13,17 +13,16 @@ MonoBehaviour:
   m_Name: LArc Melee
   m_EditorClassIdentifier: 
   effects:
-  - {fileID: 11400000, guid: 54eb31c9ce69a054188589c649059715, type: 2}
+  - {fileID: 11400000, guid: dff0749d5818e2e4882fc698dd11fb21, type: 2}
   data:
     InternalName: Larc Melee
-    apCost: 1
+    abilityFlags: 68
+    apCost: 2
     mpCost: 0
     spCost: 0
     castTime: 120
     castDelay: 160
-    abilityFlags: 76
-    castOnce: 0
     attackPhase: 2
     targetPriority: 0
     areaMode: 0
-  weaponFlags: 040000000800000040000000
+  weaponFlags: 0400000040000000

@@ -16,6 +16,6 @@ MonoBehaviour:
   AssignedWorld: Fantasy
   neutrals: {fileID: 11400000, guid: 07ff4a4fe017b8946bd3a0c866536e09, type: 2}
   factions:
-  - {fileID: 11400000, guid: d888d1ae659db314188daca241b7ba0c, type: 2}
+  - {fileID: 11400000, guid: 47a940a6d08dbf14f867dc70c1c8d5cb, type: 2}
   NeutralArmiesAreDefault: 0
   NeutralBuildingsAreDefault: 1

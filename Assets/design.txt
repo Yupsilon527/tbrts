@@ -28,11 +28,38 @@ Factions * Race: units, buildings* Leaders: UU, bonuses, unique techs* Can capt
 Transports* 1x1, 1x2, 1x3, 2x2, 3x3* Override movement 
 Heroes * Experience, level up* Up to 3 spells
 
-Human: mana on win battles Linf: swordLcav: cavalryLrng: skirmisher (javelin)Lfly: dancing swordSupport: preist (healer)Siege catapult Boat galleon* Knight: cavs are healthierLinf knightHarc priestHcav cavalier UU boyar (bonus vs undead)* Academy: mage focusHcav mounted mageHarc archmageHinf spellblade (melee caster)UU pyromancer (weak combat strong spells)Preist >> white mage* Empire: naval/ecoHinf halbsShield archersHcav lionsUU hoplite (tuff slow inf)
+Human: mana on win battles 
+Linf: sword
+Lcav: cavalry
+Lrng: skirmisher (javelin)
+Lfly: dancing sword
+Support: preist (healer)
+Siege catapult 
+Boat galleon
+* Knight: cavs are healthier
+Linf knightHarc priest
+Hcav cavalier 
+UU boyar (bonus vs undead)
+* Academy: mage focusHcav mounted mageHarc archmageHinf spellblade (melee caster)UU pyromancer (weak combat strong spells)Preist >> white mage
+* Empire: naval/ecoHinf halbsShield archersHcav lionsUU hoplite (tuff slow inf)
+
+Dwarf: units have shield
+Linf: sword
+Lcav: cavalry
+Lrng: skirmisher (javelin)
+Lfly: eagle
+support: shield all targets, offer barrier
+
+
 
 Norse: mana on raid/raze, cheap weak spellsLinf inuitLrng inuit fisherman Lcav wolf sledLfly: harpyMonk Shaman (reindeer mounted monk)Siege mammoth (hcav/siege hybrid)Boat longboat (cheaper)* Horse lordsHinf vikingHarc norse bowHcav Pegasus (Valkyrie)UU mage cav* Elep/bearHinf berserker Harc frostmageHcav polar bear riderUU bear archer* MythHinf yetiHarc trollHcav elkmanUU
 
-Orc: - Linf: orcLarc: orc slingerLcav: wriderLfly: biterSiege: goblin sappers (suicidal, deals pure damage to a unit)* Goblin: inf focus, numbersHinf goblinsHarc gob shaman Hcav spider riders* Ogres: large and powerful defensive Hinf: ogreHcav: giants, can walk over water* Orcs: no defenses, nomads, raiding 
+Orc: 
+Linf: orc
+Larc: orc slinger
+Lcav: wriderLfly: biter
+Siege: goblin sappers (suicidal, deals pure damage to a unit)
+* Goblin: inf focus, numbersHinf goblinsHarc gob shaman Hcav spider riders* Ogres: large and powerful defensive Hinf: ogreHcav: giants, can walk over water* Orcs: no defenses, nomads, raiding 
 Dwarf: passive mana income Linf: smithsSkirm: axethrowersCav: runnersLfly: gargoyle * Surface dwarf: econHcav gryph riderUU gold golem: really costy really though* Dark dwarf: strong, slow, expensiveHcav: golems* War dwarf: guns & shit* Dragonlords:Hinf drag guardHarc dragon mageHcav dragonUU dragon
 Undead: blood slave (%chance to gain mana on killed)Linf: jaguar warrior (blood slave)Lrng: bloodslave (blood slave)Lcav: pumaLfly: wraithSupport blood mage (turn blood slave to mana)Boat: canoe (fast, small)Siege • PlaguelordsHinf zombie (spawn more zombies on kill)Harc plague doctor - doubles poisonHcav plague beast (poison)UU plague bearer - procs poison• Lichelords: necromancy focus (summon troops), magesHinf skelHarc NecromancerHcav skel cav* CountsHinf ghoulsHarc lichesHcav reaperUU vampire (vampirism, can eat blood slave)* Drowners: slow in water, siege shipsHinf pirate, boardingHarc cannonHcav UU UU ship, attacks other ship* Biopunk
 

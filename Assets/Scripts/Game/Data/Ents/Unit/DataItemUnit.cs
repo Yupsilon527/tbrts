@@ -225,7 +225,7 @@ public class DataItemUnit : DataItemMob
         }
         else if (innates.GetAbilityLevel("giant") > 0)
         {
-            return TerrainDefines.Movement.GroundVersatile;
+            return TerrainDefines.Movement.GroundMounted;
         }
         else if (innates.GetAbilityLevel("foot") > 0)
         {

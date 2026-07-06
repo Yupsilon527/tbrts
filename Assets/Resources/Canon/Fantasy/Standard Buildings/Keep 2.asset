@@ -16,7 +16,7 @@ MonoBehaviour:
   AssignedWorld: 
   building:
     InternalName: Keep 2
-    icon: {fileID: 0}
+    icon: {fileID: -2261305175963411493, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
     flags:
     - townhall
     - income
@@ -38,9 +38,9 @@ MonoBehaviour:
     grantedResources: []
     grantedIncome:
     - resource: 0
-      value: 1000
+      value: 500
     - resource: 3
-      value: 125
+      value: 25
     bonusType: 0
     production: []
   armies: []

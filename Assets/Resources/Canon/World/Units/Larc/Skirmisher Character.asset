@@ -15,5 +15,5 @@ MonoBehaviour:
   InternalName: Skirmisher Character
   AssignedWorld: 
   sprites:
-  - sprite: {fileID: 8125670880829888781, guid: d3bb18af95bed7540ac7ab6d1481a9cf, type: 3}
+  - sprite: {fileID: 21300000, guid: d3bb18af95bed7540ac7ab6d1481a9cf, type: 3}
     frame: 0

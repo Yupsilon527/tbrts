@@ -53,7 +53,8 @@ public class CityProduction : CityComponent
 
         if (CanProduce())
         {
-            iProductionTime += city.income.baseIncome[(int)EconomyDefines.IncomeResource.Labor];
+            var labor = city.income.baseIncome[(int)EconomyDefines.IncomeResource.Labor];
+            iProductionTime += labor;
             while (productionQueue.Count > 0)
             {
 
@@ -75,7 +76,7 @@ public class CityProduction : CityComponent
                 else break;
             }
             if (productionQueue.Count == 0)
-                iProductionTime = 0;
+                iProductionTime = Mathf.Min(iProductionTime, labor);
         }
         else
         {
@@ -102,10 +103,11 @@ public class CityProduction : CityComponent
 
             city.GetPlayerOwner().econ.SpendResources(prodTable.costs);
 
-            if (instant || prodTable.costs[(int)EconomyDefines.EconomyResource.Labor].value == 0)
+            float laborCost = prodTable.costs[(int)EconomyDefines.EconomyResource.Labor].value;
+            if (instant || laborCost <= iProductionTime)
             {
-
                 prodTable.CompleteProduction();
+                iProductionTime -= laborCost;
             }
             else
             {

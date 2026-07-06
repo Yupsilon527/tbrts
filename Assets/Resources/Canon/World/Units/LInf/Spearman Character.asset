@@ -15,5 +15,5 @@ MonoBehaviour:
   InternalName: Spearman Character
   AssignedWorld: 
   sprites:
-  - sprite: {fileID: 3973588016999555590, guid: 48ceb9c1456b3c748a55977bd726530e, type: 3}
+  - sprite: {fileID: 21300000, guid: 3d0c470e37781f041bf2502b14c90b7a, type: 3}
     frame: 0

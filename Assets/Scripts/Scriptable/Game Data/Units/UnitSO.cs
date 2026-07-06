@@ -7,4 +7,8 @@ public class UnitSO : ScriptableObject
     public WeaponSO[] attacks;
     public SpellSo[] spells;
     public CharacterSO character;
+    private void OnValidate()
+    {
+        if (unit != null) unit.InternalName = name;
+    }
 }

@@ -20,6 +20,7 @@ public class WeaponSO : ActionSO
 
     public WeaponData Translate()
     {
+        WorldManager.main.Inspect("Unload data " + data.InternalName);
         WeaponData output = data.Clone() as WeaponData;
         output.effects = effects.Select(x => x.Translate()).ToArray();
         return output;
@@ -28,8 +29,7 @@ public class WeaponSO : ActionSO
 [Serializable]
 public class WeaponData : ActionData
 {
-    public int apCost, mpCost, spCost, castTime, castDelay, abilityFlags;
-    public bool castOnce = false;
+    public int apCost, mpCost, spCost, castTime, castDelay;
     public CombatDefines.AttackPhase attackPhase;
 
     public CombatDefines.ArmyPriorityMode targetPriority;

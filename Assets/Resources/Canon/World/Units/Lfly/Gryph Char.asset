@@ -15,5 +15,5 @@ MonoBehaviour:
   InternalName: Scout Character
   AssignedWorld: 
   sprites:
-  - sprite: {fileID: 7171838046460540711, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
+  - sprite: {fileID: 21300000, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
     frame: 0

@@ -1,0 +1,1313 @@
+fileFormatVersion: 2
+guid: 68e980157278d02418f8e64921b8cf1d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4255779277777004940
+    second: Smith_0
+  - first:
+      213: 2319896450050285661
+    second: Smith_1
+  - first:
+      213: -1607291819523614969
+    second: Smith_2
+  - first:
+      213: -6664243861225036607
+    second: Smith_3
+  - first:
+      213: -3537988139707484086
+    second: Smith_4
+  - first:
+      213: -7470156466369878183
+    second: Smith_5
+  - first:
+      213: 3879730815178258427
+    second: Smith_6
+  - first:
+      213: -2489661023139925605
+    second: Smith_7
+  - first:
+      213: -1927134119222354878
+    second: Smith_8
+  - first:
+      213: 8926225839311393787
+    second: Smith_9
+  - first:
+      213: -6832208014484212804
+    second: Smith_10
+  - first:
+      213: -3562141283355114621
+    second: Smith_11
+  - first:
+      213: 9113556181191654170
+    second: Smith_12
+  - first:
+      213: 3304613667909490528
+    second: Smith_13
+  - first:
+      213: 1065293267330834026
+    second: Smith_14
+  - first:
+      213: -6441800464139202488
+    second: Smith_15
+  - first:
+      213: -7602371850813874132
+    second: Smith_16
+  - first:
+      213: 6565822627805634124
+    second: Smith_17
+  - first:
+      213: 6207672835636541682
+    second: Smith_18
+  - first:
+      213: -5902590955884477415
+    second: Smith_19
+  - first:
+      213: -5743083507042689947
+    second: Smith_20
+  - first:
+      213: 3763144400342789759
+    second: Smith_21
+  - first:
+      213: -6008870570319809783
+    second: Smith_22
+  - first:
+      213: -1908044083193574507
+    second: Smith_23
+  - first:
+      213: 6446209806612639225
+    second: Smith_24
+  - first:
+      213: -6245271404164144688
+    second: Smith_25
+  - first:
+      213: 4938739672359127573
+    second: Smith_26
+  - first:
+      213: -5896943240778236860
+    second: Smith_27
+  - first:
+      213: -1393285400656456823
+    second: Smith_28
+  - first:
+      213: 6323655233717203444
+    second: Smith_29
+  - first:
+      213: -1064458484517155721
+    second: Smith_30
+  - first:
+      213: -2945888362896801094
+    second: Smith_31
+  - first:
+      213: 8038958829568872944
+    second: Smith_32
+  - first:
+      213: -4495069523104782190
+    second: Smith_33
+  - first:
+      213: 4426876384967220410
+    second: Smith_34
+  - first:
+      213: -4517989492821254346
+    second: Smith_35
+  - first:
+      213: 9111681669528319528
+    second: Smith_36
+  - first:
+      213: 6236399611823054815
+    second: Smith_37
+  - first:
+      213: -5676328439755375464
+    second: Smith_38
+  - first:
+      213: -7699433998576031142
+    second: Smith_39
+  - first:
+      213: 7625294298918344484
+    second: Smith_40
+  - first:
+      213: 553900685383448839
+    second: Smith_41
+  - first:
+      213: 3136571077955139499
+    second: Smith_42
+  - first:
+      213: 4458778851467590777
+    second: Smith_43
+  - first:
+      213: -2695902657411907435
+    second: Smith_44
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Smith_0
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 812
+        width: 207
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c89ed5e74b09f0b30800000000000000
+      internalID: 4255779277777004940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_1
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 812
+        width: 233
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d50efeca78de13020800000000000000
+      internalID: 2319896450050285661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_2
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 812
+        width: 207
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70757ee1b90c1b9e0800000000000000
+      internalID: -1607291819523614969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_3
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 960
+        width: 12
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c4aa135489d383a0800000000000000
+      internalID: -6664243861225036607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_4
+      rect:
+        serializedVersion: 2
+        x: 871
+        y: 918
+        width: 49
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a48b031388a86eec0800000000000000
+      internalID: -3537988139707484086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_5
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 966
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 957af6db54ca45890800000000000000
+      internalID: -7470156466369878183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_6
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 969
+        width: 6
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf736d6ee9297d530800000000000000
+      internalID: 3879730815178258427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_7
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 816
+        width: 190
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b91fb908d72f27dd0800000000000000
+      internalID: -2489661023139925605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_8
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 896
+        width: 32
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24c573d9ab17145e0800000000000000
+      internalID: -1927134119222354878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_9
+      rect:
+        serializedVersion: 2
+        x: 927
+        y: 901
+        width: 30
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf391119b1350eb70800000000000000
+      internalID: 8926225839311393787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 551
+        width: 204
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb37719620f1f21a0800000000000000
+      internalID: -6832208014484212804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_11
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 545
+        width: 168
+        height: 215
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3834dd5306bb09ec0800000000000000
+      internalID: -3562141283355114621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_12
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 555
+        width: 186
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1b7e74af0bd97e70800000000000000
+      internalID: 9113556181191654170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_13
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 706
+        width: 20
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06755a35f985cdd20800000000000000
+      internalID: 3304613667909490528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_14
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 717
+        width: 15
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6e9edc159ea8ce00800000000000000
+      internalID: 1065293267330834026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_15
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 722
+        width: 6
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8405905ab902a96a0800000000000000
+      internalID: -6441800464139202488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_16
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 718
+        width: 14
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c206fcda413fe7690800000000000000
+      internalID: -7602371850813874132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_17
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 705
+        width: 20
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4e939c84ec7e1b50800000000000000
+      internalID: 6565822627805634124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_18
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 685
+        width: 28
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f835f9ed85162650800000000000000
+      internalID: 6207672835636541682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_19
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 559
+        width: 217
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91482148cc8c51ea0800000000000000
+      internalID: -5902590955884477415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_20
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 662
+        width: 32
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56cd05f7af77c40b0800000000000000
+      internalID: -5743083507042689947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_21
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 628
+        width: 24
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7eaee4e4ef593430800000000000000
+      internalID: 3763144400342789759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_22
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 302
+        width: 181
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 903f9ca7d043c9ca0800000000000000
+      internalID: -6008870570319809783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_23
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 468
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59b067df3044585e0800000000000000
+      internalID: -1908044083193574507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_24
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 466
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fd29c66aa9857950800000000000000
+      internalID: 6446209806612639225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_25
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 455
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d124ec2fb65459a0800000000000000
+      internalID: -6245271404164144688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_26
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 289
+        width: 143
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51a4811c09de98440800000000000000
+      internalID: 4938739672359127573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_27
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 281
+        width: 90
+        height: 216
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44cb5c8ad59d92ea0800000000000000
+      internalID: -5896943240778236860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_28
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 447
+        width: 19
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 983522f5f4e0aace0800000000000000
+      internalID: -1393285400656456823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_29
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 300
+        width: 224
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f1f0cf4ee222c750800000000000000
+      internalID: 6323655233717203444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_30
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 444
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77c4438e5a84a31f0800000000000000
+      internalID: -1064458484517155721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_31
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 433
+        width: 14
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab24495542a1e17d0800000000000000
+      internalID: -2945888362896801094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_32
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 337
+        width: 20
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f15178967e109f60800000000000000
+      internalID: 8038958829568872944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_33
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 340
+        width: 21
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 298a7aaa51e4e91c0800000000000000
+      internalID: -4495069523104782190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_34
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 199
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abc59861e9c6f6d30800000000000000
+      internalID: 4426876384967220410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_35
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 44
+        width: 187
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63f117d5e70ec41c0800000000000000
+      internalID: -4517989492821254346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_36
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 214
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8267ca2e332337e70800000000000000
+      internalID: 9111681669528319528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_37
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 220
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdfd814b7642c8650800000000000000
+      internalID: 6236399611823054815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_38
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 203
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89cfee7cb51a931b0800000000000000
+      internalID: -5676328439755375464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_39
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 23
+        width: 98
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5a6f47529d162590800000000000000
+      internalID: -7699433998576031142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_40
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 24
+        width: 194
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 427d6daa3cc72d960800000000000000
+      internalID: 7625294298918344484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_41
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 178
+        width: 17
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70930291db9dfa700800000000000000
+      internalID: 553900685383448839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_42
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 185
+        width: 20
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba7b742f6c6578b20800000000000000
+      internalID: 3136571077955139499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_43
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 75
+        width: 24
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97cffb5edb3c0ed30800000000000000
+      internalID: 4458778851467590777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smith_44
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 30
+        width: 221
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5908eeb01da369ad0800000000000000
+      internalID: -2695902657411907435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Smith_0: 4255779277777004940
+      Smith_1: 2319896450050285661
+      Smith_10: -6832208014484212804
+      Smith_11: -3562141283355114621
+      Smith_12: 9113556181191654170
+      Smith_13: 3304613667909490528
+      Smith_14: 1065293267330834026
+      Smith_15: -6441800464139202488
+      Smith_16: -7602371850813874132
+      Smith_17: 6565822627805634124
+      Smith_18: 6207672835636541682
+      Smith_19: -5902590955884477415
+      Smith_2: -1607291819523614969
+      Smith_20: -5743083507042689947
+      Smith_21: 3763144400342789759
+      Smith_22: -6008870570319809783
+      Smith_23: -1908044083193574507
+      Smith_24: 6446209806612639225
+      Smith_25: -6245271404164144688
+      Smith_26: 4938739672359127573
+      Smith_27: -5896943240778236860
+      Smith_28: -1393285400656456823
+      Smith_29: 6323655233717203444
+      Smith_3: -6664243861225036607
+      Smith_30: -1064458484517155721
+      Smith_31: -2945888362896801094
+      Smith_32: 8038958829568872944
+      Smith_33: -4495069523104782190
+      Smith_34: 4426876384967220410
+      Smith_35: -4517989492821254346
+      Smith_36: 9111681669528319528
+      Smith_37: 6236399611823054815
+      Smith_38: -5676328439755375464
+      Smith_39: -7699433998576031142
+      Smith_4: -3537988139707484086
+      Smith_40: 7625294298918344484
+      Smith_41: 553900685383448839
+      Smith_42: 3136571077955139499
+      Smith_43: 4458778851467590777
+      Smith_44: -2695902657411907435
+      Smith_5: -7470156466369878183
+      Smith_6: 3879730815178258427
+      Smith_7: -2489661023139925605
+      Smith_8: -1927134119222354878
+      Smith_9: 8926225839311393787
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

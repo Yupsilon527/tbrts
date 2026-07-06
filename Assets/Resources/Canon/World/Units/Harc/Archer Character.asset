@@ -15,5 +15,5 @@ MonoBehaviour:
   InternalName: Archer Character
   AssignedWorld: 
   sprites:
-  - sprite: {fileID: 8125670880829888781, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
+  - sprite: {fileID: 21300000, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
     frame: 0

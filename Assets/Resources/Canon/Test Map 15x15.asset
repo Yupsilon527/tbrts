@@ -40,7 +40,7 @@ MonoBehaviour:
       LockedRace: 0
       LockedTeam: 0
     - Name: Player 1
-      FactionName: 
+      FactionName: Humans
       id: 1
       Team: 0
       AiLevel: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
       LockedRace: 0
       LockedTeam: 0
     - Name: Player 2
-      FactionName: 
+      FactionName: Humans
       id: 2
       Team: 1
       AiLevel: 0

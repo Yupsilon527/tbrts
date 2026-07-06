@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unit:
     InternalName: Human Heal
-    icon: {fileID: 8125670880829888781, guid: 6d7c661f7ff912e43bf2a4c44c2af2e1, type: 3}
+    icon: {fileID: 21300000, guid: 6d7c661f7ff912e43bf2a4c44c2af2e1, type: 3}
     flags: []
     costs:
     - resource: 1
@@ -56,24 +56,22 @@ MonoBehaviour:
     unitFlags: 030000000b000000
     attacks:
     - InternalName: Harc Ranged
+      abilityFlags: 76
       apCost: 1
       mpCost: 0
       spCost: 0
       castTime: 120
       castDelay: 160
-      abilityFlags: 76
-      castOnce: 0
       attackPhase: 2
       targetPriority: 0
       areaMode: 0
     - InternalName: Harc Support
+      abilityFlags: 2144
       apCost: 0
       mpCost: 0
       spCost: 1
       castTime: 120
       castDelay: 160
-      abilityFlags: 2144
-      castOnce: 1
       attackPhase: 2
       targetPriority: 0
       areaMode: 0

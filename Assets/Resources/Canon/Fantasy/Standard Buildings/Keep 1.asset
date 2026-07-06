@@ -16,15 +16,11 @@ MonoBehaviour:
   AssignedWorld: 
   building:
     InternalName: Keep 1
-    icon: {fileID: 0}
+    icon: {fileID: 3511996523978390141, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
     flags:
     - townhall
     - income
-    costs:
-    - resource: 0
-      value: 0
-    - resource: 3
-      value: 0
+    costs: []
     prerequisites: []
     infinite: 2
     affectedFlags: []

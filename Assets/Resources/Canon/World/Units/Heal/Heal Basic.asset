@@ -16,14 +16,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5d8b1f8940d170e4cb197186a115b509, type: 2}
   data:
     InternalName: Heal Basic
+    abilityFlags: 462
     apCost: 1
     mpCost: 0
     spCost: 0
     castTime: 120
     castDelay: 160
-    abilityFlags: 78
-    castOnce: 0
     attackPhase: 3
     targetPriority: 0
     areaMode: 0
-  weaponFlags: 04000000080000000200000040000000
+  weaponFlags: 040000000800000002000000000100004000000080000000

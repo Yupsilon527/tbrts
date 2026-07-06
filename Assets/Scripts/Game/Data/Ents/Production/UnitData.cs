@@ -81,10 +81,6 @@ public class UnitData : ProductionData
         {
             return TerrainDefines.Movement.Ghost;
         }
-        else if (GetAbilityLevel("ghost") > 0)
-        {
-            return TerrainDefines.Movement.Ghost;
-        }
         else if (GetAbilityLevel("fly") > 0)
         {
             return TerrainDefines.Movement.Fly;
@@ -97,9 +93,9 @@ public class UnitData : ProductionData
         {
             return TerrainDefines.Movement.GroundWheels;
         }
-        else if (GetAbilityLevel("giant") > 0)
+        else if (GetAbilityLevel("mounted") > 0)
         {
-            return TerrainDefines.Movement.GroundVersatile;
+            return TerrainDefines.Movement.GroundMounted;
         }
         else if (GetAbilityLevel("foot") > 0)
         {
@@ -116,6 +112,10 @@ public class UnitData : ProductionData
         else if (GetAbilityLevel("seaworthy") > 0)
         {
             return TerrainDefines.Movement.Boat;
+        }
+        else if (GetAbilityLevel("building") > 0)
+        {
+            return TerrainDefines.Movement.Building;
         }
 
         return TerrainDefines.Movement.Basic;

@@ -6,8 +6,21 @@ using UnityEngine;
 public class SpellSo : ActionSO
 {
     public SpellData data;
+    public CombatDefines.SpellFlag[] spellFlags;
+
+    private void OnValidate()
+    {
+        int flags = 0;
+        foreach (var flag in spellFlags)
+        {
+            flags |= (int)flag;
+        }
+        data.abilityFlags = flags;
+    }
+
     public SpellData Translate()
     {
+        WorldManager.main.Inspect("Unload data " + data.InternalName);
         SpellData output = data.Clone() as SpellData;
         output.effects = effects.Select(x => x.Translate()).ToArray();
         return output;
@@ -27,5 +40,9 @@ public class SpellData : ActionData
     public CombatDefines.TileAreaMode rangeMode;
     public CombatDefines.TileTargetingArea areaMode;
 
+    public bool HasFlag(CombatDefines.SpellFlag flag)
+    {
+        return (abilityFlags & (int)flag) != 0;
+    }
 }
 

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcddf7723cb65e54e8d83f4a6c080f98, type: 3}
+  m_Name: Humans
+  m_EditorClassIdentifier: 
+  InternalName: Humans
+  AssignedWorld: Fantasy
+  character: {fileID: 11400000, guid: 33a926e142d4a8f4e8cc0f669517a559, type: 2}
+  startingResources: []
+  startingIncome: []
+  innateUpgrades: []
+  buildings:
+  - {fileID: 11400000, guid: 8467f06e60a42fc4ca83d14937026b9a, type: 2}
+  - {fileID: 11400000, guid: 9d3425f9deaa4604f8c17dbac179acae, type: 2}
+  - {fileID: 11400000, guid: 81f7f2dd0a94ef845a5d744d8df70f94, type: 2}
+  - {fileID: 11400000, guid: 4cebb73b874726f4cace30e2a51413f0, type: 2}
+  - {fileID: 11400000, guid: 103d01e6feaceec47890f992f40d4fe4, type: 2}

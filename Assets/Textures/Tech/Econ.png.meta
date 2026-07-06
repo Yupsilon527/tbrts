@@ -1,0 +1,689 @@
+fileFormatVersion: 2
+guid: 2bbb6de4a92ba4e49a65abd3c597db30
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6768258908313246732
+    second: Econ_0
+  - first:
+      213: -1087248771320140044
+    second: Econ_1
+  - first:
+      213: -8373791762293267339
+    second: Econ_2
+  - first:
+      213: 4717206566903202788
+    second: Econ_3
+  - first:
+      213: -7089035824216437942
+    second: Econ_4
+  - first:
+      213: -8044296625658928300
+    second: Econ_5
+  - first:
+      213: 5618907070302046217
+    second: Econ_6
+  - first:
+      213: 2983269167100405882
+    second: Econ_7
+  - first:
+      213: 4430131288006683045
+    second: Econ_8
+  - first:
+      213: -7385193674486577593
+    second: Econ_9
+  - first:
+      213: 3728344927457146754
+    second: Econ_10
+  - first:
+      213: 6616542247549120081
+    second: Econ_11
+  - first:
+      213: 4684262300348720765
+    second: Econ_12
+  - first:
+      213: 6104915209328404911
+    second: Econ_13
+  - first:
+      213: -1122574718410721765
+    second: Econ_14
+  - first:
+      213: 6168426897609002345
+    second: Econ_15
+  - first:
+      213: -9162153425786725685
+    second: Econ_16
+  - first:
+      213: -939976748185015122
+    second: Econ_17
+  - first:
+      213: -1496471952539495531
+    second: Econ_18
+  - first:
+      213: 2479300774052273065
+    second: Econ_19
+  - first:
+      213: 8265117019532737008
+    second: Econ_20
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Econ_0
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 863
+        width: 163
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0c52e90e9faded50800000000000000
+      internalID: 6768258908313246732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_1
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 861
+        width: 158
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4feabf2c00159e0f0800000000000000
+      internalID: -1087248771320140044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_2
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 861
+        width: 158
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 574ea6922c05acb80800000000000000
+      internalID: -8373791762293267339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_3
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 863
+        width: 153
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e3c7683162e67140800000000000000
+      internalID: 4717206566903202788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_4
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 861
+        width: 165
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4b8f892a7fae9d90800000000000000
+      internalID: -7089035824216437942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_5
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 660
+        width: 192
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 453e9b7e6daec5090800000000000000
+      internalID: -8044296625658928300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_6
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 658
+        width: 188
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 908c84fc53e5afd40800000000000000
+      internalID: 5618907070302046217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_7
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 658
+        width: 187
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a78256e5083b66920800000000000000
+      internalID: 2983269167100405882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_8
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 654
+        width: 186
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a96bf14fecfa7d30800000000000000
+      internalID: 4430131288006683045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_9
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 456
+        width: 230
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74604c24b75828990800000000000000
+      internalID: -7385193674486577593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_10
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 451
+        width: 200
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 287763935fdbdb330800000000000000
+      internalID: 3728344927457146754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_11
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 450
+        width: 194
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15ea7824e1ea2db50800000000000000
+      internalID: 6616542247549120081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_12
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 454
+        width: 209
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d762a0f6eb7d10140800000000000000
+      internalID: 4684262300348720765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_13
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 237
+        width: 195
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa926e3a90409b450800000000000000
+      internalID: 6104915209328404911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_14
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 233
+        width: 190
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b167b43cd30db60f0800000000000000
+      internalID: -1122574718410721765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_15
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 227
+        width: 186
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96d03f6e497aa9550800000000000000
+      internalID: 6168426897609002345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_16
+      rect:
+        serializedVersion: 2
+        x: 797
+        y: 241
+        width: 202
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bca9a5e900e79d080800000000000000
+      internalID: -9162153425786725685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_17
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 36
+        width: 168
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eac2e43b02884f2f0800000000000000
+      internalID: -939976748185015122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_18
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 39
+        width: 184
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5935c8410b67b3be0800000000000000
+      internalID: -1496471952539495531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_19
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 29
+        width: 182
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ab9cb80bee386220800000000000000
+      internalID: 2479300774052273065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Econ_20
+      rect:
+        serializedVersion: 2
+        x: 797
+        y: 39
+        width: 201
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f9b848832893b270800000000000000
+      internalID: 8265117019532737008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Econ_0: 6768258908313246732
+      Econ_1: -1087248771320140044
+      Econ_10: 3728344927457146754
+      Econ_11: 6616542247549120081
+      Econ_12: 4684262300348720765
+      Econ_13: 6104915209328404911
+      Econ_14: -1122574718410721765
+      Econ_15: 6168426897609002345
+      Econ_16: -9162153425786725685
+      Econ_17: -939976748185015122
+      Econ_18: -1496471952539495531
+      Econ_19: 2479300774052273065
+      Econ_2: -8373791762293267339
+      Econ_20: 8265117019532737008
+      Econ_3: 4717206566903202788
+      Econ_4: -7089035824216437942
+      Econ_5: -8044296625658928300
+      Econ_6: 5618907070302046217
+      Econ_7: 2983269167100405882
+      Econ_8: 4430131288006683045
+      Econ_9: -7385193674486577593
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

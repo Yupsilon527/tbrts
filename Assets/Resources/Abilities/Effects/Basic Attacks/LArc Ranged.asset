@@ -16,13 +16,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 768795fae82ebbb4694719fb61c63200, type: 2}
   data:
     InternalName: Larc Ranged
-    apCost: 0
+    abilityFlags: 2184
+    apCost: 1
     mpCost: 0
     spCost: 0
     castTime: 80
     castDelay: 150
-    abilityFlags: 2184
-    castOnce: 1
     attackPhase: 2
     targetPriority: 0
     areaMode: 0

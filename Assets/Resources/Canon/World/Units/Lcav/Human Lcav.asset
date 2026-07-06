@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unit:
     InternalName: Human Lcav
-    icon: {fileID: -6504473842130613247, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
+    icon: {fileID: 21300000, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
     flags: []
     costs:
     - resource: 0
@@ -26,7 +26,7 @@ MonoBehaviour:
       Offense: 9
       Defense: 9
       Luck: 0
-      Attack: 9
+      Attack: 4
       Magic: 5
       Speed: 150
       Action: 2
@@ -35,14 +35,14 @@ MonoBehaviour:
       Health: 60
       Barrier: 0
       Armor: 0
-      Shield: 4
+      Shield: 3
       Padding: 0
       Resistance: 0
-      Block: 4
+      Block: 1
       LuckCoefficient: 1
       SpeedCoefficient: 1
       DodgeChance: 0
-      BlockChance: 25
+      BlockChance: 15
       ProcChance: 0
       CritChance: 0
       bonusDamage:
@@ -50,39 +50,37 @@ MonoBehaviour:
         scale: 0
         flag: 11
     armySprites:
-    - {fileID: -6504473842130613247, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
-    - {fileID: -6504473842130613247, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
-    - {fileID: -6504473842130613247, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
-    - {fileID: -6504473842130613247, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
-    - {fileID: -6504473842130613247, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
-    - {fileID: -6504473842130613247, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
+    - {fileID: 21300000, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
+    - {fileID: 21300000, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
+    - {fileID: 21300000, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
+    - {fileID: 21300000, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
+    - {fileID: 21300000, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
+    - {fileID: 21300000, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
     unitFlags: 050000000c000000
     attacks:
     - InternalName: Lcav Melee
+      abilityFlags: 76
       apCost: 1
       mpCost: 0
       spCost: 0
       castTime: 90
-      castDelay: 90
-      abilityFlags: 76
-      castOnce: 0
+      castDelay: 160
       attackPhase: 2
       targetPriority: 0
       areaMode: 0
     - InternalName: Lcav Charge
+      abilityFlags: 12
       apCost: 0
       mpCost: 0
       spCost: 1
-      castTime: 60
-      castDelay: 60
-      abilityFlags: 76
-      castOnce: 1
+      castTime: 75
+      castDelay: 75
       attackPhase: 2
       targetPriority: 0
       areaMode: 0
     spells: []
     abilities:
-    - abilityID: wheels
+    - abilityID: mounted
       abilityLevel: 1
   attacks:
   - {fileID: 11400000, guid: 1eff5a7a6566a15498a0aabff0087be0, type: 2}

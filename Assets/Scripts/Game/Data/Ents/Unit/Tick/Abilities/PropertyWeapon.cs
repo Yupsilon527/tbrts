@@ -17,7 +17,7 @@ public class PropertyWeapon : PropertyAbility
     public override bool CanBeCast(CombatDefines.AttackPhase phase)
     {
         return original.attackPhase == phase 
-            && (!original.castOnce || uses==0)
+            && (!original.HasFlag(CombatDefines.AttackFlag.usableOnce) || uses==0)
             && (original.HasFlag(CombatDefines.AttackFlag.castInFrontRow) && parent.troopPosition.y == 0
             || original.HasFlag(CombatDefines.AttackFlag.castInBackRow) && parent.troopPosition.y == 1
             || original.HasFlag(CombatDefines.AttackFlag.castInTransport) && parent.troopPosition.y < 0

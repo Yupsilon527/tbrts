@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
+  m_Name: Human Hinf
+  m_EditorClassIdentifier: 
+  unit:
+    InternalName: Human Hinf
+    icon: {fileID: 21300000, guid: d68b1a2f0cb67bb4ca4e56737750cfd5, type: 3}
+    flags:
+    - infantry
+    costs:
+    - resource: 0
+      value: 250
+    - resource: 1
+      value: 100
+    - resource: 3
+      value: 20
+    prerequisites:
+    - b_keep 2
+    unit:
+      Offense: 15
+      Defense: 15
+      Luck: 0
+      Attack: 15
+      Magic: 0
+      Speed: 10
+      Action: 3
+      Mana: 0
+      Supply: 0
+      Health: 50
+      Barrier: 0
+      Armor: 2
+      Shield: 2
+      Padding: 2
+      Resistance: 0
+      Block: 3
+      LuckCoefficient: 1
+      SpeedCoefficient: 1
+      DodgeChance: 0
+      BlockChance: 40
+      ProcChance: 0
+      CritChance: 0
+      bonusDamage:
+      - damage: 5
+        scale: 0
+        flag: 8
+    armySprites:
+    - {fileID: 21300000, guid: d68b1a2f0cb67bb4ca4e56737750cfd5, type: 3}
+    - {fileID: 21300000, guid: d68b1a2f0cb67bb4ca4e56737750cfd5, type: 3}
+    - {fileID: 21300000, guid: d68b1a2f0cb67bb4ca4e56737750cfd5, type: 3}
+    - {fileID: 21300000, guid: d68b1a2f0cb67bb4ca4e56737750cfd5, type: 3}
+    - {fileID: 21300000, guid: d68b1a2f0cb67bb4ca4e56737750cfd5, type: 3}
+    - {fileID: 21300000, guid: d68b1a2f0cb67bb4ca4e56737750cfd5, type: 3}
+    unitFlags: 020000000a000000
+    attacks:
+    - InternalName: Hinf Melee
+      abilityFlags: 76
+      apCost: 1
+      mpCost: 0
+      spCost: 0
+      castTime: 120
+      castDelay: 120
+      attackPhase: 2
+      targetPriority: 0
+      areaMode: 2
+    spells: []
+    abilities:
+    - abilityID: foot
+      abilityLevel: 1
+    - abilityID: raze
+      abilityLevel: 1
+    - abilityID: slow
+      abilityLevel: 1
+  attacks:
+  - {fileID: 11400000, guid: 0b12d1c6c0d533841b2ec64cf3f6adcd, type: 2}
+  spells: []
+  character: {fileID: 11400000, guid: d4a914700affcc6488aa29dbf839d77c, type: 2}

@@ -34,12 +34,13 @@ public static class UnitDefines
 		regen,
 		haste,
 		slow,
-
+		
+        building,
         seaworthy,
         swim,
         amphibian,
         foot,
-        giant,
+        mounted,
         fly,
         ghost,
         wheels,

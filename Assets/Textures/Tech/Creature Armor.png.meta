@@ -1,0 +1,585 @@
+fileFormatVersion: 2
+guid: bd56515332be0764bb061153a02509f8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2207594483705384374
+    second: Creature Armor_0
+  - first:
+      213: -2135396567741690443
+    second: Creature Armor_1
+  - first:
+      213: 2149979458627267380
+    second: Creature Armor_2
+  - first:
+      213: 2688589832814682345
+    second: Creature Armor_3
+  - first:
+      213: -2601660223756667035
+    second: Creature Armor_4
+  - first:
+      213: -6313740615954368897
+    second: Creature Armor_5
+  - first:
+      213: 249053036944624081
+    second: Creature Armor_6
+  - first:
+      213: -4511078121687845010
+    second: Creature Armor_7
+  - first:
+      213: -3580706638862912303
+    second: Creature Armor_8
+  - first:
+      213: 1991820162185785620
+    second: Creature Armor_9
+  - first:
+      213: -666201889152745227
+    second: Creature Armor_10
+  - first:
+      213: 3693666736230918782
+    second: Creature Armor_11
+  - first:
+      213: 7294465012056405922
+    second: Creature Armor_12
+  - first:
+      213: 465427594718664641
+    second: Creature Armor_13
+  - first:
+      213: -9080986424392364693
+    second: Creature Armor_14
+  - first:
+      213: 1634940562828065309
+    second: Creature Armor_15
+  - first:
+      213: -8205171930301848112
+    second: Creature Armor_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Creature Armor_0
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 723
+        width: 298
+        height: 276
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a42f0ae638c0d51e0800000000000000
+      internalID: -2207594483705384374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature Armor_1
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 723
+        width: 297
+        height: 277
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bd0b2da22c8d52e0800000000000000
+      internalID: -2135396567741690443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature Armor_2
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 723
+        width: 281
+        height: 276
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43b6dd13de246dd10800000000000000
+      internalID: 2149979458627267380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature Armor_3
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 377
+        width: 251
+        height: 267
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e065ab453acf4520800000000000000
+      internalID: 2688589832814682345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature Armor_4
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 358
+        width: 255
+        height: 285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56778b88fcb05ebd0800000000000000
+      internalID: -2601660223756667035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature Armor_5
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 351
+        width: 223
+        height: 296
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7675168c561168a0800000000000000
+      internalID: -6313740615954368897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature Armor_6
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 167
+        width: 44
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d90155ea60d47300800000000000000
+      internalID: 249053036944624081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature Armor_7
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 167
+        width: 44
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6772ca595e6561c0800000000000000
+      internalID: -4511078121687845010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature Armor_8
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 169
+        width: 42
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d471b98846ce4ec0800000000000000
+      internalID: -3580706638862912303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature Armor_9
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 169
+        width: 43
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4117b8762ed54ab10800000000000000
+      internalID: 1991820162185785620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature Armor_10
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 47
+        width: 124
+        height: 223
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f04b5859ec21c6f0800000000000000
+      internalID: -666201889152745227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature Armor_11
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 52
+        width: 170
+        height: 216
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7a68b3a35a824330800000000000000
+      internalID: 3693666736230918782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature Armor_12
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 71
+        width: 191
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a7332ed7452b3560800000000000000
+      internalID: 7294465012056405922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature Armor_13
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 39
+        width: 43
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c7ded37ee7857600800000000000000
+      internalID: 465427594718664641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature Armor_14
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 39
+        width: 43
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6dc2fbc5fad9f180800000000000000
+      internalID: -9080986424392364693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature Armor_15
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 41
+        width: 41
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1a7e3497c970b610800000000000000
+      internalID: 1634940562828065309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature Armor_16
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 41
+        width: 41
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d52a5d2a9f512e80800000000000000
+      internalID: -8205171930301848112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Creature Armor_0: -2207594483705384374
+      Creature Armor_1: -2135396567741690443
+      Creature Armor_10: -666201889152745227
+      Creature Armor_11: 3693666736230918782
+      Creature Armor_12: 7294465012056405922
+      Creature Armor_13: 465427594718664641
+      Creature Armor_14: -9080986424392364693
+      Creature Armor_15: 1634940562828065309
+      Creature Armor_16: -8205171930301848112
+      Creature Armor_2: 2149979458627267380
+      Creature Armor_3: 2688589832814682345
+      Creature Armor_4: -2601660223756667035
+      Creature Armor_5: -6313740615954368897
+      Creature Armor_6: 249053036944624081
+      Creature Armor_7: -4511078121687845010
+      Creature Armor_8: -3580706638862912303
+      Creature Armor_9: 1991820162185785620
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -32,7 +32,7 @@ public static class TerrainDefines
         Amphibian = 2,
         Basic = 3,
         GroundFoot = 4,
-        GroundVersatile = 5,
+        GroundMounted = 5,
         GroundWheels = 6,
         Fly = 7,
         Ghost = 8,
@@ -275,7 +275,7 @@ public static class TerrainDefines
                         return 1;
                     }
                     return 2;
-                case Movement.GroundVersatile:
+                case Movement.GroundMounted:
                     if (Elevation == Elevation.Swamp || Elevation == Elevation.Hill)
                     {
                         return 3;
@@ -342,7 +342,7 @@ public static class TerrainDefines
             case Movement.GroundWheels:
                 return elevation == Elevation.City || (elevation >= Elevation.Plain &&
                 elevation <= Elevation.Hill);
-            case Movement.GroundVersatile:
+            case Movement.GroundMounted:
                 return elevation == Elevation.City || elevation >= Elevation.Sea &&
                     elevation <= Elevation.Mountain;
             case Movement.Fly:

@@ -32,6 +32,7 @@ public class PropertySpell : PropertyAbility
             HashSet<DataItemArmy> affectedArmies = new();
             table.Precast();
             table.attacker.FireEventOnSelf(AbilityDefines.Event.CastSpell);
+
             foreach (var attack in original.effects)
             {
                 attack.Activate(table);
@@ -62,6 +63,8 @@ public class PropertySpell : PropertyAbility
     #region Resource
     public override bool HasResourcesToCast()
     {
+        if (original.HasFlag(CombatDefines.SpellFlag.mustNotHaveActed) && parent.troop.movement.movedThisTurn) return false;
+        
         var playerOwner = parent.GetPlayerOwner();
         return parent.actions.Sp.GetValue() >= original.SupplyCost
         && playerOwner.econ.CanAffordResource(new ResourceCost(EconomyDefines.EconomyResource.Metal, original.MetalCost))
@@ -76,6 +79,9 @@ public class PropertySpell : PropertyAbility
         playerOwner.econ.Spend(new ResourceCost(EconomyDefines.EconomyResource.Metal, original.MetalCost));
         playerOwner.econ.Spend(new ResourceCost(EconomyDefines.EconomyResource.Gold, original.GoldCost));
         playerOwner.econ.Spend(new ResourceCost(EconomyDefines.EconomyResource.Mana, original.ManaCost));
+
+        if (original.HasFlag(CombatDefines.SpellFlag.mustNotHaveActed))
+            parent.troop.Exhaust();
 
         base.SpendResources();
     }
@@ -97,7 +103,9 @@ public class PropertySpell : PropertyAbility
 
     public override DataItemUnit[] GetMainTargets(CastTable table)
     {
-        if (SidewaysMap.main?.GetTile(table.targetPoint)?.armyLayer is DataItemArmy targetArmy)
+        if (SidewaysMap.main?.GetTile(table.targetPoint)?.armyLayer is DataItemArmy targetArmy
+            && ((targetArmy.GetAlignment(parent) == PlayerDefines.Alignment.enemy && original.HasFlag(CombatDefines.SpellFlag.targetEnemies))
+            || (targetArmy.GetAlignment(parent) != PlayerDefines.Alignment.enemy && original.HasFlag(CombatDefines.SpellFlag.targetAllies))))
         {
             return targetArmy.formation.GetUnits();
         }
@@ -109,9 +117,11 @@ public class PropertySpell : PropertyAbility
         HashSet<DataItemUnit> targets = new HashSet<DataItemUnit>();
         foreach (var tile in GetHitTiles(SidewaysMap.main.GetTile(table.targetPoint)))
         {
-            if (tile.armyLayer != null)
+            if (tile.armyLayer != null
+                && ((tile.armyLayer.GetAlignment(parent) == PlayerDefines.Alignment.enemy && original.HasFlag(CombatDefines.SpellFlag.targetEnemies))
+            || (tile.armyLayer.GetAlignment(parent) != PlayerDefines.Alignment.enemy && original.HasFlag(CombatDefines.SpellFlag.targetAllies))))
                 foreach (var army in tile.armyLayer.formation.GetUnits())
-                        targets.Add(army);
+                    targets.Add(army);
         }
         return targets.ToArray();
     }

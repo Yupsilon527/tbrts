@@ -7,7 +7,7 @@ public static class CombatDefines
         BeforeCombat = 0,
         Prep = 1,
         Attack = 2,
-        PostAttack = 3,
+        Parting = 3,
         AfterCombat = 4,
         OutOfCombat = 5,
     }
@@ -25,6 +25,7 @@ public static class CombatDefines
         targetSelf = 1 << 9,
         cannotMiss = 1 << 10,
         indirectAttack = 1 << 11,
+        usableOnce = 1 << 12,
     }
     public enum ArmyPriorityMode
     {
@@ -39,6 +40,13 @@ public static class CombatDefines
     }
     #endregion
     #region Spells
+    public enum SpellFlag
+    {
+        nothing = 0,
+        targetAllies = 1 << 1,
+        targetEnemies = 1 << 2,
+        mustNotHaveActed = 1 << 3,
+    }
     public enum TileTargetingMode
     {
         passive,

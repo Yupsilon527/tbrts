@@ -1,21 +1,10 @@
 TODO
-	LoS
 	sites
+		gold
+		mana
 
 	mock combat windows
-			
-	army innates
-		auras
 
-		troop statuses
-			troop divine shield?, haste, slow
-
-		regen for SP
-		attrition for SP
-		move faster SP
-		ranged support for SP
-		spend SP to move (gas)
-		spend SP to regen
 
 		Resources
 		* Gold
@@ -24,23 +13,14 @@ TODO
 		* Can have up to 10* Regenerates by 1 each turn, up to 3
 		
 
-	army statuses
+	troop statuses
 		speed/slow/rooted
 		cloaked (works?)
 		warded
-		blind
+		blind (reduces vision)
 
-	army effects
-		push back
-		zone of control
 
-		terrain bonuses
-			ie armor in woods
-			ie los in mountains
 
-		firststrike (removes delay off abilities)
-		swarm - gets weaker the less hp it has
-		run after attack
 
 	top bar
 
@@ -61,6 +41,10 @@ Fixes
 	windows/command window pos
 
 TODO
+	revise 
+		movement
+		modifier states
+
 	summoning spells
 	corpses/necromancy
 	some sort of morale?
@@ -68,6 +52,60 @@ TODO
 	eventually TBRPS spellforge/spells
 
 	years/HoMM weeks (events?)
+	
+			
+	army innates
+		unit size (small med large) for transport loading
+
+		push back
+		zone of control (retaliate when unit walk past)
+
+		terrain bonuses
+			ie armor in woods
+			ie los in mountains
+
+		firststrike (removes delay off abilities)
+		swarm - gets weaker the less hp it has
+		run after attack
+
+		melee/range prio
+
+		auras
+		 passives
+			on kill gain MP
+			on kill gain AP
+			on kill gain HP
+
+			necro
+				necro for 1 battle
+				raise dead
+
+			assassinate
+			
+			damage eq missing hp
+			damage when user is below HP
+
+			after attack, gain damage?
+			bonus vs debuffed targets?
+			bonus when hit/blocking
+
+			passive points
+				1 PP block/guard an ally
+					negate entire row
+				1 PP dodge/negate
+				1 PP heal after damage self/other
+				1 PP counterattack self/ally
+				1 PP attack one last time
+				1 PP followup attacking ally
+				1 PP reflect magic attack
+
+			supply points
+				regen for SP
+				attrition for SP
+				move faster SP
+				ranged support for SP
+				spend SP to move (gas)
+				spend SP to regen
 
 QoL
 	document armies/etc

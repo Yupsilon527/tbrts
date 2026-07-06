@@ -13,16 +13,15 @@ MonoBehaviour:
   m_Name: Harc Ranged
   m_EditorClassIdentifier: 
   effects:
-  - {fileID: 11400000, guid: 54eb31c9ce69a054188589c649059715, type: 2}
+  - {fileID: 11400000, guid: 768795fae82ebbb4694719fb61c63200, type: 2}
   data:
     InternalName: Harc Ranged
+    abilityFlags: 76
     apCost: 1
     mpCost: 0
     spCost: 0
     castTime: 120
     castDelay: 160
-    abilityFlags: 76
-    castOnce: 0
     attackPhase: 2
     targetPriority: 0
     areaMode: 0
