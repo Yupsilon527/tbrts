@@ -91,6 +91,7 @@ public class ArmyMovementComponent : ArmyComponent
     public void Teleport(Vector2Int Location)
     {
         parent.MoveToTile(Location, false);
+        parent.UpdateLoS(true);
     }
     public void UpdateMaxMovement()
     {
@@ -124,13 +125,16 @@ public class ArmyMovementComponent : ArmyComponent
                     var next = firstOrder?.path?.Next() ?? null;
                     if (next != null && firstOrder.path.failure != Astar.Failure.impossible && firstOrder.path.failure != Astar.Failure.impassible_origin && firstOrder.path.failure != Astar.Failure.impassible_target)
                     {
-                        if (!parent.MoveToTile(next.gridPos, false))
+                        bool walked = parent.MoveToTile(next.gridPos, false);
+                        parent.UpdateLoS(!walked);
+                        if (!walked)
                             return;
                     }
                     else return;
                 }
             }
             parent.display?.OnPathChange();
+            parent.UpdateLoS(true);
         }
     }
 }

@@ -1,5 +1,8 @@
 TODO
 	LoS
+	sites
+
+	mock combat windows
 			
 	army innates
 		auras
@@ -25,14 +28,24 @@ TODO
 		speed/slow/rooted
 		cloaked (works?)
 		warded
+		blind
 
 	army effects
 		push back
 		zone of control
 
+		terrain bonuses
+			ie armor in woods
+			ie los in mountains
+
 		firststrike (removes delay off abilities)
 		swarm - gets weaker the less hp it has
 		run after attack
+
+	top bar
+
+TEST
+	innates/auras
 
 Fixes
 	armor?
@@ -45,10 +58,20 @@ Fixes
 	player window doesnt work
 	game skips player 2
 
-QoL
+	windows/command window pos
 
+TODO
+	summoning spells
+	corpses/necromancy
+	some sort of morale?
+
+	eventually TBRPS spellforge/spells
+
+	years/HoMM weeks (events?)
+
+QoL
 	document armies/etc
-	mock combat windows
+		unit/buildings desc
 
 	tile highlights and colors
 	army QOL

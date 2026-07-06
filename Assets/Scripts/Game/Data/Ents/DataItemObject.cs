@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 
 public abstract class DataItemObject : DataItem
@@ -16,6 +17,7 @@ public abstract class DataItemObject : DataItem
     public abstract DataItemTile[] GetOccupiedTiles();
     public virtual void ChangeTile(Vector2Int t, DisplayPositionChange position)
     {
+        OnPositionChange(t, t);
         display?.OnPositionChange(t, position);
     }
     public int GetDistanceFromTile(DataItemTile tile) {
@@ -102,6 +104,7 @@ public abstract class DataItemObject : DataItem
     
     public PlayerDefines.Alignment GetAlignment(DataItemPlayer other)
     {
+        if (GetPlayerOwner() == null || other == null) return PlayerDefines.Alignment.enemy;
         return GetPlayerOwner().GetAlignment(other);
     }
 
@@ -131,18 +134,29 @@ public abstract class DataItemObject : DataItem
     {
         return true;
     }
-    public  bool IsVisibleToPlayer(int playerID)
+    public virtual bool IsVisibleToPlayer(int playerID)
     {
-        return true;
+        return GetOccupiedTiles().Any(t => t.IsRevealedByPlayer(playerID, UnitDefines.TileVisibility.visible) );
     }
     public virtual bool IsVisibleToPlayer(DataItemPlayer player)
     {
-        return true;
+        return IsVisibleToPlayer(player.ID);
     }
     public int GetSightRange()
-    { return 0; }
+    { return 3; }
     public int GetTrueRange()
     { return 0; }
+    public void OnPositionChange(Vector2Int newPos, Vector2Int oldPos) { }
+    public void RevealPosition()
+    {
+        foreach (var tile in GetOccupiedTiles())
+        {
+            if (GetSightRange() <= 0) return;
+                GameManager.main.los.RevealCircle(GetPlayerOwner().ID, tile.gridPos, GetSightRange(), UnitDefines.TileVisibility.revealed_visible);
+            if (GetTrueRange()>0)
+            GameManager.main.los.RevealCircle(GetPlayerOwner().ID, tile.gridPos, GetTrueRange(), UnitDefines.TileVisibility.revealed_truesight);
+        }
+    }
     #endregion
     public virtual void Despawn()
     {

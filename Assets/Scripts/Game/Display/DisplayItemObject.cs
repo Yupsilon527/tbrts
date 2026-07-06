@@ -37,7 +37,16 @@ public class DisplayItemObject<tDataItem> : Initializable ,  IDisplayItemObject<
     }
     public virtual void OnGraphicsChange()
     {
+        OnVisibilityChange();
         DrawAgain();
+    }
+    public virtual void OnVisibilityChange()
+    {
+        gameObject.SetActive(IsVisible());
+    }
+    public virtual bool IsVisible()
+    {
+        return assignedObject.IsVisibleToPlayer(GameManager.main.playerManager.currentPlayer);
     }
     public virtual void OnPlayerOwnerChange()
     {
@@ -154,5 +163,6 @@ public interface IDisplayItemObject<out T> where T : DataItem
     public abstract void OnSelectionChange();
     public abstract void OnPositionChange(Vector2Int gridPos, DisplayPositionChange change);
     public abstract void OnGraphicsChange();
+    public abstract void OnVisibilityChange();
     public abstract void OnPathChange();
 }

@@ -250,13 +250,6 @@ public class DataItemCastle : DataItemBuilding
             }
         }*/
     }
-    #region LoS
-    public override bool IsVisibleToPlayer(DataItemPlayer player)
-    {
-        return occupiedTiles.Any(t => t.IsRevealedByPlayer(player, UnitDefines.TileVisibility.visible));
-    }
-
-    #endregion
     public  void RazeCastle(DataItemArmy attacker, DataItemCastle Castle, CastleRazeMode razeMode)
     {
         var raidingPlayer = attacker.GetPlayerOwner();

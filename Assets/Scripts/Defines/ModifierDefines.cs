@@ -255,13 +255,17 @@ public static class ModifierDefines
         shop_resets = 99,
         item_level = 103,
         item_rarity = 104,
-        
-        total = 105,
+
+        stagger = 105,
+
+
         ability_cast_range = 106,
         ability_aoe_range = 107,
         critical_damage = 108,
         critical_chance = 109,
         outgoing_bonus_damage=110,
+
+        total = 106,
     }
 
     public enum TroopState

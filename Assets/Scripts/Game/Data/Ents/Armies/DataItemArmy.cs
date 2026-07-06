@@ -1,6 +1,7 @@
 ﻿using Astar;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 
 public class DataItemArmy : DataItemMob
@@ -64,7 +65,7 @@ public class DataItemArmy : DataItemMob
     #region Move
     public virtual bool ChangeTile(Vector2Int t, int cost, DisplayPositionChange m)
     {
-        if (movement.movementLeft>0)
+        if (movement.movementLeft > 0)
         {
             movement.PayMovement(cost);
             ChangeTile(t, m);
@@ -93,8 +94,7 @@ public class DataItemArmy : DataItemMob
         tile = newTile;
         gridPos = t;
         tile.armyLayer = this;
-        UpdateLoSAroundTile(gridPos);
-        UpdateLoSAroundTile(oldtile);
+        OnPositionChange(t, oldtile);
         display?.OnPositionChange(t, m);
     }
     void ChangeRegion(DataItemCastle enter, DataItemCastle exit)
@@ -124,7 +124,7 @@ public class DataItemArmy : DataItemMob
         int totalMove = ntile.GetMoveCost(m);
         if (ntile != null)
         {
-            if (ntile.armyLayer != null )
+            if (ntile.armyLayer != null)
             {
                 if (ntile.armyLayer.GetAlignment(this) == PlayerDefines.Alignment.enemy)
                 {
@@ -135,16 +135,16 @@ public class DataItemArmy : DataItemMob
                 {
                     var currentOrder = orders.GetCurrentOrder();
 
-                    
-                        if (currentOrder.path.Remaining() > 1)
+
+                    if (currentOrder.path.Remaining() > 1)
+                    {
+                        var firstTile = currentOrder.path.Following(1);
+                        var secondTile = currentOrder.path.Following(2);
+                        if (movement.CanWalkOnTile(firstTile) && movement.CanWalkOnTile(secondTile))
                         {
-                            var firstTile = currentOrder.path.Following(1);
-                            var secondTile = currentOrder.path.Following(2);
-                            if (movement.CanWalkOnTile(firstTile) && movement.CanWalkOnTile(secondTile))
-                            {
-                                totalMove = firstTile.GetMoveCost(m) + secondTile.GetMoveCost(m);
-                                return ChangeTile(t, totalMove, DisplayPositionChange.move);
-                            }
+                            totalMove = firstTile.GetMoveCost(m) + secondTile.GetMoveCost(m);
+                            return ChangeTile(t, totalMove, DisplayPositionChange.move);
+                        }
                     }
                 }
             }
@@ -170,6 +170,17 @@ public class DataItemArmy : DataItemMob
             return ChangeTile(t, totalMove, DisplayPositionChange.move);
         }
         return false;
+    }
+    public void UpdateLoS(bool final)
+    {
+        if (final)
+        {
+            GameManager.main.los.ReviseLoSForActivePlayer();
+        }
+        else
+        {
+            RevealPosition();
+        }
     }
     #endregion
     public bool IsAlive()
@@ -295,14 +306,9 @@ public class DataItemArmy : DataItemMob
     {
         if (GetAlignment(player) == PlayerDefines.Alignment.enemy)
         {
-            return true;    //TODO LoS
-            return tile.IsRevealedByPlayer(player, status.HasState(ModifierDefines.TroopState.Stealth) ? UnitDefines.TileVisibility.truesight : UnitDefines.TileVisibility.visible);
+            return tile?.IsRevealedByPlayer(player, status.HasState(ModifierDefines.TroopState.Stealth) ? UnitDefines.TileVisibility.truesight : UnitDefines.TileVisibility.visible) ?? false;
         }
         return base.IsVisibleToPlayer(player);
-    }
-    public void UpdateLoSAroundTile(Vector2Int tile)
-    {
-
     }
     #endregion
     public bool BattleAnother(DataItemArmy other, bool showPopup = true)
@@ -311,10 +317,11 @@ public class DataItemArmy : DataItemMob
         {
             if (showPopup)
             {
-                InterfaceManager.main.OpenPrepareCombatWindow(this,other);
+                InterfaceManager.main.OpenPrepareCombatWindow(this, other);
                 return false;
             }
-            else {
+            else
+            {
                 Exhaust(4);
                 movement.UpdateStartingMovement();
                 Combat.main.BattleTroops(this, other, other.tile);
@@ -345,10 +352,11 @@ public class DataItemArmy : DataItemMob
         }
         if (formation.GetUnits(incDead: false).Length == 0)
             Despawn();
-        else {
+        else
+        {
             status.ResolvePendingStatuses();
             formation.OnFormationUpdate();
-    }
+        }
     }
     #region Selection
     public override void SetSelected(bool value)
@@ -408,8 +416,8 @@ public class DataItemArmy : DataItemMob
         if (!dead)
         {
             dead = true;
+            OnPositionChange(gridPos, gridPos);
             base.Despawn();
-            UpdateLoSAroundTile(gridPos);
 
             tile.armyLayer = null;
             if (IsSelected()) GameManager.main.armyManager.ClearSelectedArmy();
@@ -446,7 +454,7 @@ public class DataItemArmy : DataItemMob
         List<DataItemArmy> supporters = new();
         foreach (var army in GetPlayerOwner().units)
         {
-            if (army.formation.GetAbilitiyMax("rangeSupport") >0 && (army.gridPos - gridPos).magnitude<= army.formation.GetAbilitiyMax("rangeSupport"))
+            if (army.formation.GetAbilitiyMax("rangeSupport") > 0 && (army.gridPos - gridPos).magnitude <= army.formation.GetAbilitiyMax("rangeSupport"))
             {
                 supporters.Add(army);
             }
@@ -455,7 +463,7 @@ public class DataItemArmy : DataItemMob
         {
             foreach (var army in castle.GetGarrison())
             {
-                if (army!=this && army.formation.GetAbilitiyMax("siegeSupport")>0)
+                if (army != this && army.formation.GetAbilitiyMax("siegeSupport") > 0)
                 {
                     supporters.Add(army);
                 }
@@ -478,7 +486,7 @@ public class DataItemArmy : DataItemMob
 
 public class DataItemMob : DataItemObject
 {
-  protected  Vector2Int gridPos;
+    protected Vector2Int gridPos;
     protected DataItemTile tile;
 
     public override Vector2Int GetCoords()

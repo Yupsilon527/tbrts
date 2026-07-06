@@ -144,7 +144,11 @@ public class DataItemTile
 
     public bool IsRevealedByPlayer(DataItemPlayer player, UnitDefines.TileVisibility visibility)
     {
-        return RevealedByPlayer[player.ID] >= (int)visibility;
+        return IsRevealedByPlayer(player.ID, visibility);
+    }
+    public bool IsRevealedByPlayer(int playerID, UnitDefines.TileVisibility visibility)
+    {
+        return RevealedByPlayer[playerID] >= (int)visibility;
     }
     #endregion
 

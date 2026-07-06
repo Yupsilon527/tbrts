@@ -17,10 +17,12 @@ public static class UnitDefines
     public static float fSalaryMultiplier = 2;
 	public enum TileVisibility
 	{
-		hidden,
-		foggy,
-		visible,
-		truesight,
+		hidden = 0,
+		foggy = 1,
+		visible = 2,
+		revealed_visible=3,
+		truesight = 4,
+		revealed_truesight =5,
 	}
     public enum ArmyAbilities
     {

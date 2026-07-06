@@ -80,7 +80,6 @@ public delegate void AbilityFunction(EventTable CastData);
             this.aFunction = aFunction;
         }
 
-		public static int GetArmyBaseLoS = 4;
     }
     [System.Serializable]
     public class AbilityEvent

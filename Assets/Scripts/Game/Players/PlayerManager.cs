@@ -28,6 +28,7 @@ public class PlayerManager : GameComponent
     public void ChangeActivePlayer(int ap)
     {
         playerTurn = ap;
+        GameManager.main.los.ReviseLoSForPlayer(currentPlayer);
         InterfaceManager.main.AssignPlayer(currentPlayer);
     }
 
