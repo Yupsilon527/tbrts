@@ -144,6 +144,7 @@ public class UnitData : ProductionData
 
         output += $"Magic: {unit.Magic}<br>";
 
+        output += $"Health: {unit.Health}<br>";
         output += $"Armor: {unit.Armor}/{unit.Shield}/{unit.Padding}<br>";
         output += $"Magic Resist: {Mathf.Round(100-UnitDamageable.AccountResistances(100, unit.Resistance))}<br>";
         output += $"Action Points: {unit.Action}/Reaction Points: {unit.Mana}/Supply Points: {unit.Supply} <br>";

@@ -15,7 +15,7 @@ public class UnitContainer : MonoBehaviour
             unitImage.sprite = unit.data.GetSprite(CharacterSO.SpriteFrame.idle);
         }
         if (unitName != null)
-            unitName.text = unit.InternalName;
+            unitName.text = unit.data.InternalName;
         if (hpFill != null)
             hpFill.AssignResource(unit.health);
     }

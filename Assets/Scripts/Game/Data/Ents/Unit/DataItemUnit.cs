@@ -227,15 +227,15 @@ public class DataItemUnit : DataItemMob
 
         output += $"Combat: {stats.realStats.Offense}/{stats.realStats.Defense}<br>";
 
-        string damage = stats.realStats.Attack > stats.baseStats.Attack ? ("+" + (stats.realStats.Attack - stats.baseStats.Attack)) : ("" + (stats.realStats.Attack - stats.baseStats.Attack));
+        string damage = stats.realStats.Attack == stats.baseStats.Attack  ? "" :  stats.realStats.Attack > stats.baseStats.Attack ? ("+" + (stats.realStats.Attack - stats.baseStats.Attack)) : ("" + (stats.realStats.Attack - stats.baseStats.Attack));
         output += $"Damage: {stats.baseStats.Attack}{damage}<br>";
 
-        string magic = stats.realStats.Magic > stats.baseStats.Magic ? ("+" + (stats.realStats.Magic - stats.baseStats.Magic)) : ("" + (stats.realStats.Magic - stats.baseStats.Magic));
+        string magic = stats.realStats.Magic == stats.baseStats.Magic ? "" : stats.realStats.Magic > stats.baseStats.Magic ? ("+" + (stats.realStats.Magic - stats.baseStats.Magic)) : ("" + (stats.realStats.Magic - stats.baseStats.Magic));
         output += $"Magic: {stats.baseStats.Magic}{magic}<br>";
 
-        string armor = stats.realStats.Armor > stats.baseStats.Armor ? ("+" + (stats.realStats.Armor - stats.baseStats.Armor)) : ("" + (stats.realStats.Armor - stats.baseStats.Armor));
-        string shield = stats.realStats.Shield > stats.baseStats.Shield ? ("+" + (stats.realStats.Shield - stats.baseStats.Shield)) : ("" + (stats.realStats.Shield - stats.baseStats.Shield));
-        string padding = stats.realStats.Padding > stats.baseStats.Padding ? ("+" + (stats.realStats.Padding - stats.baseStats.Padding)) : ("" + (stats.realStats.Shield - stats.baseStats.Padding));
+        string armor = stats.realStats.Armor == stats.baseStats.Armor ? "" : stats.realStats.Armor > stats.baseStats.Armor ? ("+" + (stats.realStats.Armor - stats.baseStats.Armor)) : ("" + (stats.realStats.Armor - stats.baseStats.Armor));
+        string shield = stats.realStats.Shield == stats.baseStats.Shield ? "" : stats.realStats.Shield > stats.baseStats.Shield ? ("+" + (stats.realStats.Shield - stats.baseStats.Shield)) : ("" + (stats.realStats.Shield - stats.baseStats.Shield));
+        string padding = stats.realStats.Padding == stats.baseStats.Padding ? "" : stats.realStats.Padding > stats.baseStats.Padding ? ("+" + (stats.realStats.Padding - stats.baseStats.Padding)) : ("" + (stats.realStats.Shield - stats.baseStats.Padding));
 
         output += $"Armor: {stats.baseStats.Armor}{armor}/{stats.baseStats.Shield}{shield}/{stats.baseStats.Padding}{padding}<br>";
         output += $"Magic Resist: {Mathf.Round(UnitDamageable.AccountResistances(100, stats.realStats.Resistance))}<br>";

@@ -14,7 +14,7 @@ public class UnitContainerDescriptipn : UnitContainer
         }
         if (unitStats != null)
         {
-            unitStats.text = unit.OutputAbilityTable();
+            unitAbilities.text = unit.OutputAbilityTable();
         }
     }
     public override void ForData(ProductionData data)
