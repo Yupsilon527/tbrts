@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
-  m_Name: Wall 1
+  m_Name: Wall 3
   m_EditorClassIdentifier: 
   InternalName: Wall 1
   AssignedWorld: 
@@ -20,11 +20,12 @@ MonoBehaviour:
     flags: []
     costs:
     - resource: 0
-      value: 600
+      value: 400
     - resource: 3
-      value: 60
+      value: 25
     prerequisites:
-    - _keep 1
+    - _keep 3
+    - _wall 2
     infinite: 2
     affectedFlags: []
     resourceChanges: []
@@ -34,7 +35,7 @@ MonoBehaviour:
       value: 1
       IncreasePerLevel: 0
     - Property: 14
-      value: 3
+      value: 1
       IncreasePerLevel: 0
     states: []
     tempSpells: []

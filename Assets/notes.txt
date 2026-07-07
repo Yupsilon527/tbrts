@@ -34,8 +34,6 @@ TODO
 		blind (reduces vision)
 			
 	army innates
-		unit size (small med large) for transport loading
-
 		terrain bonuses
 			ie armor in woods
 			ie los in mountains

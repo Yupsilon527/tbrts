@@ -200,17 +200,21 @@ public class ArmyFormation : ArmyComponent
     #region Command and Accepting
     public bool CanIAccept(DataItemUnit target)
     {
-        if (target == null || target.GetAlignment(parent) != PlayerDefines.Alignment.playerowned)
+        if (target == null  )
         {
             return true;
         }
-        else if (!parent.GetMainTile().IsPassible(target.GetMovetype()))
+        else if (target.GetAlignment(parent) != PlayerDefines.Alignment.playerowned || !parent.GetMainTile().IsPassible(target.GetMovetype()))
         {
             return false;
         }
-        else if (transport == null && target.isTransport())
+        else if (target.isTransport())
         {
-            return true;
+                return Formation.All(u => u.GetUnitSize() < transport.GetUnitSize()) && GetCommandValue()<= transport.innates.GetAbilityLevel("transport"); ;
+        }
+        else if (transport != null)
+        {
+            return target.GetUnitSize() < transport.GetUnitSize() && CanIAccept(target.GetCommandValue());
         }
         return CanIAccept(target.GetCommandValue());
     }

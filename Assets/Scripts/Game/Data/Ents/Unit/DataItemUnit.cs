@@ -211,7 +211,18 @@ public class DataItemUnit : DataItemMob
     {
         return Mathf.Max(1, Mathf.CeilToInt(GetPowerValue(true) * UnitDefines.fSalaryMultiplier));
     }
-
+    public int GetUnitSize()
+    {
+        if (innates.GetAbilityLevel("small") > 0)
+        {
+            return 0;
+        }
+        else if (innates.GetAbilityLevel("large") > 0)
+        {
+            return 2;
+        }
+        return 1;
+    }
     public bool isTransport()
     {
         return innates.GetAbilityLevel("transport") > 0;
