@@ -73,7 +73,7 @@ TODO
 				necro for 1 battle
 				raise dead
 
-				spawn able to move
+			spawn able to move
 			assassinate
 			
 			damage eq missing hp

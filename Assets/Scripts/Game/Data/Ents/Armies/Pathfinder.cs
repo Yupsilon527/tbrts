@@ -70,7 +70,7 @@ namespace Astar
             if (Solved()) return null;
             return walkpath[++position];
         }
-        public int Remaining() =>  walkpath.Count - 1 - position;
+        public int Remaining() =>  walkpath.Count  - position;
         
         public bool Solved() => Remaining()==0;
         public void Reset() { position = 0; failure = Failure.incomplete; }

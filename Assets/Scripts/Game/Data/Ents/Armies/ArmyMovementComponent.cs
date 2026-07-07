@@ -21,7 +21,7 @@ public class ArmyMovementComponent : ArmyComponent
             return parent.formation.transport.GetMovetype();
         }
 
-        int total = 666;
+        int total = (int)TerrainDefines.Movement.Teleport;
 
         foreach (var Zim in parent.formation.GetUnits())
         {

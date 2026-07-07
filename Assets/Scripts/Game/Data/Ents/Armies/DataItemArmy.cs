@@ -129,24 +129,22 @@ public class DataItemArmy : DataItemMob
                 if (ntile.armyLayer.GetAlignment(this) == PlayerDefines.Alignment.enemy)
                 {
                     if (attack) BattleAnother(ntile.armyLayer);
-                    else return false;
                 }
                 else
                 {
                     var currentOrder = orders.GetCurrentOrder();
-
-
                     if (currentOrder.path.Remaining() > 1)
                     {
                         var firstTile = currentOrder.path.Following(1);
                         var secondTile = currentOrder.path.Following(2);
-                        if (movement.CanWalkOnTile(firstTile) && movement.CanWalkOnTile(secondTile))
+                        if (movement.CanWalkOnTile(firstTile) && movement.CanWalkOnTile(secondTile) && secondTile.armyLayer == null)
                         {
                             totalMove = firstTile.GetMoveCost(m) + secondTile.GetMoveCost(m);
-                            return ChangeTile(t, totalMove, DisplayPositionChange.move);
+                            return ChangeTile(secondTile.gridPos, totalMove, DisplayPositionChange.move);
                         }
                     }
                 }
+                return false;
             }
             else if (ntile.buildingLayer != null)
             {
@@ -463,7 +461,7 @@ public class DataItemArmy : DataItemMob
         {
             foreach (var army in castle.GetGarrison())
             {
-                if (army != this && army.formation.GetAbilitiyMax("siegeSupport") > 0)
+                if (army!= null && army != this && army.formation.GetAbilitiyMax("siegeSupport") > 0)
                 {
                     supporters.Add(army);
                 }
