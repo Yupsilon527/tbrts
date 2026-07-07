@@ -15,7 +15,9 @@ MonoBehaviour:
   unit:
     InternalName: Human Lcav
     icon: {fileID: 21300000, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
-    flags: []
+    flags:
+    - cavalry
+    - melee
     costs:
     - resource: 0
       value: 400
@@ -61,7 +63,7 @@ MonoBehaviour:
     - InternalName: Lcav Melee
       abilityFlags: 76
       apCost: 1
-      mpCost: 0
+      rpCost: 0
       spCost: 0
       castTime: 90
       castDelay: 160
@@ -71,7 +73,7 @@ MonoBehaviour:
     - InternalName: Lcav Charge
       abilityFlags: 12
       apCost: 0
-      mpCost: 0
+      rpCost: 0
       spCost: 1
       castTime: 75
       castDelay: 75

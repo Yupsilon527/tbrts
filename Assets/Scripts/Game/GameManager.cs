@@ -47,6 +47,7 @@ public class GameManager : Initializable
     public void EndTurn()
     {
         playerManager.CycleActivePlayer();
+        armyManager.ClearSelectedArmy();
     }
     public void BeginNewTurn(bool gamestart)
     {

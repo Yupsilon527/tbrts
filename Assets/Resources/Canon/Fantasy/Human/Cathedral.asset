@@ -19,17 +19,21 @@ MonoBehaviour:
     icon: {fileID: 9080485990912184260, guid: 6e992a76de6b8424fb23928f4851b8c7, type: 3}
     flags: []
     costs:
-    - resource: 0
-      value: 1250
+    - resource: 1
+      value: 200
     - resource: 3
-      value: 100
+      value: 40
     prerequisites:
-    - b_keep 3
+    - b_temple
     infinite: 2
-    affectedFlags: []
+    affectedFlags:
+    - support
     resourceChanges: []
     bonusDamage: []
-    properties: []
+    properties:
+    - Property: 10
+      value: 20
+      IncreasePerLevel: 20
     states: []
     tempSpells: []
     abilitiesAdded: []

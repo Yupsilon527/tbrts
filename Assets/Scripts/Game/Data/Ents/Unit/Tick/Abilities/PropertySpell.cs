@@ -66,14 +66,14 @@ public class PropertySpell : PropertyAbility
         if (original.HasFlag(CombatDefines.SpellFlag.mustNotHaveActed) && parent.troop.movement.movedThisTurn) return false;
         
         var playerOwner = parent.GetPlayerOwner();
-        return parent.actions.Sp.GetValue() >= original.SupplyCost
+        return parent.actions.SupplyPoints.GetValue() >= original.SupplyCost
         && playerOwner.econ.CanAffordResource(new ResourceCost(EconomyDefines.EconomyResource.Metal, original.MetalCost))
         && playerOwner.econ.CanAffordResource(new ResourceCost(EconomyDefines.EconomyResource.Gold, original.GoldCost))
         && playerOwner.econ.CanAffordResource(new ResourceCost(EconomyDefines.EconomyResource.Mana, original.ManaCost));
     }
     public override void SpendResources()
     {
-        parent.actions.Sp.SubstractedValue(original.SupplyCost);
+        parent.actions.SupplyPoints.SubstractedValue(original.SupplyCost);
 
         var playerOwner = parent.GetPlayerOwner();
         playerOwner.econ.Spend(new ResourceCost(EconomyDefines.EconomyResource.Metal, original.MetalCost));

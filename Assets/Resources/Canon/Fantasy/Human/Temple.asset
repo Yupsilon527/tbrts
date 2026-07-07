@@ -10,24 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
-  m_Name: Smithy
+  m_Name: Temple
   m_EditorClassIdentifier: 
-  InternalName: Smithy
+  InternalName: Cathedral
   AssignedWorld: 
   building:
-    InternalName: Smithy
-    icon: {fileID: 3511996523978390141, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
+    InternalName: Cathedral
+    icon: {fileID: 9080485990912184260, guid: 6e992a76de6b8424fb23928f4851b8c7, type: 3}
     flags: []
     costs:
     - resource: 0
-      value: 750
+      value: 1250
     - resource: 3
-      value: 30
+      value: 40
     prerequisites:
-    - b_keep 2
+    - b_keep 3
     infinite: 2
-    affectedFlags:
-    - infantry
+    affectedFlags: []
     resourceChanges: []
     bonusDamage: []
     properties: []
@@ -35,11 +34,9 @@ MonoBehaviour:
     tempSpells: []
     abilitiesAdded: []
     grantedResources: []
-    grantedIncome:
-    - resource: 0
-      value: 500
-    - resource: 3
-      value: 100
+    grantedIncome: []
     bonusType: 0
-    production: []
-  armies: []
+    production:
+    - Human Heal
+  armies:
+  - {fileID: 11400000, guid: cb4acf5535becb946a9ecf08ae29c9f6, type: 2}

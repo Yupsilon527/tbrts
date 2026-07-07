@@ -74,6 +74,14 @@ public class UnitStats : UnitComponent
         realStats.Armor = baseStats.Armor;
         realStats.Armor += parent.GetProperty(ModifierDefines.Property.armor_bonus);
         realStats.Armor *= parent.GetProperty(ModifierDefines.Property.armor_bonus_percent);
+
+        realStats.Padding = baseStats.Padding;
+        realStats.Padding += parent.GetProperty(ModifierDefines.Property.padding_bonus);
+        realStats.Padding *= parent.GetProperty(ModifierDefines.Property.padding_bonus_percent);
+
+        realStats.Shield = baseStats.Shield;
+        realStats.Shield += parent.GetProperty(ModifierDefines.Property.shield_bonus);
+        realStats.Shield *= parent.GetProperty(ModifierDefines.Property.shield_bonus_percent);
     }
     public virtual void UpdateBlock()
     {
@@ -83,9 +91,9 @@ public class UnitStats : UnitComponent
     }
     public virtual void UpdateResist()
     {
-        realStats.Armor = baseStats.Armor;
-        realStats.Armor += parent.GetProperty(ModifierDefines.Property.resistance_bonus);
-        realStats.Armor *= parent.GetProperty(ModifierDefines.Property.resistance_bonus_percent);
+        realStats.Resistance = baseStats.Resistance;
+        realStats.Resistance += parent.GetProperty(ModifierDefines.Property.resistance_bonus);
+        realStats.Resistance *= parent.GetProperty(ModifierDefines.Property.resistance_bonus_percent);
     }
     #endregion
     #region Attack
@@ -98,8 +106,8 @@ public class UnitStats : UnitComponent
     public virtual void UpdateMagic()
     {
         realStats.Magic = baseStats.Magic;
-        realStats.Magic += parent.GetProperty(ModifierDefines.Property.special_bonus);
-        realStats.Magic *= parent.GetProperty(ModifierDefines.Property.special_bonus_percent);
+        realStats.Magic += parent.GetProperty(ModifierDefines.Property.magic_bonus);
+        realStats.Magic *= parent.GetProperty(ModifierDefines.Property.magic_bonus_percent);
     }
     #endregion
     #region Endurance
@@ -129,21 +137,21 @@ public class UnitStats : UnitComponent
         realStats.Action = baseStats.Action;
         realStats.Action += parent.GetProperty(ModifierDefines.Property.action_bonus);
 
-        parent.actions?.Ap?.SetLimit(realStats.Action, Resource.LimitRule.leave_value);
+        parent.actions?.ActionPoint?.SetLimit(realStats.Action, Resource.LimitRule.leave_value);
     }
     public virtual void UpdateMana()
     {
         realStats.Mana = baseStats.Mana;
         realStats.Mana += parent.GetProperty(ModifierDefines.Property.mana_bonus);
 
-        parent.actions?.Mp?.SetLimit(realStats.Mana, Resource.LimitRule.leave_value);
+        parent.actions?.ReactionPoints?.SetLimit(realStats.Mana, Resource.LimitRule.leave_value);
     }
     public virtual void UpdateSupply()
     {
         realStats.Supply = baseStats.Supply;
         realStats.Supply += parent.GetProperty(ModifierDefines.Property.supply_bonus);
 
-        parent.actions?.Sp?.SetLimit(realStats.Supply, Resource.LimitRule.leave_value);
+        parent.actions?.SupplyPoints?.SetLimit(realStats.Supply, Resource.LimitRule.leave_value);
     }
     #endregion
     #region Misc Stats

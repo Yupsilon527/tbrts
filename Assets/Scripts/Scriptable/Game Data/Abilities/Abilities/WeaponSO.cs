@@ -16,6 +16,7 @@ public class WeaponSO : ActionSO
             flags |= (int)flag;
         }
         data.abilityFlags = flags;
+        data.InternalName = name;
     }
 
     public WeaponData Translate()
@@ -29,7 +30,7 @@ public class WeaponSO : ActionSO
 [Serializable]
 public class WeaponData : ActionData
 {
-    public int apCost, mpCost, spCost, castTime, castDelay;
+    public int apCost, rpCost, spCost, castTime, castDelay;
     public CombatDefines.AttackPhase attackPhase;
 
     public CombatDefines.ArmyPriorityMode targetPriority;

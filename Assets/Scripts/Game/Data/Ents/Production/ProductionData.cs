@@ -111,9 +111,7 @@ public abstract class ProductionData
         for (int iR = 0; iR < final.Length; iR++)
         {
             EconomyDefines.EconomyResource res = (EconomyDefines.EconomyResource)iR;
-            if (res == EconomyDefines.EconomyResource.Labor && GameManager.main.currentTurn == 0)   //HACK instant free on turn 0 TODO setting
-                final[iR] = new ResourceCost(res, 0);
-            else 
+            
             final[iR] = new ResourceCost(res, (GetBaseCost(res) + additions[iR]) * multipliers[iR] * mult);
         }
         return final;
@@ -183,6 +181,8 @@ public class ProductionTable
 
     public bool CompleteProduction()
     {
+        if (!playerOwner.econ.CanAffordResources(costs)) return false;
+        playerOwner.econ.SpendResources(costs);
       return  production.CompleteProduction(this);
     }
 }

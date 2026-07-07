@@ -73,7 +73,8 @@ public class DamageTable
                             }
                             break;
                         case AttackDefines.DamageType.Magical:
-                            outDamage = Mathf.Max(outDamage - target.stats.realStats.Resistance, outDamage / 2);
+                           // outDamage = Mathf.Max(outDamage - target.stats.realStats.Resistance, outDamage / 2);
+                            outDamage = UnitDamageable.AccountResistances(outDamage, target.stats.realStats.Resistance);
                             break;
                         case AttackDefines.DamageType.Poison:
                             outDamage = Mathf.Clamp(outDamage, 0, target.damageable.Health.GetValue() - 1);

@@ -13,6 +13,7 @@ public class BuildingSO : ProductionSO
         base.OnValidate();
         if (building!=null)
         {
+            building.InternalName = InternalName;
             building.production = armies.Select(u => u == null ? "" : u.unit.InternalName).ToArray();
         }
     }

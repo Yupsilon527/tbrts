@@ -17,32 +17,33 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: d68b1a2f0cb67bb4ca4e56737750cfd5, type: 3}
     flags:
     - infantry
+    - melee
     costs:
     - resource: 0
-      value: 250
+      value: 300
     - resource: 1
-      value: 100
+      value: 375
     - resource: 3
-      value: 20
+      value: 50
     prerequisites:
     - b_keep 2
     unit:
       Offense: 15
       Defense: 15
       Luck: 0
-      Attack: 15
+      Attack: 10
       Magic: 0
       Speed: 10
       Action: 3
       Mana: 0
       Supply: 0
-      Health: 50
+      Health: 120
       Barrier: 0
-      Armor: 2
-      Shield: 2
-      Padding: 2
+      Armor: 5
+      Shield: 3
+      Padding: 5
       Resistance: 0
-      Block: 3
+      Block: 10
       LuckCoefficient: 1
       SpeedCoefficient: 1
       DodgeChance: 0
@@ -65,7 +66,7 @@ MonoBehaviour:
     - InternalName: Hinf Melee
       abilityFlags: 76
       apCost: 1
-      mpCost: 0
+      rpCost: 0
       spCost: 0
       castTime: 120
       castDelay: 120

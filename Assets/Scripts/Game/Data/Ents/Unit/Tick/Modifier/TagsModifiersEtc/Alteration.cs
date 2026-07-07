@@ -65,7 +65,7 @@ public class PropertyAttribute : PropertyTag
     {
         priority = p;
         SetStates(sa);
-        SetProps(pr);
+        SetProps(pr,1);
 
     }
 
@@ -149,12 +149,12 @@ public class PropertyAttribute : PropertyTag
         return properties[property];
     }
 
-    public void SetProps(ModifierDefines.PropertyData[] properties)
+    public void SetProps(ModifierDefines.PropertyData[] properties, int level)
     {
         if (properties == null) return;
         for (int iS = 0; iS < properties.Length; iS++)
         {
-            SetProperty(properties[iS].Property, properties[iS].value);
+            SetProperty(properties[iS].Property, properties[iS].value + properties[iS].IncreasePerLevel * level);
         }
     }
     #endregion

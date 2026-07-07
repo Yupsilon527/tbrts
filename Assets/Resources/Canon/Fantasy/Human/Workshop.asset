@@ -22,7 +22,7 @@ MonoBehaviour:
     - resource: 0
       value: 2000
     - resource: 3
-      value: 100
+      value: 40
     prerequisites:
     - b_keep 4
     infinite: 2

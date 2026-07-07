@@ -142,7 +142,10 @@ public class DataItemCastle : DataItemBuilding
         {
             foreach (var unit in army.formation.GetUnits())
             {
-                unit.upgrades.upgrades.ApplyBonus(bonus.upgrade, bonus.level);
+                if (!region)
+                    unit.upgrades.upgrades.CatchUpUpgrade(bonus.upgrade, bonus.level);
+                else
+                    unit.upgrades.upgrades.ApplyBonus(bonus.upgrade, bonus.level);
             }
         }
     }

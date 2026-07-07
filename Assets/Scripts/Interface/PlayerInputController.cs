@@ -4,15 +4,20 @@ using UnityEngine;
 public class PlayerInputController : MonoBehaviour
 {
     public static PlayerInputController main;
-    float lastClick = 0;
     private void Awake()
     {
         main = this;
     }
     private void Start()
     {
+        Clear();
+    }
+
+    public void Clear()
+    {
         ClearTileColors();
         ClearTileHighlights();
+        mouseOverTile = null;
     }
 
     #region Pathfinder

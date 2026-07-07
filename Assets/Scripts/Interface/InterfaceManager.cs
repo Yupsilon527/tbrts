@@ -30,6 +30,8 @@ public class InterfaceManager : WindowManager
         OpenWindow(infoWindow);
         infoWindow.ShowPlayerTurn(player);
         playerWidget?.AssignPlayer(player);
+
+        PlayerInputController.main.Clear();
     }
     public bool IsMouseOverUI()
     {

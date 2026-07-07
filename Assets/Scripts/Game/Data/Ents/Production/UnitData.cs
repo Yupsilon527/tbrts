@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 
 [Serializable]
@@ -65,7 +66,10 @@ public class UnitData : ProductionData
     }
     public override ResourceCost[] GetCostForPlayer(DataItemPlayer player, float mult = 1)
     {
-        return base.GetCostForPlayer(player, mult);
+       var costs= base.GetCostForPlayer(player, mult);
+        if (GameManager.main.currentTurn == 0)   //HACK instant free on turn 0 TODO setting
+            costs[(int)EconomyDefines.EconomyResource.Labor].value = 0;
+        return costs;
     }
     public int GetCommandValue()
     {

@@ -101,12 +101,11 @@ public class CityProduction : CityComponent
         {
             var prodTable = new ProductionTable(city.GetPlayerOwner(), p, city);
 
-            city.GetPlayerOwner().econ.SpendResources(prodTable.costs);
 
             float laborCost = prodTable.costs[(int)EconomyDefines.EconomyResource.Labor].value;
-            if (instant || laborCost <= iProductionTime)
+            if (instant || laborCost ==0 ||(laborCost < iProductionTime && productionQueue.Count == 0))
             {
-                prodTable.CompleteProduction();
+               if ( prodTable.CompleteProduction())
                 iProductionTime -= laborCost;
             }
             else
@@ -115,14 +114,12 @@ public class CityProduction : CityComponent
             }
         }
     }
-    void RemoveProduction(int id, bool refund)
+    void RemoveProduction(int id)
     {
-        RemoveProduction(productionQueue[id],refund);
+        RemoveProduction(productionQueue[id]);
     }
-    void RemoveProduction(ProductionTable table, bool refund)
+    void RemoveProduction(ProductionTable table)
     {
-        if (refund)
-            city.GetPlayerOwner().econ.RefundCosts(table.costs);
         productionQueue.Remove(table);
     }
 

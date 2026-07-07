@@ -59,6 +59,8 @@ public class PropertyModifier : PropertyThinker
         this.stacks = stacks;
         this.thinkInterval = thinkInterval;
         this.duration = duration;
+
+        SetProps(pr, stacks);
     }
     public override ModifierDefines.Flag GetFlag()
     {

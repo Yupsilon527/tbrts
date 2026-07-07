@@ -18,7 +18,7 @@ public class PlayerManager : GameComponent
     public void CycleActivePlayer()
     {
         int next = playerTurn + 1;
-        if (next >= players.Length - 1)
+        if (next >= players.Length )
         {
             ChangeActivePlayer(1);
             GameManager.main.BeginNewTurn(false);

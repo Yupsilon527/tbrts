@@ -15,7 +15,9 @@ MonoBehaviour:
   unit:
     InternalName: Human Harc
     icon: {fileID: 21300000, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
-    flags: []
+    flags:
+    - infantry
+    - archer
     costs:
     - resource: 0
       value: 125
@@ -67,7 +69,7 @@ MonoBehaviour:
     - InternalName: Harc Ranged
       abilityFlags: 76
       apCost: 1
-      mpCost: 0
+      rpCost: 0
       spCost: 0
       castTime: 120
       castDelay: 160
@@ -77,7 +79,7 @@ MonoBehaviour:
     - InternalName: Harc Support
       abilityFlags: 2144
       apCost: 0
-      mpCost: 0
+      rpCost: 0
       spCost: 1
       castTime: 120
       castDelay: 160

@@ -16,14 +16,14 @@ public class PlayerUpgrades : PlayerComponent
         foreach (var troop in player.units)
         {
             foreach (var unit in troop.formation.GetUnits())
-                unit?.upgrades.upgrades.CompleteUpgrade(upgrade,  newLevel - oldLevel);
+                unit?.upgrades.upgrades.CatchUpUpgrade(upgrade,  newLevel );
         }
     }
     public void ApplyResearchedUpgradeToNewlySpawnedUnit(DataItemUnit unit)
     {
         foreach (var upgrade in upgrades.researchedUpgrades)
         {
-            unit.upgrades.upgrades.CompleteUpgrade(upgrade.upgrade,  upgrade.level);
+            unit.upgrades.upgrades.CatchUpUpgrade(upgrade.upgrade,  upgrade.level);
         }
     }
 }

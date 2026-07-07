@@ -15,26 +15,28 @@ MonoBehaviour:
   unit:
     InternalName: Human Hcav
     icon: {fileID: 21300000, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
-    flags: []
+    flags:
+    - cavalry
+    - melee
     costs:
     - resource: 0
       value: 300
     - resource: 1
-      value: 375
+      value: 200
     - resource: 3
-      value: 45
+      value: 40
     prerequisites:
     - b_keep 3
     unit:
       Offense: 9
       Defense: 9
       Luck: 0
-      Attack: 10
+      Attack: 12
       Magic: 5
       Speed: 115
       Action: 3
       Mana: 0
-      Supply: 0
+      Supply: 1
       Health: 100
       Barrier: 0
       Armor: 0
@@ -68,6 +70,7 @@ MonoBehaviour:
     - abilityID: slow
       abilityLevel: 1
   attacks:
-  - {fileID: 11400000, guid: 1eff5a7a6566a15498a0aabff0087be0, type: 2}
+  - {fileID: 11400000, guid: aca20d8a201f0a94e9b4210c73d3b8ad, type: 2}
+  - {fileID: 11400000, guid: ebacef28fe013bf43887ae1cdc67f8b1, type: 2}
   spells: []
   character: {fileID: 11400000, guid: 185dd6d38c9c05e42a8aff840cef7392, type: 2}

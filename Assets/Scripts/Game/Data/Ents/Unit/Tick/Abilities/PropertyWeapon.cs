@@ -17,6 +17,8 @@ public class PropertyWeapon : PropertyAbility
     public override bool CanBeCast(CombatDefines.AttackPhase phase)
     {
         return original.attackPhase == phase 
+            && ((original.HasFlag(CombatDefines.AttackFlag.indirectAttack) && !parent.GetState(ModifierDefines.State.cannot_cast))
+            || (!original.HasFlag(CombatDefines.AttackFlag.indirectAttack) && !parent.GetState(ModifierDefines.State.cannot_attack)))
             && (!original.HasFlag(CombatDefines.AttackFlag.usableOnce) || uses==0)
             && (original.HasFlag(CombatDefines.AttackFlag.castInFrontRow) && parent.troopPosition.y == 0
             || original.HasFlag(CombatDefines.AttackFlag.castInBackRow) && parent.troopPosition.y == 1
@@ -26,17 +28,17 @@ public class PropertyWeapon : PropertyAbility
     }
     public override bool HasResourcesToCast()
     {
-        return parent.actions.Mp.GetValue() >= original.mpCost
-        && parent.actions.Ap.GetValue() >= original.apCost
-        && parent.actions.Sp.GetValue() >= original.spCost;
+        return parent.actions.ReactionPoints.GetValue() >= original.rpCost
+        && parent.actions.ActionPoint.GetValue() >= original.apCost
+        && parent.actions.SupplyPoints.GetValue() >= original.spCost;
 
     }
     public override void SpendResources()
     {
         uses++;
-        parent.actions.Mp.SubstractedValue(original.mpCost);
-         parent.actions.Ap.SubstractedValue(original.apCost);
-         parent.actions.Sp.SubstractedValue(original.spCost);
+        parent.actions.ReactionPoints.SubstractedValue(original.rpCost);
+         parent.actions.ActionPoint.SubstractedValue(original.apCost);
+         parent.actions.SupplyPoints.SubstractedValue(original.spCost);
         ExtendCooldown( Mathf.CeilToInt(parent.stats.realStats.SpeedCoefficient ));
         base.SpendResources();
     }
@@ -92,10 +94,10 @@ public class PropertyWeapon : PropertyAbility
         var targets = GetValidTargets(caster);
         if (targets.Length == 0) return null;
 
-        if (caster.troopPosition.y == 0 && targets.Any(t => t.GetState(ModifierDefines.State.absolute_melee_priority)))
-            targets = targets.Where(t => t.GetState(ModifierDefines.State.absolute_melee_priority)).ToArray();
-        else if (caster.troopPosition.y == 1 && targets.Any(t => t.GetState(ModifierDefines.State.absolute_range_priority)))
-            targets = targets.Where(t => t.GetState(ModifierDefines.State.absolute_range_priority)).ToArray();
+        if (caster.troopPosition.y == 0 && targets.Any(t => t.GetState(ModifierDefines.State.priority_melee_target)))
+            targets = targets.Where(t => t.GetState(ModifierDefines.State.priority_melee_target)).ToArray();
+        else if (caster.troopPosition.y == 1 && targets.Any(t => t.GetState(ModifierDefines.State.priority_range_target)))
+            targets = targets.Where(t => t.GetState(ModifierDefines.State.priority_range_target)).ToArray();
 
         switch (original.targetPriority)
         {

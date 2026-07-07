@@ -16,6 +16,7 @@ public class SpellSo : ActionSO
             flags |= (int)flag;
         }
         data.abilityFlags = flags;
+        data.InternalName = name;
     }
 
     public SpellData Translate()

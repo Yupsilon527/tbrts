@@ -23,6 +23,11 @@ public class UpgradeList
 
     public void CompleteUpgrade(TechData upgrade, int levels = 1) =>
         SetUpgradeLevel(upgrade, GetUpgradeLevel(upgrade) + levels);
+    public void CatchUpUpgrade(TechData upgrade, int levels = 1)
+    {
+        if (GetUpgradeLevel(upgrade) < levels)
+            SetUpgradeLevel(upgrade, GetUpgradeLevel(upgrade) + levels);
+    }
     public bool UpgradeResearched(string name) =>
         researchedUpgrades.Any(x => x.level > 0 && x.upgrade.InternalName.ToLower() == name.ToLower());
 

@@ -4,9 +4,9 @@ using UnityEngine;
 public class CombatantAbilities : UnitComponent, CombatantTicker
 {
     public int nextTick = 0;
-    public ResourceInt Ap = new ResourceInt(1, "AP", false, false);
-    public ResourceInt Mp = new ResourceInt(1, "MP", false, false);
-    public ResourceInt Sp = new ResourceInt(1, "SP", false, false);
+    public ResourceInt ActionPoint = new ResourceInt(1, "AP", false, false);
+    public ResourceInt ReactionPoints = new ResourceInt(1, "MP", false, false);
+    public ResourceInt SupplyPoints = new ResourceInt(1, "SP", false, false);
 
     public HashSet<PropertyAbility> actions = new();
     public HashSet<PropertyAbility> available = new();
@@ -17,11 +17,11 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     }
     public override void TriggerFuncs(AbilityDefines.Event act)
     {
-       if (act == AbilityDefines.Event.CombatBegin)
+        if (act == AbilityDefines.Event.CombatBegin)
         {
             nextTick = 0;
-            Ap.SetPercentage(1);
-            Mp.SetPercentage(1);
+            ActionPoint.SetPercentage(1);
+            ReactionPoints.SetPercentage(1);
         }
         else if (act == AbilityDefines.Event.CombatPhase)
         {
@@ -37,7 +37,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
             if (parent.GetMainTile().buildingLayer is DataItemCastle city
                 && city.GetAlignment(parent) == PlayerDefines.Alignment.ally
                 && city.AmIUnderAlliedControl())
-                Sp.SetPercentage(1);
+                SupplyPoints.SetPercentage(1);
         }
         base.TriggerFuncs(act);
     }
@@ -117,7 +117,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         int ticks = int.MaxValue;
         foreach (var action in actions)
         {
-            ticks = Mathf.Min(ticks, action.nextTime + parent.initiative);
+            ticks = Mathf.Min(ticks, action.nextTime + parent.initiative + (int)parent.GetPropertyAdditive(ModifierDefines.Property.stagger));
         }
         return ticks;
     }

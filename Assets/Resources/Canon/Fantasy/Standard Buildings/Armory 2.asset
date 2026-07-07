@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
+  m_Name: Armory 2
+  m_EditorClassIdentifier: 
+  InternalName: Armory 2
+  AssignedWorld: 
+  building:
+    InternalName: Armory 2
+    icon: {fileID: 3511996523978390141, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
+    flags:
+    - infantry
+    costs:
+    - resource: 0
+      value: 750
+    - resource: 3
+      value: 25
+    prerequisites:
+    - b_keep 3
+    - b_armory 1
+    infinite: 2
+    affectedFlags:
+    - infantry
+    resourceChanges: []
+    bonusDamage: []
+    properties:
+    - Property: 14
+      value: 2
+      IncreasePerLevel: 2
+    - Property: 2
+      value: 2
+      IncreasePerLevel: 2
+    - Property: 18
+      value: 2
+      IncreasePerLevel: 2
+    states: []
+    tempSpells: []
+    abilitiesAdded: []
+    grantedResources: []
+    grantedIncome:
+    - resource: 0
+      value: 500
+    - resource: 3
+      value: 100
+    bonusType: 0
+    production: []
+  armies: []

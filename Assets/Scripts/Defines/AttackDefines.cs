@@ -34,11 +34,10 @@ public static class AttackDefines
         LifeHealOverhealArmor = 11,
         Assassinate = 12,
 
-        Stagger = 13,
 
-        GrantAP = 14,
-        GrantMP = 15,
-        GrantSP = 16,
+        GrantAP = 13,
+        GrantRP = 14,
+        GrantSP = 15,
 
         Total = 17,
     }
@@ -87,6 +86,9 @@ public static class AttackDefines
         HealthBar = 6,
         Magic = 7,
         Attack = 8,
+        
+        //TODO
+        MissingHealth = 9,
     }
     public enum ScaleMode
     {
@@ -141,7 +143,7 @@ public static class AttackDefines
                 return bonusDamage + baseDamage;
         }
     }
-    public static float ArmorMitigation = 50;
+    public static float ArmorMitigation = 20;
 
     public static string DefaultEffectsDirectory = "GameData/Powers/Effects/DefaultEffects";
     public static float HeroUpgradePriceBase = 100;

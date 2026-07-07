@@ -1,4 +1,22 @@
+TEST
+	innates/auras
+
+Fixes
+	armor?
+	army swap/formation tomens
+
+	command window
+	window close/open
+
+	player window doesnt work
+	game skips player 2
+
+	windows/command window pos
+
 TODO
+	revise 
+		movement
+
 	sites
 		gold
 		mana
@@ -18,32 +36,6 @@ TODO
 		cloaked (works?)
 		warded
 		blind (reduces vision)
-
-
-
-
-	top bar
-
-TEST
-	innates/auras
-
-Fixes
-	armor?
-	armies not desel on turn end
-	army swap/formation tomens
-
-	command window
-	window close/open
-
-	player window doesnt work
-	game skips player 2
-
-	windows/command window pos
-
-TODO
-	revise 
-		movement
-		modifier states
 
 	summoning spells
 	corpses/necromancy
@@ -71,7 +63,7 @@ TODO
 		melee/range prio
 
 		auras
-		 passives
+		passives
 			on kill gain MP
 			on kill gain AP
 			on kill gain HP
@@ -106,6 +98,11 @@ TODO
 				ranged support for SP
 				spend SP to move (gas)
 				spend SP to regen
+
+	
+	top bar
+		menu
+		reports
 
 QoL
 	document armies/etc

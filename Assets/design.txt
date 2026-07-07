@@ -1,7 +1,9 @@
 Warlordslike
 * Turn based map
 * WC tileset
+
 Sprites:3x2Idle, attack 1, attack 2, cast/spell, hurt, walk
+
 Unit types:2 weapons (first row, 2nd row)Cav/inf have no 2nd row weaponSkirmisher has decent 1st row weaponArcher has shit 1st row weapon Actives * Cost AP? * Once per battle  * Or multiple times per battle & cost SPPassives * Block, dodge, retaliate  * Cost SP
 BlockCombat
 Linf - cheaper fodder unit, bonus vs cavalry* Mech (slow, bonus vs cavs) Larc - bonus vs linf, harc, stronger attack in 2nd row, skirmisher * InfantryLcav - faster, tougher, costier * Light tank (fast, cannot capture cities?)Lfly - separate from cav, anti skirm, archer, siege, swarmer* Recon? Can't capture 
@@ -27,6 +29,11 @@ Ability target* Most units (column)* Most armor* Most shield * Most pierce* Low
 Factions * Race: units, buildings* Leaders: UU, bonuses, unique techs* Can capture/occupy same faction, must raid/raze enemy
 Transports* 1x1, 1x2, 1x3, 2x2, 3x3* Override movement 
 Heroes * Experience, level up* Up to 3 spells
+
+Races
+	Neutrals: All base buildings, base units?
+	Default: all units and techs
+Factions - grants bonuses, has unique heroes, has unique units, some units, some techs
 
 Human: mana on win battles 
 Linf: sword

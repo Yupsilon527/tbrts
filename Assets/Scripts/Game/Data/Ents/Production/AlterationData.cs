@@ -52,15 +52,26 @@ public class TechData : ProductionData
     {
         int delta = newLevel - oldLevel;
 
-        foreach (var prop in properties)
-            unit.upgrades.UpdateProperty(prop.Property, prop.value * delta);
 
         if (oldLevel == 0 && newLevel > 0)
+        {
             foreach (var stat in states)
                 unit.upgrades.UpdateState(stat.State, (int)stat.priority);
+            foreach (var prop in properties)
+                unit.upgrades.UpdateProperty(prop.Property, prop.value+ prop.IncreasePerLevel * delta);
+        }
         else if (newLevel == 0)
+        {
             foreach (var stat in states)
                 unit.upgrades.UpdateState(stat.State, 0);
+            foreach (var prop in properties)
+                unit.upgrades.UpdateProperty(prop.Property, prop.IncreasePerLevel * delta - prop.value);
+        }
+        else
+        {
+            foreach (var prop in properties)
+                unit.upgrades.UpdateProperty(prop.Property, prop.IncreasePerLevel * delta);
+        }
 
         foreach (var spell in tempSpells)
         {

@@ -22,7 +22,7 @@ MonoBehaviour:
     - resource: 0
       value: 1000
     - resource: 3
-      value: 100
+      value: 40
     prerequisites: []
     infinite: 2
     affectedFlags: []

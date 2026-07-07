@@ -123,13 +123,13 @@ public class UnitDamageable : UnitComponent
                     }
                     break;
                 case AttackDefines.DamageType.GrantAP:
-                    parent.actions.Ap.GiveValue(realDamage);
+                    parent.actions.ActionPoint.GiveValue(realDamage);
                     break;
-                case AttackDefines.DamageType.GrantMP:
-                    parent.actions.Mp.GiveValue(realDamage);
+                case AttackDefines.DamageType.GrantRP:
+                    parent.actions.ReactionPoints.GiveValue(realDamage);
                     break;
                 case AttackDefines.DamageType.GrantSP:
-                    parent.actions.Sp.GiveValue(realDamage);
+                    parent.actions.SupplyPoints.GiveValue(realDamage);
                     break;
             }
         }
