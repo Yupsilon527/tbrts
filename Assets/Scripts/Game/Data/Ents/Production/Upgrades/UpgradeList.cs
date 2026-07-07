@@ -26,7 +26,7 @@ public class UpgradeList
     public void CatchUpUpgrade(TechData upgrade, int levels = 1)
     {
         if (GetUpgradeLevel(upgrade) < levels)
-            SetUpgradeLevel(upgrade, GetUpgradeLevel(upgrade) + levels);
+            SetUpgradeLevel(upgrade,  levels);
     }
     public bool UpgradeResearched(string name) =>
         researchedUpgrades.Any(x => x.level > 0 && x.upgrade.InternalName.ToLower() == name.ToLower());
@@ -50,7 +50,7 @@ public class UpgradeList
             researchedUpgrades.Add(existing);
         }
 
-        onUpgradeLevelChange.Invoke(upgrade, newLevel, oldLevel);
+        onUpgradeLevelChange.Invoke(upgrade, oldLevel, newLevel);
         existing.level = newLevel;
 
         if (existing.level <= 0)

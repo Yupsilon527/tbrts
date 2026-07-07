@@ -30,7 +30,6 @@ public class PropertySpell : PropertyAbility
         {
             table.ComputeTargets();
             HashSet<DataItemArmy> affectedArmies = new();
-            table.Precast();
             table.attacker.FireEventOnSelf(AbilityDefines.Event.CastSpell);
 
             foreach (var attack in original.effects)

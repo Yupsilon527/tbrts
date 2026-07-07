@@ -32,10 +32,10 @@ MonoBehaviour:
     bonusDamage: []
     properties:
     - Property: 3
-      value: 2
+      value: 0
       IncreasePerLevel: 2
     - Property: 1
-      value: 3
+      value: 0
       IncreasePerLevel: 3
     states: []
     tempSpells: []

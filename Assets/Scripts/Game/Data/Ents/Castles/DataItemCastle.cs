@@ -140,8 +140,10 @@ public class DataItemCastle : DataItemBuilding
     {
         foreach (var bonus in bonuses.GetBonusesByType(region ? BuildingData.GrantBonus.aura : BuildingData.GrantBonus.garrison))
         {
+            if (bonus == null) continue;
             foreach (var unit in army.formation.GetUnits())
             {
+                if (unit == null) continue;
                 if (!region)
                     unit.upgrades.upgrades.CatchUpUpgrade(bonus.upgrade, bonus.level);
                 else

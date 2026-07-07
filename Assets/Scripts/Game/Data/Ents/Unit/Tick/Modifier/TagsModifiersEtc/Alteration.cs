@@ -89,7 +89,7 @@ public class PropertyAttribute : PropertyTag
     public virtual void ExecuteEvent(AbilityDefines.Event act, DataItemUnit target)
     {
         if (functions.TryGetValue(act, out ModifierDefines.ModifierAction func))
-            func.Invoke(this, target);
+            func.Invoke(new ReactionTable(Combat.main.currentTick,parent,target,this));
     }
 
     #endregion

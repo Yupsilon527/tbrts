@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -130,17 +131,18 @@ public class PlayerInputController : MonoBehaviour
                     if (mouseOverTile.armyLayer.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned)
                         GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
                     else if (mouseOverTile.armyLayer.IsVisibleToPlayer(GameManager.main.playerManager.GetActivePlayer()))
-                        if (queue)
-                            selArmy.orders.GiveOrder(new AttackOrder(Order.ID.Follow, mouseOverTile.gridPos, mouseOverTile.armyLayer));
-                        else
-                            selArmy.orders.ReplaceOrder(new AttackOrder(Order.ID.Follow, mouseOverTile.gridPos, mouseOverTile.armyLayer));
+                        MoveOrder(selArmy, queue);
                 }
                 else if (mouseOverTile.buildingLayer != null)
                 {
                     if (mouseOverTile.buildingLayer is DataItemCastle castle)
                     {
-                        if (castle.IsVisibleToPlayer(GameManager.main.playerManager.GetActivePlayer()))
+                        if (castle.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) != PlayerDefines.Alignment.enemy)
+                            MoveOrder(selArmy, queue);
+                       else if (castle.IsVisibleToPlayer(GameManager.main.playerManager.GetActivePlayer()))
                         {
+                            
+
                             //   order raze
                         }
 
@@ -148,12 +150,7 @@ public class PlayerInputController : MonoBehaviour
                 }
                 else
                 {
-                    if (queue)
-                        selArmy.orders.GiveOrder(new Order(Order.ID.Move, mouseOverTile.gridPos));
-                    else
-                    {
-                        selArmy.orders.ReplaceOrder(new Order(Order.ID.Move, mouseOverTile.gridPos));
-                    }
+                    MoveOrder(selArmy,queue);
                 }
             }
         }
@@ -162,6 +159,13 @@ public class PlayerInputController : MonoBehaviour
             GameManager.main.armyManager.ClearSelectedArmy();
             ClearCastAbility();
         }
+    }
+    void MoveOrder(DataItemArmy selArmy, bool queue)
+    {
+        if (queue)
+            selArmy.orders.GiveOrder(new AttackOrder(Order.ID.Follow, mouseOverTile.gridPos, mouseOverTile.armyLayer));
+        else
+            selArmy.orders.ReplaceOrder(new AttackOrder(Order.ID.Follow, mouseOverTile.gridPos, mouseOverTile.armyLayer));
     }
     void HandleSideInput()
     {

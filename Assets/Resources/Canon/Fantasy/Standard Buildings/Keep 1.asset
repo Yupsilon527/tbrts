@@ -23,7 +23,8 @@ MonoBehaviour:
     costs: []
     prerequisites: []
     infinite: 2
-    affectedFlags: []
+    affectedFlags:
+    - '-'
     resourceChanges: []
     bonusDamage: []
     properties: []

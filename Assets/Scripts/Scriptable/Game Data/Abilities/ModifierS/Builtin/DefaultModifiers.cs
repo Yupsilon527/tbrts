@@ -14,10 +14,10 @@ public static class DefaultModifiers
                          {
                          {
                     AbilityDefines.Event.CombatEnd,
-                     (PropertyAttribute self, DataItemUnit attacker) =>
+                     (ReactionTable table) =>
                                 {
 
-                                    self.parent.damageable.Heal(self.GetParameter("post_combat_heal"));
+                                    table.caster.damageable.Heal(table.modifier.GetParameter("post_combat_heal"));
                      }
                 }
             }

@@ -59,7 +59,12 @@ public class UnitProperties : UnitComponent
             properties[(int)Property] = (1f + properties[(int)Property]) * (value - 1);
         else
             properties[(int)Property] += value;
+
+        parent.stats.Recalculate();
     }
+    #endregion
+    #region Update Stats TODO
+
     #endregion
     #region Refresh
     public void RefreshProperties()

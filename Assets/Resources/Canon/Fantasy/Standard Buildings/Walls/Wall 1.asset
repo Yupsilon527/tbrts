@@ -10,42 +10,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
-  m_Name: Keep 3
+  m_Name: Wall 1
   m_EditorClassIdentifier: 
-  InternalName: Keep 3
+  InternalName: Wall 1
   AssignedWorld: 
   building:
-    InternalName: Keep 3
-    icon: {fileID: 617603048062758181, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
-    flags:
-    - townhall
-    - income
+    InternalName: Wall 1
+    icon: {fileID: 3511996523978390141, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
+    flags: []
     costs:
     - resource: 0
-      value: 2000
-    - resource: 1
-      value: 500
+      value: 600
     - resource: 3
-      value: 400
-    prerequisites:
-    - b_Keep 2
+      value: 25
+    prerequisites: []
     infinite: 2
-    affectedFlags:
-    - '-'
+    affectedFlags: []
     resourceChanges: []
     bonusDamage: []
-    properties: []
+    properties:
+    - Property: 16
+      value: 3
+      IncreasePerLevel: 0
+    - Property: 14
+      value: 6
+      IncreasePerLevel: 0
     states: []
     tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome:
     - resource: 0
-      value: 1000
+      value: 500
     - resource: 3
-      value: 25
-    - resource: 1
       value: 100
-    bonusType: 0
+    bonusType: 1
     production: []
   armies: []

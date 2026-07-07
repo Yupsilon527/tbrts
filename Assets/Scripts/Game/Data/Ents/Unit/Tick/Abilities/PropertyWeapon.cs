@@ -48,7 +48,6 @@ public class PropertyWeapon : PropertyAbility
         {
             at.ComputeTargets();
             if (at.maintarget == null || at.maintarget.Length == 0 || at.maintarget[0] == null) return false;
-            at.Precast();
             table.attacker.FireEventOnSelf(AbilityDefines.Event.BeforeAttack);
             foreach (var attack in original.effects)
             {

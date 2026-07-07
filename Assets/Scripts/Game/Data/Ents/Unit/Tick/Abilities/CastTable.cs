@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -22,6 +23,19 @@ public class EventTable
         this.target = target;
     }
 }
+public class ReactionTable : EventTable
+{
+    public PropertyAttribute modifier;
+    public ReactionTable(CastTable table, DataItemUnit target, PropertyAttribute modifier) : base(table, target)
+    {
+        this.modifier = modifier;
+    }
+
+    public ReactionTable(int tick, DataItemUnit caster, DataItemUnit target, PropertyAttribute modifier) : base(tick, caster, target)
+    {
+        this.modifier = modifier;
+    }
+}
 public class CastTable
 {
     public bool attackingSide = false;
@@ -41,12 +55,22 @@ public class CastTable
         this.ability = ability;
         ComputeTargets();
     }
+    public CastTable(DataItemUnit caster, DataItemUnit target)
+    {
+        this.attacker = caster;
+        this.targetPoint = target.troopPosition;
+
+        maintarget = new DataItemUnit[] { target };
+        sidetarget = new DataItemUnit[0];
+        Precast();
+    }
 
 
     public void ComputeTargets()
     {
         maintarget = ability.GetMainTargets(this);
         sidetarget = ability.GetAreaTargets(this);
+        Precast();
     }
     public virtual void ComputeDamageTable(DataItemUnit target)
     {

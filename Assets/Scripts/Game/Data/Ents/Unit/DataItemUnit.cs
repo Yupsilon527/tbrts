@@ -116,21 +116,21 @@ public class DataItemUnit : DataItemMob
     }
     public virtual bool GetState(ModifierDefines.State State)
     {
-        return modifiers.GetState(State);
+        return modifiers.GetState(State) ||upgrades.GetState(State);
     }
     public float GetProperty(ModifierDefines.Property Property)
     {
         if (ModifierDefines.IsPropertyMultiplicative(Property))
-            return modifiers.GetPropertyMultiplicative(Property);
-        return modifiers.GetPropertyAdditive(Property);
+            return GetPropertyMultiplicative(Property);
+        return GetPropertyAdditive(Property);
     }
     public virtual float GetPropertyAdditive(ModifierDefines.Property Property)
     {
-        return modifiers.GetPropertyAdditive(Property);
+        return modifiers.GetPropertyAdditive(Property) + upgrades.GetPropertyAdditive(Property);
     }
     public virtual float GetPropertyMultiplicative(ModifierDefines.Property Property)
     {
-        return modifiers.GetPropertyMultiplicative(Property);
+        return modifiers.GetPropertyMultiplicative(Property) * upgrades.GetPropertyMultiplicative(Property);
     }
     #endregion
     public bool IsInCombat()

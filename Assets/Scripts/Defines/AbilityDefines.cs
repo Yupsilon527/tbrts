@@ -1,6 +1,11 @@
 
 public static class AbilityDefines
 {
+    public enum Condition
+    {
+        Always,
+        Damaged,
+    }
     public enum Event
     {
         Nothing = -1,

@@ -32,13 +32,13 @@ MonoBehaviour:
     bonusDamage: []
     properties:
     - Property: 14
-      value: 2
+      value: 0
       IncreasePerLevel: 2
     - Property: 2
-      value: 2
+      value: 0
       IncreasePerLevel: 2
     - Property: 18
-      value: 2
+      value: 0
       IncreasePerLevel: 2
     states: []
     tempSpells: []

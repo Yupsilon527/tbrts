@@ -8,7 +8,7 @@ public static class ModifierDefines
         tooltip_only,
         always_visible
     }
-    public delegate void ModifierAction(PropertyAttribute self, DataItemUnit attacker);
+    public delegate void ModifierAction(ReactionTable e);
     public enum State
     {
         //hard disables

@@ -28,7 +28,8 @@ MonoBehaviour:
     prerequisites:
     - b_Keep 1
     infinite: 2
-    affectedFlags: []
+    affectedFlags:
+    - '-'
     resourceChanges: []
     bonusDamage: []
     properties: []

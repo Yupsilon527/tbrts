@@ -15,43 +15,26 @@ Fixes
 	windows/command window pos
 
 TODO
-	revise 
-		movement
+	revise  movement
+
+	raze castle window
 
 	sites
 		gold
 		mana
+		heal/supply 
+		refresh movement
 
-	mock combat windows
-
-
-		Resources
-		* Gold
-		* Crystal (low income, found initially on map)
-		* Mana (from kills, income, dead troops, damage, etc)
-		* Can have up to 10* Regenerates by 1 each turn, up to 3
-		
+		mana limit, mana regen, mana regen limit
 
 	troop statuses
 		speed/slow/rooted
 		cloaked (works?)
 		warded
 		blind (reduces vision)
-
-	summoning spells
-	corpses/necromancy
-	some sort of morale?
-
-	eventually TBRPS spellforge/spells
-
-	years/HoMM weeks (events?)
-	
 			
 	army innates
 		unit size (small med large) for transport loading
-
-		push back
-		zone of control (retaliate when unit walk past)
 
 		terrain bonuses
 			ie armor in woods
@@ -61,29 +44,31 @@ TODO
 		swarm - gets weaker the less hp it has
 		run after attack
 
-		melee/range prio
-
-		auras
+		auras/innates
+			applied to self
+			applied to entire troop
+			applies inside castle
+			(implemented not tested)
+				around troop
+				around castle
 		passives
-			on kill gain MP
-			on kill gain AP
-			on kill gain HP
+			modifier config
+				on kill gain MP
+				on kill gain AP
+				on kill gain HP
 
-			necro
-				necro for 1 battle
-				raise dead
+				spawn able to move
+				assassinate
 
-			spawn able to move
-			assassinate
+				depending on enemy troops
 			
-			damage eq missing hp
-			damage when user is below HP
+				damage eq current/missing hp
 
-			after attack, gain damage?
-			bonus vs debuffed targets?
-			bonus when hit/blocking
+				after attack/attacked, gain damage?
+				bonus vs debuffed targets?
+				bonus when hit/blocking
 
-			passive points
+			reactions
 				1 PP block/guard an ally
 					negate entire row
 				1 PP dodge/negate
@@ -105,19 +90,43 @@ TODO
 	top bar
 		menu
 		reports
+	
+	refactor
+		unit props updates stats
+		remove unit upgrades
+
+FEA
+	summoning spells
+	corpses/necromancy
+				necro for 1 battle
+				raise dead
+	some sort of morale?
+
+	eventually TBRPS spellforge/spells
+
+	years/HoMM weeks (events?)
+
+	powerups
+			
+	army innates
+		push back
+		zone of control (retaliate when unit walk past)
 
 QoL
+	army  window
+			quick transfer
+			apply
+			undo
+
+	mock combat windows
+	inspect troop window
+
 	undo movements
 
 	document armies/etc
 		unit/buildings desc
 
 	tile highlights and colors
-	army QOL
-		window
-			quick transfer
-			apply
-			undo
 
 			open with(only 1 army)
 	army animations
