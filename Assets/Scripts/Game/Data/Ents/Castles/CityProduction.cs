@@ -65,10 +65,10 @@ public class CityProduction : CityComponent
                 {
                     if (productionQueue[0].CompleteProduction())
                     {
-                        RemoveProduction(0, false);
+                        RemoveProduction(0);
                         if (ContinuousProduction)
                         {
-                            AddProduction(prod.production, false);
+                            AddProduction(prod.production);
                         }
                     }
                     else return;
@@ -95,17 +95,14 @@ public class CityProduction : CityComponent
             return !city.bonuses.HasBuilding(building.InternalName);
         return true;
     }
-    public void AddProduction(ProductionData p, bool instant)
+    public void AddProduction(ProductionData p)
     {
         if (p.GetAvailableState(city) == ProductionData.AvailableState.available  && CanProduce(p))
         {
             var prodTable = new ProductionTable(city.GetPlayerOwner(), p, city);
-
-
             float laborCost = prodTable.costs[(int)EconomyDefines.EconomyResource.Labor].value;
-            if (instant || laborCost ==0 ||(laborCost < iProductionTime && productionQueue.Count == 0))
+            if ((laborCost ==0 ||(laborCost < iProductionTime && productionQueue.Count == 0)) && prodTable.CompleteProduction())
             {
-               if ( prodTable.CompleteProduction())
                 iProductionTime -= laborCost;
             }
             else

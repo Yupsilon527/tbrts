@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
   m_Name: Bestiary 2
   m_EditorClassIdentifier: 
-  InternalName: Armory 2
+  InternalName: Bestiary 2
   AssignedWorld: 
   building:
-    InternalName: Armory 2
+    InternalName: Bestiary 2
     icon: {fileID: 3511996523978390141, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
     flags: []
     costs:

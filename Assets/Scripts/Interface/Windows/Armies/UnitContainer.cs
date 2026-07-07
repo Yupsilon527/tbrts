@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class UnitContainer : MonoBehaviour
 {
     public Image unitImage;
-    public TMPro.TextMeshProUGUI unitLabel;
+    public TMPro.TextMeshProUGUI unitName;
     public HealthBar hpFill;
 
     public virtual void ForUnit(DataItemUnit unit)
@@ -14,8 +14,8 @@ public class UnitContainer : MonoBehaviour
             unitImage.enabled = true;
             unitImage.sprite = unit.data.GetSprite(CharacterSO.SpriteFrame.idle);
         }
-        if (unitLabel != null)
-            unitLabel.text = unit.InternalName;
+        if (unitName != null)
+            unitName.text = unit.InternalName;
         if (hpFill != null)
             hpFill.AssignResource(unit.health);
     }
@@ -35,7 +35,8 @@ public class UnitContainer : MonoBehaviour
             unitImage.sprite = data.icon;
         }
         unitImage.enabled = true;
-        unitLabel.text = data.InternalName;
+        if (unitName != null)
+            unitName.text = data.InternalName;
     }
     public virtual void ForTable(ProductionTable data)
     {
@@ -50,7 +51,7 @@ public class UnitContainer : MonoBehaviour
     {
         if (unitImage != null)
             unitImage.enabled = false;
-        if (unitLabel != null)
-            unitLabel.text = "";
+        if (unitName != null)
+            unitName.text = "";
     }
 }

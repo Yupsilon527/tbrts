@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AbilityDragDropInterface : Initializable
 {
     public DataItemArmy unitA, unitB;
+    public UnitContainerDescriptipn desc;
     #region DD Slots
     public DragDropSlot[] UnitSlots;
     public DragDropSlot[] DiscardSlots;
@@ -46,6 +45,7 @@ public class AbilityDragDropInterface : Initializable
                 }
             }
         }
+        desc.Clear();
     }
     #region Token Pool
     public GameObject TokenPrefab;

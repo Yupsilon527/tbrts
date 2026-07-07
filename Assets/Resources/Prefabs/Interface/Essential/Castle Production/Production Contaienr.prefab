@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 2392494165908073569}
   - component: {fileID: 6484882134500321888}
   m_Layer: 5
-  m_Name: Named
+  m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -924,7 +924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitImage: {fileID: 2857691896072450820}
-  unitLabel: {fileID: 6484882134500321888}
+  unitName: {fileID: 6484882134500321888}
   hpFill: {fileID: 0}
   button: {fileID: 5979910992076720601}
   abilityCosts:

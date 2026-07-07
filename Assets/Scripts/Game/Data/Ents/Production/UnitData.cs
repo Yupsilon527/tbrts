@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Security.Cryptography;
 using UnityEngine;
 
 [Serializable]
@@ -135,5 +134,70 @@ public class UnitData : ProductionData
     public int GetAbilityLevel(string abilityID)
     {
         return abilities.Sum(a => a.abilityID == abilityID ? a.abilityLevel : 0);
+    }
+    public string OutputStatsTable()
+    {
+        string output = "";
+        output += $"Combat: {unit.Offense}/{unit.Defense}<br>";
+
+        output += $"Damage: {unit.Attack}<br>";
+
+        output += $"Magic: {unit.Magic}<br>";
+
+        output += $"Armor: {unit.Armor}/{unit.Shield}/{unit.Padding}<br>";
+        output += $"Magic Resist: {Mathf.Round(100-UnitDamageable.AccountResistances(100, unit.Resistance))}<br>";
+        output += $"Action Points: {unit.Action}/Reaction Points: {unit.Mana}/Supply Points: {unit.Supply} <br>";
+
+        return output;
+    }
+    public string OutputAbilityTable()
+    {
+        string output = "";
+
+
+        var abs = attacks;
+        var sps = spells;
+
+        var ins = abilities;
+        var mds = innates;
+
+        if (abs.Length > 0)
+        {
+            output += "<b>Abilities</b><br>";
+            foreach (var a in abs)
+            {
+                output += a.InternalName + "<br>";
+            }
+        }
+        if (sps.Length > 0)
+        {
+            if (output.Length > 0)
+            {
+                output += "<br>";
+            }
+            output += "<b>Spells</b><br>";
+            foreach (var a in sps)
+            {
+                output = a.InternalName + "<br>";
+            }
+        }
+        if (ins.Length > 0 || mds.Length > 0)
+        {
+            if (output.Length > 0)
+            {
+                output += "<br>";
+            }
+            output += "<b>Passives</b><br>";
+            foreach (var ability in ins)
+            {
+                output += $"{ability.abilityID} {ability.abilityLevel}<br>";
+            }
+            foreach (var innate in mds)
+            {
+                output += $"{innate.InternalName}<br>";
+            }
+        }
+
+        return output;
     }
 }

@@ -133,50 +133,6 @@ public class DataItemUnit : DataItemMob
         return modifiers.GetPropertyMultiplicative(Property);
     }
     #endregion
-    public string OutputTable()
-    {
-        string output = stats.realStats.OutputTable();
-        // Properties (non-zero values only)
-        bool hasProperties = false;
-        string propertiesOutput = "";
-        for (int i = 0; i < (int)ModifierDefines.Property.total; i++)
-        {
-            ModifierDefines.Property prop = (ModifierDefines.Property)i;
-            bool multi = ModifierDefines.IsPropertyMultiplicative(prop);
-            float value = GetProperty(prop);
-            if ((multi && value != 1) || (!multi && value != 0))
-            {
-                hasProperties = true;
-                float displayValue = multi ? Mathf.Round(value * 100) : Mathf.Round(value * 100) / 100;
-                propertiesOutput += $"{prop}: {(displayValue > 0 ? "+" : "")}{displayValue}{(multi ? "%" : "")}<br>";
-            }
-        }
-        if (hasProperties)
-        {
-            output += "<br><b>Properties</b><br>";
-            output += propertiesOutput;
-        }
-
-        // States (active states only)
-        bool hasStates = false;
-        string statesOutput = "";
-        for (int i = 0; i < (int)ModifierDefines.State.total; i++)
-        {
-            if (GetState((ModifierDefines.State)i))
-            {
-                hasStates = true;
-                ModifierDefines.State state = (ModifierDefines.State)i;
-                statesOutput += $"{state}<br>";
-            }
-        }
-        if (hasStates)
-        {
-            output += "<br><b>States</b><br>";
-            output += statesOutput;
-        }
-        output += actions.OutputTable();
-        return output;
-    }
     public bool IsInCombat()
     {
         return troop.IsInCombat();
@@ -264,6 +220,79 @@ public class DataItemUnit : DataItemMob
     public bool IsAlive()
     {
         return health.GetValue() > 0;
+    }
+    public virtual string OutputStatsTable()
+    {
+        string output = "";
+
+        output += $"Combat: {stats.realStats.Offense}/{stats.realStats.Defense}<br>";
+
+        string damage = stats.realStats.Attack > stats.baseStats.Attack ? ("+" + (stats.realStats.Attack - stats.baseStats.Attack)) : ("" + (stats.realStats.Attack - stats.baseStats.Attack));
+        output += $"Damage: {stats.baseStats.Attack}{damage}<br>";
+
+        string magic = stats.realStats.Magic > stats.baseStats.Magic ? ("+" + (stats.realStats.Magic - stats.baseStats.Magic)) : ("" + (stats.realStats.Magic - stats.baseStats.Magic));
+        output += $"Magic: {stats.baseStats.Magic}{magic}<br>";
+
+        string armor = stats.realStats.Armor > stats.baseStats.Armor ? ("+" + (stats.realStats.Armor - stats.baseStats.Armor)) : ("" + (stats.realStats.Armor - stats.baseStats.Armor));
+        string shield = stats.realStats.Shield > stats.baseStats.Shield ? ("+" + (stats.realStats.Shield - stats.baseStats.Shield)) : ("" + (stats.realStats.Shield - stats.baseStats.Shield));
+        string padding = stats.realStats.Padding > stats.baseStats.Padding ? ("+" + (stats.realStats.Padding - stats.baseStats.Padding)) : ("" + (stats.realStats.Shield - stats.baseStats.Padding));
+
+        output += $"Armor: {stats.baseStats.Armor}{armor}/{stats.baseStats.Shield}{shield}/{stats.baseStats.Padding}{padding}<br>";
+        output += $"Magic Resist: {Mathf.Round(UnitDamageable.AccountResistances(100, stats.realStats.Resistance))}<br>";
+        output += $"Action Points: {stats.realStats.Action}/Reaction Points: {stats.realStats.Mana}/Supply Points: {stats.realStats.Supply} <br>";
+
+        output += $"Movement: {GetMyMovement()} ({GetMovetype()})";
+
+        return output;
+    }
+    public virtual string OutputAbilityTable()
+    {
+        string output = "";
+
+        var abs = actions.GetAttacks();
+        var sps = actions.GetSpells();
+
+        var ins = innates.abilities;
+        var mds = modifiers.GetModifiers().OfType<PropertyInnate>().ToArray();
+
+        if (abs.Length > 0)
+        {
+            output += "<b>Abilities</b><br>";
+            foreach (var a in abs)
+            { 
+            output += a.InternalName + "<br>";
+            }
+        }
+        if (sps.Length > 0)
+        {
+            if (output.Length > 0)
+            {
+                output += "<br>";
+            }
+            output += "<b>Spells</b><br>";
+            foreach (var a in sps)
+            { 
+            output = a.InternalName + "<br>";
+            }
+        }
+        if (ins.Count > 0 ||mds.Length > 0)
+        {
+            if (output.Length > 0)
+            {
+                output += "<br>";
+            }
+            output += "<b>Passives</b><br>";
+            foreach (var ability in ins)
+            {
+                output += $"{ability.Key} {ability.Value}<br>";
+            }
+            foreach (var innate in mds)
+            {
+                output += $"{innate.InternalName}<br>";
+            }
+        }
+
+        return output;
     }
 
 }

@@ -29,7 +29,7 @@ public class CastleProductionWindow : TabWindow
     }
     public void QueueProduction(ProductionData p, bool ret)
     {
-        assignedCastle.production.AddProduction(p, false);
+        assignedCastle.production.AddProduction(p);
         if (ret)
         OpenTabGameObject(prodTab.gameObject) ;
     }

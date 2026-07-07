@@ -75,44 +75,7 @@ public class UnitStatsTable
     {
         return (UnitStatsTable)MemberwiseClone();
     }
-    public string OutputTable()
-    {
-        string output = "";
-        // Combat
-        output += "<b>Combat</b><br>";
-        output += $"Offense: {FormatValue(Offense)}<br>";
-        output += $"Defense: {FormatValue(Defense)}<br>";
 
-        // Attack
-        output += "<br><b>Attack</b><br>";
-        output += $"Attack: {FormatValue(Attack)}<br>";
-        output += $"Magic: {FormatValue(Magic)}<br>";
-        output += $"Control: {FormatValue(Action)}<br>";
-
-        // Health
-        output += "<br><b>Health</b><br>";
-        output += $"Health: {FormatValue(Health)}<br>";
-        output += $"Barrier: {FormatValue(Barrier)}<br>";
-
-        // Mitigation
-        output += "<br><b>Mitigation</b><br>";
-        output += $"Armor: {FormatValue(Armor)}<br>";
-        output += $"Resistance: {FormatValue(Resistance)}<br>";
-        output += $"Block: {FormatValue(Block)}<br>";
-
-        // Modifiers
-        output += "<br><b>Modifiers</b><br>";
-        output += $"Speed: {FormatValue(Speed)}<br>";
-        output += $"Luck: {FormatValue(Luck)}<br>";
-
-        // Chances
-        output += "<br><b>Chances</b><br>";
-        output += $"Dodge: {FormatPercent(DodgeChance)}<br>";
-        output += $"Block: {FormatPercent(BlockChance)}<br>";
-        output += $"Proc: {FormatPercent(ProcChance)}<br>";
-
-        return output;
-    }
 
     private string FormatValue(float value)
     {

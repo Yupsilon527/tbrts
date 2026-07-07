@@ -1,5 +1,6 @@
 TEST
 	innates/auras
+	bonuses/buildings
 
 Fixes
 	armor?
@@ -72,6 +73,7 @@ TODO
 				necro for 1 battle
 				raise dead
 
+				spawn able to move
 			assassinate
 			
 			damage eq missing hp
@@ -105,6 +107,8 @@ TODO
 		reports
 
 QoL
+	undo movements
+
 	document armies/etc
 		unit/buildings desc
 

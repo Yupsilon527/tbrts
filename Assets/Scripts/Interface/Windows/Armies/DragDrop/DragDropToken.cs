@@ -79,6 +79,7 @@ public class DragDropToken : EventTrigger
         if (slot.Interactable)
         {
             dragDropMode = true;
+            parent?.desc.ForUnit(tokenUnit);
            // InfoOverlayController.main.Close();
         }
     }

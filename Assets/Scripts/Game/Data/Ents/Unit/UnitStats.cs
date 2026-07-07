@@ -1,4 +1,6 @@
 
+using UnityEngine;
+
 public class UnitStats : UnitComponent
 {
     #region Stats
@@ -175,5 +177,6 @@ public class UnitStats : UnitComponent
         realStats.ProcChance = baseStats.ProcChance + parent.GetProperty(ModifierDefines.Property.proc_chance);
     }
     #endregion
+
 
 }
