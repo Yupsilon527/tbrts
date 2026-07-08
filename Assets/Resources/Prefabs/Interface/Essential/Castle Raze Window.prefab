@@ -621,7 +621,7 @@ GameObject:
   - component: {fileID: 9161485330231817161}
   - component: {fileID: 266717330625716835}
   m_Layer: 5
-  m_Name: Raze
+  m_Name: Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -961,7 +961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5511331965285545347
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1238,7 +1238,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1211706681554001087}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4241793933795260505}
+        m_TargetAssemblyTypeName: CastleRazeWindow, Assembly-CSharp
+        m_MethodName: RaidCastle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5734968899786834399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,7 +1371,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1085844377850718785}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4241793933795260505}
+        m_TargetAssemblyTypeName: CastleRazeWindow, Assembly-CSharp
+        m_MethodName: OccupyCastle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6736712532343934070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1480,7 +1504,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1529636749231718136}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4241793933795260505}
+        m_TargetAssemblyTypeName: CastleRazeWindow, Assembly-CSharp
+        m_MethodName: RazeCastle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7184659736219551655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1722,7 +1758,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1587571907863743510}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4241793933795260505}
+        m_TargetAssemblyTypeName: CastleRazeWindow, Assembly-CSharp
+        m_MethodName: SackCastle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &3437531560077823856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1967,6 +2015,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4241793933795260505}
   m_SourcePrefab: {fileID: 100100000, guid: dda6364d2daf69840ac5b59522b27549, type: 3}
+--- !u!114 &6558644617594789237 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7788552047908181621, guid: dda6364d2daf69840ac5b59522b27549, type: 3}
+  m_PrefabInstance: {fileID: 3968377526437710592}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &6899382044344610520 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7542690721458349528, guid: dda6364d2daf69840ac5b59522b27549, type: 3}
@@ -1992,6 +2051,8 @@ MonoBehaviour:
   playerEmblems:
   - {fileID: 8552298279349564384}
   - {fileID: 3574192870187200722}
+  castleName: {fileID: 6558644617594789237}
+  castleDesc: {fileID: 6887582521503494550}
 --- !u!224 &8937247819275917394 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5410505267763073874, guid: dda6364d2daf69840ac5b59522b27549, type: 3}

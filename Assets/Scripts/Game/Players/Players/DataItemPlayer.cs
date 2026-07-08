@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class DataItemPlayer 
@@ -15,6 +13,9 @@ public class DataItemPlayer
 
     public UnitGroup<DataItemArmy> units = new();
     public UnitGroup<DataItemCastle> buildings = new();
+
+    public PlayerUpgrades upgrades;
+    public PlayerEconomy econ;
 
     public DataItemPlayer(CustomPlayer custom, Color color) : this(custom.id,custom.Team, color)
     {
@@ -35,8 +36,6 @@ public class DataItemPlayer
         upgrades = new(this);
         econ = new(this);
     }
-    public PlayerUpgrades upgrades;
-    public PlayerEconomy econ;
     public override string ToString()
     {
         return $"Player {ID} (team {Team})";
@@ -87,5 +86,6 @@ public class DataItemPlayer
                 econ.GiveResource((EconomyDefines.EconomyResource)i, city.income.baseIncome[i]);
             }
         }
+        econ.HandleIncome();
     }
 }

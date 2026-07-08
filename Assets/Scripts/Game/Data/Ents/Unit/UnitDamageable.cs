@@ -89,11 +89,11 @@ public class UnitDamageable : UnitComponent
                     break;
                 case AttackDefines.AttackType.ShieldHeal:
                     Block.GiveValue(realDamage);
-                    parent.FireEventOnSelf(AbilityDefines.Event.OnShieldRecieved);
+                    parent.FireEventOnSelf(AbilityDefines.Event.OnShieldReceived);
                     break;
                 case AttackDefines.AttackType.ArmorHeal:
                     Armor.GiveValue(realDamage);
-                    parent.FireEventOnSelf(AbilityDefines.Event.OnArmorRecieved);
+                    parent.FireEventOnSelf(AbilityDefines.Event.OnArmorReceived);
                     break;
                 case AttackDefines.AttackType.ArmorBreak:
                     TakeShieldDamage(false, realDamage, out float guardblock); //temp shield
@@ -112,19 +112,19 @@ public class UnitDamageable : UnitComponent
                     float overheal = realDamage - healValue;
 
                     Health.GiveValue(healValue);
-                    parent.FireEventOnSelf(AbilityDefines.Event.OnHealRecieved);
+                    parent.FireEventOnSelf(AbilityDefines.Event.OnHealReceived);
 
                     if (overheal > 0)
                     {
                         if (d.Key == AttackDefines.AttackType.LifeHealOverhealShield)
                         {
                             Block.GiveValue(overheal);
-                            parent.FireEventOnSelf(AbilityDefines.Event.OnShieldRecieved);
+                            parent.FireEventOnSelf(AbilityDefines.Event.OnShieldReceived);
                         }
                         if (d.Key == AttackDefines.AttackType.LifeHealOverhealArmor)
                         {
                             Armor.GiveValue(overheal);
-                            parent.FireEventOnSelf(AbilityDefines.Event.OnArmorRecieved);
+                            parent.FireEventOnSelf(AbilityDefines.Event.OnArmorReceived);
                         }
                     }
                     break;
@@ -201,17 +201,17 @@ public class UnitDamageable : UnitComponent
         }
 
     }
-    void TakeLifeDamage(float damagevalue, out float recievedamage)
+    void TakeLifeDamage(float damagevalue, out float Receivedamage)
     {
-        recievedamage = 0;
+        Receivedamage = 0;
         if (damagevalue == 0)
             return;
 
-        recievedamage = Health.SubstractedValue(damagevalue);
+        Receivedamage = Health.SubstractedValue(damagevalue);
         parent.FireEventOnSelf(AbilityDefines.Event.OnTakeLifeDamage);
         parent.FireEventOnSelf(AbilityDefines.Event.OnLifeChange);
 
-        Combat.main.Inspect($"{parent} takes {recievedamage} damage!");
+        Combat.main.Inspect($"{parent} takes {Receivedamage} damage!");
         CheckDeath();
     }
     public float Heal(float amount)
@@ -219,7 +219,7 @@ public class UnitDamageable : UnitComponent
         float overheal = Mathf.Max(0, amount - Health.GetValue());
         Health.GiveValue(amount);
         CheckDeath();
-        parent.FireEventOnSelf(AbilityDefines.Event.OnHealRecieved);
+        parent.FireEventOnSelf(AbilityDefines.Event.OnHealReceived);
         parent.FireEventOnSelf(AbilityDefines.Event.OnLifeChange);
         return overheal;
     }

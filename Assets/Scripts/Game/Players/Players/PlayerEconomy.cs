@@ -133,5 +133,23 @@ public class PlayerEconomy : PlayerComponent
 
       */
     }
+    public void HandleIncome()
+    {
+        GiveResource(EconomyDefines.EconomyResource.Metal, realIncome[(int)EconomyDefines.IncomeResource.Metal]);
+        GiveResource(EconomyDefines.EconomyResource.Gold, realIncome[(int)EconomyDefines.IncomeResource.Gold]);
+        HandleManaIncome();
+    }
+    void HandleManaIncome()
+    {
+        var manaResource = GetResource(EconomyDefines.EconomyResource.Mana);
+
+        float manaIncome = realIncome[(int)EconomyDefines.IncomeResource.Mana];
+        float manaIncomeMin = realIncome[(int)EconomyDefines.IncomeResource.ManaMin];
+        float manaIncomeMax = realIncome[(int)EconomyDefines.IncomeResource.ManaMax];
+
+        float mana = Mathf.Min(manaIncomeMin - manaResource.GetValue(), manaIncome);
+        manaResource.SetLimit(manaIncomeMax);
+        GiveResource(EconomyDefines.EconomyResource.Mana, mana);
+    }
     #endregion
 }

@@ -17,15 +17,11 @@ Fixes
 TODO
 	revise  movement
 
-	raze castle window
-
 	sites
 		gold
 		mana
 		heal/supply 
 		refresh movement
-
-		mana limit, mana regen, mana regen limit
 
 	troop statuses
 		speed/slow/rooted

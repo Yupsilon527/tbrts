@@ -77,10 +77,13 @@ public class PropertyWeapon : PropertyAbility
                     if (magic) target.FireEventOnTarget(AbilityDefines.Event.OnEnemyUseMagicAttack, table.attacker);
                 }
             }
-            table.attacker.FireEventOnSelf(AbilityDefines.Event.BeforeAttack);
-            if (magic) table.attacker.FireEventOnSelf(AbilityDefines.Event.BeforeMagictAttack);
-            if (indirect) table.attacker.FireEventOnSelf(AbilityDefines.Event.BeforeDirectAttack);
-                else table.attacker.FireEventOnSelf(AbilityDefines.Event.BeforeIndirectAttack);
+            foreach (var target in table.maintarget)
+            {
+                table.attacker.FireEventOnTarget(AbilityDefines.Event.BeforeAttack, target);
+                if (magic) table.attacker.FireEventOnTarget(AbilityDefines.Event.BeforeMagicAttack, target);
+                if (indirect) table.attacker.FireEventOnTarget(AbilityDefines.Event.BeforeDirectAttack, target);
+                else table.attacker.FireEventOnTarget(AbilityDefines.Event.BeforeIndirectAttack, target);
+            }
 
             foreach (var ally in allyTroop)
             {

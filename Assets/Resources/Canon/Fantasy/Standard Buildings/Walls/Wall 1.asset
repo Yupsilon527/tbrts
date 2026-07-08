@@ -17,7 +17,8 @@ MonoBehaviour:
   building:
     InternalName: Wall 1
     icon: {fileID: -8297165085328784523, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
-    flags: []
+    flags:
+    - defensive
     costs:
     - resource: 0
       value: 600

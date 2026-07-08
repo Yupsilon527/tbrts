@@ -538,16 +538,8 @@ MonoBehaviour:
   playerEmblems:
   - {fileID: 8552298279349564384}
   - {fileID: 3574192870187200722}
-  defaultTab: {fileID: 0}
-  tabs:
-  - button: {fileID: 0}
-    parent: {fileID: 0}
-  - button: {fileID: 0}
-    parent: {fileID: 0}
-  - button: {fileID: 0}
-    parent: {fileID: 0}
-  build: {fileID: 0}
-  production: {fileID: 0}
+  castleName: {fileID: 1595055595334940033}
+  castleDesc: {fileID: 5096148762805063854}
 --- !u!224 &8937247819275917394 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5410505267763073874, guid: dda6364d2daf69840ac5b59522b27549, type: 3}

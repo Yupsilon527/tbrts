@@ -14,7 +14,7 @@ public static class ModifierDefines
         //hard disables
         cannot_attack = 0,
         cannot_cast = 1,
-        cannot_move = 1,
+        cannot_move = 10,
 
         //immunities
         dot_immune = 2,
@@ -28,8 +28,9 @@ public static class ModifierDefines
         priority_range_target = 8,
 
         true_block = 9,
+        cannot_block = 11,
 
-        total = 11,
+        total = 12,
     }
     public static bool IsPropertyMultiplicative(Property prop)
     {

@@ -255,10 +255,10 @@ public class DataItemCastle : DataItemBuilding
             }
         }*/
     }
-    public  void RazeCastle(DataItemArmy attacker, DataItemCastle Castle, CastleRazeMode razeMode)
+    public  void RazeCastle(DataItemArmy attacker,  CastleRazeMode razeMode)
     {
         var raidingPlayer = attacker.GetPlayerOwner();
-        var raidedPlayer = Castle.GetPlayerOwner();
+        var raidedPlayer = GetPlayerOwner();
 
         bool canSteal = attacker.formation.HasAbility("raider");
         int stealStrength = attacker.formation.GetAbilitiySum("vandal");
@@ -270,7 +270,7 @@ public class DataItemCastle : DataItemBuilding
             case CastleRazeMode.occupy:
                 earnedMetal = 0;
                 earnedGold = 0;
-                Castle.SetPlayerOwner(attacker.GetPlayerOwner());
+                SetPlayerOwner(attacker.GetPlayerOwner());
                 attacker.Exhaust();
                 break;
 
@@ -294,7 +294,7 @@ public class DataItemCastle : DataItemBuilding
                 earnedMetal /= 4;
                 earnedGold /= 3;
 
-                Castle.Demolish();
+                Demolish();
                 attacker.Exhaust();
                 break;
 

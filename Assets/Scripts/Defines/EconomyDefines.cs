@@ -17,14 +17,14 @@ public class EconomyDefines
     {
         Metal = 0,
         Gold = 1,
-        Mana = 2,
-        Labor = 3,
-        RawIncome = 4,
-        SteelMult = 5,
-        GoldMult = 6,
-        ManaMult = 7,
-        LaborMult = 8,
-        Total = 9,
+        Labor = 2,
+        Mana = 3,
+        ManaMin = 4,
+        ManaMax = 5,
+        RawIncome = 6,
+        SteelMult = 6,
+        GoldMult = 7,
+        Total = 8,
     }
 }
 
