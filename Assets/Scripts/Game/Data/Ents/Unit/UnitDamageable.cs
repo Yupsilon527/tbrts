@@ -5,6 +5,7 @@ public class UnitDamageable : UnitComponent
 {
     public ResourceInt Health, Armor, Block;
 
+    public DataItemUnit guardian;
     public DamageTable lastDamage;
     protected bool dead = false;
     public override void TriggerFuncs(AbilityDefines.Event act)
@@ -24,6 +25,11 @@ public class UnitDamageable : UnitComponent
         {
             Armor.SetPercentage(1);
             Block.SetPercentage(0);
+            ClearGuardian();
+        }
+        if (act == AbilityDefines.Event.Action)
+        {
+            ClearGuardian();
         }
         if (act == AbilityDefines.Event.CombatEnd)
         {
@@ -45,7 +51,7 @@ public class UnitDamageable : UnitComponent
         Block.SetValue(0);
     }
 
-    public void DealDamage(float value, AttackDefines.DamageType damage)
+    public void DealDamage(float value, AttackDefines.AttackType damage)
     {
         lastDamage.CalcAttack(damage, value);
     }
@@ -65,43 +71,43 @@ public class UnitDamageable : UnitComponent
                 float realDamage = d.Value;
             switch (d.Key)
             {
-                case AttackDefines.DamageType.Slashing:
-                case AttackDefines.DamageType.Piercing:
-                case AttackDefines.DamageType.Crushing:
-                case AttackDefines.DamageType.Magical:
-                case AttackDefines.DamageType.Poison:
-                case AttackDefines.DamageType.Pure:
+                case AttackDefines.AttackType.Slashing:
+                case AttackDefines.AttackType.Piercing:
+                case AttackDefines.AttackType.Crushing:
+                case AttackDefines.AttackType.Magical:
+                case AttackDefines.AttackType.Poison:
+                case AttackDefines.AttackType.Pure:
 
                     UpdateKiller(damage.attacker);
                     TakeDirectDamage(realDamage);
-                    if (d.Key == AttackDefines.DamageType.Slashing
-                        || d.Key == AttackDefines.DamageType.Crushing
-                        || d.Key == AttackDefines.DamageType.Piercing)
+                    if (d.Key == AttackDefines.AttackType.Slashing
+                        || d.Key == AttackDefines.AttackType.Crushing
+                        || d.Key == AttackDefines.AttackType.Piercing)
                         Vampirism(realDamage);
 
                     parent.FireEventOnSelf(AbilityDefines.Event.OnTakeDamage);
                     break;
-                case AttackDefines.DamageType.ShieldHeal:
+                case AttackDefines.AttackType.ShieldHeal:
                     Block.GiveValue(realDamage);
                     parent.FireEventOnSelf(AbilityDefines.Event.OnShieldRecieved);
                     break;
-                case AttackDefines.DamageType.ArmorHeal:
+                case AttackDefines.AttackType.ArmorHeal:
                     Armor.GiveValue(realDamage);
                     parent.FireEventOnSelf(AbilityDefines.Event.OnArmorRecieved);
                     break;
-                case AttackDefines.DamageType.ArmorBreak:
+                case AttackDefines.AttackType.ArmorBreak:
                     TakeShieldDamage(false, realDamage, out float guardblock); //temp shield
                     realDamage -= guardblock;
                     TakeShieldDamage(true, realDamage, out float armorblock);    //armor
                     realDamage -= armorblock;
                     break;
-                case AttackDefines.DamageType.Assassinate:
+                case AttackDefines.AttackType.Assassinate:
                     if (Health.GetValue() <= realDamage)
                         Kill(damage.attacker);
                     break;
-                case AttackDefines.DamageType.LifeHealNoOverheal:
-                case AttackDefines.DamageType.LifeHealOverhealShield:
-                case AttackDefines.DamageType.LifeHealOverhealArmor:
+                case AttackDefines.AttackType.LifeHealNoOverheal:
+                case AttackDefines.AttackType.LifeHealOverhealShield:
+                case AttackDefines.AttackType.LifeHealOverhealArmor:
                     float healValue = Mathf.Min(realDamage, Health.GetDifference());
                     float overheal = realDamage - healValue;
 
@@ -110,26 +116,29 @@ public class UnitDamageable : UnitComponent
 
                     if (overheal > 0)
                     {
-                        if (d.Key == AttackDefines.DamageType.LifeHealOverhealShield)
+                        if (d.Key == AttackDefines.AttackType.LifeHealOverhealShield)
                         {
                             Block.GiveValue(overheal);
                             parent.FireEventOnSelf(AbilityDefines.Event.OnShieldRecieved);
                         }
-                        if (d.Key == AttackDefines.DamageType.LifeHealOverhealArmor)
+                        if (d.Key == AttackDefines.AttackType.LifeHealOverhealArmor)
                         {
                             Armor.GiveValue(overheal);
                             parent.FireEventOnSelf(AbilityDefines.Event.OnArmorRecieved);
                         }
                     }
                     break;
-                case AttackDefines.DamageType.GrantAP:
+                case AttackDefines.AttackType.GrantAP:
                     parent.actions.ActionPoint.GiveValue(realDamage);
                     break;
-                case AttackDefines.DamageType.GrantRP:
+                case AttackDefines.AttackType.GrantRP:
                     parent.actions.ReactionPoints.GiveValue(realDamage);
                     break;
-                case AttackDefines.DamageType.GrantSP:
+                case AttackDefines.AttackType.GrantSP:
                     parent.actions.SupplyPoints.GiveValue(realDamage);
+                    break;
+                case AttackDefines.AttackType.Guard:
+                    damage.target.damageable.ApplyGuardian(parent) ;
                     break;
             }
         }
@@ -292,5 +301,18 @@ public class UnitDamageable : UnitComponent
     public virtual bool IsAlive()
     {
         return !dead && Health.GetValue() > 0;
+    }
+    bool CanAcceptGuardian(DataItemUnit guard)
+    {
+        return guard.damageable.IsAlive() && guard.GetAlignment(parent) == PlayerDefines.Alignment.ally && guard.IsInCombat();
+    }
+    public void ApplyGuardian(DataItemUnit guard)
+    {
+        if (CanAcceptGuardian(guard))
+            guardian = guard;
+    }
+    void ClearGuardian()
+    {
+        guardian = null;
     }
 }

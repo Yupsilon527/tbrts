@@ -12,6 +12,7 @@ public abstract class PropertyAbility : PropertyAction
     {
         return new[] { caster };
     }
+    public virtual bool GetFlag(int flag) { return false; }
     public ApplyEffects[] GetAbilityEffects() { return null; }
     public virtual bool CanBeCast(CombatDefines.AttackPhase phase)
     {

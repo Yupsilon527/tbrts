@@ -89,7 +89,7 @@ public class PropertyModifier : PropertyThinker
     #region Duration, expire
     public override void Think()
     {
-        ExecuteFunction(AbilityDefines.Event.OnThink);
+        ExecuteFunction(AbilityDefines.Event.Time);
     }
     public override bool IsExpired()
     {

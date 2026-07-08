@@ -5,64 +5,106 @@ public static class AbilityDefines
     {
         Always,
         Damaged,
+        Alive,
     }
     public enum Event
     {
         Nothing = -1,
-        Time = 29,
 
-        //functional
         OnCreated = 0,
         OnDestroyed = 1,
         OnExpired = 2,
         OnRefresh = 3,
         OnStacksChange = 4,
-        OnThink = 25,
 
-        //combat
-        OnSpawn = 5,
-        CombatBegin = 6,
-        CombatEnd = 7,
-        CombatExit = 34,    //exits a non mock-battle combat, used for "lasts for X fights" modifiers
-        CombatPhase = 33,
+        Time = 5,
+        Action = 6,
 
-		//board
-        OnTurnBegin = 24,
-        OnMoveTile = 23,
+        OnSpawn = 7,
 
-		//aura
-		OnUnitEnterStack = 24,
-		OnUnitExitStack = 25,
+        // Combat Flow
+        CombatBegin = 8,
+        CombatEnd = 9,
+        CombatExit = 10,
+        CombatPhase = 11,
 
-        OnScoreKill = 8,
-        OnKilled = 9,
+        // Turn / Board
+        OnTurnBegin = 12,
+        OnMoveTile = 13,
 
-        BeforeAttack = 10,
-        AttackHit = 11,
+        // Aura / Stack
+        OnUnitEnterStack = 14,
+        OnUnitExitStack = 15,
 
-        OnHitByEnemy = 13,
-        CastSpell = 12,
-        OnHitSpell = 31,
-        OnHitBySpell = 32,
+        // Attacks & Hits
+        BeforeAttack = 16,
+        BeforeDirectAttack = 17,
+        BeforeIndirectAttack = 18,
+        BeforeMagicAttack = 19,
 
-        OnTakeDamage = 14,
-        OnTakeLifeDamage = 15,
-        OnLifeChange = 30,
+        AfterAttack = 20,
+        AttackHit = 21,
 
-        OnHealRecieved = 16,
-        OnShieldRecieved = 17,
-        OnArmorRecieved = 18,
+        OnHitEnemy = 22,
+        OnHitByEnemy = 23,
+        DirectHitByEnemy = 24,
+        IndirectHitByEnemy = 25,
 
-        OnShieldBlock = 19,
-        OnShieldBreak = 20,
+        OnCritEnemy = 26,
+        OnDodgeEnemy = 27,
+        OnBlockEnemy = 28,
 
-        OnArmorBlock = 21,
-        OnArmorBreak = 22,
+        // Kill Events
+        OnScoreKill = 29,
+        OnKilled = 30,
 
-        Total = 35
+        // Spells
+        CastSpell = 31,
+        OnHitSpell = 32,
+        OnHitBySpell = 33,
+
+        // Damage & Healing
+        OnTakeDamage = 34,
+        OnTakeLifeDamage = 35,
+        OnLifeChange = 36,
+
+        OnHealReceived = 37,
+        OnShieldReceived = 38,
+        OnArmorReceived = 39,
+
+        // Defense Reactions
+        OnShieldBlock = 40,
+        OnShieldBreak = 41,
+        OnArmorBlock = 42,
+        OnArmorBreak = 43,
+
+        // Ally Reactions
+        OnAllyUseDirectAttack = 44,
+        OnAllyUseIndirectAttack = 45,
+
+        // Enemy Reactions
+        OnEnemyUseDirectAttack = 46,
+        OnEnemyUseIndirectAttack = 47,
+        OnEnemyUseMagicAttack = 48,
+        OnEnemyUseSingleAttack = 49,
+        OnEnemyUseMultiAttack = 50,
+
+        // Specific Hit Types
+        OnHitBySingleIndirect = 51,
+        OnHitBySingleDirect = 52,
+        OnHitByMultiIndirect = 53,
+        OnHitByMultiDirect = 54,
+        OnHitByMagicAttack = 55,
+
+        PostSingleIndirect = 56,
+        PostSingleDirect = 57,
+        PostSingleMagic = 58,
+
+        // Total (always last)
+        Total = 59,
     }
 
-public delegate void AbilityFunction(EventTable CastData);
+    public delegate void AbilityFunction(EventTable CastData);
     public class AbilityListener
     {
         public Event aEvent;

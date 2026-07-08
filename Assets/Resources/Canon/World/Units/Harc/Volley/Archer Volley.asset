@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afd1df377fcccc042a8c77201b59f966, type: 2}
   data:
     InternalName: Archer Volley
-    abilityFlags: 12
+    abilityFlags: 4
     MetalCost: 0
     GoldCost: 0
     ManaCost: 10
@@ -27,4 +27,4 @@ MonoBehaviour:
     targetMode: 4
     rangeMode: 0
     areaMode: 0
-  spellFlags: 0400000008000000
+  spellFlags: 04000000

@@ -6,6 +6,7 @@ public class UnitSO : ScriptableObject
     public UnitData unit;
     public WeaponSO[] attacks;
     public SpellSo[] spells;
+    public ModifierPassive[] passives;
     public CharacterSO character;
     private void OnValidate()
     {

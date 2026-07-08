@@ -26,6 +26,7 @@ public static class CombatDefines
         cannotMiss = 1 << 10,
         indirectAttack = 1 << 11,
         usableOnce = 1 << 12,
+        magicAttack = 1 << 13,
     }
     public enum ArmyPriorityMode
     {
@@ -33,7 +34,7 @@ public static class CombatDefines
     }
     public enum CombatantTargetingArea
     {
-        tile,
+        single,
         row,
         column,
         all,

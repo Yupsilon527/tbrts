@@ -11,7 +11,8 @@ public class ModifierConfig : ModifierSO
     {
         public float apCost, rpCost, spCost;
         public AbilityDefines.Event listener;
-        public AbilityDefines.Condition condition;
+        public AbilityDefines.Condition casterCondition;
+        public AbilityDefines.Condition targetCondition;
         public AttackEffectSO[] effects;
 
         public  ModifierDefines.ModifierAction Translate()
@@ -19,7 +20,7 @@ public class ModifierConfig : ModifierSO
             var tEffects = effects.Select(x=> x.Translate());
             return (ReactionTable table) =>
              {
-                 if (!MeetsCondition(table.caster)) return;
+                 if (!MeetsCondition(table.caster, casterCondition)|| !MeetsCondition(table.target, targetCondition)) return;
 
                  if (table.caster.actions.ActionPoint.GetValue() < apCost
                 || table.caster.actions.ReactionPoints.GetValue() < rpCost
@@ -36,12 +37,14 @@ public class ModifierConfig : ModifierSO
 
              };
         }
-        public bool MeetsCondition(DataItemUnit unit)
+        public bool MeetsCondition(DataItemUnit unit, AbilityDefines.Condition condition)
         {
             switch (condition)
             {
                 case AbilityDefines.Condition.Damaged:
-                    return unit.health.GetPercentage() < 1;
+                    return unit.damageable.Health.GetPercentage() < 1;
+                case AbilityDefines.Condition.Alive:
+                    return unit.damageable.IsAlive();
                     default: return true;
             }
         }

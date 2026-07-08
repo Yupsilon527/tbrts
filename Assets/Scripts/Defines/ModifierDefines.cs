@@ -14,6 +14,7 @@ public static class ModifierDefines
         //hard disables
         cannot_attack = 0,
         cannot_cast = 1,
+        cannot_move = 1,
 
         //immunities
         dot_immune = 2,
@@ -26,7 +27,9 @@ public static class ModifierDefines
         priority_melee_target = 7,
         priority_range_target = 8,
 
-        total = 10,
+        true_block = 9,
+
+        total = 11,
     }
     public static bool IsPropertyMultiplicative(Property prop)
     {
@@ -210,8 +213,9 @@ public static class ModifierDefines
     {
         Tag = 0,
         //positive
-        Buff = 1,
-        Regeneration = 2,
+        Innate = 1,
+        Buff = 2,
+        Regeneration = 3,
         //negative
         Debuff = -1,
         DamageOverTime = -2,
@@ -230,8 +234,10 @@ public static class ModifierDefines
         permanent = AbilityDefines.Event.Nothing,
         ticks = AbilityDefines.Event.Time,
         stacks = AbilityDefines.Event.OnStacksChange,
+        attacks = AbilityDefines.Event.AfterAttack,
         battles = AbilityDefines.Event.CombatEnd,
         forNfights = AbilityDefines.Event.CombatExit,
+        thisAction = AbilityDefines.Event.Action,
     }
 
 

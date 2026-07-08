@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class PropertyWeapon : PropertyAbility
 {
@@ -12,6 +14,10 @@ public class PropertyWeapon : PropertyAbility
 
         InternalName = original.InternalName;
         this.original = original;
+    }
+    public override bool GetFlag(int flag)
+    {
+        return original.HasFlag((CombatDefines.AttackFlag)flag);
     }
 
     public override bool CanBeCast(CombatDefines.AttackPhase phase)
@@ -48,7 +54,46 @@ public class PropertyWeapon : PropertyAbility
         {
             at.ComputeTargets();
             if (at.maintarget == null || at.maintarget.Length == 0 || at.maintarget[0] == null) return false;
+
+            var allyTroop = table.attacker.troop.formation.GetUnits();
+            var enemyTroop = Combat.main.GetOppositeSide( table.attacker.troop).formation.GetUnits();
+
+            bool indirect = original.HasFlag(CombatDefines.AttackFlag.indirectAttack);
+            bool magic = original.HasFlag(CombatDefines.AttackFlag.magicAttack);
+
+            if (original.areaMode == CombatDefines.CombatantTargetingArea.single)
+            {
+                foreach (var target in table.maintarget)
+                {
+                    target.FireEventOnTarget(indirect ? AbilityDefines.Event.OnHitBySingleIndirect : AbilityDefines.Event.OnHitBySingleDirect, table.attacker);
+                    if (magic) target.FireEventOnTarget(AbilityDefines.Event.OnEnemyUseMagicAttack, table.attacker);
+                }
+            }
+            else
+            {
+                foreach (var target in table.sidetarget)
+                {
+                    target.FireEventOnTarget(indirect ? AbilityDefines.Event.OnHitByMultiIndirect : AbilityDefines.Event.OnHitByMultiDirect, table.attacker);
+                    if (magic) target.FireEventOnTarget(AbilityDefines.Event.OnEnemyUseMagicAttack, table.attacker);
+                }
+            }
             table.attacker.FireEventOnSelf(AbilityDefines.Event.BeforeAttack);
+            if (magic) table.attacker.FireEventOnSelf(AbilityDefines.Event.BeforeMagictAttack);
+            if (indirect) table.attacker.FireEventOnSelf(AbilityDefines.Event.BeforeDirectAttack);
+                else table.attacker.FireEventOnSelf(AbilityDefines.Event.BeforeIndirectAttack);
+
+            foreach (var ally in allyTroop)
+            {
+                if (ally != table.attacker)
+                    ally.FireEventOnTarget(indirect ? AbilityDefines.Event.OnAllyUseIndirectAttack : AbilityDefines.Event.OnAllyUseDirectAttack, table.attacker);
+            }
+            foreach (var enemy in enemyTroop)
+            {
+                enemy.FireEventOnTarget(original.areaMode == CombatDefines.CombatantTargetingArea.single ? AbilityDefines.Event.OnEnemyUseSingleAttack : AbilityDefines.Event.OnEnemyUseMultiAttack, table.attacker);
+                enemy.FireEventOnTarget(indirect ? AbilityDefines.Event.OnEnemyUseIndirectAttack : AbilityDefines.Event.OnEnemyUseDirectAttack, table.attacker);
+                if (magic) enemy.FireEventOnTarget( AbilityDefines.Event.OnEnemyUseMagicAttack, table.attacker);
+            }
+
             foreach (var attack in original.effects)
             {
                 attack.Activate(table);
@@ -56,15 +101,19 @@ public class PropertyWeapon : PropertyAbility
             foreach (var target in table.maintarget)
             {
                 target.damageable.ResolveDamate();
-                table.attacker.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, target);
-                target.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, table.attacker);
+                foreach (var ally in allyTroop)
+                {
+                    if (ally != table.attacker) { 
+                        ally.FireEventOnTarget(indirect ? AbilityDefines.Event.PostSingleIndirect : AbilityDefines.Event.PostSingleDirect, target);
+                        if (magic) ally.FireEventOnTarget(AbilityDefines.Event.PostSingleMagic, target);
+                    }
+                }
             }
             foreach (var target in table.sidetarget)
             {
                 target.damageable.ResolveDamate();
-                table.attacker.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, target);
-                target.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, table.attacker);
             }
+            table.attacker.FireEventOnSelf(AbilityDefines.Event.AfterAttack);
             return true;
         }
         return false;

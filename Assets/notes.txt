@@ -42,6 +42,11 @@ TODO
 		swarm - gets weaker the less hp it has
 		run after attack
 
+		guardians
+			guard target for 1 hit/action
+			modifiers WHILE guarding (trueblock, etc)
+
+
 		auras/innates
 			applied to self
 			applied to entire troop
@@ -50,15 +55,24 @@ TODO
 				around troop
 				around castle
 		passives
+			followup attack
+			redirect attacks
+			change hit type to block/hit/crit
+
 			modifier config
+				react to allies being hit
+				ally cast spell/enemy cast spell or indirect attack
+
 				on kill gain MP
 				on kill gain AP
 				on kill gain HP
 
+				guard seal/react seal
+
 				spawn able to move
 				assassinate
 
-				depending on enemy troops
+				depending on num enemy troops (werewolf)
 			
 				damage eq current/missing hp
 

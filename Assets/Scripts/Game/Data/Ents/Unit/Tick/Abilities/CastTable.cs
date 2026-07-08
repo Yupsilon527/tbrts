@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,11 +8,8 @@ public class EventTable
     public DataItemUnit caster;
     public DataItemUnit target;
 
-    public EventTable(CastTable table, DataItemUnit target)
+    public EventTable(CastTable table, DataItemUnit target): this (table.tick, table.attacker,target)
     {
-        this.target = target;
-        this.caster = table.attacker;
-        this.tick = table.tick;
     }
 
     public EventTable(int tick, DataItemUnit caster, DataItemUnit target)
@@ -21,6 +17,12 @@ public class EventTable
         this.tick = tick;
         this.caster = caster;
         this.target = target;
+    }
+    public virtual DataItemUnit GetTarget()
+    {
+        if (caster.GetAlignment(target) == PlayerDefines.Alignment.enemy && target.damageable.guardian != null)
+            return target.damageable.guardian;
+        return target;
     }
 }
 public class ReactionTable : EventTable
@@ -35,6 +37,10 @@ public class ReactionTable : EventTable
     {
         this.modifier = modifier;
     }
+    public override DataItemUnit GetTarget()
+    {
+        return target;
+    }
 }
 public class CastTable
 {
@@ -47,6 +53,11 @@ public class CastTable
 
     public DataItemUnit[] maintarget;
     public DataItemUnit[] sidetarget;
+    public void Redirect(DataItemUnit target)
+    {
+        maintarget = new DataItemUnit[] { target };
+        sidetarget = new DataItemUnit[0] { };
+    }
 
     public CastTable(DataItemUnit caster, Vector2Int targetPoint, PropertyAbility ability)
     {
@@ -102,16 +113,18 @@ public class AttackTable : CastTable
     public AttackDefines.HitType DetermineHitType(DataItemUnit target)
     {
         AttackDefines.HitType hitType = AttackDefines.HitType.normal;
-        if (ability is PropertyWeapon attack && !attack.original.HasFlag(CombatDefines.AttackFlag.indirectAttack))
+
+        if (ability is PropertyWeapon attack)
         {
             float ranval = Random.value;
             if (!attacker.GetState(ModifierDefines.State.cannot_miss) && !attack.original.HasFlag(CombatDefines.AttackFlag.cannotMiss))
             {
                 float evasion = target.dodgeCounter / 2f * target.stats.realStats.DodgeChance * target.stats.realStats.GetLuckCoefficient();
 
-                if (ranval < Mathf.Min(1-AttackDefines.minAccuracy, evasion))
+                if (ranval < Mathf.Min(1 - AttackDefines.minAccuracy, evasion))
                 {
                     target.dodgeCounter = 1;
+                    attacker.FireEventOnTarget(AbilityDefines.Event.OnDodgeEnemy, target);
                     return AttackDefines.HitType.miss;
                 }
                 else
@@ -119,32 +132,64 @@ public class AttackTable : CastTable
                     target.dodgeCounter++;
                 }
             }
-            float accuracy = attacker.stats.realStats.Offense / Mathf.Max(target.stats.realStats.Defense);
-            accuracy = accuracy * .6f + Mathf.Min(.4f, attacker.hitCounter / 2 * .5f); //TODO DEFINE
 
-            float critChance = 15 * accuracy + attacker.stats.realStats.CritChance * (1 + accuracy) / 2f * attacker.critCounter * .5f; 
-            float hitChance = 50 * accuracy;
-            float missChance = 30 / accuracy;
-            float parryChance = 20 / accuracy + attacker.stats.realStats.BlockChance * (1 + accuracy) / 2f;
-
-            ranval = Random.value * (critChance + hitChance + missChance + parryChance);
-            if (ranval < missChance)
+            if (attack.original.HasFlag(CombatDefines.AttackFlag.indirectAttack))
             {
-                hitType = ranval < parryChance ? AttackDefines.HitType.blockCrit : AttackDefines.HitType.blocked;
-                attacker.hitCounter++;
+                target.FireEventOnTarget(AbilityDefines.Event.IndirectHitByEnemy, attacker);
             }
             else
             {
-                hitType = (ranval > parryChance + missChance + hitChance) ? AttackDefines.HitType.criticalHit : AttackDefines.HitType.normal;
-                attacker.hitCounter = 1;
-                if (hitType == AttackDefines.HitType.criticalHit)
-                    attacker.critCounter = 1;
+                if (attacker.GetState(ModifierDefines.State.true_block))
+                {
+                    hitType = AttackDefines.HitType.blocked;
+                }
                 else
-                    attacker.critCounter++;
+                {
+                    float accuracy = attacker.stats.realStats.Offense / Mathf.Max(target.stats.realStats.Defense);
+                    accuracy = accuracy * .6f + Mathf.Min(.4f, attacker.hitCounter / 2 * .5f); //TODO DEFINE
 
-                attacker.FireEventOnTarget(AbilityDefines.Event.AttackHit, target);
-                target.FireEventOnTarget(AbilityDefines.Event.OnHitByEnemy, attacker);
+                    float critChance = 10 * accuracy + attacker.stats.realStats.CritChance * (1 + accuracy) / 2f * attacker.critCounter * .5f;
+                    float hitChance = 50 * accuracy;
+                    float blockChance = 25 / accuracy + attacker.stats.realStats.BlockChance * (1 + accuracy) / 2f;
+                    float parryChance = 15 / accuracy + attacker.stats.realStats.BlockChance * (1 + accuracy) / 2f;
+
+                    ranval = Random.value * (critChance + hitChance + blockChance + parryChance);
+                    if (ranval < blockChance)
+                    {
+                        hitType = ranval < parryChance ? AttackDefines.HitType.blockCrit : AttackDefines.HitType.blocked;
+                        attacker.hitCounter++;
+                    }
+                    else
+                    {
+                        hitType = (ranval > parryChance + blockChance + hitChance) ? AttackDefines.HitType.criticalHit : AttackDefines.HitType.normal;
+                        attacker.hitCounter = 1;
+                        if (hitType == AttackDefines.HitType.criticalHit)
+                            attacker.critCounter = 1;
+                        else
+                            attacker.critCounter++;
+
+                    }
+                }
+                switch (hitType)
+                {
+                    case AttackDefines.HitType.blockCrit:
+                    case AttackDefines.HitType.blocked:
+                        target.FireEventOnTarget(AbilityDefines.Event.OnBlockEnemy, attacker);
+                        attacker.FireEventOnTarget(AbilityDefines.Event.OnHitEnemy, target);
+                        break;
+                    case AttackDefines.HitType.criticalHit:
+                        attacker.FireEventOnTarget(AbilityDefines.Event.OnCritEnemy, target);
+                        break;
+                    default:
+                        attacker.FireEventOnTarget(AbilityDefines.Event.OnHitEnemy, target);
+                        break;
+                }
+
+                target.FireEventOnTarget(AbilityDefines.Event.DirectHitByEnemy, attacker);
             }
+
+            attacker.FireEventOnTarget(AbilityDefines.Event.AttackHit, target);
+            target.FireEventOnTarget(AbilityDefines.Event.OnHitByEnemy, attacker);
         }
         return hitType;
     }

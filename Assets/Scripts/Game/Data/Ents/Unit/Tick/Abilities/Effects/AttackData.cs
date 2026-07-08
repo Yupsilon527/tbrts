@@ -3,7 +3,7 @@ using System;
 [Serializable]
 public class ApplyAttack : ApplyEffects
 {
-    public AttackDefines.DamageType attack;
+    public AttackDefines.AttackType attack;
     public float BaseDamage = 0;
     public ScaleData[] scaling;
 
@@ -12,10 +12,10 @@ public class ApplyAttack : ApplyEffects
         float realDamage = BaseDamage * strength;
         foreach (var scale in scaling)
         {
-            realDamage = scale.GetScaleStrength(table.caster, table.target, realDamage);
+            realDamage = scale.GetScaleStrength(table.caster, table.GetTarget(), realDamage);
         }
-        Combat.main.Inspect($"{table.caster} deals {realDamage * strength} base damage to {table.target}");
-        table.target.damageable.DealDamage(realDamage * strength , attack);
+        Combat.main.Inspect($"{table.caster} deals {realDamage * strength} base damage to {table.GetTarget()}");
+        table.GetTarget().damageable.DealDamage(realDamage * strength , attack);
     }
 
     public override string GetDescription()

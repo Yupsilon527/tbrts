@@ -63,6 +63,7 @@ public class WorldManager : Initializable
 
             u.unit.attacks = u.attacks.Select(w => w.Translate()).ToArray();
             u.unit.spells = u.spells.Select(a => a.Translate()).ToArray();
+            u.unit.innates = u.passives.Select(a => (InnateData)a.Translate() ).ToArray();
 
             if (u.character != null)
                 u.unit.LoadCharacter(u.character);

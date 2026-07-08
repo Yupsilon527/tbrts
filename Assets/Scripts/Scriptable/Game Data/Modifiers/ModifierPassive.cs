@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ModifierPassive : AlterationSO
 {
-    public InnateData.AuraType immateType;
+    public InnateData.AuraType innateType;
     public ModifierConfig.ConfigEvent[] listeners;
 
     public override TagData Translate()
@@ -20,7 +20,7 @@ public class ModifierPassive : AlterationSO
         return new InnateData(
             InternalName,
             sprite,
-            immateType,
+            innateType,
             uibehavior,
             priority,
             flag,

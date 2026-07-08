@@ -17,7 +17,7 @@ public static class AttackDefines
         additive = 0,
         multiplicative = 1,
     }
-    public enum DamageType
+    public enum AttackType
     {
         Slashing = 0,
         Piercing = 1,
@@ -34,25 +34,21 @@ public static class AttackDefines
         LifeHealOverhealArmor = 11,
         Assassinate = 12,
 
-
         GrantAP = 13,
         GrantRP = 14,
         GrantSP = 15,
 
+        Guard = 16,
+
         Total = 17,
     }
-    public enum AttackType
+    public enum ReactionType  //TODO
     {
-        Physical = 0,
-        Piercing = 1,
-        Crushing = 2,
-        Magical = 3,
-        Pure = 4,
-        Poison = 5,
-        Heal = 6,
-        Shield = 7,
-        Taunt = 8,
-
+        followupAttack,
+        redirectTable,
+        miss,
+        block,
+        crit,
     }
     public enum MobFlag
     {

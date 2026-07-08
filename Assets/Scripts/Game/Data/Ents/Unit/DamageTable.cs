@@ -8,13 +8,13 @@ public class DamageTable
     public DataItemUnit attacker;
     public DataItemUnit target;
     public AttackDefines.HitType blockType;
-    public Dictionary<AttackDefines.DamageType, float> baseDamage = new();
-    public Dictionary<AttackDefines.DamageType, float> realDamage = new();
+    public Dictionary<AttackDefines.AttackType, float> baseDamage = new();
+    public Dictionary<AttackDefines.AttackType, float> realDamage = new();
 
     //ability
     public DamageTable(DataItemUnit a, DataItemUnit t,   AttackDefines.HitType block)
     { attacker = a; target = t;  blockType = block;  }
-    public void CalcAttack(AttackDefines.DamageType damage, float val)
+    public void CalcAttack(AttackDefines.AttackType damage, float val)
     {
         if (baseDamage.ContainsKey(damage))
             baseDamage[damage] += val;
@@ -28,24 +28,24 @@ public class DamageTable
             float outDamage = kvp.Value;
             switch (kvp.Key)
             {
-                case AttackDefines.DamageType.Slashing:
-                case AttackDefines.DamageType.Piercing:
-                case AttackDefines.DamageType.Crushing:
-                case AttackDefines.DamageType.Magical:
-                case AttackDefines.DamageType.Poison:
-                case AttackDefines.DamageType.Pure:
+                case AttackDefines.AttackType.Slashing:
+                case AttackDefines.AttackType.Piercing:
+                case AttackDefines.AttackType.Crushing:
+                case AttackDefines.AttackType.Magical:
+                case AttackDefines.AttackType.Poison:
+                case AttackDefines.AttackType.Pure:
 
                     float armor = 0;
 
                     switch (kvp.Key)
                     {
-                        case AttackDefines.DamageType.Slashing:
+                        case AttackDefines.AttackType.Slashing:
                             armor = target.stats.realStats.Armor;
                             break;
-                        case AttackDefines.DamageType.Piercing:
+                        case AttackDefines.AttackType.Piercing:
                             armor = target.stats.realStats.Shield;
                             break;
-                        case AttackDefines.DamageType.Crushing:
+                        case AttackDefines.AttackType.Crushing:
                             armor = target.stats.realStats.Padding;
                             break;
                     }
@@ -65,30 +65,30 @@ public class DamageTable
                                     outDamage = Mathf.Max(0, outDamage - target.stats.realStats.Block - armor);
                                     break;
                                 case AttackDefines.HitType.blockCrit:
-                                    outDamage = Mathf.Max(0, outDamage - target.stats.realStats.Block * 2 - armor);
+                                    outDamage = Mathf.Max(0, outDamage/2 - target.stats.realStats.Block  - armor);
                                     break;
                                 case AttackDefines.HitType.miss:
                                     outDamage = 0;
                                     break;
                             }
                             break;
-                        case AttackDefines.DamageType.Magical:
+                        case AttackDefines.AttackType.Magical:
                            // outDamage = Mathf.Max(outDamage - target.stats.realStats.Resistance, outDamage / 2);
                             outDamage = UnitDamageable.AccountResistances(outDamage, target.stats.realStats.Resistance);
                             break;
-                        case AttackDefines.DamageType.Poison:
+                        case AttackDefines.AttackType.Poison:
                             outDamage = Mathf.Clamp(outDamage, 0, target.damageable.Health.GetValue() - 1);
                             break;
-                        case AttackDefines.DamageType.ShieldHeal:
+                        case AttackDefines.AttackType.ShieldHeal:
                             outDamage += target.GetProperty(ModifierDefines.Property.shielding_bonus_flat);
                             outDamage *= target.GetProperty(ModifierDefines.Property.outgoing_shielding);
                             break;
-                        case AttackDefines.DamageType.LifeHealNoOverheal:
-                        case AttackDefines.DamageType.LifeHealOverhealShield:
-                        case AttackDefines.DamageType.LifeHealOverhealArmor:
+                        case AttackDefines.AttackType.LifeHealNoOverheal:
+                        case AttackDefines.AttackType.LifeHealOverhealShield:
+                        case AttackDefines.AttackType.LifeHealOverhealArmor:
                             outDamage *= target.GetProperty(ModifierDefines.Property.incoming_healing);
                             break;
-                        case AttackDefines.DamageType.ArmorHeal:
+                        case AttackDefines.AttackType.ArmorHeal:
                             outDamage *= target.GetProperty(ModifierDefines.Property.incoming_barrier);
                             break;
 
@@ -97,20 +97,20 @@ public class DamageTable
             }
             realDamage[kvp.Key] = outDamage;
         }
-        if (realDamage.ContainsKey(AttackDefines.DamageType.Slashing) 
-            || realDamage.ContainsKey(AttackDefines.DamageType.Piercing)
-            || realDamage.ContainsKey(AttackDefines.DamageType.Crushing))
+        if (realDamage.ContainsKey(AttackDefines.AttackType.Slashing) 
+            || realDamage.ContainsKey(AttackDefines.AttackType.Piercing)
+            || realDamage.ContainsKey(AttackDefines.AttackType.Crushing))
         {
-            float totalDamage = (realDamage.TryGetValue(AttackDefines.DamageType.Slashing, out float slash) ? slash : 0f)
-                + (realDamage.TryGetValue(AttackDefines.DamageType.Piercing, out float pierce) ? pierce : 0f)
-                + (realDamage.TryGetValue(AttackDefines.DamageType.Crushing, out float crush) ? crush : 0f)
-                + (realDamage.TryGetValue(AttackDefines.DamageType.Pure, out float pure) ? pure : 0f);
+            float totalDamage = (realDamage.TryGetValue(AttackDefines.AttackType.Slashing, out float slash) ? slash : 0f)
+                + (realDamage.TryGetValue(AttackDefines.AttackType.Piercing, out float pierce) ? pierce : 0f)
+                + (realDamage.TryGetValue(AttackDefines.AttackType.Crushing, out float crush) ? crush : 0f)
+                + (realDamage.TryGetValue(AttackDefines.AttackType.Pure, out float pure) ? pure : 0f);
             if (totalDamage == 0)
             {
-                if (realDamage.ContainsKey(AttackDefines.DamageType.Pure))
-                    realDamage[AttackDefines.DamageType.Pure] = 1;
+                if (realDamage.ContainsKey(AttackDefines.AttackType.Pure))
+                    realDamage[AttackDefines.AttackType.Pure] = 1;
                 else
-                    realDamage.Add(AttackDefines.DamageType.Pure, 1);
+                    realDamage.Add(AttackDefines.AttackType.Pure, 1);
             }
         }
         realDamage = baseDamage;

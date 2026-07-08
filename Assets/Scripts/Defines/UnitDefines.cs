@@ -54,6 +54,10 @@ public static class UnitDefines
 
 		rangeSupport,
 		siegeSupport,
+
+        metalIncome,
+        goldIncome,
+		manaIncome,
     }
 
     public static List<string> AbilityIndex = new List<string>{

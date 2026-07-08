@@ -28,7 +28,7 @@ public class DataItemUnit : DataItemMob
 
 
     public UnitData data;
-    public ResourceInt health=new(100,"True Helath",false,true);
+    public ResourceInt health = new(100, "True Helath", false, true);
 
     public DataItemArmy troop;
     public Vector2Int troopPosition => troop.formation.GetPositionForUnit(this);
@@ -50,7 +50,7 @@ public class DataItemUnit : DataItemMob
     {
         data = table;
         stats = new(this, table.unit);
-        
+
         damageable = new(this);
 
         modifiers = new(this);
@@ -62,7 +62,7 @@ public class DataItemUnit : DataItemMob
         bonuses = new(this);
     }
 
-    public DataItemUnit( UnitData uData, DataItemArmy newArmy) :this(uData)
+    public DataItemUnit(UnitData uData, DataItemArmy newArmy) : this(uData)
     {
         SetPlayerOwner(newArmy.GetPlayerOwner());
         newArmy.formation.TransferUnit(this);
@@ -78,6 +78,7 @@ public class DataItemUnit : DataItemMob
     }
     public virtual void HandleEvent(AbilityDefines.Event evt, DataItemUnit[] targets, bool refresh = false)
     {
+        Combat.main.Inspect($"{data.InternalName} reacts to event {evt}");
         stats.TriggerFuncs(evt);
         damageable.TriggerFuncs(evt);
         actions.TriggerFuncs(evt);
@@ -100,11 +101,11 @@ public class DataItemUnit : DataItemMob
     }
     public bool CanAct(CombatDefines.AttackPhase phase)
     {
-        return damageable. IsAlive() && actions.GetAttacks().Any(a => a.original.attackPhase == phase && a.HasResourcesToCast());
+        return damageable.IsAlive() && actions.GetAttacks().Any(a => a.original.attackPhase == phase && a.HasResourcesToCast());
     }
     protected void UpdateNextAction()
     {
-        initiative = (int)(UnityEngine.Random.value * 25)   ;
+        initiative = (int)(UnityEngine.Random.value * 25);
         nextAction = Mathf.Min(actions.GetNextTick(), modifiers.GetNextTick());
         Combat.main.Inspect($"{this} next action is set to {nextAction}");
     }
@@ -116,7 +117,7 @@ public class DataItemUnit : DataItemMob
     }
     public virtual bool GetState(ModifierDefines.State State)
     {
-        return modifiers.GetState(State) ||upgrades.GetState(State);
+        return modifiers.GetState(State) || upgrades.GetState(State);
     }
     public float GetProperty(ModifierDefines.Property Property)
     {
@@ -158,12 +159,11 @@ public class DataItemUnit : DataItemMob
     }
     public TerrainDefines.Movement GetMovetype()
     {
-
-        if (innates.GetAbilityLevel("ghost") > 0)
+        if (GetState(ModifierDefines.State.cannot_move) || innates.GetAbilityLevel("building") > 0)
         {
             return TerrainDefines.Movement.Ghost;
         }
-        else   if (innates.GetAbilityLevel("ghost") > 0)
+        else if (innates.GetAbilityLevel("ghost") > 0)
         {
             return TerrainDefines.Movement.Ghost;
         }
@@ -238,7 +238,7 @@ public class DataItemUnit : DataItemMob
 
         output += $"Combat: {stats.realStats.Offense}/{stats.realStats.Defense}<br>";
 
-        string damage = stats.realStats.Attack == stats.baseStats.Attack  ? "" :  stats.realStats.Attack > stats.baseStats.Attack ? ("+" + (stats.realStats.Attack - stats.baseStats.Attack)) : ("" + (stats.realStats.Attack - stats.baseStats.Attack));
+        string damage = stats.realStats.Attack == stats.baseStats.Attack ? "" : stats.realStats.Attack > stats.baseStats.Attack ? ("+" + (stats.realStats.Attack - stats.baseStats.Attack)) : ("" + (stats.realStats.Attack - stats.baseStats.Attack));
         output += $"Damage: {stats.baseStats.Attack}{damage}<br>";
 
         string magic = stats.realStats.Magic == stats.baseStats.Magic ? "" : stats.realStats.Magic > stats.baseStats.Magic ? ("+" + (stats.realStats.Magic - stats.baseStats.Magic)) : ("" + (stats.realStats.Magic - stats.baseStats.Magic));
@@ -270,8 +270,8 @@ public class DataItemUnit : DataItemMob
         {
             output += "<b>Abilities</b><br>";
             foreach (var a in abs)
-            { 
-            output += a.InternalName + "<br>";
+            {
+                output += a.InternalName + "<br>";
             }
         }
         if (sps.Length > 0)
@@ -282,11 +282,11 @@ public class DataItemUnit : DataItemMob
             }
             output += "<b>Spells</b><br>";
             foreach (var a in sps)
-            { 
-            output = a.InternalName + "<br>";
+            {
+                output = a.InternalName + "<br>";
             }
         }
-        if (ins.Count > 0 ||mds.Length > 0)
+        if (ins.Count > 0 || mds.Length > 0)
         {
             if (output.Length > 0)
             {

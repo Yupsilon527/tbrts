@@ -39,14 +39,14 @@ public class PropertySpell : PropertyAbility
             foreach (var target in table.maintarget)
             {
                 target.damageable.ResolveDamate();
-                table.attacker.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, target);
+                table.attacker.FireEventOnTarget(AbilityDefines.Event.OnHitSpell, target);
                 target.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, table.attacker);
                 affectedArmies.Add(target.troop);
             }
             foreach (var target in table.sidetarget)
             {
                 target.damageable.ResolveDamate();
-                table.attacker.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, target);
+                table.attacker.FireEventOnTarget(AbilityDefines.Event.OnHitSpell, target);
                 target.FireEventOnTarget(AbilityDefines.Event.OnHitBySpell, table.attacker);
                 affectedArmies.Add(target.troop);
             }

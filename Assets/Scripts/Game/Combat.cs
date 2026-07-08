@@ -104,6 +104,7 @@ public class Combat : Initializable
                 Inspect($"{c} acts at tick {c.nextAction}/{currentPhase}!");
                 currentTick = c.nextAction;
                 c.Act();
+                FireEventOnAllFighters(AbilityDefines.Event.Action);
                 return;
             }
         }
