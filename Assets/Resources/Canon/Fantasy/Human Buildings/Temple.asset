@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
   m_Name: Temple
   m_EditorClassIdentifier: 
-  InternalName: Cathedral
+  InternalName: Temple
   AssignedWorld: 
+  prerequisites:
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
   building:
-    InternalName: Cathedral
+    InternalName: Temple
     icon: {fileID: 9080485990912184260, guid: 6e992a76de6b8424fb23928f4851b8c7, type: 3}
     flags: []
     costs:

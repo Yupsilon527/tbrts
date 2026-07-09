@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
   m_Name: Knight Paladin
   m_EditorClassIdentifier: 
+  InternalName: 
+  AssignedWorld: 
+  prerequisites:
+  - {fileID: 11400000, guid: 5479c026e11329446bd1309f9fe3040e, type: 2}
+  - {fileID: 11400000, guid: 9d3425f9deaa4604f8c17dbac179acae, type: 2}
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
   unit:
     InternalName: Knight Paladin
     icon: {fileID: 21300000, guid: c16be4fd6b6dee24ab81d88e2ccfd53f, type: 3}
@@ -25,7 +31,10 @@ MonoBehaviour:
       value: 200
     - resource: 3
       value: 150
-    prerequisites: []
+    prerequisites:
+    - b_knight archery
+    - b_stable
+    - b_keep 3
     unit:
       Offense: 20
       Defense: 10

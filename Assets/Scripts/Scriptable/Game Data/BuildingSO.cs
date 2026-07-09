@@ -4,9 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Building", menuName = "Data/Production/Building")]
 public class BuildingSO : ProductionSO
 {
+    public UnitSO[] armies;
     public BuildingData building;
 
-    public UnitSO[] armies;
 
     public override void OnValidate()
     {

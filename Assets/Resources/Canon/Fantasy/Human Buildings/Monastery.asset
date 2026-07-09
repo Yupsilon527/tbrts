@@ -10,20 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
-  m_Name: Cathedral
+  m_Name: Monastery
   m_EditorClassIdentifier: 
-  InternalName: Cathedral
+  InternalName: Monastery
   AssignedWorld: 
+  prerequisites:
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  - {fileID: 11400000, guid: 4cebb73b874726f4cace30e2a51413f0, type: 2}
+  armies:
+  - {fileID: 11400000, guid: cb4acf5535becb946a9ecf08ae29c9f6, type: 2}
   building:
-    InternalName: Cathedral
+    InternalName: Monastery
     icon: {fileID: 9080485990912184260, guid: 6e992a76de6b8424fb23928f4851b8c7, type: 3}
     flags: []
     costs:
     - resource: 1
       value: 200
     - resource: 3
-      value: 40
+      value: 20
     prerequisites:
+    - b_keep 3
     - b_temple
     infinite: 2
     affectedFlags:
@@ -42,5 +48,3 @@ MonoBehaviour:
     bonusType: 0
     production:
     - Human Heal
-  armies:
-  - {fileID: 11400000, guid: cb4acf5535becb946a9ecf08ae29c9f6, type: 2}

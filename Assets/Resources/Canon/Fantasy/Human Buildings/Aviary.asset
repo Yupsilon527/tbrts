@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InternalName: Aviary
   AssignedWorld: 
+  prerequisites:
+  - {fileID: 11400000, guid: 8d487c5c4270318459df288c10033324, type: 2}
   building:
     InternalName: Aviary
     icon: {fileID: 7316229441688303391, guid: 7ac415e85f8b9834da0302cb96c8d8e2, type: 3}

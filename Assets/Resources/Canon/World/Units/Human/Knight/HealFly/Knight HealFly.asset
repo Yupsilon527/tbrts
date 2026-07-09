@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
+  m_Name: Knight HealFly
+  m_EditorClassIdentifier: 
+  InternalName: 
+  AssignedWorld: 
+  prerequisites:
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  - {fileID: 11400000, guid: 4cebb73b874726f4cace30e2a51413f0, type: 2}
+  - {fileID: 11400000, guid: fd3552d1fa879d349bdd395c786e55c0, type: 2}
+  unit:
+    InternalName: Knight HealFly
+    icon: {fileID: 21300000, guid: e0634a42c35531d4ab48e8bc49b08394, type: 3}
+    flags:
+    - flyier
+    - melee
+    - support
+    costs:
+    - resource: 0
+      value: 250
+    - resource: 1
+      value: 400
+    - resource: 3
+      value: 80
+    prerequisites:
+    - b_keep 3
+    - b_temple
+    - b_knight cathedral
+    unit:
+      Offense: 15
+      Defense: 15
+      Luck: 0
+      Attack: 5
+      Magic: 6
+      Speed: 140
+      Action: 4
+      Mana: 0
+      Supply: 0
+      Health: 25
+      Barrier: 0
+      Armor: 1
+      Shield: 1
+      Padding: 1
+      Resistance: 0
+      Block: 1
+      LuckCoefficient: 1
+      SpeedCoefficient: 1
+      DodgeChance: 0
+      BlockChance: 15
+      ProcChance: 0
+      CritChance: 0
+      bonusDamage:
+      - damage: 5
+        scale: 0
+        flag: 10
+      - damage: 5
+        scale: 0
+        flag: 12
+      - damage: 10
+        scale: 0
+        flag: 8
+    armySprites:
+    - {fileID: 21300000, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
+    - {fileID: 21300000, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
+    - {fileID: 21300000, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
+    - {fileID: 21300000, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
+    - {fileID: 21300000, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
+    - {fileID: 21300000, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
+    unitFlags: 0d000000
+    attacks: []
+    spells: []
+    abilities:
+    - abilityID: fly
+      abilityLevel: 1
+    - abilityID: slow
+      abilityLevel: 2
+  attacks:
+  - {fileID: 11400000, guid: 353b222755b25ec46bd7cea8cd41ce19, type: 2}
+  spells: []
+  passives: []
+  character: {fileID: 11400000, guid: 73dad06f958bcf8429789db1c848a39a, type: 2}

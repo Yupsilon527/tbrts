@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
   m_Name: Human Harc
   m_EditorClassIdentifier: 
+  InternalName: 
+  AssignedWorld: 
+  prerequisites:
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  - {fileID: 11400000, guid: 9d3425f9deaa4604f8c17dbac179acae, type: 2}
   unit:
     InternalName: Human Harc
     icon: {fileID: 21300000, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
@@ -26,7 +31,8 @@ MonoBehaviour:
     - resource: 3
       value: 25
     prerequisites:
-    - b_Keep 2
+    - b_keep 3
+    - b_stable
     unit:
       Offense: 8
       Defense: 0

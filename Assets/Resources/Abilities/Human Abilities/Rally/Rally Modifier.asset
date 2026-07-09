@@ -15,19 +15,19 @@ MonoBehaviour:
   sprite: {fileID: 0}
   InternalName: Rally
   uibehavior: 2
-  behavior: 3
+  behavior: 4
   priority: 1
   flag: 2
   properties:
   - Property: 0
-    value: 7
-    IncreasePerLevel: 6
+    value: 6
+    IncreasePerLevel: 0
   - Property: 2
     value: 3
-    IncreasePerLevel: 1
+    IncreasePerLevel: 0
   states: []
   duration: 1
   thinker: 0
   level: 0
-  destroyEvt: 9
-  expireType: -1
+  destroyEvt: -1
+  expireType: 10

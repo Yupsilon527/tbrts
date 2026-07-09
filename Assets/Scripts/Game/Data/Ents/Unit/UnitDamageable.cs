@@ -11,7 +11,7 @@ public class UnitDamageable : UnitComponent
     public override void TriggerFuncs(AbilityDefines.Event act)
     {
         base.TriggerFuncs(act);
-        if (act == AbilityDefines.Event.OnTurnBegin)
+        if (act == AbilityDefines.Event.OnDayBegin)
         {
             float regen = parent.innates.GetAbilityCombined(UnitDefines.ArmyAbilities.regen);
             Health.GiveValue(regen);

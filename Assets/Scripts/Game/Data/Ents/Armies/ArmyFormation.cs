@@ -24,8 +24,12 @@ public class ArmyFormation : ArmyComponent
     public override void OnTurnBegin()
     {
         base.OnTurnBegin();
+        HandleEvent(AbilityDefines.Event.OnDayBegin);
+    }
+    public void HandleEvent(AbilityDefines.Event e)
+    {
         foreach (var unit in GetUnits())
-            unit.FireEventOnSelf(AbilityDefines.Event.OnTurnBegin);
+            unit.FireEventOnSelf(e);
     }
     public int CountLivingTroopsInRow(int row)
     {

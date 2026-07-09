@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InternalName: Workshop
   AssignedWorld: 
+  prerequisites:
+  - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
   building:
     InternalName: Workshop
     icon: {fileID: -3089727717190005133, guid: 6bfae443d8abda0428616d9593eb93ff, type: 3}

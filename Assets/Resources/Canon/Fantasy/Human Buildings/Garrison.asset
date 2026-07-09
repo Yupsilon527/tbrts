@@ -14,6 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InternalName: Garrison
   AssignedWorld: 
+  prerequisites: []
+  armies:
+  - {fileID: 11400000, guid: 6bcd0ea8ac54ced46b53c9c0f47cf7f0, type: 2}
+  - {fileID: 11400000, guid: 886a5c98da63c734ba584330cadc6b6e, type: 2}
+  - {fileID: 11400000, guid: 1326006cf450cc2449f57a94f56fc31b, type: 2}
+  - {fileID: 11400000, guid: 4e293d9a7a827d24eb0527af127675b7, type: 2}
   building:
     InternalName: Garrison
     icon: {fileID: 5002096206624228670, guid: b5cb38ba9325d7f4bbd338efed8a2c2d, type: 3}
@@ -34,11 +40,6 @@ MonoBehaviour:
     bonusType: 0
     production:
     - Human Linf
-    - Human Lcav
+    - Human Larc
     - Human Hinf
-    - Human Hcav
-  armies:
-  - {fileID: 11400000, guid: 6bcd0ea8ac54ced46b53c9c0f47cf7f0, type: 2}
-  - {fileID: 11400000, guid: fb79edb46f4bc31428e186831f0a885c, type: 2}
-  - {fileID: 11400000, guid: 1326006cf450cc2449f57a94f56fc31b, type: 2}
-  - {fileID: 11400000, guid: 04073a609ae407c4bbe022f59e695ec4, type: 2}
+    - Human Harc

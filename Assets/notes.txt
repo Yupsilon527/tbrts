@@ -15,7 +15,14 @@ Fixes
 	player window doesnt work
 
 TODO
-	revise  movement
+	revise events
+	revise abilities >>> multiple listeners
+		split modifier reaction/multiple listeners?
+		or paying MP/AP outside combat always return false
+
+	revise unit innates
+		unit sizes (for transport)
+		innate granting modifiers
 
 	sites
 		gold

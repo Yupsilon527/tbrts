@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
   m_Name: Knight Lcav
   m_EditorClassIdentifier: 
+  InternalName: 
+  AssignedWorld: 
+  prerequisites: []
   unit:
     InternalName: Knight Lcav
-    icon: {fileID: 21300000, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
+    icon: {fileID: 21300000, guid: b762db6c711fed7409017c8a673ba108, type: 3}
     flags:
     - cavalry
     - melee
@@ -84,9 +87,12 @@ MonoBehaviour:
     abilities:
     - abilityID: mounted
       abilityLevel: 1
+    - abilityID: fast
+      abilityLevel: 1
   attacks:
   - {fileID: 11400000, guid: 1eff5a7a6566a15498a0aabff0087be0, type: 2}
   - {fileID: 11400000, guid: 7a3d3d470d7ce6144845a925dfda660d, type: 2}
-  spells: []
+  spells:
+  - {fileID: 11400000, guid: 0a225752f25b6bc489d5ee7874c54127, type: 2}
   passives: []
-  character: {fileID: 11400000, guid: bb659cc1777b7dc40b5a7ad4ce786ca7, type: 2}
+  character: {fileID: 11400000, guid: dfde41165e7132e4b91d746c876ba3fb, type: 2}

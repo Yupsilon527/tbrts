@@ -20,11 +20,11 @@ MonoBehaviour:
   flag: 2
   properties:
   - Property: 31
-    value: 2
+    value: 1
     IncreasePerLevel: 0
   states: []
   duration: 99
   thinker: 0
   level: 0
-  destroyEvt: 6
-  expireType: 5
+  destroyEvt: 10
+  expireType: -1

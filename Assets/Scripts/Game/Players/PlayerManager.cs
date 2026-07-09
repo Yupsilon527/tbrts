@@ -17,6 +17,8 @@ public class PlayerManager : GameComponent
 
     public void CycleActivePlayer()
     {
+        foreach (var army in currentPlayer.units)
+            army.formation.HandleEvent(AbilityDefines.Event.OnEndTurn);
         int next = playerTurn + 1;
         if (next >= players.Length )
         {
@@ -30,6 +32,8 @@ public class PlayerManager : GameComponent
         playerTurn = ap;
         GameManager.main.los.ReviseLoSForPlayer(currentPlayer);
         InterfaceManager.main.AssignPlayer(currentPlayer);
+        foreach (var army in currentPlayer.units)
+            army.formation.HandleEvent(AbilityDefines.Event.OnBeginTurn);
     }
 
     public DataItemPlayer MakeNeutrals(CustomMap map)

@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
   m_Name: Human Lcav
   m_EditorClassIdentifier: 
+  InternalName: 
+  AssignedWorld: 
+  prerequisites: []
   unit:
     InternalName: Human Lcav
     icon: {fileID: 21300000, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}

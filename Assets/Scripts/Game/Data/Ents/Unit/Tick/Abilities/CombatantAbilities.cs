@@ -32,7 +32,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
                     atk.uses = 0;
                 }
         }
-        else if (act == AbilityDefines.Event.OnTurnBegin)
+        else if (act == AbilityDefines.Event.OnDayBegin)
         {
             if (parent.GetMainTile().buildingLayer is DataItemCastle city
                 && city.GetAlignment(parent) == PlayerDefines.Alignment.ally

@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
   m_Name: Knight Hinf
   m_EditorClassIdentifier: 
+  InternalName: 
+  AssignedWorld: 
+  prerequisites:
+  - {fileID: 11400000, guid: 32cbd38d31a693547963933d2eb23306, type: 2}
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
   unit:
     InternalName: Knight Hinf
     icon: {fileID: 21300000, guid: 0f038dd18d945e740aaf9d20cd4706b9, type: 3}
@@ -26,7 +31,8 @@ MonoBehaviour:
     - resource: 3
       value: 50
     prerequisites:
-    - b_keep 2
+    - b_knight crusader building
+    - b_keep 3
     unit:
       Offense: 15
       Defense: 20

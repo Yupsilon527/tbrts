@@ -155,6 +155,7 @@ public static class ModifierDefines
         incoming_slash_damage = 36,
         incoming_magic_damage = 37,
         incoming_heal = 38,
+        incoming_bonus_damage = 60,
 
         // Outgoing modifiers
         outgoing_damage = 39,
@@ -188,7 +189,7 @@ public static class ModifierDefines
         critical_chance = 59,
 
         // Total count (always last)
-        total = 60,
+        total = 61,
     }
 
     public enum TroopState
@@ -236,9 +237,11 @@ public static class ModifierDefines
         ticks = AbilityDefines.Event.Time,
         stacks = AbilityDefines.Event.OnStacksChange,
         attacks = AbilityDefines.Event.AfterAttack,
-        battles = AbilityDefines.Event.CombatEnd,
-        forNfights = AbilityDefines.Event.CombatExit,
+        thisBattle = AbilityDefines.Event.CombatEnd,
+        forNFights = AbilityDefines.Event.CombatExit,
         thisAction = AbilityDefines.Event.Action,
+        startOfTheNextTurn = AbilityDefines.Event.OnBeginTurn,
+        endOfThisTurn = AbilityDefines.Event.OnEndTurn,
     }
 
 

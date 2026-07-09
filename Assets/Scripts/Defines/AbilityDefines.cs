@@ -29,7 +29,7 @@ public static class AbilityDefines
         CombatPhase = 11,
 
         // Turn / Board
-        OnTurnBegin = 12,
+        OnDayBegin = 12,
         OnMoveTile = 13,
 
         // Aura / Stack
@@ -108,8 +108,10 @@ public static class AbilityDefines
         AfterAfterHitByIndirect = 62,
         AfterAfterHitByMagic = 63,
 
-        // Total (always last)
-        Total = 64,
+        OnEndTurn = 64,
+        OnBeginTurn = 65,
+
+        Total = 66,
     }
 
     public delegate void AbilityFunction(EventTable CastData);
