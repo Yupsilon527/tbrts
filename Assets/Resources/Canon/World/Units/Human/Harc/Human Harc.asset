@@ -88,7 +88,7 @@ MonoBehaviour:
       areaMode: 0
     spells:
     - InternalName: Archer Volley
-      abilityFlags: 12
+      abilityFlags: 4
       MetalCost: 0
       GoldCost: 0
       ManaCost: 10
@@ -111,4 +111,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2da6701740c77724a8e768453806fff2, type: 2}
   spells:
   - {fileID: 11400000, guid: 82d8fb3736530824eb8ad3c0c8025f7b, type: 2}
+  passives: []
   character: {fileID: 11400000, guid: 37931bba4cff8084e85e77b162af2633, type: 2}

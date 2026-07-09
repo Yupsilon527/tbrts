@@ -8,9 +8,9 @@ public static class UnitDefines
     public static int iArmyCols = 3;
     public static int iMaxTroopStack = iArmyRows * iArmyCols;
 
-    public static int MoveBase = 20;
-    public static int MoveAddition = 4;
-    public static int MoveSubstraction = 4;
+    public static int MoveBase = 15;
+    public static int MoveAddition = 3;
+    public static int MoveSubstraction = 3;
 
     public static int iArmyBaseLoS = 4;
     public static float fBribeMultiplier = 2;
@@ -40,10 +40,10 @@ public static class UnitDefines
         swim,
         amphibian,
         foot,
-        mounted,
+        groundfast,
+        groundheavy,
         fly,
         ghost,
-        wheels,
         teleport,
 
 		raze,

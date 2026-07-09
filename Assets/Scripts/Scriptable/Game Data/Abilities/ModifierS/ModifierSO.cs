@@ -6,7 +6,6 @@ public class ModifierSO : AlterationSO
     public int duration = 1;
     public int thinker = 0;
     public int level = 0;
-    public ModifierDefines.Flag flag;
     public ModifierDefines.ExpireType destroyEvt = ModifierDefines.ExpireType.ticks;
     public ModifierDefines.ExpireType expireType = ModifierDefines.ExpireType.ticks;
 

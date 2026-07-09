@@ -89,6 +89,13 @@ public class PlayerInputController : MonoBehaviour
         ChangeMouseTile(SidewaysMap.main.GetTile(mouseCoords));
     }
 
+    public void CastSpellOnTile(DataItemTile tile)
+    {
+        if (GameManager.main.armyManager.mainSelectedArmy.abilities.CastAbilityOnTile(castData, tile))
+        {
+            ClearCastAbility();
+        }
+    }
     void HandleMainInput(bool queue, bool overlaymenu)
     {
         var selArmy = GameManager.main.armyManager.mainSelectedArmy;
@@ -101,12 +108,7 @@ public class PlayerInputController : MonoBehaviour
             }
             else if (castData != null)
             {
-                if (selArmy.abilities.CastAbilityOnTile(castData, mouseOverTile))
-                {
-                    ClearCastAbility();
-                    ClearTileHighlights();
-                    ClearTileColors();
-                }
+                CastSpellOnTile(mouseOverTile);
             }
             else if (selArmy == null)
             {
@@ -131,26 +133,24 @@ public class PlayerInputController : MonoBehaviour
                     if (mouseOverTile.armyLayer.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned)
                         GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
                     else if (mouseOverTile.armyLayer.IsVisibleToPlayer(GameManager.main.playerManager.GetActivePlayer()))
-                        MoveOrder(selArmy, queue);
+                        GiveOrder(selArmy,new FollowOrder(Order.ID.Follow, mouseOverTile.gridPos, mouseOverTile.armyLayer),  queue);
                 }
                 else if (mouseOverTile.buildingLayer != null)
                 {
                     if (mouseOverTile.buildingLayer is DataItemCastle castle)
                     {
                         if (castle.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) != PlayerDefines.Alignment.enemy)
-                            MoveOrder(selArmy, queue);
+                            GiveOrder(selArmy, new Order(Order.ID.Move, mouseOverTile.gridPos), queue);
                        else if (castle.IsVisibleToPlayer(GameManager.main.playerManager.GetActivePlayer()))
                         {
-                            
-
-                            //   order raze
+                            GiveOrder(selArmy, new RazeOrder(Order.ID.Raze, mouseOverTile.gridPos), queue);
                         }
 
                     }
                 }
                 else
                 {
-                    MoveOrder(selArmy,queue);
+                    GiveOrder(selArmy,new Order(Order.ID.Move, mouseOverTile.gridPos), queue);
                 }
             }
         }
@@ -160,12 +160,23 @@ public class PlayerInputController : MonoBehaviour
             ClearCastAbility();
         }
     }
-    void MoveOrder(DataItemArmy selArmy, bool queue)
+    void GiveOrder(DataItemArmy selArmy, Order order, bool queue)
     {
+
         if (queue)
-            selArmy.orders.GiveOrder(new AttackOrder(Order.ID.Follow, mouseOverTile.gridPos, mouseOverTile.armyLayer));
+            selArmy.orders.GiveOrder(order);
         else
-            selArmy.orders.ReplaceOrder(new AttackOrder(Order.ID.Follow, mouseOverTile.gridPos, mouseOverTile.armyLayer));
+        {
+            foreach (var o in selArmy.orders.orders)
+            {
+                if (o.gridDest == mouseOverTile.gridPos)
+                {
+                    selArmy.movement.ResolveMovement();
+                    return;
+                }
+            }
+            selArmy.orders.ReplaceOrder(order);
+    }
     }
     void HandleSideInput()
     {
@@ -267,10 +278,12 @@ public class PlayerInputController : MonoBehaviour
         castData = ability;
         HandleAbilityInput();
     }
-    void ClearCastAbility()
+    public void ClearCastAbility()
     {
         castData = null;
         HandleAbilityInput();
+        ClearTileHighlights();
+        ClearTileColors();
     }
     #endregion
 }

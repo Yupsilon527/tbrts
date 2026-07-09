@@ -2,17 +2,17 @@ TEST
 	innates/auras
 	bonuses/buildings
 
-Fixes
-	armor?
-	army swap/formation tomens
+	terrain bonuses
+	
+	armor
 
-	command window
+Fixes
+	army swap/formation tokens
+
+	command window and buttons
 	window close/open
 
 	player window doesnt work
-	game skips player 2
-
-	windows/command window pos
 
 TODO
 	revise  movement
@@ -125,6 +125,8 @@ QoL
 			quick transfer
 			apply
 			undo
+
+	army into, army transfer >>> same prefab
 
 	mock combat windows
 	inspect troop window

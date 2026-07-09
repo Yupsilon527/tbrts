@@ -21,6 +21,32 @@ public class AbilityDragDropInterface : Initializable
             TokenPool = GetComponent<ObjectPool>();
         FindSlots();
     }
+    public void InitSlots(DataItemArmy army)
+    {
+        if (UnitSlots == null) return;
+        unitA = army;
+        unitB = null;
+
+        foreach (var slot in UnitSlots)
+        {
+            slot.army = army;
+
+            slot.gameObject.SetActive(slot.army != null);
+
+            if (slot.isActiveAndEnabled)
+            {
+                DataItemUnit unit = slot.position < 0 ? slot.army.formation.transport : slot.army.formation.Formation[slot.position];
+
+                if (unit != null)
+                {
+                    var token = GenerateToken(unit);
+                    token.parent = this;
+                    token.AttachToSlot(slot, true);
+                }
+            }
+        }
+        desc.Clear();
+    }
     public void InitSlots(DataItemArmy a, DataItemArmy b)
     {
         if (UnitSlots == null) return;

@@ -178,6 +178,16 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
         RefreshModifier(tag);
     }
     #endregion
+    #region Enable/Disable
+    public void SetModifierActive(PropertyTag tag, bool value)
+    {
+        if (tag is PropertyAttribute mod)
+        {
+            mod.active = value;
+            RefreshModifier(tag);
+        }
+    }
+    #endregion
     #region Refresh
     public void RefreshModifier(PropertyTag tag)
     {
@@ -200,9 +210,7 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
                     if (force || statRefresh)
                         UpdateModifierStates(mod);
                     if (force || propRefresh)
-                    {
                         UpdateModifierProperties(mod);
-                    }
                 }
                 if (mod.expireType == ModifierDefines.ExpireType.ticks || mod.HasThinker)
                 {
@@ -217,14 +225,14 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
         propRefresh = false;
         statRefresh = false;
     }
-    void UpdateModifierStates(PropertyModifier Mod)
+    void UpdateModifierStates(PropertyAttribute Mod)
     {
         foreach (ModifierDefines.State state in Mod.states)
         {
             UpdateState(state, Mod.priority);
         }
     }
-    void UpdateModifierProperties(PropertyModifier Mod)
+    void UpdateModifierProperties(PropertyAttribute Mod)
     {
         foreach (KeyValuePair<ModifierDefines.Property, float> prop in Mod.properties)
         {

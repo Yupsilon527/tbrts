@@ -149,8 +149,7 @@ public class DataItemArmy : DataItemMob
             {
                 if (attack && ntile.buildingLayer.GetAlignment(this) == PlayerDefines.Alignment.enemy && ntile.buildingLayer is DataItemCastle enemyCastle)
                 {
-                    enemyCastle.BattleTroop(this, ntile);
-                    return false;
+                    return enemyCastle.BattleTroop(this, ntile);
                 }
 
                 /*if (getMyTile().RuinData != null)
@@ -191,6 +190,10 @@ public class DataItemArmy : DataItemMob
     public bool IsInCombat()
     {
         return Combat.main.attackers == this || Combat.main.defenders == this;
+    }
+    public bool IsInTerrain(TerrainDefines.Elevation ter)
+    {
+        return tile.GetWalkElevation() == ter;
     }
     public override void SetPlayerOwner(DataItemPlayer player)
     {
@@ -338,7 +341,7 @@ public class DataItemArmy : DataItemMob
     }
     public bool CanInvadeCastle(DataItemCastle castle)
     {
-        return !castle.IsDemolished() && castle.GetAlignment(this) == PlayerDefines.Alignment.enemy && CanAttack() && formation.GetAbilitiyMax("raze") > 0;
+        return !castle.AmIDemolished() && castle.GetAlignment(this) == PlayerDefines.Alignment.enemy && CanAttack() && formation.GetAbilitiyMax("raze") > 0;
     }
     public void PostDamageUpdate()
     {
@@ -458,7 +461,7 @@ public class DataItemArmy : DataItemMob
         }
         if (tile.buildingLayer is DataItemCastle castle && GetAlignment(castle) == PlayerDefines.Alignment.playerowned)
         {
-            foreach (var army in castle.GetGarrison())
+            foreach (var army in castle.GetSituatedArmies(true))
             {
                 if (army!= null && army != this && army.formation.GetAbilitiyMax("siegeSupport") > 0)
                 {

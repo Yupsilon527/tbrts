@@ -46,7 +46,7 @@ public class UnitData : ProductionData
     }
     public override bool CompleteProduction(ProductionTable table)
     {
-        foreach (var troop in table.castle.GetGarrison())
+        foreach (var troop in table.castle.GetSituatedArmies(true))
         {
             if (troop == null) continue;
             if (troop.GetAlignment(table.castle) == PlayerDefines.Alignment.playerowned && troop.formation.CanIAccept(this))
@@ -92,13 +92,13 @@ public class UnitData : ProductionData
         {
             return TerrainDefines.Movement.Teleport;
         }
-        else if (GetAbilityLevel("wheels") > 0)
+        else if (GetAbilityLevel("groundheavy") > 0)
+        {
+            return TerrainDefines.Movement.GroundHeavy;
+        }
+        else if (GetAbilityLevel("groundfast") > 0)
         {
             return TerrainDefines.Movement.GroundWheels;
-        }
-        else if (GetAbilityLevel("mounted") > 0)
-        {
-            return TerrainDefines.Movement.GroundMounted;
         }
         else if (GetAbilityLevel("foot") > 0)
         {
@@ -121,7 +121,7 @@ public class UnitData : ProductionData
             return TerrainDefines.Movement.Building;
         }
 
-        return TerrainDefines.Movement.Basic;
+        return TerrainDefines.Movement.Tunneler;
     }
     public bool HasAbility(UnitDefines.ArmyAbilities ability)
     {

@@ -50,8 +50,8 @@ public class UpgradeList
             researchedUpgrades.Add(existing);
         }
 
-        onUpgradeLevelChange.Invoke(upgrade, oldLevel, newLevel);
         existing.level = newLevel;
+        onUpgradeLevelChange.Invoke(upgrade, oldLevel, newLevel);
 
         if (existing.level <= 0)
             researchedUpgrades.Remove(existing);
@@ -89,7 +89,7 @@ public class UpgradeList
 
     public void Clear()
     {
-        foreach (var upgrade in researchedUpgrades)
+        foreach (var upgrade in researchedUpgrades.ToArray())
             RemoveUpgrade(upgrade.upgrade);
     }
 }

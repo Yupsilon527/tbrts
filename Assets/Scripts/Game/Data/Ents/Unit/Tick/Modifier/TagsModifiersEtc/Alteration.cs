@@ -82,14 +82,18 @@ public class PropertyAttribute : PropertyTag
 
     }
 
-    public void ExecuteFunction(AbilityDefines.Event act)
+    public bool ExecuteFunction(AbilityDefines.Event act)
     {
-        ExecuteEvent(act, null);
+        return ExecuteEvent(act, null);
     }
-    public virtual void ExecuteEvent(AbilityDefines.Event act, DataItemUnit target)
+    public virtual bool ExecuteEvent(AbilityDefines.Event act, DataItemUnit target)
     {
-        if (functions.TryGetValue(act, out ModifierDefines.ModifierAction func))
-            func.Invoke(new ReactionTable(Combat.main.currentTick,parent,target,this));
+        if (active && functions.TryGetValue(act, out ModifierDefines.ModifierAction func))
+        {
+            func.Invoke(new ReactionTable(Combat.main.currentTick, parent, target, this));
+            return true;
+        }
+        return false;
     }
 
     #endregion

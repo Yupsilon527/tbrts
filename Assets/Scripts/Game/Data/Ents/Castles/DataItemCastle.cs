@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -76,15 +77,20 @@ public class DataItemCastle : DataItemBuilding
         }
     }
     #region Garrison and Control
-    public IEnumerable<DataItemArmy> GetGarrison()
+    public IEnumerable<DataItemArmy> GetSituatedArmies(bool friendlies)
     {
+        if (friendlies)
+            if (AmIDemolished())
+                return Array.Empty<DataItemArmy>();
+            else
+            return occupiedTiles.Select(t => t.armyLayer).Where(a => a!=null && a.GetAlignment(this) == PlayerDefines.Alignment.playerowned);
         return occupiedTiles.Select(t => t.armyLayer);
     }
 
     public int GetMyDefenseLevel()
     {
         int Power = 0;
-        foreach (DataItemArmy army in GetGarrison())
+        foreach (DataItemArmy army in GetSituatedArmies(true))
         {
             Power += army.GetPowerValue(false);
         }
@@ -97,13 +103,13 @@ public class DataItemCastle : DataItemBuilding
 
         bool Takeover = false;
 
-        if (IsDemolished() && GetGarrison().Count() > 0)
+        if (AmIDemolished() && GetSituatedArmies(false).Count() > 0)
         {
             Takeover = true;
         }
         else if (GetPlayerOwner() != Conqueror)
         {
-            foreach (DataItemArmy army in GetGarrison())
+            foreach (DataItemArmy army in GetSituatedArmies(false))
             {
                 if (army.GetPlayerOwner() == Conqueror)
                 {
@@ -116,19 +122,20 @@ public class DataItemCastle : DataItemBuilding
     }
     public bool AmIUnderAlliedControl()
     {
-        return GetGarrison().Sum(a => a?.GetAlignment(this) == PlayerDefines.Alignment.enemy ? 1 : 0) == 0;
+        return GetSituatedArmies(false).Sum(a => a?.GetAlignment(this) == PlayerDefines.Alignment.enemy ? 1 : 0) == 0;
     }
 
     public bool BattleTroop(DataItemArmy Attacker, DataItemTile Tile)
     {
-        if (GetGarrison().Count() > 0)
+        if (GetSituatedArmies(false).Count() > 0)
         {
-            foreach (DataItemArmy Zim in GetGarrison())
+            foreach (DataItemArmy Zim in GetSituatedArmies(true))
             {
 
                 if (Zim.GetPlayerOwner() != Attacker.GetPlayerOwner())
                 {
-                    //   Actions.BattleArmies(game, Attacker, Zim, false, true);
+                    Attacker.BattleAnother(Zim) ;
+                    return false;
                 }
             }
         }
@@ -187,7 +194,7 @@ public class DataItemCastle : DataItemBuilding
 
         display.DrawAgain();
     }
-    public bool IsDemolished() { return GameManager.main.currentTurn < RazeTurn; }
+    public bool AmIDemolished() { return GameManager.main.currentTurn < RazeTurn; }
     #endregion
     #region Income TODO
     /* public int GetResourceIncome()

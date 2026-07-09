@@ -30,10 +30,10 @@ public static class TerrainDefines
         Boat = 0,
         Swimmer = 1,
         Amphibian = 2,
-        Basic = 3,
+        Tunneler = 3,
         GroundFoot = 4,
-        GroundMounted = 5,
-        GroundWheels = 6,
+        GroundWheels = 5,
+        GroundHeavy = 6,
         Fly = 7,
         Ghost = 8,
         Teleport = 9,
@@ -51,10 +51,16 @@ public static class TerrainDefines
         Forest = 7,
         Hill = 8,
         Mountain = 9,
-        Wall = 10,
-        City = 11,
-        Total = 12
+        Tunnel = 10,
+        Wall = 11,
+        City = 12,
+        Total = 13
     }
+
+    public static int MovementFast = 2;
+    public static int MovementDefault = 3;
+    public static int MovementSlow = 4;
+    public static int MovementHindered = 5;
 
     public static int GetEdgeSprite(bool[] Edges)
     {
@@ -225,96 +231,82 @@ public static class TerrainDefines
             switch (movement)
             {
                 case Movement.Boat:
-                    if (Elevation == Elevation.Sea)
+                    if (Elevation == Elevation.Sea || Elevation == Elevation.Bridge)
                     {
-                        return 3;
+                        return MovementDefault;
                     }
-                    return 2;
-                case Movement.Swimmer:
+                    return MovementSlow;
+                case Movement.Swimmer://water unit that can walk on land
 
-                    if (Elevation > Elevation.Sea)
+                    if (Elevation < Elevation.Plain)
                     {
-                        return 2;
-                    }
-                    if (Elevation >= Elevation.Hill)
-                    {
-                        return 4;
-                    }
-                    return 3;
-                case Movement.Amphibian:
-                    if (Elevation >= Elevation.Plain)
-                    {
-                        return 3;
+                        return MovementDefault;
                     }
                     if (Elevation >= Elevation.Forest)
                     {
-                        return 4;
+                        return MovementHindered;
                     }
-                    return 2;
-                case Movement.Basic:
-                    if (Elevation == Elevation.Mountain)
-                    {
-                        return 3;
-                    }
-                    if (Elevation == Elevation.Swamp || Elevation >= Elevation.Forest)
-                    {
-                        return 3;
-                    }
-                    return 2;
-                case Movement.GroundFoot:
-                    if (Elevation == Elevation.Mountain)
-                    {
-                        return 3;
-                    }
-                    if (Elevation == Elevation.Swamp || Elevation >= Elevation.Forest)
-                    {
-                        return 3;
-                    }
-                    if (Elevation == Elevation.Bridge || Elevation == Elevation.Road)
-                    {
-                        return 1;
-                    }
-                    return 2;
-                case Movement.GroundMounted:
-                    if (Elevation == Elevation.Swamp || Elevation == Elevation.Hill)
-                    {
-                        return 3;
-                    }
-                    if (Elevation < Elevation.Bridge || Elevation > Elevation.Hill)
-                    {
-                        return 4;
-                    }
-                    return 2;
-                case Movement.GroundWheels:
-
-                    if (Elevation == Elevation.Bridge || Elevation == Elevation.Road)
-                    {
-                        return 1;
-                    }
+                    return MovementSlow;
+                case Movement.Amphibian://land unit that can walk on water
                     if (Elevation == Elevation.Swamp)
                     {
-                        return 5;
+                        return MovementSlow;
                     }
                     if (Elevation >= Elevation.Forest)
                     {
-                        return 4;
+                        return MovementHindered;
                     }
-                    return 3;
-                case Movement.Fly:
-
+                    return MovementDefault;
+                case Movement.Tunneler:
+                    if (Elevation == Elevation.Swamp || Elevation >= Elevation.Forest)
+                    {
+                        return MovementSlow;
+                    }
+                    return MovementDefault;
+                case Movement.GroundFoot:   //Infantry; can walk in mountains
                     if (Elevation == Elevation.Mountain)
                     {
-                        return 3;
+                        return MovementHindered;
                     }
-                    return 2;
+                    if (Elevation == Elevation.Swamp || Elevation >= Elevation.Forest)
+                    {
+                        return MovementSlow;
+                    }
+                    return MovementDefault;
+                case Movement.GroundWheels:    //wheels, walks faster on road, cant walk on mountains, hindered by swamp/forest
+                    if (Elevation == Elevation.Bridge || Elevation == Elevation.Road || Elevation == Elevation.City)
+                    {
+                        return MovementFast;
+                    }
+                    if (Elevation == Elevation.Swamp || Elevation == Elevation.Hill || Elevation == Elevation.Forest)
+                    {
+                        return MovementSlow;
+                    }
+                    return MovementDefault;
+                case Movement.GroundHeavy: //heavy vehicle
+                    if (Elevation == Elevation.Bridge || Elevation == Elevation.Road)
+                    {
+                        return MovementDefault;
+                    }
+                    if (Elevation == Elevation.Swamp || Elevation >= Elevation.Forest)
+                    {
+                        return MovementHindered;
+                    }
+                    return MovementSlow;
+                case Movement.Fly:
+                    if (Elevation == Elevation.Mountain)
+                    {
+                        return MovementHindered;
+                    }
+                    return MovementSlow;
                 case Movement.Ghost:
                     if (Elevation == Elevation.Void)
                     {
-                        return 2;
+                        return MovementDefault;
                     }
-                    return 3;
+                    return MovementSlow;
                 case Movement.Teleport:
-                    return 4;
+                    return MovementHindered;
             }
         }
 
@@ -335,14 +327,16 @@ public static class TerrainDefines
             case Movement.Amphibian:
                 return elevation == Elevation.City || elevation >= Elevation.Sea &&
                     elevation <= Elevation.Hill;
-            case Movement.Basic:
+            case Movement.Tunneler:
+                return elevation == Elevation.City || elevation == Elevation.Tunnel || (elevation >= Elevation.Swamp &&
+                elevation <= Elevation.Mountain);
             case Movement.GroundFoot:
                 return elevation == Elevation.City || (elevation >= Elevation.Swamp &&
                 elevation <= Elevation.Mountain);
-            case Movement.GroundWheels:
+            case Movement.GroundHeavy:
                 return elevation == Elevation.City || (elevation >= Elevation.Plain &&
                 elevation <= Elevation.Hill);
-            case Movement.GroundMounted:
+            case Movement.GroundWheels:
                 return elevation == Elevation.City || elevation >= Elevation.Sea &&
                     elevation <= Elevation.Mountain;
             case Movement.Fly:

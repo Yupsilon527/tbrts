@@ -7,15 +7,16 @@ public class CityBonuses : CityComponent
     {
         upgrades = new UpgradeList();
         upgrades.onUpgradeLevelChange += (upgrade, oldLevel, newLevel) => {
-            BuildBuilding(upgrade, newLevel - oldLevel,true) ;
+            if (newLevel!=oldLevel) BuildBuilding(upgrade, newLevel - oldLevel,true) ;
         };
     }
     public void BuildBuilding(TechData upgrade, int levels, bool revise)
     {
+        if (levels == 0) return;
         upgrades.CompleteUpgrade(upgrade, levels);
 
         int level = upgrades.GetUpgradeLevel(upgrade);
-        foreach (var army in city.GetGarrison())
+        foreach (var army in city.GetSituatedArmies(true))
         {
             ApplyUpgradeToAllUnits(army, upgrade, level);
         }

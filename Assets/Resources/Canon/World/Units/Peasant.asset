@@ -21,9 +21,11 @@ MonoBehaviour:
     unit:
       Offense: 5
       Defense: 5
+      Luck: 0
       Attack: 5
-      Action: 1
       Magic: 5
+      Speed: 100
+      Action: 1
       Mana: 0
       Supply: 0
       Health: 25
@@ -33,13 +35,12 @@ MonoBehaviour:
       Padding: 0
       Resistance: 0
       Block: 0
-      Speed: 100
-      Luck: 0
       LuckCoefficient: 1
       SpeedCoefficient: 1
       DodgeChance: 0
       BlockChance: 0
       ProcChance: 0
+      CritChance: 0
       bonusDamage: []
     armySprites:
     - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
@@ -50,14 +51,13 @@ MonoBehaviour:
     - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
     unitFlags: 00000000
     attacks:
-    - InternalName: Peasant Melee
+    - InternalName: Peasant Attack
+      abilityFlags: 76
       apCost: 1
-      mpCost: 0
+      rpCost: 0
       spCost: 0
       castTime: 100
       castDelay: 0
-      abilityFlags: 76
-      castOnce: 0
       attackPhase: 1
       targetPriority: 0
       areaMode: 0
@@ -68,4 +68,5 @@ MonoBehaviour:
   attacks:
   - {fileID: 11400000, guid: c810c3d2ccccc4b4c99c8fe0abdca083, type: 2}
   spells: []
+  passives: []
   character: {fileID: 11400000, guid: 850fd7226d5526e4ea37367751806fcf, type: 2}

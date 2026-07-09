@@ -173,3 +173,14 @@ MonoBehaviour:
       - Human Linf
       - 
       transporter: 
+    - InternalName: Heavy
+      ownership: 2
+      spawnPos: {x: 7, y: 7}
+      formation:
+      - Human Hinf
+      - Human Harc
+      - 
+      - Human Harc
+      - Human Hcav
+      - Human Heal
+      transporter: 

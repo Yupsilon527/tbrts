@@ -71,7 +71,6 @@ public class OrderComponent : ArmyComponent
     {
         ClearOrders();
         GiveOrder(o, 0);
-        parent.movement.ResolveMovement();
     }
     public void AdvanceOrder()
     {

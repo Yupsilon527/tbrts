@@ -28,7 +28,7 @@ public static class ModifierDefines
         priority_range_target = 8,
 
         true_block = 9,
-        cannot_block = 11,
+        cannot_guard = 11,
 
         total = 12,
     }

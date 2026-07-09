@@ -160,7 +160,6 @@ namespace Astar
         #region Node Grid
         Node[,] Nodes;
         const int ramLimit = 1000;
-        static int ram = 0;
 
         void RedoGrid()
         {
@@ -188,14 +187,10 @@ namespace Astar
 
         #region Distance Data (Dijkstra flood-fill from destination)
         readonly NodeHeap _openHeap = new NodeHeap();
-        float timeLimit = 0.01f;
-        float startTime;
 
         void ReaccountDistanceData()
         {
             ClearDistanceData();
-            startTime = Time.realtimeSinceStartup;
-
             Node dest = GetNodeAt(vDest);
             if (dest == null) { return; }
 

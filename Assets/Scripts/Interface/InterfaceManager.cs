@@ -10,10 +10,10 @@ public class InterfaceManager : WindowManager
     public PlayerWidget playerWidget;
 
     public InfoWindow infoWindow;
-    public ArmyInfoWindow armyWindow;
     public ArmyMergeWindow transferWindow;
     public CombatWindow combatWindow;
 
+    public ArmyInfoWindow armyWindow;
     public CastleProductionWindow castleWindow;
     public CastleInfoWindow castleInfoWindow;
     public CastleRazeWindow castleRazeWindow;

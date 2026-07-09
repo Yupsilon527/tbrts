@@ -52,22 +52,22 @@ MonoBehaviour:
         scale: 0
         flag: 12
     armySprites:
-    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
-    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
-    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
-    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
-    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
-    - {fileID: 181860653, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
+    - {fileID: 21300000, guid: 3d0c470e37781f041bf2502b14c90b7a, type: 3}
+    - {fileID: 21300000, guid: 3d0c470e37781f041bf2502b14c90b7a, type: 3}
+    - {fileID: 21300000, guid: 3d0c470e37781f041bf2502b14c90b7a, type: 3}
+    - {fileID: 21300000, guid: 3d0c470e37781f041bf2502b14c90b7a, type: 3}
+    - {fileID: 21300000, guid: 3d0c470e37781f041bf2502b14c90b7a, type: 3}
+    - {fileID: 21300000, guid: 3d0c470e37781f041bf2502b14c90b7a, type: 3}
     unitFlags: 010000000a000000
     attacks:
-    - InternalName: Peasant Melee
+    - InternalName: Linf Melee
       abilityFlags: 76
       apCost: 1
       rpCost: 0
       spCost: 0
       castTime: 100
-      castDelay: 0
-      attackPhase: 1
+      castDelay: 100
+      attackPhase: 2
       targetPriority: 0
       areaMode: 0
     spells: []
@@ -81,4 +81,5 @@ MonoBehaviour:
   attacks:
   - {fileID: 11400000, guid: a2980518f8729cc478c3d4f7e2632b1d, type: 2}
   spells: []
+  passives: []
   character: {fileID: 11400000, guid: 63cf10750e4557e4788a028a752f6729, type: 2}

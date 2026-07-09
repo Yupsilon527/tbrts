@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class DragDropToken : EventTrigger
 {
+    bool playerOwned;
     public DataItemUnit tokenUnit;
     public UnitContainer drawUnit;
     public AbilityDragDropInterface parent;
@@ -73,24 +74,34 @@ public class DragDropToken : EventTrigger
     }
     #endregion
     #region Drag Drop
+    public override void OnPointerClick(PointerEventData eventData)
+    {
+        base.OnPointerClick(eventData);
+        parent?.desc.ForUnit(tokenUnit);
+    }
     public override void OnBeginDrag(PointerEventData eventData)
     {
         base.OnBeginDrag(eventData);
-        if (slot.Interactable)
+        if (slot.Interactable && playerOwned)
         {
             dragDropMode = true;
-            parent?.desc.ForUnit(tokenUnit);
            // InfoOverlayController.main.Close();
         }
     }
     public override void OnDrag(PointerEventData eventData)
     {
+        if (dragDropMode) { 
         recttransform.position = Input.mousePosition;
         base.OnDrag(eventData);
+        base.OnDrag(eventData);
+    }
     }
     public override void OnEndDrag(PointerEventData eventData)
     {
-        RaycastSlot();
+        if (playerOwned)
+        {
+            RaycastSlot();
+        }
         dragDropMode = false;
         base.OnEndDrag(eventData);
     }
@@ -125,6 +136,7 @@ public class DragDropToken : EventTrigger
     {
         ClearToken(false);
         tokenUnit = unit;
+        playerOwned = unit.GetAlignment(GameManager.main.playerManager.currentPlayer) ==  PlayerDefines.Alignment.playerowned;
         if (draw)
             Redraw();
     }

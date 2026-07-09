@@ -177,11 +177,11 @@ public class DataItemUnit : DataItemMob
         }
         else if (innates.GetAbilityLevel("wheels") > 0)
         {
-            return TerrainDefines.Movement.GroundWheels;
+            return TerrainDefines.Movement.GroundHeavy;
         }
         else if (innates.GetAbilityLevel("giant") > 0)
         {
-            return TerrainDefines.Movement.GroundMounted;
+            return TerrainDefines.Movement.GroundWheels;
         }
         else if (innates.GetAbilityLevel("foot") > 0)
         {
@@ -200,7 +200,7 @@ public class DataItemUnit : DataItemMob
             return TerrainDefines.Movement.Boat;
         }
 
-        return TerrainDefines.Movement.Basic;
+        return TerrainDefines.Movement.Tunneler;
     }
 
     public ResourceCost[] GetPurchaseCost(DataItemPlayer Owner)

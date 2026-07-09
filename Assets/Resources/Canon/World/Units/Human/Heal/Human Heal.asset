@@ -48,34 +48,34 @@ MonoBehaviour:
       CritChance: 0
       bonusDamage: []
     armySprites:
-    - {fileID: 8125670880829888781, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
-    - {fileID: 8125670880829888781, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
-    - {fileID: 8125670880829888781, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
-    - {fileID: 8125670880829888781, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
-    - {fileID: 8125670880829888781, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
-    - {fileID: 8125670880829888781, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
+    - {fileID: 21300000, guid: 6d7c661f7ff912e43bf2a4c44c2af2e1, type: 3}
+    - {fileID: 21300000, guid: 6d7c661f7ff912e43bf2a4c44c2af2e1, type: 3}
+    - {fileID: 21300000, guid: 6d7c661f7ff912e43bf2a4c44c2af2e1, type: 3}
+    - {fileID: 21300000, guid: 6d7c661f7ff912e43bf2a4c44c2af2e1, type: 3}
+    - {fileID: 21300000, guid: 6d7c661f7ff912e43bf2a4c44c2af2e1, type: 3}
+    - {fileID: 21300000, guid: 6d7c661f7ff912e43bf2a4c44c2af2e1, type: 3}
     unitFlags: 030000000b000000
     attacks:
-    - InternalName: Harc Ranged
-      abilityFlags: 76
+    - InternalName: Heal Basic
+      abilityFlags: 462
       apCost: 1
       rpCost: 0
       spCost: 0
       castTime: 120
       castDelay: 160
-      attackPhase: 2
+      attackPhase: 3
       targetPriority: 0
       areaMode: 0
-    - InternalName: Harc Support
-      abilityFlags: 2144
+    - InternalName: Heal Support
+      abilityFlags: 78
       apCost: 0
       rpCost: 0
       spCost: 1
       castTime: 120
       castDelay: 160
-      attackPhase: 2
+      attackPhase: 3
       targetPriority: 0
-      areaMode: 0
+      areaMode: 3
     spells: []
     abilities:
     - abilityID: foot
@@ -88,4 +88,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2c61788af62d7264e958cf196c832aca, type: 2}
   - {fileID: 11400000, guid: 4c220d6e8c5d09847a52a94b7c8cd64e, type: 2}
   spells: []
+  passives: []
   character: {fileID: 11400000, guid: 71cf5a630acd2d64eac8dd8971e3420c, type: 2}

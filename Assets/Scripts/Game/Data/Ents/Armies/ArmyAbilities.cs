@@ -9,10 +9,11 @@ public class ArmyAbilities : ArmyComponent
 
     public PropertySpell[] GetAllAvaiableSpells()
     {
-        List<PropertySpell> spells = new();
+        HashSet<PropertySpell> spells = new();
         foreach (var u in parent.formation.GetUnits())
         {
-            spells.AddRange(u.actions.GetSpells());
+            foreach (var spell in u.actions.GetSpells())
+            spells.Add(spell);
         }
         return spells.ToArray();
     }

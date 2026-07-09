@@ -304,7 +304,7 @@ public class UnitDamageable : UnitComponent
     }
     bool CanAcceptGuardian(DataItemUnit guard)
     {
-        return guard.damageable.IsAlive() && guard.GetAlignment(parent) == PlayerDefines.Alignment.ally && guard.IsInCombat();
+        return guard.damageable.IsAlive() && guard.GetAlignment(parent) == PlayerDefines.Alignment.ally && guard.IsInCombat() && !guard.GetState( ModifierDefines.State.cannot_guard);
     }
     public void ApplyGuardian(DataItemUnit guard)
     {

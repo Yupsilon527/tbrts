@@ -30,19 +30,22 @@ public class PropertyModifier : PropertyThinker
     public int stacks = 1;
     public int duration = 1;
 
-
-    public override void ExecuteEvent(AbilityDefines.Event act, DataItemUnit target)
+    public override bool ExecuteEvent(AbilityDefines.Event act, DataItemUnit target)
     {
-        base.ExecuteEvent(act, target);
-        if (destroyType != ModifierDefines.ExpireType.ticks && (int)act == (int)destroyType)
+        if (base.ExecuteEvent(act, target))
         {
-            Die(true);
+            if (destroyType != ModifierDefines.ExpireType.ticks && (int)act == (int)destroyType)
+            {
+                Die(true);
+            }
+            if (expireType != ModifierDefines.ExpireType.ticks && (int)act == (int)expireType)
+            {
+                duration--;
+                CheckExpiration();
+            }
+            return true;
         }
-        if (expireType != ModifierDefines.ExpireType.ticks && (int)act == (int)expireType)
-        {
-            duration--;
-            CheckExpiration();
-        }
+        return false;
     }
 
 

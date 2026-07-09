@@ -48,13 +48,14 @@ public class PropertyInnate : PropertyAttribute
         return clone;
     }
 
-    public override void ExecuteEvent(AbilityDefines.Event act, DataItemUnit target)
+    public override bool ExecuteEvent(AbilityDefines.Event act, DataItemUnit target)
     {
-        if (act == AbilityDefines.Event.OnMoveTile || act == AbilityDefines.Event.CombatBegin)
+        bool _ = base.ExecuteEvent(act, target);
+        if (_ && (act == AbilityDefines.Event.OnMoveTile || act == AbilityDefines.Event.CombatBegin))
         {
             ReviseAura();
         }
-        base.ExecuteEvent(act, target);
+        return _;
     }
     void ReviseAura()
     {
