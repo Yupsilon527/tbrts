@@ -16,22 +16,33 @@ public class DataFaction : BaseData
     {
 
     }
-    public DataFaction(FactionSO faction)
+    public DataFaction( RaceSO race)
+    {
+        InternalName = race.InternalName;
+
+        bannerTexture = race.display;
+
+        availableBuildings = race.buildings.Select(p => p.building).ToArray();
+    }
+    public DataFaction(FactionSO faction, RaceSO race)
     {
         InternalName = faction.InternalName;
-        if (faction.character != null)
-        {
-            bannerTexture = faction.character.GetSprite(0);
-            emblemTexture = faction.character.GetSprite(1);
-            castleTexture = faction.character.GetSprite(2);
-        }
+
+        bannerTexture = race.display;
+        emblemTexture = faction.display;
+        castleTexture = faction.castle;
 
         foreach (var r in faction.startingResources)
             startingResources.Add(r);
+        foreach (var r in race.startingResources)
+            startingResources.Add(r);
         foreach (var i in faction.startingIncome)
             startingIncome.Add(i);
+        foreach (var i in race.startingIncome)
+            startingIncome.Add(i);
 
-        availableBuildings = faction.buildings.Select(p => p.building).ToArray();
+        innateUpgrades = faction.innateUpgrades.Select(p => p.upgrade).Union(race.innateUpgrades.Select(p => p.upgrade)).ToArray();
+        availableBuildings = faction.buildings.Select(p => p.building).Union(race.buildings.Select(p => p.building)).ToArray();
     }
 
     public List<UnitData> GetRecruitableArmies(bool neutral)

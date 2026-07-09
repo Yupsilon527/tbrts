@@ -72,9 +72,12 @@ public class WorldManager : Initializable
             units.Add(u.unit);
 
         }
-        foreach (var f in Resources.LoadAll<FactionSO>("Canon"))
+        foreach (var r in Resources.LoadAll<RaceSO>("Canon"))
         {
-            races.Add(new DataFaction(f));
+            foreach (var f in r.subFactions)
+            {
+                races.Add(new DataFaction(f,r));
+            }
         }
         foreach (var f in Resources.LoadAll<MapChunkSO>("Canon"))
         {

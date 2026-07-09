@@ -79,8 +79,8 @@ public static class AbilityDefines
         OnArmorBreak = 43,
 
         // Ally Reactions
-        OnAllyUseDirectAttack = 44,
-        OnAllyUseIndirectAttack = 45,
+        BeforeAllyUseDirectAttack = 44,
+        BeforeAllyUseIndirectAttack = 45,
 
         // Enemy Reactions
         OnEnemyUseDirectAttack = 46,
@@ -96,12 +96,20 @@ public static class AbilityDefines
         OnHitByMultiDirect = 54,
         OnHitByMagicAttack = 55,
 
-        PostSingleIndirect = 56,
-        PostSingleDirect = 57,
-        PostSingleMagic = 58,
+        AssistSingleIndirect = 56,
+        AssistSingleDirect = 57,
+        AssistSingleMagic = 58,
+
+        // Specific Hit Types
+        AfterAllyHitBySingle = 59,
+        AfterAfterHitByMulti = 60,
+
+        AfterAfterHitByDirect = 61,
+        AfterAfterHitByIndirect = 62,
+        AfterAfterHitByMagic = 63,
 
         // Total (always last)
-        Total = 59,
+        Total = 64,
     }
 
     public delegate void AbilityFunction(EventTable CastData);

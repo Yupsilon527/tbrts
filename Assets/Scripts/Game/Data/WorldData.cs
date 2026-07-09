@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 
 public class WorldData : BaseData
@@ -12,7 +13,14 @@ public class WorldData : BaseData
     public WorldData(WorldSO scriptable)
     {
         InternalName = scriptable.InternalName;
-        availableFactions = scriptable.factions.Select(faction => new DataFaction(faction)).ToArray();
+
+        HashSet<DataFaction> factions = new();
+        foreach (var race in scriptable.races)
+        { foreach (var faction in race.subFactions)
+            {
+                factions.Add(new DataFaction(faction, race));
+            } 
+        }
         neutralFaction = new DataFaction(scriptable.neutrals);
 
         NeutralArmiesAreDefault = scriptable.NeutralArmiesAreDefault;

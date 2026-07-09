@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11b2cce9b203f704d97a321c323a3106, type: 3}
+  m_Name: Human Hinf Reaction
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 0}
+  InternalName: Human Hinf Innate
+  uibehavior: 0
+  behavior: 2
+  priority: 2
+  flag: 1
+  properties: []
+  states: []
+  innateType: 0
+  listeners:
+  - apCost: 0
+    rpCost: 1
+    spCost: 0
+    listener: 52
+    casterCondition: 2
+    targetCondition: 2
+    effects:
+    - {fileID: 11400000, guid: 73d017a84d773284b9b756669dfd7e8a, type: 2}
+    - {fileID: 11400000, guid: fae54299a0aff4e4b8b5026a1b080edf, type: 2}
+  - apCost: 0
+    rpCost: 1
+    spCost: 0
+    listener: 51
+    casterCondition: 2
+    targetCondition: 2
+    effects:
+    - {fileID: 11400000, guid: 73d017a84d773284b9b756669dfd7e8a, type: 2}
+    - {fileID: 11400000, guid: fae54299a0aff4e4b8b5026a1b080edf, type: 2}

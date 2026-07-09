@@ -15,6 +15,7 @@ public class BuildingSO : ProductionSO
         {
             building.InternalName = InternalName;
             building.production = armies.Select(u => u == null ? "" : u.unit.InternalName).ToArray();
+            AutoFillPrerequisites(building);
         }
     }
 }
