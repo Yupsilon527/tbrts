@@ -4,7 +4,6 @@ using UnityEngine;
 public class WorldSO : ScriptableBase
 {
     public RaceSO neutrals;
-    public RaceSO[] factions;
     public RaceSO[] races;
 
     public bool NeutralArmiesAreDefault = false;

@@ -21,6 +21,7 @@ public class WorldData : BaseData
                 factions.Add(new DataFaction(faction, race));
             } 
         }
+        availableFactions = factions.ToArray();
         neutralFaction = new DataFaction(scriptable.neutrals);
 
         NeutralArmiesAreDefault = scriptable.NeutralArmiesAreDefault;

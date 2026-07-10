@@ -48,5 +48,5 @@ MonoBehaviour:
   - CharID: 99
     TilesetVariations:
     - {fileID: 11400000, guid: ee13edf274882de4ea0fdbc4445d3a1a, type: 2}
-    elevation: 11
+    elevation: 12
   ObjectDensity: 1

@@ -25,7 +25,6 @@ public class DataItemCastle : DataItemBuilding
         production = new(this);
         income = new(this);
         SetPlayerOwner(custom.ownership);
-        bonuses.GrantFreeBuildings();
     }
     public int GetSize()
     {
@@ -39,6 +38,7 @@ public class DataItemCastle : DataItemBuilding
         }
         base.SetPlayerOwner(player);
         GetPlayerOwner().buildings.Add(this);
+        bonuses.GrantFreeBuildings();
     }
     public override void ChangeTile(Vector2Int t, DisplayPositionChange position)
     {

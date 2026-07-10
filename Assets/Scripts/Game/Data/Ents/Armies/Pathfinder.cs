@@ -288,8 +288,9 @@ namespace Astar
             List<Node> walkPath = new List<Node> { currentCell };
             _walkedNodes.Clear();
             Failure failure = Failure.incomplete;
+            int loop = 1000;
 
-            while (failure == Failure.incomplete)
+            while (failure == Failure.incomplete && --loop > 0)
             {
                 failure = StepPathfinder(account_entities, out Node next);
                 if (next != null)
@@ -300,6 +301,7 @@ namespace Astar
                     if (MaxRange > 0 && walkPath.Count > MaxRange)
                         return ResolvePath(walkPath, includeOrigin, Failure.impossible_outofrange);
                 }
+                else break;
             }
 
             if (failure != Failure.success && recalculate)
@@ -365,10 +367,10 @@ namespace Astar
             for (int i = 0; i < neighbors.Length; i++)
             {
                 Node nb = neighbors[i];
-                if (nb == null || nb.index < 0) continue;
+                if (nb == null || nb.index < 0 ) continue;
                 if (accountEntities && nb.node.armyLayer != mob) continue;
 
-                if (nb.index == 0) return nb;
+                if (nb.index == 0 || _walkedNodes.Contains(nb)) return nb;
 
                 if (best == null
                     || nb.index < best.index
