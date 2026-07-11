@@ -8,6 +8,7 @@ public class UnitProperties : UnitComponent
 
     protected bool propRefresh = false;
     protected bool statRefresh = false;
+    protected bool abilRefresh = false;
     protected bool HasUpdates = false;
 
     public override void TriggerFuncs(AbilityDefines.Event act)
@@ -75,15 +76,21 @@ public class UnitProperties : UnitComponent
     {
         statRefresh = true;
     }
+    public void RefreshAbilities()
+    {
+        statRefresh = true;
+    }
     public virtual void Refresh(bool force = false)
     {
         if (force || statRefresh || propRefresh)
         {
             if (force || statRefresh) states = new int[(int)ModifierDefines.State.total];
             if (force || propRefresh) properties = new float[(int)ModifierDefines.Property.total];
+            if (force || abilRefresh) parent.innates.ClearTempAbilities();
         }
         propRefresh = false;
         statRefresh = false;
+        abilRefresh = false;
     }
     #endregion
 }

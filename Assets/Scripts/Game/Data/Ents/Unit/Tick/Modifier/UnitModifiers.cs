@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CombatantModifiers : UnitProperties, CombatantTicker
+public class UnitModifiers : UnitProperties, CombatantTicker
 {
     public int lastTick = 0;
-    public CombatantModifiers(DataItemUnit parent) : base(parent)
+    public UnitModifiers(DataItemUnit parent) : base(parent)
     {
     }
     #region List
@@ -72,10 +72,7 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
 
     }
     #endregion
-
-
     #region Create Modifiers
-
     public bool ApplyNewModifierFromData(TagData tag, bool refresh = true) {
         if (HasModifier(tag.InternalName))
         {
@@ -199,10 +196,11 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
     }
     public override void Refresh(bool force = false)
     {
-        if (force || statRefresh || propRefresh)
+        if (force || statRefresh || propRefresh || abilRefresh)
         {
             if (force || statRefresh) states = new int[(int)ModifierDefines.State.total];
             if (force || propRefresh) properties = new float[(int)ModifierDefines.Property.total];
+            if (force || abilRefresh) parent.innates.ClearTempAbilities();
             foreach (PropertyModifier mod in _modifiers)
             {
                 if (!mod.dead && !mod.IsExpired())
@@ -211,6 +209,8 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
                         UpdateModifierStates(mod);
                     if (force || propRefresh)
                         UpdateModifierProperties(mod);
+                    if (force || abilRefresh)
+                        UpdateModifierAbilities(mod);
                 }
                 if (mod.expireType == ModifierDefines.ExpireType.ticks || mod.HasThinker)
                 {
@@ -224,6 +224,7 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
         }
         propRefresh = false;
         statRefresh = false;
+        abilRefresh = false;
     }
     void UpdateModifierStates(PropertyAttribute Mod)
     {
@@ -237,6 +238,15 @@ public class CombatantModifiers : UnitProperties, CombatantTicker
         foreach (KeyValuePair<ModifierDefines.Property, float> prop in Mod.properties)
         {
             UpdateProperty(prop.Key, prop.Value);
+        }
+    }
+    void UpdateModifierAbilities(PropertyAttribute Mod)
+    {
+        if (Mod is PropertyIha iha) { 
+        foreach (AbilityData prop in iha.grantedAbilities)
+        {
+            parent.innates.AddAbility(prop.abilityID,prop.abilityLevel,UnitDefines.UpgradeCondition.temp);
+        }
         }
     }
     #endregion

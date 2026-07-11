@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class TechData : ProductionData
@@ -23,7 +24,7 @@ public class TechData : ProductionData
     public ModifierDefines.StateData[] states = new ModifierDefines.StateData[0];
     [Header("Abilities")]
     public SpellData[] tempSpells = new SpellData[0];
-    public string[] abilitiesAdded = new string[0];
+    public AbilityData[] abilitiesAdded = new AbilityData[0];
 
     [Header("Grant Resources/Income")]
     public ResourceCost[] grantedResources = new ResourceCost[0];
@@ -58,7 +59,9 @@ public class TechData : ProductionData
             foreach (var stat in states)
                 unit.upgrades.UpdateState(stat.State, (int)stat.priority);
             foreach (var prop in properties)
-                unit.upgrades.UpdateProperty(prop.Property, prop.value+ prop.IncreasePerLevel * delta);
+                unit.upgrades.UpdateProperty(prop.Property, prop.value + prop.IncreasePerLevel * delta);
+            foreach (var innate in abilitiesAdded)
+                unit.innates.AddAbility(innate.abilityID, innate.abilityLevel * newLevel, UnitDefines.UpgradeCondition.upgrade);
         }
         else if (newLevel == 0)
         {
@@ -66,11 +69,41 @@ public class TechData : ProductionData
                 unit.upgrades.UpdateState(stat.State, 0);
             foreach (var prop in properties)
                 unit.upgrades.UpdateProperty(prop.Property, prop.IncreasePerLevel * delta - prop.value);
+            foreach (var innate in abilitiesAdded)
+            {
+                int expectedLevel = innate.abilityLevel * oldLevel;
+                var found = unit.innates.abilities.Where(a => a.abilityTemp == UnitDefines.UpgradeCondition.upgrade && a.abilityID.ToString().ToLower() == innate.abilityID && a.abilityLevel == expectedLevel).ToArray();
+                if (found.Length > 0)
+                {
+                    unit.innates.abilities.Remove(found[0]);
+                }
+            }
         }
-        else
+        else if (delta != 0)
         {
             foreach (var prop in properties)
                 unit.upgrades.UpdateProperty(prop.Property, prop.IncreasePerLevel * delta);
+
+            foreach (var innate in abilitiesAdded)
+            {
+                int expectedOldLevel = innate.abilityLevel * oldLevel;
+                int expectedNewLevel = innate.abilityLevel * newLevel;
+
+                var found = unit.innates.abilities
+                    .Where(a => a.abilityTemp == UnitDefines.UpgradeCondition.upgrade
+                                && a.abilityID.ToString().ToLower() == innate.abilityID
+                                && a.abilityLevel == expectedOldLevel)
+                    .ToArray();
+
+                if (found.Length > 0)
+                {
+                    found[0].abilityLevel = expectedNewLevel;
+                }
+                else
+                {
+                    unit.innates.AddAbility(innate.abilityID, expectedNewLevel, UnitDefines.UpgradeCondition.upgrade);
+                }
+            }
         }
 
         foreach (var spell in tempSpells)
@@ -82,12 +115,6 @@ public class TechData : ProductionData
         }
 
         unit.bonuses.GrantBonusDamageFromTable(bonusDamage, oldLevel, newLevel);
-
-        if (delta != 0)
-        {
-            foreach (var innate in abilitiesAdded)
-                unit.innates.AddAbility(innate, delta);
-        }
     }
 }
 

@@ -17,4 +17,14 @@ public static class BuildingDefines
 
 
     }
+    public enum RuinType
+    {
+        Metal,
+        Gold,
+        Mana,
+    }
+    public static int RuinMetalBase = 1000;
+    public static int RuinGoldBase = 500;
+    public static int RuinManaBase = 10;
+    public static int RuinRefreshTurns = 3;
 }

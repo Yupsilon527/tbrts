@@ -1,12 +1,27 @@
 TEST
 	innates/auras
+		temp abilities & auras
 	bonuses/buildings
 
 	terrain bonuses
 	
 	armor
+	army innates
+		terrain bonuses
+			ie armor in woods
+			ie los in mountains
 
 Fixes
+	PREREQ AND PROD BROKEN
+	AURA abilities dont work
+
+	tag
+		alteration
+			iha
+				function
+					modifier
+					innate
+
 	army swap/formation tokens
 
 	command window and buttons
@@ -21,7 +36,6 @@ TODO
 		or paying MP/AP outside combat always return false
 
 	revise unit innates
-		unit sizes (for transport)
 		innate granting modifiers
 
 	sites
@@ -35,20 +49,36 @@ TODO
 		cloaked (works?)
 		warded
 		blind (reduces vision)
+
+	
+	top bar
+		menu
+		reports
+	
+	refactor
+		unit props updates stats
+		remove unit upgrades
+
+FEA
+	summoning spells
+	corpses/necromancy
+				necro for 1 battle
+				raise dead
+	some sort of morale?
+
+	eventually TBRPS spellforge/spells
+
+	years/HoMM weeks (events?)
+
+	powerups
 			
 	army innates
-		terrain bonuses
-			ie armor in woods
-			ie los in mountains
-
+		push back
+		zone of control (retaliate when unit walk past)
+			
 		firststrike (removes delay off abilities)
 		swarm - gets weaker the less hp it has
 		run after attack
-
-		guardians
-			guard target for 1 hit/action
-			modifiers WHILE guarding (trueblock, etc)
-
 
 		auras/innates
 			applied to self
@@ -57,6 +87,7 @@ TODO
 			(implemented not tested)
 				around troop
 				around castle
+
 		passives
 			followup attack
 			redirect attacks
@@ -100,32 +131,6 @@ TODO
 				ranged support for SP
 				spend SP to move (gas)
 				spend SP to regen
-
-	
-	top bar
-		menu
-		reports
-	
-	refactor
-		unit props updates stats
-		remove unit upgrades
-
-FEA
-	summoning spells
-	corpses/necromancy
-				necro for 1 battle
-				raise dead
-	some sort of morale?
-
-	eventually TBRPS spellforge/spells
-
-	years/HoMM weeks (events?)
-
-	powerups
-			
-	army innates
-		push back
-		zone of control (retaliate when unit walk past)
 
 QoL
 	army  window

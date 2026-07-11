@@ -1,7 +1,3 @@
-
-
-using System.Collections.Generic;
-
 public static class UnitDefines
 {
     public static int iArmyRows = 2;
@@ -24,6 +20,12 @@ public static class UnitDefines
 		truesight = 4,
 		revealed_truesight =5,
 	}
+    public enum UpgradeCondition
+    {
+        permanent,
+        temp,
+        upgrade
+    }
     public enum ArmyAbilities
     {
         mercenary,

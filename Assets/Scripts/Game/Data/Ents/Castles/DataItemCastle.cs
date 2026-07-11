@@ -227,40 +227,6 @@ public class DataItemCastle : DataItemBuilding
         bonuses.OnTurnBegin();
         production.OnTurnBegin();
         income.OnTurnBegin();
-
-        /*if (AmIUnderAlliedControl())
-        {
-
-
-            if (CanProduce() && production.Count > 0)
-            {
-                iProductionTime += GetResourceIncome();
-                while (production.Count > 0 && CanIForwardProduction())
-                {
-
-                    //if (PlayerOwner.DoIHaveEnoughGold ( Production [iProduction [0]].GetCost (false, PlayerOwner), false, false)) { -- No longer pay for troop spawning
-
-                    iProductionTime -= Production[production[0]].Stats[DataItemArmy.Stat_Resource];
-                    Produce(production[0]);
-
-                    if (ContinuousProduction)
-                    {
-                        production.Add(production[0]);
-                    }
-                    production.RemoveAt(0);
-                    //}
-                }
-            }
-
-
-        }
-        else
-        {
-            if (RazeTurn > 0 && game.RuleSet.CurrentTurn >= RazeTurn)
-            {
-                RebuildMe(game.Players[Game.iNeutrals]);
-            }
-        }*/
     }
     public  void RazeCastle(DataItemArmy attacker,  CastleRazeMode razeMode)
     {

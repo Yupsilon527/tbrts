@@ -38,8 +38,8 @@ public class DataItemUnit : DataItemMob
     public UnitDamageable damageable;
     public CombatantAbilities actions;
     public UnitBonuses bonuses;
-    public CombatantModifiers modifiers;
-    public AbilityComponentn innates;
+    public UnitModifiers modifiers;
+    public UnitInnates innates;
     public UnitUpgrades upgrades;
 
     public override string ToString()
@@ -295,7 +295,7 @@ public class DataItemUnit : DataItemMob
             output += "<b>Passives</b><br>";
             foreach (var ability in ins)
             {
-                output += $"{ability.Key} {ability.Value}<br>";
+                output += $"{ability.abilityID} {ability.abilityLevel}<br>";
             }
             foreach (var innate in mds)
             {

@@ -20,12 +20,13 @@ public class ModifierPassive : AlterationSO
         return new InnateData(
             InternalName,
             sprite,
-            innateType,
             uibehavior,
             priority,
+            innateType,
             flag,
             properties,
             states,
+            abilities,
             actions
             );
     }
