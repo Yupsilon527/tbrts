@@ -1,7 +1,7 @@
 
 using System.Collections.Generic;
 
-public class ArmyAuras : ArmyComponent
+public class BannerAuras : BannerComponent
 {
     public class InnateUnitPair
     {
@@ -15,7 +15,7 @@ public class ArmyAuras : ArmyComponent
         }
     }
     public List<InnateUnitPair> auras = new();
-    public ArmyAuras(DataItemArmy parent) : base(parent)
+    public BannerAuras(DataItemBanner parent) : base(parent)
     {
     }
     public void OnUnitEnterFormation(DataItemUnit unit)

@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class ArmyInfoWindow : DragDropWindow
 {
-    public DataItemArmy assignedArmy;
-    public void ForSingleArmy(DataItemArmy a)
+    public DataItemBanner assignedArmy;
+    public void ForSingleArmy(DataItemBanner a)
     {
         assignedArmy = a;
         AssignPlayer(assignedArmy.GetPlayerOwner());

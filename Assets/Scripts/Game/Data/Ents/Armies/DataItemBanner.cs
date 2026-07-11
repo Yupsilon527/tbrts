@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class DataItemArmy : DataItemMob
+public class DataItemBanner : DataItemMob
 {
-
-    public ArmyFormation formation;
-    public ArmyAbilities abilities;
-    public ArmyAuras auras;
-    public ArmyMovementComponent movement;
-    public ArmyStatusComponent status;
-    public OrderComponent orders;
+    public BannerFormation formation;
+    public BannerAbilities abilities;
+    public BannerAuras auras;
+    public BannerMovement movement;
+    public BannerStatus status;
+    public BannerOrders orders;
     public Pathfinder pathfinder;
-    public DataItemArmy() : base()
+    public DataItemBanner() : base()
     {
         formation = new(this);
         movement = new(this);
@@ -28,13 +27,13 @@ public class DataItemArmy : DataItemMob
     {
         return "Army " + eID;
     }
-    public DataItemArmy(Vector2Int pos, int playerOwner) : this()
+    public DataItemBanner(Vector2Int pos, int playerOwner) : this()
     {
         ChangeTile(pos, DisplayPositionChange.instant);
         SetPlayerOwner(playerOwner);
     }
 
-    public DataItemArmy(CustomArmy army) : this(army.spawnPos, army.ownership)
+    public DataItemBanner(CustomBanner army) : this(army.spawnPos, army.ownership)
     {
         for (int i = 0; i < army.formation.Length; i++)
         {
@@ -258,7 +257,7 @@ public class DataItemArmy : DataItemMob
         }*/
         return true;
     }
-    public bool CanWeMerge(DataItemArmy other)
+    public bool CanWeMerge(DataItemBanner other)
     {
         if (CanBeMerged(false) && other.CanBeMerged(false))
         {
@@ -269,7 +268,7 @@ public class DataItemArmy : DataItemMob
             return false;
         }
     }
-    public bool Transfer(DataItemArmy other, bool Instant)
+    public bool Transfer(DataItemBanner other, bool Instant)
     {
 
         if (!Instant && GameManager.main.playerManager.GetActivePlayer().IsAiControlled())
@@ -311,7 +310,7 @@ public class DataItemArmy : DataItemMob
         return base.IsVisibleToPlayer(player);
     }
     #endregion
-    public bool BattleAnother(DataItemArmy other, bool showPopup = true)
+    public bool BattleAnother(DataItemBanner other, bool showPopup = true)
     {
         if (other.IsAlive() && tile.IsNeighboring(other.tile) && GetAlignment(other) == PlayerDefines.Alignment.enemy && movement.CanPayMovement(4))
         {
@@ -377,7 +376,7 @@ public class DataItemArmy : DataItemMob
     #endregion
 
     #region Bribes/Mercs
-    public bool CanBeBribed(DataItemArmy Attacker)
+    public bool CanBeBribed(DataItemBanner Attacker)
     {
         return (GetMyBribeCost() > 0 && Attacker.GetPowerValue(false) > GetPowerValue(false));
     }
@@ -435,7 +434,7 @@ public class DataItemArmy : DataItemMob
         return formation.GetAbilitiyMax("aura");
     }
 
-    public bool CanAssist(DataItemArmy other)
+    public bool CanAssist(DataItemBanner other)
     {
         if (GetAlignment(other) == PlayerDefines.Alignment.enemy)
             return false;
@@ -451,7 +450,7 @@ public class DataItemArmy : DataItemMob
     }
     public DataItemUnit[] GetSupportingUnits()
     {
-        List<DataItemArmy> supporters = new();
+        List<DataItemBanner> supporters = new();
         foreach (var army in GetPlayerOwner().units)
         {
             if (army.formation.GetAbilitiyMax("rangeSupport") > 0 && (army.gridPos - gridPos).magnitude <= army.formation.GetAbilitiyMax("rangeSupport"))

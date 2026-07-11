@@ -14,15 +14,15 @@ public class Order
         this.gridDest = gridDest;
     }
 
-    public virtual void RecalcPath(DataItemArmy owner, Vector2Int origin)
+    public virtual void RecalcPath(DataItemBanner owner, Vector2Int origin)
     {
         path = owner.pathfinder.Solve(origin, gridDest);
     }
-    public virtual bool Resolve(DataItemArmy owner)
+    public virtual bool Resolve(DataItemBanner owner)
     {
         return true;
     }
-    public virtual bool HasResolvedOrder(DataItemArmy owner)
+    public virtual bool HasResolvedOrder(DataItemBanner owner)
     {
         return owner.GetCoords() == gridDest;
     }
@@ -33,7 +33,7 @@ public class RazeOrder : Order
     {
     }
 
-    public override bool Resolve(DataItemArmy attacker)
+    public override bool Resolve(DataItemBanner attacker)
     {
         if (attacker.GetMainTile().buildingLayer is DataItemCastle city)
         {
@@ -49,14 +49,14 @@ public class RazeOrder : Order
 }
 public class FollowOrder : Order
 {
-    public DataItemArmy TargetUnit;
+    public DataItemBanner TargetUnit;
 
-    public FollowOrder(ID orderID, Vector2Int gridDest, DataItemArmy targetUnit) : base(orderID, gridDest)
+    public FollowOrder(ID orderID, Vector2Int gridDest, DataItemBanner targetUnit) : base(orderID, gridDest)
     {
         TargetUnit = targetUnit;
     }
 
-    public virtual bool TargetValid(DataItemArmy owner)
+    public virtual bool TargetValid(DataItemBanner owner)
     {
         if (TargetUnit != null && TargetUnit.IsAlive())
         {
@@ -66,7 +66,7 @@ public class FollowOrder : Order
         }
         return false;
     }
-    public override void RecalcPath(DataItemArmy owner, Vector2Int origin)
+    public override void RecalcPath(DataItemBanner owner, Vector2Int origin)
     {
         if (TargetValid(owner))
         {
@@ -74,18 +74,18 @@ public class FollowOrder : Order
             base.RecalcPath(owner, origin);
         }
     }
-    public override bool HasResolvedOrder(DataItemArmy owner)
+    public override bool HasResolvedOrder(DataItemBanner owner)
     {
         return !TargetValid(owner) || base.HasResolvedOrder(owner);
     }
 }
 public class AttackOrder : FollowOrder
 {
-    public AttackOrder(ID orderID, Vector2Int gridDest, DataItemArmy targetUnit) : base(orderID, gridDest, targetUnit)
+    public AttackOrder(ID orderID, Vector2Int gridDest, DataItemBanner targetUnit) : base(orderID, gridDest, targetUnit)
     {
     }
 
-    public override bool Resolve(DataItemArmy owner)
+    public override bool Resolve(DataItemBanner owner)
     {
         if (TargetValid(owner))
         {

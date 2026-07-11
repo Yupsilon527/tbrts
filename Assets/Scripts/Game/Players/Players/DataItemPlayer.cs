@@ -11,7 +11,7 @@ public class DataItemPlayer
 
     public DataFaction faction = new();
 
-    public UnitGroup<DataItemArmy> units = new();
+    public UnitGroup<DataItemBanner> units = new();
     public UnitGroup<DataItemCastle> buildings = new();
 
     public PlayerUpgrades upgrades;

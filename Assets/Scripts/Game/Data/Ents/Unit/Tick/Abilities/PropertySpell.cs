@@ -29,7 +29,7 @@ public class PropertySpell : PropertyAbility
         if (base.CastFromTable(table))
         {
             table.ComputeTargets();
-            HashSet<DataItemArmy> affectedArmies = new();
+            HashSet<DataItemBanner> affectedArmies = new();
             table.attacker.FireEventOnSelf(AbilityDefines.Event.CastSpell);
 
             foreach (var attack in original.effects)
@@ -102,7 +102,7 @@ public class PropertySpell : PropertyAbility
 
     public override DataItemUnit[] GetMainTargets(CastTable table)
     {
-        if (SidewaysMap.main?.GetTile(table.targetPoint)?.armyLayer is DataItemArmy targetArmy
+        if (SidewaysMap.main?.GetTile(table.targetPoint)?.armyLayer is DataItemBanner targetArmy
             && ((targetArmy.GetAlignment(parent) == PlayerDefines.Alignment.enemy && original.HasFlag(CombatDefines.SpellFlag.targetEnemies))
             || (targetArmy.GetAlignment(parent) != PlayerDefines.Alignment.enemy && original.HasFlag(CombatDefines.SpellFlag.targetAllies))))
         {

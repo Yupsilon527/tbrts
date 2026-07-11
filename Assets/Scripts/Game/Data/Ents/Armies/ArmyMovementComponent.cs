@@ -1,14 +1,14 @@
 using UnityEditor;
 using UnityEngine;
 
-public class ArmyMovementComponent : ArmyComponent
+public class BannerMovement : BannerComponent
 {
     public int movementStarting = 0;
     public int movementLeft = 0;
     public bool movedThisTurn = false;
     public Vector2Int initialPosition;
 
-    public ArmyMovementComponent(DataItemArmy parent) : base(parent)
+    public BannerMovement(DataItemBanner parent) : base(parent)
     {
         movementLeft = 0;
     }

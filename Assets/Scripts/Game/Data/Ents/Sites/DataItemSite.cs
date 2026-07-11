@@ -18,7 +18,7 @@ public class DataItemSite : DataItemBuilding
     {
         return visitTurn < 0;
     }
-    public void OnVisited(DataItemArmy visitor)
+    public void OnVisited(DataItemBanner visitor)
     {
         if (IsVisited()) return;
         visitTurn = GameManager.main.currentTurn ;

@@ -77,11 +77,11 @@ public class DataItemCastle : DataItemBuilding
         }
     }
     #region Garrison and Control
-    public IEnumerable<DataItemArmy> GetSituatedArmies(bool friendlies)
+    public IEnumerable<DataItemBanner> GetSituatedArmies(bool friendlies)
     {
         if (friendlies)
             if (AmIDemolished())
-                return Array.Empty<DataItemArmy>();
+                return Array.Empty<DataItemBanner>();
             else
             return occupiedTiles.Select(t => t.armyLayer).Where(a => a!=null && a.GetAlignment(this) == PlayerDefines.Alignment.playerowned);
         return occupiedTiles.Select(t => t.armyLayer);
@@ -90,7 +90,7 @@ public class DataItemCastle : DataItemBuilding
     public int GetMyDefenseLevel()
     {
         int Power = 0;
-        foreach (DataItemArmy army in GetSituatedArmies(true))
+        foreach (DataItemBanner army in GetSituatedArmies(true))
         {
             Power += army.GetPowerValue(false);
         }
@@ -109,7 +109,7 @@ public class DataItemCastle : DataItemBuilding
         }
         else if (GetPlayerOwner() != Conqueror)
         {
-            foreach (DataItemArmy army in GetSituatedArmies(false))
+            foreach (DataItemBanner army in GetSituatedArmies(false))
             {
                 if (army.GetPlayerOwner() == Conqueror)
                 {
@@ -125,11 +125,11 @@ public class DataItemCastle : DataItemBuilding
         return GetSituatedArmies(false).Sum(a => a?.GetAlignment(this) == PlayerDefines.Alignment.enemy ? 1 : 0) == 0;
     }
 
-    public bool BattleTroop(DataItemArmy Attacker, DataItemTile Tile)
+    public bool BattleTroop(DataItemBanner Attacker, DataItemTile Tile)
     {
         if (GetSituatedArmies(false).Count() > 0)
         {
-            foreach (DataItemArmy Zim in GetSituatedArmies(true))
+            foreach (DataItemBanner Zim in GetSituatedArmies(true))
             {
 
                 if (Zim.GetPlayerOwner() != Attacker.GetPlayerOwner())
@@ -143,7 +143,7 @@ public class DataItemCastle : DataItemBuilding
     }
 
     #endregion
-    public virtual void OnArmyEnterCastle(DataItemArmy army, bool region)
+    public virtual void OnArmyEnterCastle(DataItemBanner army, bool region)
     {
         foreach (var bonus in bonuses.GetBonusesByType(region ? BuildingData.GrantBonus.aura : BuildingData.GrantBonus.garrison))
         {
@@ -158,7 +158,7 @@ public class DataItemCastle : DataItemBuilding
             }
         }
     }
-    public virtual void OnArmyLeaveCastle(DataItemArmy army, bool region)
+    public virtual void OnArmyLeaveCastle(DataItemBanner army, bool region)
     {
         foreach (var bonus in bonuses.GetBonusesByType(region ? BuildingData.GrantBonus.aura : BuildingData.GrantBonus.garrison))
             {
@@ -228,7 +228,7 @@ public class DataItemCastle : DataItemBuilding
         production.OnTurnBegin();
         income.OnTurnBegin();
     }
-    public  void RazeCastle(DataItemArmy attacker,  CastleRazeMode razeMode)
+    public  void RazeCastle(DataItemBanner attacker,  CastleRazeMode razeMode)
     {
         var raidingPlayer = attacker.GetPlayerOwner();
         var raidedPlayer = GetPlayerOwner();

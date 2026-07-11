@@ -5,7 +5,7 @@ public class MovementIndicator : MonoBehaviour
 {
     public GameObject elementPrefab;
     List<MovementIndicatorTile> entries = new();
-    public void DoOrderDisplay(DataItemArmy army)
+    public void DoOrderDisplay(DataItemBanner army)
     {
         var movement = army.movement.GetMyMovement();
         int movePoints = army.movement.GetMyMovementDistance();

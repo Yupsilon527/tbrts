@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrderComponent : ArmyComponent
+public class BannerOrders : BannerComponent
 {
     public List<Order> orders = new();
 
-    public OrderComponent(DataItemArmy parent) : base(parent)
+    public BannerOrders(DataItemBanner parent) : base(parent)
     {
     }
     public bool IsIdle()

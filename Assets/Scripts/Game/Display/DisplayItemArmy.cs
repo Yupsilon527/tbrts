@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class DisplayItemArmy : DisplayItemObject<DataItemArmy>
+public class DisplayItemArmy : DisplayItemObject<DataItemBanner>
 {
-    public DataItemArmy assignedArmy;
+    public DataItemBanner assignedArmy;
     public GameObject formation;
     public SpriteRenderer transport;
-    public override void AssignObject(DataItemArmy ob)
+    public override void AssignObject(DataItemBanner ob)
     {
         base.AssignObject(ob);
         assignedArmy = ob;

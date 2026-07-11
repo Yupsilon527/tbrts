@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class ArmyMergeWindow : DragDropWindow
 {
-    public DataItemArmy unitA, unitB;
-    public void MergeUnits(DataItemArmy a, DataItemArmy b)
+    public DataItemBanner unitA, unitB;
+    public void MergeUnits(DataItemBanner a, DataItemBanner b)
     {
         unitA = a;
         unitB = b;

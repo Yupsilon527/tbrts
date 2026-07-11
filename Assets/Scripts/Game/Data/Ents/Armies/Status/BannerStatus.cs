@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class ArmyStatusComponent : ArmyComponent
+public class BannerStatus : BannerComponent
 {
     public HashSet<ApplyTroopStatus> pendingStatuses = new();
     public HashSet<ArmyStatus> appliedStatuses = new();
 
-    public ArmyStatusComponent(DataItemArmy parent) : base(parent)
+    public BannerStatus(DataItemBanner parent) : base(parent)
     {
     }
 

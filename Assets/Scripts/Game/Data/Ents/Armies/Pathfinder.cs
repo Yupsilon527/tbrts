@@ -151,7 +151,7 @@ namespace Astar
         public Vector2Int vOrigin { get; private set; }
         public Vector2Int vDest { get; private set; }
 
-        DataItemArmy mob;
+        DataItemBanner mob;
         Node currentCell;
 
         // FIX D/E: renamed and semantically correct — stores walked nodes for closest-fallback search
@@ -235,7 +235,7 @@ namespace Astar
         #endregion
 
         #region Init & Solve
-        public Pathfinder(DataItemArmy a)
+        public Pathfinder(DataItemBanner a)
         {
             mob = a;
             movement = a.movement.GetMyMovement();

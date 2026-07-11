@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CastleRazeWindow : CastleWindow
 {
-    public DataItemArmy attacker;
+    public DataItemBanner attacker;
 
     public bool ValidRaze()
     {

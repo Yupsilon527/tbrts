@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class ArmyAbilities : ArmyComponent
+public class BannerAbilities : BannerComponent
 {
-    public ArmyAbilities(DataItemArmy parent) : base(parent)
+    public BannerAbilities(DataItemBanner parent) : base(parent)
     {
     }
 

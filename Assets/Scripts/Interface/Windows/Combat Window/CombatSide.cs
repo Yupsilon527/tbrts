@@ -7,7 +7,7 @@ public class CombatSide : MonoBehaviour
     public GameObject supportParent;
     public CombatantContainer[] support;
 
-    public void LoadArmy(DataItemArmy army)
+    public void LoadArmy(DataItemBanner army)
     {
         if (army.formation.transport != null)
         {

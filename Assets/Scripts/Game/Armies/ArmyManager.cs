@@ -5,9 +5,9 @@ using UnityEngine;
 public class ArmyManager : EntityManager
 {
     int idleArmyIndex = 0;
-    public DataItemArmy mainSelectedArmy = null;
-    public List<DataItemArmy> armies = new();
-    public HashSet<DataItemArmy> movingArmies = new();
+    public DataItemBanner mainSelectedArmy = null;
+    public List<DataItemBanner> armies = new();
+    public HashSet<DataItemBanner> movingArmies = new();
 
 
     /*public static DataItemUnit SpawnUnit(GameHubWorld game, DataItemArmy UnitName, entityPlayer Player, entityTile tTile, int iDur)
@@ -20,7 +20,7 @@ public class ArmyManager : EntityManager
         return Panty;
     }*/
 
-    public DataItemArmy FindArmyByID(int ID)
+    public DataItemBanner FindArmyByID(int ID)
     {
         return armies.FirstOrDefault(a => a.eID == ID) ;
     }
@@ -38,13 +38,13 @@ public class ArmyManager : EntityManager
         {
             return null;
         }
-        DataItemArmy newArmy = tTile.armyLayer;
+        DataItemBanner newArmy = tTile.armyLayer;
 
         if (newArmy == null || newArmy.formation.CanIAccept(uData))
         {
             var newTile = GameManager.main.map.GetClosestToPoint(tTile.gridPos, uData.GetMovetype(), empty: true);
             if (newTile != null)
-                newArmy = new DataItemArmy(newTile.gridPos, myCastle.GetPlayerOwner().ID);
+                newArmy = new DataItemBanner(newTile.gridPos, myCastle.GetPlayerOwner().ID);
             else 
                 return null;
 
@@ -63,7 +63,7 @@ public class ArmyManager : EntityManager
 
         return Zim;
     }
-    public static DataItemUnit SpawnUnit(UnitData uData, DataItemArmy army, DataItemCastle myCastle)
+    public static DataItemUnit SpawnUnit(UnitData uData, DataItemBanner army, DataItemCastle myCastle)
     {
 
 
@@ -75,14 +75,14 @@ public class ArmyManager : EntityManager
         return Zim;
     }
 
-    public void GenerateTheArmiesFromEditorData(CustomArmy[] armies)
+    public void GenerateTheArmiesFromEditorData(CustomBanner[] armies)
     {
         foreach (var Zim in armies)
         {
-            new DataItemArmy(Zim);
+            new DataItemBanner(Zim);
         }
     }
-    public void RegisterArmy(DataItemArmy army)
+    public void RegisterArmy(DataItemBanner army)
     {
         if (!armies.Contains(army))
         armies.Add(army);
@@ -95,7 +95,7 @@ public class ArmyManager : EntityManager
             }
         }
     }
-    public void ForgetArmy(DataItemArmy army)
+    public void ForgetArmy(DataItemBanner army)
     {
         if (!army.dead)
         {
@@ -108,7 +108,7 @@ public class ArmyManager : EntityManager
         }
     }
 
-    public void SelectArmy(DataItemArmy army)
+    public void SelectArmy(DataItemBanner army)
     {
         if (army != null && mainSelectedArmy != army)
         {
@@ -137,7 +137,7 @@ public class ArmyManager : EntityManager
       for (int i = 0; i< playerArmies.Count; i++)
         {
             int index = (i + idleArmyIndex) % playerArmies.Count;
-            if (playerArmies[index] is DataItemArmy army && army.orders.IsIdle())
+            if (playerArmies[index] is DataItemBanner army && army.orders.IsIdle())
             {
                 playerArmies[index].Select();
                 return;

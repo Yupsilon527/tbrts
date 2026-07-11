@@ -30,7 +30,7 @@ public class DataItemUnit : DataItemMob
     public UnitData data;
     public ResourceInt health = new(100, "True Helath", false, true);
 
-    public DataItemArmy troop;
+    public DataItemBanner troop;
     public Vector2Int troopPosition => troop.formation.GetPositionForUnit(this);
 
 
@@ -62,7 +62,7 @@ public class DataItemUnit : DataItemMob
         bonuses = new(this);
     }
 
-    public DataItemUnit(UnitData uData, DataItemArmy newArmy) : this(uData)
+    public DataItemUnit(UnitData uData, DataItemBanner newArmy) : this(uData)
     {
         SetPlayerOwner(newArmy.GetPlayerOwner());
         newArmy.formation.TransferUnit(this);

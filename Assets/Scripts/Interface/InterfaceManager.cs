@@ -50,7 +50,7 @@ public class InterfaceManager : WindowManager
         castleWindow.SetCastle(castle);
         castleWindow.OpenTab(production ? 1 : 0);
     }
-    public void OpenCastleRazeWindow(DataItemCastle castle, DataItemArmy attacker)
+    public void OpenCastleRazeWindow(DataItemCastle castle, DataItemBanner attacker)
     {
         castleRazeWindow.assignedCastle = castle;
         castleRazeWindow.attacker = attacker;
@@ -58,11 +58,11 @@ public class InterfaceManager : WindowManager
             castleRazeWindow.Open();
         }
     }
-    public void PreviewCombat(DataItemArmy attacker, DataItemArmy defender)
+    public void PreviewCombat(DataItemBanner attacker, DataItemBanner defender)
     {
 
     }
-    public void OpenPrepareCombatWindow(DataItemArmy attacker, DataItemArmy defender)
+    public void OpenPrepareCombatWindow(DataItemBanner attacker, DataItemBanner defender)
     {
         combatWindow.Open();
         combatWindow.PresentSides(attacker, defender);

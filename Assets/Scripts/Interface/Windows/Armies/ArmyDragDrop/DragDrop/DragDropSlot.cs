@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class DragDropSlot : EventTrigger
 {
-    public DataItemArmy army;
+    public DataItemBanner army;
     public bool left;
     public int position;
     public bool Locked = false;

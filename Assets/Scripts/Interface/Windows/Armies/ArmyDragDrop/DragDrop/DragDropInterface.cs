@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AbilityDragDropInterface : Initializable
 {
-    public DataItemArmy unitA, unitB;
+    public DataItemBanner unitA, unitB;
     public UnitContainerDescriptipn desc;
     #region DD Slots
     public DragDropSlot[] UnitSlots;
@@ -21,7 +21,7 @@ public class AbilityDragDropInterface : Initializable
             TokenPool = GetComponent<ObjectPool>();
         FindSlots();
     }
-    public void InitSlots(DataItemArmy army)
+    public void InitSlots(DataItemBanner army)
     {
         if (UnitSlots == null) return;
         unitA = army;
@@ -47,7 +47,7 @@ public class AbilityDragDropInterface : Initializable
         }
         desc.Clear();
     }
-    public void InitSlots(DataItemArmy a, DataItemArmy b)
+    public void InitSlots(DataItemBanner a, DataItemBanner b)
     {
         if (UnitSlots == null) return;
         unitA = a;

@@ -110,7 +110,7 @@ public class CommandMenu : PlayerWindow
                 e.Add("Split");
                 a.Add(() =>
                 {
-                    var tempArmy = new DataItemArmy(tile.gridPos, player.ID);
+                    var tempArmy = new DataItemBanner(tile.gridPos, player.ID);
                     InterfaceManager.main.OpenWindow(InterfaceManager.main.transferWindow);
                     InterfaceManager.main.transferWindow.AssignPlayer(player);
                     InterfaceManager.main.transferWindow.MergeUnits(selArmy, tile.armyLayer);
@@ -198,7 +198,7 @@ public class CommandMenu : PlayerWindow
             e.Add("Tile Info");
             a.Add(() => { InterfaceManager.main.infoWindow.ShowTileInfo(tile); });
 
-            if (tile.armyLayer is DataItemArmy army && army.IsVisibleToPlayer(player))
+            if (tile.armyLayer is DataItemBanner army && army.IsVisibleToPlayer(player))
             {
                 e.Add("Army Info");
                 a.Add(() =>
@@ -222,7 +222,7 @@ public class CommandMenu : PlayerWindow
 
         e.Add("Zoom On Tile");
         a.Add(() => { CameraController.main.CenterOnTile(tile.gridPos); CameraController.main.Zoom(0, true); });
-        if (GameManager.main.armyManager.mainSelectedArmy is DataItemArmy selArmy)
+        if (GameManager.main.armyManager.mainSelectedArmy is DataItemBanner selArmy)
         {
             e.Add("Center on selected army");
             a.Add(() => { CameraController.main.CenterOnTile(selArmy.GetCoords()); });

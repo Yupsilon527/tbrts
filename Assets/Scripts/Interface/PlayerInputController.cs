@@ -160,7 +160,7 @@ public class PlayerInputController : MonoBehaviour
             ClearCastAbility();
         }
     }
-    void GiveOrder(DataItemArmy selArmy, Order order, bool queue)
+    void GiveOrder(DataItemBanner selArmy, Order order, bool queue)
     {
 
         if (queue)
@@ -188,8 +188,8 @@ public class PlayerInputController : MonoBehaviour
     }
 
     #region Highlight Entities
-    DataItemArmy HighlightedEntity;
-    void HighlightEntity(DataItemArmy ent)
+    DataItemBanner HighlightedEntity;
+    void HighlightEntity(DataItemBanner ent)
     {
         if (ent != HighlightedEntity)
             ClearHighlightEntity();

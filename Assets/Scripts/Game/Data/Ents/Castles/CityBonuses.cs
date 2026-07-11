@@ -46,7 +46,7 @@ public class CityBonuses : CityComponent
     {
         return upgrades.UpgradeResearched(name);
     }
-    void ApplyUpgradeToAllUnits(DataItemArmy army, TechData upgrade, int level)
+    void ApplyUpgradeToAllUnits(DataItemBanner army, TechData upgrade, int level)
     {
         if (army == null) return;
         foreach (var unit in army.formation.GetUnits())

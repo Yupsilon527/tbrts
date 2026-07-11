@@ -13,14 +13,14 @@ public class Combat : Initializable
         enabled = false;
     }
 
-    public SparseIntMap MockBattle(DataItemArmy a, DataItemArmy d, DataItemTile l)
+    public SparseIntMap MockBattle(DataItemBanner a, DataItemBanner d, DataItemTile l)
     {
         mockBattle = true;
         SetUp(a, d, l);
         ResolveInstantly();
         return OutputResults();
     }
-    public void BattleTroops(DataItemArmy a, DataItemArmy d, DataItemTile l)
+    public void BattleTroops(DataItemBanner a, DataItemBanner d, DataItemTile l)
     {
         mockBattle = false;
         SetUp(a, d, l);
@@ -30,12 +30,12 @@ public class Combat : Initializable
 
     public CombatDefines.AttackPhase currentPhase;
     public DataItemTile locatedTile;
-    public DataItemArmy attackers, defenders;
+    public DataItemBanner attackers, defenders;
 
     public List<DataItemUnit> combatants = new();
 
     public int currentTick = 0;
-    public void SetUp(DataItemArmy a, DataItemArmy d, DataItemTile l)
+    public void SetUp(DataItemBanner a, DataItemBanner d, DataItemTile l)
     {
         Inspect($"COMBAT - Begin combat between army {a} and army {d} on tile {l}!");
         locatedTile = l;
@@ -163,7 +163,7 @@ public class Combat : Initializable
             combatant.FireEventOnSelf(e, true);
         }
     }
-    public DataItemArmy GetOppositeSide(DataItemArmy troop)
+    public DataItemBanner GetOppositeSide(DataItemBanner troop)
     {
         if (attackers.GetAlignment(troop) == PlayerDefines.Alignment.enemy)
         return attackers;
@@ -212,7 +212,7 @@ public class Combat : Initializable
     {
         return GetSupportingUnitsForSide(attackingSide ? attackers : defenders);
     }
-    public DataItemUnit[] GetSupportingUnitsForSide(DataItemArmy troop)
+    public DataItemUnit[] GetSupportingUnitsForSide(DataItemBanner troop)
     {
         List<DataItemUnit> supporters = new();
         foreach (var unit in combatants)

@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ArmyFormation : ArmyComponent
+public class BannerFormation : BannerComponent
 {
 
     public DataItemUnit[] Formation = new DataItemUnit[6];
     public DataItemUnit transport;
 
-    public ArmyFormation(DataItemArmy parent) : base(parent)
+    public BannerFormation(DataItemBanner parent) : base(parent)
     {
     }
 
@@ -329,12 +329,12 @@ public class ArmyFormation : ArmyComponent
         ExchangeTroops(aX, aY, bX, bY, a.troop, b.troop, updateVisual);
     }
 
-    public static void SwapTroops(int aX, int aY, int bX, int bY, DataItemArmy aTroop, bool updateVisual)
+    public static void SwapTroops(int aX, int aY, int bX, int bY, DataItemBanner aTroop, bool updateVisual)
     {
         ExchangeTroops(aX, aY, bX, bY, aTroop, aTroop, updateVisual);
     }
 
-    public static void ExchangeTroops(int aX, int aY, int bX, int bY, DataItemArmy aTroop, DataItemArmy bTroop, bool updateVisual)
+    public static void ExchangeTroops(int aX, int aY, int bX, int bY, DataItemBanner aTroop, DataItemBanner bTroop, bool updateVisual)
     {
         if (aTroop == bTroop)
         {

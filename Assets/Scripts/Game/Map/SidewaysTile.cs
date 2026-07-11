@@ -43,7 +43,7 @@ public class DataItemTile
         return terrain.elevation;
     }
     //layers
-    public DataItemArmy armyLayer;
+    public DataItemBanner armyLayer;
     public DataItemBuilding buildingLayer, regionCastle;
     public DataItemPowerup powerupLayer;
 
