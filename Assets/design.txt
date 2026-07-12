@@ -75,3 +75,203 @@ Undead: blood slave (%chance to gain mana on killed)Linf: jaguar warrior (blood 
 Insect - advisirs make manaLinf: antLarc: maggotLcav: mantisFly: waspSiege: scarabSupport advisor: generate manaTransport: floater, slow, regens units inside* Breeders: hinf are summoners, UU queen: support, summon hcav, harcWorm: siege, hinf* Adaptors: mutations 
 * Crustaceans: amph units Hcav mana on killsUU gains mana on kills, summoner
 Fey/conflux - double mana from sitesLinf: Larc: Lcav: Lfly: fairySupport unicorn Siege treant* Wood elfHinf elf infHarc elf arcHcav elf guardUU cav archer* Fairies Hinf Harc flying archerHcav rocUu unicorn * Centaur Hcav centaurHarc centaur archer UU pegataur* Naga: amphibian unitsHinf naga guardHarc medusaHcav hydraUU ship kraken
+
+Human - mana from kills
+Linf - Rally - bonus combat 
+Larc 
+P - indir 4 mana
+S - Shwall - bonus armor 
+Lcav 
+P - charge
+S - haste 
+Lfly
+S - 
+Hinf 
+P block
+S - momentum - squad bonus AP
+Harc
+P range supp, followup?
+S volley
+Hcav
+P - charge, gain AP on kill
+S - mag barrier (1t)
+Preist 
+P heal
+S heal
+Siege
+P - bombard, costs supply 
+S - bombard for mana, can move
+Ship - galleon
+P - transport
+S - bombard
+
+Knight - heals focus
+Linf
+P - heal on being hit
+A - crusade (rally 2)
+Larc
+P - increase healing after hit
+S - increase melee armor pnly (a lot)
+Lcav
+P - fast
+S - magic ward
+Paladin UU hcav heal
+P - heal
+S - heal
+Archon - UU heal hfly hybrid 
+P - magic smite
+S - revive 
+Wonder - hp to all units
+
+Academy - range focus
+Larc antimage
+P - high mres, on hit by spell heal
+S - stack magic damage buff (1 turn)
+Lcav mounted mage
+P - charge
+S - fireball (magic damage adjecent)
+RedMage (harc)
+P - magic followup
+S - magic damage 
+WhMage (heal, can fight) UU harc heal hybrid 
+P - heal
+S - aoe heal
+Wonder - mana gen
+
+Empire - econ
+Units cost more, more stats
+Units gain ability upgrade - pay gold, permanent stats
+UU cav archer
+P - range supp
+A - volley
+Merchant - support 
+P - generate gold
+S - turn gold to mana
+Gold cat
+P - range 4 supply
+S - deal damage, cost gold
+Wonder - income
+
+
+
+Undead - bloodslaves
+Linf
+P - bloodslave
+S - vampirism
+Larc 
+P - bloodslave , 
+S - haste
+Lcav 
+P - charge, finish off
+S - selfheal
+Lfly
+P - ghost
+S - ethereal 1 battle 
+Supp blood mage
+P - vampirism
+S - sac blood slave 
+Hinf
+P - vampirism
+A - life drain
+Harc 
+P - range supp, magic assist
+A - death coil (heal or damage)
+Hcav reaper
+P - charge
+A - unholy rage
+Siege - bone cata
+P - attack 4 supply, can move and attack, slower
+A - disease
+Boat - undead barge
+P -
+A -
+
+
+Lichelords 
+Linf. Zombie
+P - heal on kill
+A - blood frenzy
+Larc Skeletons
+P - high pierce armor
+A - 
+Hcav darknight
+P - heal on death
+A - revive undead in stack
+Supp - Necro
+P - revive dead allies
+A - zombie troop
+
+Plaguelords 
+Linf
+P - turn corpses to ghouls, poison
+S - poison melee
+Lcav poison reaper
+P - trigger poison
+A - expunge 
+Hfly dragonliche
+P - poison breath 
+A - poison aoe
+UU plague preist
+P - expunge, triggers poison
+A - ranged poison
+
+
+
+Drowned Legion
+Linf - pirate
+P - water fighting
+A - 
+Larc - gunner
+
+UU flying Dutchman 
+P - attacks other ship
+A - flight
+
+Dwarfs
+Linf
+S - huddle (armor bonus)
+Larc
+S - 
+Lcav
+S - 
+
+Nords - mana from fights, fast expandable units
+Linf
+S - haste
+Larc 
+S - 
+Lcav
+S - selfheal
+Lfly
+
+Hinf - berserker
+P - damage on low hp
+A - take damage, perm upgrade
+Harc - running
+P - fast
+S - slow + damage (blizzard)
+Hcav
+
+Druid - mounted supp
+P - heal
+A - heal
+
+Dwarfs
+Hinf
+P - shield, shield ally
+S - fortify - immobile, high def
+Harc
+P - range supp
+S - slow + volley
+Hcav
+P - shield on taken damage 
+A - 
+Siege - ram
+High prio target range
+A - 
+Supp - runelord
+P - grant shield at battle start
+A - boosts armor in boat
+Boat longboat 
+P - ranged supp
+A - heal stack

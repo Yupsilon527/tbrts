@@ -9,7 +9,7 @@ public class ModifierConfig : ModifierSO
     [Serializable]
     public class ConfigEvent
     {
-        public float apCost, rpCost, spCost;
+        public int apCost, rpCost, spCost;
         public AbilityDefines.Event[] listeners;
         public AbilityDefines.Condition casterCondition;
         public AbilityDefines.Condition targetCondition;
