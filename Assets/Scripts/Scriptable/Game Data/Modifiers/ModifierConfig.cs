@@ -22,9 +22,11 @@ public class ModifierConfig : ModifierSO
              {
                  if (!MeetsCondition(table.caster, casterCondition)|| !MeetsCondition(table.target, targetCondition)) return;
 
-                 if (table.caster.actions.ActionPoint.GetValue() < apCost
-                || table.caster.actions.ReactionPoints.GetValue() < rpCost
-                || table.caster.actions.SupplyPoints.GetValue() < spCost)
+
+
+                 if (table.caster.actions.CanAffordAP(apCost) 
+                || table.caster.actions.CanAffordRP(rpCost)
+                || table.caster.actions.CanAffordSP(spCost))
                      return;
 
                  table.caster.actions.ActionPoint.ChargeValue(apCost);

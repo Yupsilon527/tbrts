@@ -8,6 +8,19 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     public ResourceInt ReactionPoints = new ResourceInt(1, "MP", false, false);
     public ResourceInt SupplyPoints = new ResourceInt(1, "SP", false, false);
 
+    public bool CanAffordAP(int val)
+    {
+        return parent.IsInCombat() &&  ActionPoint.GetValue() >= val;
+    }
+    public bool CanAffordRP(int val)
+    {
+        return parent.IsInCombat() && ReactionPoints.GetValue() >= val;
+    }
+    public bool CanAffordSP(int val)
+    {
+        return SupplyPoints.GetValue() >= val;
+    }
+
     public HashSet<PropertyAbility> actions = new();
     public HashSet<PropertyAbility> available = new();
     public CombatantAbilities(DataItemUnit parent) : base(parent)

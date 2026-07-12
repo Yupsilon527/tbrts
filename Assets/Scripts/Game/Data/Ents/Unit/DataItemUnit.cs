@@ -132,7 +132,7 @@ public class DataItemUnit : DataItemMob
     #endregion
     public bool IsInCombat()
     {
-        return troop.IsInCombat();
+        return Combat.main.IsInCombat() && Combat.main.combatants.Contains(this);
     }
     public int GetCommandValue()
     {
