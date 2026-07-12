@@ -15,7 +15,7 @@ public class TerrainBonus : ModifierPassive
             var effects = evt.effects.Select(e => e.Translate());
             actions.Add(evt.listener, evt.Translate());
         }
-        actions.Add(AbilityDefines.Event.OnMoveTile, (ReactionTable table) => { table.caster.modifiers.SetModifierActive(table.modifier, table.caster.troop.IsInTerrain(requiredElevation)); });
+        actions.Add(AbilityDefines.Event.OnMoveTile, (ReactionTable table) => { table.caster.modifiers.SetModifierActive(table.modifier, table.caster.troop.IsInTerrain(requiredElevation)); table.caster.modifiers.RefreshModifier(table.modifier); });
 
         return new InnateData(
             InternalName,

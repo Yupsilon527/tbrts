@@ -49,7 +49,7 @@ public class PropertyAttribute : PropertyTag
     }
     public virtual bool ExecuteEvent(AbilityDefines.Event act, DataItemUnit target)
     {
-        if (active && functions.TryGetValue(act, out ModifierDefines.ModifierAction func))
+        if ( functions.TryGetValue(act, out ModifierDefines.ModifierAction func))
         {
             func.Invoke(new ReactionTable(Combat.main.currentTick, parent, target, this));
             return true;
@@ -58,6 +58,19 @@ public class PropertyAttribute : PropertyTag
     }
 
     #endregion
+    public override void Die(bool expire)
+    {
+        if (!dead)
+        {
+            if (expire)
+            {
+                ExecuteFunction(AbilityDefines.Event.OnExpired);
+            }
+            ExecuteFunction(AbilityDefines.Event.OnDestroyed);
+            parent.modifiers.RefreshModifier(this);
+            dead = true;
+        }
+    }
 
     #region States
     public void SetState(ModifierDefines.State state, bool value)

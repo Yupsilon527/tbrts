@@ -70,19 +70,15 @@ public class DataItemUnit : DataItemMob
     #region events
     public void FireEventOnSelf(AbilityDefines.Event evtData, bool refresh = false)
     {
-        HandleEvent(evtData, new DataItemUnit[0], refresh);
+        FireEventOnTarget(evtData,this, refresh);
     }
-    public void FireEventOnTarget(AbilityDefines.Event evtData, DataItemUnit target, bool refresh = false)
-    {
-        HandleEvent(evtData, new DataItemUnit[] { target }, refresh);
-    }
-    public virtual void HandleEvent(AbilityDefines.Event evt, DataItemUnit[] targets, bool refresh = false)
+    public void FireEventOnTarget(AbilityDefines.Event evt, DataItemUnit target, bool refresh = false)
     {
         Combat.main.Inspect($"{data.InternalName} reacts to event {evt}");
-        stats.TriggerFuncs(evt);
-        damageable.TriggerFuncs(evt);
-        actions.TriggerFuncs(evt);
-        modifiers.EventReaction(evt, targets);
+        stats.TriggerFuncs(evt, target);
+        damageable.TriggerFuncs(evt, target);
+        actions.TriggerFuncs(evt, target);
+        modifiers.TriggerFuncs(evt, target);
         if (evt == AbilityDefines.Event.CombatPhase)
         {
             UpdateNextAction();

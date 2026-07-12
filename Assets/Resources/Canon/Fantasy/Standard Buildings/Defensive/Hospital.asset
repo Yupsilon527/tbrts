@@ -25,7 +25,7 @@ MonoBehaviour:
     - resource: 0
       value: 1000
     - resource: 3
-      value: 20
+      value: 30
     prerequisites: []
     infinite: 2
     affectedFlags: []
@@ -36,7 +36,7 @@ MonoBehaviour:
     tempSpells: []
     abilitiesAdded:
     - abilityID: regen
-      abilityLevel: 1
+      abilityLevel: 10
     grantedResources: []
     grantedIncome:
     - resource: 0

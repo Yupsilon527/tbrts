@@ -8,9 +8,9 @@ public class UnitDamageable : UnitComponent
     public DataItemUnit guardian;
     public DamageTable lastDamage;
     protected bool dead = false;
-    public override void TriggerFuncs(AbilityDefines.Event act)
+    public override void TriggerFuncs(AbilityDefines.Event act, DataItemUnit t)
     {
-        base.TriggerFuncs(act);
+        base.TriggerFuncs(act,t);
         if (act == AbilityDefines.Event.OnDayBegin)
         {
             float regen = parent.innates.GetAbilityCombined(UnitDefines.ArmyAbilities.regen);

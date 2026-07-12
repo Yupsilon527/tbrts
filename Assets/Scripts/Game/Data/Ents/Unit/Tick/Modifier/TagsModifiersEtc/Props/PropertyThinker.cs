@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PropertyThinker : PropertyIha, ITimerAction
 {
@@ -9,7 +10,7 @@ public class PropertyThinker : PropertyIha, ITimerAction
     public int lastThink = 0;
     public int thinkInterval = 0;
 
-    public PropertyThinker(string internalName, DataItemUnit caster, DataItemUnit parent = null, Sprite sprite = null, ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.hidden, int p = 0, int thinkInterval = 0, ModifierDefines.StateData[] sa = null, ModifierDefines.PropertyData[] pr = null, AbilityData[] grantedAbilities = null) : base(internalName, caster, parent, sprite, uibehavior, p, sa, pr, grantedAbilities)
+    public PropertyThinker(string internalName, DataItemUnit caster, DataItemUnit parent = null, Sprite sprite = null, ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.hidden, int p = 0, int thinkInterval = 0, ModifierDefines.StateData[] sa = null, ModifierDefines.PropertyData[] pr = null, AbilityData[] grantedAbilities = null, Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> functions = null) : base(internalName, caster, parent, sprite, uibehavior, p, sa, pr, grantedAbilities,functions)
     {
         this.thinkInterval = thinkInterval;
         HasThinker = thinkInterval > 0;

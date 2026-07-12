@@ -15,7 +15,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         ClearAbilities();
         FromCombatantData();
     }
-    public override void TriggerFuncs(AbilityDefines.Event act)
+    public override void TriggerFuncs(AbilityDefines.Event act, DataItemUnit t)
     {
         if (act == AbilityDefines.Event.CombatBegin)
         {
@@ -39,7 +39,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
                 && city.AmIUnderAlliedControl())
                 SupplyPoints.SetPercentage(1);
         }
-        base.TriggerFuncs(act);
+        base.TriggerFuncs(act,t);
     }
     public void ClearAbilities()
     {

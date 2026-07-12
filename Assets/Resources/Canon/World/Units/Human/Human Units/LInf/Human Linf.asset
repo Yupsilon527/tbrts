@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
   m_Name: Human Linf
   m_EditorClassIdentifier: 
+  InternalName: 
+  AssignedWorld: 
+  prerequisites: []
   unit:
     InternalName: Human Linf
     icon: {fileID: 21300000, guid: 3d0c470e37781f041bf2502b14c90b7a, type: 3}
@@ -70,7 +73,19 @@ MonoBehaviour:
       attackPhase: 2
       targetPriority: 0
       areaMode: 0
-    spells: []
+    spells:
+    - InternalName: Rally Ability
+      abilityFlags: 2
+      MetalCost: 0
+      GoldCost: 0
+      ManaCost: 5
+      SupplyCost: 0
+      min_range: 0
+      max_range: 0
+      area_range: 0
+      targetMode: 1
+      rangeMode: 0
+      areaMode: 0
     abilities:
     - abilityID: foot
       abilityLevel: 1

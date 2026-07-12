@@ -93,6 +93,10 @@ public class DataItemBanner : DataItemMob
         gridPos = t;
         tile.armyLayer = this;
         OnPositionChange(t, oldtile);
+        foreach (var u in formation.GetUnits())
+        {
+            u.FireEventOnSelf(AbilityDefines.Event.OnMoveTile);
+        }
         display?.OnPositionChange(t, m);
     }
     void ChangeRegion(DataItemCastle enter, DataItemCastle exit)

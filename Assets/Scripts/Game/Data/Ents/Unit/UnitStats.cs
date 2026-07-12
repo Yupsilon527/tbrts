@@ -11,7 +11,7 @@ public class UnitStats : UnitComponent
         realStats = baseStats.Clone();
     }
     #endregion
-    public override void TriggerFuncs(AbilityDefines.Event act)
+    public override void TriggerFuncs(AbilityDefines.Event act, DataItemUnit t)
     {
         if (act == AbilityDefines.Event.CombatBegin
             || act == AbilityDefines.Event.OnRefresh

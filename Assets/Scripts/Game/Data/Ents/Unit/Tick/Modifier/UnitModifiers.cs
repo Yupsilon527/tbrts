@@ -193,6 +193,10 @@ public class UnitModifiers : UnitProperties, CombatantTicker
             if (alt.states.Count > 0) RefreshStates();
             if (alt.properties.Count > 0) RefreshProperties();
         }
+        if (tag is PropertyIha iha)
+        {
+            if (iha.grantedAbilities.Length > 0) RefreshAbilities();
+        }
     }
     public override void Refresh(bool force = false)
     {
@@ -201,20 +205,24 @@ public class UnitModifiers : UnitProperties, CombatantTicker
             if (force || statRefresh) states = new int[(int)ModifierDefines.State.total];
             if (force || propRefresh) properties = new float[(int)ModifierDefines.Property.total];
             if (force || abilRefresh) parent.innates.ClearTempAbilities();
-            foreach (PropertyModifier mod in _modifiers)
+            foreach (PropertyTag tag in _modifiers)
             {
-                if (!mod.dead && !mod.IsExpired())
+                if (tag is PropertyAttribute at) { 
+                if (!at.dead && at.active && !at.IsExpired())
                 {
                     if (force || statRefresh)
-                        UpdateModifierStates(mod);
+                        UpdateModifierStates(at);
                     if (force || propRefresh)
-                        UpdateModifierProperties(mod);
+                        UpdateModifierProperties(at);
                     if (force || abilRefresh)
-                        UpdateModifierAbilities(mod);
+                        UpdateModifierAbilities(at);
                 }
+                }
+                if (tag is PropertyModifier mod) { 
                 if (mod.expireType == ModifierDefines.ExpireType.ticks || mod.HasThinker)
                 {
                     HasUpdates = true;
+                }
                 }
             }
             if (propRefresh)
@@ -323,14 +331,7 @@ public class UnitModifiers : UnitProperties, CombatantTicker
         (flag == ModifierDefines.Flag.SoftDisable && GetState(ModifierDefines.State.soft_disable_immune)));
     }
 
-    public void EventReaction(AbilityDefines.Event evt, DataItemUnit[] affectedCritters)
-    {
-        TriggerFuncs(evt);
-        if ((int)evt == (int)ModifierDefines.ExpireType.stacks || (int)evt == (int)ModifierDefines.ExpireType.ticks)
-            Refresh();
-
-    }
-    public override void TriggerFuncs(AbilityDefines.Event act)
+    public override void TriggerFuncs(AbilityDefines.Event evt, DataItemUnit t)
     {
         foreach (var tag in _modifiers)
         {
@@ -338,10 +339,11 @@ public class UnitModifiers : UnitProperties, CombatantTicker
             {
                 if (!Mod.dead && !Mod.IsExpired())
                 {
-                    Mod.ExecuteEvent(act, parent);
+                    Mod.ExecuteEvent(evt, parent);
                 }
             }
         }
+            Refresh();
     }
     #endregion
     #region Timely Update

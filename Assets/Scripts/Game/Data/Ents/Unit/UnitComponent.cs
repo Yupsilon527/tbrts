@@ -16,7 +16,7 @@ public class UnitComponent
     {
 
     }
-    public virtual void TriggerFuncs(AbilityDefines.Event act)
+    public virtual void TriggerFuncs(AbilityDefines.Event act,DataItemUnit target )
     {
     }
 }

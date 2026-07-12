@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 public class PropertyModifier : PropertyThinker
 {
@@ -9,9 +10,9 @@ public class PropertyModifier : PropertyThinker
     public int stacks = 1;
     public int duration = 1;
 
-      public PropertyModifier(ModifierData data, DataItemUnit caster, DataItemUnit parent = null) : this(data.InternalName, caster, parent, data.sprite, data.behavior, data.uibehavior, (int)data.priority, data.states, data.properties,data.grantedAbilities,  data.flag,data.expireType,data.destroyEvent,data.thinker,data.stacks,data.duration)
+      public PropertyModifier(ModifierData data, DataItemUnit caster, DataItemUnit parent = null) : this(data.InternalName, caster, parent, data.sprite, data.behavior, data.uibehavior, (int)data.priority, data.states, data.properties,data.grantedAbilities,data.functions,  data.flag,data.expireType,data.destroyEvent,data.thinker,data.stacks,data.duration)
     { }
-    public PropertyModifier(string internalName, DataItemUnit caster, DataItemUnit parent = null, Sprite sprite = null, ModifierDefines.StackType behavior = ModifierDefines.StackType.Unique, ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.hidden, int p = 0,  ModifierDefines.StateData[] sa = null, ModifierDefines.PropertyData[] pr = null, AbilityData[] grantedAbilities = null, ModifierDefines.Flag flag = ModifierDefines.Flag.Tag, ModifierDefines.ExpireType expireType = ModifierDefines.ExpireType.permanent, ModifierDefines.ExpireType destroyType = ModifierDefines.ExpireType.permanent, int thinkInterval = 0, int stacks = 1, int duration = 1) : base(internalName, caster, parent, sprite, uibehavior, p, thinkInterval, sa, pr, grantedAbilities)
+    public PropertyModifier(string internalName, DataItemUnit caster, DataItemUnit parent = null, Sprite sprite = null, ModifierDefines.StackType behavior = ModifierDefines.StackType.Unique, ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.hidden, int p = 0,  ModifierDefines.StateData[] sa = null, ModifierDefines.PropertyData[] pr = null, AbilityData[] grantedAbilities = null, Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> functions = null, ModifierDefines.Flag flag = ModifierDefines.Flag.Tag, ModifierDefines.ExpireType expireType = ModifierDefines.ExpireType.permanent, ModifierDefines.ExpireType destroyType = ModifierDefines.ExpireType.permanent, int thinkInterval = 0, int stacks = 1, int duration = 1) : base(internalName, caster, parent, sprite, uibehavior, p, thinkInterval, sa, pr, grantedAbilities,functions)
     {
         this.flag = flag;
         this.behavior = behavior;
@@ -83,19 +84,6 @@ public class PropertyModifier : PropertyThinker
         CheckExpiration();
 
         return executed;
-    }
-    public override void Die(bool expire)
-    {
-        if (!dead)
-        {
-            if (expire)
-            {
-                ExecuteFunction(AbilityDefines.Event.OnExpired);
-            }
-            ExecuteFunction(AbilityDefines.Event.OnDestroyed);
-            parent.modifiers.RefreshModifier(this);
-            dead = true;
-        }
     }
     #endregion
     #region Stacks
