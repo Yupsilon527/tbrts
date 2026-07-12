@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PropertyAttribute : PropertyTag
@@ -13,35 +14,36 @@ public class PropertyAttribute : PropertyTag
 
     //Parameters
     public Dictionary<string, float> parameters = new Dictionary<string, float>();
-    public Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> functions = new Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction>();
+    public HashSet<AbilityFunction> functions = new HashSet<AbilityFunction>();
 
-    public PropertyAttribute(AlterationData data, DataItemUnit caster, DataItemUnit parent = null) : this(data.InternalName, caster, parent, data.sprite,  data.uibehavior,(int) data.priority,data.states,data.properties)
+    public PropertyAttribute(AlterationData data, DataItemUnit caster, DataItemUnit parent = null) : this(data.InternalName, caster, parent, data.sprite, data.uibehavior, (int)data.priority, data.states, data.properties)
     {
     }
     public PropertyAttribute(string internalName, DataItemUnit caster, DataItemUnit parent = null, Sprite sprite = null, ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.hidden,
-       
+
         int p = 0,
         ModifierDefines.StateData[] sa = null,
         ModifierDefines.PropertyData[] pr = null) : base(internalName, caster, parent, sprite, uibehavior)
     {
         priority = p;
         SetStates(sa);
-        SetProps(pr,1);
+        SetProps(pr, 1);
 
     }
 
     #region Functions
 
-    public void AddFunction(AbilityDefines.Event Name, ModifierDefines.ModifierAction execution)
+    public void AddFunction(AbilityFunction f)
     {
-        if (execution == null)
+        if (!f.IsValid())
         {
             return;
         }
 
-        functions.Add(Name, execution);
+        functions.Add(f);
 
     }
+
 
     public bool ExecuteFunction(AbilityDefines.Event act)
     {
@@ -49,12 +51,16 @@ public class PropertyAttribute : PropertyTag
     }
     public virtual bool ExecuteEvent(AbilityDefines.Event act, DataItemUnit target)
     {
-        if ( functions.TryGetValue(act, out ModifierDefines.ModifierAction func))
+        bool v = false;
+        foreach (var f in functions)
         {
-            func.Invoke(new ReactionTable(Combat.main.currentTick, parent, target, this));
-            return true;
+            if ((active || !f.onlyWhenActive) && f.events.Contains(act))
+            {
+                f.action.Invoke(new ReactionTable(Combat.main.currentTick, parent, target, this));
+                v = true;
+            }
         }
-        return false;
+        return v;
     }
 
     #endregion

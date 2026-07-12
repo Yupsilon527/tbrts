@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DataFaction : BaseData
 {
@@ -11,6 +12,7 @@ public class DataFaction : BaseData
 
     [Header("Specific")]
     public UpgradeData[] innateUpgrades;
+    public UnitData[] availableUnits;
     public BuildingData[] availableBuildings;
     public DataFaction()
     {
@@ -43,32 +45,40 @@ public class DataFaction : BaseData
 
         innateUpgrades = faction.innateUpgrades.Select(p => p.upgrade).Union(race.innateUpgrades.Select(p => p.upgrade)).ToArray();
         availableBuildings = faction.buildings.Select(p => p.building).Union(race.buildings.Select(p => p.building)).ToArray();
+        availableUnits = faction.units.Select(p => p.unit).Union(race.units.Select(p => p.unit)).ToArray();
     }
-
-    public List<UnitData> GetRecruitableArmies(bool neutral)
+    public List<UnitData> GetRecruitableArmies(bool neutral, bool global)
     {
-        List<UnitData> ProductionArmies = new List<UnitData>();
+        List<UnitData> productionArmies = new List<UnitData>();
+
         if (neutral || WorldManager.world.NeutralArmiesAreDefault)
         {
-            foreach (var building in WorldManager.world.neutralFaction.availableBuildings)
-            {
-                foreach (var unitID in building.production)
-                {
-                    ProductionArmies.Add(WorldManager.main.LoadUnit(unitID));
-                }
-            }
+            var neutralFaction = WorldManager.world.neutralFaction;
+            if (neutralFaction.availableUnits != null)
+                productionArmies.AddRange(neutralFaction.availableUnits);
+
+            if (global)
+                AddBuildingProduction(neutralFaction.availableBuildings, productionArmies);
         }
-        foreach (var building in availableBuildings)
+
+        if (availableUnits != null)
+            productionArmies.AddRange(availableUnits);
+
+        if (global)
+            AddBuildingProduction(availableBuildings, productionArmies);
+
+        return productionArmies;
+    }
+
+    private void AddBuildingProduction(IEnumerable<BuildingData> buildings, List<UnitData> destination)
+    {
+        foreach (var building in buildings)
         {
-            foreach (var Panty in building.production)
+            foreach (var unitID in building.production)
             {
-                foreach (var unitID in building.production)
-                {
-                    ProductionArmies.Add(WorldManager.main.LoadUnit(unitID));
-                }
+                destination.Add(WorldManager.main.LoadUnit(unitID));
             }
         }
-        return ProductionArmies;
     }
 
     public List<BuildingData> GetAvailableUpgrades(bool neutral)
@@ -96,7 +106,7 @@ public class DataFaction : BaseData
     public List<UnitData> FindArmiesWithAbility(string Ability, bool neutrals)
     {
         List<UnitData> AvailableArmies = new List<UnitData>();
-        foreach (UnitData Panty in GetRecruitableArmies(neutrals))
+        foreach (UnitData Panty in GetRecruitableArmies(neutrals,true))
         {
             if (Panty.HasAbility(Ability))
             {

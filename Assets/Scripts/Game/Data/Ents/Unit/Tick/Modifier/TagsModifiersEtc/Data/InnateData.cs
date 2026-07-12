@@ -12,7 +12,7 @@ public class InnateData : FunctionalData
     }
     public AuraType auraType;
 
-    public InnateData(string internalName, Sprite sprite, ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.hidden, ModifierDefines.Priority priority = ModifierDefines.Priority.normal, AuraType aura = AuraType.innate, ModifierDefines.Flag flag = ModifierDefines.Flag.Tag, ModifierDefines.PropertyData[] properties = null, ModifierDefines.StateData[] states = null, AbilityData[] grantedAbilities = null, Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> funcs = null) : base(internalName, sprite, uibehavior, priority, flag, properties, states, grantedAbilities, funcs)
+    public InnateData(string internalName, Sprite sprite, ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.hidden, ModifierDefines.Priority priority = ModifierDefines.Priority.normal, AuraType aura = AuraType.innate, ModifierDefines.Flag flag = ModifierDefines.Flag.Tag, ModifierDefines.PropertyData[] properties = null, ModifierDefines.StateData[] states = null, AbilityData[] grantedAbilities = null,  HashSet<AbilityFunction>  funcs = null) : base(internalName, sprite, uibehavior, priority, flag, properties, states, grantedAbilities, funcs)
     {
         auraType = aura;
     }

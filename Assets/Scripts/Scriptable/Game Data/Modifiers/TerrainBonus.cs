@@ -9,13 +9,13 @@ public class TerrainBonus : ModifierPassive
 
     public override TagData Translate()
     {
-        Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> actions = new();
+         HashSet<AbilityFunction>  actions = new();
         foreach (var evt in listeners)
         {
             var effects = evt.effects.Select(e => e.Translate());
-            actions.Add(evt.listener, evt.Translate());
+            actions.Add(new (evt.listeners, evt.Translate()));
         }
-        actions.Add(AbilityDefines.Event.OnMoveTile, (ReactionTable table) => { table.caster.modifiers.SetModifierActive(table.modifier, table.caster.troop.IsInTerrain(requiredElevation)); table.caster.modifiers.RefreshModifier(table.modifier); });
+        actions.Add(new (AbilityDefines.Event.OnMoveTile, (ReactionTable table) => { table.caster.modifiers.SetModifierActive(table.modifier, table.caster.troop.IsInTerrain(requiredElevation)); table.caster.modifiers.RefreshModifier(table.modifier); },false));
 
         return new InnateData(
             InternalName,

@@ -10,11 +10,11 @@ public class ModifierPassive : AlterationSO
 
     public override TagData Translate()
     {
-        Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> actions = new();
+         HashSet<AbilityFunction>  actions = new();
         foreach (var evt in listeners)
         {
             var effects = evt.effects.Select(e => e.Translate());
-            actions.Add(evt.listener, evt.Translate());
+            actions.Add(new (evt.listeners, evt.Translate()));
         }
 
         return new InnateData(

@@ -10,7 +10,7 @@ public class ModifierConfig : ModifierSO
     public class ConfigEvent
     {
         public float apCost, rpCost, spCost;
-        public AbilityDefines.Event listener;
+        public AbilityDefines.Event[] listeners;
         public AbilityDefines.Condition casterCondition;
         public AbilityDefines.Condition targetCondition;
         public AttackEffectSO[] effects;
@@ -57,7 +57,7 @@ public class ModifierConfig : ModifierSO
             foreach (var evt in listeners)
             {
                 var effects = evt.effects.Select(e => e.Translate());
-                modifier.functions.Add(evt.listener, evt.Translate()) ;
+                modifier.functions.Add(new (evt.listeners, evt.Translate())) ;
             }
             return modifier;
         }

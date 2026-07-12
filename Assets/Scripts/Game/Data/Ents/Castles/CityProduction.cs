@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class CityProduction : CityComponent
 {
@@ -23,6 +24,7 @@ public class CityProduction : CityComponent
     {
         base.Revision();
         availableUnits.Clear();
+        availableUnits.AddRange(city.GetPlayerOwner().faction.GetRecruitableArmies(false,false));
         foreach (var unit in city.bonuses.upgrades.researchedUpgrades)
         {
             if (unit.upgrade is BuildingData building)

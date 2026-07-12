@@ -10,15 +10,15 @@ public static class DefaultModifiers
      expireType:    ModifierDefines.ExpireType.permanent,
         priority:  ModifierDefines.Priority.normal,
  behavior:          ModifierDefines.StackType.Multiple,
-          funcs:  new Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction>()
+          funcs:  new  HashSet<AbilityFunction> ()
                          {
                          {
-                    AbilityDefines.Event.CombatEnd,
+                    new (AbilityDefines.Event.CombatEnd,
                      (ReactionTable table) =>
                                 {
 
                                     table.caster.damageable.Heal(table.modifier.GetParameter("post_combat_heal"));
-                     }
+                     })
                 }
             }
     );
@@ -27,7 +27,7 @@ public static class DefaultModifiers
          ModifierDefines.VisibleState.hidden,
           ModifierDefines.ExpireType.permanent,
            ModifierDefines.Behavior.Multiple,
-            new Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction>()
+            new  HashSet<AbilityFunction> ()
                          {
                          {
                     AbilityDefines.Event.CombatEnd,
@@ -45,7 +45,7 @@ public static class DefaultModifiers
                      ModifierDefines.VisibleState.always_visible,
                      ModifierDefines.ExpireType.turns,
                      ModifierDefines.Behavior.Replace,
-                         fs: new Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction>()
+                         fs: new  HashSet<AbilityFunction> ()
                          {
                          {
                              AbilityDefines.Event.OnCreated,
@@ -65,7 +65,7 @@ public static class DefaultModifiers
                      ModifierDefines.VisibleState.hidden,
                      ModifierDefines.ExpireType.fights,
                      ModifierDefines.Behavior.Multiple,
-                         fs: new Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction>()
+                         fs: new  HashSet<AbilityFunction> ()
                          {
                          {
                              AbilityDefines.Event.OnCreated,

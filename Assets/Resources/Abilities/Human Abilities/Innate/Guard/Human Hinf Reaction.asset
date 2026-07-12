@@ -20,21 +20,13 @@ MonoBehaviour:
   flag: 1
   properties: []
   states: []
+  abilities: []
   innateType: 0
   listeners:
   - apCost: 0
     rpCost: 1
     spCost: 0
-    listener: 52
-    casterCondition: 2
-    targetCondition: 2
-    effects:
-    - {fileID: 11400000, guid: 73d017a84d773284b9b756669dfd7e8a, type: 2}
-    - {fileID: 11400000, guid: fae54299a0aff4e4b8b5026a1b080edf, type: 2}
-  - apCost: 0
-    rpCost: 1
-    spCost: 0
-    listener: 51
+    listeners: 3300000034000000
     casterCondition: 2
     targetCondition: 2
     effects:

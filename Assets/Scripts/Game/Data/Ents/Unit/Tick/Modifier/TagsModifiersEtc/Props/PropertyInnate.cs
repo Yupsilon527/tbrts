@@ -9,7 +9,7 @@ public class PropertyInnate : PropertyIha
     public PropertyInnate(InnateData data, DataItemUnit caster, DataItemUnit parent = null) : this(data.InternalName, caster, parent, data.sprite,  data.uibehavior, (int)data.priority, data.states, data.properties,data.grantedAbilities,data.functions,data.auraType)
     {
     }
-    public PropertyInnate(string internalName, DataItemUnit caster, DataItemUnit parent = null, Sprite sprite = null,  ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.hidden, int p = 0, ModifierDefines.StateData[] sa = null, ModifierDefines.PropertyData[] pr = null, AbilityData[] grantedAbilities = null, Dictionary<AbilityDefines.Event, ModifierDefines.ModifierAction> functions = null,  InnateData.AuraType aura = InnateData.AuraType.innate) : base(internalName, caster, parent, sprite, uibehavior, p, sa, pr, grantedAbilities, functions)
+    public PropertyInnate(string internalName, DataItemUnit caster, DataItemUnit parent = null, Sprite sprite = null,  ModifierDefines.VisibleState uibehavior = ModifierDefines.VisibleState.hidden, int p = 0, ModifierDefines.StateData[] sa = null, ModifierDefines.PropertyData[] pr = null, AbilityData[] grantedAbilities = null,  HashSet<AbilityFunction>  functions = null,  InnateData.AuraType aura = InnateData.AuraType.innate) : base(internalName, caster, parent, sprite, uibehavior, p, sa, pr, grantedAbilities, functions)
     {
         auraType = aura;
     }

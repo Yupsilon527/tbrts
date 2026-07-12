@@ -9,5 +9,6 @@ public class TechtreeSo : ScriptableBase
 
     public UpgradeSO[] innateUpgrades;
 
+    public UnitSO[] units;
     public BuildingSO[] buildings;
 }
