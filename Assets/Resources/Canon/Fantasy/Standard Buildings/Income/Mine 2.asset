@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
+  m_Name: Mine 2
+  m_EditorClassIdentifier: 
+  InternalName: Mine 2
+  AssignedWorld: 
+  prerequisites:
+  - {fileID: 11400000, guid: 9bb5608a5e8aff240a9e77e56ef83da7, type: 2}
+  - {fileID: 11400000, guid: 8d487c5c4270318459df288c10033324, type: 2}
+  armies: []
+  building:
+    InternalName: Mine 2
+    icon: {fileID: -8297165085328784523, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
+    flags:
+    - income
+    - metal
+    - building
+    costs:
+    - resource: 0
+      value: 200
+    - resource: 3
+      value: 125
+    prerequisites:
+    - b_mine 1
+    - b_keep 2
+    infinite: 2
+    affectedFlags: []
+    resourceChanges: []
+    bonusDamage: []
+    properties:
+    - Property: 16
+      value: 1
+      IncreasePerLevel: 0
+    - Property: 14
+      value: 3
+      IncreasePerLevel: 0
+    states: []
+    tempSpells: []
+    abilitiesAdded: []
+    grantedResources: []
+    grantedIncome:
+    - resource: 0
+      value: 250
+    bonusType: 1
+    production: []

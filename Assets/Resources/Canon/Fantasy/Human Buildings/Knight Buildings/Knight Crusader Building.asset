@@ -17,6 +17,8 @@ MonoBehaviour:
   prerequisites:
   - {fileID: 11400000, guid: 8467f06e60a42fc4ca83d14937026b9a, type: 2}
   - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  armies:
+  - {fileID: 11400000, guid: 9efbeb2913fc69a418a8ae5feccf6541, type: 2}
   building:
     InternalName: Knight Crusader Building
     icon: {fileID: 1765351576224072635, guid: f90d2ba5f05edfe4980cdb0f116b21e7, type: 3}
@@ -45,5 +47,3 @@ MonoBehaviour:
     bonusType: 0
     production:
     - Knight Hinf
-  armies:
-  - {fileID: 11400000, guid: 9efbeb2913fc69a418a8ae5feccf6541, type: 2}

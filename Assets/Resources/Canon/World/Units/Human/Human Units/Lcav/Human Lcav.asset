@@ -92,6 +92,7 @@ MonoBehaviour:
   attacks:
   - {fileID: 11400000, guid: 1eff5a7a6566a15498a0aabff0087be0, type: 2}
   - {fileID: 11400000, guid: 7a3d3d470d7ce6144845a925dfda660d, type: 2}
-  spells: []
+  spells:
+  - {fileID: 11400000, guid: bde7efac7ad83094688cfeff461ba099, type: 2}
   passives: []
   character: {fileID: 11400000, guid: bb659cc1777b7dc40b5a7ad4ce786ca7, type: 2}

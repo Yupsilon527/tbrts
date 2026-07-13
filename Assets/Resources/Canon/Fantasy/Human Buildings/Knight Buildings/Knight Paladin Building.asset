@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
   m_Name: Knight Paladin Building
   m_EditorClassIdentifier: 
-  InternalName: Knight Archery
+  InternalName: Knight Paladin Building
   AssignedWorld: 
   prerequisites:
   - {fileID: 11400000, guid: 8467f06e60a42fc4ca83d14937026b9a, type: 2}
   - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  armies:
+  - {fileID: 11400000, guid: 125894bb4a5c0d947a682ab5acfd0813, type: 2}
   building:
-    InternalName: Knight Archery
+    InternalName: Knight Paladin Building
     icon: {fileID: 1765351576224072635, guid: f90d2ba5f05edfe4980cdb0f116b21e7, type: 3}
     flags: []
     costs:
@@ -45,5 +47,3 @@ MonoBehaviour:
     bonusType: 0
     production:
     - Knight Paladin
-  armies:
-  - {fileID: 11400000, guid: 125894bb4a5c0d947a682ab5acfd0813, type: 2}

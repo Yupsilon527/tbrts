@@ -9,34 +9,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
-  m_Name: Keep 1
+  m_Script: {fileID: 11500000, guid: 40009702d80c64c4a885c721de4816db, type: 3}
+  m_Name: Knight Innate Bonus 2
   m_EditorClassIdentifier: 
-  InternalName: Keep 1
+  InternalName: Knight Innate Bonus 2
   AssignedWorld: 
-  building:
-    InternalName: Keep 1
-    icon: {fileID: 3511996523978390141, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
-    flags:
-    - townhall
-    - income
+  prerequisites: []
+  upgrade:
+    InternalName: Knight Innate Bonus 2
+    icon: {fileID: 0}
+    flags: []
     costs: []
     prerequisites: []
-    infinite: 2
+    infinite: 0
     affectedFlags:
-    - '-'
-    resourceChanges: []
+    - _Training
+    resourceChanges:
+    - changedResource: 0
+      resourceChangeBehavior: 2
+      changeValue: 0.5
+    - changedResource: 3
+      resourceChangeBehavior: 2
+      changeValue: 0.1
     bonusDamage: []
     properties: []
     states: []
     tempSpells: []
     abilitiesAdded: []
     grantedResources: []
-    grantedIncome:
-    - resource: 0
-      value: 500
-    - resource: 3
-      value: 100
-    bonusType: 0
-    production: []
-  armies: []
+    grantedIncome: []

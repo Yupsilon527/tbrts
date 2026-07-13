@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40009702d80c64c4a885c721de4816db, type: 3}
-  m_Name: Knight Innate Bonuses
+  m_Name: Knight Innate Bonus 1
   m_EditorClassIdentifier: 
-  InternalName: Knight Innate Bonuses
+  InternalName: Knight Innate Bonus 1
   AssignedWorld: 
   prerequisites: []
   upgrade:
-    InternalName: Knight Innate Bonuses
+    InternalName: Knight Innate Bonus 1
     icon: {fileID: 0}
     flags: []
     costs: []

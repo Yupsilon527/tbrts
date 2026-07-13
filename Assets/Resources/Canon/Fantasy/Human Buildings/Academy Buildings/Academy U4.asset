@@ -10,38 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
-  m_Name: Knight Cathedral
+  m_Name: Academy U4
   m_EditorClassIdentifier: 
-  InternalName: Knight Cathedral
+  InternalName: Knight Mason U3
   AssignedWorld: 
   prerequisites:
-  - {fileID: 11400000, guid: 4cebb73b874726f4cace30e2a51413f0, type: 2}
-  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
-  armies:
-  - {fileID: 11400000, guid: f7a9a54c5e3724c43bf13204f2b444e6, type: 2}
+  - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
+  armies: []
   building:
-    InternalName: Knight Cathedral
+    InternalName: Knight Mason U3
     icon: {fileID: 1765351576224072635, guid: f90d2ba5f05edfe4980cdb0f116b21e7, type: 3}
     flags: []
     costs:
-    - resource: 1
-      value: 500
+    - resource: 0
+      value: 400
     - resource: 3
-      value: 50
+      value: 100
     prerequisites:
-    - b_temple
-    - b_keep 3
+    - b_keep 4
     infinite: 2
-    affectedFlags:
-    - '-'
+    affectedFlags: []
     resourceChanges: []
     bonusDamage: []
-    properties: []
+    properties:
+    - Property: 5
+      value: 0
+      IncreasePerLevel: 5
     states: []
     tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome: []
     bonusType: 0
-    production:
-    - Knight HealFly
+    production: []

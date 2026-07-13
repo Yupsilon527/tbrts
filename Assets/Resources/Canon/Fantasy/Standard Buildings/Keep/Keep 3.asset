@@ -10,41 +10,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
-  m_Name: Knight Stables U4
+  m_Name: Keep 3
   m_EditorClassIdentifier: 
-  InternalName: Knight Stables U4
+  InternalName: Keep 3
   AssignedWorld: 
-  prerequisites:
-  - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
+  prerequisites: []
   armies: []
   building:
-    InternalName: Knight Stables U4
-    icon: {fileID: 1765351576224072635, guid: f90d2ba5f05edfe4980cdb0f116b21e7, type: 3}
-    flags: []
+    InternalName: Keep 3
+    icon: {fileID: 617603048062758181, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
+    flags:
+    - townhall
+    - income
     costs:
     - resource: 0
-      value: 2400
+      value: 2000
     - resource: 1
-      value: 2400
+      value: 500
     - resource: 3
-      value: 100
-    prerequisites:
-    - b_keep 4
+      value: 400
+    prerequisites: []
     infinite: 2
     affectedFlags:
-    - cavalry
-    resourceChanges:
-    - changedResource: 3
-      resourceChangeBehavior: 2
-      changeValue: 0.5
+    - '-'
+    resourceChanges: []
     bonusDamage: []
     properties: []
     states: []
     tempSpells: []
-    abilitiesAdded:
-    - abilityID: regen
-      abilityLevel: 5
+    abilitiesAdded: []
     grantedResources: []
-    grantedIncome: []
-    bonusType: 1
+    grantedIncome:
+    - resource: 0
+      value: 1000
+    - resource: 2
+      value: 25
+    bonusType: 0
     production: []

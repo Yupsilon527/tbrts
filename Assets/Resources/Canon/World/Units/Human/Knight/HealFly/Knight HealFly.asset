@@ -22,20 +22,20 @@ MonoBehaviour:
     InternalName: Knight HealFly
     icon: {fileID: 21300000, guid: e0634a42c35531d4ab48e8bc49b08394, type: 3}
     flags:
-    - flyier
+    - fly
     - melee
     - support
     costs:
     - resource: 0
-      value: 250
+      value: 350
     - resource: 1
-      value: 400
+      value: 350
     - resource: 3
       value: 80
     prerequisites:
     - b_keep 3
     - b_temple
-    - b_knight cathedral
+    - b_knight chapel
     unit:
       Offense: 15
       Defense: 15

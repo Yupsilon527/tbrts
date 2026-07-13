@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcddf7723cb65e54e8d83f4a6c080f98, type: 3}
-  m_Name: Knight
+  m_Name: Academy
   m_EditorClassIdentifier: 
   InternalName: Knight
   AssignedWorld: 
@@ -18,8 +18,8 @@ MonoBehaviour:
   startingResources: []
   startingIncome: []
   innateUpgrades:
-  - {fileID: 11400000, guid: f4231828268026a4bbc59df78313bf21, type: 2}
-  - {fileID: 11400000, guid: eb13f7c84ed66b9419df63f72e9ca187, type: 2}
+  - {fileID: 11400000, guid: 19a91c5414926d04195b44a598ebab3b, type: 2}
+  - {fileID: 11400000, guid: c2ada69926eab2e47be572c0e2fd005f, type: 2}
   units: []
   buildings:
   - {fileID: 11400000, guid: fd3552d1fa879d349bdd395c786e55c0, type: 2}
@@ -31,4 +31,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4e0dc637c7c79e04b9ac62b904d2e24d, type: 2}
   - {fileID: 11400000, guid: 9e4bba544ae4ed94aa19c923abdb845d, type: 2}
   - {fileID: 11400000, guid: 5c81186e449848a4ca630da67e5baef6, type: 2}
+  - {fileID: 11400000, guid: 95073b601479b624eb015257ece70201, type: 2}
   castle: {fileID: -6754239384357436178, guid: 84bc3ee9b9ab07f4193fb073537ec9a1, type: 3}

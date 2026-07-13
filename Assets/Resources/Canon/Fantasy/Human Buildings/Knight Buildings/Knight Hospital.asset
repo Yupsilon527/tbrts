@@ -32,8 +32,7 @@ MonoBehaviour:
     - b_temple
     - b_keep 4
     infinite: 2
-    affectedFlags:
-    - '-'
+    affectedFlags: []
     resourceChanges: []
     bonusDamage: []
     properties: []

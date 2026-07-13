@@ -10,38 +10,46 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
-  m_Name: Keep 2
+  m_Name: Market 2
   m_EditorClassIdentifier: 
-  InternalName: Keep 2
+  InternalName: Market 2
   AssignedWorld: 
+  prerequisites:
+  - {fileID: 11400000, guid: f4d9b22afd5295d4fb9f06bd1cae9a79, type: 2}
+  - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
+  armies: []
   building:
-    InternalName: Keep 2
-    icon: {fileID: -2261305175963411493, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
+    InternalName: Market 2
+    icon: {fileID: -8297165085328784523, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
     flags:
-    - townhall
     - income
+    - gold
+    - building
     costs:
     - resource: 0
-      value: 1000
+      value: 400
     - resource: 3
       value: 200
     prerequisites:
-    - b_Keep 1
+    - b_market 1
+    - b_keep 4
     infinite: 2
-    affectedFlags:
-    - '-'
+    affectedFlags: []
     resourceChanges: []
     bonusDamage: []
-    properties: []
+    properties:
+    - Property: 16
+      value: 1
+      IncreasePerLevel: 0
+    - Property: 14
+      value: 3
+      IncreasePerLevel: 0
     states: []
     tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome:
-    - resource: 0
-      value: 500
-    - resource: 3
-      value: 25
-    bonusType: 0
+    - resource: 1
+      value: 250
+    bonusType: 1
     production: []
-  armies: []
