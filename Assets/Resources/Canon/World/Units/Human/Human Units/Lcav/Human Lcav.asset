@@ -21,6 +21,8 @@ MonoBehaviour:
     flags:
     - cavalry
     - melee
+    - lcav
+    - light
     costs:
     - resource: 0
       value: 400

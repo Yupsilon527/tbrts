@@ -12,6 +12,7 @@ public class DataItemTile
     public ElevationData terrain;
 
     public DataItemTile[] neighbors = Array.Empty<DataItemTile>();
+    public DataItemUnit[] corpse = new DataItemUnit[UnitDefines.iArmyRows * UnitDefines.iArmyCols];
     public bool[]passible;
     public int[]movecost;
     public void Init()

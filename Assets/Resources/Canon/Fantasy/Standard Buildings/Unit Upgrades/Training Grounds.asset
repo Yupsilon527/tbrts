@@ -10,38 +10,49 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
-  m_Name: Hospital
+  m_Name: Training Grounds
   m_EditorClassIdentifier: 
-  InternalName: Hospital
+  InternalName: Training Grounds
   AssignedWorld: 
-  prerequisites: []
+  prerequisites:
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
   armies: []
   building:
-    InternalName: Hospital
-    icon: {fileID: -8297165085328784523, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
-    flags:
-    - defensive
+    InternalName: Training Grounds
+    icon: {fileID: 3511996523978390141, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
+    flags: []
     costs:
     - resource: 0
       value: 1000
+    - resource: 1
+      value: 500
     - resource: 3
-      value: 30
-    prerequisites: []
+      value: 200
+    prerequisites:
+    - b_keep 3
     infinite: 2
-    affectedFlags: []
+    affectedFlags:
+    - light
     resourceChanges: []
     bonusDamage: []
-    properties: []
+    properties:
+    - Property: 0
+      value: 3
+      IncreasePerLevel: 0
+    - Property: 10
+      value: 10
+      IncreasePerLevel: 0
+    - Property: 48
+      value: 1.1
+      IncreasePerLevel: 0
     states: []
     tempSpells: []
-    abilitiesAdded:
-    - abilityID: regen
-      abilityLevel: 5
+    abilitiesAdded: []
     grantedResources: []
     grantedIncome:
     - resource: 0
       value: 500
     - resource: 3
       value: 100
-    bonusType: 1
+    bonusType: 0
     production: []

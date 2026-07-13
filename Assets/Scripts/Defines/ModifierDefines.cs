@@ -200,7 +200,8 @@ public static class ModifierDefines
         Root = 3,
         Haste = 4,
         Slow = 5,
-        Total = 11,
+        Revive = 6,
+        Total = 7,
     }
     public enum StackType    //TODO part of the modifier
     {

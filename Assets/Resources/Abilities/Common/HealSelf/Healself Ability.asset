@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fe4acfdcd7ef094ea581fedf41d0173, type: 3}
-  m_Name: Brace Ability
+  m_Name: Healself Ability
   m_EditorClassIdentifier: 
   effects:
-  - {fileID: 11400000, guid: 6e0e8a2aaf94e8949871a7855c5030bc, type: 2}
+  - {fileID: 11400000, guid: 5d8b1f8940d170e4cb197186a115b509, type: 2}
   data:
-    InternalName: Brace Ability
-    abilityFlags: 2
+    InternalName: Healself Ability
+    abilityFlags: 0
     MetalCost: 0
     GoldCost: 0
-    ManaCost: 7
+    ManaCost: 10
     SupplyCost: 0
     min_range: 0
     max_range: 0
@@ -27,4 +27,4 @@ MonoBehaviour:
     targetMode: 1
     rangeMode: 0
     areaMode: 0
-  spellFlags: 02000000
+  spellFlags: 00000000

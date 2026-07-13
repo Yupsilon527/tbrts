@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26b30f17bc374894ba8cccf57206e933, type: 3}
-  m_Name: LArc Melee
+  m_Name: LArc Ranged
   m_EditorClassIdentifier: 
   effects:
-  - {fileID: 11400000, guid: dff0749d5818e2e4882fc698dd11fb21, type: 2}
+  - {fileID: 11400000, guid: 768795fae82ebbb4694719fb61c63200, type: 2}
   data:
-    InternalName: Larc Melee
-    abilityFlags: 68
-    apCost: 2
-    mpCost: 0
+    InternalName: LArc Ranged
+    abilityFlags: 2184
+    apCost: 1
+    rpCost: 0
     spCost: 0
-    castTime: 120
-    castDelay: 160
+    castTime: 80
+    castDelay: 150
     attackPhase: 2
     targetPriority: 0
     areaMode: 0
-  weaponFlags: 0400000040000000
+  weaponFlags: 080000008000000000080000

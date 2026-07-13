@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InternalName: Wall 1
   AssignedWorld: 
+  prerequisites:
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  armies: []
   building:
     InternalName: Wall 1
     icon: {fileID: -8297165085328784523, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
@@ -25,8 +28,7 @@ MonoBehaviour:
     - resource: 3
       value: 75
     prerequisites:
-    - _keep 2
-    - _wall 1
+    - b_keep 3
     infinite: 2
     affectedFlags: []
     resourceChanges: []
@@ -49,4 +51,3 @@ MonoBehaviour:
       value: 100
     bonusType: 1
     production: []
-  armies: []

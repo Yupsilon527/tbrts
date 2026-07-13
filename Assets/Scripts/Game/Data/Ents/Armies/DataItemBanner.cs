@@ -348,11 +348,11 @@ public class DataItemBanner : DataItemMob
     }
     public void PostDamageUpdate()
     {
-        foreach (var unit in formation.GetUnits())
+      /*  foreach (var unit in formation.GetUnits())
         {
             if (!unit.IsAlive())
                 formation.RemoveTroop(unit, false);
-        }
+        }*/
         if (formation.GetUnits(incDead: false).Length == 0)
             Despawn();
         else
@@ -419,6 +419,10 @@ public class DataItemBanner : DataItemMob
         if (!dead)
         {
             dead = true;
+            foreach (var unit in formation.GetUnits())
+            {
+                formation.DisposeCorpse(unit);
+            }
             OnPositionChange(gridPos, gridPos);
             base.Despawn();
 

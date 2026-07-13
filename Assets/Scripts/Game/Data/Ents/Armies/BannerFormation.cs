@@ -86,7 +86,7 @@ public class BannerFormation : BannerComponent
                 }
                 if (unit.troop != null)
                 {
-                    unit.troop?.formation.RemoveTroop(unit, false);
+                    unit.troop?.formation.RemoveUnit(unit, false);
                 }
                 if (p < 0)
                     transport = unit;
@@ -109,7 +109,7 @@ public class BannerFormation : BannerComponent
         {
             if (unit.troop != null)
             {
-                unit.troop.formation.RemoveTroop(unit, false);
+                unit.troop.formation.RemoveUnit(unit, false);
             }
 
 
@@ -123,12 +123,22 @@ public class BannerFormation : BannerComponent
                         SetTroopInPosition(iX, rY, unit);
                         return true;
                     }
+                    else
+                    {
+                        var replaced = GetTroopInPosition(iX, rY);
+                        if (!replaced.IsAlive())
+                        {
+                            DisposeCorpse(replaced);
+                        }
+                        SetTroopInPosition(iX, rY, unit);
+                        return true;
+                    }
                 }
             }
         }
         return false;
     }
-    public void RemoveTroop(DataItemUnit unit, bool refactor)
+    public void RemoveUnit(DataItemUnit unit, bool refactor)
     {
         if (transport == unit)
             transport = null;
@@ -224,7 +234,7 @@ public class BannerFormation : BannerComponent
     }
     public bool CanIAccept(UnitData target)
     {
-        if (transport == null && target.isTransport())
+        if ((transport == null || !transport.IsAlive()) && target.isTransport())
         {
             return true;
         }
@@ -236,7 +246,7 @@ public class BannerFormation : BannerComponent
         {
             return transport == null;
         }
-        return GetUnits(false).Count() < UnitDefines.iMaxTroopStack && GetCommandValue() + Value <= GetMaxCommand();
+        return GetUnits(false,false).Count() < UnitDefines.iMaxTroopStack && GetCommandValue() + Value <= GetMaxCommand();
     }
     public int GetCommandValue()
     {
@@ -400,5 +410,8 @@ public class BannerFormation : BannerComponent
 
     }
 
-
+   public void DisposeCorpse(DataItemUnit unit)
+    {
+        RemoveUnit(unit,false);
+    }
 }

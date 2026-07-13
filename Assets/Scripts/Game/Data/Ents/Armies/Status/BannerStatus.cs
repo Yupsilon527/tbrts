@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class BannerStatus : BannerComponent
 {
@@ -17,10 +18,27 @@ public class BannerStatus : BannerComponent
     }
     public void ResolvePendingStatuses()
     {
-            foreach (var effect in pendingStatuses)
+        foreach (var effect in pendingStatuses)
+        {
+            switch (effect.effect)
             {
-                appliedStatuses.Add(new ArmyStatus(effect.effect, effect.turnDuration + GameManager.main.currentTurn));
+                case ModifierDefines.TroopState.Revive:
+                    float percent = Mathf.Clamp01(effect.turnDuration*.01f);
+
+                    foreach (var u in parent.formation.GetUnits(true,true))
+                    {
+                        if (!u.IsAlive())
+                        {
+                            u.Revive(percent);
+                        }
+                    }
+                    break;
+                default:
+                    appliedStatuses.Add(new ArmyStatus(effect.effect, effect.turnDuration + GameManager.main.currentTurn));
+                    break;
             }
+
+        }
         ClearPendingStatuses();
     }
     public void ClearPendingStatuses()

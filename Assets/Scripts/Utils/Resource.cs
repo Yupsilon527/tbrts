@@ -36,7 +36,7 @@ public abstract class Resource
         }
     }
 
-    public void SetPercentage(float value)
+    public virtual void SetPercentage(float value)
     {
         SetValue(value * GetLimit());
     }
@@ -287,6 +287,10 @@ public class ResourceInt : ResourceSimple
         }
         if (resourceDebug) Debug.Log($"[{name}]  Set Max to " + value);
     }
+    public override void SetPercentage(float value)
+    {
+        base.SetPercentage(Mathf.Ceil(value));
+    }
 }
 public class ResourceUint : ResourceSimple
 {
@@ -360,5 +364,9 @@ public class ResourceUint : ResourceSimple
                 break;
         }
         if (resourceDebug) Debug.Log($"[{name}]  Set Max to " + value);
+    }
+    public override void SetPercentage(float value)
+    {
+        base.SetPercentage(Mathf.Ceil(value));
     }
 }

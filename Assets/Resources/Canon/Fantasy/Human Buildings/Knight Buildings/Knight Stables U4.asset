@@ -10,40 +10,41 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
-  m_Name: Knight Archery
+  m_Name: Knight Stables U4
   m_EditorClassIdentifier: 
-  InternalName: Knight Archery
+  InternalName: Knight Hospital
   AssignedWorld: 
   prerequisites:
-  - {fileID: 11400000, guid: 8467f06e60a42fc4ca83d14937026b9a, type: 2}
-  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
-  armies:
-  - {fileID: 11400000, guid: 886a5c98da63c734ba584330cadc6b6e, type: 2}
+  - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
+  armies: []
   building:
-    InternalName: Knight Archery
+    InternalName: Knight Hospital
     icon: {fileID: 1765351576224072635, guid: f90d2ba5f05edfe4980cdb0f116b21e7, type: 3}
     flags: []
     costs:
     - resource: 0
       value: 1000
     - resource: 1
-      value: 500
+      value: 1000
     - resource: 3
-      value: 50
+      value: 100
     prerequisites:
-    - b_garrison
-    - b_keep 3
+    - b_keep 4
     infinite: 2
     affectedFlags:
-    - '-'
-    resourceChanges: []
+    - cavalry
+    resourceChanges:
+    - changedResource: 3
+      resourceChangeBehavior: 2
+      changeValue: 0.5
     bonusDamage: []
     properties: []
     states: []
     tempSpells: []
-    abilitiesAdded: []
+    abilitiesAdded:
+    - abilityID: regen
+      abilityLevel: 5
     grantedResources: []
     grantedIncome: []
-    bonusType: 0
-    production:
-    - Human Larc
+    bonusType: 1
+    production: []

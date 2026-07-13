@@ -21,6 +21,8 @@ MonoBehaviour:
     flags:
     - infantry
     - melee
+    - linf
+    - light
     costs:
     - resource: 0
       value: 300

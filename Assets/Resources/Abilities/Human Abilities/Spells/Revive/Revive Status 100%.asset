@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdb2a4007eece70479bede182159e45f, type: 3}
-  m_Name: HolySpear Character
+  m_Script: {fileID: 11500000, guid: 70fa41c04bb07b94b81288bd2b7f47b3, type: 3}
+  m_Name: Revive Status 100%
   m_EditorClassIdentifier: 
-  InternalName: Spearman Character
-  AssignedWorld: 
-  sprites:
-  - sprite: {fileID: 21300000, guid: 3d0c470e37781f041bf2502b14c90b7a, type: 3}
-    frame: 0
+  applyChance: 1
+  chance: 0
+  targeting: 0
+  effect: 6
+  turnDuration: 100

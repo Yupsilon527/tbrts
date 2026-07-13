@@ -214,7 +214,7 @@ public class UnitDamageable : UnitComponent
         Combat.main.Inspect($"{parent} takes {Receivedamage} damage!");
         CheckDeath();
     }
-    public float Heal(float amount)
+    public float Heal(float amount, bool world = false)
     {
         float overheal = Mathf.Max(0, amount - Health.GetValue());
         Health.GiveValue(amount);
@@ -223,7 +223,7 @@ public class UnitDamageable : UnitComponent
         parent.FireEventOnSelf(AbilityDefines.Event.OnLifeChange);
         return overheal;
     }
-    public void FullHeal(bool health = true, bool armor = true)
+    public void FullHeal(bool health = true, bool armor = true, bool world = false)
     {
         if (health) Health.SetPercentage(1);
         if (armor) Armor.SetPercentage(1);
@@ -236,20 +236,12 @@ public class UnitDamageable : UnitComponent
             Heal(parent.GetProperty(ModifierDefines.Property.health_regen_bonus) * parent.GetProperty(ModifierDefines.Property.health_regen_percentage) + parent.GetProperty(ModifierDefines.Property.total) * Health.GetLimit());
             CheckDeath();
         }
-        else
-        {
-            Revive();
-        }
     }
     public void CheckDeath()
     {
         if (!IsAlive())
         {
             Kill();
-        }
-        else
-        {
-            Revive(false);
         }
     }
     public void Kill(DataItemUnit k = null)
@@ -258,12 +250,12 @@ public class UnitDamageable : UnitComponent
         if (!dead)
             Die();
     }
-    public void Revive(bool fullHeal = true)
+    public void Revive()
     {
         dead = false;
         ClearKiller();
-        if (fullHeal)
-            FullHeal();
+            Health.SetValue(parent.health.GetValue());
+
     }
     protected virtual void Die()
     {

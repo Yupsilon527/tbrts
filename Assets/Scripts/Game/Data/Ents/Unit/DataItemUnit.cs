@@ -224,10 +224,6 @@ public class DataItemUnit : DataItemMob
         return innates.GetAbilityLevel("transport") > 0;
     }
 
-    public bool IsAlive()
-    {
-        return health.GetValue() > 0;
-    }
     public virtual string OutputStatsTable()
     {
         string output = "";
@@ -302,4 +298,16 @@ public class DataItemUnit : DataItemMob
         return output;
     }
 
+    public bool IsAlive()
+    {
+        return health.GetValue() > 0;
+    }
+    public void Revive(float percentage)
+    {
+        if (percentage > 0)
+            health.SetPercentage(percentage);
+        else
+            health.SetValue(1);
+        damageable.Revive();
+        }
 }

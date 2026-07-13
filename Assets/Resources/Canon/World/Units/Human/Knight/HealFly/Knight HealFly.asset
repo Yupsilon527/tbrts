@@ -40,13 +40,13 @@ MonoBehaviour:
       Offense: 15
       Defense: 15
       Luck: 0
-      Attack: 5
-      Magic: 6
+      Attack: 6
+      Magic: 8
       Speed: 140
       Action: 4
       Mana: 0
       Supply: 0
-      Health: 25
+      Health: 35
       Barrier: 0
       Armor: 1
       Shield: 1
@@ -83,9 +83,10 @@ MonoBehaviour:
     - abilityID: fly
       abilityLevel: 1
     - abilityID: slow
-      abilityLevel: 2
+      abilityLevel: 1
   attacks:
   - {fileID: 11400000, guid: 353b222755b25ec46bd7cea8cd41ce19, type: 2}
-  spells: []
+  spells:
+  - {fileID: 11400000, guid: 99cac65b68453de48a31a7c93f4fb812, type: 2}
   passives: []
-  character: {fileID: 11400000, guid: 73dad06f958bcf8429789db1c848a39a, type: 2}
+  character: {fileID: 11400000, guid: 9646bf5e22131144997160d869e44368, type: 2}

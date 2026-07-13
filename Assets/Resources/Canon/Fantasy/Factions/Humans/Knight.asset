@@ -17,13 +17,14 @@ MonoBehaviour:
   display: {fileID: 2688589832814682345, guid: bd56515332be0764bb061153a02509f8, type: 3}
   startingResources: []
   startingIncome: []
-  innateUpgrades: []
+  innateUpgrades:
+  - {fileID: 11400000, guid: f4231828268026a4bbc59df78313bf21, type: 2}
   units: []
   buildings:
-  - {fileID: 11400000, guid: 71647dc492f2e6b40bab87ec042653af, type: 2}
   - {fileID: 11400000, guid: fd3552d1fa879d349bdd395c786e55c0, type: 2}
   - {fileID: 11400000, guid: 32cbd38d31a693547963933d2eb23306, type: 2}
   - {fileID: 11400000, guid: 5479c026e11329446bd1309f9fe3040e, type: 2}
-  - {fileID: 11400000, guid: eba2c7a180aa0554fa183ff585027f65, type: 2}
-  - {fileID: 11400000, guid: 5c40db6684dfc274c96cd877fe769114, type: 2}
+  - {fileID: 11400000, guid: 5f75f2acaf47c7141a3c23df708940c2, type: 2}
+  - {fileID: 11400000, guid: d2eec0fe1b8f427499dda0a6c1c1bd71, type: 2}
+  - {fileID: 11400000, guid: 2013c01a4253d8d439d8677593f1c2dd, type: 2}
   castle: {fileID: -6754239384357436178, guid: 84bc3ee9b9ab07f4193fb073537ec9a1, type: 3}

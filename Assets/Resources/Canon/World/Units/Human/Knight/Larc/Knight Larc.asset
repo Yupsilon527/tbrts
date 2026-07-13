@@ -23,13 +23,15 @@ MonoBehaviour:
     flags:
     - infantry
     - archer
+    - light
+    - larc
     costs:
     - resource: 0
       value: 300
     - resource: 3
       value: 75
     prerequisites:
-    - b_knight archery
+    - b_
     - b_keep 3
     unit:
       Offense: 6
@@ -38,10 +40,10 @@ MonoBehaviour:
       Attack: 3
       Magic: 5
       Speed: 100
-      Action: 4
+      Action: 3
       Mana: 0
       Supply: 0
-      Health: 35
+      Health: 30
       Barrier: 0
       Armor: 0
       Shield: 5
@@ -102,7 +104,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 353b222755b25ec46bd7cea8cd41ce19, type: 2}
   - {fileID: 11400000, guid: 7a24da0132597db4286820965f35a81b, type: 2}
   spells:
-  - {fileID: 11400000, guid: cf865d61f45cff54f9433a56f8e3c365, type: 2}
+  - {fileID: 11400000, guid: f928b2dd478c7f44ea1488ca5f97e6a4, type: 2}
   passives:
   - {fileID: 11400000, guid: abd6bfdee1827dc49bf48552fb90fe1e, type: 2}
   character: {fileID: 11400000, guid: 36ba9896cfcd057408e2222d0e09437d, type: 2}

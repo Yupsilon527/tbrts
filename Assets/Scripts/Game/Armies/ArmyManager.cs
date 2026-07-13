@@ -40,7 +40,7 @@ public class ArmyManager : EntityManager
         }
         DataItemBanner newArmy = tTile.armyLayer;
 
-        if (newArmy == null || newArmy.formation.CanIAccept(uData))
+        if (newArmy == null || !newArmy.formation.CanIAccept(uData))
         {
             var newTile = GameManager.main.map.GetClosestToPoint(tTile.gridPos, uData.GetMovetype(), empty: true);
             if (newTile != null)

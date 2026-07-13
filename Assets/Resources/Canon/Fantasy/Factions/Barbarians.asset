@@ -18,6 +18,7 @@ MonoBehaviour:
   startingResources: []
   startingIncome: []
   innateUpgrades: []
+  units: []
   buildings:
   - {fileID: 11400000, guid: 7fcc1ea829ce68346b2554a529e7693f, type: 2}
   - {fileID: 11400000, guid: 8d487c5c4270318459df288c10033324, type: 2}
@@ -36,4 +37,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 694d5c55db7c7e942a2ca7797976cb92, type: 2}
   - {fileID: 11400000, guid: c1f59f9d552e1c243ae1dc629d23cc6f, type: 2}
   - {fileID: 11400000, guid: 87a0242efb02e0348a5a9af5ce2ba54a, type: 2}
+  - {fileID: 11400000, guid: 51a5cea29fba9814ead0d09d0e6392a1, type: 2}
   subFactions: []

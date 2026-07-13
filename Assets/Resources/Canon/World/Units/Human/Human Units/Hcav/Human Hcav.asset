@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
   m_Name: Human Hcav
   m_EditorClassIdentifier: 
+  InternalName: 
+  AssignedWorld: 
+  prerequisites: []
   unit:
     InternalName: Human Hcav
     icon: {fileID: 21300000, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
@@ -25,8 +28,7 @@ MonoBehaviour:
       value: 200
     - resource: 3
       value: 40
-    prerequisites:
-    - b_keep 3
+    prerequisites: []
     unit:
       Offense: 9
       Defense: 9
@@ -92,6 +94,7 @@ MonoBehaviour:
   attacks:
   - {fileID: 11400000, guid: aca20d8a201f0a94e9b4210c73d3b8ad, type: 2}
   - {fileID: 11400000, guid: ebacef28fe013bf43887ae1cdc67f8b1, type: 2}
-  spells: []
+  spells:
+  - {fileID: 11400000, guid: 0a225752f25b6bc489d5ee7874c54127, type: 2}
   passives: []
   character: {fileID: 11400000, guid: 185dd6d38c9c05e42a8aff840cef7392, type: 2}

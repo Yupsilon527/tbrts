@@ -12,12 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
   m_Name: Human Larc
   m_EditorClassIdentifier: 
+  InternalName: 
+  AssignedWorld: 
+  prerequisites: []
   unit:
     InternalName: Human Larc
     icon: {fileID: 21300000, guid: d3bb18af95bed7540ac7ab6d1481a9cf, type: 3}
     flags:
     - infantry
     - archer
+    - larc
+    - light
     costs:
     - resource: 0
       value: 300
@@ -31,7 +36,7 @@ MonoBehaviour:
       Attack: 2
       Magic: 5
       Speed: 100
-      Action: 4
+      Action: 3
       Mana: 0
       Supply: 0
       Health: 30
