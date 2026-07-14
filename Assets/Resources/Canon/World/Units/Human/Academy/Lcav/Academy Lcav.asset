@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
-  m_Name: Human Lcav
+  m_Name: Academy Lcav
   m_EditorClassIdentifier: 
   InternalName: 
   AssignedWorld: 
   prerequisites:
   - {fileID: 11400000, guid: 9d3425f9deaa4604f8c17dbac179acae, type: 2}
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
   unit:
-    InternalName: Human Lcav
+    InternalName: Academy Lcav
     icon: {fileID: 21300000, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
     flags:
     - cavalry
@@ -26,27 +27,30 @@ MonoBehaviour:
     - light
     costs:
     - resource: 0
-      value: 400
+      value: 200
+    - resource: 1
+      value: 200
     - resource: 3
-      value: 50
+      value: 100
     prerequisites:
     - b_stable
+    - b_keep 3
     unit:
-      Offense: 9
-      Defense: 9
+      Offense: 8
+      Defense: 5
       Luck: 0
-      Attack: 4
-      Magic: 5
+      Attack: 8
+      Magic: 6
       Speed: 150
       Action: 2
       Mana: 0
       Supply: 1
-      Health: 45
+      Health: 60
       Barrier: 0
       Armor: 0
-      Shield: 3
+      Shield: 4
       Padding: 0
-      Resistance: 0
+      Resistance: 10
       Block: 1
       LuckCoefficient: 1
       SpeedCoefficient: 1
@@ -93,8 +97,8 @@ MonoBehaviour:
       abilityLevel: 1
   attacks:
   - {fileID: 11400000, guid: 1eff5a7a6566a15498a0aabff0087be0, type: 2}
-  - {fileID: 11400000, guid: 7a3d3d470d7ce6144845a925dfda660d, type: 2}
+  - {fileID: 11400000, guid: 84f0098880c73b94a9168ee9bb41a664, type: 2}
   spells:
-  - {fileID: 11400000, guid: bde7efac7ad83094688cfeff461ba099, type: 2}
+  - {fileID: 11400000, guid: af3f4c38c0f0ab84bb8a8009d54a78d9, type: 2}
   passives: []
   character: {fileID: 11400000, guid: bb659cc1777b7dc40b5a7ad4ce786ca7, type: 2}

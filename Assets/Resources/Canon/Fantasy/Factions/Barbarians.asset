@@ -16,7 +16,13 @@ MonoBehaviour:
   AssignedWorld: Fantasy
   display: {fileID: 7294465012056405922, guid: bd56515332be0764bb061153a02509f8, type: 3}
   startingResources: []
-  startingIncome: []
+  startingIncome:
+  - resource: 4
+    value: 30
+  - resource: 5
+    value: 100
+  - resource: 3
+    value: 10
   innateUpgrades: []
   units: []
   buildings:

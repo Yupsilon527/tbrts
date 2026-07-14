@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InternalName: 
   AssignedWorld: 
-  prerequisites: []
+  prerequisites:
+  - {fileID: 11400000, guid: 9d3425f9deaa4604f8c17dbac179acae, type: 2}
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
   unit:
     InternalName: Human Hcav
     icon: {fileID: 21300000, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
@@ -28,7 +30,9 @@ MonoBehaviour:
       value: 200
     - resource: 3
       value: 40
-    prerequisites: []
+    prerequisites:
+    - b_stable
+    - b_keep 3
     unit:
       Offense: 9
       Defense: 9

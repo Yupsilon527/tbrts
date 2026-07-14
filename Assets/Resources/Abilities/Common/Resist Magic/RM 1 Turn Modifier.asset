@@ -13,18 +13,19 @@ MonoBehaviour:
   m_Name: RM 1 Turn Modifier
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
-  InternalName: Trueblock
+  InternalName: RM 1 Turn Modifier
   uibehavior: 2
-  behavior: 2
+  behavior: 4
   priority: 0
   flag: 2
   properties:
   - Property: 20
-    value: 40
-    IncreasePerLevel: 40
+    value: 25
+    IncreasePerLevel: 25
   states: []
-  duration: 99
+  abilities: []
+  duration: 1
   thinker: 0
   level: 0
-  destroyEvt: 64
+  destroyEvt: -1
   expireType: 64

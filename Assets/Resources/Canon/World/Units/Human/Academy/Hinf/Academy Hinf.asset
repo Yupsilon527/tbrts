@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
-  m_Name: Knight Hinf
+  m_Name: Academy Hinf
   m_EditorClassIdentifier: 
   InternalName: 
   AssignedWorld: 
   prerequisites:
-  - {fileID: 11400000, guid: 32cbd38d31a693547963933d2eb23306, type: 2}
-  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  - {fileID: 11400000, guid: 8d487c5c4270318459df288c10033324, type: 2}
   unit:
-    InternalName: Knight Hinf
-    icon: {fileID: 21300000, guid: 0f038dd18d945e740aaf9d20cd4706b9, type: 3}
+    InternalName: Academy Hinf
+    icon: {fileID: 21300000, guid: 110581e2c76c1de4cb066a927780e0e1, type: 3}
     flags:
     - infantry
     - melee
@@ -31,29 +30,28 @@ MonoBehaviour:
     - resource: 3
       value: 50
     prerequisites:
-    - b_knight crusader building
-    - b_keep 3
+    - b_keep 2
     unit:
-      Offense: 14
-      Defense: 18
+      Offense: 12
+      Defense: 20
       Luck: 0
       Attack: 9
-      Magic: 0
+      Magic: 6
       Speed: 10
       Action: 3
       Mana: 0
       Supply: 0
-      Health: 75
+      Health: 60
       Barrier: 0
       Armor: 1
       Shield: 1
       Padding: 2
-      Resistance: 0
-      Block: 10
+      Resistance: 20
+      Block: 5
       LuckCoefficient: 1
       SpeedCoefficient: 1
       DodgeChance: 0
-      BlockChance: 40
+      BlockChance: 20
       ProcChance: 0
       CritChance: 0
       bonusDamage:
@@ -85,11 +83,12 @@ MonoBehaviour:
       abilityLevel: 1
     - abilityID: raze
       abilityLevel: 1
+    - abilityID: slow
+      abilityLevel: 1
   attacks:
   - {fileID: 11400000, guid: 0b12d1c6c0d533841b2ec64cf3f6adcd, type: 2}
   spells:
-  - {fileID: 11400000, guid: 570f7536ebc2db04c89d179ef03c0257, type: 2}
+  - {fileID: 11400000, guid: 0a225752f25b6bc489d5ee7874c54127, type: 2}
   passives:
   - {fileID: 11400000, guid: eabbbd8d645dfbd419698ddf23c38f4a, type: 2}
-  - {fileID: 11400000, guid: ec063dbeddb6692429d4bf5149fde70b, type: 2}
   character: {fileID: 11400000, guid: d4a914700affcc6488aa29dbf839d77c, type: 2}

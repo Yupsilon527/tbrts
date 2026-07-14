@@ -76,7 +76,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
     - {fileID: 21300000, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
     - {fileID: 21300000, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
-    unitFlags: 0d000000
+    unitFlags: 0d0000000e00000009000000
     attacks: []
     spells: []
     abilities:

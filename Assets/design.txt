@@ -122,6 +122,11 @@ Archon - UU heal hfly hybrid
 P - magic smite
 S - revive 
 Wonder - hp to all units
+P1 beefy knight
+P2 training cheaper
+U1 towers cheaper
+U2 cavs haste
+
 
 Academy - range focus
 Larc antimage
@@ -137,10 +142,13 @@ WhMage (heal, can fight) UU harc heal hybrid
 P - heal
 S - aoe heal
 Wonder - mana gen
+P1 linf/arc bonus combat
+P2 labor buildings free
+U1 range supp range
+U2 magic
 
 Empire - econ
-Units cost more, more stats
-Units gain ability upgrade - pay gold, permanent stats
+Units 
 UU cav archer
 P - range supp
 A - volley
@@ -152,6 +160,10 @@ P - range 4 supply
 S - deal damage, cost gold
 Wonder - income
 
+P1 cost more, more stats
+P2 free market
+U1 cheaper towers
+U2 unit get promote ability - pay gold, gain stats
 
 
 Undead - bloodslaves
@@ -227,13 +239,39 @@ UU flying Dutchman
 P - attacks other ship
 A - flight
 
-Dwarfs
+Dwarfs - slow, units have extra Reactions
 Linf
-S - huddle (armor bonus)
+P - rage on hit 
+S - 
 Larc
+P - throw
 S - 
 Lcav
-S - 
+P - 
+A - 
+Lfly
+P - 
+S - evasion 
+
+Hinf
+P - shield, shield ally
+S - fortify - immobile, high def
+Harc
+P - range supp
+S - slow + volley
+Hcav
+P - shield on taken damage 
+A - 
+Siege - ram
+High prio target range
+A - 
+Supp - runelord
+P - grant shield at battle start
+A - boosts armor in boat
+Boat longboat 
+P - ranged supp
+A - heal stack
+
 
 Nords - mana from fights, fast expandable units
 Linf
