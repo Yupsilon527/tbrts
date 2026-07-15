@@ -15,8 +15,7 @@ MonoBehaviour:
   InternalName: 
   AssignedWorld: 
   prerequisites:
-  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
-  - {fileID: 11400000, guid: 9d3425f9deaa4604f8c17dbac179acae, type: 2}
+  - {fileID: 11400000, guid: 8d487c5c4270318459df288c10033324, type: 2}
   unit:
     InternalName: Human Harc
     icon: {fileID: 21300000, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
@@ -31,14 +30,13 @@ MonoBehaviour:
     - resource: 3
       value: 25
     prerequisites:
-    - b_keep 3
-    - b_stable
+    - b_keep 2
     unit:
       Offense: 8
       Defense: 0
       Luck: 0
       Attack: 5
-      Magic: 10
+      Magic: 6
       Speed: 100
       Action: 3
       Mana: 0
@@ -92,24 +90,12 @@ MonoBehaviour:
       attackPhase: 2
       targetPriority: 0
       areaMode: 0
-    spells:
-    - InternalName: Archer Volley
-      abilityFlags: 4
-      MetalCost: 0
-      GoldCost: 0
-      ManaCost: 10
-      SupplyCost: 0
-      min_range: 2
-      max_range: 3
-      area_range: 0
-      targetMode: 4
-      rangeMode: 0
-      areaMode: 0
+    spells: []
     abilities:
     - abilityID: foot
       abilityLevel: 1
     - abilityID: slow
-      abilityLevel: 1
+      abilityLevel: 2
     - abilityID: rangeSupport
       abilityLevel: 3
   attacks:

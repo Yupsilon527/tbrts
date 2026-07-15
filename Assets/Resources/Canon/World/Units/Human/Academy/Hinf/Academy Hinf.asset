@@ -15,7 +15,8 @@ MonoBehaviour:
   InternalName: 
   AssignedWorld: 
   prerequisites:
-  - {fileID: 11400000, guid: 8d487c5c4270318459df288c10033324, type: 2}
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  - {fileID: 11400000, guid: a3fd17eca3737ad40bb7af1a4e616808, type: 2}
   unit:
     InternalName: Academy Hinf
     icon: {fileID: 21300000, guid: 110581e2c76c1de4cb066a927780e0e1, type: 3}
@@ -30,7 +31,8 @@ MonoBehaviour:
     - resource: 3
       value: 50
     prerequisites:
-    - b_keep 2
+    - b_keep 3
+    - b_academy spellblade hall
     unit:
       Offense: 12
       Defense: 20
@@ -76,8 +78,20 @@ MonoBehaviour:
       castDelay: 120
       attackPhase: 2
       targetPriority: 0
+      areaMode: 0
+    spells:
+    - InternalName: Typhoon Ability
+      abilityFlags: 6
+      MetalCost: 0
+      GoldCost: 0
+      ManaCost: 20
+      SupplyCost: 0
+      min_range: 0
+      max_range: 0
+      area_range: 1
+      targetMode: 1
+      rangeMode: 0
       areaMode: 2
-    spells: []
     abilities:
     - abilityID: foot
       abilityLevel: 1

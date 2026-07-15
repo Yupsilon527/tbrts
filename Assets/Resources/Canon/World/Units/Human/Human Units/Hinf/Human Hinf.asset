@@ -35,13 +35,13 @@ MonoBehaviour:
       Offense: 15
       Defense: 15
       Luck: 0
-      Attack: 9
+      Attack: 6
       Magic: 0
       Speed: 10
       Action: 3
       Mana: 0
       Supply: 0
-      Health: 60
+      Health: 90
       Barrier: 0
       Armor: 1
       Shield: 1
@@ -82,6 +82,8 @@ MonoBehaviour:
     - abilityID: foot
       abilityLevel: 1
     - abilityID: raze
+      abilityLevel: 1
+    - abilityID: slow
       abilityLevel: 1
   attacks:
   - {fileID: 11400000, guid: 0b12d1c6c0d533841b2ec64cf3f6adcd, type: 2}

@@ -10,44 +10,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
-  m_Name: Fletcher 1
+  m_Name: Academy WhiteMage Hall
   m_EditorClassIdentifier: 
-  InternalName: Fletcher 1
+  InternalName: Academy WhiteMage Hall
   AssignedWorld: 
   prerequisites:
-  - {fileID: 11400000, guid: 8d487c5c4270318459df288c10033324, type: 2}
-  armies: []
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  - {fileID: 11400000, guid: 4cebb73b874726f4cace30e2a51413f0, type: 2}
+  armies:
+  - {fileID: 11400000, guid: 7d8eed2b5a0ead34ea535c456fe02f73, type: 2}
   building:
-    InternalName: Fletcher 1
-    icon: {fileID: 3511996523978390141, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
+    InternalName: Academy WhiteMage Hall
+    icon: {fileID: 1765351576224072635, guid: f90d2ba5f05edfe4980cdb0f116b21e7, type: 3}
     flags: []
     costs:
-    - resource: 0
-      value: 400
+    - resource: 1
+      value: 1000
     - resource: 3
-      value: 30
+      value: 50
     prerequisites:
-    - b_keep 2
+    - b_keep 3
+    - b_temple
     infinite: 2
     affectedFlags:
-    - archer
+    - '-'
     resourceChanges: []
     bonusDamage: []
-    properties:
-    - Property: 3
-      value: 0
-      IncreasePerLevel: 2
-    - Property: 1
-      value: 0
-      IncreasePerLevel: 3
+    properties: []
     states: []
     tempSpells: []
     abilitiesAdded: []
     grantedResources: []
-    grantedIncome:
-    - resource: 0
-      value: 500
-    - resource: 3
-      value: 100
+    grantedIncome: []
     bonusType: 0
-    production: []
+    production:
+    - Academy Heal

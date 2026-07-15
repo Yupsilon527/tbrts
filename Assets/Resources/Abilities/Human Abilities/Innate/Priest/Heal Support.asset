@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 72629d6a76c5d854b969b65ec3586aa6, type: 2}
   data:
     InternalName: Heal Support
-    abilityFlags: 78
+    abilityFlags: 98
     apCost: 0
     rpCost: 0
     spCost: 1
@@ -25,4 +25,4 @@ MonoBehaviour:
     attackPhase: 3
     targetPriority: 0
     areaMode: 1
-  weaponFlags: 04000000080000000200000040000000
+  weaponFlags: 200000000200000040000000

@@ -10,46 +10,41 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
-  m_Name: Wall 3
+  m_Name: Knight Fmedic Heal
   m_EditorClassIdentifier: 
-  InternalName: Wall 3
+  InternalName: Knight Hospital
   AssignedWorld: 
   prerequisites:
+  - {fileID: 11400000, guid: 8467f06e60a42fc4ca83d14937026b9a, type: 2}
+  - {fileID: 11400000, guid: 51a5cea29fba9814ead0d09d0e6392a1, type: 2}
   - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
-  - {fileID: 11400000, guid: 694d5c55db7c7e942a2ca7797976cb92, type: 2}
-  armies: []
+  armies:
+  - {fileID: 11400000, guid: b52308469fab0a249a55ceb24697cb2b, type: 2}
   building:
-    InternalName: Wall 3
-    icon: {fileID: -8297165085328784523, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
-    flags:
-    - defensive
+    InternalName: Knight Hospital
+    icon: {fileID: 1765351576224072635, guid: f90d2ba5f05edfe4980cdb0f116b21e7, type: 3}
+    flags: []
     costs:
-    - resource: 0
-      value: 400
+    - resource: 1
+      value: 500
     - resource: 3
-      value: 75
+      value: 50
     prerequisites:
+    - b_garrison
+    - b_training grounds
     - b_keep 4
-    - b_wall 2
     infinite: 2
     affectedFlags: []
     resourceChanges: []
     bonusDamage: []
-    properties:
-    - Property: 16
-      value: 1
-      IncreasePerLevel: 0
-    - Property: 14
-      value: 1
-      IncreasePerLevel: 0
+    properties: []
     states: []
     tempSpells: []
-    abilitiesAdded: []
+    abilitiesAdded:
+    - abilityID: regen
+      abilityLevel: 5
     grantedResources: []
-    grantedIncome:
-    - resource: 0
-      value: 500
-    - resource: 3
-      value: 100
+    grantedIncome: []
     bonusType: 1
-    production: []
+    production:
+    - Knight Larc

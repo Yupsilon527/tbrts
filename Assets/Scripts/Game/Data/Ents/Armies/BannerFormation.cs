@@ -105,7 +105,7 @@ public class BannerFormation : BannerComponent
     }
     public bool TransferUnit(DataItemUnit unit)
     {
-        if (CanIAccept(unit.GetCommandValue()) && parent.CanBeMerged(true))
+        if (parent.CanBeMerged(true) && CanIAccept(unit) )
         {
             if (unit.troop != null)
             {
@@ -129,9 +129,9 @@ public class BannerFormation : BannerComponent
                         if (!replaced.IsAlive())
                         {
                             DisposeCorpse(replaced);
+                            SetTroopInPosition(iX, rY, unit);
+                            return true;
                         }
-                        SetTroopInPosition(iX, rY, unit);
-                        return true;
                     }
                 }
             }

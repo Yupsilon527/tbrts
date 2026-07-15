@@ -17,7 +17,7 @@ MonoBehaviour:
   prerequisites:
   - {fileID: 11400000, guid: 5479c026e11329446bd1309f9fe3040e, type: 2}
   - {fileID: 11400000, guid: 9d3425f9deaa4604f8c17dbac179acae, type: 2}
-  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
   unit:
     InternalName: Knight Paladin
     icon: {fileID: 21300000, guid: c16be4fd6b6dee24ab81d88e2ccfd53f, type: 3}
@@ -32,9 +32,9 @@ MonoBehaviour:
     - resource: 3
       value: 150
     prerequisites:
-    - b_knight archery
+    - b_knight paladin building
     - b_stable
-    - b_keep 3
+    - b_keep 4
     unit:
       Offense: 20
       Defense: 10
@@ -94,8 +94,6 @@ MonoBehaviour:
     spells: []
     abilities:
     - abilityID: mounted
-      abilityLevel: 1
-    - abilityID: slow
       abilityLevel: 1
   attacks:
   - {fileID: 11400000, guid: aca20d8a201f0a94e9b4210c73d3b8ad, type: 2}

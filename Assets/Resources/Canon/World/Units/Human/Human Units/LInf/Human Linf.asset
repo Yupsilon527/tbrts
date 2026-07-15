@@ -94,7 +94,7 @@ MonoBehaviour:
     - abilityID: raze
       abilityLevel: 1
     - abilityID: slow
-      abilityLevel: 2
+      abilityLevel: 3
   attacks:
   - {fileID: 11400000, guid: a2980518f8729cc478c3d4f7e2632b1d, type: 2}
   spells:

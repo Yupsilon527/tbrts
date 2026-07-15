@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
   m_Name: Academy U3
   m_EditorClassIdentifier: 
-  InternalName: Knight Mason U3
+  InternalName: Academy U3
   AssignedWorld: 
   prerequisites:
   - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
   armies: []
   building:
-    InternalName: Knight Mason U3
+    InternalName: Academy U3
     icon: {fileID: 1765351576224072635, guid: f90d2ba5f05edfe4980cdb0f116b21e7, type: 3}
     flags: []
     costs:

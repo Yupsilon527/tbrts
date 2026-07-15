@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InternalName: Bestiary 3
   AssignedWorld: 
+  prerequisites:
+  - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
+  - {fileID: 11400000, guid: 969a7215739463f42a6692fadbc141d5, type: 2}
+  armies: []
   building:
     InternalName: Bestiary 3
     icon: {fileID: 3511996523978390141, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
@@ -24,8 +28,8 @@ MonoBehaviour:
     - resource: 3
       value: 30
     prerequisites:
-    - b_keep 3
-    - b_Bestiary 2
+    - b_keep 4
+    - b_bestiary 2
     infinite: 2
     affectedFlags:
     - cavalry
@@ -53,4 +57,3 @@ MonoBehaviour:
       value: 100
     bonusType: 0
     production: []
-  armies: []

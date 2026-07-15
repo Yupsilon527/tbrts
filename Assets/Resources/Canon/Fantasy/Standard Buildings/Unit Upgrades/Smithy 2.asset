@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InternalName: Smithy 2
   AssignedWorld: 
+  prerequisites:
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  - {fileID: 11400000, guid: 953d806119d803f459d7c15b293a0c21, type: 2}
+  armies: []
   building:
     InternalName: Smithy 2
     icon: {fileID: 3511996523978390141, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
@@ -49,4 +53,3 @@ MonoBehaviour:
       value: 100
     bonusType: 0
     production: []
-  armies: []

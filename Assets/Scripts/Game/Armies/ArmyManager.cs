@@ -172,11 +172,3 @@ public class ArmyManager : EntityManager
         }
     }
 }
-
-public class EntityManager : GameComponent
-{
-    public virtual void HandleEndOfTurn()
-    {
-
-    }
-}

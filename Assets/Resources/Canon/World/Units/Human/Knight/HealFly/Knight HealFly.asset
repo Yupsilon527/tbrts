@@ -16,7 +16,6 @@ MonoBehaviour:
   AssignedWorld: 
   prerequisites:
   - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
-  - {fileID: 11400000, guid: 4cebb73b874726f4cace30e2a51413f0, type: 2}
   - {fileID: 11400000, guid: fd3552d1fa879d349bdd395c786e55c0, type: 2}
   unit:
     InternalName: Knight HealFly
@@ -34,7 +33,6 @@ MonoBehaviour:
       value: 80
     prerequisites:
     - b_keep 3
-    - b_temple
     - b_knight chapel
     unit:
       Offense: 15

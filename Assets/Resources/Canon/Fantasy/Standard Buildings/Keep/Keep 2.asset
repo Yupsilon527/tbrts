@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InternalName: Keep 2
   AssignedWorld: 
-  prerequisites: []
+  prerequisites:
+  - {fileID: 11400000, guid: 7fcc1ea829ce68346b2554a529e7693f, type: 2}
   armies: []
   building:
     InternalName: Keep 2
@@ -27,7 +28,8 @@ MonoBehaviour:
       value: 1000
     - resource: 3
       value: 200
-    prerequisites: []
+    prerequisites:
+    - b_keep 1
     infinite: 2
     affectedFlags:
     - '-'

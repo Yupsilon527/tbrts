@@ -29,3 +29,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ae7af041e5580f041a03c60c541b18a4, type: 2}
   subFactions:
   - {fileID: 11400000, guid: 19367ccee244bb647807a618494280eb, type: 2}
+  - {fileID: 11400000, guid: 4798da5e492b0064f84560982b8a1c53, type: 2}

@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InternalName: Hospital
   AssignedWorld: 
-  prerequisites: []
+  prerequisites:
+  - {fileID: 11400000, guid: 4cebb73b874726f4cace30e2a51413f0, type: 2}
   armies: []
   building:
     InternalName: Hospital
-    icon: {fileID: -8297165085328784523, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
+    icon: {fileID: -6364478885945245177, guid: 153cb5c0706fb90499f14e9f56f8c4ae, type: 3}
     flags:
     - defensive
     costs:
@@ -26,7 +27,8 @@ MonoBehaviour:
       value: 1000
     - resource: 3
       value: 30
-    prerequisites: []
+    prerequisites:
+    - b_temple
     infinite: 2
     affectedFlags: []
     resourceChanges: []

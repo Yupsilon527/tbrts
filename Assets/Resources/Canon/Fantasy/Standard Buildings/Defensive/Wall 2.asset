@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
   m_Name: Wall 2
   m_EditorClassIdentifier: 
-  InternalName: Wall 1
+  InternalName: Wall 2
   AssignedWorld: 
   prerequisites:
   - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  - {fileID: 11400000, guid: 6e640e0a77696a34196c8c8f61be1ca5, type: 2}
   armies: []
   building:
-    InternalName: Wall 1
+    InternalName: Wall 2
     icon: {fileID: -8297165085328784523, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
     flags:
     - defensive
@@ -29,6 +30,7 @@ MonoBehaviour:
       value: 75
     prerequisites:
     - b_keep 3
+    - b_
     infinite: 2
     affectedFlags: []
     resourceChanges: []

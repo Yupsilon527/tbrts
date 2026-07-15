@@ -20,10 +20,13 @@ public class DataItemPlayer
     public DataItemPlayer(CustomPlayer custom, Color color) : this(custom.id,custom.Team, color)
     {
         Name = custom.Name;
-        if (ID > 0 && (custom.FactionName == "" || custom.FactionName == "Random"))
-            faction = WorldManager.world.availableFactions[ Mathf.FloorToInt(Random.value * WorldManager.world.availableFactions.Length)];
+        if (custom.FactionName == "" || custom.FactionName == "Random")
+            if (ID > 0)
+                AssignFaction(WorldManager.world.availableFactions[Mathf.FloorToInt(Random.value * WorldManager.world.availableFactions.Length)]);
+            else
+                AssignFaction(WorldManager.world.neutralFaction);
         else
-        faction = WorldManager.main.LoadFaction(custom.FactionName);
+            AssignFaction(WorldManager.main.LoadFaction(custom.FactionName));
     }
     public DataItemPlayer(int iD, Color color) : this(iD,iD,color)
     {
@@ -35,6 +38,16 @@ public class DataItemPlayer
         this.color = color;
         upgrades = new(this);
         econ = new(this);
+    }
+    void AssignFaction(DataFaction f)
+    {
+        faction = f;
+     if (f.startingResources != null)
+        foreach (var r in f.startingResources)
+        { econ.GiveResource(r.resource,r.value,true); }
+        if (f.innateUpgrades != null)
+            foreach (var up in f.innateUpgrades)
+        { upgrades.upgrades.CatchUpUpgrade(up, 1); }
     }
     public override string ToString()
     {

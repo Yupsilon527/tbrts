@@ -12,7 +12,9 @@ TEST
 			ie los in mountains
 
 Fixes
-	PREREQ AND PROD BROKEN
+	pfinder bugged
+	production bguged
+
 	AURA abilities dont work
 	army swap/formation tokens
 

@@ -28,8 +28,8 @@ MonoBehaviour:
     bonusDamage: []
     properties:
     - Property: 11
-      value: 0.2
-      IncreasePerLevel: 0
+      value: 0
+      IncreasePerLevel: 1.2
     states: []
     tempSpells: []
     abilitiesAdded: []

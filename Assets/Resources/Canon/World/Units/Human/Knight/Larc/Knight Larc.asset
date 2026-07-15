@@ -15,8 +15,9 @@ MonoBehaviour:
   InternalName: 
   AssignedWorld: 
   prerequisites:
-  - {fileID: 11400000, guid: 71647dc492f2e6b40bab87ec042653af, type: 2}
-  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  - {fileID: 11400000, guid: 8467f06e60a42fc4ca83d14937026b9a, type: 2}
+  - {fileID: 11400000, guid: 51a5cea29fba9814ead0d09d0e6392a1, type: 2}
+  - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
   unit:
     InternalName: Knight Larc
     icon: {fileID: 21300000, guid: 817f590ffbc468a41a905afa1a987c1e, type: 3}
@@ -31,8 +32,9 @@ MonoBehaviour:
     - resource: 3
       value: 75
     prerequisites:
-    - b_
-    - b_keep 3
+    - b_garrison
+    - b_training grounds
+    - b_keep 4
     unit:
       Offense: 6
       Defense: 9

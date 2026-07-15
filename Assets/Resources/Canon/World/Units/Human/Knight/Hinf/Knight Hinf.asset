@@ -37,13 +37,13 @@ MonoBehaviour:
       Offense: 14
       Defense: 18
       Luck: 0
-      Attack: 9
+      Attack: 7
       Magic: 0
       Speed: 10
       Action: 3
       Mana: 0
       Supply: 0
-      Health: 75
+      Health: 95
       Barrier: 0
       Armor: 1
       Shield: 1

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40009702d80c64c4a885c721de4816db, type: 3}
   m_Name: Academy Innate Bonus 2
   m_EditorClassIdentifier: 
-  InternalName: Knight Innate Bonus 2
+  InternalName: Academy Innate Bonus 2
   AssignedWorld: 
   prerequisites: []
   upgrade:
-    InternalName: Knight Innate Bonus 2
+    InternalName: Academy Innate Bonus 2
     icon: {fileID: 0}
     flags: []
     costs: []

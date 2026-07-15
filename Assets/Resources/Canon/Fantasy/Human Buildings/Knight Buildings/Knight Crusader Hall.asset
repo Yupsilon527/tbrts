@@ -10,39 +10,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
-  m_Name: Knight Hospital
+  m_Name: Knight Crusader Hall
   m_EditorClassIdentifier: 
-  InternalName: Knight Hospital
+  InternalName: Knight Crusader Building
   AssignedWorld: 
   prerequisites:
-  - {fileID: 11400000, guid: 4cebb73b874726f4cace30e2a51413f0, type: 2}
-  - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
+  - {fileID: 11400000, guid: 8467f06e60a42fc4ca83d14937026b9a, type: 2}
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
   armies:
-  - {fileID: 11400000, guid: b52308469fab0a249a55ceb24697cb2b, type: 2}
+  - {fileID: 11400000, guid: 9efbeb2913fc69a418a8ae5feccf6541, type: 2}
   building:
-    InternalName: Knight Hospital
+    InternalName: Knight Crusader Building
     icon: {fileID: 1765351576224072635, guid: f90d2ba5f05edfe4980cdb0f116b21e7, type: 3}
     flags: []
     costs:
+    - resource: 0
+      value: 1000
     - resource: 1
       value: 500
     - resource: 3
-      value: 50
+      value: 100
     prerequisites:
-    - b_temple
-    - b_keep 4
+    - b_garrison
+    - b_keep 3
     infinite: 2
-    affectedFlags: []
+    affectedFlags:
+    - '-'
     resourceChanges: []
     bonusDamage: []
     properties: []
     states: []
     tempSpells: []
-    abilitiesAdded:
-    - abilityID: regen
-      abilityLevel: 5
+    abilitiesAdded: []
     grantedResources: []
     grantedIncome: []
-    bonusType: 1
+    bonusType: 0
     production:
-    - Knight Larc
+    - Knight Hinf
