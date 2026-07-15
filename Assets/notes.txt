@@ -11,9 +11,12 @@ TEST
 			ie armor in woods
 			ie los in mountains
 
+	revival
+
 Fixes
 	pfinder bugged
-	production bguged
+
+
 
 	AURA abilities dont work
 	army swap/formation tokens
@@ -24,6 +27,8 @@ Fixes
 	player window doesnt work
 
 TODO
+	command menu
+
 	sites
 		gold
 		mana
@@ -35,7 +40,7 @@ TODO
 		cloaked (works?)
 		warded
 		blind (reduces vision)
-
+		cleanse
 	
 	top bar
 		menu
@@ -43,7 +48,8 @@ TODO
 	
 	refactor
 		unit props updates stats
-		remove unit upgrades
+
+	unit replacements?
 
 FEA
 	summoning spells

@@ -77,7 +77,7 @@ MonoBehaviour:
       rangeMode: 0
       areaMode: 0
     abilities:
-    - abilityID: wheels
+    - abilityID: groundheavy
       abilityLevel: 1
   attacks: []
   spells:

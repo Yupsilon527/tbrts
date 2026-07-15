@@ -41,7 +41,7 @@ public static class UnitDefines
         seaworthy,
         swim,
         amphibian,
-        foot,
+        tunneler,
         groundfast,
         groundheavy,
         fly,

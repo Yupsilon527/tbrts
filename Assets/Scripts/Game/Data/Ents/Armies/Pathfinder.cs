@@ -200,7 +200,6 @@ namespace Astar
             _openHeap.Clear();
             _openHeap.Push(dest);
 
-            // FIX H: capture origin at BFS start, not from stale currentCell field
             Node originNode = GetNodeAt(vOrigin);
 
             while (_openHeap.Count > 0)
@@ -368,9 +367,9 @@ namespace Astar
             {
                 Node nb = neighbors[i];
                 if (nb == null || nb.index < 0 ) continue;
-                if (accountEntities && nb.node.armyLayer != mob) continue;
+                if ((accountEntities && nb.node.armyLayer != mob) || _walkedNodes.Contains(nb)) continue;
 
-                if (nb.index == 0 || _walkedNodes.Contains(nb)) return nb;
+                if (nb.index == 0) return nb;
 
                 if (best == null
                     || nb.index < best.index

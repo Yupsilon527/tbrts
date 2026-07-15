@@ -91,7 +91,7 @@ MonoBehaviour:
       areaMode: 0
     spells: []
     abilities:
-    - abilityID: mounted
+    - abilityID: groundfast
       abilityLevel: 1
     - abilityID: slow
       abilityLevel: 1

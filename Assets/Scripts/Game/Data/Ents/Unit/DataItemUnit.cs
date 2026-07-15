@@ -155,48 +155,47 @@ public class DataItemUnit : DataItemMob
     }
     public TerrainDefines.Movement GetMovetype()
     {
-        if (GetState(ModifierDefines.State.cannot_move) || innates.GetAbilityLevel("building") > 0)
+        if (GetState(ModifierDefines.State.cannot_move) || innates.GetAbilityLevel(UnitDefines.ArmyAbilities.building) > 0)
         {
             return TerrainDefines.Movement.Ghost;
         }
-        else if (innates.GetAbilityLevel("ghost") > 0)
+        else if (innates.GetAbilityLevel(UnitDefines.ArmyAbilities.ghost) > 0)
         {
             return TerrainDefines.Movement.Ghost;
         }
-        else if (innates.GetAbilityLevel("fly") > 0)
+        else if (innates.GetAbilityLevel(UnitDefines.ArmyAbilities.fly) > 0)
         {
             return TerrainDefines.Movement.Fly;
         }
-        else if (innates.GetAbilityLevel("teleport") > 0)
+        else if (innates.GetAbilityLevel(UnitDefines.ArmyAbilities.teleport) > 0)
         {
             return TerrainDefines.Movement.Teleport;
         }
-        else if (innates.GetAbilityLevel("wheels") > 0)
+        else if (innates.GetAbilityLevel(UnitDefines.ArmyAbilities.groundheavy) > 0)
         {
             return TerrainDefines.Movement.GroundHeavy;
         }
-        else if (innates.GetAbilityLevel("giant") > 0)
+        else if (innates.GetAbilityLevel(UnitDefines.ArmyAbilities.groundfast) > 0)
         {
             return TerrainDefines.Movement.GroundWheels;
         }
-        else if (innates.GetAbilityLevel("foot") > 0)
+        else if (innates.GetAbilityLevel(UnitDefines.ArmyAbilities.tunneler) > 0)
         {
-            return TerrainDefines.Movement.GroundFoot;
+            return TerrainDefines.Movement.Tunneler;
         }
-        else if (innates.GetAbilityLevel("amphibian") > 0)
+        else if (innates.GetAbilityLevel(UnitDefines.ArmyAbilities.amphibian) > 0)
         {
             return TerrainDefines.Movement.Amphibian;
         }
-        else if (innates.GetAbilityLevel("swim") > 0)
+        else if (innates.GetAbilityLevel(UnitDefines.ArmyAbilities.swim) > 0)
         {
             return TerrainDefines.Movement.Swimmer;
         }
-        else if (innates.GetAbilityLevel("seaworthy") > 0)
+        else if (innates.GetAbilityLevel(UnitDefines.ArmyAbilities.seaworthy) > 0)
         {
             return TerrainDefines.Movement.Boat;
         }
-
-        return TerrainDefines.Movement.Tunneler;
+        return TerrainDefines.Movement.GroundFoot;
     }
 
     public ResourceCost[] GetPurchaseCost(DataItemPlayer Owner)

@@ -37,7 +37,7 @@ MonoBehaviour:
     prerequisites:
     - b_stable
     - b_keep 3
-    - b_knight chapel
+    - b_academy stormmage hall
     unit:
       Offense: 8
       Defense: 5
@@ -96,7 +96,7 @@ MonoBehaviour:
       areaMode: 0
     spells: []
     abilities:
-    - abilityID: mounted
+    - abilityID: groundfast
       abilityLevel: 1
   attacks:
   - {fileID: 11400000, guid: 1eff5a7a6566a15498a0aabff0087be0, type: 2}
