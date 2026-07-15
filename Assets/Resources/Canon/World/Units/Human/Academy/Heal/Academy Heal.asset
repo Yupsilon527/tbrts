@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
-  m_Name: Human Heal
+  m_Name: Academy Heal
   m_EditorClassIdentifier: 
   InternalName: 
   AssignedWorld: 
   prerequisites:
   - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
   unit:
-    InternalName: Human Heal
-    icon: {fileID: 21300000, guid: 6d7c661f7ff912e43bf2a4c44c2af2e1, type: 3}
+    InternalName: Academy Heal
+    icon: {fileID: 21300000, guid: ce02f8cd2f18b90459537199708190ec, type: 3}
     flags:
     - support
     costs:
     - resource: 1
       value: 400
     - resource: 3
-      value: 33
+      value: 60
     prerequisites:
     - b_keep 3
     unit:
@@ -90,9 +90,9 @@ MonoBehaviour:
     - abilityID: rangeSupport
       abilityLevel: 3
   attacks:
-  - {fileID: 11400000, guid: 2c61788af62d7264e958cf196c832aca, type: 2}
-  - {fileID: 11400000, guid: 4c220d6e8c5d09847a52a94b7c8cd64e, type: 2}
+  - {fileID: 11400000, guid: 6483a605d5914724ab8742f3ac722941, type: 2}
+  - {fileID: 11400000, guid: 40c993c024dd16e4c83c12f80c809b6d, type: 2}
   spells:
   - {fileID: 11400000, guid: bf9d54c030aa055458202818c389334d, type: 2}
   passives: []
-  character: {fileID: 11400000, guid: 71cf5a630acd2d64eac8dd8971e3420c, type: 2}
+  character: {fileID: 11400000, guid: 43bf9919bdc8744419b242851eddded4, type: 2}

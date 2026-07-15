@@ -72,7 +72,7 @@ public class SidewaysMap : MonoBehaviour
         Vector2Int end = TranslateWorldPosition(rect.max);
         return GetTilesInRect(start, end, imaginary);
     }
-    public DataItemTile[] GetTilesInRect(RectInt rect, GetTileType imaginary = GetTileType.real)
+    public DataItemTile[] GetTilesInIrect(RectInt rect, GetTileType imaginary = GetTileType.real)
     {
         return GetTilesInRect(rect.min,rect.max, imaginary);
     }

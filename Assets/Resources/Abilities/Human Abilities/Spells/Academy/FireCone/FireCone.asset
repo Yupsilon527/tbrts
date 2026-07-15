@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fe4acfdcd7ef094ea581fedf41d0173, type: 3}
-  m_Name: Archon Revive
+  m_Name: FireCone
   m_EditorClassIdentifier: 
   effects:
-  - {fileID: 11400000, guid: 51bed7301d2d68b449e41df15f2e3bb9, type: 2}
+  - {fileID: 11400000, guid: fb430768917d57c4eb554e19bc3469da, type: 2}
   data:
-    InternalName: Archon Revive
-    abilityFlags: 2
+    InternalName: FireCone
+    abilityFlags: 6
     MetalCost: 0
     GoldCost: 0
-    ManaCost: 25
+    ManaCost: 20
     SupplyCost: 0
     min_range: 0
-    max_range: 3
-    area_range: 0
+    max_range: 1
+    area_range: 2
     targetMode: 2
-    rangeMode: 0
-    areaMode: 0
-  spellFlags: 02000000
+    rangeMode: 2
+    areaMode: 6
+  spellFlags: 0200000004000000

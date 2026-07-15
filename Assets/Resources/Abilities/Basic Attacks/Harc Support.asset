@@ -16,13 +16,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 768795fae82ebbb4694719fb61c63200, type: 2}
   data:
     InternalName: Harc Support
-    abilityFlags: 2144
+    abilityFlags: 6240
     apCost: 0
-    mpCost: 0
+    rpCost: 0
     spCost: 1
     castTime: 120
     castDelay: 160
     attackPhase: 2
     targetPriority: 0
     areaMode: 0
-  weaponFlags: 200000004000000000080000
+  weaponFlags: 20000000400000000008000000100000

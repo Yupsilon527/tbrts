@@ -99,6 +99,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1eff5a7a6566a15498a0aabff0087be0, type: 2}
   - {fileID: 11400000, guid: 84f0098880c73b94a9168ee9bb41a664, type: 2}
   spells:
-  - {fileID: 11400000, guid: af3f4c38c0f0ab84bb8a8009d54a78d9, type: 2}
+  - {fileID: 11400000, guid: 6e854885d5eea5144aaefd9958c4d127, type: 2}
   passives: []
   character: {fileID: 11400000, guid: bb659cc1777b7dc40b5a7ad4ce786ca7, type: 2}

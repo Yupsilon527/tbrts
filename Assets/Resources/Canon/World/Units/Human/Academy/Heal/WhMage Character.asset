@@ -9,16 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43f429b60ff54854f8f152f4bc7fa126, type: 3}
-  m_Name: Heal Magic 1to1
+  m_Script: {fileID: 11500000, guid: cdb2a4007eece70479bede182159e45f, type: 3}
+  m_Name: WhMage Character
   m_EditorClassIdentifier: 
-  applyChance: 1
-  chance: 0
-  targeting: 2
-  attack: 6
-  BaseDamage: 4
-  scaling:
-  - scaleMode: 7
-    scaleDamage: 1
-    scaleoff: 0
-    scaleRate: 0
+  InternalName: Preist Character
+  AssignedWorld: 
+  sprites:
+  - sprite: {fileID: 21300000, guid: ce02f8cd2f18b90459537199708190ec, type: 3}
+    frame: 0

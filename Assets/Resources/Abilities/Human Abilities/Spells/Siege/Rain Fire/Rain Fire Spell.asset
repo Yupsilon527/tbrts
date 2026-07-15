@@ -24,7 +24,7 @@ MonoBehaviour:
     min_range: 2
     max_range: 5
     area_range: 1
-    targetMode: 4
+    targetMode: 2
     rangeMode: 0
     areaMode: 0
   spellFlags: 0400000008000000

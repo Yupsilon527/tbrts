@@ -88,7 +88,7 @@ MonoBehaviour:
   attacks:
   - {fileID: 11400000, guid: 0b12d1c6c0d533841b2ec64cf3f6adcd, type: 2}
   spells:
-  - {fileID: 11400000, guid: 0a225752f25b6bc489d5ee7874c54127, type: 2}
+  - {fileID: 11400000, guid: af3f4c38c0f0ab84bb8a8009d54a78d9, type: 2}
   passives:
   - {fileID: 11400000, guid: eabbbd8d645dfbd419698ddf23c38f4a, type: 2}
   character: {fileID: 11400000, guid: d4a914700affcc6488aa29dbf839d77c, type: 2}

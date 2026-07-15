@@ -98,7 +98,7 @@ public class LineOfSight : MonoBehaviour
     }
     void ReviseRect(RectInt rect, int playerID)
     {
-        foreach (var tile in SidewaysMap.main.GetTilesInRect(rect))
+        foreach (var tile in SidewaysMap.main.GetTilesInIrect(rect))
             ResetTile(tile, playerID);
     }
     void ResetTile(DataItemTile tile)

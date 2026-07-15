@@ -48,26 +48,20 @@ public static class CombatDefines
         targetEnemies = 1 << 2,
         mustNotHaveActed = 1 << 3,
     }
-    public enum TileTargetingMode
+    public enum AbilityCastMode
     {
         passive,
         self,
-        direction,
-        direction8,
-        circle,
+        point,
         random_tile,
     }
-    public enum TileAreaMode
+    public enum TileTargetingMode
     {
         circle,
         square,
         cross,
         diagcross,
         cross8,
-        line,
-        line8,
-        cone,
-        cone8,
     }
     public enum TileTargetingArea
     {

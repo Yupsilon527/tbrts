@@ -14,7 +14,7 @@ public class PropertySpell : PropertyAbility
 
     public override bool CastFromTable(CastTable table)
     {
-        if (original.targetMode == CombatDefines.TileTargetingMode.random_tile)
+        if (original.targetMode == CombatDefines.AbilityCastMode.random_tile)
         {
             var hitTiles = GetValidCastTiles();
             if (hitTiles.Length > 0)
@@ -127,7 +127,7 @@ public class PropertySpell : PropertyAbility
     #endregion
     public bool InstantCast()
     {
-        return original.targetMode == CombatDefines.TileTargetingMode.self || original.targetMode == CombatDefines.TileTargetingMode.random_tile;
+        return original.targetMode == CombatDefines.AbilityCastMode.self || original.targetMode == CombatDefines.AbilityCastMode.random_tile;
     }
     public bool IsInCastRange(DataItemTile point)
     {
@@ -138,18 +138,24 @@ public class PropertySpell : PropertyAbility
     public bool CanCastOnTile(DataItemTile point)
     {
         DataItemTile origin = parent.GetOccupiedTiles()[0];
-        switch (original.targetMode)
+        Vector2Int delta = origin.gridPos - point.gridPos;
+        switch (original.rangeMode)
         {
-            default://self
-                return true;
-            case CombatDefines.TileTargetingMode.passive:
-                return false;
-            case CombatDefines.TileTargetingMode.direction:
-                return (Mathf.Abs(origin.gridPos.x - point.gridPos.x) == 1 && origin.gridPos.y == point.gridPos.y) || (Mathf.Abs(origin.gridPos.y - point.gridPos.y) == 1 && (origin.gridPos.x == point.gridPos.x));
-            case CombatDefines.TileTargetingMode.direction8:
-                return Mathf.Abs(origin.gridPos.x - point.gridPos.x) == 1 || Mathf.Abs(origin.gridPos.y - point.gridPos.y) == 1;
             case CombatDefines.TileTargetingMode.circle:
-                return IsInCastRange(point);
+                return delta.sqrMagnitude <= original.max_range * original.max_range;
+            case CombatDefines.TileTargetingMode.square:
+                return Mathf.Abs(delta.x) <= original.max_range && Mathf.Abs(delta.y) <= original.max_range;
+            case CombatDefines.TileTargetingMode.cross:
+                return (Mathf.Abs(delta.x) <= original.max_range && delta.y == 0) || (Mathf.Abs(delta.y) <= original.max_range && delta.x == 0);
+            case CombatDefines.TileTargetingMode.diagcross:
+                return Mathf.Abs(delta.x) <= original.max_range && Mathf.Abs(delta.y) <= original.max_range && Mathf.Abs(delta.x)== Mathf.Abs(delta.y);
+            case CombatDefines.TileTargetingMode.cross8:
+                return (Mathf.Abs(delta.x) <= original.max_range && delta.y == 0) || (Mathf.Abs(delta.y) <= original.max_range && delta.x == 0)
+                || Mathf.Abs(delta.x) <= original.max_range && Mathf.Abs(delta.y) <= original.max_range && Mathf.Abs(delta.x) == Mathf.Abs(delta.y);
+
+
+            default://self, random tile
+                return true;
         }
     }
 
@@ -157,36 +163,9 @@ public class PropertySpell : PropertyAbility
     {
         List<DataItemTile> staticCastTiles = new List<DataItemTile>();
         var centerTile = parent.GetOccupiedTiles()[0];
-        switch (original.targetMode)
-        {
-            default:
-                staticCastTiles.AddRange(parent.GetOccupiedTiles());
-                break;
-            case CombatDefines.TileTargetingMode.direction:
-                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.up));
-                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.down));
-                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.left));
-                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.right));
-                break;
-            case CombatDefines.TileTargetingMode.direction8:
-                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.up));
-                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.down));
-                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.left));
-                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.right));
-                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.upright));
-                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.upleft));
-                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.downright));
-                staticCastTiles.Add(centerTile.GetNeighbor(DataItemTile.GridDirection.downleft));
-                break;
-            case CombatDefines.TileTargetingMode.random_tile:
-            case CombatDefines.TileTargetingMode.circle:
-                staticCastTiles.AddRange(SidewaysMap.main.GetTilesInCircle(centerTile.gridPos, (int)GetMaxRange()));
 
-                int minRange = (int)GetMinRange();
-                staticCastTiles.RemoveAll(t => (t.gridPos - centerTile.gridPos).sqrMagnitude < minRange * minRange);
-                break;
-        }
-        staticCastTiles.RemoveAll(t => t == null);
+        staticCastTiles.AddRange(SidewaysMap.main.GetTilesInIrect(new (centerTile.gridPos,Mathf.CeilToInt(GetMaxRange()*2)*Vector2Int.one)));
+        staticCastTiles.RemoveAll(t => !CanCastOnTile(t) );
         return staticCastTiles.ToArray();
     }
 

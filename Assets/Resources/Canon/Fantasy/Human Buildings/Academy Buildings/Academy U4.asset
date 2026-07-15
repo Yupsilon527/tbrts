@@ -33,9 +33,9 @@ MonoBehaviour:
     resourceChanges: []
     bonusDamage: []
     properties:
-    - Property: 5
+    - Property: 6
       value: 0
-      IncreasePerLevel: 5
+      IncreasePerLevel: 1
     states: []
     tempSpells: []
     abilitiesAdded: []

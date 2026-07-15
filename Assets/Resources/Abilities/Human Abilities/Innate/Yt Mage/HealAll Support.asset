@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26b30f17bc374894ba8cccf57206e933, type: 3}
-  m_Name: Heal Basic
+  m_Name: HealAll Support
   m_EditorClassIdentifier: 
   effects:
-  - {fileID: 11400000, guid: 5d8b1f8940d170e4cb197186a115b509, type: 2}
+  - {fileID: 11400000, guid: 72629d6a76c5d854b969b65ec3586aa6, type: 2}
   data:
-    InternalName: Heal Basic
-    abilityFlags: 206
-    apCost: 1
-    rpCost: 0
-    spCost: 0
+    InternalName: Heal Support
+    apCost: 0
+    mpCost: 0
+    spCost: 1
     castTime: 120
     castDelay: 160
-    attackPhase: 1
+    abilityFlags: 78
+    castOnce: 1
+    attackPhase: 3
     targetPriority: 0
-    areaMode: 0
-  weaponFlags: 0400000008000000020000004000000080000000
+    areaMode: 3
+  weaponFlags: 04000000080000000200000040000000
