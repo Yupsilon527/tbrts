@@ -145,6 +145,13 @@ public class Combat : Initializable
             attackers.PostDamageUpdate();
             defenders.PostDamageUpdate();
             FireEventOnAllFighters(AbilityDefines.Event.CombatExit);
+
+            var attackerHP = attackers.formation.GetHealthCurrent() / attackers.formation.GetHealthTotal();
+            var defenderHP = defenders.formation.GetHealthCurrent() / defenders.formation.GetHealthTotal();
+            if (attackerHP > defenderHP)
+                attackers.formation.HandleEvent(AbilityDefines.Event.Victory);
+            else
+                defenders.formation.HandleEvent(AbilityDefines.Event.Victory);
         }
 
         if (enabled)

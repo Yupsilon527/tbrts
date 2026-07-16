@@ -6,7 +6,7 @@ public class UnitSO : ProductionSO
 {
     public UnitData unit;
     public WeaponSO[] attacks;
-    public SpellSo[] spells;
+    public SpellSO[] spells;
     public ModifierPassive[] passives;
     public CharacterSO character;
 

@@ -41,6 +41,22 @@ public class GameManager : Initializable
         armyManager.GenerateTheArmiesFromEditorData(gen.mapData.MapData.armies);
         los.InitTexture();
 
+        foreach (var player in playerManager.players)
+        {
+            foreach (var castle in player.buildings)
+            {
+                if (castle.isCapital)
+                {
+                    player.capital = castle;
+                    break;
+                }
+            }
+            if (player.capital == null && player.buildings.Count>0)
+            {
+                player.capital = player.buildings[0];   
+            }
+        }
+
         playerManager.ChangeActivePlayer(1);
         BeginNewTurn(true);
     }

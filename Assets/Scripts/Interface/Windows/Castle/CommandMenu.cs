@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -326,7 +324,7 @@ public class CommandMenu : PlayerWindow
         }
 
         GameObject d = Instantiate(playerButtonPrefab, transform);
-        dividers.Add(d);
+        entries.Add(d);
         d.SetActive(true);
         d.transform.SetAsLastSibling();
         AssignButton(d, pos);

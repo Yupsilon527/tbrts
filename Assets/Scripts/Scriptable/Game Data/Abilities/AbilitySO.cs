@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
 
-public class ActionSO : ScriptableObject
+public abstract class ActionSO : ScriptableObject
 {
     public AttackEffectSO[] effects;
+
+    public abstract ActionData Translate();
 }
 
 

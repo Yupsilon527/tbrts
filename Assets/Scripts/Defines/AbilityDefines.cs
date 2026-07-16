@@ -110,8 +110,9 @@ public static class AbilityDefines
 
         OnEndTurn = 64,
         OnBeginTurn = 65,
+        Victory = 66,
 
-        Total = 66,
+        Total = 67,
     }
 
     public delegate void AbilityFunction(EventTable CastData);

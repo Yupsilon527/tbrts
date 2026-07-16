@@ -200,8 +200,14 @@ public static class ModifierDefines
         Root = 3,
         Haste = 4,
         Slow = 5,
-        Revive = 6,
-        Total = 7,
+        Total = 6,
+    }
+
+    public enum TroopEffect
+    {
+        Nothing = 0,
+        Revive = 1,
+        Total = 2,
     }
     public enum StackType    //TODO part of the modifier
     {

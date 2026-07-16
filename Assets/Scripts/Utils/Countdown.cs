@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace VikingParty
-{
+
     public class Countdown
     {
         float time;
@@ -38,6 +37,5 @@ namespace VikingParty
         {
             time = -1;
         }
-    }
 
 }

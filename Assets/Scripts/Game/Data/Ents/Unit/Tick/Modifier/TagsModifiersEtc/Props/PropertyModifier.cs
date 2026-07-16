@@ -96,13 +96,13 @@ public class PropertyModifier : PropertyThinker
         stacks = value;
         ExecuteFunction(AbilityDefines.Event.OnStacksChange);
     }
-    public void IncrementStackCount()
+    public void IncrementStackCount(int amt = 1)
     {
-        SetStackCount(stacks + 1);
+        SetStackCount(stacks + amt);
     }
-    public void DecrementStackCount()
+    public void DecrementStackCount(int amt = 1)
     {
-        SetStackCount(stacks - 1);
+        SetStackCount(stacks - amt);
     }
     #endregion
 }

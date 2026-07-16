@@ -414,4 +414,13 @@ public class BannerFormation : BannerComponent
     {
         RemoveUnit(unit,false);
     }
+
+    public float GetHealthCurrent()
+    {
+        return Formation.Sum(u => u.health.GetValue());
+    }
+    public float GetHealthTotal()
+    {
+        return Formation.Sum(u => u.health.GetLimit());
+    }
 }

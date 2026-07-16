@@ -61,9 +61,9 @@ public class WorldManager : Initializable
         foreach (var u in Resources.LoadAll<UnitSO>("Canon"))
         {
 
-            u.unit.attacks = u.attacks.Select(w => w.Translate()).ToArray();
-            u.unit.spells = u.spells.Select(a => a.Translate()).ToArray();
-            u.unit.innates = u.passives.Select(a => (InnateData)a.Translate() ).ToArray();
+            u.unit.attacks = u.attacks.Select(w => w.Translate() as WeaponData).ToArray();
+            u.unit.spells = u.spells.Select(a => a.Translate() as SpellData).ToArray();
+            u.unit.innates = u.passives.Select(a => (InnateData)a.Translate()).ToArray();
 
             if (u.character != null)
                 u.unit.LoadCharacter(u.character);
@@ -76,7 +76,7 @@ public class WorldManager : Initializable
         {
             foreach (var f in r.subFactions)
             {
-                races.Add(new DataFaction(f,r));
+                races.Add(new DataFaction(f, r));
             }
         }
         foreach (var f in Resources.LoadAll<MapChunkSO>("Canon"))

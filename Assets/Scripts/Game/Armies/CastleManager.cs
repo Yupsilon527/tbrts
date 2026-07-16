@@ -51,26 +51,25 @@ public class CastleManager : EntityManager
                 var castlePrefab = GameManager.main.displayPool.PoolItem(GameManager.main.displayPool.castlePrefab);
                 if (castlePrefab.TryGetComponent(out DisplayItemCastle dic))
                 {
-                    dic.AssignObject(castle); 
+                    dic.AssignObject(castle);
                 }
             }
         }
     }
     public void SelectNextIdleCity()
     {
-        /*
-            entityCastle Stocking = null;
-            foreach (entityCastle Panty in GameCastles)
+        DataItemCastle castle = null;
+        foreach (var c in GameManager.main.playerManager.currentPlayer.buildings)
+        {
+            if (c.production.CanProduce() && c.production.productionQueue.Count == 0)
             {
-                if (MyPlayer.GetAlliance(Panty.PlayerOwner) == 0 && Panty.iProduction.Count == 0 && Panty.CanProduce())
-                {
-                    Stocking = Panty;
-                }
+                castle = c;
             }
-            if (Stocking != null)
-            {
-                FocusCamera(new Vector3(Stocking.center.x, Stocking.center.y, 0));
-                game.InGameMenus.OpenWindow(new CastleInfoWindow(game, Stocking, "info"));
-            }*/
+        }
+        if (castle != null)
+        {
+            CameraController.main.JumptoMob(castle);
+            InterfaceManager.main.OpenCastleWindow(castle, true);
+        }
     }
 }

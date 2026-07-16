@@ -23,8 +23,9 @@ public class TechData : ProductionData
     public ModifierDefines.PropertyData[] properties = new ModifierDefines.PropertyData[0];
     public ModifierDefines.StateData[] states = new ModifierDefines.StateData[0];
     [Header("Abilities")]
-    public SpellData[] tempSpells = new SpellData[0];
+    public ActionData[] tempSpells = new ActionData[0];
     public AbilityData[] abilitiesAdded = new AbilityData[0];
+    public InnateData[] innatesAdded = new InnateData[0];
 
     [Header("Grant Resources/Income")]
     public ResourceCost[] grantedResources = new ResourceCost[0];
@@ -112,6 +113,14 @@ public class TechData : ProductionData
                 unit.actions.AddAbility(spell);
             else
                 unit.actions.RemoveAbility(spell);
+        }
+
+        foreach (var innate in innatesAdded)
+        {
+            if (delta > 0)
+                unit.modifiers.IncrementModifier(innate, delta);
+            else
+                unit.modifiers.DecrementModifier(innate,-delta);
         }
 
         unit.bonuses.GrantBonusDamageFromTable(bonusDamage, oldLevel, newLevel);

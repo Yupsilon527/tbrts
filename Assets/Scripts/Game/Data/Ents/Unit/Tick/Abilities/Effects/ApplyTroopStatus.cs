@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class ApplyTroopStatus : ApplyEffects
+public class ApplyTroopStatus : TroopUniqueEffect
 {
     public ModifierDefines.TroopState effect;
     public int turnDuration;
-    public override void ActivateOnUnit(EventTable table, float strength = 1)
+public override void Resolve(DataItemBanner banner)
     {
-        table.target.troop.status.ApplyPendingStatus(this);
+        banner.status. appliedStatuses.Add(new ArmyStatus(effect, turnDuration + GameManager.main.currentTurn));
     }
 }

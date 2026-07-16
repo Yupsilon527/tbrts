@@ -14,8 +14,7 @@ TEST
 	revival
 
 Fixes
-	pfinder bugged
-
+	combat wont start
 
 
 	AURA abilities dont work

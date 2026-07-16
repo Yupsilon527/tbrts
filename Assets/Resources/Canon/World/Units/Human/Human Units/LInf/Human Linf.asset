@@ -89,8 +89,6 @@ MonoBehaviour:
       rangeMode: 0
       areaMode: 0
     abilities:
-    - abilityID: foot
-      abilityLevel: 1
     - abilityID: raze
       abilityLevel: 1
     - abilityID: slow

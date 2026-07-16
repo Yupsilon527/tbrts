@@ -2,7 +2,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "Apply Attacks", menuName = "Abilities/Effects/Apply Attacks")]
-public class ApplyAttacksSO : AttackEffectSO
+public class ApplyAttackSO : AttackEffectSO
 {
     public AttackDefines.AttackType attack;
     public float BaseDamage = 0;

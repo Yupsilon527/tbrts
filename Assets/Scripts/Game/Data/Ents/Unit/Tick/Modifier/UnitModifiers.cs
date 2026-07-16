@@ -73,12 +73,16 @@ public class UnitModifiers : UnitProperties, CombatantTicker
     }
     #endregion
     #region Create Modifiers
-    public bool ApplyNewModifierFromData(TagData tag, bool refresh = true) {
+    public bool ApplyNewModifierFromData(TagData tag, DataItemUnit caster = null, int stacks =1, bool refresh = true) {
+        if (tag is InnateData innate)
+            return ApplyNewModifierFromData(innate, caster);
+        if (tag is ModifierData modifier)
+            return ApplyNewModifierFromData(modifier, caster, stacks, refresh);
         if (HasModifier(tag.InternalName))
         {
             return false;
         }
-        return ApplyNewModifier(new PropertyTag(tag, parent), skipImmunityCheck: true, refresh: refresh);
+        return ApplyNewModifier(new PropertyTag(tag, caster,parent), skipImmunityCheck: true, refresh: refresh);
     }
     public bool ApplyNewModifierFromData(InnateData innate, DataItemUnit caster)
     {
@@ -88,7 +92,7 @@ public class UnitModifiers : UnitProperties, CombatantTicker
         }
         return ApplyNewModifier(new PropertyInnate(innate, caster, parent), refresh: true);
     }
-    public bool ApplyNewModifierFromData(ModifierData Modifier, DataItemUnit caster, int atTick, out PropertyModifier resultingModifier)
+    public bool ApplyNewModifierFromData(ModifierData Modifier, DataItemUnit caster, int atTick, int stacks , out PropertyModifier resultingModifier)
     {
         resultingModifier = null;
         if (Modifier is AlterationData alt && IsImmuneToModifier(alt)) { return false; }
@@ -100,9 +104,9 @@ public class UnitModifiers : UnitProperties, CombatantTicker
 
         resultingModifier = new PropertyModifier(Modifier,caster,parent);
 
-        return ApplyNewModifier(resultingModifier, atTick + Modifier.duration, refresh: true);
+        return ApplyNewModifier(resultingModifier, atTick + Modifier.duration, stacks,refresh: true);
     }
-    public bool ApplyNewModifier(PropertyTag status, int atTick=0, bool skipImmunityCheck = false, bool refresh = true)
+    public bool ApplyNewModifier(PropertyTag status, int atTick=0,int stacks = 1, bool skipImmunityCheck = false, bool refresh = true)
     {
         if (!skipImmunityCheck && IsImmuneToModifier(status)) { return false; }
         status.parent = parent;
@@ -112,6 +116,7 @@ public class UnitModifiers : UnitProperties, CombatantTicker
         }*/
         if (status is PropertyModifier modifier) {
             modifier.duration = atTick;
+            modifier.stacks = stacks;
         switch (modifier.behavior)
         {
             case ModifierDefines.StackType.Replace: //Replace 
@@ -258,7 +263,34 @@ public class UnitModifiers : UnitProperties, CombatantTicker
         }
     }
     #endregion
-
+    #region Increment Decrement
+    public void IncrementModifier(TagData tag, int levels)
+    {
+        if (FindModifierByName(tag.InternalName) is PropertyModifier modifier)
+        {
+            modifier.IncrementStackCount(levels);
+        }else
+        {
+            ApplyNewModifierFromData(tag);
+        }
+    }
+    public void DecrementModifier(TagData tag, int levels)
+    {
+        if (HasModifier(tag.InternalName) )
+        {
+            foreach (var modifier in Filter(tag.InternalName))
+            {
+                int stacks = Mathf.Max(levels,modifier.stacks);
+                modifier.DecrementStackCount(stacks);
+                levels -= stacks;
+            }
+        }
+        else
+        {
+            ApplyNewModifierFromData(tag);
+        }
+    }
+    #endregion
     #region Handle Modifiers
     public void OnTurnBegin()
     {

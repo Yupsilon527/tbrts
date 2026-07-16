@@ -34,6 +34,8 @@ public class PlayerManager : GameComponent
         InterfaceManager.main.AssignPlayer(currentPlayer);
         foreach (var army in currentPlayer.units)
             army.formation.HandleEvent(AbilityDefines.Event.OnBeginTurn);
+        if (currentPlayer.capital!=null)
+        CameraController.main.JumptoMob(currentPlayer.capital);
     }
 
     public DataItemPlayer MakeNeutrals(CustomMap map)

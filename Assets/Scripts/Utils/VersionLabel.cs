@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace VikingParty
-{
+
     public class VersionLabel : MonoBehaviour
     {
         public TMPro.TextMeshProUGUI versionText;
@@ -15,4 +14,3 @@ namespace VikingParty
             }
         }
     }
-}

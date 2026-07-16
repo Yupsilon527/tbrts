@@ -1,5 +1,3 @@
-using UnityEngine;
-using VikingParty;
 
 public class UnitComponent 
 {

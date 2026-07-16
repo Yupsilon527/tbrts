@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DataItemPlayer 
+public class DataItemPlayer
 {
     public int ID, Team;
     public Color color;
@@ -11,13 +11,14 @@ public class DataItemPlayer
 
     public DataFaction faction = new();
 
+    public DataItemCastle capital;
     public UnitGroup<DataItemBanner> units = new();
     public UnitGroup<DataItemCastle> buildings = new();
 
     public PlayerUpgrades upgrades;
     public PlayerEconomy econ;
 
-    public DataItemPlayer(CustomPlayer custom, Color color) : this(custom.id,custom.Team, color)
+    public DataItemPlayer(CustomPlayer custom, Color color) : this(custom.id, custom.Team, color)
     {
         Name = custom.Name;
         if (custom.FactionName == "" || custom.FactionName == "Random")
@@ -28,7 +29,7 @@ public class DataItemPlayer
         else
             AssignFaction(WorldManager.main.LoadFaction(custom.FactionName));
     }
-    public DataItemPlayer(int iD, Color color) : this(iD,iD,color)
+    public DataItemPlayer(int iD, Color color) : this(iD, iD, color)
     {
     }
     public DataItemPlayer(int iD, int team, Color color)
@@ -42,12 +43,12 @@ public class DataItemPlayer
     void AssignFaction(DataFaction f)
     {
         faction = f;
-     if (f.startingResources != null)
-        foreach (var r in f.startingResources)
-        { econ.GiveResource(r.resource,r.value,true); }
+        if (f.startingResources != null)
+            foreach (var r in f.startingResources)
+            { econ.GiveResource(r.resource, r.value, true); }
         if (f.innateUpgrades != null)
             foreach (var up in f.innateUpgrades)
-        { upgrades.upgrades.CatchUpUpgrade(up, 1); }
+            { upgrades.upgrades.CatchUpUpgrade(up, 1); }
     }
     public override string ToString()
     {
@@ -84,8 +85,8 @@ public class DataItemPlayer
             return PlayerDefines.Alignment.ally;
         }
     }
-   
-    
+
+
     public bool IsAiControlled()
     {
         return false;
@@ -94,7 +95,7 @@ public class DataItemPlayer
     {
         foreach (var city in buildings)
         {
-            for (int i = 0; i< city.income.baseIncome.Length; i++)
+            for (int i = 0; i < city.income.baseIncome.Length; i++)
             {
                 econ.GiveResource((EconomyDefines.EconomyResource)i, city.income.baseIncome[i]);
             }

@@ -70,7 +70,7 @@ MonoBehaviour:
     attacks:
     - InternalName: LArc Melee
       abilityFlags: 68
-      apCost: 2
+      apCost: 1
       rpCost: 0
       spCost: 0
       castTime: 120
@@ -88,10 +88,20 @@ MonoBehaviour:
       attackPhase: 2
       targetPriority: 0
       areaMode: 0
-    spells: []
+    spells:
+    - InternalName: Brace Ability
+      abilityFlags: 2
+      MetalCost: 0
+      GoldCost: 0
+      ManaCost: 7
+      SupplyCost: 0
+      min_range: 0
+      max_range: 0
+      area_range: 0
+      targetMode: 1
+      rangeMode: 0
+      areaMode: 0
     abilities:
-    - abilityID: foot
-      abilityLevel: 1
     - abilityID: raze
       abilityLevel: 1
     - abilityID: slow

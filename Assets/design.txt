@@ -159,11 +159,14 @@ Gold cat
 P - range 4 supply
 S - deal damage, cost gold
 Wonder - income
-
-P1 cost more, more stats
-P2 free market
+P1 econ upgrades cheaper
+P2 armor/smithy no gold
 U1 cheaper towers
 U2 unit get promote ability - pay gold, gain stats
+
+OLD
+P1 cost more, more stats
+P2 free market
 
 
 Undead - bloodslaves

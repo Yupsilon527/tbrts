@@ -64,7 +64,7 @@ public class CameraController : MonoBehaviour
     {
         if (followChar == null) return;
 
-        MovePosition(followChar.GetCoords());
+        MovePosition(followChar.GetOccupiedTiles()[0].GetWorldPosition());
     }
     public Vector2 PointInsideBorders(Vector3 point)
     {

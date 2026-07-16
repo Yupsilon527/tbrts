@@ -18,8 +18,7 @@ public class WeaponSO : ActionSO
         data.abilityFlags = flags;
         data.InternalName = name;
     }
-
-    public WeaponData Translate()
+    public override ActionData Translate()
     {
         WorldManager.main.Inspect("Unload data " + data.InternalName);
         WeaponData output = data.Clone() as WeaponData;

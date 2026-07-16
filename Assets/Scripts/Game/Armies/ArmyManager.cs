@@ -139,6 +139,7 @@ public class ArmyManager : EntityManager
             int index = (i + idleArmyIndex) % playerArmies.Count;
             if (playerArmies[index] is DataItemBanner army && army.orders.IsIdle())
             {
+                CameraController.main.JumptoMob(playerArmies[index]);
                 playerArmies[index].Select();
                 return;
             }

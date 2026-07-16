@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class BannerStatus : BannerComponent
 {
-    public HashSet<ApplyTroopStatus> pendingStatuses = new();
+    public HashSet<TroopUniqueEffect> pendingStatuses = new();
     public HashSet<ArmyStatus> appliedStatuses = new();
 
     public BannerStatus(DataItemBanner parent) : base(parent)
     {
     }
 
-    public void ApplyPendingStatus(ApplyTroopStatus status)
+    public void ApplyPendingStatus(TroopUniqueEffect status)
     {
         if (!pendingStatuses.Contains(status))
             pendingStatuses.Add(status);
@@ -20,24 +20,7 @@ public class BannerStatus : BannerComponent
     {
         foreach (var effect in pendingStatuses)
         {
-            switch (effect.effect)
-            {
-                case ModifierDefines.TroopState.Revive:
-                    float percent = Mathf.Clamp01(effect.turnDuration*.01f);
-
-                    foreach (var u in parent.formation.GetUnits(true,true))
-                    {
-                        if (!u.IsAlive())
-                        {
-                            u.Revive(percent);
-                        }
-                    }
-                    break;
-                default:
-                    appliedStatuses.Add(new ArmyStatus(effect.effect, effect.turnDuration + GameManager.main.currentTurn));
-                    break;
-            }
-
+            effect.Resolve(parent);
         }
         ClearPendingStatuses();
     }

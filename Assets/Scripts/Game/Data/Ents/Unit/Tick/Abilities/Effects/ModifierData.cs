@@ -8,7 +8,7 @@ public class ApplyModifier : ApplyEffects
 
     public override void ActivateOnUnit(EventTable table, float strength = 1)
     {
-        table. target.modifiers.ApplyNewModifierFromData(appliedModifier,table.caster, table.tick, out PropertyModifier modifier);
+        table. target.modifiers.ApplyNewModifierFromData(appliedModifier,table.caster,1, table.tick, out PropertyModifier modifier);
         foreach (var parameter in modifier.parameters)
         {
             foreach (var alteration in alterations)

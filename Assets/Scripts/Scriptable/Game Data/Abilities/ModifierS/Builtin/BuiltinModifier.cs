@@ -12,7 +12,7 @@ public class BuiltInModifier : ApplyEffects
     }
     public override void ActivateOnUnit(EventTable table, float strength = 1)
     {
-        table.target.modifiers.ApplyNewModifier(Translate(table.caster,table.target), table.tick, true, false);
+        table.target.modifiers.ApplyNewModifier(Translate(table.caster, table.target), table.tick, 1, true, false);
 
     }
     #region Params
@@ -24,7 +24,7 @@ public class BuiltInModifier : ApplyEffects
         switch (BuiltinType)
         {
             case BuiltInModifierType.HealPostCombat:
-                nModifier = new (DefaultModifiers.HealPostCombat,caster, target);
+                nModifier = new(DefaultModifiers.HealPostCombat, caster, target);
                 break;
 
         }
