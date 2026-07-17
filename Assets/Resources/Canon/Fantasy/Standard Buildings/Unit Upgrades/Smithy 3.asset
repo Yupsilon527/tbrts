@@ -29,7 +29,7 @@ MonoBehaviour:
       value: 30
     prerequisites:
     - b_keep 4
-    - b_smithy 2
+    - b_
     infinite: 2
     affectedFlags:
     - melee
@@ -43,7 +43,6 @@ MonoBehaviour:
       value: 0
       IncreasePerLevel: 2
     states: []
-    tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome:

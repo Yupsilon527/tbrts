@@ -29,7 +29,7 @@ MonoBehaviour:
       value: 25
     prerequisites:
     - b_keep 3
-    - b_bestiary 1
+    - b_
     infinite: 2
     affectedFlags:
     - cavalry
@@ -47,7 +47,6 @@ MonoBehaviour:
       value: 0
       IncreasePerLevel: 2
     states: []
-    tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome:

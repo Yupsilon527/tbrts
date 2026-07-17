@@ -40,11 +40,8 @@ MonoBehaviour:
     bonusDamage: []
     properties: []
     states: []
-    tempSpells: []
-    abilitiesAdded:
-    - abilityID: regen
-      abilityLevel: 5
+    abilitiesAdded: []
     grantedResources: []
     grantedIncome: []
-    bonusType: 1
+    bonusType: 0
     production: []

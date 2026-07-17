@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class PropertyWeapon : PropertyAbility
 {
     public WeaponData original;
+    public override string ToString()
+    {
+        return $"{original.InternalName} {original.castTime}/{original.castDelay}";
+    }
     public PropertyWeapon(DataItemUnit caster, WeaponData original) : base(caster)
     {
         startupDelay = original.castDelay;
@@ -158,8 +160,8 @@ public class PropertyWeapon : PropertyAbility
         {
             if (u == null) continue;
             Vector2Int fPos = u.troopPosition;
-            if ((original.HasFlag(CombatDefines.AttackFlag.targetSelf) || caster!=u) 
-                && (original.HasFlag(CombatDefines.AttackFlag.targetFrontRow) && (fPos.y == 0 || troop.formation.CountLivingTroopsInRow(0) == 0))
+            if ((original.HasFlag(CombatDefines.AttackFlag.targetSelf) && caster!=u) 
+                || (original.HasFlag(CombatDefines.AttackFlag.targetFrontRow) && (fPos.y == 0 || troop.formation.CountLivingTroopsInRow(0) == 0))
                 || (original.HasFlag(CombatDefines.AttackFlag.targetBackRow) && (fPos.y == 1 || troop.formation.CountLivingTroopsInRow(1) == 0))
                 || (original.HasFlag(CombatDefines.AttackFlag.targetOwnCol) && fPos.x == cPos.x))
                 units.Add(u);

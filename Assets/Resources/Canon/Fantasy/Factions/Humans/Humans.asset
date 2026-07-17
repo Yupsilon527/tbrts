@@ -16,7 +16,13 @@ MonoBehaviour:
   AssignedWorld: Fanyasy
   display: {fileID: 549951673, guid: f2204c64c6ff46742944cd37357ed352, type: 3}
   startingResources: []
-  startingIncome: []
+  startingIncome:
+  - resource: 3
+    value: 10
+  - resource: 4
+    value: 30
+  - resource: 5
+    value: 100
   innateUpgrades: []
   units:
   - {fileID: 11400000, guid: d49708cd88ccddc4b83cadafad5453ba, type: 2}

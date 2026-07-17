@@ -45,7 +45,6 @@ MonoBehaviour:
       value: 0
       IncreasePerLevel: 2
     states: []
-    tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome:

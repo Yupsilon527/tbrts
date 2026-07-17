@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class DataItemPlayer
@@ -43,12 +44,16 @@ public class DataItemPlayer
     void AssignFaction(DataFaction f)
     {
         faction = f;
+        econ.UpdateManaLimit();
+        if (f.startingIncome != null)
+            { econ.RegisterIncome(f.startingIncome.ToArray()); }
         if (f.startingResources != null)
             foreach (var r in f.startingResources)
             { econ.GiveResource(r.resource, r.value, true); }
         if (f.innateUpgrades != null)
             foreach (var up in f.innateUpgrades)
             { upgrades.upgrades.CatchUpUpgrade(up, 1); }
+        econ.ReviseRealIncome();
     }
     public override string ToString()
     {

@@ -41,7 +41,6 @@ MonoBehaviour:
     bonusDamage: []
     properties: []
     states: []
-    tempSpells: []
     abilitiesAdded:
     - abilityID: regen
       abilityLevel: 5

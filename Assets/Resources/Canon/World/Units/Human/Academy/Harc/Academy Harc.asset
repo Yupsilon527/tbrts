@@ -15,7 +15,8 @@ MonoBehaviour:
   InternalName: 
   AssignedWorld: 
   prerequisites:
-  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
+  - {fileID: 11400000, guid: e168bd1c5c4046f478492a985362cba8, type: 2}
   unit:
     InternalName: Academy Harc
     icon: {fileID: 21300000, guid: 377bd4420cbba6246ad3fd3fdadc9a2b, type: 3}
@@ -31,7 +32,8 @@ MonoBehaviour:
     - resource: 3
       value: 75
     prerequisites:
-    - b_keep 3
+    - b_keep 4
+    - b_academy redmage hall
     unit:
       Offense: 8
       Defense: 0

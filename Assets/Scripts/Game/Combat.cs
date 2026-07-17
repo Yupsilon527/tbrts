@@ -103,12 +103,14 @@ public class Combat : Initializable
             {
                 Inspect($"{c} acts at tick {c.nextAction}/{currentPhase}!");
                 currentTick = c.nextAction;
-                c.Act();
-                FireEventOnAllFighters(AbilityDefines.Event.Action);
-                return;
+                if (c.Act())
+                {
+                    FireEventOnAllFighters(AbilityDefines.Event.Action);
+                    return;
+                }
             }
         }
-            ForwardPhase();
+        ForwardPhase();
 
     }
     void ForwardPhase()
@@ -121,6 +123,10 @@ public class Combat : Initializable
         {
             currentPhase++;
             FireEventOnAllFighters(AbilityDefines.Event.CombatPhase);
+            foreach (var c in combatants)
+            {
+                c.UpdateNextAction();
+            }
         }
     }
     void EndCombat()

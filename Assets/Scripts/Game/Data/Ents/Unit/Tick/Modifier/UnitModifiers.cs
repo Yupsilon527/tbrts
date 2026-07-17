@@ -379,7 +379,7 @@ public class UnitModifiers : UnitProperties, CombatantTicker
     }
     #endregion
     #region Timely Update
-    public void Tick(int steps)
+    public bool Tick(int steps)
     {
         bool executed = false;
         if (HasUpdates)
@@ -394,6 +394,7 @@ public class UnitModifiers : UnitProperties, CombatantTicker
             }
         }
         lastTick = steps;
+        return executed;
     }
     public int GetNextTick()
     {

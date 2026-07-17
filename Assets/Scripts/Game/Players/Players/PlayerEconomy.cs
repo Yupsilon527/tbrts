@@ -79,20 +79,20 @@ public class PlayerEconomy : PlayerComponent
     {
         GetResource(refund.resource).GiveValue(refund.value);
     }
-    public void RegisterIncome(ResourceIncome[] income, float mult)
+    public void RegisterIncome(ResourceIncome[] income, float mult = 1)
     {
         foreach (var e in income)
             IncreaseIncome(e, mult);
         if (income.Length > 0)
             ReviseRealIncome();
     }
-    public void DeregisterIncome(ResourceIncome[] income, float mult)
+    public void DeregisterIncome(ResourceIncome[] income, float mult = 1)
     {
         foreach (var e in income)
             IncreaseIncome(e, 0 - mult);
     }
     #region Income
-    public void IncreaseIncome(ResourceIncome income, float mult)
+    public void IncreaseIncome(ResourceIncome income, float mult = 1)
     {
         IncreaseIncome(income.resource, income.value * mult);
 
@@ -118,20 +118,20 @@ public class PlayerEconomy : PlayerComponent
     }
     public void ReviseRealIncome()
     {
-        /*  if (LevelController.main.gameState != LevelController.GameState.playing) return;
-          for (int i = 0; i < baseIncome.Length; i++)
-          {
-              realIncome[i] = baseIncome[i];
-              foreach (var b in buildings)
-              {
-                  if ((EconomyDefines.IncomeResource)i == EconomyDefines.IncomeResource.PopLimit)
-                      realIncome[i] += b.buildingData.GetResourceIncome((EconomyDefines.IncomeResource)i);
-                  else
-                      realIncome[i] += b.buildingData.GetResourceIncome((EconomyDefines.IncomeResource)i) * b.stats.realStats.HarvestRate;
-              }
-          }
+        for (int i = 0; i < baseIncome.Length; i++)
+        {
+            realIncome[i] = baseIncome[i];
+            /*  foreach (var b in buildings)
+             {
+                 if ((EconomyDefines.IncomeResource)i == EconomyDefines.IncomeResource.PopLimit)
+                     realIncome[i] += b.buildingData.GetResourceIncome((EconomyDefines.IncomeResource)i);
+                 else
+                     realIncome[i] += b.buildingData.GetResourceIncome((EconomyDefines.IncomeResource)i) * b.stats.realStats.HarvestRate;
+             }
+     */
+        }
+        UpdateManaLimit();
 
-      */
     }
     public void HandleIncome()
     {
@@ -139,17 +139,29 @@ public class PlayerEconomy : PlayerComponent
         GiveResource(EconomyDefines.EconomyResource.Gold, realIncome[(int)EconomyDefines.IncomeResource.Gold]);
         HandleManaIncome();
     }
-    void HandleManaIncome()
+    public void HandleManaIncome()
     {
-        var manaResource = GetResource(EconomyDefines.EconomyResource.Mana);
+        UpdateManaLimit();
+        GiveMana(realIncome[(int)EconomyDefines.IncomeResource.Mana], isIncome: true);
+    }
 
-        float manaIncome = realIncome[(int)EconomyDefines.IncomeResource.Mana];
-        float manaIncomeMin = realIncome[(int)EconomyDefines.IncomeResource.ManaMin];
-        float manaIncomeMax = realIncome[(int)EconomyDefines.IncomeResource.ManaMax];
-
-        float mana = Mathf.Min(manaIncomeMin - manaResource.GetValue(), manaIncome);
-        manaResource.SetLimit(manaIncomeMax);
+    public void GiveMana(float amount, bool isIncome = false)
+    {
+        float mana = amount;
+        if (isIncome)
+        {
+            var manaResource = GetResource(EconomyDefines.EconomyResource.Mana);
+            float manaIncomeMin = realIncome[(int)EconomyDefines.IncomeResource.ManaMin];
+            mana = Mathf.Min(manaIncomeMin - manaResource.GetValue(), amount);
+        }
         GiveResource(EconomyDefines.EconomyResource.Mana, mana);
+    }
+
+
+    public void UpdateManaLimit()
+    {
+        float manaIncomeMax = realIncome[(int)EconomyDefines.IncomeResource.ManaMax];
+        GetResource(EconomyDefines.EconomyResource.Mana).SetLimit(manaIncomeMax, Resource.LimitRule.leave_value);
     }
     #endregion
 }

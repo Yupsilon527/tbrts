@@ -85,21 +85,21 @@ public class DataItemUnit : DataItemMob
         }
     }
     #endregion
-    public void Act()
+    public bool Act()
     {
-        Act(Combat.main.currentTick);
+        return Act(Combat.main.currentTick);
     }
-    public void Act(int currentTick)
+    public bool Act(int currentTick)
     {
-        actions.Tick(currentTick);
-        modifiers.Tick(currentTick);
+        bool a = actions.Tick(currentTick) | modifiers.Tick(currentTick);
         UpdateNextAction();
+        return a;
     }
     public bool CanAct(CombatDefines.AttackPhase phase)
     {
         return damageable.IsAlive() && actions.GetAttacks().Any(a => a.original.attackPhase == phase && a.HasResourcesToCast());
     }
-    protected void UpdateNextAction()
+    public void UpdateNextAction()
     {
         initiative = (int)(UnityEngine.Random.value * 25);
         nextAction = Mathf.Min(actions.GetNextTick(), modifiers.GetNextTick());

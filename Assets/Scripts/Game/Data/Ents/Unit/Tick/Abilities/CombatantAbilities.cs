@@ -68,7 +68,6 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         {
             AddAbility(ability);
         }
-        nextTick = GetNextTick();
     }
     public PropertyWeapon[] GetAttacks()
     {
@@ -121,15 +120,16 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     }
 
     #region Casting
-    public void Tick(int currentTick)
+    public bool  Tick(int currentTick)
     {
-        Trigger(Combat.main.currentPhase, currentTick);
+       return  Trigger(Combat.main.currentPhase, currentTick);
     }
     public int GetNextTick()
     {
         int ticks = int.MaxValue;
         foreach (var action in actions)
         {
+            if (action.CanBeCast(Combat.main.currentPhase) )
             ticks = Mathf.Min(ticks, action.nextTime + parent.initiative + (int)parent.GetPropertyAdditive(ModifierDefines.Property.stagger));
         }
         return ticks;

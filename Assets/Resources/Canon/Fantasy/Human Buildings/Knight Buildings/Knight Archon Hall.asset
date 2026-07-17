@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
   m_Name: Knight Archon Hall
   m_EditorClassIdentifier: 
-  InternalName: Knight Chapel
+  InternalName: Knight Archon Hall
   AssignedWorld: 
   prerequisites:
   - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
   armies:
   - {fileID: 11400000, guid: f7a9a54c5e3724c43bf13204f2b444e6, type: 2}
   building:
-    InternalName: Knight Chapel
+    InternalName: Knight Archon Hall
     icon: {fileID: 1765351576224072635, guid: f90d2ba5f05edfe4980cdb0f116b21e7, type: 3}
     flags: []
     costs:
@@ -36,7 +36,6 @@ MonoBehaviour:
     bonusDamage: []
     properties: []
     states: []
-    tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome: []

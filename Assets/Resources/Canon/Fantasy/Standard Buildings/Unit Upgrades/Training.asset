@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
   m_Name: Training
   m_EditorClassIdentifier: 
-  InternalName: Training Grounds
+  InternalName: Training
   AssignedWorld: 
   prerequisites:
   - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
   armies: []
   building:
-    InternalName: Training Grounds
+    InternalName: Training
     icon: {fileID: 3511996523978390141, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
-    flags: []
+    flags:
+    - light_upgrade
     costs:
     - resource: 0
       value: 1000
@@ -46,7 +47,6 @@ MonoBehaviour:
       value: 1.1
       IncreasePerLevel: 0
     states: []
-    tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome:

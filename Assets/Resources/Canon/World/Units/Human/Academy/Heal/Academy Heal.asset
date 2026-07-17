@@ -15,7 +15,7 @@ MonoBehaviour:
   InternalName: 
   AssignedWorld: 
   prerequisites:
-  - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
   - {fileID: 11400000, guid: 4cebb73b874726f4cace30e2a51413f0, type: 2}
   - {fileID: 11400000, guid: 5ad8dd91bd5b6d14f8d2162d8ff850db, type: 2}
   unit:
@@ -30,9 +30,9 @@ MonoBehaviour:
     - resource: 3
       value: 60
     prerequisites:
-    - b_keep 4
+    - b_keep 3
     - b_temple
-    - b_knight chapel
+    - b_academy whitemage hall
     unit:
       Offense: 4
       Defense: 8
