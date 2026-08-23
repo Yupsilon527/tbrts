@@ -6,8 +6,6 @@ using UnityEngine;
 public class UpgradeList
 {
     #region Upgrades
-
-    [Header("Move to player")]
     public HashSet<ResearchedUpgrade> researchedUpgrades = new HashSet<ResearchedUpgrade>();
     public Action<TechData , int ,  int > onUpgradeLevelChange;
 
