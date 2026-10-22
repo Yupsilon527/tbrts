@@ -49,4 +49,23 @@ MonoBehaviour:
     TilesetVariations:
     - {fileID: 11400000, guid: ee13edf274882de4ea0fdbc4445d3a1a, type: 2}
     elevation: 12
+  Sites:
+  - sprite: {fileID: -1326521119, guid: d0da994dc33e7704cab401d9f4c1b731, type: 3}
+    ruin: 0
+    ruinLevel: 0
+  - sprite: {fileID: -1051045693, guid: d0da994dc33e7704cab401d9f4c1b731, type: 3}
+    ruin: 1
+    ruinLevel: 0
+  - sprite: {fileID: -992012658, guid: d0da994dc33e7704cab401d9f4c1b731, type: 3}
+    ruin: 2
+    ruinLevel: 0
+  - sprite: {fileID: 1008455801, guid: d0da994dc33e7704cab401d9f4c1b731, type: 3}
+    ruin: 3
+    ruinLevel: 0
+  - sprite: {fileID: -1023536298, guid: d0da994dc33e7704cab401d9f4c1b731, type: 3}
+    ruin: 4
+    ruinLevel: 0
+  - sprite: {fileID: 425860770, guid: d0da994dc33e7704cab401d9f4c1b731, type: 3}
+    ruin: 5
+    ruinLevel: 0
   ObjectDensity: 1

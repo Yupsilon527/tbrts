@@ -98,6 +98,7 @@ public class PlayerInputController : MonoBehaviour
     }
     void HandleMainInput(bool queue, bool overlaymenu)
     {
+        var activePlayer = GameManager.main.playerManager.GetActivePlayer();
         var selArmy = GameManager.main.armyManager.mainSelectedArmy;
         if (mouseOverTile != null)
         {
@@ -114,13 +115,13 @@ public class PlayerInputController : MonoBehaviour
             {
                if (mouseOverTile.armyLayer != null)
                 {
-                    if (mouseOverTile.armyLayer.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned)
+                    if (mouseOverTile.armyLayer.GetAlignment(activePlayer) == PlayerDefines.Alignment.playerowned)
                         GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
                 }
                 else if (mouseOverTile.buildingLayer != null)
                 {
                     if (mouseOverTile.buildingLayer is DataItemCastle castle)
-                        if (castle.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned)
+                        if (castle.GetAlignment(activePlayer) == PlayerDefines.Alignment.playerowned)
                             InterfaceManager.main.OpenCastleWindow(castle, false);
                         else
                             InterfaceManager.main.infoWindow.ShowCastleInfo(castle);
@@ -130,20 +131,28 @@ public class PlayerInputController : MonoBehaviour
             {
                 if (mouseOverTile.armyLayer != null)
                 {
-                    if (mouseOverTile.armyLayer.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.playerowned)
+                    if (mouseOverTile.armyLayer.GetAlignment(activePlayer) == PlayerDefines.Alignment.playerowned)
                         GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
-                    else if (mouseOverTile.armyLayer.IsVisibleToPlayer(GameManager.main.playerManager.GetActivePlayer()))
+                    else if (mouseOverTile.armyLayer.IsVisibleToPlayer(activePlayer))
                         GiveOrder(selArmy,new AttackOrder(Order.ID.Follow, mouseOverTile.gridPos, mouseOverTile.armyLayer),  queue);
                 }
                 else if (mouseOverTile.buildingLayer != null)
                 {
                     if (mouseOverTile.buildingLayer is DataItemCastle castle)
                     {
-                        if (castle.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) != PlayerDefines.Alignment.enemy)
+                        if (castle.GetAlignment(activePlayer) != PlayerDefines.Alignment.enemy)
                             GiveOrder(selArmy, new Order(Order.ID.Move, mouseOverTile.gridPos), queue);
-                       else if (castle.IsVisibleToPlayer(GameManager.main.playerManager.GetActivePlayer()))
+                       else if (castle.IsVisibleToPlayer(activePlayer))
                         {
                             GiveOrder(selArmy, new RazeOrder(Order.ID.Raze, mouseOverTile.gridPos), queue);
+                        }
+
+                    }
+                    else if(mouseOverTile.buildingLayer is DataItemSite site)
+                    {
+                       if (site.IsVisibleToPlayer(activePlayer))
+                        {
+                            GiveOrder(selArmy, new VisitOrder(Order.ID.Raze, mouseOverTile.gridPos), queue);
                         }
 
                     }
@@ -197,7 +206,7 @@ public class PlayerInputController : MonoBehaviour
         HighlightedEntity = ent;
         foreach (var tile in ent.GetOccupiedTiles())
         {
-            tile.display.ChangeColor(ent.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.ally ? DisplayItemTile.tileState.select_ally : DisplayItemTile.tileState.select_enemy);
+            tile.display.ChangeColor(ent.GetAlignment(activePlayer) == PlayerDefines.Alignment.ally ? DisplayItemTile.tileState.select_ally : DisplayItemTile.tileState.select_enemy);
             colortiles.Add(tile);
         }
     }
@@ -211,7 +220,7 @@ public class PlayerInputController : MonoBehaviour
     {
         foreach (var tile in ent.GetOccupiedTiles())
         {
-            tile.display.ChangeColor(ent.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.ally ? DisplayItemTile.tileState.mindread_ally : DisplayItemTile.tileState.mindread_danger);
+            tile.display.ChangeColor(ent.GetAlignment(activePlayer) == PlayerDefines.Alignment.ally ? DisplayItemTile.tileState.mindread_ally : DisplayItemTile.tileState.mindread_danger);
             colortiles.Add(tile);
         }
     }

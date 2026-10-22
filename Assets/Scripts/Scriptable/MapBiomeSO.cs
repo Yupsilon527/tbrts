@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Map Biome", menuName = "GameData/Map Generation/Map Biome")]
 public class MapBiomeSO : ScriptableObject
 {
     public ElevationData[] Elevations;
+    public SiteData[] Sites;
     public float ObjectDensity = 1;
     public ElevationData GetElevation(char e)
     {

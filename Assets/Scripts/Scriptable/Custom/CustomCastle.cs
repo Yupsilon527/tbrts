@@ -2,15 +2,15 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class CistomCastle : CustomObject
+public class CustomCastle : CustomObject
 {
     public string customName, customDescription, customSprite;
     public bool isCapital = false;
     public string[] producedArmies, producedBuildings;
 
-    public static CistomCastle GenerateRandom(Vector2Int tile)
+    public static CustomCastle GenerateRandom(Vector2Int tile)
     {
-        CistomCastle castle = new();
+        CustomCastle castle = new();
         castle.customName = "Castle";
         castle.ownership = 0;
         castle.spawnPos = tile;

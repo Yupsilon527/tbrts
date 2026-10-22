@@ -124,7 +124,14 @@ public class CommandMenu : PlayerWindow
                         InterfaceManager.main.OpenCastleRazeWindow(castle, selArmy);
                     });
                 }
-                //Explore ruin
+                if (tile.buildingLayer is DataItemSite site)
+                {
+                    e.Add("Visit");
+                    a.Add(() =>
+                    {
+                        selArmy.VisitSite(site);
+                    });
+                }
             }
             if (tile.gridPos == selArmy.GetCoords())
             {

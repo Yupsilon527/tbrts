@@ -100,6 +100,10 @@ public class BannerMovement : BannerComponent
     public override void OnTurnBegin()
     {
         movedThisTurn = false;
+        RefreshMovement();
+    }
+    public void RefreshMovement()
+    {
         movementLeft = GetMyMovementDistance();
         UpdateStartingMovement();
     }

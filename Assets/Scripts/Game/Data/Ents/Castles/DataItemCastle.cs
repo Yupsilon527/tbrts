@@ -15,7 +15,7 @@ public class DataItemCastle : DataItemBuilding
     public CityProduction production;
     public CityIncome income;
 
-    public DataItemCastle(CistomCastle custom) : base()
+    public DataItemCastle(CustomCastle custom) : base()
     {
         customName = custom.customName;
         customDescription = custom.customDescription;

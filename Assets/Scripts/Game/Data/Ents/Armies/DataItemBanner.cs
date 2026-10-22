@@ -489,25 +489,14 @@ public class DataItemBanner : DataItemMob
         }
         return assist.ToArray();
     }
-}
 
-public class DataItemMob : DataItemObject
-{
-    protected Vector2Int gridPos;
-    protected DataItemTile tile;
-
-    public override Vector2Int GetCoords()
+    public bool VisitSite(DataItemSite site)
     {
-        return gridPos;
+        if (site.GetCoords() == GetCoords())
+        {
+            site.OnVisited(this);
+            return true;
+        }
+        return false;
     }
-
-    public override DataItemTile[] GetOccupiedTiles()
-    {
-        return new DataItemTile[] { tile };
-    }
-    public virtual DataItemTile GetMainTile()
-    {
-        return tile;
-    }
-
 }

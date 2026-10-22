@@ -36,7 +36,9 @@ public class GameManager : Initializable
 
         cb.SetRect(new Rect(TerrainDefines.UnitsPerTile * .5f, -TerrainDefines.UnitsPerTile * .5f, map.width  * TerrainDefines.UnitsPerTile, map.height * TerrainDefines.UnitsPerTile));
         castleManager.DrawTheCastlesFromEditorData(gen.mapData.MapData.castles);
+        castleManager.DrawTheSitesFromEditorData(gen.mapData.MapData.sites);
         castleManager.redoCastleRegions();
+        castleManager.DrawBuildings();
 
         armyManager.GenerateTheArmiesFromEditorData(gen.mapData.MapData.armies);
         los.InitTexture();

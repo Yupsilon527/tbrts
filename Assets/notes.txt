@@ -33,6 +33,7 @@ TODO
 		mana
 		heal/supply 
 		refresh movement
+		buff
 
 	troop statuses
 		speed/slow/rooted

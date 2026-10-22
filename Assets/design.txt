@@ -4,14 +4,35 @@ Warlordslike
 
 Sprites:3x2Idle, attack 1, attack 2, cast/spell, hurt, walk
 
-Unit types:2 weapons (first row, 2nd row)Cav/inf have no 2nd row weaponSkirmisher has decent 1st row weaponArcher has shit 1st row weapon Actives * Cost AP? * Once per battle  * Or multiple times per battle & cost SPPassives * Block, dodge, retaliate  * Cost SP
+Unit types:2 weapons (first row, 2nd row)Cav/inf have no 2nd row weaponSkirmisher has decent 1st row weaponArcher has shit 1st row weapon Actives 
+* Cost AP? 
+* Once per battle  
+* Or multiple times per battle & cost SPPassives 
+* Block, dodge, retaliate  
+* Cost SP
 BlockCombat
-Linf - cheaper fodder unit, bonus vs cavalry* Mech (slow, bonus vs cavs) Larc - bonus vs linf, harc, stronger attack in 2nd row, skirmisher * InfantryLcav - faster, tougher, costier * Light tank (fast, cannot capture cities?)Lfly - separate from cav, anti skirm, archer, siege, swarmer* Recon? Can't capture 
-Hinf - tanky, weak to cavalry 
-Harc - weak in 1st row, ok 2nd row, rnged ability, mage/damage support unit
+
+Defense
+Linf - defensive troop (rocket launcher), slow, bonus vs lcav
+
+Larc - single unit skirmisher, rifle, strong vs mage
+Cata - artillery, faster, strong vs mage, buildings
+
+Lcav - faster, tougher, costier * Light tank (fast, cannot capture cities?), strong vs larc, catas
 Hcav - damage dealer, monster, overall good stats, hits multiple
-Healer/supportSiege* Catapult - long range attack (advance sars art) that deals full damage in castle * Misc: negates siege bonuses* Battering Ram/Siege Tower/Ents grant warding (imm to ranged attackers)
-SpellsLike Mewgenics Inflct damageDebuff (n battles or turns or till rested in castles)
+
+Harc - mage, weak in 1st row, ok 2nd row, rnged ability, mage/damage support unit, strong vs cavalry, linf, flyiers
+Scor - missiles, must stop to cast, high damage spells
+
+Lfly - anti-air flyier/scout 
+Hfly - anti-ground
+
+Healer/support
+Siege
+* Misc: negates siege bonuses
+* Battering Ram/Siege Tower/Ents grant warding (imm to ranged attackers)
+Spells
+Like Mewgenics Inflct damageDebuff (n battles or turns or till rested in castles)
 
 Buildings
 * Act as upgrades; Units entering castle get all upgrades

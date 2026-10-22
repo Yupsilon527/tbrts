@@ -28,10 +28,10 @@ public class CastleManager : EntityManager
         }
     }
 
-    public void DrawTheCastlesFromEditorData(CistomCastle[] customData)
+    public void DrawTheCastlesFromEditorData(CustomCastle[] customData)
     {
 
-        foreach (CistomCastle Zim in customData)
+        foreach (CustomCastle Zim in customData)
         {
             buildings.Add(new DataItemCastle(Zim));
         }
@@ -40,21 +40,18 @@ public class CastleManager : EntityManager
         {
             if (tData.GetWalkElevation() == TerrainDefines.Elevation.City && tData.buildingLayer == null)
             {
-                buildings.Add(new DataItemCastle(CistomCastle.GenerateRandom(tData.gridPos)));
+                buildings.Add(new DataItemCastle(CustomCastle.GenerateRandom(tData.gridPos)));
             }
+        }
+    }
+    public void DrawTheSitesFromEditorData(CustomSite[] customData)
+    {
+
+        foreach (CustomSite Zim in customData)
+        {
+            buildings.Add(new DataItemSite(Zim));
         }
 
-        foreach (var b in buildings)
-        {
-            if (b is DataItemCastle castle)
-            {
-                var castlePrefab = GameManager.main.displayPool.PoolItem(GameManager.main.displayPool.castlePrefab);
-                if (castlePrefab.TryGetComponent(out DisplayItemCastle dic))
-                {
-                    dic.AssignObject(castle);
-                }
-            }
-        }
     }
     public void SelectNextIdleCity()
     {
@@ -70,6 +67,29 @@ public class CastleManager : EntityManager
         {
             CameraController.main.JumptoMob(castle);
             InterfaceManager.main.OpenCastleWindow(castle, true);
+        }
+    }
+    public void DrawBuildings()
+    {
+
+        foreach (var b in buildings)
+        {
+            if (b is DataItemCastle castle)
+            {
+                var castlePrefab = GameManager.main.displayPool.PoolItem(GameManager.main.displayPool.castlePrefab);
+                if (castlePrefab.TryGetComponent(out DisplayItemCastle dic))
+                {
+                    dic.AssignObject(castle);
+                }
+            }
+            else if (b is DataItemSite site)
+            {
+                var sitePrefab = GameManager.main.displayPool.PoolItem(GameManager.main.displayPool.ruinPrefab);
+                if (sitePrefab.TryGetComponent(out DisplayItemSite dis))
+                {
+                    dis.AssignObject(site);
+                }
+            }
         }
     }
 }

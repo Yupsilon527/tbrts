@@ -12,7 +12,8 @@ public class CustomMap
 
     public int height = 0;
     public string MapData;
-    public CistomCastle[] castles;
+    public CustomCastle[] castles;
+    public CustomSite[] sites;
     public CustomBanner[] armies;
     public int GetWidth()
     {

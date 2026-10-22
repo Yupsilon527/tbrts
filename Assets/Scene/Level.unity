@@ -1052,7 +1052,7 @@ PrefabInstance:
     - target: {fileID: 6799309003276000355, guid: 9fd15009e7f70ac4ebff9d51d890b3f3, type: 3}
       propertyPath: mapData
       value: 
-      objectReference: {fileID: 11400000, guid: f57164a2d850f1c4d9cd442c2258ad41, type: 2}
+      objectReference: {fileID: 11400000, guid: 38498f50343e02248a3d688979010d25, type: 2}
     - target: {fileID: 6799309003276000355, guid: 9fd15009e7f70ac4ebff9d51d890b3f3, type: 3}
       propertyPath: biomeData
       value: 
@@ -2131,7 +2131,7 @@ MonoBehaviour:
   precacheData: []
   castlePrefab: {fileID: 1137592080461875685, guid: ac234438a63e32c40861aa3ce34be888, type: 3}
   armyPrefab: {fileID: 1137592080461875685, guid: e92a3a92e8796074e9f46f080cf82445, type: 3}
-  ruinPrefab: {fileID: 0}
+  ruinPrefab: {fileID: 1137592080461875685, guid: 4b6a2af8d048e1247a77e1ff35a4cb31, type: 3}
   pupPrefab: {fileID: 0}
 --- !u!4 &1512420663 stripped
 Transform:

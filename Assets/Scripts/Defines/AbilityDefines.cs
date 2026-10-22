@@ -108,11 +108,20 @@ public static class AbilityDefines
         AfterAfterHitByIndirect = 62,
         AfterAfterHitByMagic = 63,
 
+        //End Of Battle
         OnEndTurn = 64,
         OnBeginTurn = 65,
         Victory = 66,
 
-        Total = 67,
+        //Out Of Battle
+        OnRuinRest = 67,
+        OnRuinHeal = 68,
+        OnRuinPray = 68,
+        OnVisitRuin = 69,
+        OnHarvestRuin = 69,
+        OnRuinBoon  = 69,
+
+        Total = 70,
     }
 
     public delegate void AbilityFunction(EventTable CastData);

@@ -84,6 +84,12 @@ MonoBehaviour:
       isCapital: 1
       producedArmies: []
       producedBuildings: []
+    sites:
+    - InternalName: zxc
+      ownership: 0
+      spawnPos: {x: 5, y: 5}
+      RuinLevel: 0
+      ruinType: 0
     armies:
     - InternalName: 3 Linf
       ownership: 2
