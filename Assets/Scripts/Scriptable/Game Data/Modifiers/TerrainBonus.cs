@@ -26,7 +26,7 @@ public class TerrainBonus : ModifierPassive
             flag,
             properties,
             states,
-            abilities,
+            abilities.Select((a) => new AbilityData(a.abilityID.ToString(), a.abilityLevel)).ToArray(),
             actions
             );
     }

@@ -40,6 +40,8 @@ TODO
 		refresh movement
 		buff
 
+	unit abilities
+
 	troop statuses
 		speed/slow/rooted
 		cloaked (works?)

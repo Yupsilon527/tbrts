@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40009702d80c64c4a885c721de4816db, type: 3}
-  m_Name: Human Mana Income
+  m_Name: Human Pray Income
   m_EditorClassIdentifier: 
   InternalName: Human Mana Income
   AssignedWorld: 
   prerequisites: []
   actions: []
-  innates:
-  - {fileID: 11400000, guid: d52dd580be106404e9e6c22600799a80, type: 2}
+  innates: []
   upgrade:
     InternalName: Human Mana Income
     icon: {fileID: 0}
@@ -30,6 +29,8 @@ MonoBehaviour:
     bonusDamage: []
     properties: []
     states: []
-    abilitiesAdded: []
+    abilitiesAdded:
+    - abilityID: 29
+      abilityLevel: 5
     grantedResources: []
     grantedIncome: []

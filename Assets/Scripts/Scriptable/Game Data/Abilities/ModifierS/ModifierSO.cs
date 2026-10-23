@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Modifier", menuName = "Abilities/Effects/Modifiers/Modifier")]
@@ -19,7 +21,7 @@ public class ModifierSO : AlterationSO
             flag,
             properties,
             states,
-            abilities,
+            abilities.Select((a) => new AbilityData(a.abilityID.ToString(), a.abilityLevel)).ToArray(),
             null,
             behavior,
             duration,
@@ -30,4 +32,3 @@ public class ModifierSO : AlterationSO
             );
     }
 }
-

@@ -87,7 +87,7 @@ public class UnitStatsTable
         return $"{Mathf.Round(value * 100)}%";
     }
 
-    public float GetPowerValue(AbilityData[] abilities = null)
+    public float GetPowerValue(AbilitySave[] abilities = null)
     {
         return 100;
     }

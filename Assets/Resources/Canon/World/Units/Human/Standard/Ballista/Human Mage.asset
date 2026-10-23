@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
+  m_Name: Human Mage
+  m_EditorClassIdentifier: 
+  InternalName: Human Mage
+  AssignedWorld: 
+  prerequisites: []
+  unit:
+    InternalName: Human Mage
+    icon: {fileID: 21300000, guid: d4ba2983abb5a2641bb5af3a1d8adc76, type: 3}
+    flags:
+    - unit
+    - siege
+    - vehicle
+    - heavy
+    - mage
+    - human
+    costs:
+    - resource: 0
+      value: 200
+    - resource: 1
+      value: 300
+    prerequisites: []
+    unit:
+      Offense: 8
+      Defense: 0
+      Luck: 0
+      Attack: 5
+      Magic: 6
+      Speed: 100
+      Action: 3
+      Mana: 0
+      Supply: 3
+      Health: 30
+      Barrier: 0
+      Armor: 0
+      Shield: 7
+      Padding: 10
+      Resistance: 0
+      Block: 0
+      DodgeChance: 0
+      BlockChance: 10
+      ProcChance: 0
+      CritChance: 0
+      bonusDamage:
+      - damage: 3
+        scale: 0
+        flag: 4
+      - damage: 10
+        scale: 0
+        flag: 14
+    armySprites:
+    - {fileID: 21300000, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
+    - {fileID: 21300000, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
+    - {fileID: 21300000, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
+    - {fileID: 21300000, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
+    - {fileID: 21300000, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
+    - {fileID: 21300000, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
+    unitFlags: 1200000016000000
+    attacks:
+    - InternalName: Harc Ranged
+      abilityFlags: 76
+      apCost: 1
+      rpCost: 0
+      spCost: 0
+      castTime: 120
+      castDelay: 160
+      attackPhase: 2
+      targetPriority: 0
+      areaMode: 0
+    - InternalName: Harc Support
+      abilityFlags: 6240
+      apCost: 0
+      rpCost: 0
+      spCost: 1
+      castTime: 120
+      castDelay: 160
+      attackPhase: 2
+      targetPriority: 0
+      areaMode: 0
+    spells:
+    - InternalName: Archer Volley
+      abilityFlags: 4
+      MetalCost: 0
+      GoldCost: 0
+      ManaCost: 10
+      SupplyCost: 0
+      min_range: 2
+      max_range: 3
+      area_range: 0
+      targetMode: 2
+      rangeMode: 0
+      areaMode: 0
+    abilities:
+    - abilityID: 14
+      abilityLevel: 1
+  attacks:
+  - {fileID: 11400000, guid: f728bf6946d1ceb4bb85dc0d5e79d942, type: 2}
+  spells:
+  - {fileID: 11400000, guid: 2d0d0b0f49e65694780ec6548f02bb23, type: 2}
+  - {fileID: 11400000, guid: 82d8fb3736530824eb8ad3c0c8025f7b, type: 2}
+  passives: []
+  character: {fileID: 11400000, guid: dc382dc700d332a40b6baca866c17c09, type: 2}

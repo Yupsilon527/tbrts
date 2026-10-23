@@ -82,4 +82,13 @@ public class AbilityData
 {
     public string abilityID;
     public int abilityLevel;
+
+    public AbilityData()
+    {
+    }
+    public AbilityData(string abilityID, int abilityLevel)
+    {
+        this.abilityID = abilityID;
+        this.abilityLevel = abilityLevel;
+    }
 }

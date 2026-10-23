@@ -19,6 +19,7 @@ MonoBehaviour:
     InternalName: Human Linf
     icon: {fileID: 21300000, guid: 3d0c470e37781f041bf2502b14c90b7a, type: 3}
     flags:
+    - unit
     - infantry
     - melee
     - linf
@@ -35,12 +36,12 @@ MonoBehaviour:
       Attack: 3
       Magic: 0
       Speed: 100
-      Action: 3
+      Action: 5
       Mana: 0
       Supply: 0
       Health: 40
       Barrier: 0
-      Armor: 0
+      Armor: 3
       Shield: 0
       Padding: 0
       Resistance: 0
@@ -50,7 +51,7 @@ MonoBehaviour:
       ProcChance: 0
       CritChance: 0
       bonusDamage:
-      - damage: 9
+      - damage: 15
         scale: 0
         flag: 11
     armySprites:
@@ -86,9 +87,9 @@ MonoBehaviour:
       rangeMode: 0
       areaMode: 0
     abilities:
-    - abilityID: raze
+    - abilityID: 18
       abilityLevel: 1
-    - abilityID: slow
+    - abilityID: 7
       abilityLevel: 3
   attacks:
   - {fileID: 11400000, guid: a2980518f8729cc478c3d4f7e2632b1d, type: 2}

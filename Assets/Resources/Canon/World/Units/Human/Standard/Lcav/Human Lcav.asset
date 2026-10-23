@@ -20,6 +20,7 @@ MonoBehaviour:
     InternalName: Human Lcav
     icon: {fileID: 21300000, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
     flags:
+    - unit
     - cavalry
     - melee
     - lcav
@@ -28,8 +29,6 @@ MonoBehaviour:
     costs:
     - resource: 0
       value: 400
-    - resource: 3
-      value: 50
     prerequisites:
     - b_stable
     unit:
@@ -39,13 +38,13 @@ MonoBehaviour:
       Attack: 3
       Magic: 2
       Speed: 150
-      Action: 2
+      Action: 5
       Mana: 0
       Supply: 1
       Health: 45
       Barrier: 0
       Armor: 0
-      Shield: 2
+      Shield: 5
       Padding: 0
       Resistance: 0
       Block: 0
@@ -54,9 +53,6 @@ MonoBehaviour:
       ProcChance: 0
       CritChance: 0
       bonusDamage:
-      - damage: 2
-        scale: 0
-        flag: 8
       - damage: 3
         scale: 0
         flag: 18
@@ -94,8 +90,10 @@ MonoBehaviour:
       areaMode: 0
     spells: []
     abilities:
-    - abilityID: groundfast
+    - abilityID: 13
       abilityLevel: 1
+    - abilityID: 6
+      abilityLevel: 2
   attacks:
   - {fileID: 11400000, guid: 1eff5a7a6566a15498a0aabff0087be0, type: 2}
   - {fileID: 11400000, guid: 7a3d3d470d7ce6144845a925dfda660d, type: 2}

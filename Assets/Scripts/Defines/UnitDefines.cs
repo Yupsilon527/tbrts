@@ -30,7 +30,7 @@ public static class UnitDefines
     {
         mercenary,
         scouting,
-        spies,
+        spies,  //can see in buildings
         transport,
         command,
 		regen,
@@ -52,7 +52,7 @@ public static class UnitDefines
 		raider,
 		vandal,
 
-		aura,
+		aura,   //increase aura range
 
 		phase,
 		magicimmune,
@@ -63,6 +63,8 @@ public static class UnitDefines
         metalIncome,
         goldIncome,
 		manaIncome,
+
+        faith, //mana income from prayer ruins
 
 		//spies can see inside cities
 		//banding, reverse banding (depending on troops in enemy team)

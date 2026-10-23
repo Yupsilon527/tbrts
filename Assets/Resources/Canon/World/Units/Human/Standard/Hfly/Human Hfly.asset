@@ -10,58 +10,63 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
-  m_Name: Human Lfly
+  m_Name: Human Hfly
   m_EditorClassIdentifier: 
-  InternalName: 
+  InternalName: Human Hfly
   AssignedWorld: 
   prerequisites:
   - {fileID: 11400000, guid: 8d487c5c4270318459df288c10033324, type: 2}
   unit:
-    InternalName: Human Lfly
+    InternalName: Human Hfly
     icon: {fileID: 21300000, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
     flags:
-    - fly
+    - unit
     - melee
+    - flyier
+    - hfly
+    - heavy
+    - human
     costs:
     - resource: 0
-      value: 500
-    - resource: 3
-      value: 40
+      value: 250
+    - resource: 1
+      value: 350
     prerequisites:
     - b_keep 2
     unit:
-      Offense: 15
-      Defense: 15
+      Offense: 10
+      Defense: 25
       Luck: 0
-      Attack: 3
-      Magic: 5
+      Attack: 8
+      Magic: 7
       Speed: 140
-      Action: 4
+      Action: 8
       Mana: 0
       Supply: 0
-      Health: 40
+      Health: 90
       Barrier: 0
-      Armor: 2
+      Armor: 4
       Shield: 4
-      Padding: 2
+      Padding: 4
       Resistance: 0
       Block: 1
-      LuckCoefficient: 1
-      SpeedCoefficient: 1
       DodgeChance: 0
-      BlockChance: 15
+      BlockChance: 0
       ProcChance: 0
       CritChance: 0
       bonusDamage:
-      - damage: 4
+      - damage: 6
         scale: 0
-        flag: 10
-      - damage: 8
+        flag: 5
+      - damage: 6
         scale: 0
-        flag: 3
-      - damage: 4
+        flag: 11
+      - damage: 6
         scale: 0
-        flag: 13
+        flag: 15
+      - damage: 12
+        scale: 0
+        flag: 16
     armySprites:
     - {fileID: 21300000, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
     - {fileID: 21300000, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
@@ -69,13 +74,13 @@ MonoBehaviour:
     - {fileID: 21300000, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
     - {fileID: 21300000, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
     - {fileID: 21300000, guid: ee2af744ed75dd24bab7cb9aae3abdc2, type: 3}
-    unitFlags: 0d000000
+    unitFlags: 0d0000000e000000
     attacks: []
     spells: []
     abilities:
-    - abilityID: fly
+    - abilityID: 15
       abilityLevel: 1
-    - abilityID: slow
+    - abilityID: 7
       abilityLevel: 2
   attacks:
   - {fileID: 11400000, guid: 353b222755b25ec46bd7cea8cd41ce19, type: 2}

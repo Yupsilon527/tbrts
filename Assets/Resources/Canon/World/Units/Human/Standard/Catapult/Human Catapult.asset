@@ -12,46 +12,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
   m_Name: Human Catapult
   m_EditorClassIdentifier: 
-  InternalName: 
+  InternalName: Human Catapult
   AssignedWorld: 
   prerequisites: []
   unit:
     InternalName: Human Catapult
     icon: {fileID: 21300000, guid: 884e81365693bfc4ba631a52a0f3be01, type: 3}
-    flags: []
+    flags:
+    - unit
+    - siege
+    - vehicle
+    - heavy
+    - ctpt
+    - human
     costs:
     - resource: 0
-      value: 875
+      value: 750
     - resource: 1
-      value: 375
-    - resource: 3
-      value: 100
+      value: 600
     prerequisites: []
     unit:
       Offense: 0
       Defense: 0
       Luck: 0
-      Attack: 60
-      Magic: 5
+      Attack: 40
+      Magic: 25
       Speed: 100
       Action: 1
       Mana: 0
       Supply: 3
       Health: 50
-      Barrier: 25
+      Barrier: 0
       Armor: 0
-      Shield: 0
-      Padding: 0
+      Shield: 10
+      Padding: 2
       Resistance: 0
-      Block: 1
-      LuckCoefficient: 1
-      SpeedCoefficient: 1
+      Block: 0
       DodgeChance: 0
       BlockChance: 0
       ProcChance: 0
       CritChance: 0
       bonusDamage:
-      - damage: 150
+      - damage: 15
         scale: 0
         flag: 8
     armySprites:
@@ -61,7 +63,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 884e81365693bfc4ba631a52a0f3be01, type: 3}
     - {fileID: 21300000, guid: 884e81365693bfc4ba631a52a0f3be01, type: 3}
     - {fileID: 21300000, guid: 884e81365693bfc4ba631a52a0f3be01, type: 3}
-    unitFlags: 07000000
+    unitFlags: 1200000016000000
     attacks: []
     spells:
     - InternalName: Catapult Bombardment
@@ -73,11 +75,13 @@ MonoBehaviour:
       min_range: 2
       max_range: 5
       area_range: 0
-      targetMode: 4
+      targetMode: 2
       rangeMode: 0
       areaMode: 0
     abilities:
-    - abilityID: groundheavy
+    - abilityID: 14
+      abilityLevel: 1
+    - abilityID: 7
       abilityLevel: 1
   attacks: []
   spells:

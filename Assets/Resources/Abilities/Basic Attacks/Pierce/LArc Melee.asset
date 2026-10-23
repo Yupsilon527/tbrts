@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LArc Melee
   m_EditorClassIdentifier: 
   effects:
-  - {fileID: 11400000, guid: dff0749d5818e2e4882fc698dd11fb21, type: 2}
+  - {fileID: 11400000, guid: 92287d2ebbb0af540bff0a51f8dc2320, type: 2}
   data:
     InternalName: LArc Melee
     abilityFlags: 68

@@ -256,7 +256,7 @@ public class UnitModifiers : UnitProperties, CombatantTicker
     void UpdateModifierAbilities(PropertyAttribute Mod)
     {
         if (Mod is PropertyIha iha) { 
-        foreach (AbilityData prop in iha.grantedAbilities)
+        foreach (var prop in iha.grantedAbilities)
         {
             parent.innates.AddAbility(prop.abilityID,prop.abilityLevel,UnitDefines.UpgradeCondition.temp);
         }

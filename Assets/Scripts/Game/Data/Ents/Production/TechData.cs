@@ -24,7 +24,7 @@ public class TechData : ProductionData
     public ModifierDefines.StateData[] states = new ModifierDefines.StateData[0];
     [Header("Abilities")]
     public ActionData[] tempSpells = new ActionData[0];
-    public AbilityData[] abilitiesAdded = new AbilityData[0];
+    public AbilitySave[] abilitiesAdded = new AbilitySave[0];
     public InnateData[] innatesAdded = new InnateData[0];
 
     [Header("Grant Resources/Income")]
@@ -73,7 +73,7 @@ public class TechData : ProductionData
             foreach (var innate in abilitiesAdded)
             {
                 int expectedLevel = innate.abilityLevel * oldLevel;
-                var found = unit.innates.abilities.Where(a => a.abilityTemp == UnitDefines.UpgradeCondition.upgrade && a.abilityID.ToString().ToLower() == innate.abilityID && a.abilityLevel == expectedLevel).ToArray();
+                var found = unit.innates.abilities.Where(a => a.abilityTemp == UnitDefines.UpgradeCondition.upgrade && a.abilityID == innate.abilityID && a.abilityLevel == expectedLevel).ToArray();
                 if (found.Length > 0)
                 {
                     unit.innates.abilities.Remove(found[0]);
@@ -92,7 +92,7 @@ public class TechData : ProductionData
 
                 var found = unit.innates.abilities
                     .Where(a => a.abilityTemp == UnitDefines.UpgradeCondition.upgrade
-                                && a.abilityID.ToString().ToLower() == innate.abilityID
+                                && a.abilityID == innate.abilityID
                                 && a.abilityLevel == expectedOldLevel)
                     .ToArray();
 

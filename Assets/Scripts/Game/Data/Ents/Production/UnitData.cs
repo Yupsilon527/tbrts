@@ -10,7 +10,7 @@ public class UnitData : ProductionData
     public AttackDefines.MobFlag[] unitFlags;
     public WeaponData[] attacks = new WeaponData[0];
     public SpellData[] spells = new SpellData[0];
-    public AbilityData[] abilities = new AbilityData[0];
+    public AbilitySave[] abilities = new AbilitySave[0];
     public InnateData[] innates= new InnateData[0];
     public override AvailableState GetAvailableState(DataItemPlayer player, DataItemCastle castle)
     {
@@ -129,11 +129,11 @@ public class UnitData : ProductionData
     }
     public bool HasAbility(string abilityID)
     {
-        return abilities.Any(a => a.abilityID == abilityID);
+        return abilities.Any(a => a.abilityID.ToString().ToLower() == abilityID);
     }
     public int GetAbilityLevel(string abilityID)
     {
-        return abilities.Sum(a => a.abilityID == abilityID ? a.abilityLevel : 0);
+        return abilities.Sum(a => a.abilityID.ToString().ToLower() == abilityID ? a.abilityLevel : 0);
     }
     public string OutputStatsTable()
     {

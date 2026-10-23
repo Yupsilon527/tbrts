@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
   m_Name: Linf Upgrade
   m_EditorClassIdentifier: 
-  InternalName: Training Grounds
+  InternalName: Linf Upgrade
   AssignedWorld: 
   prerequisites:
   - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
   armies: []
   building:
-    InternalName: Training Grounds
+    InternalName: Linf Upgrade
     icon: {fileID: 3511996523978390141, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
     flags:
-    - light_upgrade
+    - light upgrade
     costs:
     - resource: 0
       value: 1000
@@ -52,10 +52,6 @@ MonoBehaviour:
     states: []
     abilitiesAdded: []
     grantedResources: []
-    grantedIncome:
-    - resource: 0
-      value: 500
-    - resource: 3
-      value: 100
+    grantedIncome: []
     bonusType: 0
     production: []

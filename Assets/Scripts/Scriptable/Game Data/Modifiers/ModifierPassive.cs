@@ -26,7 +26,7 @@ public class ModifierPassive : AlterationSO
             flag,
             properties,
             states,
-            abilities,
+            abilities.Select((a) => new AbilityData(a.abilityID.ToString(), a.abilityLevel)).ToArray(),
             actions
             );
     }
