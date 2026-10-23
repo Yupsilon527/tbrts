@@ -20,7 +20,7 @@ MonoBehaviour:
   - resource: 3
     value: 10
   - resource: 4
-    value: 30
+    value: 20
   - resource: 5
     value: 100
   innateUpgrades: []

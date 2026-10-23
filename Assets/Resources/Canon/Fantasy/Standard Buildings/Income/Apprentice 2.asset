@@ -29,7 +29,7 @@ MonoBehaviour:
     - resource: 0
       value: 1000
     - resource: 3
-      value: 75
+      value: 100
     prerequisites:
     - b_apprentice 1
     - b_keep 3
@@ -39,7 +39,6 @@ MonoBehaviour:
     bonusDamage: []
     properties: []
     states: []
-    tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome:

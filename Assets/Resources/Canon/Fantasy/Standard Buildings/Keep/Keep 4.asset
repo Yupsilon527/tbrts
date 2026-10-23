@@ -26,10 +26,10 @@ MonoBehaviour:
     costs:
     - resource: 0
       value: 4000
+    - resource: 3
+      value: 200
     - resource: 1
       value: 3000
-    - resource: 3
-      value: 500
     prerequisites:
     - b_keep 3
     infinite: 2
@@ -39,13 +39,10 @@ MonoBehaviour:
     bonusDamage: []
     properties: []
     states: []
-    tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome:
     - resource: 0
       value: 2000
-    - resource: 2
-      value: 200
     bonusType: 0
     production: []

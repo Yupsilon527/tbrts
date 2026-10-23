@@ -29,6 +29,7 @@ MonoBehaviour:
     value: 1
     IncreasePerLevel: 1
   states: []
+  abilities: []
   duration: 1
   thinker: 0
   level: 0

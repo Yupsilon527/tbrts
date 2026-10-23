@@ -52,21 +52,41 @@ public static class AttackDefines
     }
     public enum MobFlag
     {
-        civilian,
+        // misc
+        Civilian,
+        UniqueUnit,
+        Support,
+
+        // infantry
         Spearman,
         Infantry,
+        FootUnit,
+
+        // ranged/magic
         Skirmisher,
         Archer,
+        RangedUnit,
+
+        //vehicles
         Cavalry,
         Knight,
-        SiegeEngine,
-        Building,
-        UniqueUnit,
-        FootUnit,
-        RangedUnit,
-        MountedUnit,
+        MountedUnit,    //ie vehicle
+
+        //vehicles
+        Plane,
+        Bomber,
         FlyingUnit,
-        SupportUnit,
+
+        //buildings
+        Building,
+        DefensiveBuilding,
+        Wall,
+
+        //unit flags
+        SiegeUnit,
+        Organic,
+        Mechanical,
+        Undead,
     }
     public enum ScaleType
     {

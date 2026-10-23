@@ -26,7 +26,7 @@ MonoBehaviour:
     - resource: 0
       value: 600
     - resource: 3
-      value: 75
+      value: 100
     prerequisites:
     - b_keep 2
     infinite: 2
@@ -41,7 +41,6 @@ MonoBehaviour:
       value: 3
       IncreasePerLevel: 0
     states: []
-    tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome:

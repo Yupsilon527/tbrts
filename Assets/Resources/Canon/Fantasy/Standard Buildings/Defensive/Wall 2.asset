@@ -27,10 +27,10 @@ MonoBehaviour:
     - resource: 0
       value: 500
     - resource: 3
-      value: 75
+      value: 100
     prerequisites:
     - b_keep 3
-    - b_
+    - b_wall 1
     infinite: 2
     affectedFlags: []
     resourceChanges: []
@@ -43,7 +43,6 @@ MonoBehaviour:
       value: 2
       IncreasePerLevel: 0
     states: []
-    tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome:

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1db8b338be2854b982226bdc53579e, type: 3}
+  m_Name: Wall Modifier
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 0}
+  InternalName: Wall
+  uibehavior: 2
+  behavior: 3
+  priority: 1
+  flag: 2
+  properties:
+  - Property: 2
+    value: 5
+    IncreasePerLevel: 1
+  - Property: 27
+    value: 10
+    IncreasePerLevel: 10
+  states: []
+  abilities: []
+  duration: 1
+  thinker: 0
+  level: 0
+  destroyEvt: 9
+  expireType: -1

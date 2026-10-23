@@ -206,7 +206,7 @@ public class PlayerInputController : MonoBehaviour
         HighlightedEntity = ent;
         foreach (var tile in ent.GetOccupiedTiles())
         {
-            tile.display.ChangeColor(ent.GetAlignment(activePlayer) == PlayerDefines.Alignment.ally ? DisplayItemTile.tileState.select_ally : DisplayItemTile.tileState.select_enemy);
+            tile.display.ChangeColor(ent.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.ally ? DisplayItemTile.tileState.select_ally : DisplayItemTile.tileState.select_enemy);
             colortiles.Add(tile);
         }
     }
@@ -220,7 +220,7 @@ public class PlayerInputController : MonoBehaviour
     {
         foreach (var tile in ent.GetOccupiedTiles())
         {
-            tile.display.ChangeColor(ent.GetAlignment(activePlayer) == PlayerDefines.Alignment.ally ? DisplayItemTile.tileState.mindread_ally : DisplayItemTile.tileState.mindread_danger);
+            tile.display.ChangeColor(ent.GetAlignment(GameManager.main.playerManager.GetActivePlayer()) == PlayerDefines.Alignment.ally ? DisplayItemTile.tileState.mindread_ally : DisplayItemTile.tileState.mindread_danger);
             colortiles.Add(tile);
         }
     }

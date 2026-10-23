@@ -13,6 +13,11 @@ TEST
 
 	revival
 
+	revise block?
+		can only block first row
+
+
+
 Fixes
 	combat wont start
 

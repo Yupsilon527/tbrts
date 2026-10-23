@@ -53,6 +53,7 @@ public class DamageTable
                     switch (kvp.Key)
                     {
                         default:
+                            float blockValue = target.troopPosition.x == 0 ? target.stats.realStats.Block : 0;
                             switch (blockType)
                             {
                                 case AttackDefines.HitType.criticalHit:
@@ -62,10 +63,10 @@ public class DamageTable
                                     outDamage = Mathf.Max(0, outDamage - armor);
                                     break;
                                 case AttackDefines.HitType.blocked:
-                                    outDamage = Mathf.Max(0, outDamage - target.stats.realStats.Block - armor);
+                                    outDamage = Mathf.Max(0, outDamage - blockValue - armor);
                                     break;
                                 case AttackDefines.HitType.blockCrit:
-                                    outDamage = Mathf.Max(0, outDamage/2 - target.stats.realStats.Block  - armor);
+                                    outDamage = Mathf.Max(0, outDamage/2 - blockValue - armor);
                                     break;
                                 case AttackDefines.HitType.miss:
                                     outDamage = 0;

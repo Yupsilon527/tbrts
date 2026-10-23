@@ -145,13 +145,13 @@ public class AttackTable : CastTable
                 }
                 else
                 {
-                    float accuracy = attacker.stats.realStats.Offense / Mathf.Max(target.stats.realStats.Defense);
-                    accuracy = accuracy * .6f + Mathf.Min(.4f, attacker.hitCounter / 2 * .5f); //TODO DEFINE
+                    float accuracy = attacker.stats.realStats.Offense / target.stats.realStats.Defense;
+                    accuracy = accuracy *  attacker.hitCounter * .5f; 
 
                     float critChance = 10 * accuracy + attacker.stats.realStats.CritChance * (1 + accuracy) / 2f * attacker.critCounter * .5f;
                     float hitChance = 50 * accuracy;
-                    float blockChance = 25 / accuracy + attacker.stats.realStats.BlockChance * (1 + accuracy) / 2f;
-                    float parryChance = 15 / accuracy + attacker.stats.realStats.BlockChance * (1 + accuracy) / 2f;
+                    float blockChance =   25 / accuracy + attacker.stats.realStats.BlockChance * (1 + accuracy) / 2f;
+                    float parryChance = (attacker.troopPosition.x == 0  && target.troopPosition.x == 0) ?(  15 / accuracy + attacker.stats.realStats.BlockChance * (1 + accuracy) / 2f) : 0;
 
                     ranval = Random.value * (critChance + hitChance + blockChance + parryChance);
                     if (ranval < blockChance)

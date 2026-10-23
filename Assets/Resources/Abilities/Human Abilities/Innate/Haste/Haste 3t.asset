@@ -15,5 +15,5 @@ MonoBehaviour:
   applyChance: 1
   chance: 0
   targeting: 0
-  effect: 6
-  turnDuration: 100
+  effect: 4
+  turnDuration: 3

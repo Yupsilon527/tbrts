@@ -27,7 +27,7 @@ MonoBehaviour:
     - resource: 0
       value: 1000
     - resource: 3
-      value: 200
+      value: 100
     prerequisites:
     - b_keep 1
     infinite: 2
@@ -37,13 +37,10 @@ MonoBehaviour:
     bonusDamage: []
     properties: []
     states: []
-    tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome:
     - resource: 0
       value: 500
-    - resource: 2
-      value: 25
     bonusType: 0
     production: []

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rally Ability
   m_EditorClassIdentifier: 
   effects:
-  - {fileID: 11400000, guid: 6e0e8a2aaf94e8949871a7855c5030bc, type: 2}
+  - {fileID: 11400000, guid: 7af26b10667c3e844bac181c76bf4052, type: 2}
   data:
     InternalName: Rally Ability
     abilityFlags: 2

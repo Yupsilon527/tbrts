@@ -22,10 +22,11 @@ MonoBehaviour:
   - Property: 0
     value: 6
     IncreasePerLevel: 0
-  - Property: 2
-    value: 3
+  - Property: 24
+    value: 15
     IncreasePerLevel: 0
   states: []
+  abilities: []
   duration: 1
   thinker: 0
   level: 0

@@ -23,11 +23,10 @@ MonoBehaviour:
     - archer
     - larc
     - light
+    - human
     costs:
     - resource: 0
       value: 300
-    - resource: 3
-      value: 40
     prerequisites: []
     unit:
       Offense: 4

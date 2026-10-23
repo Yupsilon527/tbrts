@@ -49,8 +49,8 @@ public class UnitStatsTable
             return (speed) / (speed + 300);
         return 1 - (speed / 200);
     }
-    public float LuckCoefficient = 1;
-    public float SpeedCoefficient = 1;
+   [NonSerialized] public float LuckCoefficient = 1;
+    [NonSerialized] public float SpeedCoefficient = 1;
 
 
     public float DodgeChance = 0;
