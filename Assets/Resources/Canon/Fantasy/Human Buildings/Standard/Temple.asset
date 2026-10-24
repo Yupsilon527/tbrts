@@ -16,6 +16,8 @@ MonoBehaviour:
   AssignedWorld: 
   prerequisites:
   - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  armies:
+  - {fileID: 11400000, guid: cb4acf5535becb946a9ecf08ae29c9f6, type: 2}
   building:
     InternalName: Temple
     icon: {fileID: 9080485990912184260, guid: 6e992a76de6b8424fb23928f4851b8c7, type: 3}
@@ -24,7 +26,7 @@ MonoBehaviour:
     - resource: 0
       value: 1250
     - resource: 3
-      value: 40
+      value: 100
     prerequisites:
     - b_keep 3
     infinite: 2
@@ -34,12 +36,9 @@ MonoBehaviour:
     bonusDamage: []
     properties: []
     states: []
-    tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome: []
     bonusType: 0
     production:
     - Human Heal
-  armies:
-  - {fileID: 11400000, guid: cb4acf5535becb946a9ecf08ae29c9f6, type: 2}

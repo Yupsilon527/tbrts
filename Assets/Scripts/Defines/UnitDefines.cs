@@ -64,14 +64,15 @@ public static class UnitDefines
         goldIncome,
 		manaIncome,
 
-        faith, //mana income from prayer ruins
+        resolve,//prevents unit from taking too much damage
+        small, 
+        large,
 
 		//spies can see inside cities
 		//banding, reverse banding (depending on troops in enemy team)
 		//loner
 
 		//slayer, trample?
-		resolve,//prevents unit from taking too much damage
 
         // vampirism,
         // cannibalize, heals on kill

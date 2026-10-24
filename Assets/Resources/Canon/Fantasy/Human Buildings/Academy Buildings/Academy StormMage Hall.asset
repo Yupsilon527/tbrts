@@ -17,7 +17,6 @@ MonoBehaviour:
   prerequisites:
   - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
   - {fileID: 11400000, guid: 9d3425f9deaa4604f8c17dbac179acae, type: 2}
-  - {fileID: 11400000, guid: 858a5154ebaddda4a823333f0924a5bd, type: 2}
   armies:
   - {fileID: 11400000, guid: 09d8e9d82a4fb504eb7a884f5b0b903d, type: 2}
   building:
@@ -34,7 +33,6 @@ MonoBehaviour:
     prerequisites:
     - b_keep 4
     - b_stable
-    - b_husbandry
     infinite: 2
     affectedFlags:
     - '-'

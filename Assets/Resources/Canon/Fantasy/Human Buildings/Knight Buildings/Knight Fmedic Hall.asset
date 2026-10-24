@@ -16,7 +16,6 @@ MonoBehaviour:
   AssignedWorld: 
   prerequisites:
   - {fileID: 11400000, guid: 8467f06e60a42fc4ca83d14937026b9a, type: 2}
-  - {fileID: 11400000, guid: 51a5cea29fba9814ead0d09d0e6392a1, type: 2}
   - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
   armies:
   - {fileID: 11400000, guid: b52308469fab0a249a55ceb24697cb2b, type: 2}
@@ -32,7 +31,6 @@ MonoBehaviour:
       value: 50
     prerequisites:
     - b_garrison
-    - b_training
     - b_keep 3
     infinite: 2
     affectedFlags: []
@@ -41,7 +39,7 @@ MonoBehaviour:
     properties: []
     states: []
     abilitiesAdded:
-    - abilityID: regen
+    - abilityID: 0
       abilityLevel: 5
     grantedResources: []
     grantedIncome: []

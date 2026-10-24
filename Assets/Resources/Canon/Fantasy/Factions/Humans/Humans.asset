@@ -23,9 +23,11 @@ MonoBehaviour:
     value: 20
   - resource: 5
     value: 100
-  innateUpgrades: []
+  innateUpgrades:
+  - {fileID: 11400000, guid: e726fff4def580f4d86b9d18cc6a0197, type: 2}
   units:
   - {fileID: 11400000, guid: d49708cd88ccddc4b83cadafad5453ba, type: 2}
+  - {fileID: 11400000, guid: e27a422fe6713cb4e9e50eeca12d9a30, type: 2}
   buildings:
   - {fileID: 11400000, guid: 8467f06e60a42fc4ca83d14937026b9a, type: 2}
   - {fileID: 11400000, guid: 9d3425f9deaa4604f8c17dbac179acae, type: 2}

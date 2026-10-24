@@ -105,6 +105,8 @@ MonoBehaviour:
       abilityLevel: 2
     - abilityID: 24
       abilityLevel: 3
+    - abilityID: 30
+      abilityLevel: 1
   attacks:
   - {fileID: 11400000, guid: 2e485267c1bd2834c8632db5ba48d2aa, type: 2}
   - {fileID: 11400000, guid: 2da6701740c77724a8e768453806fff2, type: 2}

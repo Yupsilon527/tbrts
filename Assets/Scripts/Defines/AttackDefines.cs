@@ -84,8 +84,8 @@ public static class AttackDefines
 
         //unit flags
         SiegeUnit,
-        Transporter,
-        BattleTransporter,
+        Transport,
+        Ship,
 
         Organic,
         Mechanical,

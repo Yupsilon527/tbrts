@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
-  m_Name: Mage Upgrade
+  m_Name: Arti Upgrade
   m_EditorClassIdentifier: 
   InternalName: Mage Upgrade
   AssignedWorld: 
@@ -33,7 +33,7 @@ MonoBehaviour:
     - b_keep 4
     infinite: 2
     affectedFlags:
-    - mage
+    - arti
     resourceChanges: []
     bonusDamage: []
     properties:

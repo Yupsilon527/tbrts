@@ -21,6 +21,11 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 6d7c661f7ff912e43bf2a4c44c2af2e1, type: 3}
     flags:
     - support
+    - human
+    - magic
+    - infantry
+    - unit
+    - heavy
     costs:
     - resource: 1
       value: 400
@@ -45,8 +50,6 @@ MonoBehaviour:
       Padding: 2
       Resistance: 0
       Block: 5
-      LuckCoefficient: 1
-      SpeedCoefficient: 1
       DodgeChance: 0
       BlockChance: 33
       ProcChance: 0
@@ -83,11 +86,11 @@ MonoBehaviour:
       areaMode: 3
     spells: []
     abilities:
-    - abilityID: foot
+    - abilityID: 0
       abilityLevel: 1
-    - abilityID: slow
+    - abilityID: 0
       abilityLevel: 2
-    - abilityID: rangeSupport
+    - abilityID: 0
       abilityLevel: 3
   attacks:
   - {fileID: 11400000, guid: 2c61788af62d7264e958cf196c832aca, type: 2}

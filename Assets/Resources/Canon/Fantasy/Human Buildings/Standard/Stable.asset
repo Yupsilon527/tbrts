@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InternalName: Stable
   AssignedWorld: 
-  prerequisites: []
+  prerequisites:
+  - {fileID: 11400000, guid: 8d487c5c4270318459df288c10033324, type: 2}
   armies:
   - {fileID: 11400000, guid: fb79edb46f4bc31428e186831f0a885c, type: 2}
   - {fileID: 11400000, guid: 04073a609ae407c4bbe022f59e695ec4, type: 2}
@@ -27,7 +28,8 @@ MonoBehaviour:
       value: 1000
     - resource: 3
       value: 100
-    prerequisites: []
+    prerequisites:
+    - b_keep 2
     infinite: 2
     affectedFlags:
     - '-'

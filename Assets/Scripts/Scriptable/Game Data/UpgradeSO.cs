@@ -14,8 +14,8 @@ public class UpgradeSO : ProductionSO
         {
             upgrade.InternalName = InternalName;
             AutoFillPrerequisites(upgrade);
-            upgrade.tempSpells = actions.Select(a => a.Translate()).ToArray();
-            upgrade.innatesAdded = innates.Select(a => a.Translate() as InnateData).ToArray();
+            upgrade.tempSpells = actions.Where(a=> a!=null).Select(a => a.Translate()).ToArray();
+            upgrade.innatesAdded = innates.Where(a => a != null).Select(a => a.Translate() as InnateData).ToArray();
         }
     }
 }

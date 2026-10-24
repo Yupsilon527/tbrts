@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InternalName: Human Catapult
   AssignedWorld: 
-  prerequisites: []
+  prerequisites:
+  - {fileID: 11400000, guid: 103d01e6feaceec47890f992f40d4fe4, type: 2}
   unit:
     InternalName: Human Catapult
     icon: {fileID: 21300000, guid: 884e81365693bfc4ba631a52a0f3be01, type: 3}
@@ -30,7 +31,8 @@ MonoBehaviour:
       value: 750
     - resource: 1
       value: 600
-    prerequisites: []
+    prerequisites:
+    - b_workshop
     unit:
       Offense: 0
       Defense: 0

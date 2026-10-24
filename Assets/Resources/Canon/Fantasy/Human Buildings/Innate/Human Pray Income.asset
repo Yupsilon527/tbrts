@@ -16,7 +16,8 @@ MonoBehaviour:
   AssignedWorld: 
   prerequisites: []
   actions: []
-  innates: []
+  innates:
+  - {fileID: 11400000, guid: d52dd580be106404e9e6c22600799a80, type: 2}
   upgrade:
     InternalName: Human Mana Income
     icon: {fileID: 0}

@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
+  m_Name: Human Ship
+  m_EditorClassIdentifier: 
+  InternalName: 
+  AssignedWorld: 
+  prerequisites:
+  - {fileID: 11400000, guid: 7fcc1ea829ce68346b2554a529e7693f, type: 2}
+  unit:
+    InternalName: Human Ship
+    icon: {fileID: 21300000, guid: 7762b6f94ece5b744822bc609e12f4cb, type: 3}
+    flags:
+    - ship
+    - human
+    - archer
+    - unit
+    - vehicle
+    - light
+    costs:
+    - resource: 0
+      value: 500
+    prerequisites:
+    - b_keep 1
+    unit:
+      Offense: 10
+      Defense: 0
+      Luck: 0
+      Attack: 10
+      Magic: 10
+      Speed: 100
+      Action: 1
+      Mana: 0
+      Supply: 0
+      Health: 60
+      Barrier: 0
+      Armor: 2
+      Shield: 4
+      Padding: 0
+      Resistance: 0
+      Block: 0
+      DodgeChance: 0
+      BlockChance: 0
+      ProcChance: 0
+      CritChance: 0
+      bonusDamage:
+      - damage: 10
+        scale: 0
+        flag: 20
+    armySprites:
+    - {fileID: 7316229441688303391, guid: 7ac415e85f8b9834da0302cb96c8d8e2, type: 3}
+    - {fileID: 7316229441688303391, guid: 7ac415e85f8b9834da0302cb96c8d8e2, type: 3}
+    - {fileID: 7316229441688303391, guid: 7ac415e85f8b9834da0302cb96c8d8e2, type: 3}
+    - {fileID: 7316229441688303391, guid: 7ac415e85f8b9834da0302cb96c8d8e2, type: 3}
+    - {fileID: 7316229441688303391, guid: 7ac415e85f8b9834da0302cb96c8d8e2, type: 3}
+    - {fileID: 7316229441688303391, guid: 7ac415e85f8b9834da0302cb96c8d8e2, type: 3}
+    unitFlags: 130000001400000016000000
+    attacks:
+    - InternalName: Harc Ranged
+      abilityFlags: 76
+      apCost: 1
+      rpCost: 0
+      spCost: 0
+      castTime: 120
+      castDelay: 160
+      attackPhase: 2
+      targetPriority: 0
+      areaMode: 0
+    - InternalName: Harc Support
+      abilityFlags: 6240
+      apCost: 0
+      rpCost: 0
+      spCost: 1
+      castTime: 120
+      castDelay: 160
+      attackPhase: 2
+      targetPriority: 0
+      areaMode: 0
+    spells: []
+    abilities:
+    - abilityID: 9
+      abilityLevel: 1
+    - abilityID: 31
+      abilityLevel: 1
+  attacks: []
+  spells:
+  - {fileID: 11400000, guid: b231095f0a2beb1429c94b19a87955da, type: 2}
+  passives: []
+  character: {fileID: 11400000, guid: 9a052bc98eb907b4eac434b9a6b1327b, type: 2}

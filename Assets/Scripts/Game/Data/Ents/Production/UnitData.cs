@@ -6,10 +6,10 @@ using UnityEngine;
 public class UnitData : ProductionData
 {
     public UnitStatsTable unit;
-    public Sprite[] armySprites = new Sprite[6];
+    [HideInInspector] public Sprite[] armySprites = new Sprite[6];
     public AttackDefines.MobFlag[] unitFlags;
-    public WeaponData[] attacks = new WeaponData[0];
-    public SpellData[] spells = new SpellData[0];
+   [HideInInspector] public WeaponData[] attacks = new WeaponData[0];
+    [HideInInspector] public SpellData[] spells = new SpellData[0];
     public AbilitySave[] abilities = new AbilitySave[0];
     public InnateData[] innates= new InnateData[0];
     public override AvailableState GetAvailableState(DataItemPlayer player, DataItemCastle castle)

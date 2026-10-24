@@ -17,8 +17,7 @@ MonoBehaviour:
   prerequisites:
   - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
   - {fileID: 11400000, guid: 4cebb73b874726f4cace30e2a51413f0, type: 2}
-  armies:
-  - {fileID: 11400000, guid: cb4acf5535becb946a9ecf08ae29c9f6, type: 2}
+  armies: []
   building:
     InternalName: Monastery
     icon: {fileID: 9080485990912184260, guid: 6e992a76de6b8424fb23928f4851b8c7, type: 3}
@@ -27,7 +26,7 @@ MonoBehaviour:
     - resource: 1
       value: 200
     - resource: 3
-      value: 20
+      value: 100
     prerequisites:
     - b_keep 3
     - b_temple
@@ -40,11 +39,12 @@ MonoBehaviour:
     - Property: 10
       value: 20
       IncreasePerLevel: 20
+    - Property: 8
+      value: 1
+      IncreasePerLevel: 1
     states: []
-    tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome: []
     bonusType: 0
-    production:
-    - Human Heal
+    production: []

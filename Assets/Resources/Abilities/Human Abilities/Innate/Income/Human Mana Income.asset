@@ -26,7 +26,7 @@ MonoBehaviour:
   - apCost: 0
     rpCost: 0
     spCost: 0
-    listeners: 1d000000
+    listeners: 44000000
     casterCondition: 0
     targetCondition: 0
     effects:

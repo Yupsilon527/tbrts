@@ -14,19 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InternalName: Aviary
   AssignedWorld: 
-  prerequisites:
-  - {fileID: 11400000, guid: 8d487c5c4270318459df288c10033324, type: 2}
+  prerequisites: []
+  armies:
+  - {fileID: 11400000, guid: efb02aa9294312343a0b47ddf42bd8da, type: 2}
+  - {fileID: 11400000, guid: caca8c875837adb48a17166806958ecc, type: 2}
   building:
     InternalName: Aviary
     icon: {fileID: 7316229441688303391, guid: 7ac415e85f8b9834da0302cb96c8d8e2, type: 3}
     flags: []
     costs:
     - resource: 0
-      value: 1000
+      value: 400
     - resource: 3
-      value: 40
-    prerequisites:
-    - b_keep 2
+      value: 100
+    prerequisites: []
     infinite: 2
     affectedFlags:
     - '-'
@@ -34,12 +35,10 @@ MonoBehaviour:
     bonusDamage: []
     properties: []
     states: []
-    tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome: []
     bonusType: 0
     production:
     - Human Lfly
-  armies:
-  - {fileID: 11400000, guid: efb02aa9294312343a0b47ddf42bd8da, type: 2}
+    - Human Hfly

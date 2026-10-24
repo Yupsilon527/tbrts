@@ -44,12 +44,10 @@ MonoBehaviour:
       Health: 300
       Barrier: 0
       Armor: 3
-      Shield: 9
+      Shield: 10
       Padding: 3
       Resistance: 0
       Block: 0
-      LuckCoefficient: 1
-      SpeedCoefficient: 1
       DodgeChance: 0
       BlockChance: 0
       ProcChance: 0
@@ -57,10 +55,10 @@ MonoBehaviour:
       bonusDamage:
       - damage: 3
         scale: 0
-        flag: 1
-      - damage: 10
+        flag: 20
+      - damage: 6
         scale: 0
-        flag: 13
+        flag: 12
     armySprites:
     - {fileID: 7316229441688303391, guid: 7ac415e85f8b9834da0302cb96c8d8e2, type: 3}
     - {fileID: 7316229441688303391, guid: 7ac415e85f8b9834da0302cb96c8d8e2, type: 3}
@@ -68,7 +66,7 @@ MonoBehaviour:
     - {fileID: 7316229441688303391, guid: 7ac415e85f8b9834da0302cb96c8d8e2, type: 3}
     - {fileID: 7316229441688303391, guid: 7ac415e85f8b9834da0302cb96c8d8e2, type: 3}
     - {fileID: 7316229441688303391, guid: 7ac415e85f8b9834da0302cb96c8d8e2, type: 3}
-    unitFlags: 040000000b000000
+    unitFlags: 0f0000001000000016000000
     attacks:
     - InternalName: Harc Ranged
       abilityFlags: 76
@@ -92,12 +90,14 @@ MonoBehaviour:
       areaMode: 0
     spells: []
     abilities:
-    - abilityID: slow
+    - abilityID: 8
       abilityLevel: 1
-    - abilityID: rangeSupport
-      abilityLevel: 4
-    - abilityID: building
+    - abilityID: 24
+      abilityLevel: 3
+    - abilityID: 7
       abilityLevel: 1
+    - abilityID: 1
+      abilityLevel: 3
   attacks:
   - {fileID: 11400000, guid: 2e485267c1bd2834c8632db5ba48d2aa, type: 2}
   - {fileID: 11400000, guid: 2da6701740c77724a8e768453806fff2, type: 2}
