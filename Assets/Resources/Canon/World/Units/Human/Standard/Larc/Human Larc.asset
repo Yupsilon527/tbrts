@@ -34,6 +34,7 @@ MonoBehaviour:
       Defense: 8
       Luck: 0
       Attack: 2
+      Special: 2
       Magic: 5
       Speed: 100
       Action: 6
@@ -61,7 +62,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: d3bb18af95bed7540ac7ab6d1481a9cf, type: 3}
     - {fileID: 21300000, guid: d3bb18af95bed7540ac7ab6d1481a9cf, type: 3}
     - {fileID: 21300000, guid: d3bb18af95bed7540ac7ab6d1481a9cf, type: 3}
-    unitFlags: 030000000b000000
+    unitFlags: 0600000008000000
     attacks:
     - InternalName: LArc Melee
       abilityFlags: 68

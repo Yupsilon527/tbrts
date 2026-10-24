@@ -105,9 +105,10 @@ public static class AttackDefines
         HealthBar = 6,
         Magic = 7,
         Attack = 8,
+        Special = 9,
         
         //TODO
-        MissingHealth = 9,
+        MissingHealth = 10,
     }
     public enum ScaleMode
     {
@@ -130,6 +131,9 @@ public static class AttackDefines
             switch (scale)
             {
                 case ScaleType.Attack:
+                    bonusDamage *= owner.stats.realStats.Attack;
+                    break;
+                case ScaleType.Special:
                     bonusDamage *= owner.stats.realStats.Attack;
                     break;
                 case ScaleType.Magic:

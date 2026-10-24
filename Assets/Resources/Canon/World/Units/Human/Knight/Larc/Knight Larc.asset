@@ -16,59 +16,57 @@ MonoBehaviour:
   AssignedWorld: 
   prerequisites:
   - {fileID: 11400000, guid: 8467f06e60a42fc4ca83d14937026b9a, type: 2}
-  - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
   unit:
     InternalName: Knight Larc
     icon: {fileID: 21300000, guid: 817f590ffbc468a41a905afa1a987c1e, type: 3}
     flags:
+    - unit
     - infantry
     - archer
-    - light
     - larc
+    - light
+    - human
     costs:
     - resource: 0
       value: 300
-    - resource: 3
-      value: 75
     prerequisites:
     - b_garrison
-    - b_keep 4
+    - b_keep 3
     unit:
-      Offense: 6
-      Defense: 9
+      Offense: 4
+      Defense: 8
       Luck: 0
-      Attack: 3
+      Attack: 2
+      Special: 1
       Magic: 5
       Speed: 100
-      Action: 3
+      Action: 6
       Mana: 0
       Supply: 0
-      Health: 30
+      Health: 35
       Barrier: 0
       Armor: 0
-      Shield: 5
+      Shield: 7
       Padding: 2
       Resistance: 0
-      Block: 4
+      Block: 3
       DodgeChance: 0
       BlockChance: 40
       ProcChance: 0
       CritChance: 0
       bonusDamage:
-      - damage: 10
+      - damage: 3
         scale: 0
-        flag: 4
-      - damage: 10
-        scale: 0
-        flag: 1
+        flag: 7
     armySprites:
-    - {fileID: 21300000, guid: 817f590ffbc468a41a905afa1a987c1e, type: 3}
-    - {fileID: 21300000, guid: 817f590ffbc468a41a905afa1a987c1e, type: 3}
-    - {fileID: 21300000, guid: 817f590ffbc468a41a905afa1a987c1e, type: 3}
-    - {fileID: 21300000, guid: 817f590ffbc468a41a905afa1a987c1e, type: 3}
-    - {fileID: 21300000, guid: 817f590ffbc468a41a905afa1a987c1e, type: 3}
-    - {fileID: 21300000, guid: 817f590ffbc468a41a905afa1a987c1e, type: 3}
-    unitFlags: 030000000b000000
+    - {fileID: 21300000, guid: d3bb18af95bed7540ac7ab6d1481a9cf, type: 3}
+    - {fileID: 21300000, guid: d3bb18af95bed7540ac7ab6d1481a9cf, type: 3}
+    - {fileID: 21300000, guid: d3bb18af95bed7540ac7ab6d1481a9cf, type: 3}
+    - {fileID: 21300000, guid: d3bb18af95bed7540ac7ab6d1481a9cf, type: 3}
+    - {fileID: 21300000, guid: d3bb18af95bed7540ac7ab6d1481a9cf, type: 3}
+    - {fileID: 21300000, guid: d3bb18af95bed7540ac7ab6d1481a9cf, type: 3}
+    unitFlags: 0600000008000000
     attacks:
     - InternalName: LArc Melee
       abilityFlags: 68
@@ -91,22 +89,24 @@ MonoBehaviour:
       targetPriority: 0
       areaMode: 0
     spells:
-    - InternalName: Medic Revive
+    - InternalName: Brace Ability
       abilityFlags: 2
       MetalCost: 0
       GoldCost: 0
-      ManaCost: 15
+      ManaCost: 7
       SupplyCost: 0
       min_range: 0
-      max_range: 2
+      max_range: 0
       area_range: 0
-      targetMode: 2
+      targetMode: 1
       rangeMode: 0
       areaMode: 0
     abilities:
-    - abilityID: 0
+    - abilityID: 18
       abilityLevel: 1
-    - abilityID: 0
+    - abilityID: 7
+      abilityLevel: 1
+    - abilityID: 30
       abilityLevel: 1
   attacks:
   - {fileID: 11400000, guid: 353b222755b25ec46bd7cea8cd41ce19, type: 2}

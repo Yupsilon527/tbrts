@@ -232,6 +232,9 @@ public class DataItemUnit : DataItemMob
         string damage = stats.realStats.Attack == stats.baseStats.Attack ? "" : stats.realStats.Attack > stats.baseStats.Attack ? ("+" + (stats.realStats.Attack - stats.baseStats.Attack)) : ("" + (stats.realStats.Attack - stats.baseStats.Attack));
         output += $"Damage: {stats.baseStats.Attack}{damage}<br>";
 
+        string special = stats.realStats.Special == stats.baseStats.Special ? "" : stats.realStats.Special > stats.baseStats.Special ? ("+" + (stats.realStats.Special - stats.baseStats.Special)) : ("" + (stats.realStats.Special - stats.baseStats.Special));
+        output += $"Special: {stats.baseStats.Special}{special}<br>";
+
         string magic = stats.realStats.Magic == stats.baseStats.Magic ? "" : stats.realStats.Magic > stats.baseStats.Magic ? ("+" + (stats.realStats.Magic - stats.baseStats.Magic)) : ("" + (stats.realStats.Magic - stats.baseStats.Magic));
         output += $"Magic: {stats.baseStats.Magic}{magic}<br>";
 

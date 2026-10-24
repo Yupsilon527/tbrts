@@ -22,46 +22,44 @@ MonoBehaviour:
     InternalName: Knight Paladin
     icon: {fileID: 21300000, guid: c16be4fd6b6dee24ab81d88e2ccfd53f, type: 3}
     flags:
+    - unit
     - cavalry
     - melee
+    - hcav
+    - human
+    - heavy
     costs:
     - resource: 0
       value: 300
     - resource: 1
       value: 200
-    - resource: 3
-      value: 150
     prerequisites:
-    - b_knight paladin building
+    - b_knight paladin hall
     - b_stable
     - b_keep 4
     unit:
-      Offense: 20
-      Defense: 10
+      Offense: 15
+      Defense: 21
       Luck: 0
-      Attack: 15
-      Magic: 6
-      Speed: 115
-      Action: 3
-      Mana: 1
+      Attack: 12
+      Special: 18
+      Magic: 5
+      Speed: 110
+      Action: 5
+      Mana: 0
       Supply: 1
-      Health: 140
+      Health: 120
       Barrier: 0
-      Armor: 2
-      Shield: 5
-      Padding: 2
+      Armor: 0
+      Shield: 4
+      Padding: 0
       Resistance: 0
-      Block: 4
-      LuckCoefficient: 1
-      SpeedCoefficient: 1
+      Block: 2
       DodgeChance: 0
       BlockChance: 33
       ProcChance: 0
       CritChance: 0
-      bonusDamage:
-      - damage: 15
-        scale: 0
-        flag: 11
+      bonusDamage: []
     armySprites:
     - {fileID: 21300000, guid: 313c68a58e0f8ce46b323c2c6fc4192d, type: 3}
     - {fileID: 21300000, guid: 313c68a58e0f8ce46b323c2c6fc4192d, type: 3}
@@ -69,7 +67,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 313c68a58e0f8ce46b323c2c6fc4192d, type: 3}
     - {fileID: 21300000, guid: 313c68a58e0f8ce46b323c2c6fc4192d, type: 3}
     - {fileID: 21300000, guid: 313c68a58e0f8ce46b323c2c6fc4192d, type: 3}
-    unitFlags: 060000000c000000
+    unitFlags: 0b0000000a000000
     attacks:
     - InternalName: Hcav Charge
       abilityFlags: 12
@@ -93,7 +91,9 @@ MonoBehaviour:
       areaMode: 0
     spells: []
     abilities:
-    - abilityID: groundfast
+    - abilityID: 13
+      abilityLevel: 1
+    - abilityID: 7
       abilityLevel: 1
   attacks:
   - {fileID: 11400000, guid: aca20d8a201f0a94e9b4210c73d3b8ad, type: 2}

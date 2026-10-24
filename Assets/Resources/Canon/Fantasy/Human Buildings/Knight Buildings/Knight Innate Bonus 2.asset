@@ -25,14 +25,14 @@ MonoBehaviour:
     prerequisites: []
     infinite: 0
     affectedFlags:
-    - light_upgrade
+    - light upgrade
     resourceChanges:
     - changedResource: 0
       resourceChangeBehavior: 2
       changeValue: 0.5
     - changedResource: 3
       resourceChangeBehavior: 2
-      changeValue: 0.1
+      changeValue: 0
     bonusDamage: []
     properties: []
     states: []

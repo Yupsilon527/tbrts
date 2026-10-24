@@ -35,9 +35,10 @@ MonoBehaviour:
     - b_keep 2
     unit:
       Offense: 8
-      Defense: 0
+      Defense: 6
       Luck: 0
       Attack: 5
+      Special: 4
       Magic: 6
       Speed: 100
       Action: 3

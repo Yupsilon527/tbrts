@@ -105,6 +105,8 @@ public static class ModifierDefines
         // Attack
         attack_bonus = 3,
         attack_bonus_percent = 4,
+       special_bonus = 61,
+        special_bonus_percent = 62,
         magic_bonus = 5,
         magic_bonus_percent = 6,
 
@@ -189,7 +191,7 @@ public static class ModifierDefines
         critical_chance = 59,
 
         // Total count (always last)
-        total = 61,
+        total = 63,
     }
 
     public enum TroopState

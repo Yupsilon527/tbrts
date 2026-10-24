@@ -21,8 +21,12 @@ MonoBehaviour:
     InternalName: Knight Hinf
     icon: {fileID: 21300000, guid: 0f038dd18d945e740aaf9d20cd4706b9, type: 3}
     flags:
+    - unit
     - infantry
     - melee
+    - hinf
+    - light
+    - human
     costs:
     - resource: 0
       value: 300
@@ -31,35 +35,34 @@ MonoBehaviour:
     - resource: 3
       value: 50
     prerequisites:
-    - b_knight crusader building
+    - b_knight crusader hall
     - b_keep 3
     unit:
       Offense: 14
       Defense: 18
       Luck: 0
       Attack: 7
+      Special: 0
       Magic: 0
       Speed: 10
       Action: 3
       Mana: 0
       Supply: 0
-      Health: 95
+      Health: 80
       Barrier: 0
       Armor: 1
       Shield: 1
       Padding: 2
       Resistance: 0
-      Block: 10
-      LuckCoefficient: 1
-      SpeedCoefficient: 1
+      Block: 5
       DodgeChance: 0
       BlockChance: 40
       ProcChance: 0
       CritChance: 0
       bonusDamage:
-      - damage: 5
+      - damage: 3
         scale: 0
-        flag: 8
+        flag: 3
     armySprites:
     - {fileID: 21300000, guid: d68b1a2f0cb67bb4ca4e56737750cfd5, type: 3}
     - {fileID: 21300000, guid: d68b1a2f0cb67bb4ca4e56737750cfd5, type: 3}
@@ -67,7 +70,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: d68b1a2f0cb67bb4ca4e56737750cfd5, type: 3}
     - {fileID: 21300000, guid: d68b1a2f0cb67bb4ca4e56737750cfd5, type: 3}
     - {fileID: 21300000, guid: d68b1a2f0cb67bb4ca4e56737750cfd5, type: 3}
-    unitFlags: 020000000a000000
+    unitFlags: 0400000005000000
     attacks:
     - InternalName: Hinf Melee
       abilityFlags: 76
@@ -93,7 +96,7 @@ MonoBehaviour:
       rangeMode: 0
       areaMode: 0
     abilities:
-    - abilityID: raze
+    - abilityID: 18
       abilityLevel: 1
   attacks:
   - {fileID: 11400000, guid: 0b12d1c6c0d533841b2ec64cf3f6adcd, type: 2}
@@ -102,4 +105,4 @@ MonoBehaviour:
   passives:
   - {fileID: 11400000, guid: eabbbd8d645dfbd419698ddf23c38f4a, type: 2}
   - {fileID: 11400000, guid: ec063dbeddb6692429d4bf5149fde70b, type: 2}
-  character: {fileID: 11400000, guid: d4a914700affcc6488aa29dbf839d77c, type: 2}
+  character: {fileID: 11400000, guid: 517b351abcf85774c8cf52ecde797c57, type: 2}

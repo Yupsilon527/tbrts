@@ -33,12 +33,13 @@ MonoBehaviour:
       value: 80
     prerequisites:
     - b_keep 3
-    - b_knight chapel
+    - b_knight archon hall
     unit:
       Offense: 15
       Defense: 15
       Luck: 0
       Attack: 6
+      Special: 0
       Magic: 9
       Speed: 140
       Action: 4
@@ -51,8 +52,6 @@ MonoBehaviour:
       Padding: 1
       Resistance: 0
       Block: 1
-      LuckCoefficient: 1
-      SpeedCoefficient: 1
       DodgeChance: 0
       BlockChance: 15
       ProcChance: 0
@@ -78,12 +77,13 @@ MonoBehaviour:
     attacks: []
     spells: []
     abilities:
-    - abilityID: fly
+    - abilityID: 0
       abilityLevel: 1
-    - abilityID: slow
+    - abilityID: 0
       abilityLevel: 1
   attacks:
-  - {fileID: 11400000, guid: 353b222755b25ec46bd7cea8cd41ce19, type: 2}
+  - {fileID: 11400000, guid: 421a5efa58343f54eb7fbeb48b2aea00, type: 2}
+  - {fileID: 11400000, guid: 2c61788af62d7264e958cf196c832aca, type: 2}
   spells:
   - {fileID: 11400000, guid: 99cac65b68453de48a31a7c93f4fb812, type: 2}
   passives: []

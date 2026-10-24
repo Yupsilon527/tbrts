@@ -15,7 +15,7 @@ MonoBehaviour:
   InternalName: Knight Archon Hall
   AssignedWorld: 
   prerequisites:
-  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
   armies:
   - {fileID: 11400000, guid: f7a9a54c5e3724c43bf13204f2b444e6, type: 2}
   building:
@@ -28,7 +28,7 @@ MonoBehaviour:
     - resource: 3
       value: 50
     prerequisites:
-    - b_keep 3
+    - b_keep 4
     infinite: 2
     affectedFlags:
     - '-'

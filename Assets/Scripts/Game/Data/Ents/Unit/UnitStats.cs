@@ -41,6 +41,7 @@ public class UnitStats : UnitComponent
         UpdateDefense();
 
         UpdateAttack();
+        UpdateSpecial();
         UpdateMagic();
         UpdateAction();
         UpdateMana();
@@ -104,6 +105,12 @@ public class UnitStats : UnitComponent
         realStats.Attack = baseStats.Attack;
         realStats.Attack += parent.GetProperty(ModifierDefines.Property.attack_bonus);
         realStats.Attack *= parent.GetProperty(ModifierDefines.Property.attack_bonus_percent);
+    }
+    public virtual void UpdateSpecial()
+    {
+        realStats.Special = baseStats.Special;
+        realStats.Special += parent.GetProperty(ModifierDefines.Property.attack_bonus);
+        realStats.Special *= parent.GetProperty(ModifierDefines.Property.attack_bonus_percent);
     }
     public virtual void UpdateMagic()
     {

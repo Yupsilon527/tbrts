@@ -140,7 +140,8 @@ public class UnitData : ProductionData
         string output = "";
         output += $"Combat: {unit.Offense}/{unit.Defense}<br>";
 
-        output += $"Damage: {unit.Attack}<br>";
+        output += $"Attack: {unit.Attack}<br>";
+        output += $"Special: {unit.Special}<br>";
 
         output += $"Magic: {unit.Magic}<br>";
 

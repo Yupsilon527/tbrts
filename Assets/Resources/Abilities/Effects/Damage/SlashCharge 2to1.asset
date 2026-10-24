@@ -16,13 +16,13 @@ MonoBehaviour:
   chance: 0
   targeting: 2
   attack: 0
-  BaseDamage: -3
+  BaseDamage: 0
   scaling:
-  - scaleMode: 8
+  - scaleMode: 9
     scaleDamage: 1
     scaleoff: 0
     scaleRate: 0
   - scaleMode: 2
-    scaleDamage: 2
+    scaleDamage: 1
     scaleoff: 0
     scaleRate: 0

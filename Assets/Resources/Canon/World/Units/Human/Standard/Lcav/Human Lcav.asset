@@ -36,6 +36,7 @@ MonoBehaviour:
       Defense: 8
       Luck: 0
       Attack: 3
+      Special: 8
       Magic: 2
       Speed: 150
       Action: 5

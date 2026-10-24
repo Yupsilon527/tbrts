@@ -14,6 +14,7 @@ public class UnitStatsTable
 
     [Header("Attack")]
     public float Attack = 5;
+    public float Special = 0;
     public float Magic = 0;
     public float Speed = 100;
 

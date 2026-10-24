@@ -33,6 +33,8 @@ Fixes
 TODO
 	command menu
 
+	ability bar
+
 	sites
 		gold
 		mana
