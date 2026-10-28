@@ -23,6 +23,7 @@ public class Combat : Initializable
     public void BattleTroops(DataItemBanner a, DataItemBanner d, DataItemTile l)
     {
         mockBattle = false;
+        a.Exhaust(AttackDefines.combatMovementCost);
         SetUp(a, d, l);
         ResolveInstantly();
     }

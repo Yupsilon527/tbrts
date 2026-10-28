@@ -1906,6 +1906,14 @@ PrefabInstance:
     - target: {fileID: 2076128750353709723, guid: dda6364d2daf69840ac5b59522b27549, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 4241793933795260505}
+    - target: {fileID: 2076128750353709723, guid: dda6364d2daf69840ac5b59522b27549, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076128750353709723, guid: dda6364d2daf69840ac5b59522b27549, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CastleRazeWindow, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7542690721458349528, guid: dda6364d2daf69840ac5b59522b27549, type: 3}
       propertyPath: m_Name

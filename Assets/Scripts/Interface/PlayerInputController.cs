@@ -131,10 +131,18 @@ public class PlayerInputController : MonoBehaviour
             {
                 if (mouseOverTile.armyLayer != null)
                 {
+                    if (mouseOverTile.armyLayer == selArmy)
+                    {
+                        InterfaceManager.main.OpenWindow(InterfaceManager.main.armyWindow);
+                        InterfaceManager.main.armyWindow.ForSingleArmy(selArmy);
+                    }
                     if (mouseOverTile.armyLayer.GetAlignment(activePlayer) == PlayerDefines.Alignment.playerowned)
                         GameManager.main.armyManager.SelectArmy(mouseOverTile.armyLayer);
                     else if (mouseOverTile.armyLayer.IsVisibleToPlayer(activePlayer))
-                        GiveOrder(selArmy,new AttackOrder(Order.ID.Follow, mouseOverTile.gridPos, mouseOverTile.armyLayer),  queue);
+                        if (mouseOverTile.armyLayer.GetAlignment(selArmy) == PlayerDefines.Alignment.enemy)
+                            GiveOrder(selArmy,new AttackOrder(Order.ID.Follow, mouseOverTile.gridPos, mouseOverTile.armyLayer),  queue);
+                        else
+                            GiveOrder(selArmy,new FollowOrder(Order.ID.Follow, mouseOverTile.gridPos, mouseOverTile.armyLayer),  queue);
                 }
                 else if (mouseOverTile.buildingLayer != null)
                 {

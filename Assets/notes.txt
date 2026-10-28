@@ -1,5 +1,8 @@
 TEST
 	innates/auras
+		aura types
+			troop
+			aura
 		temp abilities & auras
 	bonuses/buildings
 
@@ -19,9 +22,6 @@ TEST
 
 
 Fixes
-	combat wont start
-
-
 	AURA abilities dont work
 	army swap/formation tokens
 
@@ -31,16 +31,21 @@ Fixes
 	player window doesnt work
 
 TODO
-	command menu
+	INTERFACE
+		command menu
+		ability bar
 
-	ability bar
+	econ	
+		metal limit
+			overlimit 25%
+			sell for 50%
 
-	sites
-		gold
-		mana
-		heal/supply 
-		refresh movement
-		buff
+		sites
+			gold
+			mana
+			heal/supply 
+			refresh movement
+			buff
 
 	unit abilities
 

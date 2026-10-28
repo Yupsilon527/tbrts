@@ -47,7 +47,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         }
         else if (act == AbilityDefines.Event.OnDayBegin)
         {
-            if (parent.GetMainTile().buildingLayer is DataItemCastle city
+            if (parent.GetCenterTile().buildingLayer is DataItemCastle city
                 && city.GetAlignment(parent) == PlayerDefines.Alignment.ally
                 && city.AmIUnderAlliedControl())
                 SupplyPoints.SetPercentage(1);

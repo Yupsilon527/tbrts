@@ -53,15 +53,6 @@ public class CommandMenu : PlayerWindow
         }
         if (selArmy != null)
         {
-            if (selArmy.movement.CanWalkOnTile(tile))
-            {
-                e.Add("Move here");
-                a.Add(() =>
-                {
-                    selArmy.orders.ReplaceOrder(new Order(Order.ID.Move, tile.gridPos));
-                    selArmy.movement.ResolveMovement();
-                });
-            }
             if (tile.armyLayer != null)
             {
                 if (tile.armyLayer.GetAlignment(selArmy) == PlayerDefines.Alignment.playerowned)
@@ -95,42 +86,90 @@ public class CommandMenu : PlayerWindow
                             });
                         }
                     }
-                    e.Add("Inspect");
-                    a.Add(() =>
-                    {
-                        InterfaceManager.main.OpenWindow(InterfaceManager.main.armyWindow);
-                        InterfaceManager.main.armyWindow.ForSingleArmy(tile.armyLayer);
-                    });
                 }
-            }
-            else if (selArmy.IsAdjecent(tile))
-            {
-                e.Add("Split");
+                else
+                {
+                    if (tile.armyLayer != null)
+                    {
+                        if (tile.armyLayer.GetAlignment(selArmy) == PlayerDefines.Alignment.enemy)
+                        {
+                            e.Add("Attack");
+                            a.Add(() =>
+                            {
+                                selArmy.orders.ReplaceOrder(new AttackOrder(Order.ID.Follow, tile.gridPos, tile.armyLayer));
+                                selArmy.movement.ResolveMovement();
+                            });
+                        }
+                    }
+                }
+                e.Add("Inspect");
                 a.Add(() =>
                 {
-                    var tempArmy = new DataItemBanner(tile.gridPos, player.ID);
-                    InterfaceManager.main.OpenWindow(InterfaceManager.main.transferWindow);
-                    InterfaceManager.main.transferWindow.AssignPlayer(player);
-                    InterfaceManager.main.transferWindow.MergeUnits(selArmy, tile.armyLayer);
+                    InterfaceManager.main.OpenWindow(InterfaceManager.main.armyWindow);
+                    InterfaceManager.main.armyWindow.ForSingleArmy(tile.armyLayer);
                 });
             }
-            if (tile.buildingLayer != null)
+            else
             {
-                if (tile.buildingLayer is DataItemCastle castle && selArmy.CanInvadeCastle(castle))
+                if (selArmy.movement.CanWalkOnTile(tile))
                 {
-                    e.Add("Raze");
+                    e.Add("Move here");
                     a.Add(() =>
                     {
-                        InterfaceManager.main.OpenCastleRazeWindow(castle, selArmy);
+                        selArmy.orders.ReplaceOrder(new Order(Order.ID.Move, tile.gridPos));
+                        selArmy.movement.ResolveMovement();
                     });
                 }
-                if (tile.buildingLayer is DataItemSite site)
+            }
+            if (selArmy.IsAdjecent(tile))
+            {
+                if (tile.armyLayer == null)
                 {
-                    e.Add("Visit");
+                    e.Add("Split");
                     a.Add(() =>
                     {
-                        selArmy.VisitSite(site);
+                        var tempArmy = new DataItemBanner(tile.gridPos, player.ID);
+                        InterfaceManager.main.OpenWindow(InterfaceManager.main.transferWindow);
+                        InterfaceManager.main.transferWindow.AssignPlayer(player);
+                        InterfaceManager.main.transferWindow.MergeUnits(selArmy, tile.armyLayer);
                     });
+                }
+            }
+            else if (tile == selArmy.GetCenterTile())
+            {
+                if (tile.buildingLayer != null)
+                {
+                    if (tile.buildingLayer is DataItemCastle castle && selArmy.CanRazeCastle(castle))
+                    {
+                        e.Add("Raze");
+                        a.Add(() =>
+                        {
+                            InterfaceManager.main.OpenCastleRazeWindow(castle, selArmy);
+                        });
+                    }
+                    if (tile.buildingLayer is DataItemSite site)
+                    {
+                        e.Add("Visit");
+                        a.Add(() =>
+                        {
+                            selArmy.VisitSite(site);
+                        });
+                    }
+                }
+            }
+            else
+            {
+                if (tile.buildingLayer != null)
+                {
+                    if (tile.buildingLayer is DataItemCastle castle && selArmy.CanInvadeCastle(castle))
+                    {
+                        e.Add("Raze");
+                        a.Add(() =>
+                        {
+                            selArmy.orders.ReplaceOrder(new RazeOrder(Order.ID.Raze, tile.gridPos));
+                            selArmy.movement.ResolveMovement();
+                        });
+                    }
                 }
             }
             if (tile.gridPos == selArmy.GetCoords())
@@ -157,11 +196,12 @@ public class CommandMenu : PlayerWindow
 
             foreach (var spell in s)
             {
-                e.Add("Cast " + spell.InternalName);
+                if (spell.HasResourcesToCast()) { 
+                    string action = "Cast " + spell.InternalName;
+                if (!e.Contains(action)) { 
+                e.Add(action);
                 a.Add(() =>
                 {
-                    if (spell.HasResourcesToCast())
-                    {
                         if (spell.InstantCast())
                         {
                             selArmy.abilities.CastAbilityOnTile(spell, tile);
@@ -170,8 +210,9 @@ public class CommandMenu : PlayerWindow
                         {
                             PlayerInputController.main.AssignCastAbility(spell);
                         }
-                    }
                 });
+            }
+            }
             }
         }
 
@@ -231,17 +272,14 @@ public class CommandMenu : PlayerWindow
         {
             e.Add("Center on selected army");
             a.Add(() => { CameraController.main.CenterOnTile(selArmy.GetCoords()); });
-            e.Add("Move here");
-            a.Add(() =>
-            {
-                selArmy.orders.ReplaceOrder(new Order(Order.ID.Move, tile.gridPos));
-            });
             e.Add("Reorganize");
             a.Add(() =>
             {
                 InterfaceManager.main.OpenWindow(InterfaceManager.main.armyWindow);
                 InterfaceManager.main.armyWindow.ForSingleArmy(selArmy);
             });
+            e.Add("Move");
+            a.Add(() => { selArmy.movement.ResolveMovement(); });
             e.Add("Deselect");
             a.Add(() => { GameManager.main.armyManager.ClearSelectedArmy(); });
         }

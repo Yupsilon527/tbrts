@@ -8,7 +8,7 @@ public class VisitOrder : Order
 
     public override bool Resolve(DataItemBanner attacker)
     {
-        if (attacker.GetMainTile().buildingLayer is DataItemSite site)
+        if (attacker.GetCenterTile().buildingLayer is DataItemSite site)
         {
             if (attacker.VisitSite(site))
             {

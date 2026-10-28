@@ -3,7 +3,7 @@
 public class ApplyTroopEffect : TroopUniqueEffect
 {
     public ModifierDefines.TroopEffect effect;
-    public int effectPower;
+    public float effectPower;
 
     public override void Resolve(DataItemBanner banner)
     {

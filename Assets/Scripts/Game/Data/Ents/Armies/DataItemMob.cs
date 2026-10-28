@@ -14,7 +14,7 @@ public class DataItemMob : DataItemObject
     {
         return new DataItemTile[] { tile };
     }
-    public virtual DataItemTile GetMainTile()
+    public virtual DataItemTile GetCenterTile()
     {
         return tile;
     }

@@ -18,7 +18,7 @@ MonoBehaviour:
   attack: 2
   BaseDamage: 0
   scaling:
-  - scaleMode: 8
+  - scaleMode: 9
     scaleDamage: 1
     scaleoff: 0
     scaleRate: 0

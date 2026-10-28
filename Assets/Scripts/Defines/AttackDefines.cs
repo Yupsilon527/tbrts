@@ -182,5 +182,7 @@ public static class AttackDefines
         return baseValue;
     }
     public static float attackCoefficient = 100;
-    internal static float minAccuracy = .2f;
+    public static float minAccuracy = .2f;
+    public static int combatMovementNeed = 1;
+    public static int combatMovementCost = 10;
 }

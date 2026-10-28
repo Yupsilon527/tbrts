@@ -56,6 +56,10 @@ public class DataItemBanner : DataItemMob
             GetPlayerOwner().upgrades.ApplyResearchedUpgradeToNewlySpawnedUnit(u);
             if (tile.buildingLayer is DataItemCastle castle)
                 castle.bonuses.ApplyResearchedUpgradeToNewlySpawnedUnit(u);
+            foreach (var a in army.bonusAbilities)
+            {
+                u.innates.AddAbility(a.abilityID, a.abilityLevel, UnitDefines.UpgradeCondition.permanent);
+            }
             u.FireEventOnSelf(AbilityDefines.Event.OnSpawn);
         }
         display?.OnGraphicsChange();
@@ -316,7 +320,7 @@ public class DataItemBanner : DataItemMob
     #endregion
     public bool BattleAnother(DataItemBanner other, bool showPopup = true)
     {
-        if (other.IsAlive() && tile.IsNeighboring(other.tile) && GetAlignment(other) == PlayerDefines.Alignment.enemy && movement.CanPayMovement(4))
+        if (other.IsAlive() && tile.IsNeighboring(other.tile) && GetAlignment(other) == PlayerDefines.Alignment.enemy && movement.CanPayMovement(AttackDefines.combatMovementNeed))
         {
             if (showPopup)
             {
@@ -325,7 +329,6 @@ public class DataItemBanner : DataItemMob
             }
             else
             {
-                Exhaust(4);
                 movement.UpdateStartingMovement();
                 Combat.main.BattleTroops(this, other, other.tile);
                 foreach (var unit in formation.GetUnits())
@@ -341,6 +344,10 @@ public class DataItemBanner : DataItemMob
 
         }
         return false;
+    }
+    public bool CanRazeCastle(DataItemCastle castle)
+    {
+        return CanInvadeCastle(castle) && castle.GetSituatedArmies(true).Count() == 0;
     }
     public bool CanInvadeCastle(DataItemCastle castle)
     {

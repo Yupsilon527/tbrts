@@ -8,7 +8,7 @@ public class RazeOrder : Order
 
     public override bool Resolve(DataItemBanner attacker)
     {
-        if (attacker.GetMainTile().buildingLayer is DataItemCastle city)
+        if (attacker.GetCenterTile().buildingLayer is DataItemCastle city)
         {
             //player ai
             if (attacker.CanInvadeCastle(city))

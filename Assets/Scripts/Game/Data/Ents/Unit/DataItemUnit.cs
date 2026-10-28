@@ -21,9 +21,9 @@ public class DataItemUnit : DataItemMob
         return troop.GetOccupiedTiles();
     }
 
-    public override DataItemTile GetMainTile()
+    public override DataItemTile GetCenterTile()
     {
-        return troop.GetMainTile();
+        return troop.GetCenterTile();
     }
 
 

@@ -47,6 +47,7 @@ public static class CombatDefines
         targetAllies = 1 << 1,
         targetEnemies = 1 << 2,
         mustNotHaveActed = 1 << 3,
+        exhausting = 1 << 4,
     }
     public enum AbilityCastMode
     {

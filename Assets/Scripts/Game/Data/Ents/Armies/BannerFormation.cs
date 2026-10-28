@@ -218,7 +218,7 @@ public class BannerFormation : BannerComponent
         {
             return true;
         }
-        else if (target.GetAlignment(parent) != PlayerDefines.Alignment.playerowned || !parent.GetMainTile().IsPassible(target.GetMovetype()))
+        else if (target.GetAlignment(parent) != PlayerDefines.Alignment.playerowned || !parent.GetCenterTile().IsPassible(target.GetMovetype()))
         {
             return false;
         }
@@ -417,10 +417,10 @@ public class BannerFormation : BannerComponent
 
     public float GetHealthCurrent()
     {
-        return Formation.Sum(u => u.health.GetValue());
+        return Formation.Sum(u => u?.health?.GetValue() ?? 0);
     }
     public float GetHealthTotal()
     {
-        return Formation.Sum(u => u.health.GetLimit());
+        return Formation.Sum(u => u?.health?.GetLimit() ?? 0);
     }
 }

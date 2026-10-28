@@ -37,12 +37,13 @@ MonoBehaviour:
       Offense: 0
       Defense: 0
       Luck: 0
-      Attack: 40
-      Magic: 25
+      Attack: 10
+      Special: 20
+      Magic: 8
       Speed: 100
-      Action: 1
+      Action: 2
       Mana: 0
-      Supply: 3
+      Supply: 0
       Health: 50
       Barrier: 0
       Armor: 0
@@ -55,7 +56,7 @@ MonoBehaviour:
       ProcChance: 0
       CritChance: 0
       bonusDamage:
-      - damage: 15
+      - damage: 8
         scale: 0
         flag: 8
     armySprites:
@@ -85,9 +86,9 @@ MonoBehaviour:
       abilityLevel: 1
     - abilityID: 7
       abilityLevel: 1
-  attacks: []
+  attacks:
+  - {fileID: 11400000, guid: 2a05274626917c34c987aceeaab222d7, type: 2}
   spells:
   - {fileID: 11400000, guid: 77a8ab516e3f6b7459e2e8d1a53ef8f8, type: 2}
-  - {fileID: 11400000, guid: c30c581a52c7d5841a798660ec3d7940, type: 2}
   passives: []
   character: {fileID: 11400000, guid: 183bc472a392b2f4a8021636448c618b, type: 2}

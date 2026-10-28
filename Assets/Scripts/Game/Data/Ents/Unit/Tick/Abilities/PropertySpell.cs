@@ -67,6 +67,7 @@ public class PropertySpell : PropertyAbility
     public override bool HasResourcesToCast()
     {
         if (original.HasFlag(CombatDefines.SpellFlag.mustNotHaveActed) && parent.troop.movement.movedThisTurn) return false;
+        if (original.HasFlag(CombatDefines.SpellFlag.exhausting) && parent.troop.movement.movementLeft == 0) return false;
         
         var playerOwner = parent.GetPlayerOwner();
         return parent.actions.SupplyPoints.GetValue() >= original.SupplyCost
@@ -83,7 +84,7 @@ public class PropertySpell : PropertyAbility
         playerOwner.econ.Spend(new ResourceCost(EconomyDefines.EconomyResource.Gold, original.GoldCost));
         playerOwner.econ.Spend(new ResourceCost(EconomyDefines.EconomyResource.Mana, original.ManaCost));
 
-        if (original.HasFlag(CombatDefines.SpellFlag.mustNotHaveActed))
+        if (original.HasFlag(CombatDefines.SpellFlag.exhausting))
             parent.troop.Exhaust();
 
         base.SpendResources();

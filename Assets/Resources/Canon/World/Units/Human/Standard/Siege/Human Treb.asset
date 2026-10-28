@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cc0d2294cc641c47b082b692bb6707d, type: 3}
+  m_Name: Human Treb
+  m_EditorClassIdentifier: 
+  InternalName: Human Catapult
+  AssignedWorld: 
+  prerequisites:
+  - {fileID: 11400000, guid: 103d01e6feaceec47890f992f40d4fe4, type: 2}
+  - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
+  unit:
+    InternalName: Human Treb
+    icon: {fileID: 21300000, guid: 884e81365693bfc4ba631a52a0f3be01, type: 3}
+    flags:
+    - unit
+    - siege
+    - vehicle
+    - heavy
+    - treb
+    - human
+    costs:
+    - resource: 0
+      value: 900
+    - resource: 1
+      value: 900
+    prerequisites:
+    - b_workshop
+    - b_keep 4
+    unit:
+      Offense: 0
+      Defense: 0
+      Luck: 0
+      Attack: 30
+      Special: 30
+      Magic: 25
+      Speed: 100
+      Action: 0
+      Mana: 0
+      Supply: 3
+      Health: 50
+      Barrier: 0
+      Armor: 0
+      Shield: 0
+      Padding: 0
+      Resistance: 0
+      Block: 0
+      DodgeChance: 0
+      BlockChance: 0
+      ProcChance: 0
+      CritChance: 0
+      bonusDamage: []
+    armySprites:
+    - {fileID: 21300000, guid: 884e81365693bfc4ba631a52a0f3be01, type: 3}
+    - {fileID: 21300000, guid: 884e81365693bfc4ba631a52a0f3be01, type: 3}
+    - {fileID: 21300000, guid: 884e81365693bfc4ba631a52a0f3be01, type: 3}
+    - {fileID: 21300000, guid: 884e81365693bfc4ba631a52a0f3be01, type: 3}
+    - {fileID: 21300000, guid: 884e81365693bfc4ba631a52a0f3be01, type: 3}
+    - {fileID: 21300000, guid: 884e81365693bfc4ba631a52a0f3be01, type: 3}
+    unitFlags: 1200000016000000
+    attacks: []
+    spells:
+    - InternalName: Catapult Bombardment
+      abilityFlags: 12
+      MetalCost: 0
+      GoldCost: 0
+      ManaCost: 0
+      SupplyCost: 1
+      min_range: 2
+      max_range: 5
+      area_range: 0
+      targetMode: 2
+      rangeMode: 0
+      areaMode: 0
+    abilities:
+    - abilityID: 14
+      abilityLevel: 1
+    - abilityID: 7
+      abilityLevel: 1
+  attacks: []
+  spells:
+  - {fileID: 11400000, guid: eeda78e7fd906fc42987509be163a847, type: 2}
+  - {fileID: 11400000, guid: c30c581a52c7d5841a798660ec3d7940, type: 2}
+  passives: []
+  character: {fileID: 11400000, guid: 183bc472a392b2f4a8021636448c618b, type: 2}
