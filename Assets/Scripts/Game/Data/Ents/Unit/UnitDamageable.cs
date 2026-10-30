@@ -66,7 +66,7 @@ public class UnitDamageable : UnitComponent
         damage.Calculate();
         foreach (var d in damage.realDamage)
         {
-            Combat.main.Inspect($"{parent} recevies {d.Value} {d.Key} ({damage.blockType}) total damage from {damage.attacker} at t{Combat.main.currentTick}");
+            Combat.main.Inspect($"{parent} TAKES {d.Value} {d.Key} ({damage.blockType}) DAMAGE from {damage.attacker} at t{Combat.main.currentTick}");
     
                 float realDamage = d.Value;
             switch (d.Key)

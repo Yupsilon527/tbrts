@@ -16,8 +16,10 @@ public class UnitContainer : MonoBehaviour
         }
         if (unitName != null)
             unitName.text = unit.data.InternalName;
-        if (hpFill != null)
+        if (hpFill != null) { 
             hpFill.AssignResource(unit.health);
+            hpFill.gameObject.SetActive(true);
+        }
     }
     public virtual void ForData(ProductionData data)
     {
@@ -53,5 +55,7 @@ public class UnitContainer : MonoBehaviour
             unitImage.enabled = false;
         if (unitName != null)
             unitName.text = "";
+        if (hpFill != null)
+            hpFill.gameObject.SetActive(false);
     }
 }

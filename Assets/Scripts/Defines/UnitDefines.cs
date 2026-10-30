@@ -68,15 +68,19 @@ public static class UnitDefines
         small, 
         large,
 
-		//spies can see inside cities
-		//banding, reverse banding (depending on troops in enemy team)
-		//loner
+        undead,
+        specual,
 
-		//slayer, trample?
+        //spies can see inside cities
+        //banding, reverse banding (depending on troops in enemy team)
+        //loner
+
+        //slayer, trample?
 
         // vampirism,
         // cannibalize, heals on kill
 
-		// petrify - unit dies below X hp
+        // petrify - unit dies below X hp
     }
+    public delegate bool UnitCheck(DataItemUnit unit);
 }

@@ -1,4 +1,12 @@
 TEST
+	death
+		dead units stay in troop
+		can be revived
+		can be zombie'd
+		revived/healed in castle
+
+		replaced with summon unit
+
 	innates/auras
 		aura types
 			troop

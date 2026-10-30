@@ -174,7 +174,7 @@ public class UnitStats : UnitComponent
     {
         realStats.Speed = baseStats.Speed;
         realStats.Speed += parent.GetProperty(ModifierDefines.Property.luck_bonus);
-        realStats.SpeedCoefficient += realStats.GetSpeedMultiplier();
+        realStats.SpeedCoefficient = realStats.GetSpeedMultiplier();
     }
     public virtual void UpdateMisc()
     {

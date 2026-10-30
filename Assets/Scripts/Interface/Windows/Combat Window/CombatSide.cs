@@ -6,6 +6,7 @@ public class CombatSide : MonoBehaviour
     public CombatantContainer[] formation;
     public GameObject supportParent;
     public CombatantContainer[] support;
+    public HealthBar healthBar;
 
     public void LoadArmy(DataItemBanner army)
     {
@@ -38,7 +39,14 @@ public class CombatSide : MonoBehaviour
             }
             else { support[i].gameObject.SetActive(false); }
         }
+        if (healthBar!= null)
+        {
+            float health = army.formation.GetHealthCurrent();
+            float limit = army.formation.GetHealthTotal();
+            float percent = health / limit;
 
+            healthBar.ShowValue((percent * 100).ToString("F0"), percent);
+        }
     }
     public void Clear()
     {

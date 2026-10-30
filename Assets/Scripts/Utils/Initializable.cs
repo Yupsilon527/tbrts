@@ -21,7 +21,7 @@ using UnityEngine;
             if (att == null)
                 att = GetComponentInChildren<T>();
         }
-        public void Inspect(string str)
+        public virtual void Inspect(string str)
         {
             if (inspect)
                 Debug.Log($"[{name}] {str}");

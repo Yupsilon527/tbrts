@@ -333,11 +333,11 @@ public class DataItemBanner : DataItemMob
                 Combat.main.BattleTroops(this, other, other.tile);
                 foreach (var unit in formation.GetUnits())
                 {
-                    Combat.main.Inspect($"Unit {unit} remaining with {unit.health.GetValue()} health!");
+                    Combat.main.Inspect($"Unit {unit} remaining with {unit.health.GetValue()}/{unit.health.GetLimit()} health!");
                 }
                 foreach (var unit in other.formation.GetUnits())
                 {
-                    Combat.main.Inspect($"Unit {unit} remaining with {unit.health.GetValue()} health!");
+                    Combat.main.Inspect($"Unit {unit} remaining with {unit.health.GetValue()}/{unit.health.GetLimit()} health!");
                 }
                 return true;
             }
@@ -355,18 +355,15 @@ public class DataItemBanner : DataItemMob
     }
     public void PostDamageUpdate()
     {
-      /*  foreach (var unit in formation.GetUnits())
-        {
-            if (!unit.IsAlive())
-                formation.RemoveTroop(unit, false);
-        }*/
         if (formation.GetUnits(incDead: false).Length == 0)
             Despawn();
         else
         {
+            formation.DisposeAllWhere((u) => u.IsTemporary() || (!u.IsAlive() && u.IsDisposable()));
             status.ResolvePendingStatuses();
             formation.OnFormationUpdate();
         }
+
     }
     #region Selection
     public override void SetSelected(bool value)
@@ -426,10 +423,7 @@ public class DataItemBanner : DataItemMob
         if (!dead)
         {
             dead = true;
-            foreach (var unit in formation.GetUnits())
-            {
-                formation.DisposeCorpse(unit);
-            }
+                formation.DisposeAllWhere((u) => true);
             OnPositionChange(gridPos, gridPos);
             base.Despawn();
 

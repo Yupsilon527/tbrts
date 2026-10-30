@@ -8,9 +8,13 @@ public class HealthBar : MonoBehaviour
     public TextMeshProUGUI value;
     public void AssignResource(Resource res)
     {
-        if (fill!=null)
-        fill.fillAmount = res.GetPercentage();
+        ShowValue(res.GetValue() + "/" + res.GetLimit(), res.GetPercentage());
+    }
+    public void ShowValue(string text, float percent)
+    {
+        if (fill != null)
+            fill.fillAmount = percent;
         if (value != null)
-            value.text = res.GetValue() + "/" + res.GetLimit();
+            value.text = text;
     }
 }

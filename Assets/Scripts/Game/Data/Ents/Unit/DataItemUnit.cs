@@ -300,6 +300,18 @@ public class DataItemUnit : DataItemMob
         return output;
     }
 
+    public bool IsSpecial()
+    {
+        return false;
+    }
+    public bool IsTemporary()
+    {
+        return false;
+    }
+    public bool IsDisposable()
+    {
+        return false;
+    }
     public bool IsAlive()
     {
         return health.GetValue() > 0;

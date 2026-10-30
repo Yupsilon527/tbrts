@@ -4,9 +4,9 @@ using UnityEngine;
 public class CombatantAbilities : UnitComponent, CombatantTicker
 {
     public int nextTick = 0;
-    public ResourceInt ActionPoint = new ResourceInt(1, "AP", false, false);
-    public ResourceInt ReactionPoints = new ResourceInt(1, "MP", false, false);
-    public ResourceInt SupplyPoints = new ResourceInt(1, "SP", false, false);
+    public ResourceInt ActionPoint = new ResourceInt(1, "AP", false, true);
+    public ResourceInt ReactionPoints = new ResourceInt(1, "MP", false, true);
+    public ResourceInt SupplyPoints = new ResourceInt(1, "SP", false, true);
 
     public bool CanAffordAP(int val)
     {
@@ -22,7 +22,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     }
 
     public HashSet<PropertyAbility> actions = new();
-    public HashSet<PropertyAbility> available = new();
+    public HashSet<PropertyWeapon> available = new();
     public CombatantAbilities(DataItemUnit parent) : base(parent)
     {
         ClearAbilities();
@@ -38,8 +38,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         }
         else if (act == AbilityDefines.Event.CombatPhase)
         {
-            foreach (var atk in GetAttacks())
-                if (atk.original.attackPhase == Combat.main.currentPhase)
+            foreach (var atk in UpdateAvailableAbilities(Combat.main.currentPhase,false))
                 {
                     atk.SetCooldown(Combat.main.currentTick + Mathf.CeilToInt(parent.stats.realStats.SpeedCoefficient * atk.startupDelay));
                     atk.uses = 0;
@@ -47,12 +46,16 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         }
         else if (act == AbilityDefines.Event.OnDayBegin)
         {
-            if (parent.GetCenterTile().buildingLayer is DataItemCastle city
-                && city.GetAlignment(parent) == PlayerDefines.Alignment.ally
-                && city.AmIUnderAlliedControl())
+            if (IsinAlliedCity())
                 SupplyPoints.SetPercentage(1);
         }
         base.TriggerFuncs(act,t);
+    }
+    public bool IsinAlliedCity()
+    {
+        return parent.GetCenterTile().buildingLayer is DataItemCastle city
+                && city.GetAlignment(parent) == PlayerDefines.Alignment.ally
+                && city.AmIUnderAlliedControl();
     }
     public void ClearAbilities()
     {
@@ -103,16 +106,16 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
                 RemoveAbility(ab);
         }
     }
-    public PropertyAbility[] GetAvailableAbilities(CombatDefines.AttackPhase phase, bool castable)
+    public PropertyWeapon[] UpdateAvailableAbilities(CombatDefines.AttackPhase phase, bool castable)
     {
         available.Clear();
-        if (!castable || SanityCheck())
+        if ( SanityCheck())
         {
-            foreach (PropertyWeapon ability in actions)
+            foreach (PropertyWeapon ability in GetAttacks())
             {
                 if (ability == null)
                     continue;
-                if (castable && ability.CanBeCast(phase))
+                if ((castable && ability.CanBeCast(phase))|| ability.IsUsableInPhase(phase))
                     available.Add(ability);
             }
         }
@@ -127,7 +130,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     public int GetNextTick()
     {
         int ticks = int.MaxValue;
-        foreach (var action in actions)
+        foreach (var action in available)
         {
             if (action.CanBeCast(Combat.main.currentPhase) )
             ticks = Mathf.Min(ticks, action.nextTime + parent.initiative + (int)parent.GetPropertyAdditive(ModifierDefines.Property.stagger));
@@ -136,9 +139,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
     }
     public bool Trigger(CombatDefines.AttackPhase phase, int currentTick)
     {
-        var abilities = GetAttacks();
-
-        foreach (var action in abilities.Where(a => a.CanBeCast(phase) && a.GetValidTargets(parent).Length > 0))
+        foreach (var action in available.Where(a => a.CanBeCast(phase) && a.GetValidTargets(parent).Length > 0))
         {
             if (action.nextTime <= currentTick)
             {

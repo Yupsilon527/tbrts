@@ -416,6 +416,7 @@ MonoBehaviour:
   - {fileID: 7243817208644288734}
   - {fileID: 4208292828992509626}
   - {fileID: 7199341699279594279}
+  healthBar: {fileID: 6388487127979106974}
 --- !u!1 &5655719778846640109
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,10 @@ public class Combat : Initializable
         base.Initialize();
         enabled = false;
     }
-
+    public override void Inspect(string str)
+    {
+        base.Inspect((mockBattle ? "Speculative" : "") + str);
+    }
     public SparseIntMap MockBattle(DataItemBanner a, DataItemBanner d, DataItemTile l)
     {
         mockBattle = true;
@@ -100,7 +103,7 @@ public class Combat : Initializable
 
         foreach (var c in combatants)
         {
-            if (c.actions.GetAttacks().Any(w => w.CanBeCast(currentPhase)))
+            if (c.actions.UpdateAvailableAbilities(currentPhase,true).Length>0)
             {
                 Inspect($"{c} acts at tick {c.nextAction}/{currentPhase}!");
                 currentTick = c.nextAction;
@@ -123,6 +126,7 @@ public class Combat : Initializable
         else
         {
             currentPhase++;
+            currentTick = 0;
             FireEventOnAllFighters(AbilityDefines.Event.CombatPhase);
             foreach (var c in combatants)
             {
@@ -180,7 +184,7 @@ public class Combat : Initializable
     public DataItemBanner GetOppositeSide(DataItemBanner troop)
     {
         if (attackers.GetAlignment(troop) == PlayerDefines.Alignment.enemy)
-        return attackers;
+            return attackers;
         return defenders;
     }
     public bool IsAttackingSide(DataItemUnit unit)

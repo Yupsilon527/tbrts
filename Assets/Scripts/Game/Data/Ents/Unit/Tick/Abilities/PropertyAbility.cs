@@ -18,6 +18,10 @@ public abstract class PropertyAbility : PropertyAction
     {
         return HasResourcesToCast();
     }
+    public virtual bool IsUsableInPhase(CombatDefines.AttackPhase phase)
+    {
+        return false;
+    }
     public virtual bool HasResourcesToCast()
     {
         return true;

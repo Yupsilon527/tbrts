@@ -128,7 +128,7 @@ public class BannerFormation : BannerComponent
                         var replaced = GetTroopInPosition(iX, rY);
                         if (!replaced.IsAlive())
                         {
-                            DisposeCorpse(replaced);
+                            Dispose(replaced);
                             SetTroopInPosition(iX, rY, unit);
                             return true;
                         }
@@ -409,8 +409,17 @@ public class BannerFormation : BannerComponent
         aTroop.formation.SetTroopInPosition(aX, aY, aUnit);
 
     }
-
-   public void DisposeCorpse(DataItemUnit unit)
+    public void DisposeAllWhere(UnitDefines.UnitCheck unitCheck)
+    {
+        foreach (var u in Formation)
+        {
+            if (!u.IsAlive() && unitCheck(u))
+            {
+                Dispose(u);
+            }
+        }
+    }
+   public void Dispose(DataItemUnit unit)
     {
         RemoveUnit(unit,false);
     }

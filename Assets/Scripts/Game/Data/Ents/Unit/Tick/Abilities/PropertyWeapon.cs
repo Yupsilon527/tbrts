@@ -22,16 +22,20 @@ public class PropertyWeapon : PropertyAbility
         return original.HasFlag((CombatDefines.AttackFlag)flag);
     }
 
-    public override bool CanBeCast(CombatDefines.AttackPhase phase)
+    public override bool IsUsableInPhase(CombatDefines.AttackPhase phase)
     {
         return original.attackPhase == phase 
-            && ((original.HasFlag(CombatDefines.AttackFlag.indirectAttack) && !parent.GetState(ModifierDefines.State.cannot_cast))
-            || (!original.HasFlag(CombatDefines.AttackFlag.indirectAttack) && !parent.GetState(ModifierDefines.State.cannot_attack)))
-            && (!original.HasFlag(CombatDefines.AttackFlag.usableOnce) || uses==0)
             && (original.HasFlag(CombatDefines.AttackFlag.castInFrontRow) && parent.troopPosition.y == 0
             || original.HasFlag(CombatDefines.AttackFlag.castInBackRow) && parent.troopPosition.y == 1
             || original.HasFlag(CombatDefines.AttackFlag.castInTransport) && parent.troopPosition.y < 0
-            || original.HasFlag(CombatDefines.AttackFlag.castInSupport) && !parent.troop.IsInCombat())
+            || original.HasFlag(CombatDefines.AttackFlag.castInSupport) && !parent.troop.IsInCombat());
+    }
+    public override bool CanBeCast(CombatDefines.AttackPhase phase)
+    {
+        return IsUsableInPhase(phase)
+            && ((original.HasFlag(CombatDefines.AttackFlag.indirectAttack) && !parent.GetState(ModifierDefines.State.cannot_cast))
+            || (!original.HasFlag(CombatDefines.AttackFlag.indirectAttack) && !parent.GetState(ModifierDefines.State.cannot_attack)))
+            && (!original.HasFlag(CombatDefines.AttackFlag.usableOnce) || uses==0)
             && base.CanBeCast(phase);
     }
     public override bool HasResourcesToCast()
@@ -56,6 +60,7 @@ public class PropertyWeapon : PropertyAbility
         {
             at.ComputeTargets();
             if (at.maintarget == null || at.maintarget.Length == 0 || at.maintarget[0] == null) return false;
+            Combat.main.Inspect($"{table.attacker} casts ability {table.ability}");
 
             var allyTroop = table.attacker.troop.formation.GetUnits();
             var enemyTroop = Combat.main.GetOppositeSide( table.attacker.troop).formation.GetUnits();
