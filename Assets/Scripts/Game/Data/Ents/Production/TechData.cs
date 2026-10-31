@@ -118,12 +118,13 @@ public class TechData : ProductionData
         foreach (var innate in innatesAdded)
         {
             if (delta > 0)
-                unit.modifiers.IncrementModifier(innate, delta);
+                unit.modifiers.IncrementModifier(innate, delta,false);
             else
                 unit.modifiers.DecrementModifier(innate,-delta);
         }
 
         unit.bonuses.GrantBonusDamageFromTable(bonusDamage, oldLevel, newLevel);
+        unit.Refresh();
     }
 }
 

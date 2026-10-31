@@ -28,7 +28,7 @@ public class BannerFormation : BannerComponent
     }
     public void HandleEvent(AbilityDefines.Event e)
     {
-        foreach (var unit in GetUnits())
+        foreach (var unit in GetUnits(incDead:false))
             unit.FireEventOnSelf(e);
     }
     public int CountLivingTroopsInRow(int row)
@@ -60,14 +60,14 @@ public class BannerFormation : BannerComponent
     {
         SetTroopInPosition(p, new DataItemUnit(unit, parent));
     }
-    public void SetTroopInPosition(int x, int y, DataItemUnit unit)
+    public void SetTroopInPosition(int x, int y, DataItemUnit unit, bool sendMessage = false)
     {
         if (x < 0 || y < 0)
-            SetTroopInPosition(-1, unit);
+            SetTroopInPosition(-1, unit, sendMessage);
         else
-            SetTroopInPosition(Translate(x, y), unit);
+            SetTroopInPosition(Translate(x, y), unit, sendMessage);
     }
-    public void SetTroopInPosition(int p, DataItemUnit unit)
+    public void SetTroopInPosition(int p, DataItemUnit unit, bool sendMessage = false)
     {
         if (unit == null)
         {
@@ -93,6 +93,7 @@ public class BannerFormation : BannerComponent
                 else
                     Formation[p] = unit;
                 unit.troop = parent;
+                if (sendMessage)
                 unit.FireEventOnSelf(AbilityDefines.Event.OnMoveTile);
                 parent.auras.OnUnitEnterFormation(unit);
             }
@@ -103,7 +104,7 @@ public class BannerFormation : BannerComponent
         }
         OnFormationUpdate();
     }
-    public bool TransferUnit(DataItemUnit unit)
+    public bool TransferUnit(DataItemUnit unit, bool sendMessage = true)
     {
         if (parent.CanBeMerged(true) && CanIAccept(unit) )
         {
@@ -120,7 +121,7 @@ public class BannerFormation : BannerComponent
                     int rY = unit.IsRanged() ? (UnitDefines.iArmyCols - iY - 1) : iY;
                     if (IsEmptyAt(iX, rY))
                     {
-                        SetTroopInPosition(iX, rY, unit);
+                        SetTroopInPosition(iX, rY, unit, sendMessage);
                         return true;
                     }
                     else
@@ -129,7 +130,7 @@ public class BannerFormation : BannerComponent
                         if (!replaced.IsAlive())
                         {
                             Dispose(replaced);
-                            SetTroopInPosition(iX, rY, unit);
+                            SetTroopInPosition(iX, rY, unit, sendMessage);
                             return true;
                         }
                     }
@@ -413,7 +414,7 @@ public class BannerFormation : BannerComponent
     {
         foreach (var u in Formation)
         {
-            if (!u.IsAlive() && unitCheck(u))
+            if (u!= null && unitCheck(u))
             {
                 Dispose(u);
             }

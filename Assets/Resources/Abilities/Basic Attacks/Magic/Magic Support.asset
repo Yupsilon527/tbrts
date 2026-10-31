@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5d8b1f8940d170e4cb197186a115b509, type: 2}
   data:
     InternalName: Magic Support
-    abilityFlags: 6240
+    abilityFlags: 22624
     apCost: 0
     rpCost: 0
     spCost: 0
@@ -25,4 +25,4 @@ MonoBehaviour:
     attackPhase: 2
     targetPriority: 0
     areaMode: 0
-  weaponFlags: 20000000400000000008000000100000
+  weaponFlags: 2000000040000000000800000010000000400000

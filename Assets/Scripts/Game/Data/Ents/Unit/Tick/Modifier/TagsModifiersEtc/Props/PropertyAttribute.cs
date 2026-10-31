@@ -35,13 +35,10 @@ public class PropertyAttribute : PropertyTag
 
     public void AddFunction(AbilityFunction f)
     {
-        if (!f.IsValid())
+        if (f.IsValid())
         {
-            return;
-        }
-
         functions.Add(f);
-
+        }
     }
 
 

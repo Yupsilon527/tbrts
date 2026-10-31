@@ -27,6 +27,7 @@ public static class CombatDefines
         indirectAttack = 1 << 11,
         usableOnce = 1 << 12,
         magicAttack = 1 << 13,
+        cannotCrit = 1 << 14,
     }
     public enum ArmyPriorityMode
     {

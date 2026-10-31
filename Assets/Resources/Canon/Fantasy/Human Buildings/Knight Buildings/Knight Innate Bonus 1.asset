@@ -15,6 +15,8 @@ MonoBehaviour:
   InternalName: Knight Innate Bonus 1
   AssignedWorld: 
   prerequisites: []
+  actions: []
+  innates: []
   upgrade:
     InternalName: Knight Innate Bonus 1
     icon: {fileID: 0}
@@ -31,7 +33,6 @@ MonoBehaviour:
       value: 0
       IncreasePerLevel: 1.2
     states: []
-    tempSpells: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome: []

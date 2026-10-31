@@ -65,12 +65,20 @@ public class DataItemUnit : DataItemMob
     public DataItemUnit(UnitData uData, DataItemBanner newArmy) : this(uData)
     {
         SetPlayerOwner(newArmy.GetPlayerOwner());
-        newArmy.formation.TransferUnit(this);
+        newArmy.formation.TransferUnit(this,false);
     }
     #region events
     public void FireEventOnSelf(AbilityDefines.Event evtData, bool refresh = false)
     {
-        FireEventOnTarget(evtData,this, refresh);
+        if (evtData == AbilityDefines.Event.OnSpawn)
+        {
+            FireEventOnTarget(evtData, this, false);
+            FireEventOnSelf(AbilityDefines.Event.OnMoveTile, refresh);
+        }
+        else
+        {
+            FireEventOnTarget(evtData, this, refresh);
+        }
     }
     public void FireEventOnTarget(AbilityDefines.Event evt, DataItemUnit target, bool refresh = false)
     {
@@ -243,7 +251,7 @@ public class DataItemUnit : DataItemMob
         string padding = stats.realStats.Padding == stats.baseStats.Padding ? "" : stats.realStats.Padding > stats.baseStats.Padding ? ("+" + (stats.realStats.Padding - stats.baseStats.Padding)) : ("" + (stats.realStats.Shield - stats.baseStats.Padding));
 
         output += $"Armor: {stats.baseStats.Armor}{armor}/{stats.baseStats.Shield}{shield}/{stats.baseStats.Padding}{padding}<br>";
-        output += $"Magic Resist: {Mathf.Round(UnitDamageable.AccountResistances(100, stats.realStats.Resistance))}<br>";
+        output += $"Magic Resist: {Mathf.Round(UnitDamageable.AccountResistances(100, stats.realStats.Resistance))}%<br>";
         output += $"Action Points: {stats.realStats.Action}/Reaction Points: {stats.realStats.Mana}/Supply Points: {stats.realStats.Supply} <br>";
 
         output += $"Movement: {GetMyMovement()} ({GetMovetype()})";

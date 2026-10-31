@@ -33,6 +33,7 @@ public class UnitStatsTable
     public float Padding = 0; 
     public float Resistance = 0; //flat damage reduction against all elemental sources
     public float Block = 0; //damage block, reduces damage when blocking
+    public float Brace = 0; //damage block, reduces damage when blocking
 
     public float GetLuckCoefficient()
     {

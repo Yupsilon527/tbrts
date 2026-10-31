@@ -27,6 +27,6 @@ public class AbilityFunction
     }
     public bool IsValid()
     {
-        return action == null || events == null || events.Length == 0;
+        return action != null && events != null && events.Length > 0;
     }
 }

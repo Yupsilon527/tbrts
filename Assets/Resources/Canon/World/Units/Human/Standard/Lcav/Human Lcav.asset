@@ -36,7 +36,7 @@ MonoBehaviour:
       Defense: 8
       Luck: 0
       Attack: 3
-      Special: 8
+      Special: 4
       Magic: 2
       Speed: 150
       Action: 5
@@ -45,10 +45,11 @@ MonoBehaviour:
       Health: 45
       Barrier: 0
       Armor: 0
-      Shield: 5
-      Padding: 0
+      Shield: 0
+      Padding: 2
       Resistance: 0
       Block: 0
+      Brace: 0
       DodgeChance: 0
       BlockChance: 0
       ProcChance: 0
@@ -60,6 +61,9 @@ MonoBehaviour:
       - damage: 5
         scale: 0
         flag: 2
+      - damage: 5
+        scale: 0
+        flag: 22
     armySprites:
     - {fileID: 21300000, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
     - {fileID: 21300000, guid: c950aefcb8f79fd4c9db3937a578ad42, type: 3}
@@ -100,5 +104,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7a3d3d470d7ce6144845a925dfda660d, type: 2}
   spells:
   - {fileID: 11400000, guid: bde7efac7ad83094688cfeff461ba099, type: 2}
-  passives: []
+  passives:
+  - {fileID: 11400000, guid: 829f29903bc651a43a017d090b56fd0b, type: 2}
+  - {fileID: 11400000, guid: bbf3d590c4dc5b94ebae4924685b6a7b, type: 2}
   character: {fileID: 11400000, guid: bb659cc1777b7dc40b5a7ad4ce786ca7, type: 2}

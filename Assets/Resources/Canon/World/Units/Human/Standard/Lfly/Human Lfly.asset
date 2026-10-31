@@ -35,12 +35,13 @@ MonoBehaviour:
     - b_keep 2
     unit:
       Offense: 15
-      Defense: 15
+      Defense: 5
       Luck: 0
       Attack: 2
-      Magic: 3
+      Special: 1
+      Magic: 1
       Speed: 140
-      Action: 8
+      Action: 6
       Mana: 0
       Supply: 0
       Health: 40
@@ -50,6 +51,7 @@ MonoBehaviour:
       Padding: 5
       Resistance: 0
       Block: 1
+      Brace: 0
       DodgeChance: 0
       BlockChance: 15
       ProcChance: 0
@@ -79,5 +81,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 421a5efa58343f54eb7fbeb48b2aea00, type: 2}
   spells:
   - {fileID: 11400000, guid: 1428fb87fa630c341b6bb6ff65995918, type: 2}
-  passives: []
+  passives:
+  - {fileID: 11400000, guid: 96dd7cdf7b3961e4c98f9d66f57b72f6, type: 2}
   character: {fileID: 11400000, guid: 73dad06f958bcf8429789db1c848a39a, type: 2}

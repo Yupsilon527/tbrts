@@ -87,9 +87,17 @@ public static class AttackDefines
         Transport,
         Ship,
 
+        //misc
+        Chicken,
+        Creep,
+        SuperUnit,
+
+        //alignments/classifications
         Organic,
         Mechanical,
         Undead,
+        Holy,
+        
     }
     public enum ScaleType
     {

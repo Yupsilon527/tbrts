@@ -36,6 +36,7 @@ MonoBehaviour:
       Defense: 0
       Luck: 0
       Attack: 4
+      Special: 3
       Magic: 0
       Speed: 100
       Action: 1
@@ -45,7 +46,7 @@ MonoBehaviour:
       Barrier: 0
       Armor: 3
       Shield: 10
-      Padding: 3
+      Padding: 0
       Resistance: 0
       Block: 0
       DodgeChance: 0
@@ -53,9 +54,6 @@ MonoBehaviour:
       ProcChance: 0
       CritChance: 0
       bonusDamage:
-      - damage: 3
-        scale: 0
-        flag: 20
       - damage: 6
         scale: 0
         flag: 12
@@ -93,7 +91,7 @@ MonoBehaviour:
     - abilityID: 8
       abilityLevel: 1
     - abilityID: 24
-      abilityLevel: 3
+      abilityLevel: 2
     - abilityID: 7
       abilityLevel: 1
     - abilityID: 1

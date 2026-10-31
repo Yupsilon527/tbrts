@@ -34,22 +34,24 @@ MonoBehaviour:
     prerequisites:
     - b_workshop
     unit:
-      Offense: 8
-      Defense: 0
+      Offense: 0
+      Defense: 4
       Luck: 0
       Attack: 5
-      Magic: 6
+      Special: 6
+      Magic: 5
       Speed: 100
-      Action: 3
+      Action: 0
       Mana: 0
-      Supply: 3
+      Supply: 2
       Health: 30
       Barrier: 0
-      Armor: 0
+      Armor: 10
       Shield: 7
-      Padding: 10
+      Padding: 0
       Resistance: 0
       Block: 0
+      Brace: 0
       DodgeChance: 0
       BlockChance: 10
       ProcChance: 0
@@ -68,7 +70,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
     - {fileID: 21300000, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
     - {fileID: 21300000, guid: 16337cf56c199eb4aa7e3dbf5c81e1b7, type: 3}
-    unitFlags: 1200000016000000
+    unitFlags: 1200000019000000
     attacks:
     - InternalName: Harc Ranged
       abilityFlags: 76
@@ -109,7 +111,8 @@ MonoBehaviour:
   attacks:
   - {fileID: 11400000, guid: f728bf6946d1ceb4bb85dc0d5e79d942, type: 2}
   spells:
-  - {fileID: 11400000, guid: 2d0d0b0f49e65694780ec6548f02bb23, type: 2}
-  - {fileID: 11400000, guid: 82d8fb3736530824eb8ad3c0c8025f7b, type: 2}
-  passives: []
+  - {fileID: 11400000, guid: c33f1090c898b8740845ce3f682b843a, type: 2}
+  - {fileID: 11400000, guid: 0a225752f25b6bc489d5ee7874c54127, type: 2}
+  passives:
+  - {fileID: 11400000, guid: bbf3d590c4dc5b94ebae4924685b6a7b, type: 2}
   character: {fileID: 11400000, guid: dc382dc700d332a40b6baca866c17c09, type: 2}

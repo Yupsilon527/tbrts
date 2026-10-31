@@ -51,6 +51,7 @@ MonoBehaviour:
       Padding: 0
       Resistance: 0
       Block: 2
+      Brace: 0
       DodgeChance: 0
       BlockChance: 10
       ProcChance: 0
@@ -113,5 +114,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2da6701740c77724a8e768453806fff2, type: 2}
   spells:
   - {fileID: 11400000, guid: 82d8fb3736530824eb8ad3c0c8025f7b, type: 2}
-  passives: []
+  passives:
+  - {fileID: 11400000, guid: 829f29903bc651a43a017d090b56fd0b, type: 2}
+  - {fileID: 11400000, guid: 0c055c9b3e0bcb946bee4ffd16b27618, type: 2}
+  - {fileID: 11400000, guid: bbf3d590c4dc5b94ebae4924685b6a7b, type: 2}
   character: {fileID: 11400000, guid: 37931bba4cff8084e85e77b162af2633, type: 2}

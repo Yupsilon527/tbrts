@@ -38,12 +38,12 @@ MonoBehaviour:
       Defense: 0
       Luck: 0
       Attack: 10
-      Special: 20
+      Special: 15
       Magic: 8
       Speed: 100
-      Action: 2
+      Action: 1
       Mana: 0
-      Supply: 0
+      Supply: 2
       Health: 50
       Barrier: 0
       Armor: 0
@@ -51,6 +51,7 @@ MonoBehaviour:
       Padding: 2
       Resistance: 0
       Block: 0
+      Brace: 0
       DodgeChance: 0
       BlockChance: 0
       ProcChance: 0
@@ -66,7 +67,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 884e81365693bfc4ba631a52a0f3be01, type: 3}
     - {fileID: 21300000, guid: 884e81365693bfc4ba631a52a0f3be01, type: 3}
     - {fileID: 21300000, guid: 884e81365693bfc4ba631a52a0f3be01, type: 3}
-    unitFlags: 1200000016000000
+    unitFlags: 1200000019000000
     attacks: []
     spells:
     - InternalName: Catapult Bombardment
@@ -86,9 +87,10 @@ MonoBehaviour:
       abilityLevel: 1
     - abilityID: 7
       abilityLevel: 1
-  attacks:
-  - {fileID: 11400000, guid: 2a05274626917c34c987aceeaab222d7, type: 2}
+  attacks: []
   spells:
   - {fileID: 11400000, guid: 77a8ab516e3f6b7459e2e8d1a53ef8f8, type: 2}
-  passives: []
+  - {fileID: 11400000, guid: c30c581a52c7d5841a798660ec3d7940, type: 2}
+  passives:
+  - {fileID: 11400000, guid: bbf3d590c4dc5b94ebae4924685b6a7b, type: 2}
   character: {fileID: 11400000, guid: 183bc472a392b2f4a8021636448c618b, type: 2}

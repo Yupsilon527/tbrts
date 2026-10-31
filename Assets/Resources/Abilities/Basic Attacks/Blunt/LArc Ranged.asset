@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a1d78c3cf8342b34e9c225a040e2f4e6, type: 2}
   data:
     InternalName: LArc Ranged
-    abilityFlags: 2184
+    abilityFlags: 2248
     apCost: 1
     rpCost: 0
     spCost: 0
@@ -25,4 +25,4 @@ MonoBehaviour:
     attackPhase: 2
     targetPriority: 0
     areaMode: 0
-  weaponFlags: 080000008000000000080000
+  weaponFlags: 08000000800000004000000000080000

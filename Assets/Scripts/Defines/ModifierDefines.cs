@@ -131,6 +131,8 @@ public static class ModifierDefines
         resistance_bonus = 20,
         resistance_bonus_percent = 21,
 
+        brace_bonus = 63,
+
         // Block
         block_bonus = 22,
         block_bonus_percent = 23,
@@ -191,7 +193,7 @@ public static class ModifierDefines
         critical_chance = 59,
 
         // Total count (always last)
-        total = 63,
+        total = 64,
     }
 
     public enum TroopState

@@ -40,7 +40,7 @@ MonoBehaviour:
       Defense: 15
       Luck: 0
       Attack: 12
-      Special: 20
+      Special: 9
       Magic: 5
       Speed: 115
       Action: 5
@@ -53,6 +53,7 @@ MonoBehaviour:
       Padding: 1
       Resistance: 0
       Block: 1
+      Brace: 0
       DodgeChance: 0
       BlockChance: 33
       ProcChance: 0
@@ -98,5 +99,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ebacef28fe013bf43887ae1cdc67f8b1, type: 2}
   spells:
   - {fileID: 11400000, guid: cf865d61f45cff54f9433a56f8e3c365, type: 2}
-  passives: []
+  passives:
+  - {fileID: 11400000, guid: 829f29903bc651a43a017d090b56fd0b, type: 2}
+  - {fileID: 11400000, guid: bbf3d590c4dc5b94ebae4924685b6a7b, type: 2}
   character: {fileID: 11400000, guid: 185dd6d38c9c05e42a8aff840cef7392, type: 2}

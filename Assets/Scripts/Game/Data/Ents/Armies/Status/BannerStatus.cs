@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 public class BannerStatus : BannerComponent
 {
@@ -11,7 +10,7 @@ public class BannerStatus : BannerComponent
     {
     }
 
-    public void ApplyPendingStatus(TroopUniqueEffect status)
+    public void ApplyStatus(TroopUniqueEffect status)
     {
         if (!pendingStatuses.Contains(status))
             pendingStatuses.Add(status);

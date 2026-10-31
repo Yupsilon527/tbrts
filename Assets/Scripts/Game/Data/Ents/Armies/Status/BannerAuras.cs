@@ -28,6 +28,7 @@ public class BannerAuras : BannerComponent
         {
             unit.modifiers.ApplyNewModifierFromData(aura.innate,aura.caster);
         }
+        unit.Refresh();
     }
     public void OnUnitExitFormation(DataItemUnit unit)
     {

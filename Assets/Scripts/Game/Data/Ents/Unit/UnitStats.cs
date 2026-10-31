@@ -74,17 +74,23 @@ public class UnitStats : UnitComponent
     #region Defensive
     public virtual void UpdateArmor()
     {
+        realStats.Brace = baseStats.Brace;
+        realStats.Brace += parent.GetProperty(ModifierDefines.Property.brace_bonus);
+
         realStats.Armor = baseStats.Armor;
         realStats.Armor += parent.GetProperty(ModifierDefines.Property.armor_bonus);
         realStats.Armor *= parent.GetProperty(ModifierDefines.Property.armor_bonus_percent);
+        realStats.Armor += realStats.Brace;
 
         realStats.Padding = baseStats.Padding;
         realStats.Padding += parent.GetProperty(ModifierDefines.Property.padding_bonus);
         realStats.Padding *= parent.GetProperty(ModifierDefines.Property.padding_bonus_percent);
+        realStats.Padding += realStats.Brace;
 
         realStats.Shield = baseStats.Shield;
         realStats.Shield += parent.GetProperty(ModifierDefines.Property.shield_bonus);
         realStats.Shield *= parent.GetProperty(ModifierDefines.Property.shield_bonus_percent);
+        realStats.Shield += realStats.Brace;
     }
     public virtual void UpdateBlock()
     {

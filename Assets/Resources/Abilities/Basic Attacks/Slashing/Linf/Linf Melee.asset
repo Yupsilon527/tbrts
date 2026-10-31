@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26b30f17bc374894ba8cccf57206e933, type: 3}
-  m_Name: Harc Ranged
+  m_Name: Linf Melee
   m_EditorClassIdentifier: 
   effects:
-  - {fileID: 11400000, guid: 768795fae82ebbb4694719fb61c63200, type: 2}
+  - {fileID: 11400000, guid: 8eaeac0c0954b4f4ba2d62981ba0e490, type: 2}
   data:
-    InternalName: Harc Ranged
+    InternalName: Linf Melee
     abilityFlags: 76
     apCost: 1
-    mpCost: 0
+    rpCost: 0
     spCost: 0
-    castTime: 120
-    castDelay: 160
+    castTime: 100
+    castDelay: 100
     attackPhase: 2
     targetPriority: 0
     areaMode: 0

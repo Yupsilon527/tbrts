@@ -173,6 +173,10 @@ public class UnitDamageable : UnitComponent
     }
     public static float AccountResistances(float damage, float resistance)
     {
+        if (resistance < 0)
+        {
+            return -damage * resistance / AttackDefines.ArmorMitigation;
+        }
         float arMult = AttackDefines.ArmorMitigation / (AttackDefines.ArmorMitigation + resistance);
         return damage * arMult;
     }

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Ctpt Ranged
   m_EditorClassIdentifier: 
   effects:
-  - {fileID: 11400000, guid: 92287d2ebbb0af540bff0a51f8dc2320, type: 2}
+  - {fileID: 11400000, guid: dff0749d5818e2e4882fc698dd11fb21, type: 2}
   data:
-    InternalName: Siege Ranged
-    abilityFlags: 136
+    InternalName: Ctpt Ranged
+    abilityFlags: 460
     apCost: 1
     rpCost: 0
     spCost: 0
@@ -25,4 +25,4 @@ MonoBehaviour:
     attackPhase: 2
     targetPriority: 0
     areaMode: 1
-  weaponFlags: 0800000080000000
+  weaponFlags: 0400000008000000400000008000000000010000

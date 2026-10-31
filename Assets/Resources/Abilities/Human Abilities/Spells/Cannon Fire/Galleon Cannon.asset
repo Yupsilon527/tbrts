@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Galleon Cannon
   m_EditorClassIdentifier: 
   effects:
-  - {fileID: 11400000, guid: afd1df377fcccc042a8c77201b59f966, type: 2}
+  - {fileID: 11400000, guid: 7dbb3be73efc8cb458d5533ee6717dcd, type: 2}
   data:
     InternalName: Galleon Cannon
     abilityFlags: 4

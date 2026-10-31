@@ -35,9 +35,10 @@ MonoBehaviour:
       Offense: 10
       Defense: 0
       Luck: 0
-      Attack: 10
-      Magic: 10
-      Speed: 100
+      Attack: 0
+      Special: 0
+      Magic: 2
+      Speed: 55
       Action: 1
       Mana: 0
       Supply: 0
@@ -48,6 +49,7 @@ MonoBehaviour:
       Padding: 0
       Resistance: 0
       Block: 0
+      Brace: 0
       DodgeChance: 0
       BlockChance: 0
       ProcChance: 0

@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class PropertyTag
 {
+    public override string ToString()
+    {
+        return $"{GetFlag().ToString()} {InternalName}";
+    }
     public string InternalName = "MISSING";
     public DataItemUnit caster, parent;
     public Sprite sprite;

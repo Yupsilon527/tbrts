@@ -90,7 +90,7 @@ public class UnitModifiers : UnitProperties, CombatantTicker
         {
             return false;
         }
-        return ApplyNewModifier(new PropertyInnate(innate, caster, parent), refresh: true);
+        return ApplyNewModifier(new PropertyInnate(innate, caster, parent), refresh: false);
     }
     public bool ApplyNewModifierFromData(ModifierData Modifier, DataItemUnit caster, int atTick, int stacks , out PropertyModifier resultingModifier)
     {
@@ -264,14 +264,14 @@ public class UnitModifiers : UnitProperties, CombatantTicker
     }
     #endregion
     #region Increment Decrement
-    public void IncrementModifier(TagData tag, int levels)
+    public void IncrementModifier(TagData tag, int levels, bool refresh)
     {
         if (FindModifierByName(tag.InternalName) is PropertyModifier modifier)
         {
             modifier.IncrementStackCount(levels);
         }else
         {
-            ApplyNewModifierFromData(tag);
+            ApplyNewModifierFromData(tag, refresh:refresh);
         }
     }
     public void DecrementModifier(TagData tag, int levels)
@@ -284,10 +284,6 @@ public class UnitModifiers : UnitProperties, CombatantTicker
                 modifier.DecrementStackCount(stacks);
                 levels -= stacks;
             }
-        }
-        else
-        {
-            ApplyNewModifierFromData(tag);
         }
     }
     #endregion
@@ -365,7 +361,7 @@ public class UnitModifiers : UnitProperties, CombatantTicker
 
     public override void TriggerFuncs(AbilityDefines.Event evt, DataItemUnit t)
     {
-        foreach (var tag in _modifiers)
+        foreach (PropertyTag tag in _modifiers)
         {
             if (tag is PropertyAttribute Mod)
             {

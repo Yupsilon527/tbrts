@@ -8,7 +8,7 @@ public class EventTable
     public DataItemUnit caster;
     public DataItemUnit target;
 
-    public EventTable(CastTable table, DataItemUnit target): this (table.tick, table.attacker,target)
+    public EventTable(CastTable table, DataItemUnit target) : this(table.tick, table.attacker, target)
     {
     }
 
@@ -146,12 +146,12 @@ public class AttackTable : CastTable
                 else
                 {
                     float accuracy = attacker.stats.realStats.Offense / target.stats.realStats.Defense;
-                    accuracy = accuracy *  attacker.hitCounter * .5f; 
+                    accuracy = accuracy * attacker.hitCounter * .5f;
 
                     float critChance = 10 * accuracy + attacker.stats.realStats.CritChance * (1 + accuracy) / 2f * attacker.critCounter * .5f;
                     float hitChance = 50 * accuracy;
-                    float blockChance =   25 / accuracy + attacker.stats.realStats.BlockChance * (1 + accuracy) / 2f;
-                    float parryChance = (attacker.troopPosition.x == 0  && target.troopPosition.x == 0) ?(  15 / accuracy + attacker.stats.realStats.BlockChance * (1 + accuracy) / 2f) : 0;
+                    float blockChance = 25 / accuracy + attacker.stats.realStats.BlockChance * (1 + accuracy) / 2f;
+                    float parryChance = (attacker.troopPosition.x == 0 && target.troopPosition.x == 0) ? (15 / accuracy + attacker.stats.realStats.BlockChance * (1 + accuracy) / 2f) : 0;
 
                     ranval = Random.value * (critChance + hitChance + blockChance + parryChance);
                     if (ranval < blockChance)
@@ -164,7 +164,10 @@ public class AttackTable : CastTable
                         hitType = (ranval > parryChance + blockChance + hitChance) ? AttackDefines.HitType.criticalHit : AttackDefines.HitType.normal;
                         attacker.hitCounter = 1;
                         if (hitType == AttackDefines.HitType.criticalHit)
-                            attacker.critCounter = 1;
+                            if (attack.original.HasFlag(CombatDefines.AttackFlag.cannotCrit))
+                                hitType = AttackDefines.HitType.normal;
+                            else
+                                attacker.critCounter = 1;
                         else
                             attacker.critCounter++;
 
