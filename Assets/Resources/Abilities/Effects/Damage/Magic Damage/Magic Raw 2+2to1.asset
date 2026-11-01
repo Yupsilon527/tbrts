@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   applyChance: 1
   chance: 0
-  targeting: 2
+  targeting: 1
   attack: 3
   BaseDamage: 2
   scaling:

@@ -30,8 +30,6 @@ MonoBehaviour:
     bonusDamage: []
     properties: []
     states: []
-    abilitiesAdded:
-    - abilityID: 29
-      abilityLevel: 5
+    abilitiesAdded: []
     grantedResources: []
     grantedIncome: []

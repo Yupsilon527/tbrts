@@ -46,6 +46,14 @@ public class CityBonuses : CityComponent
     {
         return upgrades.UpgradeResearched(name);
     }
+    public bool HasBuildingOfType(BuildingData.BuildingType btype)
+    {
+        return CountBuildingOfType(btype) > 0; ;
+    }
+    public int CountBuildingOfType(BuildingData.BuildingType btype)
+    {
+        return upgrades.researchedUpgrades.Where ( u => u.upgrade is BuildingData).Sum(u=> u.upgrade is BuildingData b && b.uniqueType == btype ? 1 : 0);
+    }
     void ApplyUpgradeToAllUnits(DataItemBanner army, TechData upgrade, int level)
     {
         if (army == null) return;

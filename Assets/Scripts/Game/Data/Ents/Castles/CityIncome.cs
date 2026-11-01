@@ -1,4 +1,3 @@
-using UnityEngine;
 
 public class CityIncome : CityComponent
 {
@@ -24,7 +23,7 @@ public class CityIncome : CityComponent
             {
                 for (int i = 0; i < baseIncome.Length; i++)
                 {
-                    baseIncome[i] += building.GetResourceIncome((EconomyDefines.IncomeResource)i) ;
+                    baseIncome[i] += building.GetResourceIncome(city,(EconomyDefines.IncomeResource)i) ;
                 }
             }
         }

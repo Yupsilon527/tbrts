@@ -38,7 +38,7 @@ MonoBehaviour:
       Attack: 4
       Special: 3
       Magic: 0
-      Speed: 100
+      Speed: 50
       Action: 1
       Mana: 0
       Supply: 0
@@ -47,8 +47,9 @@ MonoBehaviour:
       Armor: 3
       Shield: 10
       Padding: 0
-      Resistance: 0
+      Resistance: 10
       Block: 0
+      Brace: 0
       DodgeChance: 0
       BlockChance: 0
       ProcChance: 0
@@ -91,11 +92,9 @@ MonoBehaviour:
     - abilityID: 8
       abilityLevel: 1
     - abilityID: 24
-      abilityLevel: 2
-    - abilityID: 7
       abilityLevel: 1
     - abilityID: 1
-      abilityLevel: 3
+      abilityLevel: 2
   attacks:
   - {fileID: 11400000, guid: 2e485267c1bd2834c8632db5ba48d2aa, type: 2}
   - {fileID: 11400000, guid: 2da6701740c77724a8e768453806fff2, type: 2}

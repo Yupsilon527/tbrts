@@ -24,7 +24,7 @@ public class CityProduction : CityComponent
     {
         base.Revision();
         availableUnits.Clear();
-        availableUnits.AddRange(city.GetPlayerOwner().faction.GetRecruitableArmies(false,false));
+        availableUnits.AddRange(city.GetPlayerOwner().faction.GetRecruitableArmies(false, false));
         foreach (var unit in city.bonuses.upgrades.researchedUpgrades)
         {
             if (unit.upgrade is BuildingData building)
@@ -46,7 +46,7 @@ public class CityProduction : CityComponent
     }
     public float GetFirstItemLaborCost()
     {
-        if (productionQueue.Count>0)
+        if (productionQueue.Count > 0)
             return productionQueue[0].costs[(int)EconomyDefines.EconomyResource.Labor].value;
         return 0;
     }
@@ -94,16 +94,16 @@ public class CityProduction : CityComponent
         if (prod is UnitData unit)
             return GetValidTileForArmy(unit) != null;
         else if (prod is BuildingData building)
-            return !city.bonuses.HasBuilding(building.InternalName);
+            return !city.bonuses.HasBuilding(building.InternalName) && (building.uniqueType != BuildingData.BuildingType.unique || !city.bonuses.HasBuildingOfType(BuildingData.BuildingType.unique));
         return true;
     }
     public void AddProduction(ProductionData p)
     {
-        if (p.GetAvailableState(city) == ProductionData.AvailableState.available  && CanProduce(p))
+        if (p.GetAvailableState(city) == ProductionData.AvailableState.available && CanProduce(p))
         {
             var prodTable = new ProductionTable(city.GetPlayerOwner(), p, city);
             float laborCost = prodTable.costs[(int)EconomyDefines.EconomyResource.Labor].value;
-            if ((laborCost ==0 ||(laborCost < iProductionTime && productionQueue.Count == 0)) && prodTable.CompleteProduction())
+            if ((laborCost == 0 || (laborCost < iProductionTime && productionQueue.Count == 0)) && prodTable.CompleteProduction())
             {
                 iProductionTime -= laborCost;
             }
@@ -148,7 +148,7 @@ public class CityProduction : CityComponent
         || !t.armyLayer.formation.CanIAccept(Army))
         );
 
-        if (passibleTiles.Count > 0 ) { return passibleTiles[0]; }
+        if (passibleTiles.Count > 0) { return passibleTiles[0]; }
 
 
         return null;

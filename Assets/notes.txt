@@ -13,9 +13,11 @@ TEST
 			aura
 		temp abilities & auras
 	bonuses/buildings
+	global bonuses
 
-	terrain bonuses
-	
+		terrain bonuses work
+		innate abilities also work
+
 	armor
 	army innates
 		terrain bonuses

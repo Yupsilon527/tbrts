@@ -40,8 +40,8 @@ MonoBehaviour:
       Attack: 2
       Special: 1
       Magic: 1
-      Speed: 140
-      Action: 6
+      Speed: 150
+      Action: 8
       Mana: 0
       Supply: 0
       Health: 40

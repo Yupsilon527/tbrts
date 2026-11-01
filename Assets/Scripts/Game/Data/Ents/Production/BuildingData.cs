@@ -10,8 +10,20 @@ public class BuildingData : TechData
         garrison,
         aura
     }
+    public enum IncomeBonus
+    {
+        raw,
+        citySize,
+    }
+    public enum BuildingType
+    {
+        generic,
+        unique,
+    }
     [Header("Granted Bonus")]
     public GrantBonus bonusType;
+    public IncomeBonus incomeType;
+    public BuildingType uniqueType;
     [Header("Production")]
     public string[] production;
     public override AvailableState GetAvailableState(DataItemPlayer player, DataItemCastle castle)
@@ -20,9 +32,16 @@ public class BuildingData : TechData
             return AvailableState.hidden;
             return base.GetAvailableState(player, castle);
     }
-    public float GetResourceIncome(EconomyDefines.IncomeResource resource)
+    public float GetResourceIncome(DataItemCastle castle, EconomyDefines.IncomeResource resource)
     {
-        return grantedIncome.Sum(i => i.resource == resource ? i.value : 0);
+        float total = grantedIncome.Sum(i => i.resource == resource ? i.value : 0);
+        switch (incomeType)
+        {
+            default:
+                return total;
+            case IncomeBonus.citySize:
+                return total * castle.GetSize();
+        }
     }
     public override bool CompleteProduction(ProductionTable table)
     {

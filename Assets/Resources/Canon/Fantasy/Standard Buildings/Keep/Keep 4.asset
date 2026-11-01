@@ -27,7 +27,7 @@ MonoBehaviour:
     - resource: 0
       value: 4000
     - resource: 3
-      value: 200
+      value: 400
     - resource: 1
       value: 3000
     prerequisites:
@@ -45,4 +45,6 @@ MonoBehaviour:
     - resource: 0
       value: 2000
     bonusType: 0
+    incomeType: 0
+    uniqueType: 0
     production: []
