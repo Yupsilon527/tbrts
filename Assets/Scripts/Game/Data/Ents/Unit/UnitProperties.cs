@@ -11,10 +11,10 @@ public class UnitProperties : UnitComponent
     protected bool abilRefresh = false;
     protected bool HasUpdates = false;
 
-    public override void TriggerFuncs(AbilityDefines.Event act, DataItemUnit t)
+    public override void TriggerFuncs(AbilityDefines.Event act, DataItemUnit t, bool refresh = false)
     {
-        base.TriggerFuncs(act, t);
-        if (act == AbilityDefines.Event.CombatBegin)
+        base.TriggerFuncs(act, t,refresh);
+        if (refresh || act == AbilityDefines.Event.CombatBegin)
         {
             Refresh(true);
         }

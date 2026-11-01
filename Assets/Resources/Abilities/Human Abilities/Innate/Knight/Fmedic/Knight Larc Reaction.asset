@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b2cce9b203f704d97a321c323a3106, type: 3}
   m_Name: Knight Larc Reaction
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
   InternalName: Knight Larc Reaction
+  AssignedWorld: 
+  sprite: {fileID: 0}
   uibehavior: 0
   behavior: 2
   priority: 2
@@ -26,7 +27,9 @@ MonoBehaviour:
   - apCost: 0
     rpCost: 1
     spCost: 0
-    listeners: 3b0000003c000000
+    listeners: 0f0000001000000011000000
+    target: 1
+    timing: 0
     casterCondition: 2
     targetCondition: 1
     effects:

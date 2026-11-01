@@ -14,7 +14,7 @@ public class UnitComponent
     {
 
     }
-    public virtual void TriggerFuncs(AbilityDefines.Event act,DataItemUnit target )
+    public virtual void TriggerFuncs(AbilityDefines.Event act,DataItemUnit target, bool refresh = false)
     {
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class PropertyWeapon : PropertyAbility
 {
@@ -24,7 +25,7 @@ public class PropertyWeapon : PropertyAbility
 
     public override bool IsUsableInPhase(CombatDefines.AttackPhase phase)
     {
-        return original.attackPhase == phase 
+        return original.attackPhase == phase
             && (original.HasFlag(CombatDefines.AttackFlag.castInFrontRow) && parent.troopPosition.y == 0
             || original.HasFlag(CombatDefines.AttackFlag.castInBackRow) && parent.troopPosition.y == 1
             || original.HasFlag(CombatDefines.AttackFlag.castInTransport) && parent.troopPosition.y < 0
@@ -35,7 +36,7 @@ public class PropertyWeapon : PropertyAbility
         return IsUsableInPhase(phase)
             && ((original.HasFlag(CombatDefines.AttackFlag.indirectAttack) && !parent.GetState(ModifierDefines.State.cannot_cast))
             || (!original.HasFlag(CombatDefines.AttackFlag.indirectAttack) && !parent.GetState(ModifierDefines.State.cannot_attack)))
-            && (!original.HasFlag(CombatDefines.AttackFlag.usableOnce) || uses==0)
+            && (!original.HasFlag(CombatDefines.AttackFlag.usableOnce) || uses == 0)
             && base.CanBeCast(phase);
     }
     public override bool HasResourcesToCast()
@@ -49,9 +50,9 @@ public class PropertyWeapon : PropertyAbility
     {
         uses++;
         parent.actions.ReactionPoints.SubstractedValue(original.rpCost);
-         parent.actions.ActionPoint.SubstractedValue(original.apCost);
-         parent.actions.SupplyPoints.SubstractedValue(original.spCost);
-        ExtendCooldown( Mathf.CeilToInt(parent.stats.realStats.SpeedCoefficient ));
+        parent.actions.ActionPoint.SubstractedValue(original.apCost);
+        parent.actions.SupplyPoints.SubstractedValue(original.spCost);
+        ExtendCooldown(Mathf.CeilToInt(parent.stats.realStats.SpeedCoefficient));
         base.SpendResources();
     }
     public override bool CastFromTable(CastTable table)
@@ -63,29 +64,16 @@ public class PropertyWeapon : PropertyAbility
             Combat.main.Inspect($"{table.attacker} casts ability {table.ability}");
 
             var allyTroop = table.attacker.troop.formation.GetUnits();
-            var enemyTroop = Combat.main.GetOppositeSide( table.attacker.troop).formation.GetUnits();
+            var enemyTroop = Combat.main.GetOppositeSide(table.attacker.troop).formation.GetUnits();
 
             bool attackEnemy = !original.HasFlag(CombatDefines.AttackFlag.targetAllies);
             bool indirect = original.HasFlag(CombatDefines.AttackFlag.indirectAttack);
             bool magic = original.HasFlag(CombatDefines.AttackFlag.magicAttack);
             bool singleTarget = original.areaMode == CombatDefines.CombatantTargetingArea.single;
 
-            if (singleTarget)
-            {
-                foreach (var target in table.maintarget)
-                {
-                    target.FireEventOnTarget(indirect ? AbilityDefines.Event.OnHitBySingleIndirect : AbilityDefines.Event.OnHitBySingleDirect, table.attacker);
-                    if (magic) target.FireEventOnTarget(AbilityDefines.Event.OnEnemyUseMagicAttack, table.attacker);
-                }
-            }
-            else
-            {
-                foreach (var target in table.sidetarget)
-                {
-                    target.FireEventOnTarget(indirect ? AbilityDefines.Event.OnHitByMultiIndirect : AbilityDefines.Event.OnHitByMultiDirect, table.attacker);
-                    if (magic) target.FireEventOnTarget(AbilityDefines.Event.OnEnemyUseMagicAttack, table.attacker);
-                }
-            }
+            //alert before cast
+            Events(indirect, singleTarget, attackEnemy, magic, table, AbilityDefines.ReactionTiming.Before);
+
             foreach (var target in table.maintarget)
             {
                 table.attacker.FireEventOnTarget(AbilityDefines.Event.BeforeAttack, target);
@@ -94,20 +82,6 @@ public class PropertyWeapon : PropertyAbility
                 else table.attacker.FireEventOnTarget(AbilityDefines.Event.BeforeIndirectAttack, target);
             }
 
-            foreach (var ally in allyTroop)
-            {
-                if (ally != table.attacker)
-                    ally.FireEventOnTarget(indirect ? AbilityDefines.Event.BeforeAllyUseIndirectAttack : AbilityDefines.Event.BeforeAllyUseDirectAttack, table.attacker);
-            }
-            foreach (var enemy in enemyTroop)
-            {
-                if (attackEnemy)
-                {
-                    enemy.FireEventOnTarget(singleTarget ? AbilityDefines.Event.OnEnemyUseSingleAttack : AbilityDefines.Event.OnEnemyUseMultiAttack, table.attacker);
-                    enemy.FireEventOnTarget(indirect ? AbilityDefines.Event.OnEnemyUseIndirectAttack : AbilityDefines.Event.OnEnemyUseDirectAttack, table.attacker);
-                    if (magic) enemy.FireEventOnTarget( AbilityDefines.Event.OnEnemyUseMagicAttack, table.attacker);
-            }
-            }
 
             foreach (var attack in original.effects)
             {
@@ -115,46 +89,83 @@ public class PropertyWeapon : PropertyAbility
             }
             foreach (var target in table.maintarget)
             {
-                target.damageable.ResolveDamate();
-                if (attackEnemy && singleTarget)
-                {
-                    foreach (var ally in allyTroop)
-                    {
-                        if (ally != table.attacker) {
-                            ally.FireEventOnTarget(indirect ? AbilityDefines.Event.AssistSingleIndirect : AbilityDefines.Event.AssistSingleDirect, target);
-                            if (magic) ally.FireEventOnTarget(AbilityDefines.Event.AssistSingleMagic, target);
-                        }
-                    }
-                    foreach (var enemy in enemyTroop)
-                    {
-                        if (enemy != target) { 
-                            enemy.FireEventOnTarget(AbilityDefines.Event.AfterAllyHitBySingle, target);
-
-                            enemy.FireEventOnTarget(indirect ? AbilityDefines.Event.AfterAfterHitByIndirect : AbilityDefines.Event.AfterAfterHitByDirect, target);
-                            if (magic) enemy.FireEventOnTarget(AbilityDefines.Event.AfterAfterHitByMagic, target);
-                        }
-                    }
-                }
+                target.damageable.ResolveDamage();
             }
             foreach (var target in table.sidetarget)
             {
-                target.damageable.ResolveDamate();
+                target.damageable.ResolveDamage();
+            }
 
-                if (attackEnemy && !singleTarget)
+            table.attacker.FireEventOnSelf(AbilityDefines.Event.AfterAttack);
+            if (attackEnemy )
+            {
+                foreach (var ally in allyTroop)
                 {
-                    foreach (var enemy in enemyTroop)
+                    if (ally != table.attacker)
                     {
-                        if (enemy != target)
-                            enemy.FireEventOnTarget(AbilityDefines.Event.AfterAfterHitByMulti, target);
+                        if (singleTarget)
+                        {
+                            ally.ReactToAction(indirect ? AbilityDefines.ReactionEvent.UseSingleIndirect : AbilityDefines.ReactionEvent.UseSingleDirect, AbilityDefines.ReactionTiming.Assist, table.attacker);
+                            if (magic) ally.ReactToAction(AbilityDefines.ReactionEvent.UseSingleMagic, AbilityDefines.ReactionTiming.Assist, table.attacker);
+                        }
+                        else
+                        {
+                            ally.ReactToAction(indirect ? AbilityDefines.ReactionEvent.UseMultiIndirect : AbilityDefines.ReactionEvent.UseMultiDirect, AbilityDefines.ReactionTiming.Assist, table.attacker);
+                            if (magic) ally.ReactToAction(AbilityDefines.ReactionEvent.UseMultiMagic, AbilityDefines.ReactionTiming.Assist, table.attacker);
+                        }
                     }
                 }
             }
-            table.attacker.FireEventOnSelf(AbilityDefines.Event.AfterAttack);
+
+            Events(indirect, singleTarget, attackEnemy, magic, table, AbilityDefines.ReactionTiming.After);
             return true;
         }
         return false;
     }
+    void Events(bool indirect, bool singleTarget, bool attackenemy, bool magic, CastTable table, AbilityDefines.ReactionTiming timing)
+    {
+        if (attackenemy)
+            foreach (var unit in Combat.main.combatants)
+            {
+                unit.ReactToAction(indirect ? AbilityDefines.ReactionEvent.UseIndirectAttack : AbilityDefines.ReactionEvent.UseDirectAttack, timing, table.attacker);
+                if (singleTarget)
+                    unit.ReactToAction(indirect ? AbilityDefines.ReactionEvent.UseSingleIndirect : AbilityDefines.ReactionEvent.UseSingleDirect, timing, table.attacker);
+                else
+                    unit.ReactToAction(indirect ? AbilityDefines.ReactionEvent.UseMultiIndirect : AbilityDefines.ReactionEvent.UseMultiDirect, timing, table.attacker);
 
+                if (magic)
+                {
+                    unit.ReactToAction(AbilityDefines.ReactionEvent.UseMagicAttack, timing, table.attacker);
+                    unit.ReactToAction(indirect ? AbilityDefines.ReactionEvent.UseSingleMagic : AbilityDefines.ReactionEvent.UseMultiMagic, timing, table.attacker);
+                }
+            }
+        if (singleTarget)
+        {
+            foreach (var target in table.maintarget)
+            {
+                target.ReactToAction(AbilityDefines.ReactionEvent.HitBySingle, timing, table.attacker);
+                target.ReactToAction(indirect ? AbilityDefines.ReactionEvent.HitByIndirect : AbilityDefines.ReactionEvent.HitByDirect, timing, table.attacker);
+                target.ReactToAction(indirect ? AbilityDefines.ReactionEvent.HitBySingleIndirect : AbilityDefines.ReactionEvent.HitBySingleDirect, timing, table.attacker);
+                if (magic)
+                {
+                    target.ReactToAction(AbilityDefines.ReactionEvent.HitByMagic, timing, table.attacker);
+                }
+            }
+        }
+        else
+        {
+            foreach (var target in table.sidetarget)
+            {
+                target.ReactToAction(AbilityDefines.ReactionEvent.HitByMulti, timing, table.attacker);
+                target.ReactToAction(indirect ? AbilityDefines.ReactionEvent.HitByIndirect : AbilityDefines.ReactionEvent.HitByDirect, timing, table.attacker);
+                target.ReactToAction(indirect ? AbilityDefines.ReactionEvent.HitByMultiIndirect : AbilityDefines.ReactionEvent.HitByMultiIndirect, timing, table.attacker);
+                if (magic)
+                {
+                    target.ReactToAction(AbilityDefines.ReactionEvent.HitByMagic, timing, table.attacker);
+                }
+            }
+        }
+    }
     public override DataItemUnit[] GetValidTargets(DataItemUnit caster)
     {
         Vector2Int cPos = caster.troopPosition;
@@ -165,7 +176,7 @@ public class PropertyWeapon : PropertyAbility
         {
             if (u == null) continue;
             Vector2Int fPos = u.troopPosition;
-            if ((original.HasFlag(CombatDefines.AttackFlag.targetSelf) && caster!=u) 
+            if ((original.HasFlag(CombatDefines.AttackFlag.targetSelf) && caster != u)
                 || (original.HasFlag(CombatDefines.AttackFlag.targetFrontRow) && (fPos.y == 0 || troop.formation.CountLivingTroopsInRow(0) == 0))
                 || (original.HasFlag(CombatDefines.AttackFlag.targetBackRow) && (fPos.y == 1 || troop.formation.CountLivingTroopsInRow(1) == 0))
                 || (original.HasFlag(CombatDefines.AttackFlag.targetOwnCol) && fPos.x == cPos.x))

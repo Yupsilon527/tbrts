@@ -78,56 +78,34 @@ public static class AbilityDefines
         OnArmorBlock = 42,
         OnArmorBreak = 43,
 
-        // Ally Reactions
-        BeforeAllyUseDirectAttack = 44,
-        BeforeAllyUseIndirectAttack = 45,
-
-        // Enemy Reactions
-        OnEnemyUseDirectAttack = 46,
-        OnEnemyUseIndirectAttack = 47,
-        OnEnemyUseMagicAttack = 48,
-        OnEnemyUseSingleAttack = 49,
-        OnEnemyUseMultiAttack = 50,
-
-        // Specific Hit Types
-        OnHitBySingleIndirect = 51,
-        OnHitBySingleDirect = 52,
-        OnHitByMultiIndirect = 53,
-        OnHitByMultiDirect = 54,
-        OnHitByMagicAttack = 55,
-
-        AssistSingleIndirect = 56,
-        AssistSingleDirect = 57,
-        AssistSingleMagic = 58,
-
-        // Specific Hit Types
-        AfterAllyHitBySingle = 59,
-        AfterAfterHitByMulti = 60,
-
-        AfterAfterHitByDirect = 61,
-        AfterAfterHitByIndirect = 62,
-        AfterAfterHitByMagic = 63,
-
         //End Of Battle
-        OnEndTurn = 64,
-        OnBeginTurn = 65,
-        Victory = 66,
+        OnEndTurn = 44,
+        OnBeginTurn = 45,
+        Victory = 46,
 
         //Out Of Battle
-        OnRuinRest = 67,
-        OnRuinHeal = 68,
-        OnRuinPray = 68,
-        OnVisitRuin = 69,
-        OnHarvestRuin = 69,
-        OnRuinBoon  = 69,
+        OnRuinRest = 47,
+        OnRuinHeal = 48,
+        OnRuinPray = 49,
+        OnVisitRuin = 50,
+        OnHarvestRuin = 51,
+        OnRuinBoon  = 52,
 
-        Total = 70,
+        Total = 53,
     }
     public enum ReactionEvent
     {
         UseDirectAttack,
         UseIndirectAttack,
         UseMagicAttack,
+
+        UseSingleDirect,
+        UseSingleIndirect,
+         UseMultiDirect,
+        UseMultiIndirect,
+
+        UseSingleMagic,
+        UseMultiMagic,
 
         HitBySingle,
         HitBySingleDirect,
@@ -138,6 +116,12 @@ public static class AbilityDefines
         HitByDirect,
         HitByIndirect,
         HitByMagic,
+
+        OnKilled,
+        OnScoreKill,
+
+        OnBlock,
+        OnCrit,
     }
     public enum ReactionTarget
     {

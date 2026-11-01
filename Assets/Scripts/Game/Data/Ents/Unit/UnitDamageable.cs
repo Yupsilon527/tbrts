@@ -8,9 +8,9 @@ public class UnitDamageable : UnitComponent
     public DataItemUnit guardian;
     public DamageTable lastDamage;
     protected bool dead = false;
-    public override void TriggerFuncs(AbilityDefines.Event act, DataItemUnit t)
+    public override void TriggerFuncs(AbilityDefines.Event act, DataItemUnit t, bool refresh =false)
     {
-        base.TriggerFuncs(act,t);
+        base.TriggerFuncs(act,t, refresh);
         if (act == AbilityDefines.Event.OnDayBegin)
         {
             float regen = parent.innates.GetAbilityCombined(UnitDefines.ArmyAbilities.regen);
@@ -55,7 +55,7 @@ public class UnitDamageable : UnitComponent
     {
         lastDamage.CalcAttack(damage, value);
     }
-    public virtual void ResolveDamate()
+    public virtual void ResolveDamage()
     {
         DealDamage(lastDamage);
     }
@@ -273,9 +273,11 @@ public class UnitDamageable : UnitComponent
 
             Combat.main.Inspect(parent + " has died!");
             parent.FireEventOnTarget(AbilityDefines.Event.OnKilled, killer, true);
+            Combat.main.AllFightersReact(AbilityDefines.ReactionEvent.OnKilled,  AbilityDefines.ReactionTiming.After, parent);
             if (killer != null)
             {
                 killer.FireEventOnTarget(AbilityDefines.Event.OnScoreKill, parent, true);
+                Combat.main.AllFightersReact(AbilityDefines.ReactionEvent.OnScoreKill, AbilityDefines.ReactionTiming.After, killer);
             }
         }
     }

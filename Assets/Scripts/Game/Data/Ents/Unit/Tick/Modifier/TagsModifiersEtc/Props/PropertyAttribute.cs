@@ -15,6 +15,7 @@ public class PropertyAttribute : PropertyTag
     //Parameters
     public Dictionary<string, float> parameters = new Dictionary<string, float>();
     public HashSet<AbilityFunction> functions = new HashSet<AbilityFunction>();
+    public HashSet<AbilityReaction> reactions = new HashSet<AbilityReaction>();
 
     public PropertyAttribute(AlterationData data, DataItemUnit caster, DataItemUnit parent = null) : this(data.InternalName, caster, parent, data.sprite, data.uibehavior, (int)data.priority, data.states, data.properties)
     {
@@ -40,6 +41,13 @@ public class PropertyAttribute : PropertyTag
         functions.Add(f);
         }
     }
+    public void AddReaction(AbilityReaction r)
+    {
+        if (r.IsValid())
+        {
+            reactions.Add(r);
+        }
+    }
 
 
     public bool ExecuteFunction(AbilityDefines.Event act)
@@ -54,6 +62,19 @@ public class PropertyAttribute : PropertyTag
             if ((active || !f.onlyWhenActive) && f.events.Contains(act))
             {
                 f.action.Invoke(new ReactionTable(Combat.main.currentTick, parent, target, this));
+                v = true;
+            }
+        }
+        return v;
+    }
+    public virtual bool ExecuteReaction(AbilityDefines.ReactionEvent evt, AbilityDefines.ReactionTiming timing, AbilityDefines.ReactionTarget target, DataItemUnit unit)
+    {
+        bool v = false;
+        foreach (var f in reactions)
+        {
+            if ((active || !f.onlyWhenActive) && f.listeners.Contains(evt) && f.timing == timing && f.target == target)
+            {
+                f.action.Invoke(new ReactionTable(Combat.main.currentTick, parent, unit, this));
                 v = true;
             }
         }

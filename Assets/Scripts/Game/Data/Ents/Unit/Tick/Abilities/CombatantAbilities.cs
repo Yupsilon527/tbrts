@@ -28,7 +28,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
         ClearAbilities();
         FromCombatantData();
     }
-    public override void TriggerFuncs(AbilityDefines.Event act, DataItemUnit t)
+    public override void TriggerFuncs(AbilityDefines.Event act, DataItemUnit t, bool refresh = false)
     {
         if (act == AbilityDefines.Event.CombatBegin)
         {
@@ -49,7 +49,7 @@ public class CombatantAbilities : UnitComponent, CombatantTicker
             if (IsinAlliedCity())
                 SupplyPoints.SetPercentage(1);
         }
-        base.TriggerFuncs(act,t);
+        base.TriggerFuncs(act,t, refresh);
     }
     public bool IsinAlliedCity()
     {

@@ -359,7 +359,7 @@ public class UnitModifiers : UnitProperties, CombatantTicker
         (flag == ModifierDefines.Flag.SoftDisable && GetState(ModifierDefines.State.soft_disable_immune)));
     }
 
-    public override void TriggerFuncs(AbilityDefines.Event evt, DataItemUnit t)
+    public override void TriggerFuncs(AbilityDefines.Event evt, DataItemUnit t, bool refresh = false)
     {
         foreach (PropertyTag tag in _modifiers)
         {
@@ -367,11 +367,26 @@ public class UnitModifiers : UnitProperties, CombatantTicker
             {
                 if (!Mod.dead && !Mod.IsExpired())
                 {
-                    Mod.ExecuteEvent(evt, parent);
+                    Mod.ExecuteEvent(evt, t == null ? parent : t);
                 }
             }
         }
-            Refresh();
+         if (refresh)   Refresh();
+    }
+
+    public  void TriggerReaction(AbilityDefines.ReactionEvent evt, AbilityDefines.ReactionTiming timing,AbilityDefines.ReactionTarget target, DataItemUnit t, bool refresh = false)
+    {
+        foreach (PropertyTag tag in _modifiers)
+        {
+            if (tag is PropertyAttribute Mod)
+            {
+                if (!Mod.dead && !Mod.IsExpired())
+                {
+                    Mod.ExecuteReaction(evt,timing,target, t == null ? parent : t);
+                }
+            }
+        }
+        if (refresh) Refresh();
     }
     #endregion
     #region Timely Update

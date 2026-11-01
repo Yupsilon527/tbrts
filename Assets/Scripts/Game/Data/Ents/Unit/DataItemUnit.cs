@@ -92,6 +92,11 @@ public class DataItemUnit : DataItemMob
             UpdateNextAction();
         }
     }
+    public void ReactToAction(AbilityDefines.ReactionEvent evt,AbilityDefines.ReactionTiming timing, DataItemUnit target)
+    {
+        AbilityDefines.ReactionTarget tgt = target == this ? AbilityDefines.ReactionTarget.self : target.GetAlignment(this) == PlayerDefines.Alignment.enemy ? AbilityDefines.ReactionTarget.enemy : AbilityDefines.ReactionTarget.ally;
+        modifiers.TriggerReaction(evt, timing, tgt, target);
+    }
     #endregion
     public bool Act()
     {

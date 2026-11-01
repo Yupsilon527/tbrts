@@ -181,6 +181,13 @@ public class Combat : Initializable
             combatant.FireEventOnSelf(e, true);
         }
     }
+    public void AllFightersReact (AbilityDefines.ReactionEvent e, AbilityDefines.ReactionTiming t, DataItemUnit u)
+    {
+        foreach (var unit in combatants)
+        {
+            unit.ReactToAction(e, t, u);
+        }
+    }
     public DataItemBanner GetOppositeSide(DataItemBanner troop)
     {
         if (attackers.GetAlignment(troop) == PlayerDefines.Alignment.enemy)

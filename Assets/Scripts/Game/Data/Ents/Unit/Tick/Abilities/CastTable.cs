@@ -179,9 +179,11 @@ public class AttackTable : CastTable
                     case AttackDefines.HitType.blocked:
                         target.FireEventOnTarget(AbilityDefines.Event.OnBlockEnemy, attacker);
                         attacker.FireEventOnTarget(AbilityDefines.Event.OnHitEnemy, target);
+                        Combat.main.AllFightersReact(AbilityDefines.ReactionEvent.OnBlock, AbilityDefines.ReactionTiming.After, target);
                         break;
                     case AttackDefines.HitType.criticalHit:
                         attacker.FireEventOnTarget(AbilityDefines.Event.OnCritEnemy, target);
+                        Combat.main.AllFightersReact(AbilityDefines.ReactionEvent.OnCrit, AbilityDefines.ReactionTiming.After, attacker);
                         break;
                     default:
                         attacker.FireEventOnTarget(AbilityDefines.Event.OnHitEnemy, target);

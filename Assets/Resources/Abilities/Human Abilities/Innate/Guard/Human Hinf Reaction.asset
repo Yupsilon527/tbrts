@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b2cce9b203f704d97a321c323a3106, type: 3}
   m_Name: Human Hinf Reaction
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
   InternalName: Human Hinf Innate
+  AssignedWorld: 
+  sprite: {fileID: 0}
   uibehavior: 0
   behavior: 2
   priority: 2
@@ -26,7 +27,9 @@ MonoBehaviour:
   - apCost: 0
     rpCost: 1
     spCost: 0
-    listeners: 3300000034000000
+    listeners: 09000000
+    target: 1
+    timing: 0
     casterCondition: 2
     targetCondition: 2
     effects:
