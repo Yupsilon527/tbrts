@@ -31,6 +31,8 @@ MonoBehaviour:
       value: 125
     - resource: 1
       value: 225
+    - resource: 3
+      value: 15
     prerequisites:
     - b_keep 2
     unit:

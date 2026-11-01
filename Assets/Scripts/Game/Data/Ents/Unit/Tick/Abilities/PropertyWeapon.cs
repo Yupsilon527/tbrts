@@ -97,7 +97,7 @@ public class PropertyWeapon : PropertyAbility
             }
 
             table.attacker.FireEventOnSelf(AbilityDefines.Event.AfterAttack);
-            if (attackEnemy )
+            /*if (attackEnemy )
             {
                 foreach (var ally in allyTroop)
                 {
@@ -115,7 +115,7 @@ public class PropertyWeapon : PropertyAbility
                         }
                     }
                 }
-            }
+            }*/
 
             Events(indirect, singleTarget, attackEnemy, magic, table, AbilityDefines.ReactionTiming.After);
             return true;

@@ -10,39 +10,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
-  m_Name: Market 2
+  m_Name: Knight Healing U3
   m_EditorClassIdentifier: 
-  InternalName: Market 2
+  InternalName: Knight Mason U3
   AssignedWorld: 
   prerequisites:
-  - {fileID: 11400000, guid: f4d9b22afd5295d4fb9f06bd1cae9a79, type: 2}
-  - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
+  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
   armies: []
   building:
-    InternalName: Market 2
-    icon: {fileID: -8297165085328784523, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
-    flags:
-    - income
-    - gold
-    - building
+    InternalName: Knight Mason U3
+    icon: {fileID: 1765351576224072635, guid: f90d2ba5f05edfe4980cdb0f116b21e7, type: 3}
+    flags: []
     costs:
     - resource: 0
-      value: 400
+      value: 600
+    - resource: 1
+      value: 300
     - resource: 3
       value: 100
     prerequisites:
-    - b_market 1
-    - b_keep 4
+    - b_keep 3
     infinite: 2
-    affectedFlags: []
+    affectedFlags:
+    - unit
     resourceChanges: []
     bonusDamage: []
-    properties: []
+    properties:
+    - Property: 38
+      value: 1
+      IncreasePerLevel: 1
     states: []
     abilitiesAdded: []
     grantedResources: []
-    grantedIncome:
-    - resource: 1
-      value: 150
+    grantedIncome: []
     bonusType: 1
+    incomeType: 0
+    uniqueType: 0
     production: []

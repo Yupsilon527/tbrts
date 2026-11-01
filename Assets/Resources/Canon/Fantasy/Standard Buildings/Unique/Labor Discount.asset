@@ -10,37 +10,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaeaedf11eb7cfd4abe46528c5967b72, type: 3}
-  m_Name: Market 1
+  m_Name: Labor Discount
   m_EditorClassIdentifier: 
-  InternalName: Market 1
+  InternalName: Labor Discount
   AssignedWorld: 
   prerequisites:
-  - {fileID: 11400000, guid: 7d4ae88016f76254b802e039c914170e, type: 2}
+  - {fileID: 11400000, guid: 95df24cf897a9a741a58c2e090c920f5, type: 2}
   armies: []
   building:
-    InternalName: Market 1
+    InternalName: Labor Discount
     icon: {fileID: -8297165085328784523, guid: 51ca3cf960946d842b635a47e366177b, type: 3}
     flags:
     - income
-    - gold
+    - labor
     - building
     costs:
     - resource: 0
-      value: 200
+      value: 600
+    - resource: 1
+      value: 600
     - resource: 3
       value: 100
     prerequisites:
-    - b_keep 3
+    - b_keep 4
     infinite: 2
-    affectedFlags: []
-    resourceChanges: []
+    affectedFlags:
+    - unit
+    resourceChanges:
+    - changedResource: 3
+      resourceChangeBehavior: 2
+      changeValue: 0.66
     bonusDamage: []
     properties: []
     states: []
     abilitiesAdded: []
     grantedResources: []
-    grantedIncome:
-    - resource: 1
-      value: 100
+    grantedIncome: []
     bonusType: 1
+    incomeType: 0
+    uniqueType: 1
     production: []

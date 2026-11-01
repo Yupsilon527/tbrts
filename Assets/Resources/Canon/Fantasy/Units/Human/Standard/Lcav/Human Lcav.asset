@@ -29,6 +29,8 @@ MonoBehaviour:
     costs:
     - resource: 0
       value: 400
+    - resource: 3
+      value: 15
     prerequisites:
     - b_stable
     unit:

@@ -33,6 +33,8 @@ MonoBehaviour:
       value: 300
     - resource: 1
       value: 200
+    - resource: 3
+      value: 20
     prerequisites:
     - b_knight paladin hall
     - b_stable
@@ -55,6 +57,7 @@ MonoBehaviour:
       Padding: 0
       Resistance: 0
       Block: 2
+      Brace: 0
       DodgeChance: 0
       BlockChance: 33
       ProcChance: 0

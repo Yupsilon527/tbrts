@@ -41,12 +41,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 87a0242efb02e0348a5a9af5ce2ba54a, type: 2}
   - {fileID: 11400000, guid: c78d34e7f3c97174eae58d2ae1cabb4c, type: 2}
   - {fileID: 11400000, guid: 2c755feaaa0963f4ab67690a896a2ae9, type: 2}
-  - {fileID: 11400000, guid: f4d9b22afd5295d4fb9f06bd1cae9a79, type: 2}
-  - {fileID: 11400000, guid: ff5b7d470bfd25245a3f2c42e34c40f3, type: 2}
   - {fileID: 11400000, guid: 9bb5608a5e8aff240a9e77e56ef83da7, type: 2}
   - {fileID: 11400000, guid: a3874787bae4c174185bad3f6aee1255, type: 2}
   - {fileID: 11400000, guid: f55cb9f0cc034ba42b351f4f62a0a9eb, type: 2}
   - {fileID: 11400000, guid: 66acca6b89ccc734cb52f1090faddf2e, type: 2}
   - {fileID: 11400000, guid: c8a4ecfbc8bd9664eb2ed267f6eb5699, type: 2}
   - {fileID: 11400000, guid: d7097b2291aff7e45a8f7dceddbfb03f, type: 2}
+  - {fileID: 11400000, guid: 0b1fa09bf29506048ac85595c6b0ae60, type: 2}
+  - {fileID: 11400000, guid: bbdf5ad4eb8fa12409a03379efbd2bd3, type: 2}
   subFactions: []

@@ -132,7 +132,6 @@ public static class AbilityDefines
     public enum ReactionTiming
     {
         Before,
-        Assist,
         After,
     }
 

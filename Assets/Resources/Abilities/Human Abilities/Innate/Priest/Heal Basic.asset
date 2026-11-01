@@ -22,7 +22,7 @@ MonoBehaviour:
     spCost: 0
     castTime: 120
     castDelay: 160
-    attackPhase: 1
+    attackPhase: 3
     targetPriority: 0
     areaMode: 0
   weaponFlags: 0400000008000000020000004000000080000000

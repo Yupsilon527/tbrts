@@ -32,16 +32,18 @@ MonoBehaviour:
     - b_keep 4
     infinite: 2
     affectedFlags:
-    - human
-    resourceChanges: []
+    - cavalry
+    resourceChanges:
+    - changedResource: 3
+      resourceChangeBehavior: 2
+      changeValue: 0.6
     bonusDamage: []
-    properties:
-    - Property: 38
-      value: 1
-      IncreasePerLevel: 1
+    properties: []
     states: []
     abilitiesAdded: []
     grantedResources: []
     grantedIncome: []
     bonusType: 0
+    incomeType: 0
+    uniqueType: 0
     production: []
