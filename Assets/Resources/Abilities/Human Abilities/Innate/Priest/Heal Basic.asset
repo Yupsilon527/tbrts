@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Heal Basic
   m_EditorClassIdentifier: 
   effects:
-  - {fileID: 11400000, guid: 5d8b1f8940d170e4cb197186a115b509, type: 2}
+  - {fileID: 11400000, guid: 5e18462c40e922840bc5d4bb1fafccf3, type: 2}
   data:
     InternalName: Heal Basic
     abilityFlags: 206

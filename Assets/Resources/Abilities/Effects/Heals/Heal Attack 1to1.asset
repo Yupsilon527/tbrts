@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43f429b60ff54854f8f152f4bc7fa126, type: 3}
-  m_Name: Preist Heal Attack
+  m_Name: Heal Attack 1to1
   m_EditorClassIdentifier: 
   applyChance: 1
   chance: 0
-  targeting: 1
+  targeting: 2
   attack: 6
-  BaseDamage: 2
+  BaseDamage: 0
   scaling:
-  - scaleMode: 7
-    scaleDamage: 0.5
+  - scaleMode: 9
+    scaleDamage: 1
     scaleoff: 0
     scaleRate: 0

@@ -123,6 +123,34 @@ public static class AbilityDefines
 
         Total = 70,
     }
+    public enum ReactionEvent
+    {
+        UseDirectAttack,
+        UseIndirectAttack,
+        UseMagicAttack,
+
+        HitBySingle,
+        HitBySingleDirect,
+        HitBySingleIndirect,
+        HitByMulti,
+        HitByMultiDirect,
+        HitByMultiIndirect,
+        HitByDirect,
+        HitByIndirect,
+        HitByMagic,
+    }
+    public enum ReactionTarget
+    {
+        self,
+        ally,
+        enemy,
+    }
+    public enum ReactionTiming
+    {
+        Before,
+        Assist,
+        After,
+    }
 
     public delegate void AbilityFunction(EventTable CastData);
     public class AbilityListener
