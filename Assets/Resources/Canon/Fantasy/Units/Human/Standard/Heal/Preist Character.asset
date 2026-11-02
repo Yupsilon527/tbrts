@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InternalName: Preist Character
   AssignedWorld: 
-  sprites:
-  - sprite: {fileID: 21300000, guid: 6d7c661f7ff912e43bf2a4c44c2af2e1, type: 3}
-    frame: 0
+  character:
+    states:
+    - sprite: {fileID: 21300000, guid: 6d7c661f7ff912e43bf2a4c44c2af2e1, type: 3}
+      frame: 0

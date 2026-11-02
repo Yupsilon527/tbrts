@@ -12,11 +12,11 @@ public class UnitModifiers : UnitProperties, CombatantTicker
     protected List<PropertyTag> _modifiers = new List<PropertyTag>();
     public PropertyModifier[] GetModifiers()
     {
-        return _modifiers.Select(m => m is PropertyModifier ? m as PropertyModifier : null).ToArray();
+        return _modifiers.Where(m => m is PropertyModifier).Select(m => m as PropertyModifier).ToArray();
     }
     public PropertyInnate[] GetInnates()
     {
-        return _modifiers.Select(m => m is PropertyInnate ? m as PropertyInnate : null).ToArray();
+        return _modifiers.Where(m => m is PropertyInnate).Select(m => m as PropertyInnate).ToArray();
     }
     #endregion
     #region Filter
@@ -412,6 +412,7 @@ public class UnitModifiers : UnitProperties, CombatantTicker
         int ticks = int.MaxValue;
         foreach (var modifier in GetModifiers())
         {
+            if (modifier == null)continue;
             ticks = Mathf.Min(ticks, modifier.duration, modifier.thinkInterval);
         }
         return ticks;

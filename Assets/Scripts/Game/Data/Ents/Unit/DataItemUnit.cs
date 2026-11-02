@@ -235,6 +235,10 @@ public class DataItemUnit : DataItemMob
     {
         return innates.GetAbilityLevel("transport") > 0;
     }
+    public bool IsSuperUnit()
+    {
+        return innates.GetAbilityLevel("superUnit") > 0;
+    }
 
     public virtual string OutputStatsTable()
     {

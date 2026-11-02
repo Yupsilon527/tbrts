@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InternalName: Medic Character
   AssignedWorld: 
-  sprites:
-  - sprite: {fileID: 21300000, guid: 817f590ffbc468a41a905afa1a987c1e, type: 3}
-    frame: 0
+  character:
+    states:
+    - sprite: {fileID: 21300000, guid: 817f590ffbc468a41a905afa1a987c1e, type: 3}
+      frame: 0

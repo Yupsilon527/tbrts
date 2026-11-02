@@ -66,9 +66,9 @@ public class WorldManager : Initializable
             u.unit.innates = u.passives.Select(a => (InnateData)a.Translate()).ToArray();
 
             if (u.character != null)
-                u.unit.LoadCharacter(u.character);
+                u.unit.LoadCharacter(u.character.character);
             else
-                u.unit.LoadCharacter(LoadCharacter(u.unit.InternalName));
+                u.unit.LoadCharacter(LoadCharacter(u.unit.InternalName)?.character);
             units.Add(u.unit);
 
         }

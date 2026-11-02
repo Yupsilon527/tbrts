@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WhiteMage Heal
   m_EditorClassIdentifier: 
   effects:
-  - {fileID: 11400000, guid: 0eeea34ac8eb6a34b95e9c31aa0a103f, type: 2}
+  - {fileID: 11400000, guid: 5d8b1f8940d170e4cb197186a115b509, type: 2}
   data:
     InternalName: WhiteMage Heal
     abilityFlags: 2

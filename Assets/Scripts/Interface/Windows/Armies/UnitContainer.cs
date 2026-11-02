@@ -12,7 +12,7 @@ public class UnitContainer : MonoBehaviour
         if (unitImage != null)
         {
             unitImage.enabled = true;
-            unitImage.sprite = unit.data.GetSprite(CharacterSO.SpriteFrame.idle);
+            unitImage.sprite = unit.data.armySprites.GetSprite(UnitDefines.SpriteFrame.Idle);
         }
         if (unitName != null)
             unitName.text = unit.data.InternalName;
@@ -30,7 +30,7 @@ public class UnitContainer : MonoBehaviour
         }
         if (data is UnitData unit)
         {
-            unitImage.sprite = unit.GetSprite(CharacterSO.SpriteFrame.idle);
+            unitImage.sprite = unit.armySprites.GetSprite(UnitDefines.SpriteFrame.Portrait);
         }
         else
         {

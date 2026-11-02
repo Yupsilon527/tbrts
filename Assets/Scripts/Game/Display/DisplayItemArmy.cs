@@ -46,7 +46,7 @@ public class DisplayItemArmy : DisplayItemObject<DataItemBanner>
                 {
                     var unit = assignedArmy.formation.Formation[i];
                     objectSprites[i].gameObject.SetActive(true);
-                    objectSprites[i].sprite = unit.data.GetSprite(unit.IsAlive() ?  CharacterSO.SpriteFrame.idle : CharacterSO.SpriteFrame.dead);
+                    objectSprites[i].sprite = unit.data.armySprites.GetSprite(unit.IsAlive() ?  UnitDefines.SpriteFrame.Idle : UnitDefines.SpriteFrame.Dead);
                 }
                 else
                 {

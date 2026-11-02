@@ -83,4 +83,17 @@ public static class UnitDefines
         // petrify - unit dies below X hp
     }
     public delegate bool UnitCheck(DataItemUnit unit);
+    public enum SpriteFrame
+    {
+        Idle = 0,
+        Selected = 1,
+        Walk = 2,
+        IdleReady = 3,
+        Attack = 4,
+        Spell = 5,
+        Hurt = 6,
+        Dead = 7,
+        Portrait = 8
+
+    }
 }

@@ -6,12 +6,12 @@ using UnityEngine;
 public class UnitData : ProductionData
 {
     public UnitStatsTable unit;
-    [HideInInspector] public Sprite[] armySprites = new Sprite[6];
+    [HideInInspector] public CharacterSheet armySprites;
     public AttackDefines.MobFlag[] unitFlags;
-   [HideInInspector] public WeaponData[] attacks = new WeaponData[0];
+    [HideInInspector] public WeaponData[] attacks = new WeaponData[0];
     [HideInInspector] public SpellData[] spells = new SpellData[0];
     public AbilitySave[] abilities = new AbilitySave[0];
-    public InnateData[] innates= new InnateData[0];
+    public InnateData[] innates = new InnateData[0];
     public override AvailableState GetAvailableState(DataItemPlayer player, DataItemCastle castle)
     {
         var avs = base.GetAvailableState(player, castle);
@@ -21,28 +21,10 @@ public class UnitData : ProductionData
         }
         return avs;
     }
-    public void LoadCharacter(CharacterSO character)
+    public void LoadCharacter(CharacterSheet character)
     {
         if (character == null) return;
-        if (character.sprites.Length ==1)
-        {
-            for (int i = 0; i< armySprites.Length; i++)
-            {
-                armySprites[i] = character.sprites[0].sprite;
-            }
-        }
-        foreach (var sprite in character.sprites)
-        {
-            armySprites[(int)sprite.frame] = sprite.sprite;
-        }
-    }
-    public Sprite GetSprite(CharacterSO.SpriteFrame id)
-    {
-        return GetSprite((int)id);
-    }
-    public Sprite GetSprite(int id)
-    {
-        return armySprites[id];
+        armySprites = character;
     }
     public override bool CompleteProduction(ProductionTable table)
     {
@@ -57,7 +39,7 @@ public class UnitData : ProductionData
         }
         if (table.castle.production.GetValidTileForArmy(this) is DataItemTile tile)
         {
-            if ( ArmyManager.SpawnUnitInCastle(this, table.playerOwner, tile, table.castle) != null)
+            if (ArmyManager.SpawnUnitInCastle(this, table.playerOwner, tile, table.castle) != null)
                 return true;
         }
         return false;
@@ -65,7 +47,7 @@ public class UnitData : ProductionData
     }
     public override ResourceCost[] GetCostForPlayer(DataItemPlayer player, float mult = 1)
     {
-       var costs= base.GetCostForPlayer(player, mult);
+        var costs = base.GetCostForPlayer(player, mult);
         if (GameManager.main.currentTurn == 0)   //HACK instant free on turn 0 TODO setting
             costs[(int)EconomyDefines.EconomyResource.Labor].value = 0;
         return costs;
@@ -147,7 +129,7 @@ public class UnitData : ProductionData
 
         output += $"Health: {unit.Health}<br>";
         output += $"Armor: {unit.Armor}/{unit.Shield}/{unit.Padding}<br>";
-        output += $"Magic Resist: {Mathf.Round(100-UnitDamageable.AccountResistances(100, unit.Resistance))}<br>";
+        output += $"Magic Resist: {Mathf.Round(100 - UnitDamageable.AccountResistances(100, unit.Resistance))}<br>";
         output += $"Action Points: {unit.Action}/Reaction Points: {unit.Mana}/Supply Points: {unit.Supply} <br>";
 
         return output;
