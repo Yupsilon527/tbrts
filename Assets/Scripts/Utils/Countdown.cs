@@ -5,6 +5,12 @@ public class Countdown
 {
     float startTime;
     float durationTime;
+
+    public Countdown(float durationTime)
+    {
+        this.durationTime = durationTime;
+    }
+
     public float GetEndTime()
     {
         return startTime + durationTime;
@@ -78,6 +84,11 @@ public class Countdown
 public class CountdownAction : Countdown
 {
     public Action concludeAction;
+    public CountdownAction(float durationTime) : base(durationTime)   { }
+    public CountdownAction(float durationTime, Action concludeAction) : base(durationTime)   {
+        this.concludeAction = concludeAction;
+    }
+
     public bool ShouldFire()
     {
         return !IsRunning() && concludeAction != null;

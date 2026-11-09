@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Combat : Initializable
 {
+    public enum CombatMode
+    {
+        mock,
+        instant,
+        animated,
+    }
+
     public static Combat main;
     protected override void Initialize()
     {
@@ -18,19 +25,21 @@ public class Combat : Initializable
     }
     public SparseIntMap MockBattle(DataItemBanner a, DataItemBanner d, DataItemTile l)
     {
-        mockBattle = true;
+        combatMode =  CombatMode.mock;
         SetUp(a, d, l);
         ResolveInstantly();
         return OutputResults();
     }
-    public void BattleTroops(DataItemBanner a, DataItemBanner d, DataItemTile l)
+    public void BattleTroops(DataItemBanner a, DataItemBanner d, DataItemTile l,bool instant)
     {
-        mockBattle = false;
+        combatMode = instant ? CombatMode.instant : CombatMode.animated;
         a.Exhaust(AttackDefines.combatMovementCost);
         SetUp(a, d, l);
-        ResolveInstantly();
+        if (instant) ResolveInstantly();
+        else BeginCombat();
     }
-    bool mockBattle = false;
+    public CombatMode combatMode ;
+    bool mockBattle => combatMode == CombatMode.mock;
 
     public CombatDefines.AttackPhase currentPhase;
     public DataItemTile locatedTile;
@@ -70,12 +79,14 @@ public class Combat : Initializable
     {
         Inspect($"COMBAT - Begin Combat!");
 
+        if (!enabled) { 
         enabled = true;
         currentPhase = CombatDefines.AttackPhase.BeforeCombat;
         currentTick = 0;
         FireEventOnAllFighters(AbilityDefines.Event.CombatBegin);
         currentPhase = CombatDefines.AttackPhase.Prep;
         FireEventOnAllFighters(AbilityDefines.Event.CombatPhase);
+    }
     }
     public bool IsInCombat()
     {
@@ -84,16 +95,16 @@ public class Combat : Initializable
     void ResolveInstantly()
     {
         BeginCombat();
+        FastForward();
+    }
+    public void FastForward()
+    {
         int soft = 0;
         while (enabled && ++soft < 1000)
         {
             OnGameTick();
         }
         EndCombat();
-    }
-    private void Update()
-    {
-        OnGameTick();
     }
     public void OnGameTick()
     {

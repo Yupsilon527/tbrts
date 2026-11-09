@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-using System.Linq;
-using UnityEngine;
+﻿using System.Linq;
 
 public abstract class VisualEffect : ApplyEffects
 {
@@ -9,5 +7,9 @@ public abstract class VisualEffect : ApplyEffects
     public  CombatantContainer GetContainerForUnit(DataItemUnit unit)
     {
         return InterfaceManager.main.combatWindow.containers.FirstOrDefault(c => c.assignedUnit == unit);
+    }
+    public bool SanityCheck()
+    {
+        return Combat.main.combatMode == Combat.CombatMode.animated;
     }
 }

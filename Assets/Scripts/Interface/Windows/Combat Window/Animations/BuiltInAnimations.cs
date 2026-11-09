@@ -3,7 +3,7 @@
     public enum BuiltinAnimation
     {
         Walk,
-        Hurt,
+        Death,
         Attack,
         Spell,
     }
@@ -22,12 +22,12 @@
         repeats: -1
     );
 
-    public static SpriteAnimation Hurt => new SpriteAnimation(
-        name: "Hurt",
-        priority: 5,
-        duration: 0.3f,
-        frames: new[] { (int)UnitDefines.SpriteFrame.Hurt },
-        repeats: 0 // plays once
+    public static SpriteAnimation Death => new SpriteAnimation(
+        name: "Death",
+        priority: 9999,
+        duration: 100,
+        frames: new[] { (int)UnitDefines.SpriteFrame.Dead },
+        repeats: 100 // plays once
     );
     public static SpriteAnimation Attack => new SpriteAnimation(
         name: "Attack",

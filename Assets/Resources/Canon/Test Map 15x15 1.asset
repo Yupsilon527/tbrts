@@ -94,6 +94,7 @@ MonoBehaviour:
     - InternalName: 3 Linf
       ownership: 2
       spawnPos: {x: 4, y: 4}
+      bonusAbilities: []
       formation:
       - Human Linf
       - 
@@ -105,6 +106,7 @@ MonoBehaviour:
     - InternalName: 3 Linf
       ownership: 2
       spawnPos: {x: 5, y: 3}
+      bonusAbilities: []
       formation:
       - Human Linf
       - 
@@ -116,6 +118,7 @@ MonoBehaviour:
     - InternalName: 3 Linf
       ownership: 2
       spawnPos: {x: 3, y: 5}
+      bonusAbilities: []
       formation:
       - Human Linf
       - 
@@ -127,6 +130,7 @@ MonoBehaviour:
     - InternalName: Skirms
       ownership: 2
       spawnPos: {x: 5, y: 5}
+      bonusAbilities: []
       formation:
       - Human Larc
       - 
@@ -138,6 +142,7 @@ MonoBehaviour:
     - InternalName: Skirms
       ownership: 2
       spawnPos: {x: 4, y: 6}
+      bonusAbilities: []
       formation:
       - Human Larc
       - 
@@ -149,6 +154,7 @@ MonoBehaviour:
     - InternalName: Skirms
       ownership: 2
       spawnPos: {x: 6, y: 4}
+      bonusAbilities: []
       formation:
       - Human Larc
       - 
@@ -160,6 +166,7 @@ MonoBehaviour:
     - InternalName: 3
       ownership: 2
       spawnPos: {x: 6, y: 6}
+      bonusAbilities: []
       formation:
       - Human Lcav
       - 
@@ -171,6 +178,7 @@ MonoBehaviour:
     - InternalName: 1
       ownership: 2
       spawnPos: {x: 7, y: 7}
+      bonusAbilities: []
       formation:
       - Human Linf
       - 
@@ -182,11 +190,12 @@ MonoBehaviour:
     - InternalName: Heavy
       ownership: 2
       spawnPos: {x: 7, y: 7}
+      bonusAbilities: []
       formation:
-      - Human Hinf
-      - Human Harc
-      - 
-      - Human Harc
-      - Human Hcav
-      - Human Heal
+      - Knight Hinf
+      - Knight Hinf
+      - Knight Hinf
+      - Knight Hinf
+      - Knight Hinf
+      - Knight Hinf
       transporter: 

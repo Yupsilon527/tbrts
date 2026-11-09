@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effects:
   - {fileID: 11400000, guid: 5d8b1f8940d170e4cb197186a115b509, type: 2}
+  - {fileID: 11400000, guid: 8653d6643fc424b44990bdd0f34a00b6, type: 2}
   data:
     InternalName: Magic Support
     abilityFlags: 22624

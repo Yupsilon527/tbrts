@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effects:
   - {fileID: 11400000, guid: dbfff8c60a737364ca0330623bf46464, type: 2}
+  - {fileID: 11400000, guid: a3396104e227c1642be7ebedd1e7287c, type: 2}
   data:
     InternalName: Hcav Charge
     abilityFlags: 76

@@ -10,7 +10,7 @@ public class AttackOrder : FollowOrder
     {
         if (TargetValid(owner))
         {
-            if (owner.BattleAnother(TargetUnit))
+            if (owner.BattleAnother(TargetUnit,true,false))
                 return false;
             /* SparseIntMap results = Combat.main.MockBattle(owner, TargetUnit, TargetUnit.tile);
 

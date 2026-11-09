@@ -4,12 +4,13 @@
 public class BuiltinAnimationEffectSO : AnimationEffectSO
 {
     public BuiltInAnimations.BuiltinAnimation animation;
+
     public override SpriteAnimation GetAnimation()
     {
         switch (animation)
         {
-            case BuiltInAnimations.BuiltinAnimation.Hurt:
-                return BuiltInAnimations.Hurt;
+            case BuiltInAnimations.BuiltinAnimation.Death:
+                return BuiltInAnimations.Death;
             case BuiltInAnimations.BuiltinAnimation.Walk:
                 return BuiltInAnimations.Walk;
             case BuiltInAnimations.BuiltinAnimation.Spell:

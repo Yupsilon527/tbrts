@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using UnityEngine;
 
@@ -32,6 +31,7 @@ public class DataItemUnit : DataItemMob
 
     public DataItemBanner troop;
     public Vector2Int troopPosition => troop.formation.GetPositionForUnit(this);
+    public CombatantContainer combatDisplay;
 
 
     public UnitStats stats;
@@ -90,6 +90,14 @@ public class DataItemUnit : DataItemMob
         if (evt == AbilityDefines.Event.CombatPhase)
         {
             UpdateNextAction();
+        }
+        if (evt == AbilityDefines.Event.OnTakeLifeDamage)
+        {
+            combatDisplay?.animator?.hurtTimer.Set(1f);
+        }
+        if (evt == AbilityDefines.Event.OnKilled)
+        {
+            combatDisplay?.animator?.PlayAnimation(BuiltInAnimations.Death);
         }
     }
     public void ReactToAction(AbilityDefines.ReactionEvent evt,AbilityDefines.ReactionTiming timing, DataItemUnit target)

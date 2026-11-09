@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -15,7 +16,13 @@ public class UnitSO : ProductionSO
         if (unit != null)
         {
             unit.InternalName = name;
+            try { 
             AutoFillPrerequisites(unit);
         }
+            catch (Exception e)
+            {
+                Debug.LogError(unit + " Prereq Error: " + e.Message);   
+            }
+    }
     }
 }

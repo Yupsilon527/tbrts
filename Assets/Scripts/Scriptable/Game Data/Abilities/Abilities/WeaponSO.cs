@@ -22,7 +22,7 @@ public class WeaponSO : ActionSO
     {
         WorldManager.main.Inspect("Unload data " + data.InternalName);
         WeaponData output = data.Clone() as WeaponData;
-        output.effects = effects.Select(x => x.Translate()).ToArray();
+        output.effects = effects.SelectMany(x => x.Translate()).ToArray();
         return output;
     }
 }

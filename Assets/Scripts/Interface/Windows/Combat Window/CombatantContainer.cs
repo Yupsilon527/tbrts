@@ -15,6 +15,7 @@ public class CombatantContainer : UnitContainer
         assignedUnit = unit;
         base.ForUnit(unit);
         animator.character = unit.data.armySprites;
+        assignedUnit.combatDisplay ??= this;
         assignedUnit.damageable.Health.OnValueChanged.AddListener(UpdateLifebar);
         Refresh();
         ResetColor();
@@ -34,6 +35,8 @@ public class CombatantContainer : UnitContainer
     {
         if (assignedUnit != null)
         {
+            if (assignedUnit .combatDisplay == this)
+                assignedUnit.combatDisplay =null;
             assignedUnit.damageable.Health.OnValueChanged.RemoveListener(UpdateLifebar);
         }
         base.Clear();

@@ -1,14 +1,17 @@
-﻿public abstract class AnimationEffectSO : VisualEffectSO
+﻿using UnityEngine;
+
+public abstract class AnimationEffectSO : VisualEffectSO
 {
     public abstract SpriteAnimation GetAnimation();
-    public override ApplyEffects Translate()
+    public override ApplyEffects[] Translate()
     {
-        return new AnimationEffect()
+        return new[]{ 
+            new AnimationEffect()
         {
             delay = delay,
             duration = duration,
-            animation = GetAnimation()
+            animation = GetAnimation(),
+        }
         };
     }
 }
-

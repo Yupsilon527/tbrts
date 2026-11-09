@@ -11,10 +11,9 @@ public class AnimationController : Initializable
             foreach (var anim in animations.ToArray())
             {
                 if (anim.ShouldFire())
-                {
                     anim.Stop(true);
+                if (!anim.IsRunning())
                     animations.Remove(anim);
-                }
             }
         }
     }

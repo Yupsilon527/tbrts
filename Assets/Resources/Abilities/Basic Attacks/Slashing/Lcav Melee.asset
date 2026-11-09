@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effects:
   - {fileID: 11400000, guid: 8eaeac0c0954b4f4ba2d62981ba0e490, type: 2}
+  - {fileID: 11400000, guid: e38b71089bbee9f4b9d44aaa8f880b67, type: 2}
   data:
     InternalName: Lcav Melee
+    abilityFlags: 76
     apCost: 1
-    mpCost: 0
+    rpCost: 0
     spCost: 0
     castTime: 90
     castDelay: 160
-    abilityFlags: 76
-    castOnce: 0
     attackPhase: 2
     targetPriority: 0
     areaMode: 0

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effects:
   - {fileID: 11400000, guid: dff0749d5818e2e4882fc698dd11fb21, type: 2}
+  - {fileID: 11400000, guid: 3c4e67745d19ec54a9d921119f113d87, type: 2}
   data:
     InternalName: Ctpt Ranged
     abilityFlags: 460

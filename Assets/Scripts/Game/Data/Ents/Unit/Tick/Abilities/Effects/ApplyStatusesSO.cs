@@ -5,15 +5,18 @@ public class ApplyStatusesSO : AttackEffectSO
 {
     public ModifierDefines.TroopEffect effect;
     public float effectPower;
-    public override ApplyEffects Translate()
+    public override ApplyEffects[] Translate()
     {
-        return new ApplyTroopEffect()
+
+        return new[]{
+            new ApplyTroopEffect()
         {
             applyChance = applyChance,
             targeting = targeting,
             chance = chance,
              effect = effect,
                effectPower = effectPower
+        }
         };
     }
 }

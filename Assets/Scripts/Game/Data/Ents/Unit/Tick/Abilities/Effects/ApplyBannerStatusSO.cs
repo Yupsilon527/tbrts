@@ -5,15 +5,17 @@ public class ApplyBannerStatusSO : AttackEffectSO
 {
     public ModifierDefines.TroopState effect;
     public int turnDuration;
-    public override ApplyEffects Translate()
+    public override ApplyEffects[] Translate()
     {
-        return new ApplyTroopStatus()
+
+        return new[]{ new ApplyTroopStatus()
         {
             applyChance = applyChance,
             targeting = targeting,
             chance = chance,
              effect = effect,
               turnDuration = turnDuration
+        }
         };
     }
 }

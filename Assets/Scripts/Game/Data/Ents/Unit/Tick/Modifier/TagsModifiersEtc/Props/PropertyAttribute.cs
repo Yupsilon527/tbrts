@@ -61,7 +61,8 @@ public class PropertyAttribute : PropertyTag
         {
             if ((active || !f.onlyWhenActive) && f.events.Contains(act))
             {
-                f.action.Invoke(new ReactionTable(Combat.main.currentTick, parent, target, this));
+                Combat.main.Inspect($"{InternalName} fires event {act} on {target}");
+                    f.action.Invoke(new ReactionTable(Combat.main.currentTick, parent, target, this));
                 v = true;
             }
         }

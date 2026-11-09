@@ -134,7 +134,7 @@ public class DataItemCastle : DataItemBuilding
 
                 if (Zim.GetPlayerOwner() != Attacker.GetPlayerOwner())
                 {
-                    Attacker.BattleAnother(Zim) ;
+                    Attacker.BattleAnother(Zim, true, false) ;
                     return false;
                 }
             }

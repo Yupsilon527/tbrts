@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effects:
   - {fileID: 11400000, guid: 768795fae82ebbb4694719fb61c63200, type: 2}
+  - {fileID: 11400000, guid: 3c4e67745d19ec54a9d921119f113d87, type: 2}
   data:
     InternalName: Harc Ranged
     abilityFlags: 68

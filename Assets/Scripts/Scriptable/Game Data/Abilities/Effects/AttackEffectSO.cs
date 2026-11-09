@@ -6,5 +6,5 @@ public abstract class AttackEffectSO : ScriptableObject
     public CombatDefines.ChanceMult chance;
     public CombatDefines.TargetType targeting;
 
-    public abstract ApplyEffects Translate();
+    public abstract ApplyEffects[] Translate();
 }

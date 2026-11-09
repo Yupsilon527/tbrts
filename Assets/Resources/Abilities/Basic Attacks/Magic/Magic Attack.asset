@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effects:
   - {fileID: 11400000, guid: fb430768917d57c4eb554e19bc3469da, type: 2}
+  - {fileID: 11400000, guid: 036141c71c8879f488667ed7b9032cf0, type: 2}
   data:
     InternalName: Magic Attack
     abilityFlags: 204

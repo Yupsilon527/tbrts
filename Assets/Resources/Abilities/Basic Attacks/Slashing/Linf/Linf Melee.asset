@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effects:
   - {fileID: 11400000, guid: 8eaeac0c0954b4f4ba2d62981ba0e490, type: 2}
+  - {fileID: 11400000, guid: e38b71089bbee9f4b9d44aaa8f880b67, type: 2}
   data:
     InternalName: Linf Melee
     abilityFlags: 76

@@ -1343,6 +1343,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7542690721458349528, guid: dda6364d2daf69840ac5b59522b27549, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9188518008343433566}
+    - targetCorrespondingSourceObject: {fileID: 7542690721458349528, guid: dda6364d2daf69840ac5b59522b27549, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1344636995491930322}
   m_SourcePrefab: {fileID: 100100000, guid: dda6364d2daf69840ac5b59522b27549, type: 3}
 --- !u!1 &6899382044344610520 stripped
 GameObject:
@@ -1366,7 +1369,21 @@ MonoBehaviour:
   containers: []
   attackers: {fileID: 3250525144038972350}
   defenders: {fileID: 6754644730394169760}
+  animations: {fileID: 1344636995491930322}
   buttonsParent: {fileID: 7575355287848255052}
+--- !u!114 &1344636995491930322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6899382044344610520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8030ca5fa070ca648a301e7de6800911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inspect: 0
 --- !u!224 &8937247819275917394 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5410505267763073874, guid: dda6364d2daf69840ac5b59522b27549, type: 3}

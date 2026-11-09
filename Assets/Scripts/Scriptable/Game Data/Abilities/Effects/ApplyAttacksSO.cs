@@ -7,9 +7,10 @@ public class ApplyAttackSO : AttackEffectSO
     public AttackDefines.AttackType attack;
     public float BaseDamage = 0;
     public ScaleData[] scaling;
-    public override ApplyEffects Translate()
+    public override ApplyEffects[] Translate()
     {
-        return new ApplyAttack()
+        return new[]{ 
+            new ApplyAttack()
         {
             attack = attack,
             BaseDamage = BaseDamage,
@@ -17,6 +18,7 @@ public class ApplyAttackSO : AttackEffectSO
             applyChance = applyChance,
             targeting = targeting,
             chance = chance,
+        }
         };
     }
 }

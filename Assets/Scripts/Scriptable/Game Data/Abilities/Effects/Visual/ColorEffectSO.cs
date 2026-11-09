@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "Character", menuName = "Abilities/Effects/Visual/Character")]
+[CreateAssetMenu(fileName = "Flash Color", menuName = "Abilities/Effects/Visual/Flash Color")]
 public class ColorEffectSO : VisualEffectSO
 {
     public Color color;
-    public override ApplyEffects Translate()
+    public override ApplyEffects[] Translate()
     {
-        return new ColorEffect()
+        return new[]{new ColorEffect()
         {
             delay = delay,
             duration = duration,
             color = color
+        }
         };
     }
 }

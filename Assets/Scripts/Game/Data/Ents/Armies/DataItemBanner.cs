@@ -131,7 +131,7 @@ public class DataItemBanner : DataItemMob
             {
                 if (ntile.armyLayer.GetAlignment(this) == PlayerDefines.Alignment.enemy)
                 {
-                    if (attack) BattleAnother(ntile.armyLayer);
+                    if (attack) BattleAnother(ntile.armyLayer,true,false);
                 }
                 else
                 {
@@ -315,7 +315,7 @@ public class DataItemBanner : DataItemMob
         return base.IsVisibleToPlayer(player);
     }
     #endregion
-    public bool BattleAnother(DataItemBanner other, bool showPopup = true)
+    public bool BattleAnother(DataItemBanner other, bool showPopup, bool resolveInstantly )
     {
         if (other.IsAlive() && tile.IsNeighboring(other.tile) && GetAlignment(other) == PlayerDefines.Alignment.enemy && movement.CanPayMovement(AttackDefines.combatMovementNeed))
         {
@@ -327,7 +327,7 @@ public class DataItemBanner : DataItemMob
             else
             {
                 movement.UpdateStartingMovement();
-                Combat.main.BattleTroops(this, other, other.tile);
+                Combat.main.BattleTroops(this, other, other.tile, resolveInstantly);
                 foreach (var unit in formation.GetUnits())
                 {
                     Combat.main.Inspect($"Unit {unit} remaining with {unit.health.GetValue()}/{unit.health.GetLimit()} health!");

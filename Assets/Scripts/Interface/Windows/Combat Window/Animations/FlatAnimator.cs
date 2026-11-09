@@ -8,6 +8,8 @@ public abstract class FlatAnimator : Initializable
     protected SpriteAnimation currentAnimation;
     protected float animTime;
     private int loopsCompleted;
+    public Countdown readyTimer = new(3);
+    public Countdown hurtTimer = new(.5f);
 
     protected bool facesRight = false;
     public bool FacesRight
@@ -52,6 +54,15 @@ public abstract class FlatAnimator : Initializable
             return null;
 
         int spriteIndex = anim.GetFrameSpriteIndex(time);
+
+        if (spriteIndex == (int)UnitDefines.SpriteFrame.Idle)
+        {
+            if (hurtTimer.IsRunning())
+            {
+                spriteIndex = (int)UnitDefines.SpriteFrame.Hurt;
+            }
+        }
+
         return character. GetSprite(spriteIndex);
     }
     public bool PlayAnimation(SpriteAnimation anim)
@@ -60,7 +71,7 @@ public abstract class FlatAnimator : Initializable
             return false;
 
         if (currentAnimation != null && currentAnimation.priority > anim.priority)
-            return false; // current anim outranks the request; ignore
+            return false;
 
         currentAnimation = anim;
         animTime = anim.startTime;

@@ -4,8 +4,8 @@ using UnityEngine;
 public class GrantResourceSO : AttackEffectSO
 {
     public ResourceCost[] resourceAmount;
-    public override ApplyEffects Translate()
+    public override ApplyEffects[] Translate()
     {
-        return new GrantResources() { resourceAmount = resourceAmount};
+        return new[] { new GrantResources() { resourceAmount = resourceAmount}};
     }
 }

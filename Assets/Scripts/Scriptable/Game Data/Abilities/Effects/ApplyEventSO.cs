@@ -6,14 +6,16 @@ public class ApplyEventSO : AttackEffectSO
 {
     public AbilityDefines.Event abilityEvent;
 
-    public override ApplyEffects Translate()
+    public override ApplyEffects[] Translate()
     {
-        return new EventData()
+        return new[]{
+            new EventData()
         {
             abilityEvent = abilityEvent,
             applyChance = applyChance,
             targeting = targeting,
             chance = chance,
+        }
         };
     }
 }

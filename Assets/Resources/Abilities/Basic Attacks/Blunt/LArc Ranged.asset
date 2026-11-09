@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effects:
   - {fileID: 11400000, guid: a1d78c3cf8342b34e9c225a040e2f4e6, type: 2}
+  - {fileID: 11400000, guid: 3c4e67745d19ec54a9d921119f113d87, type: 2}
   data:
     InternalName: LArc Ranged
     abilityFlags: 2248

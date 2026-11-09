@@ -19,7 +19,7 @@ public class ModifierConfig : ModifierSO
 
         public  ModifierDefines.ModifierAction Translate()
         {
-            var tEffects = effects.Select(x=> x.Translate());
+            var tEffects = effects.SelectMany(x=> x.Translate());
             return (ReactionTable table) =>
              {
                  if (!MeetsCondition(table.caster, casterCondition)|| !MeetsCondition(table.target, targetCondition)) return;

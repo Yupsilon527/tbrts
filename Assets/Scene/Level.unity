@@ -267,6 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inspect: 1
+  combatMode: 0
   currentPhase: 0
   currentTick: 0
 --- !u!1 &96515106
@@ -5248,10 +5249,6 @@ PrefabInstance:
     - target: {fileID: 3570084795342153385, guid: 5392d81d3ccda0447b95563510742ebb, type: 3}
       propertyPath: m_Name
       value: World
-      objectReference: {fileID: 0}
-    - target: {fileID: 8125226990891236217, guid: 5392d81d3ccda0447b95563510742ebb, type: 3}
-      propertyPath: inspect
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8491707159234098774, guid: 5392d81d3ccda0447b95563510742ebb, type: 3}
       propertyPath: m_LocalPosition.x

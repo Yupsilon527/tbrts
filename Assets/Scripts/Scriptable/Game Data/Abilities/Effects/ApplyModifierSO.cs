@@ -7,15 +7,17 @@ public class ApplyModifierSO : AttackEffectSO
     public TagSO appliedModifier;
     public ModifierParameterAlteration[] alteredParameters;
 
-    public override ApplyEffects Translate()
+    public override ApplyEffects[] Translate()
     {
-        return new ApplyModifier()
+
+        return new[]{ new ApplyModifier()
         {
             appliedModifier = appliedModifier.Translate() as ModifierData,
             alterations = alteredParameters,
             applyChance = applyChance,
             targeting = targeting,
             chance = chance,
+        }
         };
     }
 }
